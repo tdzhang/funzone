@@ -1,0 +1,11 @@
+<events>
+    <event>
+        <event_id>0</event_id>
+        <creator_id>0</creator_id>
+        <title>Saxophone Masterclass with Otis Murphy</title>
+        <location>Braun Rehearsal Hall, Stanford University, CA, 94305</location>
+        <img_url>http://otismurphy.com/images/Spain_Tour.jpg</img_url>
+        <intro>Otis Murphy is a world-renowned, classical saxophonist and professor of saxophone at Indiana University. He will give a short concert and then work with several of our Stanford saxophone students during this masterclass. Everyone is welcome. </intro>
+        <price>0</price>        
+    </event>
+</events>
