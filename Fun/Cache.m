@@ -17,9 +17,9 @@
 static bool cacheInitialized = false;
 static int cacheSize;
 static int usedCacheSize;
-
+//current documenr directory
 static NSString* documentDir;
-
+//cache directory file path
 static NSMutableDictionary* cacheDict;
 static NSString* cacheDictPath;
 
@@ -39,7 +39,7 @@ static NSString* recentViewListPath;
     
     documentDir = [paths objectAtIndex:0];    
     // set cache dictionary path as current document directory with appending cache naming component
-    cacheDictPath = [[documentDir init] stringByAppendingPathComponent:DEFAULT_CACHE_DICT_FILE];
+    cacheDictPath = [documentDir stringByAppendingPathComponent:DEFAULT_CACHE_DICT_FILE];
     cacheDict = [[NSMutableDictionary alloc] initWithContentsOfFile:cacheDictPath];
     if (cacheDict == nil) {
         cacheDict = [[NSMutableDictionary alloc] init];

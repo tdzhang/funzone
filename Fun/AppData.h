@@ -11,8 +11,8 @@
 @interface AppData : NSObject
 
 + (AppData *)getAppDataInstance;
-@property (nonatomic) NSArray *events;
-@property (nonatomic) NSArray *favorList;
+@property (nonatomic,strong) NSArray *events;
+@property (nonatomic,strong) NSArray *favorList;
 @property (nonatomic) int event_id;
 
 @end

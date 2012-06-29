@@ -15,6 +15,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
     NSArray *results = [context executeFetchRequest:request error:nil];
     for (NSManagedObject *obj in results) {
+        //delete all the object in that context
         [context deleteObject:obj];
     }
 }
