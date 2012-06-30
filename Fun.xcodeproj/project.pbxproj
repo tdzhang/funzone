@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		460776FF159E820900799431 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 460776FE159E820900799431 /* ExploreViewController.m */; };
+		0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128541159EB0AD00430859 /* CoreLocation.framework */; };
+		0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128544159EB0B600430859 /* AddressBook.framework */; };
+		0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128546159EB0BE00430859 /* MapKit.framework */; };
+		0F128557159EB5AF00430859 /* MyContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128553159EB19500430859 /* MyContactsTableViewCell.m */; };
+		0F128558159EB5C100430859 /* CustonContactInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F128552159EB19500430859 /* CustonContactInfoView.xib */; };
+		0F128559159EB5D900430859 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128555159EB1D400430859 /* MapViewController.m */; };
+		0F12855A159EB5F100430859 /* FourSquarePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854B159EB16A00430859 /* FourSquarePlace.m */; };
+		0F12855B159EB5F700430859 /* UserContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854D159EB16A00430859 /* UserContactObject.m */; };
+		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
+		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
+		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
@@ -56,8 +66,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		460776FD159E820900799431 /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
-		460776FE159E820900799431 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		0F128541159EB0AD00430859 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0F128544159EB0B600430859 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		0F128546159EB0BE00430859 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0F12854A159EB16A00430859 /* FourSquarePlace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FourSquarePlace.h; sourceTree = "<group>"; };
+		0F12854B159EB16A00430859 /* FourSquarePlace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FourSquarePlace.m; sourceTree = "<group>"; };
+		0F12854C159EB16A00430859 /* UserContactObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserContactObject.h; sourceTree = "<group>"; };
+		0F12854D159EB16A00430859 /* UserContactObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserContactObject.m; sourceTree = "<group>"; };
+		0F12854E159EB16A00430859 /* GeneralActivityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralActivityModel.h; sourceTree = "<group>"; };
+		0F12854F159EB16A00430859 /* GeneralActivityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneralActivityModel.m; sourceTree = "<group>"; };
+		0F128551159EB19500430859 /* MyContactsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyContactsTableViewCell.h; sourceTree = "<group>"; };
+		0F128552159EB19500430859 /* CustonContactInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustonContactInfoView.xib; sourceTree = "<group>"; };
+		0F128553159EB19500430859 /* MyContactsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyContactsTableViewCell.m; sourceTree = "<group>"; };
+		0F128554159EB1D400430859 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		0F128555159EB1D400430859 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		0F128562159ECA8800430859 /* TimeChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeChooseViewController.h; sourceTree = "<group>"; };
+		0F128563159ECA8800430859 /* TimeChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeChooseViewController.m; sourceTree = "<group>"; };
+		0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackToCreateActivityChange.h; sourceTree = "<group>"; };
+		0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
+		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
 		463869E315962CE900E3A699 /* profile1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile1.jpg; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
@@ -125,6 +152,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */,
+				0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */,
+				0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */,
 				4668A7A91593FC8800713A4C /* CoreData.framework in Frameworks */,
 				4668A7A71593FC8100713A4C /* QuartzCore.framework in Frameworks */,
 				4668A7431593E56400713A4C /* UIKit.framework in Frameworks */,
@@ -136,9 +166,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F128549159EB14200430859 /* model class */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "model class";
+			sourceTree = "<group>";
+		};
+		0F128550159EB18200430859 /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				0F128551159EB19500430859 /* MyContactsTableViewCell.h */,
+				0F128552159EB19500430859 /* CustonContactInfoView.xib */,
+				0F128553159EB19500430859 /* MyContactsTableViewCell.m */,
+			);
+			name = "custom view";
+			sourceTree = "<group>";
+		};
+		0F128556159EB1D700430859 /* chooseLocation */ = {
+			isa = PBXGroup;
+			children = (
+				0F128554159EB1D400430859 /* MapViewController.h */,
+				0F128555159EB1D400430859 /* MapViewController.m */,
+				0F128549159EB14200430859 /* model class */,
+				0F12854A159EB16A00430859 /* FourSquarePlace.h */,
+				0F12854B159EB16A00430859 /* FourSquarePlace.m */,
+				0F12854C159EB16A00430859 /* UserContactObject.h */,
+				0F12854D159EB16A00430859 /* UserContactObject.m */,
+				0F12854E159EB16A00430859 /* GeneralActivityModel.h */,
+				0F12854F159EB16A00430859 /* GeneralActivityModel.m */,
+			);
+			name = chooseLocation;
+			sourceTree = "<group>";
+		};
+		0F128561159ECA7600430859 /* chooseTime */ = {
+			isa = PBXGroup;
+			children = (
+				0F128562159ECA8800430859 /* TimeChooseViewController.h */,
+				0F128563159ECA8800430859 /* TimeChooseViewController.m */,
+			);
+			name = chooseTime;
+			sourceTree = "<group>";
+		};
+		0F128565159ECC1000430859 /* choose Friends */ = {
+			isa = PBXGroup;
+			children = (
+				0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */,
+				0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */,
+				0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */,
+				0F128550159EB18200430859 /* custom view */,
+			);
+			name = "choose Friends";
+			sourceTree = "<group>";
+		};
 		4668A7331593E56400713A4C = {
 			isa = PBXGroup;
 			children = (
+				0F128546159EB0BE00430859 /* MapKit.framework */,
+				0F128544159EB0B600430859 /* AddressBook.framework */,
+				0F128541159EB0AD00430859 /* CoreLocation.framework */,
 				4668A7A81593FC8800713A4C /* CoreData.framework */,
 				4668A7A61593FC8100713A4C /* QuartzCore.framework */,
 				4668A7481593E56400713A4C /* Fun */,
@@ -231,8 +317,6 @@
 			children = (
 				4668A7A31593FBC800713A4C /* FeaturedTVC.h */,
 				4668A7A41593FBC800713A4C /* FeaturedTVC.m */,
-				460776FD159E820900799431 /* ExploreViewController.h */,
-				460776FE159E820900799431 /* ExploreViewController.m */,
 			);
 			name = Explore;
 			sourceTree = "<group>";
@@ -278,6 +362,9 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				0F128565159ECC1000430859 /* choose Friends */,
+				0F128561159ECA7600430859 /* chooseTime */,
+				0F128556159EB1D700430859 /* chooseLocation */,
 				4668A7AD15943B4000713A4C /* NewEventVC.h */,
 				4668A7AE15943B4000713A4C /* NewEventVC.m */,
 			);
@@ -335,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F128558159EB5C100430859 /* CustonContactInfoView.xib in Resources */,
 				4668A74D1593E56400713A4C /* InfoPlist.strings in Resources */,
 				4668A7561593E56400713A4C /* MainStoryboard_iPhone.storyboard in Resources */,
 				4668A7591593E56400713A4C /* MainStoryboard_iPad.storyboard in Resources */,
@@ -371,6 +459,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */,
+				0F12855B159EB5F700430859 /* UserContactObject.m in Sources */,
+				0F12855A159EB5F100430859 /* FourSquarePlace.m in Sources */,
+				0F128559159EB5D900430859 /* MapViewController.m in Sources */,
+				0F128557159EB5AF00430859 /* MyContactsTableViewCell.m in Sources */,
 				4668A74F1593E56400713A4C /* main.m in Sources */,
 				4668A7531593E56400713A4C /* FunAppDelegate.m in Sources */,
 				4668A75C1593E56400713A4C /* FunFirstViewController.m in Sources */,
@@ -385,7 +478,8 @@
 				4668A79B1593F86100713A4C /* AppData.m in Sources */,
 				4668A7A51593FBC800713A4C /* FeaturedTVC.m in Sources */,
 				4668A7AF15943B4000713A4C /* NewEventVC.m in Sources */,
-				460776FF159E820900799431 /* ExploreViewController.m in Sources */,
+				0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */,
+				0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
