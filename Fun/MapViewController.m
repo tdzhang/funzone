@@ -237,9 +237,9 @@
         //add annotation
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = placemark.region.center;
-        annotationPoint.title = placemark.name;
+        annotationPoint.title = placemark.locality;
         if(!annotationPoint.title)annotationPoint.title=@"NO name:";
-            annotationPoint.subtitle = placemark.locality;
+            annotationPoint.subtitle = placemark.name;
         if(!annotationPoint.subtitle)annotationPoint.subtitle=@"No subtitle name.";
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
