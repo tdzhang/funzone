@@ -16,6 +16,7 @@
 		0F12855A159EB5F100430859 /* FourSquarePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854B159EB16A00430859 /* FourSquarePlace.m */; };
 		0F12855B159EB5F700430859 /* UserContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854D159EB16A00430859 /* UserContactObject.m */; };
 		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
+		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
@@ -78,6 +79,8 @@
 		0F128553159EB19500430859 /* MyContactsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyContactsTableViewCell.m; sourceTree = "<group>"; };
 		0F128554159EB1D400430859 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0F128555159EB1D400430859 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		0F128562159ECA8800430859 /* TimeChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeChooseViewController.h; sourceTree = "<group>"; };
+		0F128563159ECA8800430859 /* TimeChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeChooseViewController.m; sourceTree = "<group>"; };
 		463869E315962CE900E3A699 /* profile1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile1.jpg; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
@@ -191,6 +194,15 @@
 				0F12854F159EB16A00430859 /* GeneralActivityModel.m */,
 			);
 			name = chooseLocation;
+			sourceTree = "<group>";
+		};
+		0F128561159ECA7600430859 /* chooseTime */ = {
+			isa = PBXGroup;
+			children = (
+				0F128562159ECA8800430859 /* TimeChooseViewController.h */,
+				0F128563159ECA8800430859 /* TimeChooseViewController.m */,
+			);
+			name = chooseTime;
 			sourceTree = "<group>";
 		};
 		4668A7331593E56400713A4C = {
@@ -336,6 +348,7 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				0F128561159ECA7600430859 /* chooseTime */,
 				0F128556159EB1D700430859 /* chooseLocation */,
 				4668A7AD15943B4000713A4C /* NewEventVC.h */,
 				4668A7AE15943B4000713A4C /* NewEventVC.m */,
@@ -450,6 +463,7 @@
 				4668A79B1593F86100713A4C /* AppData.m in Sources */,
 				4668A7A51593FBC800713A4C /* FeaturedTVC.m in Sources */,
 				4668A7AF15943B4000713A4C /* NewEventVC.m in Sources */,
+				0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

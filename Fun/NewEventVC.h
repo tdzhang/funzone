@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #include "MapViewController.h"
+#import "TimeChooseViewController.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal>
 
 @end

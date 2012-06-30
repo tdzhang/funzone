@@ -75,7 +75,9 @@
     if([segue.identifier isEqualToString:@"ChooseFriends"]){
         
     }
-    else if ([segue.identifier isEqualToString:@"chooseTime"]){
+    else if ([segue.identifier isEqualToString:@"chooseTime"] &&[segue.destinationViewController isKindOfClass:[TimeChooseViewController class]]){
+        TimeChooseViewController *TimeChooseVC=segue.destinationViewController;
+        [TimeChooseVC setDelegate:self];
     }
     else if ([segue.identifier isEqualToString:@"ChooseLocationInMAP"]){
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
@@ -84,6 +86,38 @@
         }
     }
 }
+
+#pragma mark - action sheet
+//pop the action sheet of the time selection
+- (IBAction)SelectTime:(UIButton *)sender {
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"now",@"today",@"tonight",@"tomorrow",@"self enter", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [pop showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //for the what to do action sheet
+    if([actionSheet.title isEqualToString:@"What do you want to do?"]){
+
+    }
+    else if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
+        if(buttonIndex == 0){
+            [self.buttonEventTime setTitle:@"now" forState:UIControlStateNormal];
+        }else if(buttonIndex == 1){
+            [self.buttonEventTime setTitle:@"today" forState:UIControlStateNormal];
+        }else if(buttonIndex == 2){
+            [self.buttonEventTime setTitle:@"tonight" forState:UIControlStateNormal];
+        }else if(buttonIndex == 3){
+            [self.buttonEventTime setTitle:@"tomorrow" forState:UIControlStateNormal];
+        }else if(buttonIndex == 4){
+            //self enter the time
+            [self performSegueWithIdentifier:@"chooseTime" sender:self];
+        }
+        
+    }
+}
+
+
 
 #pragma mark - implement protocals
 ////////////////////////////////////////////////
@@ -97,6 +131,37 @@
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
+}
+
+////////////////////////////////////////////////
+//implement the method for Chooseing Time part (TimeChooseViewController)
+- (void)ChangedTheNSDate:(NSDate *)date SendFrom:(UIButton *)sender{
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *weekdayComponents =
+    [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit | NSMonthCalendarUnit |NSYearCalendarUnit | NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
+    NSInteger day = [weekdayComponents day];
+    //NSInteger weekday = [weekdayComponents weekday];
+    NSInteger year= [weekdayComponents year];
+    NSInteger month=[weekdayComponents month];
+    NSInteger hour = [weekdayComponents hour];
+    NSInteger minute = [weekdayComponents minute];
+    NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d @%d:%d",month,day,year,hour,minute];
+    [self.buttonEventTime setTitle:showDateString forState:UIControlStateNormal];
+    
+    /*
+     NSCalendar *gregorian = [[NSCalendar alloc]
+     initWithCalendarIdentifier:NSGregorianCalendar];
+     NSDateComponents *weekdayComponents =
+     [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit | NSMonthCalendarUnit |NSYearCalendarUnit | NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
+     NSInteger day = [weekdayComponents day];
+     NSInteger weekday = [weekdayComponents weekday];
+     NSInteger year= [weekdayComponents year];
+     NSInteger month=[weekdayComponents month];
+     NSInteger hour = [weekdayComponents hour];
+     NSInteger minute = [weekdayComponents minute];
+     NSLog(@"%d:%d:%d weekday%d  =>%d:%d",year,month,day,weekday,hour,minute);
+     */
 }
 
 
