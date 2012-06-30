@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "MapViewController.h"
 
-@interface NewEventVC : UIViewController
+@interface NewEventVC : UIViewController<SelfChooseLocation>
 
 @end

@@ -121,6 +121,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="LUL-40-gED" kind="push" identifier="ChooseLocationInMAP" id="fnA-zd-dnM"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Place" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Km3-Yh-jqp">
                                         <rect key="frame" x="15" y="53" width="43" height="21"/>
@@ -788,6 +791,72 @@
             </objects>
             <point key="canvasLocation" x="1604" y="-138"/>
         </scene>
+        <!--Map View Controller - view2-->
+        <scene sceneID="vyZ-eW-82d">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cwY-w3-CrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="LUL-40-gED" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TtU-0z-1Er">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="MtV-1R-3Sd">
+                                <rect key="frame" x="0.0" y="44" width="320" height="323"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minimumValue="1" maximumValue="10" id="jMG-rq-ygX">
+                                <rect key="frame" x="36" y="319" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="Zooming:" destination="LUL-40-gED" eventType="valueChanged" id="wa2-lW-593"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UyR-SH-yX5">
+                                <rect key="frame" x="199" y="366" width="93" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="My location">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="returnToMyLocation" destination="LUL-40-gED" eventType="touchUpInside" id="bmb-Ah-6zg"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" id="y3w-yZ-Bax">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="LUL-40-gED" id="nFN-Sl-GIZ"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="view2" id="Jh0-xe-etq"/>
+                    <connections>
+                        <outlet property="myMapView" destination="MtV-1R-3Sd" id="qfA-PZ-6kv"/>
+                        <outlet property="mySearchBar" destination="y3w-yZ-Bax" id="ohN-PC-p02"/>
+                        <outlet property="myStepper" destination="jMG-rq-ygX" id="mg8-XV-035"/>
+                        <outlet property="searchDisplayController" destination="KMt-Ox-eTC" id="c1O-RM-CXI"/>
+                    </connections>
+                </viewController>
+                <searchDisplayController id="KMt-Ox-eTC">
+                    <connections>
+                        <outlet property="delegate" destination="LUL-40-gED" id="aAv-Yg-GcI"/>
+                        <outlet property="searchBar" destination="y3w-yZ-Bax" id="e6B-fg-WIq"/>
+                        <outlet property="searchContentsController" destination="LUL-40-gED" id="cXK-KF-vmj"/>
+                        <outlet property="searchResultsDataSource" destination="LUL-40-gED" id="Z5R-iJ-wuI"/>
+                        <outlet property="searchResultsDelegate" destination="LUL-40-gED" id="RDb-rs-Ami"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1654" y="1056"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Featured.png" width="30" height="30"/>
@@ -812,23 +881,6 @@
         <image name="time.png" width="40" height="40"/>
         <image name="twitter.png" width="40" height="40"/>
     </resources>
-    <classes>
-        <class className="FeaturedTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedTVC.h"/>
-        </class>
-        <class className="NewEventVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventFriends" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventPrice" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

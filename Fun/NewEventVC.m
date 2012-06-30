@@ -66,7 +66,31 @@
 }
 
 
+#pragma mark - Segues related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
+{
+    if([segue.identifier isEqualToString:@"ChooseFriends"]){
+        
+    }
+    else if ([segue.identifier isEqualToString:@"chooseTime"]){
+    }
+    else if ([segue.identifier isEqualToString:@"ChooseLocationInMAP"]){
+        if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
+            MapViewController *mapViewC=segue.destinationViewController;
+            [mapViewC setDelegate:self];
+        }
+    }
+}
 
+#pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the method for dealing with the return of the alertView
+-(void)UpdateLocation:(MKAnnotationView *)aView sendFrom:(MapViewController *)sender{
+    MKPointAnnotation *annotation=aView.annotation;
+    NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
+    //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
+    //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
+}
 
 
 @end

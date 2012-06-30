@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "MapViewController.h"
 
 @interface FunFirstViewController : UIViewController
 
