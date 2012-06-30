@@ -26,8 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTime;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
-
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+
+@property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @end
 
 //////////////////////////////////////
@@ -41,6 +42,27 @@
 @synthesize buttonEventPrice = _eventPriceButton;
 @synthesize buttonEventFriends = _eventFriendsButton;
 @synthesize locationLabel = _locationLabel;
+@synthesize peopleGoOutWith=_peopleGoOutWith;
+
+#pragma mark - self defined synthesize
+-(void)setPeopleGoOutWith:(NSDictionary *)peopleGoOutWith{
+    _peopleGoOutWith=peopleGoOutWith;
+    int i= [peopleGoOutWith count];
+    if (i>0) {
+        [self.buttonEventFriends setTitle:[NSString stringWithFormat:@"%d friends",i] forState:UIControlStateNormal];
+    }
+    else{
+        [self.buttonEventFriends setTitle:@"Invite Friends" forState:UIControlStateNormal];
+    }
+}
+
+-(NSDictionary*)peopleGoOutWith{
+    if (_peopleGoOutWith == nil){
+        _peopleGoOutWith = [[NSDictionary alloc	] init];
+    }
+    return _peopleGoOutWith;	
+}
+
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad:(BOOL)animated {
@@ -72,8 +94,11 @@
 #pragma mark - Segues related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender 
 {
-    if([segue.identifier isEqualToString:@"ChooseFriends"]){
-        
+    if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){
+        ChoosePeopleToGoTableViewController *peopleController=nil;
+        peopleController = segue.destinationViewController;
+        peopleController.delegate=self;
+        peopleController.alreadySelectedContacts=[self.peopleGoOutWith copy];
     }
     else if ([segue.identifier isEqualToString:@"chooseTime"] &&[segue.destinationViewController isKindOfClass:[TimeChooseViewController class]]){
         TimeChooseViewController *TimeChooseVC=segue.destinationViewController;
@@ -120,6 +145,23 @@
 
 
 #pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the method for the adding or delete contacts that will be go out with
+-(void)AddContactInformtionToPeopleList:(UserContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people setObject:(id)person forKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
+-(void)DeleteContactInformtionToPeopleList:(UserContactObject*)person{
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people removeObjectForKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
 -(void)UpdateLocation:(MKAnnotationView *)aView withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #include "MapViewController.h"
-#import "TimeChooseViewController.h"
+#include "ChoosePeopleToGoTableViewController.h"
+#include "TimeChooseViewController.h"
+#include "FeedBackToCreateActivityChange.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange>
 
 @end
