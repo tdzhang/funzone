@@ -36,6 +36,16 @@
 #define TITLE_HEIGHT 36
 #define TITLE_TEXT_OFFSET 8
 
+#define ICON_SIZE 20
+#define JOIN_X 13
+#define FAVOR_X 263
+#define ICON_Y 130
+
+#define LABEL_WIDTH 24
+#define JOIN_LABEL_X 40
+#define FAVOR_LABEL_X 287
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,6 +60,8 @@
 {
     [super viewDidLoad];
     
+    _currentY = 20;
+    
     //Block View
     UIView *blockView = [[UIView alloc] initWithFrame:CGRectMake(0, _currentY, VIEW_WIDTH, VIEW_HEIGHT)];
     [_mainScrollView addSubview:blockView];
@@ -63,9 +75,9 @@
     UIImageView *thumbNailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y + _currentY, THUMB_SIZE, THUMB_SIZE)];
     thumbNailImageView.image = [UIImage imageNamed:@"monterey.jpg"];
     thumbNailImageView.layer.shadowRadius = 2.f;
-    thumbNailImageView.layer.shadowOpacity = .85f;
     thumbNailImageView.layer.shadowOffset = CGSizeMake(1.f, 1.f);
     thumbNailImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    thumbNailImageView.layer.shadowOpacity = 1.f;
     thumbNailImageView.layer.shouldRasterize = YES;
     thumbNailImageView.layer.masksToBounds = NO;
     thumbNailImageView.layer.borderWidth = 3.f;
@@ -73,7 +85,7 @@
     [blockView addSubview:thumbNailImageView];
     
     //Title View
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y+_currentY, TITLE_WIDTH, TITLE_HEIGHT)];
     titleView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.56];
     [blockView addSubview:titleView];
     
@@ -86,6 +98,38 @@
     //titleLabel.font = 
     [titleView addSubview:titleLabel];
     
+    //Joined Image
+    UIImageView *joinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(JOIN_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
+    joinImageView.image = [UIImage imageNamed:@"join.png"];
+    joinImageView.layer.shadowRadius = 2.f;
+    joinImageView.layer.shadowOpacity = .85f;
+    joinImageView.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
+    joinImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    joinImageView.layer.shouldRasterize = YES;
+    joinImageView.layer.masksToBounds = NO;
+    [blockView addSubview:joinImageView];
+    
+    //Joined number label
+    UILabel *joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(JOIN_LABEL_X, ICON_Y + _currentY, LABEL_WIDTH, ICON_SIZE)];
+    joinLabel.text = @"25";
+    joinLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    joinLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
+    joinLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    
+    [blockView addSubview:joinLabel];
+    
+    //Favored Image
+    UIImageView *favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(FAVOR_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
+    favorImageView.image = [UIImage imageNamed:@"heart-white.png"];
+    favorImageView.layer.shadowRadius = 2.f;
+    favorImageView.layer.shadowOpacity = .50f;
+    favorImageView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    favorImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    favorImageView.layer.shouldRasterize = YES;
+    favorImageView.layer.masksToBounds = NO;
+    [blockView addSubview:favorImageView];
+    
+    //Favor
     [self.view reloadInputViews];
 	// Do any additional setup after loading the view.
 }
