@@ -79,7 +79,19 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ChooseEventCost:" destination="bvQ-PW-Zc1" eventType="touchUpInside" id="yas-kn-bAN"/>
+                                        </connections>
                                     </button>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="Y2P-Qp-AQC">
+                                        <rect key="frame" x="48" y="2" width="226" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="bvQ-PW-Zc1" id="ufq-Jo-UrJ"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94772401147959184" green="0.94772401147959184" blue="0.94772401147959184" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -222,6 +234,7 @@
                         <outlet property="buttonEventTime" destination="UkJ-bj-72e" id="W0i-s5-oEO"/>
                         <outlet property="buttonEventTitle" destination="IDg-rk-x0Y" id="EQz-fK-AbV"/>
                         <outlet property="locationLabel" destination="Km3-Yh-jqp" id="UY2-of-OIV"/>
+                        <outlet property="textFieldEventPrice" destination="Y2P-Qp-AQC" id="uFK-Oi-PMo"/>
                         <outlet property="textFieldEventTitle" destination="kIt-zH-vTt" id="5F9-a4-8ve"/>
                         <outlet property="textViewEventDescription" destination="lQt-Nl-dzR" id="e2g-qM-QQF"/>
                         <segue destination="UDl-pC-I2G" kind="modal" identifier="chooseTime" modalTransitionStyle="partialCurl" id="XhC-yJ-EJI"/>
@@ -901,7 +914,7 @@
                                 </date>
                                 <locale key="locale" localeIdentifier="en_US"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <mutableData key="data">
+                                    <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -919,7 +932,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                 </timeZone>
                                 <connections>
                                     <action selector="ValueChanged:" destination="UDl-pC-I2G" eventType="valueChanged" id="MgQ-ap-etn"/>
@@ -1045,6 +1058,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTitle" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="textFieldEventPrice" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextView"/>
             </relationships>

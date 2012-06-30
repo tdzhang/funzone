@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @end
@@ -46,6 +47,7 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize buttonEventTitle = _buttonEventTitle;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
+@synthesize textFieldEventPrice = _textFieldEventPrice;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 
 #pragma mark - self defined synthesize
@@ -84,6 +86,7 @@
     [self setLocationLabel:nil];
     [self setButtonEventTitle:nil];
     [self setTextFieldEventTitle:nil];
+    [self setTextFieldEventPrice:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -124,11 +127,17 @@
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showInView:self.view];
 }
+//pop the action sheet of the choose the event title
 - (IBAction)ChooseEventTitle:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self define", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showInView:self.view];
 
+}
+- (IBAction)ChooseEventCost:(UIButton *)sender {
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Estimate the event cost:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Free",@"less than $10",@"less than $100",@"self enter", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
+    [pop showInView:self.view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -148,6 +157,7 @@
             [self.buttonEventTitle setTitle:@"" forState:UIControlStateNormal];
         }
     }
+    //for the when to go action sheet
     else if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
             [self.buttonEventTime setTitle:@"now" forState:UIControlStateNormal];
@@ -162,6 +172,20 @@
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
         
+    }
+    //for the event cost action sheet
+    else if ([actionSheet.title isEqualToString:@"Estimate the event cost:"]) {
+        if (buttonIndex==0) {
+            [self.buttonEventPrice setTitle:@"Free" forState:UIControlStateNormal];
+        }else if (buttonIndex==1) {
+            [self.buttonEventPrice setTitle:@"less than $10" forState:UIControlStateNormal];
+        }else if (buttonIndex == 2){
+            [self.buttonEventPrice setTitle:@"less than $100" forState:UIControlStateNormal];
+        }else if(buttonIndex == 3){
+            [self.textFieldEventPrice setHidden:NO];
+            [self.textFieldEventPrice becomeFirstResponder];
+            [self.buttonEventPrice setTitle:@"" forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -190,7 +214,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if ([textField isEqual:self.textFieldEventTitle]) {
         if ([textField.text length]==0) {
-            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
+            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Title Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
             inputEmptyError.delegate=self;
             [inputEmptyError show];
             return YES;
@@ -200,16 +224,58 @@
         [self.textFieldEventTitle setHidden:YES];
         return YES;
     }
+    else if ([textField isEqual:self.textFieldEventPrice]){
+        if ([textField.text length]==0) {
+            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Cost Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
+            inputEmptyError.delegate=self;
+            [inputEmptyError show];
+            return YES;
+        }
+        [textField resignFirstResponder];
+        [self.buttonEventPrice setTitle:textField.text forState:UIControlStateNormal];
+        [self.textFieldEventPrice setHidden:YES];
+        return YES;
+    }
     return YES;
+}
+
+//the next 3 method deal with the keyboard covering with the text field
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    //if edit the add cost textfield, the whole view need to 
+    //scroll up, get rid of the keyboard covering
+    if ([textField isEqual:self.textFieldEventPrice]) {
+        [self animateTextField: textField up: YES];
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    //if finished editign the add cost textfield, the whole view need to scroll down
+    if ([textField isEqual:self.textFieldEventPrice]) {
+        [self animateTextField: textField up: NO];
+    }
+}
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"%@",alertView.title);
+    //NSLog(@"%@",alertView.title);
     //deal with the Input Empty Error for the activity category choose
-    if ([alertView.title isEqualToString:@"Input Empty"]) {
-        NSLog(@"%d",buttonIndex);
+    if ([alertView.title isEqualToString:@"Title Input Empty"]) {
+        //NSLog(@"%d",buttonIndex);
         if (buttonIndex == 0) {
             //Input Again
             [self.textFieldEventTitle becomeFirstResponder];
@@ -220,6 +286,20 @@
             [self.buttonEventTitle setTitle:@"getting together" forState:UIControlStateNormal];
             [self.textFieldEventTitle setHidden:YES];
         }
+    }
+    //deal with the input empty for the add cost part
+    else if ([alertView.title isEqualToString:@"Cost Input Empty"]){
+        if (buttonIndex == 0) {
+            //Input Again
+            [self.textFieldEventPrice becomeFirstResponder];
+        }
+        else if(buttonIndex == 1){
+            //Cancel
+            [self.textFieldEventPrice resignFirstResponder];
+            [self.buttonEventPrice setTitle:@"Add cost" forState:UIControlStateNormal];
+            [self.textFieldEventPrice setHidden:YES];
+        }
+
     }
 }
 
