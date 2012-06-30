@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "FourSquarePlace.h"
+#import <QuartzCore/QuartzCore.h>
 
 @class MapViewController;
 
@@ -17,7 +18,7 @@
 
 @protocol SelfChooseLocation <NSObject>
 
--(void)UpdateLocation:(MKAnnotationView*)aView sendFrom:(MapViewController*)sender;
+-(void)UpdateLocation:(MKAnnotationView*)aView withSnapShot:(UIImage*)image sendFrom:(MapViewController*)sender;
 
 @end
 

@@ -488,11 +488,41 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //do the right thing when user tap the button of the annotation
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     if ([(UIButton*)control buttonType]==UIButtonTypeContactAdd) {
-        //do somthing and return
+        
+        MKPointAnnotation *annotationPoint = view.annotation;
+        [mapView deselectAnnotation:annotationPoint animated:NO];
+        //Move the target into the center of the mapview
+        MKCoordinateRegion region;
+        region.center = annotationPoint.coordinate;
+        MKCoordinateSpan span;
+        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*4;
+        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*4;
+        region.span = span;
+        [self.myMapView setRegion:region animated:NO];
+        
+        
+        
+        //do the snapshot of the map view
+        UIGraphicsBeginImageContext(mapView.frame.size);
+        [mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext(); 
+        
+        //then crop the snapshot
+        //NSLog(@"height:%f",image.size.height);
+        //NSLog(@"width:%f",image.size.width);
+        CGRect cropRect=CGRectMake(120, 120, 80, 80);
+        CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
+        image = [UIImage imageWithCGImage:imageRef]; 
+        CGImageRelease(imageRef);
+        
+        //run the delegate method to feedback
         if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
-            [self.delegate UpdateLocation:view sendFrom:self];
+            [self.delegate UpdateLocation:view withSnapShot:image sendFrom:self];
         }
         [self.navigationController popViewControllerAnimated:YES];
+        
+        
     }
 }
 

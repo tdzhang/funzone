@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
 
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @end
 
 //////////////////////////////////////
@@ -39,6 +40,7 @@
 @synthesize buttonEventTime = _eventTimeButton;
 @synthesize buttonEventPrice = _eventPriceButton;
 @synthesize buttonEventFriends = _eventFriendsButton;
+@synthesize locationLabel = _locationLabel;
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad:(BOOL)animated {
@@ -54,6 +56,7 @@
     [self setButtonEventFriends:nil];
     [self setButtonChooseEventPhoto:nil];
     [self setButtonChooseEventLocation:nil];
+    [self setLocationLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -85,9 +88,13 @@
 #pragma mark - implement protocals
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
--(void)UpdateLocation:(MKAnnotationView *)aView sendFrom:(MapViewController *)sender{
+-(void)UpdateLocation:(MKAnnotationView *)aView withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=aView.annotation;
     NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
+    //show the map snapshot
+    [self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
+    //add discription
+    [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
 }
