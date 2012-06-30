@@ -19,7 +19,7 @@
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
+
 @property (weak, nonatomic) IBOutlet UITextView *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventLocation;
@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @end
@@ -34,7 +36,7 @@
 //////////////////////////////////////
 
 @implementation NewEventVC
-@synthesize textFieldEventTitle = _eventTitleTextField;
+
 @synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
 @synthesize buttonChooseEventLocation = _buttonChooseEventLocation;
@@ -42,6 +44,8 @@
 @synthesize buttonEventPrice = _eventPriceButton;
 @synthesize buttonEventFriends = _eventFriendsButton;
 @synthesize locationLabel = _locationLabel;
+@synthesize buttonEventTitle = _buttonEventTitle;
+@synthesize textFieldEventTitle = _textFieldEventTitle;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 
 #pragma mark - self defined synthesize
@@ -71,7 +75,6 @@
 
 - (void)viewDidUnload
 {
-    [self setTextFieldEventTitle:nil];
     [self setTextViewEventDescription:nil];
     [self setButtonEventTime:nil];
     [self setButtonEventPrice:nil];
@@ -79,6 +82,8 @@
     [self setButtonChooseEventPhoto:nil];
     [self setButtonChooseEventLocation:nil];
     [self setLocationLabel:nil];
+    [self setButtonEventTitle:nil];
+    [self setTextFieldEventTitle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -119,11 +124,29 @@
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showInView:self.view];
 }
+- (IBAction)ChooseEventTitle:(UIButton *)sender {
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self define", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [pop showInView:self.view];
+
+}
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     //for the what to do action sheet
     if([actionSheet.title isEqualToString:@"What do you want to do?"]){
-
+        if(buttonIndex == 0){
+            [self.buttonEventTitle setTitle:@"getting together" forState:UIControlStateNormal];
+        }else if(buttonIndex == 1){
+            [self.buttonEventTitle setTitle:@"eatting" forState:UIControlStateNormal];
+        }else if(buttonIndex == 2){
+            [self.buttonEventTitle setTitle:@"movie" forState:UIControlStateNormal];
+        }else if(buttonIndex == 3){
+            [self.buttonEventTitle setTitle:@"coffee" forState:UIControlStateNormal];
+        }else if(buttonIndex == 4){
+            [self.textFieldEventTitle setHidden:NO];
+            [self.textFieldEventTitle becomeFirstResponder];
+            [self.buttonEventTitle setTitle:@"" forState:UIControlStateNormal];
+        }
     }
     else if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
@@ -160,6 +183,44 @@
     NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
     [people removeObjectForKey:key];
     self.peopleGoOutWith = [people copy];
+}
+
+////////////////////////////////////////////////
+//implement the method for dealing with the textfield
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField isEqual:self.textFieldEventTitle]) {
+        if ([textField.text length]==0) {
+            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
+            inputEmptyError.delegate=self;
+            [inputEmptyError show];
+            return YES;
+        }
+        [textField resignFirstResponder];
+        [self.buttonEventTitle setTitle:textField.text forState:UIControlStateNormal];
+        [self.textFieldEventTitle setHidden:YES];
+        return YES;
+    }
+    return YES;
+}
+
+////////////////////////////////////////////////
+//implement the method for dealing with the return of the alertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"%@",alertView.title);
+    //deal with the Input Empty Error for the activity category choose
+    if ([alertView.title isEqualToString:@"Input Empty"]) {
+        NSLog(@"%d",buttonIndex);
+        if (buttonIndex == 0) {
+            //Input Again
+            [self.textFieldEventTitle becomeFirstResponder];
+        }
+        else if(buttonIndex == 1){
+            //Cancel
+            [self.textFieldEventTitle resignFirstResponder];
+            [self.buttonEventTitle setTitle:@"getting together" forState:UIControlStateNormal];
+            [self.textFieldEventTitle setHidden:YES];
+        }
+    }
 }
 
 ////////////////////////////////////////////////

@@ -12,6 +12,6 @@
 #include "TimeChooseViewController.h"
 #include "FeedBackToCreateActivityChange.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,UITextFieldDelegate>
 
 @end
