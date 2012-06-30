@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FD73111159E799D00147B77 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD73110159E799D00147B77 /* AddressBook.framework */; };
+		0FD7311B159E7DB600147B77 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7311A159E7DB600147B77 /* AddressBookUI.framework */; };
+		0FD73136159E7EB700147B77 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD73135159E7EB700147B77 /* ChoosePeopleToGoTableViewController.m */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
@@ -55,6 +58,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0FD7310D159E792300147B77 /* MyContactsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyContactsTableViewCell.h; sourceTree = "<group>"; };
+		0FD7310E159E792300147B77 /* CustonContactInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustonContactInfoView.xib; sourceTree = "<group>"; };
+		0FD7310F159E792300147B77 /* MyContactsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyContactsTableViewCell.m; sourceTree = "<group>"; };
+		0FD73110159E799D00147B77 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		0FD73114159E7B7900147B77 /* FourSquarePlace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FourSquarePlace.h; sourceTree = "<group>"; };
+		0FD73115159E7B7900147B77 /* FourSquarePlace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FourSquarePlace.m; sourceTree = "<group>"; };
+		0FD73116159E7B7900147B77 /* UserContactObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserContactObject.h; sourceTree = "<group>"; };
+		0FD73117159E7B7900147B77 /* UserContactObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserContactObject.m; sourceTree = "<group>"; };
+		0FD73118159E7B7900147B77 /* GeneralActivityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralActivityModel.h; sourceTree = "<group>"; };
+		0FD73119159E7B7900147B77 /* GeneralActivityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneralActivityModel.m; sourceTree = "<group>"; };
+		0FD7311A159E7DB600147B77 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		0FD73133159E7EB700147B77 /* ChoosePeopleToGoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ChoosePeopleToGoDelegate.h; sourceTree = "<group>"; };
+		0FD73134159E7EB700147B77 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
+		0FD73135159E7EB700147B77 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
 		463869E315962CE900E3A699 /* profile1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile1.jpg; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
@@ -122,6 +139,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FD7311B159E7DB600147B77 /* AddressBookUI.framework in Frameworks */,
+				0FD73111159E799D00147B77 /* AddressBook.framework in Frameworks */,
 				4668A7A91593FC8800713A4C /* CoreData.framework in Frameworks */,
 				4668A7A71593FC8100713A4C /* QuartzCore.framework in Frameworks */,
 				4668A7431593E56400713A4C /* UIKit.framework in Frameworks */,
@@ -133,9 +152,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FD7310B159E78E100147B77 /* Invite Friends */ = {
+			isa = PBXGroup;
+			children = (
+				0FD73133159E7EB700147B77 /* ChoosePeopleToGoDelegate.h */,
+				0FD73134159E7EB700147B77 /* ChoosePeopleToGoTableViewController.h */,
+				0FD73135159E7EB700147B77 /* ChoosePeopleToGoTableViewController.m */,
+			);
+			name = "Invite Friends";
+			sourceTree = "<group>";
+		};
+		0FD7310C159E790E00147B77 /* Custom Table Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0FD7310D159E792300147B77 /* MyContactsTableViewCell.h */,
+				0FD7310E159E792300147B77 /* CustonContactInfoView.xib */,
+				0FD7310F159E792300147B77 /* MyContactsTableViewCell.m */,
+			);
+			name = "Custom Table Cell";
+			sourceTree = "<group>";
+		};
+		0FD73113159E7B6100147B77 /* Modal Class */ = {
+			isa = PBXGroup;
+			children = (
+				0FD73114159E7B7900147B77 /* FourSquarePlace.h */,
+				0FD73115159E7B7900147B77 /* FourSquarePlace.m */,
+				0FD73116159E7B7900147B77 /* UserContactObject.h */,
+				0FD73117159E7B7900147B77 /* UserContactObject.m */,
+				0FD73118159E7B7900147B77 /* GeneralActivityModel.h */,
+				0FD73119159E7B7900147B77 /* GeneralActivityModel.m */,
+			);
+			name = "Modal Class";
+			sourceTree = "<group>";
+		};
 		4668A7331593E56400713A4C = {
 			isa = PBXGroup;
 			children = (
+				0FD7311A159E7DB600147B77 /* AddressBookUI.framework */,
+				0FD73110159E799D00147B77 /* AddressBook.framework */,
 				4668A7A81593FC8800713A4C /* CoreData.framework */,
 				4668A7A61593FC8100713A4C /* QuartzCore.framework */,
 				4668A7481593E56400713A4C /* Fun */,
@@ -273,6 +327,9 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				0FD73113159E7B6100147B77 /* Modal Class */,
+				0FD7310C159E790E00147B77 /* Custom Table Cell */,
+				0FD7310B159E78E100147B77 /* Invite Friends */,
 				4668A7AD15943B4000713A4C /* NewEventVC.h */,
 				4668A7AE15943B4000713A4C /* NewEventVC.m */,
 			);
@@ -380,6 +437,7 @@
 				4668A79B1593F86100713A4C /* AppData.m in Sources */,
 				4668A7A51593FBC800713A4C /* FeaturedTVC.m in Sources */,
 				4668A7AF15943B4000713A4C /* NewEventVC.m in Sources */,
+				0FD73136159E7EB700147B77 /* ChoosePeopleToGoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

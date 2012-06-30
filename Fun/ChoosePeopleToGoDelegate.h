@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UserContactObject.h"
 
-@protocol FeedBackToCreateActivityChange <NSObject>
+@protocol ChoosePeopleToGoDelegate <NSObject>
 @optional
 //the method for choosing activity
 -(void)UserSetupOnePropertyFrom:(UIButton*)sender

@@ -229,14 +229,14 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 
-    if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
+    if ([self.delegate conformsToProtocol:@protocol(ChoosePeopleToGoDelegate)]) {
         UserContactObject *person = [self.contacts objectAtIndex:indexPath.row];
             [self.delegate AddContactInformtionToPeopleList:person];
     }
     
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-        if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
+        if ([self.delegate conformsToProtocol:@protocol(ChoosePeopleToGoDelegate)]) {
         UserContactObject *person = [self.contacts objectAtIndex:indexPath.row];
             [self.delegate DeleteContactInformtionToPeopleList:person];
         
