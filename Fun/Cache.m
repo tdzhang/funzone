@@ -19,10 +19,10 @@ static int cacheSize;
 static int usedCacheSize;
 //current documenr directory
 static NSString* documentDir;
-//cacheDic mapping "key" to "path"
+//cache directory file path
 static NSMutableDictionary* cacheDict;
 static NSString* cacheDictPath;
-//recentViewList store the recent fetched data sequence
+
 static NSMutableArray* recentViewList;
 static NSString* recentViewListPath;
 /*****************************************************************

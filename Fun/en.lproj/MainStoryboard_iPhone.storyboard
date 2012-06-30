@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -53,6 +52,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="eventTimeButtonPressed:" destination="bvQ-PW-Zc1" eventType="touchUpInside" id="l2z-Os-BTs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94772401147959184" green="0.94772401147959184" blue="0.94772401147959184" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,6 +78,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="eventPriceButtonPressed:" destination="bvQ-PW-Zc1" eventType="touchUpInside" id="I84-Y7-KNn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94772401147959184" green="0.94772401147959184" blue="0.94772401147959184" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,25 +89,10 @@
                                 <rect key="frame" x="228" y="20" width="72" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="coi-si-Iix">
+                                    <imageView contentMode="scaleToFill" image="addPhoto.png" id="bIs-fe-7QX">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" backgroundImage="addPhoto.png">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jGN-pd-11Y">
-                                        <rect key="frame" x="15" y="58" width="46" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94772401147959184" green="0.94772401147959184" blue="0.94772401147959184" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -110,25 +100,10 @@
                                 <rect key="frame" x="228" y="103" width="72" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q37-VP-oK4">
+                                    <imageView contentMode="scaleToFill" image="location.png" id="wH4-Vk-8OS">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="79"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" backgroundImage="location.png">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Place" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Km3-Yh-jqp">
-                                        <rect key="frame" x="15" y="53" width="43" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94772401147959184" green="0.94772401147959184" blue="0.94772401147959184" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -173,6 +148,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="eventFriendsButtonPressed:" destination="bvQ-PW-Zc1" eventType="touchUpInside" id="MGf-nm-Mj7"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="addFriends.png" id="dIA-zd-WOo" userLabel="addPriceImageView">
                                         <rect key="frame" x="9" y="7" width="20" height="20"/>
@@ -188,17 +166,17 @@
                     <navigationItem key="navigationItem" id="Xl1-XM-270"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="buttonChooseEventLocation" destination="q37-VP-oK4" id="R0A-R8-VMV"/>
-                        <outlet property="buttonChooseEventPhoto" destination="coi-si-Iix" id="PG2-l1-VwS"/>
-                        <outlet property="buttonEventFriends" destination="pUe-C4-um4" id="v7D-C6-ygh"/>
-                        <outlet property="buttonEventPrice" destination="IUu-iQ-3Dd" id="cg8-rI-vOT"/>
-                        <outlet property="buttonEventTime" destination="UkJ-bj-72e" id="W0i-s5-oEO"/>
-                        <outlet property="textFieldEventTitle" destination="jtU-np-SvR" id="eEE-RJ-J40"/>
-                        <outlet property="textViewEventDescription" destination="lQt-Nl-dzR" id="e2g-qM-QQF"/>
+                        <outlet property="eventDescriptionTextView" destination="lQt-Nl-dzR" id="zFc-IY-4XT"/>
+                        <outlet property="eventFriendsButton" destination="pUe-C4-um4" id="C0H-Gx-fBb"/>
+                        <outlet property="eventImageView" destination="bIs-fe-7QX" id="t44-aU-VD7"/>
+                        <outlet property="eventLocationImageView" destination="wH4-Vk-8OS" id="jWz-Jv-Mee"/>
+                        <outlet property="eventPriceButton" destination="IUu-iQ-3Dd" id="SM5-h4-bEy"/>
+                        <outlet property="eventTimeButton" destination="UkJ-bj-72e" id="O8I-09-Dt7"/>
+                        <outlet property="eventTitleTextField" destination="jtU-np-SvR" id="Sf8-ll-rBS"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1170" y="1084"/>
+            <point key="canvasLocation" x="1169" y="1084"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8AS-Gi-EOt">
@@ -819,13 +797,13 @@
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventFriends" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventPrice" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="eventDescriptionTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="eventFriendsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eventLocationImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eventPriceButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="eventTimeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="eventTitleTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>
