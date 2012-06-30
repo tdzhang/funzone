@@ -426,7 +426,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1135" y="-135"/>
+            <point key="canvasLocation" x="1149" y="-138"/>
         </scene>
         <!--FeaturedTVC - Explore-->
         <scene sceneID="VZy-k4-BaX">
@@ -791,7 +791,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="xAd-hw-VSG"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1169" y="498"/>
+            <point key="canvasLocation" x="1149" y="498"/>
         </scene>
         <!--Navigation Controller - Profile-->
         <scene sceneID="93z-0B-UvQ">

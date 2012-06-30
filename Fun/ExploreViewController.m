@@ -43,7 +43,7 @@
 
 #define LABEL_WIDTH 24
 #define JOIN_LABEL_X 40
-#define FAVOR_LABEL_X 287
+#define FAVOR_LABEL_X 289
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -74,12 +74,7 @@
     //Thumbnail Image
     UIImageView *thumbNailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y + _currentY, THUMB_SIZE, THUMB_SIZE)];
     thumbNailImageView.image = [UIImage imageNamed:@"monterey.jpg"];
-    thumbNailImageView.layer.shadowRadius = 2.f;
-    thumbNailImageView.layer.shadowOffset = CGSizeMake(1.f, 1.f);
-    thumbNailImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    thumbNailImageView.layer.shadowOpacity = 1.f;
-    thumbNailImageView.layer.shouldRasterize = YES;
-    thumbNailImageView.layer.masksToBounds = NO;
+    [self setShadow:thumbNailImageView.layer];    
     thumbNailImageView.layer.borderWidth = 3.f;
     thumbNailImageView.layer.borderColor = [[UIColor grayColor] CGColor];    
     [blockView addSubview:thumbNailImageView];
@@ -101,12 +96,7 @@
     //Joined Image
     UIImageView *joinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(JOIN_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
     joinImageView.image = [UIImage imageNamed:@"join.png"];
-    joinImageView.layer.shadowRadius = 2.f;
-    joinImageView.layer.shadowOpacity = .85f;
-    joinImageView.layer.shadowOffset = CGSizeMake(1.5f, 1.5f);
-    joinImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    joinImageView.layer.shouldRasterize = YES;
-    joinImageView.layer.masksToBounds = NO;
+    [self setShadow:joinImageView.layer];
     [blockView addSubview:joinImageView];
     
     //Joined number label
@@ -115,23 +105,45 @@
     joinLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     joinLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
     joinLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    
+    [self setShadow:joinLabel.layer];
     [blockView addSubview:joinLabel];
     
     //Favored Image
     UIImageView *favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(FAVOR_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
+    
     favorImageView.image = [UIImage imageNamed:@"heart-white.png"];
+
+    [self setShadow:favorImageView.layer];
+    /*
     favorImageView.layer.shadowRadius = 2.f;
     favorImageView.layer.shadowOpacity = .50f;
     favorImageView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
     favorImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
     favorImageView.layer.shouldRasterize = YES;
     favorImageView.layer.masksToBounds = NO;
+     */
     [blockView addSubview:favorImageView];
     
-    //Favor
+    //Favored Label
+    UILabel *favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(FAVOR_LABEL_X, ICON_Y + _currentY, LABEL_WIDTH, ICON_SIZE)];
+    favorLabel.text = @"25";
+    favorLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    favorLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
+    favorLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    [self setShadow:favorLabel.layer];
+    [blockView addSubview:favorLabel];
+    
     [self.view reloadInputViews];
 	// Do any additional setup after loading the view.
+}
+
+- (void)setShadow:(CALayer *)layer {
+    layer.shadowRadius = 2.f;
+    layer.shadowOpacity = .50f;
+    layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    layer.shadowColor = [[UIColor blackColor] CGColor];
+    layer.shouldRasterize = YES;
+    layer.masksToBounds = NO;
 }
 
 - (void)viewDidUnload
