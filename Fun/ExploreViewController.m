@@ -18,7 +18,7 @@
 
 @implementation ExploreViewController
 @synthesize currentY = _currentY;
-@synthesize mainScrollView = _mainScrollView;
+@synthesize mainScrollView = _mainScrollVgit iew;
 
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 158 
