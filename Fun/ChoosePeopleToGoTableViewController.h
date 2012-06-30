@@ -10,13 +10,13 @@
 #import <AddressBook/AddressBook.h>
 #import "UserContactObject.h"
 #import "MyContactsTableViewCell.h"
-#import "ChoosePeopleToGoDelegate.h"
+#import "FeedBackToCreateActivityChange.h"
 
 
 
 
 @interface ChoosePeopleToGoTableViewController : UITableViewController
 //this delegate is used to add contact info to activity
-@property(nonatomic, weak) id<ChoosePeopleToGoDelegate> delegate;
+@property(nonatomic, weak) id<FeedBackToCreateActivityChange> delegate;
 @property(nonatomic,strong) NSDictionary *alreadySelectedContacts;
 @end
