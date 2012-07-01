@@ -118,6 +118,14 @@
             [mapViewC setDelegate:self];
         }
     }
+    else if ([segue.identifier isEqualToString:@"ChooseImagveSegue"]){
+        if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
+            if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
+                [segue.destinationViewController setPredefinedKeyWord:self.buttonEventTitle.titleLabel.text];
+            }
+            
+        }
+    }
 }
 
 #pragma mark - action sheet

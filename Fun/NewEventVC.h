@@ -11,6 +11,7 @@
 #include "ChoosePeopleToGoTableViewController.h"
 #include "TimeChooseViewController.h"
 #include "FeedBackToCreateActivityChange.h"
+#import "ChooseImageTableViewController.h"
 
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,UITextFieldDelegate>
 
