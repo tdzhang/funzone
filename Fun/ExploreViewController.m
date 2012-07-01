@@ -90,7 +90,6 @@
     titleLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
-    //titleLabel.font = 
     [titleView addSubview:titleLabel];
     
     //Joined Image
@@ -110,18 +109,8 @@
     
     //Favored Image
     UIImageView *favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(FAVOR_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
-    
     favorImageView.image = [UIImage imageNamed:@"heart-white.png"];
-
     [self setShadow:favorImageView.layer];
-    /*
-    favorImageView.layer.shadowRadius = 2.f;
-    favorImageView.layer.shadowOpacity = .50f;
-    favorImageView.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    favorImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    favorImageView.layer.shouldRasterize = YES;
-    favorImageView.layer.masksToBounds = NO;
-     */
     [blockView addSubview:favorImageView];
     
     //Favored Label

@@ -241,7 +241,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1170" y="1084"/>
+            <point key="canvasLocation" x="1149" y="1084"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8AS-Gi-EOt">
@@ -343,7 +343,7 @@
                     <navigationItem key="navigationItem" id="bwz-Es-Kjz"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1179" y="1686"/>
+            <point key="canvasLocation" x="1149" y="1686"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="MDo-xn-wHU">
@@ -358,7 +358,7 @@
                     <navigationItem key="navigationItem" id="UK2-Nq-Fsg"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1170" y="2275"/>
+            <point key="canvasLocation" x="1149" y="2275"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -402,7 +402,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="653" y="-138"/>
+            <point key="canvasLocation" x="645" y="-138"/>
         </scene>
         <!--Explore View Controller-->
         <scene sceneID="ZX0-g3-g0t">
@@ -701,7 +701,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="653" y="498"/>
+            <point key="canvasLocation" x="645" y="498"/>
         </scene>
         <!--Table View Controller - Friends-->
         <scene sceneID="u4x-dQ-Bip">
