@@ -28,6 +28,7 @@
 @synthesize cacheImage=_cacheImage;
 @synthesize predefinedKeyWord=_predefinedKeyWord;
 @synthesize indicatorDictionary=_indicatorDictionary;
+@synthesize delegate=_delegate;
 
 #pragma mark - self define getter and setter
 -(NSMutableDictionary *)indicatorDictionary{
@@ -340,13 +341,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSString* urlString=[self.imageUrls objectAtIndex:indexPath.row];
+    //if the image url can be found in the temp cache, get the image from the cache
+    if ([self.cacheImage objectForKey:urlString]) { 
+        UIImage *image=nil;
+        image=[UIImage imageWithData:(NSData*)[self.cacheImage objectForKey:urlString]];
+        [self.delegate ChooseUIImage:image From:self];
+    } 
+    else {
+        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+        [self.delegate ChooseUIImage:image From:self];
+    }
 }
 
 @end

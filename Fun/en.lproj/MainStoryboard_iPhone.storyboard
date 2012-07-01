@@ -236,6 +236,7 @@
                         <outlet property="buttonEventPrice" destination="IUu-iQ-3Dd" id="cg8-rI-vOT"/>
                         <outlet property="buttonEventTime" destination="UkJ-bj-72e" id="W0i-s5-oEO"/>
                         <outlet property="buttonEventTitle" destination="IDg-rk-x0Y" id="EQz-fK-AbV"/>
+                        <outlet property="labelChoosePhoto" destination="jGN-pd-11Y" id="lgq-AT-Jhu"/>
                         <outlet property="locationLabel" destination="Km3-Yh-jqp" id="UY2-of-OIV"/>
                         <outlet property="textFieldEventPrice" destination="Y2P-Qp-AQC" id="uFK-Oi-PMo"/>
                         <outlet property="textFieldEventTitle" destination="kIt-zH-vTt" id="5F9-a4-8ve"/>
