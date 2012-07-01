@@ -163,15 +163,27 @@
             }
         }
     }
-    // Configure the cell...
+    // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
     UserContactObject* contact=[self.contacts objectAtIndex:indexPath.row];
-    cell.userName.text= [contact.firstName stringByAppendingFormat:@", %@",contact.lastName];
-    cell.userEmail.text=[contact.email objectAtIndex:0];
-    NSString *key=[NSString stringWithFormat:@"%@, %@",contact.firstName,contact.lastName];
-    if ([self.alreadySelectedContacts objectForKey:key]) {
+    NSString *nameText=@"";
+    if (contact.firstName) {
+        nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
+        if (contact.lastName) {
+            nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+        }
+    }
+    else if(contact.lastName){
+        nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
+    }
+    
+    cell.userName.text= nameText;
+    if ([contact.email count]>0) {
+        cell.userEmail.text=[contact.email objectAtIndex:0];
+    }
+    
+    if ([self.alreadySelectedContacts objectForKey:nameText]) {
         //[cell setSelected:YES animated:YES];
         [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-
     }
     	
     
