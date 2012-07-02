@@ -194,7 +194,7 @@
         loading.frame = CGRectMake(100, 200, 120, 120);
         [cell addSubview:loading];
         //after adding the indicator, it need to be saved to indicatorDictionary, to make the image fetching block can delete the indicator for the table cell view when it finished.
-        [self.indicatorDictionary setObject:loading forKey:urlString];
+        if(loading)[self.indicatorDictionary setObject:loading forKey:urlString];
         // NSLog(@"add indicator url:%@",urlString);
         
     }
@@ -311,13 +311,13 @@
                 //NSLog(@"downloaded %@ error, using a default image",url);
                 UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
-                [self.cacheImage setObject:imageData forKey:url];
+                if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 [self.tableView reloadData]; 
             }
             else {
                 //else, the image date getting finished, directlhy put it in the cache, and them reload the table view data.
                 //NSLog(@"downloaded %@",url);
-                [self.cacheImage setObject:imageData forKey:url];
+                if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 [self.tableView reloadData]; 
             }
          
