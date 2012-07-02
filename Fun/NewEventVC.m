@@ -152,24 +152,24 @@
 - (IBAction)SelectTime:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"now",@"today",@"tonight",@"tomorrow",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-    [pop showInView:self.view];
+    [pop showFromTabBar:self.tabBarController.tabBar];
 }
 //pop the action sheet of the choose the event title
 - (IBAction)ChooseEventTitle:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-    [pop showInView:self.view];
+    [pop showFromTabBar:self.tabBarController.tabBar];
 
 }
 - (IBAction)ChooseEventCost:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Estimate the event cost:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Free",@"less than $10",@"less than $100",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
-    [pop showInView:self.view];
+    [pop showFromTabBar:self.tabBarController.tabBar];
 }
 - (IBAction)ChoosePhoto:(UIButton *)sender {
     UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose Photo Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"In Album",@"Google Image", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
-    [pop showInView:self.view];
+    [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
