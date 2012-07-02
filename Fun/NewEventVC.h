@@ -13,6 +13,6 @@
 #include "FeedBackToCreateActivityChange.h"
 #import "ChooseImageTableViewController.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,UITextFieldDelegate,ChooseImageFeedBackDelegate>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end

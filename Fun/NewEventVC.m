@@ -18,7 +18,7 @@
 
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
-
+@property (nonatomic, retain) UIImagePickerController *imgPicker; //using to start a image pick(from camera or album)
 
 @property (weak, nonatomic) IBOutlet UITextView *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
@@ -38,6 +38,7 @@
 //////////////////////////////////////
 
 @implementation NewEventVC
+@synthesize imgPicker=_imgPicker;
 
 @synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
@@ -53,6 +54,21 @@
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 
 #pragma mark - self defined synthesize
+-(UIImagePickerController *)imgPicker{
+    if (_imgPicker==nil) {
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.allowsEditing = YES;
+        [_imgPicker setDelegate:self];
+    }
+    return _imgPicker;
+}
+
+-(void)setImgPicker:(UIImagePickerController *)imgPicker{
+    if (![_imgPicker isEqual:imgPicker]) {
+        _imgPicker=imgPicker;
+    }
+}
+
 -(void)setPeopleGoOutWith:(NSDictionary *)peopleGoOutWith{
     _peopleGoOutWith=peopleGoOutWith;
     int i= [peopleGoOutWith count];
@@ -121,13 +137,12 @@
             [mapViewC setDelegate:self];
         }
     }
-    else if ([segue.identifier isEqualToString:@"ChooseImagveSegue"]){
+    else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){
         if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
             if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
                 [segue.destinationViewController setPredefinedKeyWord:self.buttonEventTitle.titleLabel.text];
-                [segue.destinationViewController setDelegate:self];
             }
-            
+            [segue.destinationViewController setDelegate:self];
         }
     }
 }
@@ -148,6 +163,11 @@
 }
 - (IBAction)ChooseEventCost:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Estimate the event cost:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Free",@"less than $10",@"less than $100",@"self enter", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
+    [pop showInView:self.view];
+}
+- (IBAction)ChoosePhoto:(UIButton *)sender {
+    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose Photo Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"In Album",@"Google Image", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
     [pop showInView:self.view];
 }
@@ -199,11 +219,52 @@
             [self.buttonEventPrice setTitle:@"" forState:UIControlStateNormal];
         }
     }
+    //for the event photo choose action sheet
+    else if([actionSheet.title isEqualToString:@"Choose Photo Source"]){
+        if (buttonIndex == 0) {
+            //do sth. about take photo part
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                self.imgPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+                [self presentModalViewController:self.imgPicker animated:YES];
+            }
+            else {
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Camera Not Exist" message:@"Your device do not support Camera." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                cameraNotSupport.delegate=self;
+                [cameraNotSupport show];
+            }
+            
+        }
+        else if(buttonIndex == 1){
+            //do sth. about choose photo from the album
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                
+                self.imgPicker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+                [self presentModalViewController:self.imgPicker animated:YES];
+            }
+            else {
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Album Not Exist" message:@"Your device do not support Photo Album." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                cameraNotSupport.delegate=self;
+                [cameraNotSupport show];
+            }
+        }
+        else if(buttonIndex ==2){
+            //using google image seach(implement by segue)
+            [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+        }
+    }
 }
 
 
 
 #pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the UIImagePickerControllerDelegate Method
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    [self.buttonChooseEventPhoto setBackgroundImage:image forState:UIControlStateNormal];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
 -(void)ChooseUIImage:(UIImage *)image From:(ChooseImageTableViewController *)sender{
