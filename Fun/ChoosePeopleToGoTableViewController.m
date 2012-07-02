@@ -14,8 +14,8 @@
 @end
 
 @implementation ChoosePeopleToGoTableViewController
-@synthesize contacts=_contacts;
-@synthesize delegate=_delegate;
+@synthesize contacts = _contacts;
+@synthesize delegate = _delegate;
 @synthesize alreadySelectedContacts=_alreadySelectedContacts;
 -(NSDictionary*)alreadySelectedContacts{
     if(_alreadySelectedContacts==nil){

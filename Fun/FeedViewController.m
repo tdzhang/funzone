@@ -1,28 +1,28 @@
 //
-//  ExploreViewController.m
+//  FeedViewController.m
 //  Fun
 //
-//  Created by He Yang on 6/29/12.
-//  Copyright (c) 2012 Stanford University. All rights reserved.
+//  Created by He Yang on 7/1/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ExploreViewController.h"
+#import "FeedViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 
-
-@interface ExploreViewController ()
+@interface FeedViewController ()
 @property CGFloat currentY;
-@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (nonatomic,retain) DetailViewController *detailViewController;
 @property (nonatomic,retain) NSMutableArray *blockViews;
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
+
 @end
 
-@implementation ExploreViewController
+@implementation FeedViewController
 @synthesize detailViewController = _detailViewController;
 @synthesize blockViews = _blockViews;
-@synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
+@synthesize currentY = _currentY;
 
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 158 
@@ -34,11 +34,22 @@
 #define BACKGROUND_Y 25
 #define BACKGROUND_HEIGHT 137
 
-#define TITLE_X 60
-#define TITLE_Y 16
-#define TITLE_WIDTH 260
-#define TITLE_HEIGHT 36
-#define TITLE_TEXT_OFFSET 8
+#define TITLE_Y 4
+#define TITLE_WIDTH 311
+
+#define USERNAME_X 58
+#define USERNAME_Y 3
+#define USERNAME_WIDTH 42
+#define USERNAME_HEIGHT 21
+
+#define ACTION_X 98
+#define ACTION_WIDTH 100
+
+#define TITLENAME_X 58
+#define TITLENAME_Y 18
+#define TITLENAME_WIDTH 237
+#define TITLENAME_HEIGHT 21
+
 
 #define ICON_SIZE 20
 #define JOIN_X 13
@@ -54,8 +65,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        
+        // Custom initialization
     }
     return self;
 }
@@ -67,14 +77,11 @@
     return _blockViews;
 }
 
-- (DetailViewController *)detailViewController {
-    if (_detailViewController == nil) {
-        _detailViewController = [[DetailViewController alloc] init];
-    }
-    return _detailViewController;
-}
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
@@ -96,25 +103,42 @@
     backgroundImageView.image = [UIImage imageNamed:@"monterey.jpg"]; /*****TODO*****/
     [blockView addSubview:backgroundImageView];
     
-    //Thumbnail Image
-    UIImageView *thumbNailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y + _currentY, THUMB_SIZE, THUMB_SIZE)];
-    thumbNailImageView.image = [UIImage imageNamed:@"monterey.jpg"]; /*****TODO*****/
-    [self setShadow:thumbNailImageView.layer];    
-    thumbNailImageView.layer.borderWidth = 3.f;
-    thumbNailImageView.layer.borderColor = [[UIColor grayColor] CGColor];    
-    [blockView addSubview:thumbNailImageView];
-    
+        
     //Title View
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y+_currentY, TITLE_WIDTH, TITLE_HEIGHT)];
-    titleView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.56];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y+_currentY, TITLE_WIDTH, THUMB_SIZE)];
+    titleView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.72];
     [blockView addSubview:titleView];
     
+    //Thumbnail Image
+    UIImageView *thumbNailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, THUMB_SIZE, THUMB_SIZE)];
+    thumbNailImageView.image = [UIImage imageNamed:@"profile1.jpg"]; /*****TODO*****/
+    [self setShadow:thumbNailImageView.layer];    
+    //thumbNailImageView.layer.borderWidth = 3.f;
+    //thumbNailImageView.layer.borderColor = [[UIColor grayColor] CGColor];    
+    [titleView addSubview:thumbNailImageView];
+
+    //User name
+    UILabel *usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(USERNAME_X, USERNAME_Y+_currentY, USERNAME_WIDTH, USERNAME_HEIGHT)];
+    usernameLabel.text = @"Cindy";
+    usernameLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    usernameLabel.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+    usernameLabel.textColor = [UIColor blackColor];
+    [titleView addSubview:usernameLabel];
+    
+    //Action name
+    UILabel *actionLabel = [[UILabel alloc] initWithFrame:CGRectMake(ACTION_X, USERNAME_Y+_currentY, ACTION_WIDTH, USERNAME_HEIGHT)];
+    actionLabel.text = @"wants to go to";
+    actionLabel.font = [UIFont systemFontOfSize:13.0];
+    actionLabel.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0];
+    actionLabel.textColor = [UIColor blackColor];
+    [titleView addSubview:actionLabel];
+
     //Title Label
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_TEXT_OFFSET, 0, TITLE_WIDTH-2*TITLE_TEXT_OFFSET, TITLE_HEIGHT)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLENAME_X, TITLENAME_Y+_currentY, TITLENAME_WIDTH, TITLENAME_HEIGHT)];
     titleLabel.text = @"World Ocean's Day Celebration"; /*****TODO*****/
     titleLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
+    titleLabel.textColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    titleLabel.font = [UIFont systemFontOfSize:14.0];
     [titleView addSubview:titleLabel];
     
     //Joined Image
@@ -165,6 +189,7 @@
     self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:self.detailViewController animated:YES completion:^{}];
 }
+
 
 - (void)viewDidUnload
 {
