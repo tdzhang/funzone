@@ -21,7 +21,7 @@
 
 @implementation ChooseImageTableViewController
 @synthesize mySearchBar = _mySearchBar;
-@synthesize searchBarImage;
+@synthesize searchBarImage = _searchBarImage;
 @synthesize data=_data;
 @synthesize imageUrls=_imageUrls;
 @synthesize imageTitles=_imageTitles;

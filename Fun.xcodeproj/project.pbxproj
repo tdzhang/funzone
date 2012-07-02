@@ -18,10 +18,9 @@
 		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
 		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
-		0FB24BA815A0F4090014F734 /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FB24BA515A0F4090014F734 /* ImageTableCell.xib */; };
-		0FB24BA915A0F4090014F734 /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB24BA715A0F4090014F734 /* ImageTableViewCell.m */; };
-		0FB24BAB15A0F4350014F734 /* big40.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0FB24BAA15A0F4350014F734 /* big40.jpg */; };
-		0FB24BAE15A0F44F0014F734 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB24BAD15A0F44F0014F734 /* ChooseImageTableViewController.m */; };
+		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
+		0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEA15A167F10004136E /* ImageTableCell.xib */; };
+		0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
@@ -94,12 +93,11 @@
 		0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackToCreateActivityChange.h; sourceTree = "<group>"; };
 		0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
 		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
-		0FB24BA515A0F4090014F734 /* ImageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableCell.xib; sourceTree = "<group>"; };
-		0FB24BA615A0F4090014F734 /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
-		0FB24BA715A0F4090014F734 /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
-		0FB24BAA15A0F4350014F734 /* big40.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = big40.jpg; sourceTree = "<group>"; };
-		0FB24BAC15A0F44F0014F734 /* ChooseImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseImageTableViewController.h; sourceTree = "<group>"; };
-		0FB24BAD15A0F44F0014F734 /* ChooseImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseImageTableViewController.m; sourceTree = "<group>"; };
+		0F579A4F15A166B70006FCC6 /* ChooseImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseImageTableViewController.h; sourceTree = "<group>"; };
+		0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseImageTableViewController.m; sourceTree = "<group>"; };
+		0FCD2BEA15A167F10004136E /* ImageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableCell.xib; sourceTree = "<group>"; };
+		0FCD2BEB15A167F10004136E /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
+		0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
 		463869E315962CE900E3A699 /* profile1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile1.jpg; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
@@ -242,7 +240,26 @@
 			name = "choose Friends";
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
+		0F579A5315A166C60006FCC6 /* choose Image */ = {
+			isa = PBXGroup;
+			children = (
+				0FCD2BE815A167790004136E /* custom view */,
+				0F579A4F15A166B70006FCC6 /* ChooseImageTableViewController.h */,
+				0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */,
+			);
+			name = "choose Image";
+			sourceTree = "<group>";
+		};
+		0FCD2BE815A167790004136E /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				0FCD2BEA15A167F10004136E /* ImageTableCell.xib */,
+				0FCD2BEB15A167F10004136E /* ImageTableViewCell.h */,
+				0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */,
+			);
+			name = "custom view";
+			sourceTree = "<group>";
+		};
 		463B9BF215A0F90B0087CDBA /* Detail Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,27 +267,6 @@
 				463B9BF515A0F9210087CDBA /* DetailViewController.m */,
 			);
 			name = "Detail Page";
-=======
-		0FB24BA215A0F3E70014F734 /* choose Image */ = {
-			isa = PBXGroup;
-			children = (
-				0FB24BAC15A0F44F0014F734 /* ChooseImageTableViewController.h */,
-				0FB24BAD15A0F44F0014F734 /* ChooseImageTableViewController.m */,
-				0FB24BA415A0F3F30014F734 /* self define Table Cell */,
-			);
-			name = "choose Image";
-			sourceTree = "<group>";
-		};
-		0FB24BA415A0F3F30014F734 /* self define Table Cell */ = {
-			isa = PBXGroup;
-			children = (
-				0FB24BAA15A0F4350014F734 /* big40.jpg */,
-				0FB24BA515A0F4090014F734 /* ImageTableCell.xib */,
-				0FB24BA615A0F4090014F734 /* ImageTableViewCell.h */,
-				0FB24BA715A0F4090014F734 /* ImageTableViewCell.m */,
-			);
-			name = "self define Table Cell";
->>>>>>> 2a40ed5cf4b1206dd282cc2f167090f995cf0f72
 			sourceTree = "<group>";
 		};
 		4668A7331593E56400713A4C = {
@@ -422,7 +418,7 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
-				0FB24BA215A0F3E70014F734 /* choose Image */,
+				0F579A5315A166C60006FCC6 /* choose Image */,
 				0F128565159ECC1000430859 /* choose Friends */,
 				0F128561159ECA7600430859 /* chooseTime */,
 				0F128556159EB1D700430859 /* chooseLocation */,
@@ -519,13 +515,9 @@
 				463869E415962CE900E3A699 /* profile1.jpg in Resources */,
 				463869E7159645E400E3A699 /* heart-white.png in Resources */,
 				463869E91596472300E3A699 /* join.png in Resources */,
-<<<<<<< HEAD
 				463B9C0415A1029A0087CDBA /* funnect_57.png in Resources */,
 				463B9C0615A102A50087CDBA /* funnect_114.png in Resources */,
-=======
-				0FB24BA815A0F4090014F734 /* ImageTableCell.xib in Resources */,
-				0FB24BAB15A0F4350014F734 /* big40.jpg in Resources */,
->>>>>>> 2a40ed5cf4b1206dd282cc2f167090f995cf0f72
+				0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,13 +550,10 @@
 				0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */,
 				0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */,
 				463B9BE9159FC08D0087CDBA /* ExploreViewController.m in Sources */,
-<<<<<<< HEAD
 				463B9BF615A0F9210087CDBA /* DetailViewController.m in Sources */,
 				4698259315A11E1F00204234 /* FeedViewController.m in Sources */,
-=======
-				0FB24BA915A0F4090014F734 /* ImageTableViewCell.m in Sources */,
-				0FB24BAE15A0F44F0014F734 /* ChooseImageTableViewController.m in Sources */,
->>>>>>> 2a40ed5cf4b1206dd282cc2f167090f995cf0f72
+				0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */,
+				0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

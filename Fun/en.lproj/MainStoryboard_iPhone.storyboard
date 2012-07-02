@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -110,7 +111,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="lHv-0K-Ifb" kind="push" identifier="ChooseImagveSegue" id="h4D-VP-By9"/>
+                                            <segue destination="0Oa-z7-ur9" kind="push" identifier="ChooseImagveSegue" id="l6I-kV-1XT"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jGN-pd-11Y">
@@ -235,7 +236,7 @@
                         <outlet property="buttonEventPrice" destination="IUu-iQ-3Dd" id="cg8-rI-vOT"/>
                         <outlet property="buttonEventTime" destination="UkJ-bj-72e" id="W0i-s5-oEO"/>
                         <outlet property="buttonEventTitle" destination="IDg-rk-x0Y" id="EQz-fK-AbV"/>
-                        <outlet property="labelChoosePhoto" destination="jGN-pd-11Y" id="lgq-AT-Jhu"/>
+                        <outlet property="labelChoosePhoto" destination="jGN-pd-11Y" id="u1H-tR-gfu"/>
                         <outlet property="locationLabel" destination="Km3-Yh-jqp" id="UY2-of-OIV"/>
                         <outlet property="textFieldEventPrice" destination="Y2P-Qp-AQC" id="uFK-Oi-PMo"/>
                         <outlet property="textFieldEventTitle" destination="kIt-zH-vTt" id="5F9-a4-8ve"/>
@@ -870,7 +871,49 @@
             </objects>
             <point key="canvasLocation" x="1604" y="-138"/>
         </scene>
-        <!--Map View Controller - Choose Location-->
+        <!--Choose Image Table View Controller-->
+        <scene sceneID="Cnv-qM-cUF">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j2x-ng-Mof" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="0Oa-z7-ur9" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="SHD-BC-oU5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="laD-1r-gbL">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="0Oa-z7-ur9" id="PBO-w3-dWH"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="115" id="d6c-ia-pol">
+                                <rect key="frame" x="0.0" y="66" width="320" height="115"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="114"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0Oa-z7-ur9" id="zn0-qB-fwh"/>
+                            <outlet property="delegate" destination="0Oa-z7-ur9" id="8ws-yc-tcF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="90E-JM-io8"/>
+                    <connections>
+                        <outlet property="mySearchBar" destination="laD-1r-gbL" id="4h3-pm-62W"/>
+                        <outlet property="searchBarImage" destination="laD-1r-gbL" id="mmB-ck-xbC"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1933" y="497"/>
+        </scene>
+        <!--Map View Controller - view2-->
         <scene sceneID="vyZ-eW-82d">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwY-w3-CrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -916,7 +959,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose Location" id="Jh0-xe-etq"/>
+                    <navigationItem key="navigationItem" title="view2" id="Jh0-xe-etq"/>
                     <connections>
                         <outlet property="myMapView" destination="MtV-1R-3Sd" id="qfA-PZ-6kv"/>
                         <outlet property="mySearchBar" destination="y3w-yZ-Bax" id="ohN-PC-p02"/>
@@ -1048,7 +1091,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1964" y="2238"/>
         </scene>
-<<<<<<< HEAD
         <!--Feed View Controller-->
         <scene sceneID="J7I-Bi-1WF">
             <objects>
@@ -1072,49 +1114,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1149" y="498"/>
-=======
-        <!--Choose Image Table View Controller - Choose Image-->
-        <scene sceneID="BbT-Ym-Ooe">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Stq-jk-jiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="lHv-0K-Ifb" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="pWt-My-oXv">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="hye-UO-JXE">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="lHv-0K-Ifb" id="MZ3-1a-Krk"/>
-                            </connections>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="115" id="XuA-oy-h8c">
-                                <rect key="frame" x="0.0" y="66" width="320" height="115"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="114"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="lHv-0K-Ifb" id="Ysn-sS-aDM"/>
-                            <outlet property="delegate" destination="lHv-0K-Ifb" id="whh-WQ-MLb"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Choose Image" id="9ZO-Zt-BRT"/>
-                    <connections>
-                        <outlet property="mySearchBar" destination="hye-UO-JXE" id="i5h-5a-gmX"/>
-                        <outlet property="searchBarImage" destination="hye-UO-JXE" id="2V4-em-Til"/>
-                    </connections>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="1964" y="521"/>
->>>>>>> 2a40ed5cf4b1206dd282cc2f167090f995cf0f72
         </scene>
     </scenes>
     <resources>
@@ -1140,8 +1139,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="time.png" width="40" height="40"/>
         <image name="twitter.png" width="40" height="40"/>
     </resources>
-<<<<<<< HEAD
     <classes>
+        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
         </class>
@@ -1191,6 +1196,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="buttonEventPrice" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="labelChoosePhoto" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="textFieldEventPrice" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextField"/>
@@ -1205,8 +1211,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </relationships>
         </class>
     </classes>
-=======
->>>>>>> 2a40ed5cf4b1206dd282cc2f167090f995cf0f72
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
