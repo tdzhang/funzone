@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
+@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @end
@@ -48,6 +49,7 @@
 @synthesize buttonEventTitle = _buttonEventTitle;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
 @synthesize textFieldEventPrice = _textFieldEventPrice;
+@synthesize labelChoosePhoto = _labelChoosePhoto;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 
 #pragma mark - self defined synthesize
@@ -87,6 +89,7 @@
     [self setButtonEventTitle:nil];
     [self setTextFieldEventTitle:nil];
     [self setTextFieldEventPrice:nil];
+    [self setLabelChoosePhoto:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -116,6 +119,15 @@
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
             MapViewController *mapViewC=segue.destinationViewController;
             [mapViewC setDelegate:self];
+        }
+    }
+    else if ([segue.identifier isEqualToString:@"ChooseImagveSegue"]){
+        if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
+            if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
+                [segue.destinationViewController setPredefinedKeyWord:self.buttonEventTitle.titleLabel.text];
+                [segue.destinationViewController setDelegate:self];
+            }
+            
         }
     }
 }
@@ -192,6 +204,16 @@
 
 
 #pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the chooseimageFeedBackDelegate method
+-(void)ChooseUIImage:(UIImage *)image From:(ChooseImageTableViewController *)sender{
+    [self.buttonChooseEventPhoto setBackgroundImage:image forState:UIControlStateNormal];
+    [self.labelChoosePhoto setHidden:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
 ////////////////////////////////////////////////
 //implement the method for the adding or delete contacts that will be go out with
 -(void)AddContactInformtionToPeopleList:(UserContactObject*)person{

@@ -165,7 +165,11 @@
         annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",coordinate.latitude,coordinate.longitude];
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
-        [self.myMapView selectAnnotation:annotationPoint animated:YES];
+        
+
+        
+        //[self.myMapView selectAnnotation:annotationPoint animated:YES];
+        
         /*//reset the MapView region
         MKCoordinateRegion region;
         region.center=coordinate;
@@ -446,6 +450,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 #pragma mark - implement the map view protocal
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views{
+    if ([mapView.annotations count]>1) {
+        [mapView removeAnnotation:[mapView.annotations objectAtIndex:1]];
+    }
+    id myAnnotation = [mapView.annotations objectAtIndex:0]; 
+    [mapView selectAnnotation:myAnnotation animated:YES];
+}
+
+
 //when the user location update happen
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     [self showUserCurrentLocation];

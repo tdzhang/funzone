@@ -31,7 +31,7 @@ static NSMutableDictionary *documentDict;
 /**************************************************************************
  Document saving helper
  *************************************************************************/
-+ (void)saveDocument:(UIDocument*)document withURL:(NSURL*)url {
++ (void)saveDocument:(UIManagedDocument*)document withURL:(NSURL*)url {
     [document saveToURL:url forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
         if (success) {
             NSLog(@"document Helper - Document %@ saved", document.localizedName);
