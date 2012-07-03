@@ -180,6 +180,9 @@
     if ([contact.email count]>0) {
         cell.userEmail.text=[contact.email objectAtIndex:0];
     }
+    else {
+        cell.userEmail.text=@"No Email Information Found.";
+    }
     
     if ([self.alreadySelectedContacts objectForKey:nameText]) {
         //[cell setSelected:YES animated:YES];
