@@ -11,8 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import "FourSquarePlace.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TableViewContainMapviewTVC.h"
+#import "FunTableViewContainMapviewTVCDelegate.h"
 
 @class MapViewController;
+@class TableViewContainMapviewTVC;
 
 
 
@@ -23,11 +26,14 @@
 @end
 
 
-@interface MapViewController : UIViewController <MKMapViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIGestureRecognizerDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIGestureRecognizerDelegate,FunTableViewContainMapviewTVCDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
 @property (weak, nonatomic) IBOutlet UIStepper *myStepper;
 @property (weak,nonatomic) id<SelfChooseLocation> delegate;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (nonatomic,strong) TableViewContainMapviewTVC *tableViewControllerContainMap;
+
 
 @end
 

@@ -9,11 +9,11 @@
 #import "MapViewController.h"
 
 @interface  MapViewController()
-@property (nonatomic, strong)MKPointAnnotation* annotation;
 @property (nonatomic,strong)NSNumber* oldZoom;
 @property (nonatomic,strong)NSNumber* currentZOOMVALUE;
 @property (nonatomic,strong)NSArray *foursquareSearchResults;
 @property(nonatomic,retain) NSMutableData *data;  //using to restore the http connection data
+@property (nonatomic, strong)MKPointAnnotation* annotation;
 @end
 
 @implementation MapViewController
@@ -22,12 +22,30 @@
 @synthesize myStepper = _myStepper;
 @synthesize annotation=_annotation;
 @synthesize delegate=_delegate;
+@synthesize myTableView = _myTableView;
 @synthesize oldZoom=_oldZoom;
 @synthesize currentZOOMVALUE=_currentZOOMVALUE;
 @synthesize foursquareSearchResults=_foursquareSearchResults;
 @synthesize data=_data;
+@synthesize tableViewControllerContainMap=_tableViewControllerContainMap;
+
+#pragma mark - self define setting and getting method
+-(TableViewContainMapviewTVC *)tableViewControllerContainMap{
+    if (_tableViewControllerContainMap == nil) {
+        _tableViewControllerContainMap=[[TableViewContainMapviewTVC alloc] init];
+    }
+    return _tableViewControllerContainMap;
+}
+
+-(void)setTableViewControllerContainMap:(TableViewContainMapviewTVC *)tableViewControllerContainMap{
+    if (![_tableViewControllerContainMap isEqual:tableViewControllerContainMap]) {
+        _tableViewControllerContainMap=tableViewControllerContainMap;
+    }
+}
 
 
+
+#pragma mark - init
 -(void)setAnnotation:(MKPointAnnotation *)annotation
 {
     if (self.myMapView.annotations) {
@@ -99,7 +117,14 @@
     mapView.showsUserLocation=YES;
     mapView.mapType=MKMapTypeStandard;
     mapView.delegate=self;
+
     
+    
+    //setting the property of the table view(datasource and delegate)
+    [self.myTableView setDelegate:self.tableViewControllerContainMap];
+    [self.myTableView setDataSource:self.tableViewControllerContainMap];
+    self.tableViewControllerContainMap.myTableView =self.myTableView;
+    self.tableViewControllerContainMap.delegate=self;
     
     
     //只有第二次启动的时候，user location 才会有值, make the view show user location
@@ -109,6 +134,7 @@
     //NSLog(@"user longitude = %f",userCoordinate.longitude);
     if (userCoordinate.latitude>0.001) {
         [self showUserCurrentLocation];
+        [self.tableViewControllerContainMap SearchTheKeyWords:@"stanford" AtUserLocation:userLoc];
     }
     
     //add gesture recognizer for usering choosing locaiton
@@ -137,6 +163,7 @@
     [self setMyMapView:nil];
     [self setMySearchBar:nil];
     [self setMyStepper:nil];
+    [self setMyTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -449,6 +476,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
+#pragma mark - implemetn the FunTableViewContainMapviewTVCDelegate protocal
+-(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region{
+    self.annotation=annotation;
+    [self.myMapView addAnnotation:annotation];
+    [self.myMapView setRegion:region animated:YES];
+}
+
+
 #pragma mark - implement the map view protocal
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views{
     if ([mapView.annotations count]>1) {
@@ -462,6 +497,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //when the user location update happen
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     [self showUserCurrentLocation];
+    [self.tableViewControllerContainMap SearchTheKeyWords:@"stanford" AtUserLocation:userLocation.location];
 }
 
 //create the annnotation view(In mapView)
@@ -522,9 +558,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
         UIGraphicsEndImageContext(); 
         
         //then crop the snapshot
-        //NSLog(@"height:%f",image.size.height);
-        //NSLog(@"width:%f",image.size.width);
-        CGRect cropRect=CGRectMake(120, 120, 80, 80);
+        NSLog(@"height:%f",image.size.height);
+        NSLog(@"width:%f",image.size.width);
+        CGPoint center=CGPointMake(image.size.width/2, image.size.height/2);
+        CGFloat length=40;
+        CGRect cropRect=CGRectMake(center.x-length, center.y-length, 2*length, 2*length);
         CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
         image = [UIImage imageWithCGImage:imageRef]; 
         CGImageRelease(imageRef);
@@ -534,7 +572,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             [self.delegate UpdateLocation:view withSnapShot:image sendFrom:self];
         }
         [self.navigationController popViewControllerAnimated:YES];
-        
+
         
     }
 }
