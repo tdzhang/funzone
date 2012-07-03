@@ -194,6 +194,12 @@
 		0F128549159EB14200430859 /* model class */ = {
 			isa = PBXGroup;
 			children = (
+				0F12854A159EB16A00430859 /* FourSquarePlace.h */,
+				0F12854B159EB16A00430859 /* FourSquarePlace.m */,
+				0F12854C159EB16A00430859 /* UserContactObject.h */,
+				0F12854D159EB16A00430859 /* UserContactObject.m */,
+				0F12854E159EB16A00430859 /* GeneralActivityModel.h */,
+				0F12854F159EB16A00430859 /* GeneralActivityModel.m */,
 			);
 			name = "model class";
 			sourceTree = "<group>";
@@ -217,12 +223,6 @@
 				0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */,
 				0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */,
 				0F128549159EB14200430859 /* model class */,
-				0F12854A159EB16A00430859 /* FourSquarePlace.h */,
-				0F12854B159EB16A00430859 /* FourSquarePlace.m */,
-				0F12854C159EB16A00430859 /* UserContactObject.h */,
-				0F12854D159EB16A00430859 /* UserContactObject.m */,
-				0F12854E159EB16A00430859 /* GeneralActivityModel.h */,
-				0F12854F159EB16A00430859 /* GeneralActivityModel.m */,
 			);
 			name = chooseLocation;
 			sourceTree = "<group>";

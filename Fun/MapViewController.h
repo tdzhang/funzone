@@ -33,7 +33,7 @@
 @property (weak,nonatomic) id<SelfChooseLocation> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic,strong) TableViewContainMapviewTVC *tableViewControllerContainMap;
-
+@property (nonatomic,strong) NSString *predefinedSeachingWords;
 
 @end
 

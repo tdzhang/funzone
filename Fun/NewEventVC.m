@@ -135,6 +135,13 @@
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
             MapViewController *mapViewC=segue.destinationViewController;
             [mapViewC setDelegate:self];
+            if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
+                [mapViewC setPredefinedSeachingWords:self.buttonEventTitle.titleLabel.text];
+            }
+            else {
+                [mapViewC setPredefinedSeachingWords:@"Stanford"];
+            }
+            
         }
     }
     else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){

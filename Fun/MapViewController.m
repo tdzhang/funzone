@@ -17,6 +17,7 @@
 @end
 
 @implementation MapViewController
+@synthesize predefinedSeachingWords=_predefinedSeachingWords;
 @synthesize myMapView=_myMapView;
 @synthesize mySearchBar = _mySearchBar;
 @synthesize myStepper = _myStepper;
@@ -134,7 +135,10 @@
     //NSLog(@"user longitude = %f",userCoordinate.longitude);
     if (userCoordinate.latitude>0.001) {
         [self showUserCurrentLocation];
-        [self.tableViewControllerContainMap SearchTheKeyWords:@"stanford" AtUserLocation:userLoc];
+        if (self.predefinedSeachingWords) {
+            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
+        }
+        
     }
     
     //add gesture recognizer for usering choosing locaiton
@@ -497,7 +501,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //when the user location update happen
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     [self showUserCurrentLocation];
-    [self.tableViewControllerContainMap SearchTheKeyWords:@"stanford" AtUserLocation:userLocation.location];
+    
+    //if have predefined seaching words, search it
+    if (self.predefinedSeachingWords) {
+        [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLocation.location];
+    }
 }
 
 //create the annnotation view(In mapView)
