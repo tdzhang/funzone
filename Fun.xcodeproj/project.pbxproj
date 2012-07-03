@@ -20,6 +20,7 @@
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
+		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
 		0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEA15A167F10004136E /* ImageTableCell.xib */; };
 		0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
@@ -99,6 +100,7 @@
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
+		0FC91A2E15A3727800EB3E9A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0FCD2BEA15A167F10004136E /* ImageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableCell.xib; sourceTree = "<group>"; };
 		0FCD2BEB15A167F10004136E /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
 		0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewCell.m; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */,
 				0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */,
 				0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */,
 				0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */,
@@ -279,6 +282,7 @@
 		4668A7331593E56400713A4C = {
 			isa = PBXGroup;
 			children = (
+				0FC91A2E15A3727800EB3E9A /* MessageUI.framework */,
 				0F128546159EB0BE00430859 /* MapKit.framework */,
 				0F128544159EB0B600430859 /* AddressBook.framework */,
 				0F128541159EB0AD00430859 /* CoreLocation.framework */,

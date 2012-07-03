@@ -262,8 +262,65 @@
 }
 
 
+#pragma mark - Compose Email Parts implementation
+//the button activite the email sending event
+- (IBAction)SendInvitationByEmail {
+    if (self.peopleGoOutWith) {
+        if ([self.peopleGoOutWith count] > 0) {
+            //Now we have friends to be invided using email
+            //get the email list
+            NSMutableArray *emailList=[NSMutableArray array];
+            for (NSString* key in [self.peopleGoOutWith allKeys] ){
+                UserContactObject *user=[self.peopleGoOutWith objectForKey:key];
+                if (user.email) {
+                    if ([user.email count]>0) {
+                        [emailList addObject:[user.email objectAtIndex:0]];
+                    }
+                }
+            }
+            //we have the email list, now try to send email invitation
+            if([MFMailComposeViewController canSendMail]) {
+                //if the device allowed sending email
+                MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+                mailCont.mailComposeDelegate = self;
+                
+                //get the event information from all the selection
+                NSString *eventName=(self.buttonEventTitle.titleLabel.text!=@"Event Title")?self.buttonEventTitle.titleLabel.text:@"Some Stuff";
+                NSString *eventTime=(self.buttonEventTime.titleLabel.text!=@"Select time")?self.buttonEventTime.titleLabel.text:@"Some Time";
+                NSString *eventCost=(self.buttonEventPrice.titleLabel.text!=@"Add cost")?self.buttonEventPrice.titleLabel.text:@"maybe not much";
+                NSString *eventLocation=self.locationLabel.text;
+                
+                //email subject
+                [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",eventName]];
+                //email list
+                [mailCont setToRecipients:emailList];
+                //email body
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The cost is %@, and the time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~ Cheers~",eventName,eventCost,eventTime,eventLocation] isHTML:NO];
+                //go!
+                [self presentModalViewController:mailCont animated:YES];
+            }
+            
+            
+        }
+    }
+        
+}
+
+
+
+
 
 #pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the MFMailComposeViewControllerDelegate Method
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (error) {
+        NSLog(@"Sending Email Error Happended!");
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 ////////////////////////////////////////////////
 //implement the UIImagePickerControllerDelegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
