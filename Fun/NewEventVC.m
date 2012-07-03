@@ -139,7 +139,7 @@
                 [mapViewC setPredefinedSeachingWords:self.buttonEventTitle.titleLabel.text];
             }
             else {
-                [mapViewC setPredefinedSeachingWords:@"Stanford"];
+                [mapViewC setPredefinedSeachingWords:@""];
             }
             
         }
