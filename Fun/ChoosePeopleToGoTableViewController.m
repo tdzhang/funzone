@@ -11,12 +11,31 @@
 
 @interface ChoosePeopleToGoTableViewController()
 @property(nonatomic,strong)NSArray *contacts;
+@property(nonatomic,strong)NSArray *dividedContacts;//divided it into select and not select 2 parts
+-(void)getTheDividedContacts;//using contacts and alreadySelectedContacts to generate this contact
 @end
 
 @implementation ChoosePeopleToGoTableViewController
+@synthesize dividedContacts = _dividedContacts;
 @synthesize contacts = _contacts;
 @synthesize delegate = _delegate;
 @synthesize alreadySelectedContacts=_alreadySelectedContacts;
+
+
+#pragma mark - self defined setter and getter
+-(NSArray*)dividedContacts{
+    if (!_dividedContacts) {
+        _dividedContacts=[[NSArray alloc] initWithArray:nil];
+    }
+    return _dividedContacts;
+}
+
+-(void)setDividedContacts:(NSArray *)dividedContacts{
+    if (![_dividedContacts isEqualToArray:dividedContacts]) {
+        _dividedContacts=dividedContacts;
+    }
+}
+
 -(NSDictionary*)alreadySelectedContacts{
     if(_alreadySelectedContacts==nil){
         _alreadySelectedContacts=[[NSDictionary alloc] init];
@@ -109,6 +128,8 @@
     }
     //set the contacts property
     self.contacts = [constactsMutable copy];
+    [self getTheDividedContacts];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -131,20 +152,42 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+#pragma mark - implement self defined internal class method
+-(void)getTheDividedContacts{
+    NSMutableArray *tempContacts=[NSMutableArray array];
+    for (UserContactObject* contact in self.contacts) {
+        NSString *nameText=@"";
+        if (contact.firstName) {
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
+            if (contact.lastName) {
+                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+            }
+        }
+        else if(contact.lastName){
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
+        }
+        if (![self.alreadySelectedContacts objectForKey:nameText]) {
+            [tempContacts addObject:contact];
+        }
+    }
+    for (NSString* key in [self.alreadySelectedContacts allKeys]) {
+        UserContactObject* contact=[self.alreadySelectedContacts objectForKey:key];
+        [tempContacts insertObject:contact atIndex:0];
+    }
+    self.dividedContacts=tempContacts;
+}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
-    // Return the number of sections.
     return 1; //temp set to 1
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.contacts count];
+    return [self.dividedContacts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +207,7 @@
         }
     }
     // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
-    UserContactObject* contact=[self.contacts objectAtIndex:indexPath.row];
+    UserContactObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
     NSString *nameText=@"";
     if (contact.firstName) {
         nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
@@ -187,6 +230,7 @@
     if ([self.alreadySelectedContacts objectForKey:nameText]) {
         //[cell setSelected:YES animated:YES];
         [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        
     }
     	
     
@@ -245,14 +289,14 @@
      */
 
     if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-        UserContactObject *person = [self.contacts objectAtIndex:indexPath.row];
+        UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
             [self.delegate AddContactInformtionToPeopleList:person];
     }
     
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
         if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-        UserContactObject *person = [self.contacts objectAtIndex:indexPath.row];
+        UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
             [self.delegate DeleteContactInformtionToPeopleList:person];
         
     }
