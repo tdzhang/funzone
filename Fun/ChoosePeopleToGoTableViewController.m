@@ -12,6 +12,7 @@
 @interface ChoosePeopleToGoTableViewController()
 @property(nonatomic,strong)NSArray *contacts;
 @property(nonatomic,strong)NSArray *dividedContacts;//divided it into select and not select 2 parts
+@property(nonatomic,strong)NSMutableArray *searchResultContacts; //used to contain Search Bar search result
 -(void)getTheDividedContacts;//using contacts and alreadySelectedContacts to generate this contact
 @end
 
@@ -20,9 +21,23 @@
 @synthesize contacts = _contacts;
 @synthesize delegate = _delegate;
 @synthesize alreadySelectedContacts=_alreadySelectedContacts;
+@synthesize searchResultContacts=_searchResultContacts;
 
 
 #pragma mark - self defined setter and getter
+-(NSMutableArray*)searchResultContacts{
+    if (!_searchResultContacts) {
+        _searchResultContacts=[NSMutableArray array];
+    }
+    return _searchResultContacts;
+}
+
+-(void)setSearchResultContacts:(NSMutableArray *)searchResultContacts{
+    if (![_searchResultContacts isEqualToArray:searchResultContacts]) {
+        _searchResultContacts=searchResultContacts;
+    }
+}
+
 -(NSArray*)dividedContacts{
     if (!_dividedContacts) {
         _dividedContacts=[[NSArray alloc] initWithArray:nil];
@@ -152,6 +167,8 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
 #pragma mark - implement self defined internal class method
 -(void)getTheDividedContacts{
     NSMutableArray *tempContacts=[NSMutableArray array];
@@ -181,60 +198,111 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1; //temp set to 1
+    //if the tableview is used to show the search results
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        return 1;
+    }
+    //else: the tabel view is used to show the ordinary address book information
+    else{
+        return 1; //temp set to 1
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.dividedContacts count];
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        return [self.searchResultContacts count];
+    }
+    //else: the tabel view is used to show the ordinary address book information
+    else{
+        return [self.dividedContacts count];
+    }
+    
 }
 
+//config each cell of the table view(both the search result and the ordinary address book showing)
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CustomContactInfo";
-
-    
-    MyContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"CustonContactInfoView" owner:nil options:nil];
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        static NSString *CellIdentifier = @"MysearchResultDisplay";
         
-        for (UIView *view in views) {
-            if([view isKindOfClass:[UITableViewCell class]])
-            {
-                cell = (MyContactsTableViewCell*)view;
+        UITableViewCell *cell = [tableView 
+                                 dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] 
+                    initWithStyle:UITableViewCellStyleSubtitle //the style of the cell
+                    reuseIdentifier:CellIdentifier] ;
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        UserContactObject* contact=[self.searchResultContacts objectAtIndex:indexPath.row];
+        NSString *nameText=@"";
+        if (contact.firstName) {
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
+            if (contact.lastName) {
+                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
             }
         }
-    }
-    // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
-    UserContactObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
-    NSString *nameText=@"";
-    if (contact.firstName) {
-        nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
-        if (contact.lastName) {
-            nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+        else if(contact.lastName){
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
         }
+        [cell.textLabel setText:nameText];
+        if ([contact.email count]>0) {
+            [cell.detailTextLabel setText:[contact.email objectAtIndex:0]];
+        }
+        else {
+            [cell.detailTextLabel setText:@"No Email Information Found."];
+        }
+        //[cell setSelected:YES];
+        return cell;
     }
-    else if(contact.lastName){
-        nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
-    }
-    
-    cell.userName.text= nameText;
-    if ([contact.email count]>0) {
-        cell.userEmail.text=[contact.email objectAtIndex:0];
-    }
-    else {
-        cell.userEmail.text=@"No Email Information Found.";
-    }
-    
-    if ([self.alreadySelectedContacts objectForKey:nameText]) {
-        //[cell setSelected:YES animated:YES];
-        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    //else: the tabel view is used to show the ordinary address book information
+    else{
+        static NSString *CellIdentifier = @"CustomContactInfo";
         
+        
+        MyContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"CustonContactInfoView" owner:nil options:nil];
+            
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]])
+                {
+                    cell = (MyContactsTableViewCell*)view;
+                }
+            }
+        }
+        // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
+        UserContactObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
+        NSString *nameText=@"";
+        if (contact.firstName) {
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
+            if (contact.lastName) {
+                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+            }
+        }
+        else if(contact.lastName){
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
+        }
+        
+        cell.userName.text= nameText;
+        if ([contact.email count]>0) {
+            cell.userEmail.text=[contact.email objectAtIndex:0];
+        }
+        else {
+            cell.userEmail.text=@"No Email Information Found.";
+        }
+        
+        if ([self.alreadySelectedContacts objectForKey:nameText]) {
+            //[cell setSelected:YES animated:YES];
+            [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            
+        }
+        return cell;
     }
-    	
+
     
-    return cell;
 }
 
 /*
@@ -275,35 +343,108 @@
     return YES;
 }
 */
+#pragma mark - Implement the SearchBar and SearchBarDisplay
+//search the result
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
+shouldReloadTableForSearchString:(NSString *)searchString
+{   
+    [self.searchResultContacts removeAllObjects];
+    for (UserContactObject* contact in self.dividedContacts) {
+        NSString *nameText=@"";
+        if (contact.firstName) {
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
+            if (contact.lastName) {
+                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+            }
+        }
+        else if(contact.lastName){
+            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
+        }
+    
+        NSString *keyword=[searchString stringByReplacingOccurrencesOfString:@"," withString:@" "];
+        NSArray* keywords=[keyword componentsSeparatedByString:@" "];
+        BOOL flag = YES;
+        for (NSString* word in keywords) {
+            if (([nameText rangeOfString:word].length <= 0)&&word.length>0) {
+                flag=NO;
+                break;
+            }
+        }
+        if(flag)[self.searchResultContacts addObject:contact];
+
+    }
+    return YES;
+}
+
+//Showing the location that User Searched, using Apple API
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar setText:@""];
+    
+}
+
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-
-    if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-        UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
-        
-        NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
-        //get the key value from the name of the person
-        NSString *nameText=@"";
-        if (person.firstName) {
-            nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
-            if (person.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
+        if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
+            UserContactObject *person = [self.searchResultContacts objectAtIndex:indexPath.row];
+            
+            NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
+            //get the key value from the name of the person
+            NSString *nameText=@"";
+            if (person.firstName) {
+                nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+                if (person.lastName) {
+                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                }
             }
+            else if(person.lastName){
+                nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+            }
+            //add the object in the alreadySelected Dictionary
+            [alreadySelected setObject:person forKey:nameText];
+            self.alreadySelectedContacts = alreadySelected;
+            //activate the delegate method
+            [self.delegate AddContactInformtionToPeopleList:person];
+            [self.searchDisplayController.searchBar resignFirstResponder];
+            //after change, update the table view
+            [tableView removeFromSuperview];
+            [self getTheDividedContacts];
+            [self.tableView reloadData];
         }
-        else if(person.lastName){
-            nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
-        }
-        //add the object in the alreadySelected Dictionary
-        [alreadySelected setObject:person forKey:nameText];
-        self.alreadySelectedContacts = alreadySelected;
-        //activate the delegate method
-        [self.delegate AddContactInformtionToPeopleList:person];
+
     }
-    
+    else {
+        if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
+            UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+            
+            NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
+            //get the key value from the name of the person
+            NSString *nameText=@"";
+            if (person.firstName) {
+                nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+                if (person.lastName) {
+                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                }
+            }
+            else if(person.lastName){
+                nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+            }
+            //add the object in the alreadySelected Dictionary
+            [alreadySelected setObject:person forKey:nameText];
+            self.alreadySelectedContacts = alreadySelected;
+            //activate the delegate method
+            [self.delegate AddContactInformtionToPeopleList:person];
+        }
+    }
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
         if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
