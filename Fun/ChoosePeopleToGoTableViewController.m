@@ -280,23 +280,51 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
 
     if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
         UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
-            [self.delegate AddContactInformtionToPeopleList:person];
+        
+        NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
+        //get the key value from the name of the person
+        NSString *nameText=@"";
+        if (person.firstName) {
+            nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+            if (person.lastName) {
+                nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+            }
+        }
+        else if(person.lastName){
+            nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+        }
+        //add the object in the alreadySelected Dictionary
+        [alreadySelected setObject:person forKey:nameText];
+        self.alreadySelectedContacts = alreadySelected;
+        //activate the delegate method
+        [self.delegate AddContactInformtionToPeopleList:person];
     }
     
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
         if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
         UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+            
+            NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
+            //get the key value from the name of the person
+            NSString *nameText=@"";
+            if (person.firstName) {
+                nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+                if (person.lastName) {
+                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                }
+            }
+            else if(person.lastName){
+                nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+            }
+            //add the object in the alreadySelected Dictionary
+            [alreadySelected removeObjectForKey:nameText];
+            self.alreadySelectedContacts = alreadySelected;
+            //activate the delegate method
             [self.delegate DeleteContactInformtionToPeopleList:person];
         
     }
