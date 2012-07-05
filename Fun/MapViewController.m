@@ -428,8 +428,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [self.myMapView addAnnotation:annotationPoint];
         [self.myMapView setRegion:region animated:YES];
         
-        [self.mySearchBar resignFirstResponder];
-        [tableView removeFromSuperview];
+        [self.searchDisplayController setActive:NO];
     }
 }
 

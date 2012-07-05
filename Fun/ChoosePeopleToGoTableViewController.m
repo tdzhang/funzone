@@ -84,11 +84,6 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -384,7 +379,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar setText:@""];
-    
 }
 
 
@@ -414,11 +408,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
             self.alreadySelectedContacts = alreadySelected;
             //activate the delegate method
             [self.delegate AddContactInformtionToPeopleList:person];
-            [self.searchDisplayController.searchBar resignFirstResponder];
+           
+            [self.searchDisplayController setActive:NO]; 
             //after change, update the table view
-            [tableView removeFromSuperview];
             [self getTheDividedContacts];
             [self.tableView reloadData];
+
         }
 
     }
