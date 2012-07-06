@@ -15,11 +15,16 @@
 #define TOP_RIGHT_VIEW_WIDTH 72
 #define TOP_RIGHT_VIEW_HEIGHT 79
 
+#define ANIMATION_TIME_DURATION 0.7
+
 
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
 @property (nonatomic, retain) UIImagePickerController *imgPicker; //using to start a image pick(from camera or album)
-
+@property (nonatomic,strong) UIButton* buttonEmailShare;
+@property (nonatomic,strong) UIButton* buttonTwitterShare;
+@property (nonatomic,strong) UIButton* buttonFacebookShare;
+@property (nonatomic) BOOL showNewButtonFlag;
 @property (weak, nonatomic) IBOutlet UITextView *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventLocation;
@@ -33,13 +38,24 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
+
+//Email Share Button handler
+-(void)useEmailToShare:(id)sender;
+//Twitter Share Button handler
+-(void)useTwitterToShare:(id)sender;
+//Facebook Share Button handler
+-(void)useFacebookToShare:(id)sender;
+
 @end
 
 //////////////////////////////////////
 
 @implementation NewEventVC
 @synthesize imgPicker=_imgPicker;
-
+@synthesize buttonEmailShare=_buttonEmailShare;
+@synthesize buttonTwitterShare=_buttonTwitterShare;
+@synthesize showNewButtonFlag=_showNewButtonFlag;
+@synthesize buttonFacebookShare=_buttonFacebookShare;
 @synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
 @synthesize buttonChooseEventLocation = _buttonChooseEventLocation;
@@ -89,9 +105,45 @@
 
 
 #pragma mark - View lifecycle
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //initiate the config of the EventShare To Friends Function part
+    //set the show flag to NO;
+    self.showNewButtonFlag=NO;
+    //set up all the potential button(email,twitter,facebook)
+    self.buttonEmailShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonEmailShare addTarget:self 
+                     action:@selector(useEmailToShare:)
+           forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
+    self.buttonEmailShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    [self.buttonEmailShare setHidden:YES];
+    [self.view addSubview:self.buttonEmailShare];
+    
+    self.buttonTwitterShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonTwitterShare addTarget:self 
+                              action:@selector(useTwitterToShare:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+    self.buttonTwitterShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    [self.buttonTwitterShare setHidden:YES];
+    [self.view addSubview:self.buttonTwitterShare];
+    
+    self.buttonFacebookShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonFacebookShare addTarget:self 
+                                action:@selector(useFacebookToShare:)
+                      forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+    self.buttonFacebookShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    [self.buttonFacebookShare setHidden:YES];
+    [self.view addSubview:self.buttonFacebookShare];
+}
+
 - (void)viewDidLoad:(BOOL)animated {
     [super viewDidLoad];
 }
+
 
 - (void)viewDidUnload
 {
@@ -262,9 +314,74 @@
 }
 
 
-#pragma mark - Compose Email Parts implementation
-//the button activite the email sending event
-- (IBAction)SendInvitationByEmail {
+#pragma mark - Share the event to Friends
+//show all the option button
+- (IBAction)showAllOptionButtons:(id)sender {
+    if (self.showNewButtonFlag==NO) {
+        [self.buttonEmailShare setHidden:NO];
+        [self.buttonEmailShare setAlpha:0];
+        [self.buttonTwitterShare setHidden:NO];
+        [self.buttonTwitterShare setAlpha:0];
+        [self.buttonFacebookShare setHidden:NO];
+        [self.buttonFacebookShare setAlpha:0];
+        
+        CABasicAnimation *fullRotation;
+        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        fullRotation.fromValue = [NSNumber numberWithFloat:0];
+        fullRotation.toValue = [NSNumber numberWithFloat:((10*M_PI))];
+        fullRotation.duration = ANIMATION_TIME_DURATION;
+        fullRotation.repeatCount = 1;
+        [self.buttonEmailShare.layer addAnimation:fullRotation forKey:@"360"];
+        [self.buttonTwitterShare.layer addAnimation:fullRotation forKey:@"360"];
+        [self.buttonFacebookShare.layer addAnimation:fullRotation forKey:@"360"];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0.0];
+        [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
+        self.buttonEmailShare.frame = CGRectMake(205.0,320.0,35.0,35.0);
+        self.buttonTwitterShare.frame = CGRectMake(145.0,320.0,35.0,35.0);
+        self.buttonFacebookShare.frame = CGRectMake(85.0,320.0,35.0,35.0);
+        [self.buttonEmailShare setAlpha:1];
+        [self.buttonTwitterShare setAlpha:1];
+        [self.buttonFacebookShare setAlpha:1];
+        [UIView commitAnimations];
+        self.showNewButtonFlag=YES;
+    }
+    else{
+        CABasicAnimation *fullRotation;
+        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+        fullRotation.fromValue = [NSNumber numberWithFloat:0];
+        fullRotation.toValue = [NSNumber numberWithFloat:((10*M_PI))];
+        fullRotation.duration = ANIMATION_TIME_DURATION;
+        fullRotation.repeatCount = 1;
+        [self.buttonEmailShare.layer addAnimation:fullRotation forKey:@"360"];
+        [self.buttonTwitterShare.layer addAnimation:fullRotation forKey:@"360"];
+        [self.buttonFacebookShare.layer addAnimation:fullRotation forKey:@"360"];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0.0];
+        [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
+        self.buttonEmailShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+        self.buttonTwitterShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+        self.buttonFacebookShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);        
+        [self.buttonEmailShare setAlpha:0];
+        [self.buttonTwitterShare setAlpha:0];
+        [self.buttonFacebookShare setAlpha:0];
+        [UIView commitAnimations];
+        self.showNewButtonFlag=NO;
+    }
+
+}
+
+//Email Share Button handler
+-(void)emailSelector:(id)sender{
+    //clean the screen of all the potential option buttons
+    [self.buttonEmailShare.layer removeAllAnimations];
+    [self.buttonTwitterShare.layer removeAllAnimations];
+    [self.buttonFacebookShare.layer removeAllAnimations];
+    [self.buttonEmailShare setHidden:YES];
+    [self.buttonTwitterShare setHidden:YES];
+    [self.buttonFacebookShare setHidden:YES];
+    
+    //compose the email
     if (self.peopleGoOutWith) {
         if ([self.peopleGoOutWith count] > 0) {
             //Now we have friends to be invided using email
@@ -303,7 +420,35 @@
             
         }
     }
-        
+
+}
+-(void)useEmailToShare:(id)sender{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
+    //sender.frame = CGRectMake(100.0, 210.0, 160.0, 40.0);
+    [self.buttonEmailShare setTransform:CGAffineTransformMakeScale(40, 40)];
+    [sender setAlpha:0];
+    [UIView commitAnimations];
+
+    [self performSelector:@selector(emailSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
+}
+
+//Twitter Share Button handler
+-(void)useTwitterToShare:(id)sender{
+    //to do sth here
+}
+
+//Facebook Share Button handler
+-(void)useFacebookToShare:(id)sender{
+    //to do sth here
+
+}
+
+
+//the button activite the email sending event
+- (void)SendInvitationByEmail {
+            
 }
 
 
