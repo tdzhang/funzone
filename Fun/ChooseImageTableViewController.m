@@ -255,7 +255,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    [searchBar resignFirstResponder];
+    [self.mySearchBar resignFirstResponder];
+    [self.searchDisplayController setActive:NO];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
