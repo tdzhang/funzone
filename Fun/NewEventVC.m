@@ -109,6 +109,17 @@
     [super viewWillAppear:animated];
     
     //initiate the config of the EventShare To Friends Function part
+    //clean the possible remain button (when went back from segue)
+    if(self.buttonEmailShare){
+        [self.buttonEmailShare removeFromSuperview];
+    }
+    if(self.buttonTwitterShare){
+        [self.buttonTwitterShare removeFromSuperview];
+    }
+    if(self.buttonFacebookShare){
+        [self.buttonFacebookShare removeFromSuperview];
+    }
+    
     //set the show flag to NO;
     self.showNewButtonFlag=NO;
     //set up all the potential button(email,twitter,facebook)
