@@ -25,19 +25,23 @@
 @property (nonatomic,strong) UIButton* buttonTwitterShare;
 @property (nonatomic,strong) UIButton* buttonFacebookShare;
 @property (nonatomic) BOOL showNewButtonFlag;
+@property (weak, nonatomic) IBOutlet UIImageView *uIImageViewEvent;
 @property (weak, nonatomic) IBOutlet UITextView *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventLocation;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTime;
-@property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;
+//@property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;//---not using
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *labelEventTime;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
-@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
-@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
+//@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
+//@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
+@property (weak, nonatomic) IBOutlet UITextView *uITextViewPersonalMsg;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
+@property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 
 //Email Share Button handler
 -(void)useEmailToShare:(id)sender;
@@ -51,22 +55,26 @@
 //////////////////////////////////////
 
 @implementation NewEventVC
+@synthesize eventPeopleInfo = _eventPeopleInfo;
 @synthesize imgPicker=_imgPicker;
 @synthesize buttonEmailShare=_buttonEmailShare;
 @synthesize buttonTwitterShare=_buttonTwitterShare;
 @synthesize showNewButtonFlag=_showNewButtonFlag;
+@synthesize uIImageViewEvent = _uIImageViewEvent;
 @synthesize buttonFacebookShare=_buttonFacebookShare;
 @synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
 @synthesize buttonChooseEventLocation = _buttonChooseEventLocation;
 @synthesize buttonEventTime = _eventTimeButton;
-@synthesize buttonEventPrice = _eventPriceButton;
+//@synthesize buttonEventPrice = _eventPriceButton;
 @synthesize buttonEventFriends = _eventFriendsButton;
 @synthesize locationLabel = _locationLabel;
+@synthesize labelEventTime = _labelEventTime;
 @synthesize buttonEventTitle = _buttonEventTitle;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
-@synthesize textFieldEventPrice = _textFieldEventPrice;
-@synthesize labelChoosePhoto = _labelChoosePhoto;
+//@synthesize textFieldEventPrice = _textFieldEventPrice;
+//@synthesize labelChoosePhoto = _labelChoosePhoto;
+@synthesize uITextViewPersonalMsg = _uITextViewPersonalMsg;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 
 #pragma mark - self defined synthesize
@@ -89,10 +97,10 @@
     _peopleGoOutWith=peopleGoOutWith;
     int i= [peopleGoOutWith count];
     if (i>0) {
-        [self.buttonEventFriends setTitle:[NSString stringWithFormat:@"%d friends",i] forState:UIControlStateNormal];
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d friends",i]];
     }
     else{
-        [self.buttonEventFriends setTitle:@"Invite Friends" forState:UIControlStateNormal];
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"Don't forget to invite your friends",i]];
     }
 }
 
@@ -160,15 +168,19 @@
 {
     [self setTextViewEventDescription:nil];
     [self setButtonEventTime:nil];
-    [self setButtonEventPrice:nil];
+//    [self setButtonEventPrice:nil];
     [self setButtonEventFriends:nil];
     [self setButtonChooseEventPhoto:nil];
     [self setButtonChooseEventLocation:nil];
     [self setLocationLabel:nil];
     [self setButtonEventTitle:nil];
     [self setTextFieldEventTitle:nil];
-    [self setTextFieldEventPrice:nil];
-    [self setLabelChoosePhoto:nil];
+//    [self setTextFieldEventPrice:nil];
+//    [self setLabelChoosePhoto:nil];
+    [self setUIImageViewEvent:nil];
+    [self setLabelEventTime:nil];
+    [self setEventPeopleInfo:nil];
+    [self setUITextViewPersonalMsg:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -198,8 +210,8 @@
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
             MapViewController *mapViewC=segue.destinationViewController;
             [mapViewC setDelegate:self];
-            if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
-                [mapViewC setPredefinedSeachingWords:self.buttonEventTitle.titleLabel.text];
+            if (![self.textFieldEventTitle.text isEqualToString:@""]) {
+                [mapViewC setPredefinedSeachingWords:self.textFieldEventTitle.text];
             }
             else {
                 [mapViewC setPredefinedSeachingWords:@""];
@@ -209,8 +221,8 @@
     }
     else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){
         if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
-            if (![self.buttonEventTitle.titleLabel.text isEqualToString:@"Event Title"]) {
-                [segue.destinationViewController setPredefinedKeyWord:self.buttonEventTitle.titleLabel.text];
+            if (![self.textFieldEventTitle.text isEqualToString:@""]) {
+                [segue.destinationViewController setPredefinedKeyWord:self.textFieldEventTitle.text];
             }
             [segue.destinationViewController setDelegate:self];
         }
@@ -226,16 +238,20 @@
 }
 //pop the action sheet of the choose the event title
 - (IBAction)ChooseEventTitle:(UIButton *)sender {
+    /*
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
-
+    */
+    [self.textFieldEventTitle becomeFirstResponder];
 }
+/*
 - (IBAction)ChooseEventCost:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Estimate the event cost:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Free",@"less than $10",@"less than $100",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
+*/
 - (IBAction)ChoosePhoto:(UIButton *)sender {
     UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose Photo Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"In Album",@"Google Image", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
@@ -243,6 +259,7 @@
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    /*
     //for the what to do action sheet
     if([actionSheet.title isEqualToString:@"What do you want to do?"]){
         if(buttonIndex == 0){
@@ -259,22 +276,24 @@
             [self.buttonEventTitle setTitle:@"" forState:UIControlStateNormal];
         }
     }
+     */
     //for the when to go action sheet
-    else if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
+    if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.buttonEventTime setTitle:@"now" forState:UIControlStateNormal];
+            [self.labelEventTime setText:@"now"];
         }else if(buttonIndex == 1){
-            [self.buttonEventTime setTitle:@"today" forState:UIControlStateNormal];
+            [self.labelEventTime setText:@"today"];
         }else if(buttonIndex == 2){
-            [self.buttonEventTime setTitle:@"tonight" forState:UIControlStateNormal];
+            [self.labelEventTime setText:@"tonight"];
         }else if(buttonIndex == 3){
-            [self.buttonEventTime setTitle:@"tomorrow" forState:UIControlStateNormal];
+            [self.labelEventTime setText:@"tomorrow"];
         }else if(buttonIndex == 4){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
         
     }
+    /*
     //for the event cost action sheet
     else if ([actionSheet.title isEqualToString:@"Estimate the event cost:"]) {
         if (buttonIndex==0) {
@@ -289,6 +308,7 @@
             [self.buttonEventPrice setTitle:@"" forState:UIControlStateNormal];
         }
     }
+    */
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose Photo Source"]){
         if (buttonIndex == 0) {
@@ -415,7 +435,7 @@
                 //get the event information from all the selection
                 NSString *eventName=(self.buttonEventTitle.titleLabel.text!=@"Event Title")?self.buttonEventTitle.titleLabel.text:@"Some Stuff";
                 NSString *eventTime=(self.buttonEventTime.titleLabel.text!=@"Select time")?self.buttonEventTime.titleLabel.text:@"Some Time";
-                NSString *eventCost=(self.buttonEventPrice.titleLabel.text!=@"Add cost")?self.buttonEventPrice.titleLabel.text:@"maybe not much";
+                //NSString *eventCost=(self.buttonEventPrice.titleLabel.text!=@"Add cost")?self.buttonEventPrice.titleLabel.text:@"maybe not much";
                 NSString *eventLocation=self.locationLabel.text;
                 
                 //email subject
@@ -423,7 +443,7 @@
                 //email list
                 [mailCont setToRecipients:emailList];
                 //email body
-                [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The cost is %@, and the time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~ Cheers~",eventName,eventCost,eventTime,eventLocation] isHTML:NO];
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n %@ Cheers~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text] isHTML:NO];
                 //go!
                 [self presentModalViewController:mailCont animated:YES];
             }
@@ -480,7 +500,7 @@
 ////////////////////////////////////////////////
 //implement the UIImagePickerControllerDelegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    [self.buttonChooseEventPhoto setBackgroundImage:image forState:UIControlStateNormal];
+    [self.uIImageViewEvent setImage:image];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -488,8 +508,7 @@
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
 -(void)ChooseUIImage:(UIImage *)image From:(ChooseImageTableViewController *)sender{
-    [self.buttonChooseEventPhoto setBackgroundImage:image forState:UIControlStateNormal];
-    [self.labelChoosePhoto setHidden:YES];
+    [self.uIImageViewEvent setImage:image];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -511,6 +530,40 @@
     [people removeObjectForKey:key];
     self.peopleGoOutWith = [people copy];
 }
+////////////////////////////////////////////////
+//implement the Protocal UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {  
+    
+    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
+    
+    self.navigationItem.rightBarButtonItem = done;      
+    [self animateTextView:textView up:YES];
+}  
+
+- (void)textViewDidEndEditing:(UITextView *)textView {  
+    self.navigationItem.rightBarButtonItem = nil; 
+    [self animateTextView:textView up:NO];
+}  
+
+//deal with when user pressed the "done" button
+- (void)leaveEditMode {  
+    [self.uITextViewPersonalMsg resignFirstResponder];  
+}
+//To compensate for the showing up keyboard
+- (void) animateTextView: (UITextView*) textView up: (BOOL) up
+{
+    const int movementDistance = 120; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the textfield
@@ -523,10 +576,9 @@
             return YES;
         }
         [textField resignFirstResponder];
-        [self.buttonEventTitle setTitle:textField.text forState:UIControlStateNormal];
-        [self.textFieldEventTitle setHidden:YES];
         return YES;
     }
+    /*
     else if ([textField isEqual:self.textFieldEventPrice]){
         if ([textField.text length]==0) {
             UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Cost Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
@@ -539,24 +591,29 @@
         [self.textFieldEventPrice setHidden:YES];
         return YES;
     }
+     */
     return YES;
 }
 
 //the next 3 method deal with the keyboard covering with the text field
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    /*
     //if edit the add cost textfield, the whole view need to 
     //scroll up, get rid of the keyboard covering
     if ([textField isEqual:self.textFieldEventPrice]) {
         [self animateTextField: textField up: YES];
     }
+     */
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    /*
     //if finished editign the add cost textfield, the whole view need to scroll down
     if ([textField isEqual:self.textFieldEventPrice]) {
         [self animateTextField: textField up: NO];
     }
+     */
 }
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
@@ -586,10 +643,9 @@
         else if(buttonIndex == 1){
             //Cancel
             [self.textFieldEventTitle resignFirstResponder];
-            [self.buttonEventTitle setTitle:@"getting together" forState:UIControlStateNormal];
-            [self.textFieldEventTitle setHidden:YES];
         }
     }
+    /*
     //deal with the input empty for the add cost part
     else if ([alertView.title isEqualToString:@"Cost Input Empty"]){
         if (buttonIndex == 0) {
@@ -604,6 +660,7 @@
         }
 
     }
+     */
 }
 
 ////////////////////////////////////////////////
@@ -612,7 +669,7 @@
     MKPointAnnotation *annotation=aView.annotation;
     NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
     //show the map snapshot
-    [self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
+    //[self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
     //add discription
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
@@ -633,7 +690,7 @@
     NSInteger hour = [weekdayComponents hour];
     NSInteger minute = [weekdayComponents minute];
     NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d @%d:%d",month,day,year,hour,minute];
-    [self.buttonEventTime setTitle:showDateString forState:UIControlStateNormal];
+    [self.labelEventTime setText:showDateString];
     
     /*
      NSCalendar *gregorian = [[NSCalendar alloc]
