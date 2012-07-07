@@ -73,6 +73,7 @@
 		4698259315A11E1F00204234 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4698259215A11E1F00204234 /* FeedViewController.m */; };
 		46CF988F1595771700563423 /* detailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CF988E1595771700563423 /* detailButton.png */; };
 		46CF989215957B8600563423 /* intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CF989115957B8600563423 /* intro.png */; };
+		92B026A215A7BCCA0069B96D /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B026A115A7BCCA0069B96D /* JSON.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +173,8 @@
 		4698259215A11E1F00204234 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		46CF988E1595771700563423 /* detailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailButton.png; sourceTree = "<group>"; };
 		46CF989115957B8600563423 /* intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro.png; sourceTree = "<group>"; };
+		92B026A015A7BCCA0069B96D /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		92B026A115A7BCCA0069B96D /* JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSON.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +374,8 @@
 				4668A7831593F3E500713A4C /* XMLParserDelegate.m */,
 				4668A7841593F3E500713A4C /* DictDataConverter.h */,
 				4668A7851593F3E500713A4C /* DictDataConverter.m */,
+				92B026A015A7BCCA0069B96D /* JSON.h */,
+				92B026A115A7BCCA0069B96D /* JSON.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -566,6 +571,7 @@
 				0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */,
 				0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */,
 				0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */,
+				92B026A215A7BCCA0069B96D /* JSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
