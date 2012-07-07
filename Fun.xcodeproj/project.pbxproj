@@ -45,6 +45,14 @@
 		46500E9215953D8100535824 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 46500E9115953D8000535824 /* share.png */; };
 		46500E941595541B00535824 /* monterey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 46500E931595541B00535824 /* monterey.jpg */; };
 		46500E961595644100535824 /* location-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 46500E951595644100535824 /* location-gray.png */; };
+		46550EA015A8FD4B008FF360 /* Category-Entertainment.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9815A8FD4B008FF360 /* Category-Entertainment.png */; };
+		46550EA115A8FD4B008FF360 /* Category-Events.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9915A8FD4B008FF360 /* Category-Events.png */; };
+		46550EA215A8FD4B008FF360 /* Category-Food.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9A15A8FD4B008FF360 /* Category-Food.png */; };
+		46550EA315A8FD4B008FF360 /* Category-Movie.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9B15A8FD4B008FF360 /* Category-Movie.jpeg */; };
+		46550EA415A8FD4B008FF360 /* Category-Outdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9C15A8FD4B008FF360 /* Category-Outdoor.png */; };
+		46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9D15A8FD4B008FF360 /* Category-Party.png */; };
+		46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9E15A8FD4B008FF360 /* Category-Shopping.png */; };
+		46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9F15A8FD4B008FF360 /* Category-Sports.png */; };
 		4665120715A8D2B2004BEA73 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4665120615A8D2B2004BEA73 /* 07-map-marker.png */; };
 		4668A7431593E56400713A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7421593E56400713A4C /* UIKit.framework */; };
 		4668A7451593E56400713A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7441593E56400713A4C /* Foundation.framework */; };
@@ -131,6 +139,14 @@
 		46500E9115953D8000535824 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		46500E931595541B00535824 /* monterey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = monterey.jpg; sourceTree = "<group>"; };
 		46500E951595644100535824 /* location-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-gray.png"; sourceTree = "<group>"; };
+		46550E9815A8FD4B008FF360 /* Category-Entertainment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Entertainment.png"; sourceTree = "<group>"; };
+		46550E9915A8FD4B008FF360 /* Category-Events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Events.png"; sourceTree = "<group>"; };
+		46550E9A15A8FD4B008FF360 /* Category-Food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Food.png"; sourceTree = "<group>"; };
+		46550E9B15A8FD4B008FF360 /* Category-Movie.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Category-Movie.jpeg"; sourceTree = "<group>"; };
+		46550E9C15A8FD4B008FF360 /* Category-Outdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Outdoor.png"; sourceTree = "<group>"; };
+		46550E9D15A8FD4B008FF360 /* Category-Party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Party.png"; sourceTree = "<group>"; };
+		46550E9E15A8FD4B008FF360 /* Category-Shopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Shopping.png"; sourceTree = "<group>"; };
+		46550E9F15A8FD4B008FF360 /* Category-Sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Sports.png"; sourceTree = "<group>"; };
 		4665120615A8D2B2004BEA73 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		4668A73E1593E56400713A4C /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4668A7421593E56400713A4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -405,6 +421,14 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				46550E9815A8FD4B008FF360 /* Category-Entertainment.png */,
+				46550E9915A8FD4B008FF360 /* Category-Events.png */,
+				46550E9A15A8FD4B008FF360 /* Category-Food.png */,
+				46550E9B15A8FD4B008FF360 /* Category-Movie.jpeg */,
+				46550E9C15A8FD4B008FF360 /* Category-Outdoor.png */,
+				46550E9D15A8FD4B008FF360 /* Category-Party.png */,
+				46550E9E15A8FD4B008FF360 /* Category-Shopping.png */,
+				46550E9F15A8FD4B008FF360 /* Category-Sports.png */,
 				4665120615A8D2B2004BEA73 /* 07-map-marker.png */,
 				463B9C0515A102A50087CDBA /* funnect_114.png */,
 				463B9C0315A1029A0087CDBA /* funnect_57.png */,
@@ -538,6 +562,14 @@
 				463B9C0615A102A50087CDBA /* funnect_114.png in Resources */,
 				0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */,
 				4665120715A8D2B2004BEA73 /* 07-map-marker.png in Resources */,
+				46550EA015A8FD4B008FF360 /* Category-Entertainment.png in Resources */,
+				46550EA115A8FD4B008FF360 /* Category-Events.png in Resources */,
+				46550EA215A8FD4B008FF360 /* Category-Food.png in Resources */,
+				46550EA315A8FD4B008FF360 /* Category-Movie.jpeg in Resources */,
+				46550EA415A8FD4B008FF360 /* Category-Outdoor.png in Resources */,
+				46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */,
+				46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */,
+				46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
