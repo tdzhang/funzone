@@ -49,6 +49,10 @@
 #pragma mark - init
 -(void)setAnnotation:(MKPointAnnotation *)annotation
 {
+    
+    if(![_annotation isEqual:annotation]){
+        _annotation=annotation; 
+    }
     if (self.myMapView.annotations) {
         [self.myMapView removeAnnotations:self.myMapView.annotations];
     }
@@ -98,6 +102,15 @@
     region.center=location;
     [mapView setRegion:region animated:YES];
     
+    
+    // add annotation at the point User pressed
+    MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+    annotationPoint.coordinate = location;
+    annotationPoint.title=@"Current Location";
+    annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
+    self.annotation=annotationPoint;
+    [self.myMapView addAnnotation:annotationPoint];
+    
     self.myStepper.minimumValue = 1;
     self.myStepper.maximumValue = 9;
     self.myStepper.stepValue = 1;
@@ -128,19 +141,6 @@
     self.tableViewControllerContainMap.delegate=self;
     
     
-    //只有第二次启动的时候，user location 才会有值, make the view show user location
-    CLLocation *userLoc = mapView.userLocation.location;
-    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
-    //NSLog(@"user latitude = %f",userCoordinate.latitude);
-    //NSLog(@"user longitude = %f",userCoordinate.longitude);
-    if (userCoordinate.latitude>0.001) {
-        [self showUserCurrentLocation];
-        if (self.predefinedSeachingWords) {
-            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
-        }
-        
-    }
-    
     //add gesture recognizer for usering choosing locaiton
     UILongPressGestureRecognizer* lpgr =[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration =0.25;  //press time to add a annotation
@@ -159,7 +159,21 @@
     self.oldZoom =[NSNumber numberWithDouble:5];
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //只有第二次启动的时候，user location 才会有值, make the view show user location
+    MKMapView *mapView=self.myMapView;
+    CLLocation *userLoc = mapView.userLocation.location;
+    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
+    if (userCoordinate.latitude>0.001) {
+        [self showUserCurrentLocation];
+        if (self.predefinedSeachingWords) {
+            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
+        }
+        
+    }
+}
 
 
 - (void)viewDidUnload
@@ -489,11 +503,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 #pragma mark - implement the map view protocal
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views{
-    if ([mapView.annotations count]>1) {
-        [mapView removeAnnotation:[mapView.annotations objectAtIndex:1]];
-    }
-    id myAnnotation = [mapView.annotations objectAtIndex:0]; 
-    [mapView selectAnnotation:myAnnotation animated:YES];
+    //if ([mapView.annotations count]>1) {
+    //    [mapView removeAnnotation:[mapView.annotations objectAtIndex:1]];
+    //}
+    //id myAnnotation = [mapView.annotations objectAtIndex:0]; 
+    [mapView selectAnnotation:self.annotation animated:YES];
 }
 
 
@@ -551,8 +565,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
         MKCoordinateRegion region;
         region.center = annotationPoint.coordinate;
         MKCoordinateSpan span;
-        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*4;
-        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*4;
+        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*2;
+        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*2;
         region.span = span;
         [self.myMapView setRegion:region animated:NO];
         
