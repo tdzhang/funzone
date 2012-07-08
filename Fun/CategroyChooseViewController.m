@@ -23,10 +23,12 @@
 @property (nonatomic,strong) UIImageView *flashBackImageView;
 @property (nonatomic,strong) NSString *eventPrepareCategory;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldSelfDefine;
+@property (nonatomic) BOOL uIViewUpFlag; //using to say whether the view is puting up to avoid keyboard shadowing
 @end
 
 @implementation CategroyChooseViewController
 @synthesize flash=_flash;
+@synthesize uIViewUpFlag=_uIViewUpFlag;
 @synthesize flashBackImageView=_flashBackImageView;
 @synthesize eventPrepareCategory=_eventPrepareCategory;
 @synthesize textFieldSelfDefine = _textFieldSelfDefine;
@@ -45,10 +47,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-
-    //hide the tab bar (bottom) when pushed
-
     
     if (self.flash) {
         [self.flash removeFromSuperview];
@@ -88,6 +86,12 @@
         //do some preparation for the next Controller
         //the category information is in the self.eventPrepareCategory
     }
+    //clean up the unprocess UIView up rolling stuff(shadowing keyboard related stuff)
+    if (self.uIViewUpFlag) {
+        [self animateTextField:self.textFieldSelfDefine up:NO];
+        self.uIViewUpFlag=NO;
+        [self.textFieldSelfDefine resignFirstResponder];
+    }
 }
 
 #pragma mark - annimation related
@@ -103,13 +107,14 @@
 
 //the imageName is the snapshot for the next loading view
 -(void)FlashTransition1:(NSString *)imageName{
+    //set up the background snap image
     UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 367)];
     self.flashBackImageView=imageView;
     [imageView setImage:[UIImage imageNamed:imageName]];
     [self.view addSubview:imageView];
     [self.flashBackImageView setAlpha:0.05];
     
-    
+    //set up the flash transition
     UIView *flash=[[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 367)];
     self.flash=flash;
     [flash setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.8]];
@@ -217,6 +222,7 @@
      //scroll up, get rid of the keyboard covering
      if ([textField isEqual:self.textFieldSelfDefine]) {
      [self animateTextField: textField up: YES];
+     self.uIViewUpFlag=YES;
      }
      
 }
@@ -226,6 +232,7 @@
      //if finished editign the add cost textfield, the whole view need to scroll down
      if ([textField isEqual:self.textFieldSelfDefine]) {
      [self animateTextField: textField up: NO];
+     self.uIViewUpFlag=NO;
      }
      
 }
