@@ -78,6 +78,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"NewEvent"]) {
         //do some preparation for the next Controller
+        //the category information is in the self.eventPrepareCategory
     }
 }
 
