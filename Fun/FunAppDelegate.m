@@ -18,25 +18,43 @@ static NSString* kAppId = @"433716793339720";
 @synthesize facebook;
 @synthesize viewController = _viewController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+//{
     // Override point for customization after application launch.
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+//    self.window.rootViewController = self.viewController;
+//    [self.window makeKeyAndVisible];
     
-    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:self];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    if (![facebook isSessionValid]) {
-        [facebook authorize:nil];
-    }
-
-    return YES;
-}
+//    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:self];
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+//        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+//        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+//    }
+//    if (![facebook isSessionValid]) {
+//        [facebook authorize:nil];
+//    }
+//    
+//    return YES;
+//}
+//
+//// Pre iOS 4.2 support
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    return [facebook handleOpenURL:url]; 
+//}
+//
+//// For iOS 4.2+ support
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+//  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    return [facebook handleOpenURL:url]; 
+//}
+//
+//- (void)fbDidLogin {
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
+//    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
+//    [defaults synchronize];
+//}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
