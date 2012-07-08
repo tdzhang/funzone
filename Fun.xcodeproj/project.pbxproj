@@ -374,6 +374,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				9251E9CB15A947F0007302A1 /* Auth */,
 				9298264F15A938D6003673CF /* facebook-ios-sdk */,
 				0F68DD5715A9036000B093BB /* Category */,
 				4698258F15A11DFC00204234 /* Friend Feed */,
@@ -518,6 +519,13 @@
 				4698259215A11E1F00204234 /* FeedViewController.m */,
 			);
 			name = "Friend Feed";
+			sourceTree = "<group>";
+		};
+		9251E9CB15A947F0007302A1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Auth;
 			sourceTree = "<group>";
 		};
 		9298264F15A938D6003673CF /* facebook-ios-sdk */ = {

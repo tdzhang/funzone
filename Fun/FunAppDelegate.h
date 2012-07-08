@@ -7,16 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
 
-@class FunFirstViewController;
-
-@interface FunAppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate> {
-    Facebook *facebook;
-}
+@interface FunAppDelegate : UIResponder <UIApplicationDelegate> 
 
 @property (strong, nonatomic) UIWindow *window;
-@property (retain, nonatomic) IBOutlet FunFirstViewController *viewController;
-@property (strong, nonatomic) Facebook *facebook;
-
 @end
