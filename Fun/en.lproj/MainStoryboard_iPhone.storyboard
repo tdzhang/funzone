@@ -1542,7 +1542,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="CSv-vv-GQ1">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5W-37-JW5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="ZbQ-zo-m0r" customClass="NewEventVC" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="ZbQ-zo-m0r" customClass="NewEventVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iwr-PE-6wp">
                         <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1770,7 +1770,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Create new event" id="iN8-nn-uhK"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonChooseEventLocation" destination="vEh-ar-9Xq" id="UKk-Sz-xxn"/>
                         <outlet property="buttonChooseEventPhoto" destination="xrw-MG-Ego" id="LH1-X5-E04"/>

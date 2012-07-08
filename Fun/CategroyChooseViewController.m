@@ -46,10 +46,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.tabBarController.tabBar.hidden = NO;
+
     //hide the tab bar (bottom) when pushed
-    self.hidesBottomBarWhenPushed = YES;
-    
+
     
     if (self.flash) {
         [self.flash removeFromSuperview];
@@ -61,7 +60,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.hidesBottomBarWhenPushed = NO;
 }
 
 - (void)viewDidLoad
@@ -129,6 +127,8 @@
 
 #pragma mark - button action
 -(void)GoToNextViewEvent:(id)sender{
+    [self.flashBackImageView removeFromSuperview];
+    self.flashBackImageView=nil;
     [self performSegueWithIdentifier:@"NewEvent" sender:sender];
 }
 //food
@@ -189,10 +189,13 @@
         inputEmptyError.delegate=self;
         [inputEmptyError show];
     }
-    //otherwise, do the segue
-    [self.textFieldSelfDefine resignFirstResponder];
-    [self FlashTransition1:GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    else {
+        //otherwise, do the segue
+        [self.textFieldSelfDefine resignFirstResponder];
+        [self FlashTransition1:GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT];
+        [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    }
+    
 }
 
 #pragma mark - testfield delegate method
@@ -228,7 +231,7 @@
 }
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
-    const int movementDistance = 40; // tweak as needed
+    const int movementDistance = 80; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);

@@ -115,7 +115,7 @@
 #pragma mark - View lifecycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-     
+    
     //initiate the config of the EventShare To Friends Function part
     //clean the possible remain button (when went back from segue)
     if(self.buttonEmailShare){
