@@ -7,14 +7,34 @@
 //
 
 #import "FunAppDelegate.h"
+#import "FunFirstViewController.h"
 
 @implementation FunAppDelegate
 
+// Facebook APP id
+static NSString* kAppId = @"433716793339720";
+
 @synthesize window = _window;
+@synthesize facebook;
+@synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
+    
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:self];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![facebook isSessionValid]) {
+        [facebook authorize:nil];
+    }
+
     return YES;
 }
 							
