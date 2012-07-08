@@ -2060,12 +2060,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="157" width="320" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter something else..." borderStyle="roundedRect" minimumFontSize="17" id="PnZ-Qj-8Rq">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter something else..." minimumFontSize="17" id="PnZ-Qj-8Rq">
                                         <rect key="frame" x="15" y="11" width="235" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Fdw-Lk-27j" id="84y-Ud-Ihc"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JTn-Ar-q0n">
                                         <rect key="frame" x="253" y="12" width="52" height="30"/>
@@ -2078,6 +2081,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SelfDefineButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="dR1-Z4-Ou0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.58999999999999997" colorSpace="calibratedWhite"/>
@@ -2106,6 +2112,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
+                        <outlet property="textFieldSelfDefine" destination="PnZ-Qj-8Rq" id="Xi9-2R-tEa"/>
                         <segue destination="ZbQ-zo-m0r" kind="custom" identifier="NewEvent" customClass="NoAnimationSegue" id="seg-9U-zVu"/>
                     </connections>
                 </viewController>
@@ -2143,83 +2150,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="time.png" width="40" height="40"/>
         <image name="twitter.png" width="40" height="40"/>
     </resources>
-    <classes>
-        <class className="CategroyChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
-        </class>
-        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-        </class>
-        <class className="DetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="contributorProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationDistanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timestampLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ExploreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FeaturedTVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedTVC.h"/>
-        </class>
-        <class className="FeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="myStepper" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NewEventVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventFriends" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="eventPeopleInfo" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="uITextViewPersonalMsg" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="TimeChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

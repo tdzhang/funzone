@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CategroyChooseViewController : UIViewController
+@interface CategroyChooseViewController : UIViewController<UIAlertViewDelegate>
 
 @end
