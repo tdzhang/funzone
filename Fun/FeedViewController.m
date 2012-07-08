@@ -77,6 +77,23 @@
     return _blockViews;
 }
 
+#pragma mark - View Life Circle
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //........towards right Gesture recogniser for swiping.....// usded to change view
+    UISwipeGestureRecognizer* rightRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
+    rightRecognizer.direction =UISwipeGestureRecognizerDirectionRight;
+    [rightRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:rightRecognizer];
+    //........towards left Gesture recogniser for swiping.....// used to change view
+    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:leftRecognizer]; 
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -198,9 +215,66 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark - Aotorotation
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Gesture handler
+-(void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
+    //right swipe need to change to the left view
+    // Get the views.
+    int controllerIndex=0;
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    // Position it off screen.
+    toView.frame = CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
+    [UIView animateWithDuration:0.4 
+                     animations: ^{
+                         // Animate the views on and off the screen. This will appear to slide.
+                         fromView.frame =CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
+                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             // Remove the old view from the tabbar view.
+                             [fromView removeFromSuperview];
+                             self.tabBarController.selectedIndex = controllerIndex;                
+                         }
+                     }];
+}
+
+-(void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
+    //left swipe need to change to the right view
+    // Get the views.
+    int controllerIndex=2;
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    // Position it off screen.
+    toView.frame = CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
+    [UIView animateWithDuration:0.4 
+                     animations: ^{
+                         // Animate the views on and off the screen. This will appear to slide.
+                         fromView.frame =CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
+                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             // Remove the old view from the tabbar view.
+                             [fromView removeFromSuperview];
+                             self.tabBarController.selectedIndex = controllerIndex;                
+                         }
+                     }];
 }
 
 @end

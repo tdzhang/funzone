@@ -73,6 +73,20 @@
     }
     return _detailViewController;
 }
+
+
+#pragma mark - View Life circle
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+
+    //........towards left Gesture recogniser for swiping.....// used to change view
+    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:leftRecognizer]; 
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
@@ -173,9 +187,40 @@
     // Release any retained subviews of the main view.
 }
 
+
+#pragma mark - autorotation
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Gesture handler
+-(void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
+    //left swipe need to change to the right view
+    // Get the views.
+    int controllerIndex=1;
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    // Position it off screen.
+    toView.frame = CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
+    [UIView animateWithDuration:0.4 
+                     animations: ^{
+                         // Animate the views on and off the screen. This will appear to slide.
+                         fromView.frame =CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
+                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             // Remove the old view from the tabbar view.
+                             [fromView removeFromSuperview];
+                             self.tabBarController.selectedIndex = controllerIndex;                
+                         }
+                     }];
 }
 
 @end
