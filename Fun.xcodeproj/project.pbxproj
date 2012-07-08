@@ -19,6 +19,9 @@
 		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
+		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
+		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
+		0F68DD6015A90DD300B093BB /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
 		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
 		0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEA15A167F10004136E /* ImageTableCell.xib */; };
@@ -107,6 +110,11 @@
 		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
 		0F579A4F15A166B70006FCC6 /* ChooseImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseImageTableViewController.h; sourceTree = "<group>"; };
 		0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseImageTableViewController.m; sourceTree = "<group>"; };
+		0F68DD5915A903A000B093BB /* CategroyChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyChooseViewController.h; sourceTree = "<group>"; };
+		0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyChooseViewController.m; sourceTree = "<group>"; };
+		0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
+		0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
+		0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
@@ -281,6 +289,18 @@
 			name = "choose Image";
 			sourceTree = "<group>";
 		};
+		0F68DD5715A9036000B093BB /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				4668A7AC15943B1000713A4C /* Add Event */,
+				0F68DD5915A903A000B093BB /* CategroyChooseViewController.h */,
+				0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */,
+				0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */,
+				0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		0FCD2BE815A167790004136E /* custom view */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,9 +356,9 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F68DD5715A9036000B093BB /* Category */,
 				4698258F15A11DFC00204234 /* Friend Feed */,
 				463B9BF215A0F90B0087CDBA /* Detail Page */,
-				4668A7AC15943B1000713A4C /* Add Event */,
 				4668A7A01593F98600713A4C /* Images */,
 				4668A7981593F85500713A4C /* Model */,
 				4668A7911593F72600713A4C /* Explore */,
@@ -421,6 +441,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */,
 				46550E9815A8FD4B008FF360 /* Category-Entertainment.png */,
 				46550E9915A8FD4B008FF360 /* Category-Events.png */,
 				46550E9A15A8FD4B008FF360 /* Category-Food.png */,
@@ -570,6 +591,7 @@
 				46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */,
 				46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */,
 				46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */,
+				0F68DD6015A90DD300B093BB /* AddEventControllerSnapShot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +630,8 @@
 				0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */,
 				0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */,
 				92B026A215A7BCCA0069B96D /* JSON.m in Sources */,
+				0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */,
+				0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
