@@ -46,12 +46,22 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.tabBarController.tabBar.hidden = NO;
+    //hide the tab bar (bottom) when pushed
+    self.hidesBottomBarWhenPushed = YES;
+    
+    
     if (self.flash) {
         [self.flash removeFromSuperview];
     }
     if (self.flashBackImageView) {
         [self.flashBackImageView removeFromSuperview];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 - (void)viewDidLoad
