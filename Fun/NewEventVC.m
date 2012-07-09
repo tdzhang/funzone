@@ -100,7 +100,7 @@
         [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d friends",i]];
     }
     else{
-        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"Don't forget to invite your friends",i]];
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"invite your friends",i]];
     }
 }
 
