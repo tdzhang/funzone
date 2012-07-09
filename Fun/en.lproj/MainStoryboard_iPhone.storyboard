@@ -1648,8 +1648,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="seperator.png" id="cS0-V4-ln8">
+                                <rect key="frame" x="5" y="190" width="310" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" id="B7X-h4-Uhs">
-                                <rect key="frame" x="5" y="189" width="310" height="50"/>
+                                <rect key="frame" x="5" y="190" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" image="11-clock.png" id="RgG-rW-Dgn">
@@ -1691,8 +1695,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="seperator.png" id="j2m-iU-QaL">
+                                <rect key="frame" x="5" y="240" width="310" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" id="ARL-NS-Bth">
-                                <rect key="frame" x="5" y="239" width="310" height="50"/>
+                                <rect key="frame" x="5" y="241" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" image="112-group.png" id="dbQ-OW-PXi">
@@ -2181,6 +2189,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="price.png" width="40" height="40"/>
         <image name="profile.png" width="30" height="30"/>
         <image name="profile1.jpg" width="50" height="50"/>
+        <image name="seperator.png" width="110" height="1"/>
         <image name="settings.png" width="30" height="30"/>
         <image name="share.png" width="30" height="30"/>
         <image name="subtle-pattern-2.jpg" width="1000" height="1000"/>

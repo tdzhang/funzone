@@ -92,6 +92,7 @@
 		923D003A15AA462C00A0818D /* subtle-pattern-4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 923D003915AA462C00A0818D /* subtle-pattern-4.jpg */; };
 		923D003C15AA464D00A0818D /* subtle-pattern-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 923D003B15AA464D00A0818D /* subtle-pattern-2.jpg */; };
 		923D005215AA642400A0818D /* form.png in Resources */ = {isa = PBXBuildFile; fileRef = 923D005115AA642400A0818D /* form.png */; };
+		923D005415AA6C2B00A0818D /* seperator.png in Resources */ = {isa = PBXBuildFile; fileRef = 923D005315AA6C2B00A0818D /* seperator.png */; };
 		9298265F15A938D6003673CF /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9298265215A938D6003673CF /* FBDialog.bundle */; };
 		9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9298265815A938D6003673CF /* libfacebook_ios_sdk.a */; };
 		92B026A215A7BCCA0069B96D /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B026A115A7BCCA0069B96D /* JSON.m */; };
@@ -216,6 +217,7 @@
 		923D003915AA462C00A0818D /* subtle-pattern-4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subtle-pattern-4.jpg"; sourceTree = "<group>"; };
 		923D003B15AA464D00A0818D /* subtle-pattern-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subtle-pattern-2.jpg"; sourceTree = "<group>"; };
 		923D005115AA642400A0818D /* form.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = form.png; sourceTree = "<group>"; };
+		923D005315AA6C2B00A0818D /* seperator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seperator.png; sourceTree = "<group>"; };
 		9298265015A938D6003673CF /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		9298265115A938D6003673CF /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
 		9298265215A938D6003673CF /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				46500E951595644100535824 /* location-gray.png */,
 				46500E931595541B00535824 /* monterey.jpg */,
 				46500E9115953D8000535824 /* share.png */,
+				923D005315AA6C2B00A0818D /* seperator.png */,
 				46500E8D1595299300535824 /* location.png */,
 				46500E891595186A00535824 /* addPhoto.png */,
 				46500E83159500CD00535824 /* addFriends.png */,
@@ -671,6 +674,7 @@
 				923D003A15AA462C00A0818D /* subtle-pattern-4.jpg in Resources */,
 				923D003C15AA464D00A0818D /* subtle-pattern-2.jpg in Resources */,
 				923D005215AA642400A0818D /* form.png in Resources */,
+				923D005415AA6C2B00A0818D /* seperator.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
