@@ -12,11 +12,18 @@
 
 
 #pragma mark - Constant Value Declarition
-#define TOP_RIGHT_VIEW_WIDTH 72
-#define TOP_RIGHT_VIEW_HEIGHT 79
 
 #define ANIMATION_TIME_DURATION 0.7
-
+#define SHOW_OPTION_BUTTON_LOCATION_X 280
+#define SHOW_OPTION_BUTTON_LOCATION_Y 360
+#define SHOW_OPTION_BUTTON_LOCATION_WIDTH 40
+#define SHOW_OPTION_BUTTON_LOCATION_HEIGHT 40
+#define SHARE_BY_EMAIL_X 230
+#define SHARE_BY_EMAIL_Y 360
+#define SHARE_BY_FACEBOOK_X 150
+#define SHARE_BY_FACEBOOK_Y 360
+#define SHARE_BY_TWITTER_X 70
+#define SHARE_BY_TWITTER_Y 360
 
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
@@ -41,6 +48,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *uITextViewPersonalMsg;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
+@property (nonatomic,strong) NSDictionary *facebookFriendsGoOutWith; //the infomation of the facebook firends that user choose to go with
+@property (nonatomic,strong) NSString *currentFacebookConnect;
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 
 //Email Share Button handler
@@ -76,6 +85,8 @@
 //@synthesize labelChoosePhoto = _labelChoosePhoto;
 @synthesize uITextViewPersonalMsg = _uITextViewPersonalMsg;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
+@synthesize facebookFriendsGoOutWith=_facebookFriendsGoOutWith;
+@synthesize currentFacebookConnect=_currentFacebookConnect;
 
 #pragma mark - self defined synthesize
 -(UIImagePickerController *)imgPicker{
@@ -96,8 +107,9 @@
 -(void)setPeopleGoOutWith:(NSDictionary *)peopleGoOutWith{
     _peopleGoOutWith=peopleGoOutWith;
     int i= [peopleGoOutWith count];
-    if (i>0) {
-        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d friends",i]];
+    int j= [self.facebookFriendsGoOutWith count];
+    if (i>0||j>0) {
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d add ; %d facebook",i,j]];
     }
     else{
         [self.eventPeopleInfo setText:[NSString stringWithFormat:@"invite your friends",i]];
@@ -109,6 +121,25 @@
         _peopleGoOutWith = [[NSDictionary alloc	] init];
     }
     return _peopleGoOutWith;	
+}
+
+-(void)setFacebookFriendsGoOutWith:(NSDictionary *)facebookFriendsGoOutWith{
+    _facebookFriendsGoOutWith=facebookFriendsGoOutWith;
+    int i= [self.peopleGoOutWith count];
+    int j= [facebookFriendsGoOutWith count];
+    if (i>0||j>0) {
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d add ; %d facebook",i,j]];
+    }
+    else{
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"Don't forget to invite your friends",i]];
+    }
+}
+
+-(NSDictionary*)facebookFriendsGoOutWith{
+    if (_facebookFriendsGoOutWith == nil){
+        _facebookFriendsGoOutWith = [[NSDictionary alloc	] init];
+    }
+    return _facebookFriendsGoOutWith;	
 }
 
 
@@ -136,7 +167,7 @@
                      action:@selector(useEmailToShare:)
            forControlEvents:UIControlEventTouchUpInside];
     [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
-    self.buttonEmailShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    self.buttonEmailShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonEmailShare setHidden:YES];
     [self.view addSubview:self.buttonEmailShare];
     
@@ -145,7 +176,7 @@
                               action:@selector(useTwitterToShare:)
                     forControlEvents:UIControlEventTouchUpInside];
     [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
-    self.buttonTwitterShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    self.buttonTwitterShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonTwitterShare setHidden:YES];
     [self.view addSubview:self.buttonTwitterShare];
     
@@ -154,9 +185,28 @@
                                 action:@selector(useFacebookToShare:)
                       forControlEvents:UIControlEventTouchUpInside];
     [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
-    self.buttonFacebookShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
+    self.buttonFacebookShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonFacebookShare setHidden:YES];
     [self.view addSubview:self.buttonFacebookShare];
+    
+    //initial the face book
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) {
+        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+            funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        }
+        if (![funAppdelegate.facebook isSessionValid]) {
+            NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                    @"publish_stream", 
+                                    @"read_stream",@"create_event",
+                                    nil];
+            [funAppdelegate.facebook authorize:permissions];
+        }
+    }
 }
 
 - (void)viewDidLoad:(BOOL)animated {
@@ -202,6 +252,12 @@
         peopleController.delegate=self;
         peopleController.alreadySelectedContacts=[self.peopleGoOutWith copy];
     }
+    else if([segue.identifier isEqualToString:@"ChooseFacebookFriends"] && [segue.destinationViewController isKindOfClass:[ChooseFacebookFriendsToGoTableViewControllerViewController class]]){
+        ChooseFacebookFriendsToGoTableViewControllerViewController *peopleController=nil;
+        peopleController = segue.destinationViewController;
+        peopleController.delegate=self;
+        peopleController.alreadySelectedContacts=[self.facebookFriendsGoOutWith copy];
+    }
     else if ([segue.identifier isEqualToString:@"chooseTime"] &&[segue.destinationViewController isKindOfClass:[TimeChooseViewController class]]){
         TimeChooseViewController *TimeChooseVC=segue.destinationViewController;
         [TimeChooseVC setDelegate:self];
@@ -236,6 +292,13 @@
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
+
+- (IBAction)ChoosePeopleToGo:(UIButton *)sender {
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose a friend source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Address Book",@"Facebook", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [pop showFromTabBar:self.tabBarController.tabBar];
+}
+
 //pop the action sheet of the choose the event title
 - (IBAction)ChooseEventTitle:(UIButton *)sender {
     /*
@@ -293,6 +356,14 @@
         }
         
     }
+    //for choose people to go action sheet
+    if([actionSheet.title isEqualToString:@"Choose a friend source"]){
+        if(buttonIndex == 0){
+            [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+        }else if(buttonIndex == 1){
+            [self performSegueWithIdentifier:@"ChooseFacebookFriends" sender:self];
+        }
+    }
     /*
     //for the event cost action sheet
     else if ([actionSheet.title isEqualToString:@"Estimate the event cost:"]) {
@@ -345,6 +416,8 @@
 }
 
 
+
+
 #pragma mark - Share the event to Friends
 //show all the option button
 - (IBAction)showAllOptionButtons:(id)sender {
@@ -368,9 +441,11 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0.0];
         [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-        self.buttonEmailShare.frame = CGRectMake(205.0,320.0,35.0,35.0);
-        self.buttonTwitterShare.frame = CGRectMake(145.0,320.0,35.0,35.0);
-        self.buttonFacebookShare.frame = CGRectMake(85.0,320.0,35.0,35.0);
+        
+
+        self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+        self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+        self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
         [self.buttonEmailShare setAlpha:1];
         [self.buttonTwitterShare setAlpha:1];
         [self.buttonFacebookShare setAlpha:1];
@@ -390,9 +465,9 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0.0];
         [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-        self.buttonEmailShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
-        self.buttonTwitterShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);
-        self.buttonFacebookShare.frame = CGRectMake(265.0, 320.0, 35.0, 35.0);        
+        self.buttonEmailShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+        self.buttonTwitterShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+        self.buttonFacebookShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);        
         [self.buttonEmailShare setAlpha:0];
         [self.buttonTwitterShare setAlpha:0];
         [self.buttonFacebookShare setAlpha:0];
@@ -433,10 +508,11 @@
                 mailCont.mailComposeDelegate = self;
                 
                 //get the event information from all the selection
-                NSString *eventName=(self.buttonEventTitle.titleLabel.text!=@"Event Title")?self.buttonEventTitle.titleLabel.text:@"Some Stuff";
-                NSString *eventTime=(self.buttonEventTime.titleLabel.text!=@"Select time")?self.buttonEventTime.titleLabel.text:@"Some Time";
-                //NSString *eventCost=(self.buttonEventPrice.titleLabel.text!=@"Add cost")?self.buttonEventPrice.titleLabel.text:@"maybe not much";
-                NSString *eventLocation=self.locationLabel.text;
+                
+                //get the event information from all the selection
+                NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+                NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+                NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
                 
                 //email subject
                 [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",eventName]];
@@ -471,9 +547,59 @@
 }
 
 //Facebook Share Button handler
+-(void)facebookSelector:(id)sender{
+    //clean the screen of all the potential option buttons
+    [self.buttonEmailShare.layer removeAllAnimations];
+    [self.buttonTwitterShare.layer removeAllAnimations];
+    [self.buttonFacebookShare.layer removeAllAnimations];
+    [self.buttonEmailShare setHidden:YES];
+    [self.buttonTwitterShare setHidden:YES];
+    [self.buttonFacebookShare setHidden:YES];
+    
+    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+     NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    
+    //get the event information from all the selection
+    NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+    NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+    
+    NSLog(@"%@",self.locationLabel.text);
+    NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+    if ([eventTime length]<10) {
+        NSDate *now = [NSDate date];
+        eventTime=[now description];
+    }  
+    
+    [params setObject:eventName forKey:@"name"];
+    [params setObject:eventTime forKey:@"start_time"];
+    [params setObject:[NSString stringWithFormat:eventLocation] forKey:@"location"];
+    [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"description"];
+    
+     if ([delegate.facebook isSessionValid]) {
+         self.currentFacebookConnect=@"create event";
+     [delegate.facebook requestWithGraphPath:@"me/events" 
+     andParams:params 
+     andHttpMethod:@"POST" 
+     andDelegate:self];
+     }
+     else {
+     NSLog(@"Face book session invalid~~~");
+     }
+    //[[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
+}
+
+
 -(void)useFacebookToShare:(id)sender{
     //to do sth here
-
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
+    //sender.frame = CGRectMake(100.0, 210.0, 160.0, 40.0);
+    [self.buttonFacebookShare setTransform:CGAffineTransformMakeScale(40, 40)];
+    [sender setAlpha:0];
+    [UIView commitAnimations];
+    
+    [self performSelector:@selector(facebookSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
 
 
@@ -483,6 +609,52 @@
 }
 
 
+#pragma mark - facebook related protocal implement
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"Err details: %@", [error description]);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    if ([self.currentFacebookConnect isEqualToString:@"create event"]) {
+        NSLog(@"%@",result);
+        //get the event id
+        NSString *event_id = [result objectForKey:@"id"];
+        NSLog(@"start to invite people");
+        //start to invite people
+        if ([self.facebookFriendsGoOutWith count]>0) {
+            FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+            
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            NSString* user_ids=[NSString stringWithFormat:@""];
+            BOOL temp_flag=NO;
+            for (NSString *key in self.facebookFriendsGoOutWith) {
+                FacebookContactObject *contact=[self.facebookFriendsGoOutWith objectForKey:key];
+                if (temp_flag==NO) {
+                    user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@"%@",contact.facebook_id]];
+                }
+                else {
+                    user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@",%@",contact.facebook_id]];
+                }
+            }
+            [params setObject:user_ids forKey:@"users"];
+            
+            if ([delegate.facebook isSessionValid]) {
+                self.currentFacebookConnect=@"add invite";
+                NSLog(@"%@",event_id);
+                [delegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/invited",event_id] andParams:params andHttpMethod:@"POST" andDelegate:self];
+            }
+            else {
+                NSLog(@"Face book session invalid~~~");
+            }
+        }
+    }
+    else if ([self.currentFacebookConnect isEqualToString:@"add invite"]) {
+        NSLog(@"%@",result);
+        self.currentFacebookConnect=nil;
+    }
+    
+}
 
 
 
@@ -563,6 +735,7 @@
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
 }
+
 
 
 ////////////////////////////////////////////////
@@ -664,6 +837,23 @@
 }
 
 ////////////////////////////////////////////////
+//implement the method for the adding or delete Facebook contacts that will be go out with (FeedBackToFaceBookFriendToGoChange)
+-(void)AddFacebookContactTogoInformtionToPeopleList:(FacebookContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSMutableDictionary *people=[self.facebookFriendsGoOutWith mutableCopy];
+    NSString * key=person.facebook_name;
+    [people setObject:(id)person forKey:key];
+    self.facebookFriendsGoOutWith = [people copy];
+}
+
+-(void)DeleteFacebookContactTogoInformtionToPeopleList:(FacebookContactObject*)person{
+    NSMutableDictionary *people=[self.facebookFriendsGoOutWith mutableCopy];
+    NSString *key=person.facebook_name;
+    [people removeObjectForKey:key];
+    self.facebookFriendsGoOutWith = [people copy];
+}
+
+////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
 -(void)UpdateLocation:(MKAnnotationView *)aView withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=aView.annotation;
@@ -689,7 +879,7 @@
     NSInteger month=[weekdayComponents month];
     NSInteger hour = [weekdayComponents hour];
     NSInteger minute = [weekdayComponents minute];
-    NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d @%d:%d",month,day,year,hour,minute];
+    NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d %d:%d",month,day,year,hour,minute];
     [self.labelEventTime setText:showDateString];
     
     /*

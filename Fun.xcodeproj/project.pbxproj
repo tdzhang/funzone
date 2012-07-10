@@ -21,8 +21,10 @@
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
 		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
 		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
-		0F68DD6015A90DD300B093BB /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
+		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
+		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
+		0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */; };
 		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
 		0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEA15A167F10004136E /* ImageTableCell.xib */; };
 		0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */; };
@@ -124,10 +126,14 @@
 		0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyChooseViewController.m; sourceTree = "<group>"; };
 		0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
 		0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
-		0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
+		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
+		0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookContactObject.m; sourceTree = "<group>"; };
+		0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFacebookFriendsToGoTableViewControllerViewController.h; sourceTree = "<group>"; };
+		0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseFacebookFriendsToGoTableViewControllerViewController.m; sourceTree = "<group>"; };
+		0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0FC91A2E15A3727800EB3E9A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0FCD2BEA15A167F10004136E /* ImageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableCell.xib; sourceTree = "<group>"; };
 		0FCD2BEB15A167F10004136E /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
@@ -263,8 +269,6 @@
 			children = (
 				0F12854A159EB16A00430859 /* FourSquarePlace.h */,
 				0F12854B159EB16A00430859 /* FourSquarePlace.m */,
-				0F12854C159EB16A00430859 /* UserContactObject.h */,
-				0F12854D159EB16A00430859 /* UserContactObject.m */,
 				0F12854E159EB16A00430859 /* GeneralActivityModel.h */,
 				0F12854F159EB16A00430859 /* GeneralActivityModel.m */,
 			);
@@ -306,9 +310,9 @@
 		0F128565159ECC1000430859 /* choose Friends */ = {
 			isa = PBXGroup;
 			children = (
-				0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */,
-				0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */,
-				0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */,
+				0FC6FF7415ABA82D00CC022C /* addressbook TVC */,
+				0FC6FF7015ABA80C00CC022C /* facebook TVC */,
+				0FC6FF6B15ABA7D200CC022C /* self defined model */,
 				0F128550159EB18200430859 /* custom view */,
 			);
 			name = "choose Friends";
@@ -334,6 +338,36 @@
 				0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */,
 			);
 			name = Category;
+			sourceTree = "<group>";
+		};
+		0FC6FF6B15ABA7D200CC022C /* self defined model */ = {
+			isa = PBXGroup;
+			children = (
+				0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */,
+				0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */,
+				0F12854C159EB16A00430859 /* UserContactObject.h */,
+				0F12854D159EB16A00430859 /* UserContactObject.m */,
+			);
+			name = "self defined model";
+			sourceTree = "<group>";
+		};
+		0FC6FF7015ABA80C00CC022C /* facebook TVC */ = {
+			isa = PBXGroup;
+			children = (
+				0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */,
+				0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */,
+			);
+			name = "facebook TVC";
+			sourceTree = "<group>";
+		};
+		0FC6FF7415ABA82D00CC022C /* addressbook TVC */ = {
+			isa = PBXGroup;
+			children = (
+				0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */,
+				0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */,
+				0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */,
+			);
+			name = "addressbook TVC";
 			sourceTree = "<group>";
 		};
 		0FCD2BE815A167790004136E /* custom view */ = {
@@ -478,8 +512,8 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */,
 				923D003215AA274000A0818D /* subtle-pattern-1.jpg */,
-				0F68DD5F15A90DD300B093BB /* AddEventControllerSnapShot.png */,
 				46550E9815A8FD4B008FF360 /* Category-Entertainment.png */,
 				46550E9915A8FD4B008FF360 /* Category-Events.png */,
 				46550E9A15A8FD4B008FF360 /* Category-Food.png */,
@@ -666,7 +700,6 @@
 				46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */,
 				46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */,
 				46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */,
-				0F68DD6015A90DD300B093BB /* AddEventControllerSnapShot.png in Resources */,
 				9298265F15A938D6003673CF /* FBDialog.bundle in Resources */,
 				923D003315AA274000A0818D /* subtle-pattern-1.jpg in Resources */,
 				923D003615AA316C00A0818D /* 11-clock.png in Resources */,
@@ -675,6 +708,7 @@
 				923D003C15AA464D00A0818D /* subtle-pattern-2.jpg in Resources */,
 				923D005215AA642400A0818D /* form.png in Resources */,
 				923D005415AA6C2B00A0818D /* seperator.png in Resources */,
+				0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +750,8 @@
 				0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */,
 				0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */,
 				92360FB815A94C9B006A559C /* FacebookSSOViewController.m in Sources */,
+				0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */,
+				0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
