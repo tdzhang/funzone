@@ -181,7 +181,7 @@
                     initWithStyle:UITableViewCellStyleDefault //the style of the cell
                     reuseIdentifier:CellIdentifier] ;
             
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
         FacebookContactObject* contact=[self.searchResultContacts objectAtIndex:indexPath.row];
         NSString *nameText=contact.facebook_name;
@@ -201,9 +201,8 @@
             cell = [[UITableViewCell alloc] 
                     initWithStyle:UITableViewCellStyleDefault //the style of the cell
                     reuseIdentifier:CellIdentifier] ;
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        cell.accessoryType = UITableViewCellAccessoryNone;
         // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
         FacebookContactObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
         NSString *nameText=contact.facebook_name;
@@ -213,7 +212,7 @@
         if ([self.alreadySelectedContacts objectForKey:nameText]) {
             //[cell setSelected:YES animated:YES];
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-            
+            cell.accessoryType=UITableViewCellAccessoryCheckmark;
         }
         return cell;
     }
@@ -321,7 +320,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
     else {
             FacebookContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
-            
             NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
             //get the key value from the name of the person
             NSString *nameText=person.facebook_name;
@@ -330,21 +328,26 @@ shouldReloadTableForSearchString:(NSString *)searchString
             self.alreadySelectedContacts = alreadySelected;
             //activate the delegate method
             [self.delegate AddFacebookContactTogoInformtionToPeopleList:person];
+        
+            UITableViewCell* cell=[tableView cellForRowAtIndexPath:indexPath];
+            cell.accessoryType=UITableViewCellAccessoryCheckmark;
         }
      
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-        FacebookContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+    FacebookContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
         
-        NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
-        //get the key value from the name of the person
-        NSString *nameText=person.facebook_name;
-        //add the object in the alreadySelected Dictionary
-        [alreadySelected removeObjectForKey:nameText];
-        self.alreadySelectedContacts = alreadySelected;
-        //activate the delegate method
-        [self.delegate DeleteFacebookContactTogoInformtionToPeopleList:person];
+    NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
+    //get the key value from the name of the person
+    NSString *nameText=person.facebook_name;
+    //add the object in the alreadySelected Dictionary
+    [alreadySelected removeObjectForKey:nameText];
+    self.alreadySelectedContacts = alreadySelected;
+    //activate the delegate method
+    [self.delegate DeleteFacebookContactTogoInformtionToPeopleList:person];
+    UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType=UITableViewCellAccessoryNone;
 }
 
 @end
