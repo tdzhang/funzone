@@ -61,6 +61,7 @@
     return [self.facebook handleOpenURL:url]; 
 }
 
+
 - (void)fbDidLogin {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
@@ -68,9 +69,12 @@
     [defaults synchronize];
     
 }
+-(void)fbDidNotLogin:(BOOL)cancelled{
+    
+}
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
-    //NSLog(@"hah");
+    NSLog(@"%@",response);
 }
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
     //NSLog(@"error %@",error);
