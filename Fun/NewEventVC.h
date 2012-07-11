@@ -19,4 +19,5 @@
 
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,FeedBackToFaceBookFriendToGoChange,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,FBRequestDelegate>
 
+@property (nonatomic,strong) NSString *eventType;//used to differentiate the different style for different event category.
 @end

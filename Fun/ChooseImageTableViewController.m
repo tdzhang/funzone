@@ -316,7 +316,7 @@
                 [self.tableView reloadData]; 
             }
             else {
-                //else, the image date getting finished, directlhy put it in the cache, and them reload the table view data.
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
                 //NSLog(@"downloaded %@",url);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 [self.tableView reloadData]; 

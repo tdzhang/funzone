@@ -87,6 +87,7 @@
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize facebookFriendsGoOutWith=_facebookFriendsGoOutWith;
 @synthesize currentFacebookConnect=_currentFacebookConnect;
+@synthesize eventType=_eventType;
 
 #pragma mark - self defined synthesize
 -(UIImagePickerController *)imgPicker{
@@ -306,7 +307,13 @@
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
     */
-    [self.textFieldEventTitle becomeFirstResponder];
+    if([self.eventType isEqualToString:@"movie"]){
+        [self.textFieldEventTitle setEnabled:NO];
+        [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
+    }
+    else {
+        [self.textFieldEventTitle becomeFirstResponder];
+    }
 }
 /*
 - (IBAction)ChooseEventCost:(UIButton *)sender {

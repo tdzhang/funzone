@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */; };
 		0F07F27715ADF11200BF41CF /* FreshBigArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07F27615ADF11200BF41CF /* FreshBigArrow.png */; };
+		0F07F27C15AE1C2500BF41CF /* MovieAotoCompletionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F27B15AE1C2500BF41CF /* MovieAotoCompletionVC.m */; };
+		0F07F27F15AE26F500BF41CF /* movieAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F07F27E15AE26F500BF41CF /* movieAutoCompleteCell.xib */; };
+		0F07F28215AE273D00BF41CF /* movieAutoCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F28115AE273D00BF41CF /* movieAutoCCell.m */; };
+		0F07F28615AE29F300BF41CF /* rottenTomatoMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F28515AE29F300BF41CF /* rottenTomatoMovieModel.m */; };
 		0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128541159EB0AD00430859 /* CoreLocation.framework */; };
 		0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128544159EB0B600430859 /* AddressBook.framework */; };
 		0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128546159EB0BE00430859 /* MapKit.framework */; };
@@ -106,6 +110,13 @@
 		0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreBlockElement.h; sourceTree = "<group>"; };
 		0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreBlockElement.m; sourceTree = "<group>"; };
 		0F07F27615ADF11200BF41CF /* FreshBigArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrow.png; sourceTree = "<group>"; };
+		0F07F27A15AE1C2500BF41CF /* MovieAotoCompletionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieAotoCompletionVC.h; sourceTree = "<group>"; };
+		0F07F27B15AE1C2500BF41CF /* MovieAotoCompletionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieAotoCompletionVC.m; sourceTree = "<group>"; };
+		0F07F27E15AE26F500BF41CF /* movieAutoCompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = movieAutoCompleteCell.xib; sourceTree = "<group>"; };
+		0F07F28015AE273D00BF41CF /* movieAutoCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieAutoCCell.h; sourceTree = "<group>"; };
+		0F07F28115AE273D00BF41CF /* movieAutoCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieAutoCCell.m; sourceTree = "<group>"; };
+		0F07F28415AE29F300BF41CF /* rottenTomatoMovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rottenTomatoMovieModel.h; sourceTree = "<group>"; };
+		0F07F28515AE29F300BF41CF /* rottenTomatoMovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rottenTomatoMovieModel.m; sourceTree = "<group>"; };
 		0F128541159EB0AD00430859 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0F128544159EB0B600430859 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0F128546159EB0BE00430859 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -269,6 +280,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F07F27915AE1BEF00BF41CF /* auto completion part */ = {
+			isa = PBXGroup;
+			children = (
+				0F07F27A15AE1C2500BF41CF /* MovieAotoCompletionVC.h */,
+				0F07F27B15AE1C2500BF41CF /* MovieAotoCompletionVC.m */,
+				0F07F27D15AE269900BF41CF /* customTableCellView */,
+				0F07F28315AE29B000BF41CF /* self define model */,
+			);
+			name = "auto completion part";
+			sourceTree = "<group>";
+		};
+		0F07F27D15AE269900BF41CF /* customTableCellView */ = {
+			isa = PBXGroup;
+			children = (
+				0F07F27E15AE26F500BF41CF /* movieAutoCompleteCell.xib */,
+				0F07F28015AE273D00BF41CF /* movieAutoCCell.h */,
+				0F07F28115AE273D00BF41CF /* movieAutoCCell.m */,
+			);
+			name = customTableCellView;
+			sourceTree = "<group>";
+		};
+		0F07F28315AE29B000BF41CF /* self define model */ = {
+			isa = PBXGroup;
+			children = (
+				0F07F28415AE29F300BF41CF /* rottenTomatoMovieModel.h */,
+				0F07F28515AE29F300BF41CF /* rottenTomatoMovieModel.m */,
+			);
+			name = "self define model";
+			sourceTree = "<group>";
+		};
 		0F128549159EB14200430859 /* model class */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +609,7 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				0F07F27915AE1BEF00BF41CF /* auto completion part */,
 				0F579A5315A166C60006FCC6 /* choose Image */,
 				0F128565159ECC1000430859 /* choose Friends */,
 				0F128561159ECA7600430859 /* chooseTime */,
@@ -718,6 +760,7 @@
 				923D005415AA6C2B00A0818D /* seperator.png in Resources */,
 				0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */,
 				0F07F27715ADF11200BF41CF /* FreshBigArrow.png in Resources */,
+				0F07F27F15AE26F500BF41CF /* movieAutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +805,9 @@
 				0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */,
 				0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */,
 				0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */,
+				0F07F27C15AE1C2500BF41CF /* MovieAotoCompletionVC.m in Sources */,
+				0F07F28215AE273D00BF41CF /* movieAutoCCell.m in Sources */,
+				0F07F28615AE29F300BF41CF /* rottenTomatoMovieModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

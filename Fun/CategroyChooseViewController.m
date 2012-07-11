@@ -108,6 +108,12 @@
     if ([segue.identifier isEqualToString:@"NewEvent"]) {
         //do some preparation for the next Controller
         //the category information is in the self.eventPrepareCategory
+        if ([self.eventPrepareCategory isEqualToString:@"movie"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"movie"];
+        }
+        else {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"other"];
+        }
     }
     //clean up the unprocess UIView up rolling stuff(shadowing keyboard related stuff)
     if (self.uIViewUpFlag) {

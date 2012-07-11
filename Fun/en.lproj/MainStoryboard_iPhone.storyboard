@@ -22,7 +22,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="645" y="1084"/>
+            <point key="canvasLocation" x="821" y="1468"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Mzo-sb-mPK">
@@ -202,7 +202,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1507" y="2511"/>
+            <point key="canvasLocation" x="1747" y="4207"/>
         </scene>
         <!--New EventVC - Add Event-->
         <scene sceneID="peY-Yc-bLe">
@@ -421,7 +421,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3321" y="369"/>
+            <point key="canvasLocation" x="3073" y="-207"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Bp8-Rs-W7V">
@@ -608,7 +608,7 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3273" y="1280"/>
+            <point key="canvasLocation" x="2617" y="-120"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8AS-Gi-EOt">
@@ -710,7 +710,7 @@
                     <navigationItem key="navigationItem" id="bwz-Es-Kjz"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="1686"/>
+            <point key="canvasLocation" x="1397" y="2867"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="MDo-xn-wHU">
@@ -725,7 +725,7 @@
                     <navigationItem key="navigationItem" id="UK2-Nq-Fsg"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="2275"/>
+            <point key="canvasLocation" x="1165" y="3955"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -769,7 +769,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="645" y="-138"/>
+            <point key="canvasLocation" x="677" y="-714"/>
         </scene>
         <!--Explore View Controller-->
         <scene sceneID="ZX0-g3-g0t">
@@ -796,7 +796,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="-138"/>
+            <point key="canvasLocation" x="1181" y="-714"/>
         </scene>
         <!--FeaturedTVC - Explore-->
         <scene sceneID="VZy-k4-BaX">
@@ -873,7 +873,7 @@
                     <navigationItem key="navigationItem" title="Explore" id="163-bQ-kuz"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="-700"/>
+            <point key="canvasLocation" x="1181" y="-1276"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="XzJ-bW-wVO">
@@ -1066,7 +1066,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2130" y="-138"/>
+            <point key="canvasLocation" x="2162" y="-714"/>
         </scene>
         <!--Navigation Controller - Feeds-->
         <scene sceneID="lWy-O6-SIi">
@@ -1086,7 +1086,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="645" y="498"/>
+            <point key="canvasLocation" x="813" y="354"/>
         </scene>
         <!--Table View Controller - Friends-->
         <scene sceneID="u4x-dQ-Bip">
@@ -1176,7 +1176,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="xAd-hw-VSG"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1609" y="-700"/>
+            <point key="canvasLocation" x="1641" y="-1276"/>
         </scene>
         <!--Navigation Controller - Profile-->
         <scene sceneID="93z-0B-UvQ">
@@ -1196,7 +1196,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="645" y="1686"/>
+            <point key="canvasLocation" x="781" y="2867"/>
         </scene>
         <!--Navigation Controller - Settings-->
         <scene sceneID="yBW-ic-o4f">
@@ -1216,7 +1216,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="645" y="2275"/>
+            <point key="canvasLocation" x="661" y="3971"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6dE-gu-dr9">
@@ -1235,7 +1235,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1604" y="-138"/>
+            <point key="canvasLocation" x="1636" y="-714"/>
         </scene>
         <!--Choose Image Table View Controller-->
         <scene sceneID="Cnv-qM-cUF">
@@ -1277,7 +1277,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2288" y="464"/>
+            <point key="canvasLocation" x="3232" y="2468"/>
         </scene>
         <!--Time Choose View Controller-->
         <scene sceneID="aAO-fk-NZ4">
@@ -1359,7 +1359,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2282" y="2133"/>
+            <point key="canvasLocation" x="2858" y="3901"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="P4w-kC-xZF">
@@ -1409,7 +1409,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2282" y="1565"/>
+            <point key="canvasLocation" x="2858" y="3333"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="J7I-Bi-1WF">
@@ -1433,7 +1433,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="498"/>
+            <point key="canvasLocation" x="1317" y="354"/>
         </scene>
         <!--Map View Controller - view2-->
         <scene sceneID="50d-tt-Sfs">
@@ -1539,7 +1539,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2282" y="1018"/>
+            <point key="canvasLocation" x="2858" y="2786"/>
         </scene>
         <!--New EventVC - New Event-->
         <scene sceneID="CSv-vv-GQ1">
@@ -1816,10 +1816,55 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="0Oa-z7-ur9" kind="push" identifier="ChooseImageUsingGoogleImage" id="33M-1Y-ZVf"/>
                         <segue destination="YyR-VS-w2s" kind="push" identifier="ChooseFacebookFriends" id="H6a-W7-A3i"/>
                         <segue destination="i8q-Ty-eGM" kind="push" identifier="ChooseFriends" id="jfP-Rx-6zg"/>
+                        <segue destination="jyJ-uT-gZE" kind="push" identifier="moviewAutoCompletion" id="vAK-hh-pPA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1678" y="1084"/>
+            <point key="canvasLocation" x="1886" y="1988"/>
+        </scene>
+        <!--Movie Aoto CompletionVC-->
+        <scene sceneID="GYM-7s-qOH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o60-th-zux" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="jyJ-uT-gZE" customClass="MovieAotoCompletionVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="48U-Uz-gbs">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" id="dLI-Zs-87a">
+                                <rect key="frame" x="0.0" y="37" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jyJ-uT-gZE" id="f3m-mh-wOC"/>
+                                </connections>
+                            </searchBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="I want to ..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="vid-JM-zYO">
+                                <rect key="frame" x="15" y="2" width="291" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fAm-so-pS1"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="3a3-ti-0eL" id="RHV-iM-BUq"/>
+                    </connections>
+                </viewController>
+                <searchDisplayController id="3a3-ti-0eL">
+                    <connections>
+                        <outlet property="delegate" destination="jyJ-uT-gZE" id="WlQ-co-YJV"/>
+                        <outlet property="searchBar" destination="dLI-Zs-87a" id="Ae6-xt-YNk"/>
+                        <outlet property="searchContentsController" destination="jyJ-uT-gZE" id="Nvm-Fv-BQM"/>
+                        <outlet property="searchResultsDataSource" destination="jyJ-uT-gZE" id="eVG-4m-cr9"/>
+                        <outlet property="searchResultsDelegate" destination="jyJ-uT-gZE" id="d70-HU-nG7"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="2322" y="1657"/>
         </scene>
         <!--Categroy Choose View Controller - Category-->
         <scene sceneID="l1z-0j-Rje">
@@ -2162,7 +2207,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1066" y="1084"/>
+            <point key="canvasLocation" x="1298" y="1476"/>
         </scene>
         <!--Choose Facebook Friends To Go Table View Controller View Controller - Choose Friends-->
         <scene sceneID="PBb-PX-McL">
@@ -2221,7 +2266,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2692" y="1307"/>
+            <point key="canvasLocation" x="3268" y="3075"/>
         </scene>
     </scenes>
     <resources>
@@ -2317,6 +2362,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="myStepper" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
+        </class>
+        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
         </class>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>

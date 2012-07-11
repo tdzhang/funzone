@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewEventVC.h"
 
 @interface CategroyChooseViewController : UIViewController<UIAlertViewDelegate>
 
