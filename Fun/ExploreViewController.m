@@ -166,12 +166,13 @@
 }
 
 - (void)setShadow:(CALayer *)layer {
-    layer.shadowRadius = 2.f;
+    /*layer.shadowRadius = 2.f;
     layer.shadowOpacity = .50f;
     layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
     layer.shadowColor = [[UIColor blackColor] CGColor];
     layer.shouldRasterize = YES;
     layer.masksToBounds = NO;
+     */
 }
 
 - (void)tapBlock:(UITapGestureRecognizer *)tapGR {
