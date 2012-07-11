@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ExploreViewController : UIViewController
+#import "ExploreBlockElement.h"
+@interface ExploreViewController : UIViewController<UIScrollViewDelegate>
 
 @end

@@ -16,38 +16,21 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (nonatomic,retain) DetailViewController *detailViewController;
 @property (nonatomic,retain) NSMutableArray *blockViews;
+@property (nonatomic,retain) UIImageView *refreshView;
+@property (nonatomic,strong) NSMutableData *data;
 @end
 
 @implementation ExploreViewController
+@synthesize refreshView=_refreshView;
 @synthesize detailViewController = _detailViewController;
 @synthesize blockViews = _blockViews;
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
+@synthesize data=_data;
 
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 158 
-
-#define THUMB_X 10
-#define THUMB_Y 4
-#define THUMB_SIZE 50
-
-#define BACKGROUND_Y 25
-#define BACKGROUND_HEIGHT 137
-
-#define TITLE_X 60
-#define TITLE_Y 16
-#define TITLE_WIDTH 260
-#define TITLE_HEIGHT 36
-#define TITLE_TEXT_OFFSET 8
-
-#define ICON_SIZE 20
-#define JOIN_X 13
-#define FAVOR_X 263
-#define ICON_Y 130
-
-#define LABEL_WIDTH 24
-#define JOIN_LABEL_X 40
-#define FAVOR_LABEL_X 289
+#define View_HEIGHT 367
+#define BlOCK_VIEW_HEIGHT 168 
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,6 +68,22 @@
     leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:leftRecognizer]; 
     
+    //test/////////////////////////////////////////////////////////////
+    //refresh part
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+    [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    [self.mainScrollView addSubview:self.refreshView];
+    
+    //main part
+    for (int i=0; i<5; i++) {
+        [self.blockViews addObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT*i backGroundImage:@"monterey.jpg"tabActionTarget:self withTitle:@"World Ocean's Day Celebration" withFavorLabelString:@"15" withJoinLabelString:@"25"]];
+        
+        ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:i];
+        [self.mainScrollView addSubview:Element.blockView];
+    }
+    
+    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
+    self.mainScrollView.contentOffset = CGPointMake(0, 0);
 }
 
 - (void)viewDidLoad {
@@ -92,94 +91,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
-    _currentY = 5;/*****TODO*****/
-    
-    //Block View
-    UIView *blockView = [[UIView alloc] initWithFrame:CGRectMake(0, _currentY, VIEW_WIDTH, VIEW_HEIGHT)];
-    [_mainScrollView addSubview:blockView];
-    [self.blockViews addObject:blockView];
-    
-    //Gesture Recognizer
-    blockView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
-    [blockView addGestureRecognizer:tapGR];
-    
-    
-    //Background Image
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, BACKGROUND_Y + _currentY, VIEW_WIDTH, BACKGROUND_HEIGHT)];
-    backgroundImageView.image = [UIImage imageNamed:@"monterey.jpg"]; /*****TODO*****/
-    [blockView addSubview:backgroundImageView];
-    
-    //Thumbnail Image
-    UIImageView *thumbNailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y + _currentY, THUMB_SIZE, THUMB_SIZE)];
-    thumbNailImageView.image = [UIImage imageNamed:@"monterey.jpg"]; /*****TODO*****/
-    [self setShadow:thumbNailImageView.layer];    
-    thumbNailImageView.layer.borderWidth = 3.f;
-    thumbNailImageView.layer.borderColor = [[UIColor grayColor] CGColor];    
-    [blockView addSubview:thumbNailImageView];
-    
-    //Title View
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y+_currentY, TITLE_WIDTH, TITLE_HEIGHT)];
-    titleView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.56];
-    [blockView addSubview:titleView];
-    
-    //Title Label
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_TEXT_OFFSET, 0, TITLE_WIDTH-2*TITLE_TEXT_OFFSET, TITLE_HEIGHT)];
-    titleLabel.text = @"World Ocean's Day Celebration"; /*****TODO*****/
-    titleLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
-    [titleView addSubview:titleLabel];
-    
-    //Joined Image
-    UIImageView *joinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(JOIN_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
-    joinImageView.image = [UIImage imageNamed:@"join.png"];
-    [self setShadow:joinImageView.layer];
-    [blockView addSubview:joinImageView];
-    
-    //Joined number label
-    UILabel *joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(JOIN_LABEL_X, ICON_Y + _currentY, LABEL_WIDTH, ICON_SIZE)];
-    joinLabel.text = @"25"; /*****TODO*****/
-    joinLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    joinLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
-    joinLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    [self setShadow:joinLabel.layer];
-    [blockView addSubview:joinLabel];
-    
-    //Favored Image
-    UIImageView *favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(FAVOR_X, ICON_Y + _currentY, ICON_SIZE, ICON_SIZE)];
-    favorImageView.image = [UIImage imageNamed:@"heart-white.png"];
-    [self setShadow:favorImageView.layer];
-    [blockView addSubview:favorImageView];
-    
-    //Favored Label
-    UILabel *favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(FAVOR_LABEL_X, ICON_Y + _currentY, LABEL_WIDTH, ICON_SIZE)];
-    favorLabel.text = @"25"; /*****TODO*****/
-    favorLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    favorLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
-    favorLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    [self setShadow:favorLabel.layer];
-    [blockView addSubview:favorLabel];
-    
-    [self.view reloadInputViews];
-	// Do any additional setup after loading the view.
-}
+   }
 
-- (void)setShadow:(CALayer *)layer {
-    /*layer.shadowRadius = 2.f;
-    layer.shadowOpacity = .50f;
-    layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    layer.shadowColor = [[UIColor blackColor] CGColor];
-    layer.shouldRasterize = YES;
-    layer.masksToBounds = NO;
-     */
-}
-
-- (void)tapBlock:(UITapGestureRecognizer *)tapGR {
-    //int index = [_blockViews indexOfObject:tapGR.view];
-    self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:self.detailViewController animated:YES completion:^{}];
-}
 
 - (void)viewDidUnload
 {
@@ -196,7 +109,153 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - implement the UIScrollViewDelegate
+//when the scrolling over 最上方，need refresh process
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/2) {
+        //set the refresh view ahead
+        NSLog(@"called");
+        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+        for(UIView *subview in [self.refreshView subviews]) {
+            [subview removeFromSuperview];
+        }
+        
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        loading.layer.cornerRadius =15;
+        loading.opaque = NO;
+        loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
+        loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loadLabel.textAlignment =UITextAlignmentCenter;
+        loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
+        loadLabel.backgroundColor =[UIColor clearColor];
+        [loading addSubview:loadLabel];
+        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        spinning.frame =CGRectMake(120,80,80,80);
+        [spinning startAnimating];[loading addSubview:spinning];
+        [self.refreshView addSubview:loading];
+        //relocate the main views
+        for (int i=0;i<[self.blockViews count];i++) {
+            ExploreBlockElement* element = [self.blockViews objectAtIndex:i];
+            [element.blockView setFrame:CGRectMake(0, BlOCK_VIEW_HEIGHT*(i+1), VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+        }
+        [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, BlOCK_VIEW_HEIGHT*([self.blockViews count]+1))];
+        [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        
+        //and then do the refresh process
+        
+        /* //ask the server to refresh event information
+         NSString *request_string=[NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=%d&q=%@",GOOGLE_IMAGE_NUM,searchKeywords];
+         NSLog(@"%@",request_string);
+         //start the image seaching connection using google image api
+         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+         [connection start];
+         */
+    }
+}
+
+
+#pragma mark - implement NSURLconnection delegate methods 
+//to deal with the returned data
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    //self.data = [[NSMutableData alloc] init];
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    //[self.data appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+     [someError show];*/
+    //NSLog(@"%@",connection.originalRequest.URL);
+    //NSLog(@"%@",error);
+}
+
+
+//when the connection get the returned data (json form)
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
+    /*
+     NSError *error;
+     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+     NSLog(@"all %@",[json allKeys]);
+     NSDictionary* responseData = [json objectForKey:@"responseData"];
+     NSArray *results = [responseData objectForKey:@"results"];
+     NSLog(@"get %d results",[results count]);
+     
+     //update the imageURLs and ImageTitles (the property of this table view)
+     [self.imageUrls removeAllObjects];  
+     [self.imageTitles removeAllObjects];
+     
+     for (NSDictionary* result in results) {
+     NSString *url=nil;
+     NSString *title=nil;
+     url=[result objectForKey:@"url"];
+     [self.imageUrls addObject:url];//add the new image url
+     title=[result objectForKey:@"contentNoFormatting"];
+     [self.imageTitles addObject:title]; //add the new image title
+     
+     //using high priority queue to fetch the image
+     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+     
+     //get the image data
+     NSData * imageData = nil;
+     imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
+     
+     if ( imageData == nil ){
+     //if the image data is nil, the image url is not reachable. using a default image to replace that
+     //NSLog(@"downloaded %@ error, using a default image",url);
+     UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+     imageData=UIImagePNGRepresentation(image);
+     if(imageData)[self.cacheImage setObject:imageData forKey:url];
+     [self.tableView reloadData]; 
+     }
+     else {
+     //else, the image date getting finished, directlhy put it in the cache, and them reload the table view data.
+     //NSLog(@"downloaded %@",url);
+     if(imageData)[self.cacheImage setObject:imageData forKey:url];
+     [self.tableView reloadData]; 
+     }
+     
+     //when the image fetching thread is done, delete the spining activity indicator
+     dispatch_async(dispatch_get_main_queue(), ^{
+     if ([self.indicatorDictionary objectForKey:url]) {
+     UIView *loading=nil;
+     loading=(UIView *)[self.indicatorDictionary objectForKey:url];
+     [loading removeFromSuperview];
+     [self.indicatorDictionary removeObjectForKey:url];
+     //NSLog(@"delete 1 subview:%@",url);
+     }
+     });	
+     
+     });
+     
+     }
+     */
+}
+
+
 #pragma mark - Gesture handler
+
+//handle when user tap a certain block view
+-(void)tapBlock:(UITapGestureRecognizer *)tapGR {
+    
+    CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
+    //get the index of the touched block view
+    int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
+    NSLog(@"%d",index);
+    /*
+     self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+     [self presentViewController:self.detailViewController animated:YES completion:^{}];
+     */
+}
+
+//the swipe gesture to change the view
 -(void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
     //left swipe need to change to the right view
     // Get the views.

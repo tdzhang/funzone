@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */; };
 		0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128541159EB0AD00430859 /* CoreLocation.framework */; };
 		0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128544159EB0B600430859 /* AddressBook.framework */; };
 		0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128546159EB0BE00430859 /* MapKit.framework */; };
@@ -101,6 +102,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreBlockElement.h; sourceTree = "<group>"; };
+		0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreBlockElement.m; sourceTree = "<group>"; };
 		0F128541159EB0AD00430859 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0F128544159EB0B600430859 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0F128546159EB0BE00430859 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -492,6 +495,8 @@
 		4668A7911593F72600713A4C /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */,
+				0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */,
 				463B9BE7159FC08D0087CDBA /* ExploreViewController.h */,
 				463B9BE8159FC08D0087CDBA /* ExploreViewController.m */,
 				4668A7A31593FBC800713A4C /* FeaturedTVC.h */,
@@ -752,6 +757,7 @@
 				92360FB815A94C9B006A559C /* FacebookSSOViewController.m in Sources */,
 				0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */,
 				0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */,
+				0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
