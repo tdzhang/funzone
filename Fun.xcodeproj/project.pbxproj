@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */; };
+		0F07F27715ADF11200BF41CF /* FreshBigArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07F27615ADF11200BF41CF /* FreshBigArrow.png */; };
 		0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128541159EB0AD00430859 /* CoreLocation.framework */; };
 		0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128544159EB0B600430859 /* AddressBook.framework */; };
 		0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128546159EB0BE00430859 /* MapKit.framework */; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreBlockElement.h; sourceTree = "<group>"; };
 		0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreBlockElement.m; sourceTree = "<group>"; };
+		0F07F27615ADF11200BF41CF /* FreshBigArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrow.png; sourceTree = "<group>"; };
 		0F128541159EB0AD00430859 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0F128544159EB0B600430859 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0F128546159EB0BE00430859 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -517,6 +519,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F07F27615ADF11200BF41CF /* FreshBigArrow.png */,
 				0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */,
 				923D003215AA274000A0818D /* subtle-pattern-1.jpg */,
 				46550E9815A8FD4B008FF360 /* Category-Entertainment.png */,
@@ -714,6 +717,7 @@
 				923D005215AA642400A0818D /* form.png in Resources */,
 				923D005415AA6C2B00A0818D /* seperator.png in Resources */,
 				0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */,
+				0F07F27715ADF11200BF41CF /* FreshBigArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
