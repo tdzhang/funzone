@@ -7,6 +7,7 @@
 //
 
 #import "ExploreBlockElement.h"
+#import "Cache.h"
 
 @implementation ExploreBlockElement
 @synthesize blockView=_blockView;
@@ -45,10 +46,22 @@
 #define JOIN_LABEL_X 40
 #define FAVOR_LABEL_X 289
 
+-(void) resetFramWith:(CGFloat)position_y{
+    self.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
+}
 
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label{
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImage:(NSString *)backGroundImageName tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label{
-
+    //get the backgroud image from the cache
+    UIImage *backGroundImage = nil;
+    if ([Cache isURLCached:backGroundImageUrl]) {
+        backGroundImage = [UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
+    }
+    else {
+        backGroundImage = [UIImage imageNamed:@"monterey.jpg"];
+    }
+    
+    
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
     //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
@@ -58,11 +71,11 @@
     [blockElement.blockView addGestureRecognizer:tapGR];
     //Backgroud Image
     blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, BACKGROUND_Y, VIEW_WIDTH, BACKGROUND_HEIGHT)];
-    blockElement.backGroundImageView.image=[UIImage imageNamed:backGroundImageName];
+    blockElement.backGroundImageView.image=[backGroundImage copy];
     [blockElement.blockView addSubview:blockElement.backGroundImageView];
     //Thumbnail Image
     blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y, THUMB_SIZE, THUMB_SIZE)];
-    blockElement.thumbNailImageView.image=[UIImage imageNamed:backGroundImageName];
+    blockElement.thumbNailImageView.image=[backGroundImage copy];
     [blockElement.blockView addSubview:blockElement.thumbNailImageView];
     //Title View
     blockElement.titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT)];

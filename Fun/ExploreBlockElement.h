@@ -21,7 +21,10 @@
 @property(nonatomic,strong) UIImageView *favorImageView;
 @property(nonatomic,strong) UILabel *favorLabel;
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImage:(NSString *)backGroundImageName tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label;
+//used to reset the fram information
+-(void) resetFramWith:(CGFloat)position_y;
+
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label;
 @end
 
 

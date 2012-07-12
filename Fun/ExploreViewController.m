@@ -76,14 +76,20 @@
     
     //main part
     for (int i=0; i<5; i++) {
-        [self.blockViews addObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT*i backGroundImage:@"monterey.jpg"tabActionTarget:self withTitle:@"World Ocean's Day Celebration" withFavorLabelString:@"15" withJoinLabelString:@"25"]];
+        [self.blockViews addObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT*i backGroundImageUrl:[NSURL URLWithString:@"XXX"] tabActionTarget:self withTitle:@"World Ocean's Day Celebration" withFavorLabelString:@"15" withJoinLabelString:@"25"]];
         
         ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:i];
         [self.mainScrollView addSubview:Element.blockView];
+        [Element.blockView removeFromSuperview];
+        [self.mainScrollView addSubview:Element.blockView];
     }
+    NSLog(@"%d",[self.blockViews count]);
     
     self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    
+    
+
 }
 
 - (void)viewDidLoad {
@@ -145,29 +151,48 @@
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
-        
-        /* //ask the server to refresh event information
-         NSString *request_string=[NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=%d&q=%@",GOOGLE_IMAGE_NUM,searchKeywords];
-         NSLog(@"%@",request_string);
-         //start the image seaching connection using google image api
-         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-         [connection start];
-         */
+        //test json
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=3&shared_event_id=2"];
+        NSLog(@"%@",request_string);
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        [connection start];
     }
 }
 
+#pragma mark - already load the new data, refresh the whole view
+-(void)refreshAllTheMainScrollViewSUbviews{
+    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:0];
+    [self.mainScrollView addSubview:Element.blockView];
+    
+    [self.refreshView removeFromSuperview];
+    /*for (UIView *view in [self.mainScrollView subviews]) {
+        [view removeFromSuperview];
+    }*/
+    /*
+    NSLog(@"%d",[self.blockViews count]);
+   
+    ExploreBlockElement* blockElement=[self.blockViews objectAtIndex:0];
+    [blockElement resetFramWith:0];
+    [self.mainScrollView addSubview:blockElement.blockView];
+  
+    
+    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, BlOCK_VIEW_HEIGHT*([self.blockViews count]));
+    self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    [self.mainScrollView reloadInputViews];
+    */
+}
 
 #pragma mark - implement NSURLconnection delegate methods 
 //to deal with the returned data
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    //self.data = [[NSMutableData alloc] init];
+    self.data = [[NSMutableData alloc] init];
 }
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    //[self.data appendData:data];
+    [self.data appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -180,63 +205,53 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
-    /*
+    
+    //deal with one data first
      NSError *error;
      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-     NSLog(@"all %@",[json allKeys]);
-     NSDictionary* responseData = [json objectForKey:@"responseData"];
-     NSArray *results = [responseData objectForKey:@"results"];
-     NSLog(@"get %d results",[results count]);
+     NSString *title=[json objectForKey:@"title"];
+     NSString *photo=[json objectForKey:@"photo"];
      
-     //update the imageURLs and ImageTitles (the property of this table view)
-     [self.imageUrls removeAllObjects];  
-     [self.imageTitles removeAllObjects];
-     
-     for (NSDictionary* result in results) {
-     NSString *url=nil;
-     NSString *title=nil;
-     url=[result objectForKey:@"url"];
-     [self.imageUrls addObject:url];//add the new image url
-     title=[result objectForKey:@"contentNoFormatting"];
-     [self.imageTitles addObject:title]; //add the new image title
-     
-     //using high priority queue to fetch the image
-     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-     
-     //get the image data
-     NSData * imageData = nil;
-     imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
-     
-     if ( imageData == nil ){
-     //if the image data is nil, the image url is not reachable. using a default image to replace that
-     //NSLog(@"downloaded %@ error, using a default image",url);
-     UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-     imageData=UIImagePNGRepresentation(image);
-     if(imageData)[self.cacheImage setObject:imageData forKey:url];
-     [self.tableView reloadData]; 
-     }
-     else {
-     //else, the image date getting finished, directlhy put it in the cache, and them reload the table view data.
-     //NSLog(@"downloaded %@",url);
-     if(imageData)[self.cacheImage setObject:imageData forKey:url];
-     [self.tableView reloadData]; 
-     }
-     
-     //when the image fetching thread is done, delete the spining activity indicator
-     dispatch_async(dispatch_get_main_queue(), ^{
-     if ([self.indicatorDictionary objectForKey:url]) {
-     UIView *loading=nil;
-     loading=(UIView *)[self.indicatorDictionary objectForKey:url];
-     [loading removeFromSuperview];
-     [self.indicatorDictionary removeObjectForKey:url];
-     //NSLog(@"delete 1 subview:%@",url);
-     }
-     });	
-     
-     });
-     
-     }
-     */
+    NSURL *url=[NSURL URLWithString:photo];
+    if (![Cache isURLCached:url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: url];
+            
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                
+                if(imageData){
+                    [Cache addDataToCache:url withData:imageData];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
+                    //refresh the whole view
+                    [self refreshAllTheMainScrollViewSUbviews];
+                    NSLog(@"%d",[self.blockViews count]);
+                }
+                 
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    [Cache addDataToCache:url withData:imageData];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
+                    
+                    
+                    
+                    
+                    //refresh the whole view
+                    [self refreshAllTheMainScrollViewSUbviews];
+                }
+                 
+            }
+        });
+    }
 }
 
 

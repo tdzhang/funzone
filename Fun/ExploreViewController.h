@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ExploreBlockElement.h"
+#import "Cache.h"
+
+#define DEFAULT_IMAGE_REPLACEMENT @"big40.jpg" //to replace the image which cannot get the 
 @interface ExploreViewController : UIViewController<UIScrollViewDelegate>
 
 @end
