@@ -318,21 +318,25 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
+                
                 UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
-                
+                dispatch_async( dispatch_get_main_queue(),^{
                 [self.tableView reloadData];
                 [self.tableView becomeFirstResponder];
                 [self.tableView scrollsToTop];
+                });
             }
             else {
                 //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
                 //NSLog(@"downloaded %@",url);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
+                dispatch_async( dispatch_get_main_queue(),^{
                 [self.tableView reloadData]; 
                 [self.tableView becomeFirstResponder];
                 [self.tableView scrollsToTop];
+                });
             }
        });
         
