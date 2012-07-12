@@ -148,6 +148,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //set the title textfield uneditable  if it is for the movie
+    if([self.eventType isEqualToString:@"movie"]){
+        self.textFieldEventTitle.enabled = NO;
+    }
+    
     //initiate the config of the EventShare To Friends Function part
     //clean the possible remain button (when went back from segue)
     if(self.buttonEmailShare){
@@ -212,6 +217,7 @@
 
 - (void)viewDidLoad:(BOOL)animated {
     [super viewDidLoad];
+    
 }
 
 
