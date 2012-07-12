@@ -209,13 +209,17 @@ shouldReloadTableForSearchString:(NSString *)searchString
                         imageData=UIImagePNGRepresentation(image);
                         
                         if(imageData)[Cache addDataToCache:url withData:imageData];
+                        dispatch_async( dispatch_get_main_queue(),^{
                         [self.searchDisplayController.searchResultsTableView reloadData]; 
+                        });
                     }
                     else {
                         //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
                         //NSLog(@"downloaded %@",url);
                         if(imageData)[Cache addDataToCache:url withData:imageData];
+                        dispatch_async( dispatch_get_main_queue(),^{
                         [self.searchDisplayController.searchResultsTableView reloadData];  
+                        });
                     }
                 });
             }
