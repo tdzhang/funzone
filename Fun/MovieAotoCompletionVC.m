@@ -32,6 +32,13 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //preset the search bar to be the first responser
+    [self.searchDisplayController.searchBar becomeFirstResponder];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
