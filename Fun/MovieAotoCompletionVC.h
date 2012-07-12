@@ -10,6 +10,16 @@
 #import "rottenTomatoMovieModel.h"
 #import "movieAutoCCell.h"
 #import "Cache.h"
-@interface MovieAotoCompletionVC : UIViewController<UISearchBarDelegate,UISearchDisplayDelegate>
 
+#define ROTTENTOMATOE_APIKEY @"fsdtjhkez9txeuj86n9b83ba"
+
+@protocol movieInfoReturn <NSObject>
+
+-(void)movieInfoReturn:(rottenTomatoMovieModel *)model from:(id) sender;
+
+@end
+
+
+@interface MovieAotoCompletionVC : UIViewController<UISearchBarDelegate,UISearchDisplayDelegate>
+@property(nonatomic,weak)id<movieInfoReturn> delegate;
 @end

@@ -18,6 +18,7 @@
 @end
 
 @implementation MovieAotoCompletionVC
+@synthesize delegate=_delegate;
 @synthesize searchResult=_searchResult;
 @synthesize data=_data;
 
@@ -53,7 +54,20 @@
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    //.....
+    NSString* searchString=self.searchDisplayController.searchBar.text;
+    NSString* keyword=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    //if (searchLength<3||((searchLength-4)%2)!=0) {
+    //    return NO;
+    //}
+    
+    // else{
+    //Searching the key word
+    //http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=ted&page_limit=5&apikey=fsdtjhkez9txeuj86n9b83ba
+    NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=10&apikey=%@",keyword,ROTTENTOMATOE_APIKEY];
+    NSLog(@"%@",request_string);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -63,7 +77,7 @@
 }
 
 //Start when searchBar text changed,find the user searched result from fousqure, and save them to self.foursquareSearchResults
-#define ROTTENTOMATOE_APIKEY @"fsdtjhkez9txeuj86n9b83ba"
+
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
 shouldReloadTableForSearchString:(NSString *)searchString
 {
@@ -138,12 +152,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //if the notificaiton is from the user select search results
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         [self.searchDisplayController setActive:NO];
+        [self.delegate movieInfoReturn:[self.searchResult objectAtIndex:indexPath.row] from:self];
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 112;
 }
+
 
 #pragma mark - implement NSURLconnection delegate methods 
 //to deal with the returned data

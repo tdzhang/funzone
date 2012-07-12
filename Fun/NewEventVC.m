@@ -290,6 +290,9 @@
             [segue.destinationViewController setDelegate:self];
         }
     }
+    else if([segue.identifier isEqualToString:@"moviewAutoCompletion"]){
+        [segue.destinationViewController setDelegate:self];
+    }
 }
 
 #pragma mark - action sheet
@@ -672,6 +675,13 @@
 
 
 #pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the movieInfoReturn protocal, for movie info return
+-(void)movieInfoReturn:(rottenTomatoMovieModel *)model from:(id) sender{
+    [self.textFieldEventTitle setText:model.title];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 ////////////////////////////////////////////////
 //implement the MFMailComposeViewControllerDelegate Method
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
