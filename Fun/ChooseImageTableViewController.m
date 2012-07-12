@@ -164,22 +164,31 @@
             }
         }
     }
+    
+    //clear the loading indicator of all the cell
+    for (UIView *view in cell.subviews) {
+        if (view.frame.size.height == 80) {
+            [view removeFromSuperview];
+        }
+    }
+    
     // Configure the cell...if the range is not right return empty table cell
     if ([self.imageUrls count]<=indexPath.row) return cell;
     
     NSString* urlString=[self.imageUrls objectAtIndex:indexPath.row];
     //if the image url can be found in the temp cache, get the image from the cache
     if ([self.cacheImage objectForKey:urlString]) { 
+        
         [cell.imageViewContent setImage:[UIImage imageWithData:(NSData*)[self.cacheImage objectForKey:urlString]]];
     } 
     //if the image can not be found in the temp cache, which means the image is still in the fetching process, so here we add the spinning activity indicator
-    else if(![self.indicatorDictionary objectForKey:urlString]) {
+    else{
         //NSLog(@"lack url :%@",urlString);
         //NSLog(@"%d",indexPath.row);
-        UIView *loading = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 120, 120)]; 
+        UIView *loading = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 80)]; 
         loading.opaque = NO;
-        loading.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
-        UILabel *loadLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 25, 81, 22)];
+        loading.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+        UILabel *loadLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 81, 22)];
         loadLabel.text = @"Loading";
         loadLabel.font = [UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment = UITextAlignmentCenter;
@@ -187,15 +196,15 @@
         loadLabel.backgroundColor = [UIColor clearColor];
         [loading addSubview:loadLabel];
         UIActivityIndicatorView *spinning = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame = CGRectMake(42, 54, 37, 37);
+        spinning.frame = CGRectMake(30, 30, 37, 37);
         [spinning startAnimating];
         [loading addSubview:spinning];
         
-        loading.frame = CGRectMake(100, 200, 120, 120);
         [cell addSubview:loading];
         //after adding the indicator, it need to be saved to indicatorDictionary, to make the image fetching block can delete the indicator for the table cell view when it finished.
-        if(loading)[self.indicatorDictionary setObject:loading forKey:urlString];
-        // NSLog(@"add indicator url:%@",urlString);
+        
+        //NSLog(@"add indicator url:%@",urlString);
+        //NSLog(@"total indicator %d",[[self.indicatorDictionary allKeys] count]);
         
     }
     [cell.labelTitle setText:[self.imageTitles objectAtIndex:indexPath.row]];
@@ -296,9 +305,9 @@
         NSString *url=nil;
         NSString *title=nil;
         url=[result objectForKey:@"url"];
-        [self.imageUrls addObject:url];//add the new image url
+        [self.imageUrls insertObject:url atIndex:0];//add the new image url
         title=[result objectForKey:@"contentNoFormatting"];
-        [self.imageTitles addObject:title]; //add the new image title
+        [self.imageTitles insertObject:title atIndex:0]; //add the new image title
         
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
@@ -313,6 +322,7 @@
                 UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
+                
                 [self.tableView reloadData]; 
             }
             else {
@@ -321,18 +331,6 @@
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 [self.tableView reloadData]; 
             }
-         
-            //when the image fetching thread is done, delete the spining activity indicator
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.indicatorDictionary objectForKey:url]) {
-                    UIView *loading=nil;
-                    loading=(UIView *)[self.indicatorDictionary objectForKey:url];
-                    [loading removeFromSuperview];
-                    [self.indicatorDictionary removeObjectForKey:url];
-                    //NSLog(@"delete 1 subview:%@",url);
-                }
-            });	
-           
        });
         
     }

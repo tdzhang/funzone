@@ -162,10 +162,15 @@
 
 #pragma mark - already load the new data, refresh the whole view
 -(void)refreshAllTheMainScrollViewSUbviews{
-    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:0];
-    [self.mainScrollView addSubview:Element.blockView];
+    
     
     [self.refreshView removeFromSuperview];
+    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:0];
+    [self.mainScrollView addSubview:Element.blockView];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+    [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    [self.mainScrollView addSubview:self.refreshView];
+    
     /*for (UIView *view in [self.mainScrollView subviews]) {
         [view removeFromSuperview];
     }*/
@@ -208,10 +213,12 @@
     
     //deal with one data first
      NSError *error;
+    
      NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
      NSString *title=[json objectForKey:@"title"];
-     NSString *photo=[json objectForKey:@"photo"];
-     
+     NSString *photo=[json objectForKey:@"photo_url"];
+    NSLog(@"%@",title);
+    NSLog(@"%@",photo);
     NSURL *url=[NSURL URLWithString:photo];
     if (![Cache isURLCached:url]) {
         //using high priority queue to fetch the image
@@ -223,7 +230,7 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
                 imageData=UIImagePNGRepresentation(image);
                 
                 if(imageData){
@@ -233,7 +240,6 @@
                     [self refreshAllTheMainScrollViewSUbviews];
                     NSLog(@"%d",[self.blockViews count]);
                 }
-                 
             }
             else {
                 //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
@@ -241,14 +247,9 @@
                 if(imageData){
                     [Cache addDataToCache:url withData:imageData];
                     [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
-                    
-                    
-                    
-                    
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 }
-                 
             }
         });
     }
