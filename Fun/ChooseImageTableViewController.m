@@ -308,10 +308,9 @@
         [self.imageUrls insertObject:url atIndex:0];//add the new image url
         title=[result objectForKey:@"contentNoFormatting"];
         [self.imageTitles insertObject:title atIndex:0]; //add the new image title
-        
+        [self.tableView reloadData];
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            
             //get the image data
             NSData * imageData = nil;
             imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:url]];
@@ -323,13 +322,17 @@
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 
-                [self.tableView reloadData]; 
+                [self.tableView reloadData];
+                [self.tableView becomeFirstResponder];
+                [self.tableView scrollsToTop];
             }
             else {
                 //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
                 //NSLog(@"downloaded %@",url);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 [self.tableView reloadData]; 
+                [self.tableView becomeFirstResponder];
+                [self.tableView scrollsToTop];
             }
        });
         
