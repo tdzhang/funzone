@@ -234,7 +234,7 @@
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
                     [Cache addDataToCache:url withData:imageData];
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                     NSLog(@"123:   %d",[self.blockViews count]);
@@ -254,6 +254,13 @@
                 }
             }
         });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
+        //refresh the whole view
+        [self refreshAllTheMainScrollViewSUbviews];
+            });
     }
 }
 

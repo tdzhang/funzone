@@ -52,6 +52,13 @@
 @property (nonatomic,strong) NSString *currentFacebookConnect;
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 
+//these property used to send back to server when create a event(image, title, location)
+@property (nonatomic,strong) UIImage *createEvent_image;
+@property (nonatomic,strong) NSString *createEvent_title;
+@property (nonatomic,strong) NSString *createEvent_latitude;
+@property (nonatomic,strong) NSString *createEvent_longitude;
+@property (nonatomic,strong) NSString *createEvent_locationName;
+
 //Email Share Button handler
 -(void)useEmailToShare:(id)sender;
 //Twitter Share Button handler
@@ -89,7 +96,32 @@
 @synthesize currentFacebookConnect=_currentFacebookConnect;
 @synthesize eventType=_eventType;
 
+@synthesize createEvent_image=_createEvent_image;
+@synthesize createEvent_title=_createEvent_title;
+@synthesize createEvent_latitude=_createEvent_latitude;
+@synthesize createEvent_longitude=_createEvent_longitude;
+@synthesize createEvent_locationName=_createEvent_locationName;
+
+
 #pragma mark - self defined synthesize
+-(UIImage *)createEvent_image{
+    _createEvent_image=[self.uIImageViewEvent copy];
+    return _createEvent_image;
+}
+
+-(NSString *)createEvent_title{
+    _createEvent_title=self.textFieldEventTitle.text;
+    if([_createEvent_title isEqualToString:@""]){
+        _createEvent_title=@"some thing";
+    }
+    return _createEvent_title;
+}
+
+-(NSString *)createEvent_locationName{
+    _createEvent_locationName=self.locationLabel.text;
+    return _createEvent_locationName;
+}
+
 -(UIImagePickerController *)imgPicker{
     if (_imgPicker==nil) {
         _imgPicker = [[UIImagePickerController alloc] init];
@@ -887,6 +919,8 @@
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
+    self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
+    self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
 }
 
 ////////////////////////////////////////////////
