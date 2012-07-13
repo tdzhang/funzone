@@ -18,6 +18,7 @@
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
+@property (nonatomic,strong) NSString *freshConnectionType;
 @end
 
 @implementation ExploreViewController
@@ -27,6 +28,7 @@
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
 @synthesize data=_data;
+@synthesize freshConnectionType=_freshConnectionType;
 
 #define VIEW_WIDTH 320
 #define View_HEIGHT 367
@@ -84,6 +86,7 @@
     
     
     //quest the most recent 10 featured events
+    self.freshConnectionType=@"New";
     NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -151,6 +154,7 @@
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        self.freshConnectionType=@"New";
         [connection start];
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
         self.mainScrollView.contentOffset = CGPointMake(0, 0);
@@ -171,21 +175,7 @@
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
     [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
-    /*for (UIView *view in [self.mainScrollView subviews]) {
-        [view removeFromSuperview];
-    }*/
-    /*
-    NSLog(@"%d",[self.blockViews count]);
-   
-    ExploreBlockElement* blockElement=[self.blockViews objectAtIndex:0];
-    [blockElement resetFramWith:0];
-    [self.mainScrollView addSubview:blockElement.blockView];
-  
     
-    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, BlOCK_VIEW_HEIGHT*([self.blockViews count]));
-    self.mainScrollView.contentOffset = CGPointMake(0, 0);
-    [self.mainScrollView reloadInputViews];
-    */
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -210,130 +200,77 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
-    NSError *error;
-    NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    
-    
-    for (NSDictionary* event in json) {
-        NSString *title=[event objectForKey:@"title"];
-        NSString *description=[event objectForKey:@"description"];
-        NSString *photo=[event objectForKey:@"photo_url"];
-        NSLog(@"%@",title);
-        NSLog(@"%@",photo);
-        NSLog(@"%@",description);
-        if (!title) {
-            continue;
-        }
-        NSURL *url=[NSURL URLWithString:photo];
-        if (![Cache isURLCached:url]) {
-            //using high priority queue to fetch the image
-            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-                //get the image data
-                NSData * imageData = nil;
-                imageData = [[NSData alloc] initWithContentsOfURL: url];
-                
-                if ( imageData == nil ){
-                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                    //NSLog(@"downloaded %@ error, using a default image",url);
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                    imageData=UIImagePNGRepresentation(image);
+    if ([self.freshConnectionType isEqualToString:@"New"]) {
+        self.freshConnectionType=@"not";
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        
+        for (NSDictionary* event in json) {
+            NSString *title=[event objectForKey:@"title"];
+            NSString *description=[event objectForKey:@"description"];
+            NSString *photo=[event objectForKey:@"photo_url"];
+            NSLog(@"%@",title);
+            NSLog(@"%@",photo);
+            NSLog(@"%@",description);
+            if (!title) {
+                continue;
+            }
+            NSURL *url=[NSURL URLWithString:photo];
+            if (![Cache isURLCached:url]) {
+                //using high priority queue to fetch the image
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+                    //get the image data
+                    NSData * imageData = nil;
+                    imageData = [[NSData alloc] initWithContentsOfURL: url];
                     
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
-                            
-                            //refresh the whole view
-                            [self refreshAllTheMainScrollViewSUbviews];
-                            NSLog(@"123:   %d",[self.blockViews count]);
-                        });
+                    if ( imageData == nil ){
+                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                        //NSLog(@"downloaded %@ error, using a default image",url);
+                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        imageData=UIImagePNGRepresentation(image);
+                        
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:url withData:imageData];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                
+                                //refresh the whole view
+                                [self refreshAllTheMainScrollViewSUbviews];
+                                NSLog(@"123:   %d",[self.blockViews count]);
+                            });
+                        }
                     }
-                }
-                else {
-                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                    //NSLog(@"downloaded %@",url);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            
-                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
-                            //refresh the whole view
-                            [self refreshAllTheMainScrollViewSUbviews];
-                            NSLog(@"321:   %d",[self.blockViews count]);
-                        });
+                    else {
+                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                        //NSLog(@"downloaded %@",url);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:url withData:imageData];
+                                
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                //refresh the whole view
+                                [self refreshAllTheMainScrollViewSUbviews];
+                                NSLog(@"321:   %d",[self.blockViews count]);
+                            });
+                        }
                     }
-                }
-            });
-        }
-        else {
-            dispatch_async( dispatch_get_main_queue(),^{
-                
-                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
-                //refresh the whole view
-                [self refreshAllTheMainScrollViewSUbviews];
-            });
-        }
-
-    }
-    
-    
-    
-    
-    /*
-    //deal with one data first
-    NSError *error;
-    
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSString *title=[json objectForKey:@"title"];
-    NSString *photo=[json objectForKey:@"photo_url"];
-    NSLog(@"%@",title);
-    NSLog(@"%@",photo);
-    NSURL *url=[NSURL URLWithString:photo];
-    if (![Cache isURLCached:url]) {
-        //using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: url];
-            
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                imageData=UIImagePNGRepresentation(image);
-                
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                    [Cache addDataToCache:url withData:imageData];
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
-                    //refresh the whole view
-                    [self refreshAllTheMainScrollViewSUbviews];
-                    NSLog(@"123:   %d",[self.blockViews count]);
-                    });
-                }
+                });
             }
             else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                    [Cache addDataToCache:url withData:imageData];
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
+                dispatch_async( dispatch_get_main_queue(),^{
+                    
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
-                        });
-                }
+                });
             }
-        });
+            
+        }
     }
     else {
-        dispatch_async( dispatch_get_main_queue(),^{
-        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:0 backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:0];
-        //refresh the whole view
-        [self refreshAllTheMainScrollViewSUbviews];
-            });
+        
     }
-     */
+    
 }
 
 
