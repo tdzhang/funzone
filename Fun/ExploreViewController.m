@@ -68,26 +68,12 @@
     leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:leftRecognizer]; 
     
-    //test/////////////////////////////////////////////////////////////
+
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
     
-    //main part
-    for (int i=0; i<5; i++) {
-        [self.blockViews addObject:[ExploreBlockElement initialWithPositionY:BlOCK_VIEW_HEIGHT*i backGroundImageUrl:[NSURL URLWithString:@"XXX"] tabActionTarget:self withTitle:@"World Ocean's Day Celebration" withFavorLabelString:@"15" withJoinLabelString:@"25"]];
-        
-        ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:i];
-        [self.mainScrollView addSubview:Element.blockView];
-    }
-    NSLog(@"%d",[self.blockViews count]);
-    
-    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
-    self.mainScrollView.contentOffset = CGPointMake(0, 0);
-    
-    
-
 }
 
 - (void)viewDidLoad {
@@ -95,7 +81,17 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
-   }
+    
+    
+    //quest the most recent 10 featured events
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
+    NSLog(@"%@",request_string);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
+    self.mainScrollView.contentOffset = CGPointMake(0, 0);
+}
 
 
 - (void)viewDidUnload
@@ -118,6 +114,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/2) {
         //set the refresh view ahead
         NSLog(@"called");
@@ -140,21 +137,26 @@
         spinning.frame =CGRectMake(120,80,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
         [self.refreshView addSubview:loading];
-        //relocate the main views
+        //remove the main views
         for (int i=0;i<[self.blockViews count];i++) {
             ExploreBlockElement* element = [self.blockViews objectAtIndex:i];
-            [element.blockView setFrame:CGRectMake(0, BlOCK_VIEW_HEIGHT*(i+1), VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+            [element.blockView removeFromSuperview];
         }
-        [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, BlOCK_VIEW_HEIGHT*([self.blockViews count]+1))];
+        [self.blockViews removeAllObjects];
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
         //test json
-        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=3&shared_event_id=2"];
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection start];
+        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
+        self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    }
+    else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2)+0.2)){
+        //NSLog(@"add more");
     }
 }
 
@@ -163,12 +165,12 @@
     
     
     [self.refreshView removeFromSuperview];
-    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:0];
+    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
-    
+    [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
     /*for (UIView *view in [self.mainScrollView subviews]) {
         [view removeFromSuperview];
     }*/
@@ -208,13 +210,82 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
+    NSError *error;
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     
+    
+    for (NSDictionary* event in json) {
+        NSString *title=[event objectForKey:@"title"];
+        NSString *description=[event objectForKey:@"description"];
+        NSString *photo=[event objectForKey:@"photo_url"];
+        NSLog(@"%@",title);
+        NSLog(@"%@",photo);
+        NSLog(@"%@",description);
+        if (!title) {
+            continue;
+        }
+        NSURL *url=[NSURL URLWithString:photo];
+        if (![Cache isURLCached:url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    imageData=UIImagePNGRepresentation(image);
+                    
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                            
+                            //refresh the whole view
+                            [self refreshAllTheMainScrollViewSUbviews];
+                            NSLog(@"123:   %d",[self.blockViews count]);
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            
+                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                            //refresh the whole view
+                            [self refreshAllTheMainScrollViewSUbviews];
+                            NSLog(@"321:   %d",[self.blockViews count]);
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                
+                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                //refresh the whole view
+                [self refreshAllTheMainScrollViewSUbviews];
+            });
+        }
+
+    }
+    
+    
+    
+    
+    /*
     //deal with one data first
-     NSError *error;
+    NSError *error;
     
-     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-     NSString *title=[json objectForKey:@"title"];
-     NSString *photo=[json objectForKey:@"photo_url"];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+    NSString *title=[json objectForKey:@"title"];
+    NSString *photo=[json objectForKey:@"photo_url"];
     NSLog(@"%@",title);
     NSLog(@"%@",photo);
     NSURL *url=[NSURL URLWithString:photo];
@@ -262,6 +333,7 @@
         [self refreshAllTheMainScrollViewSUbviews];
             });
     }
+     */
 }
 
 
