@@ -105,7 +105,7 @@
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
-    _createEvent_image=[self.uIImageViewEvent copy];
+    _createEvent_image=[self.uIImageViewEvent.image copy];
     return _createEvent_image;
 }
 
@@ -273,6 +273,48 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
+
+#pragma mark - create event to server
+- (IBAction)CreateEventToSever:(id)sender {
+    NSURL *url=[NSURL URLWithString:@"http://www.funnect.me/events/add"];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Upload Complete!" message:@"The Event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        success.delegate=self;
+        [success show];
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+    
+    [request setPostValue:@"1" forKey:@"user_id"];
+    [request setPostValue:self.createEvent_title forKey:@"title"];
+    [request setPostValue:self.createEvent_locationName forKey:@"address"];
+    [request setPostValue:self.createEvent_locationName forKey:@"location"];
+    [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
+    [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
+    NSString *format=@"png";
+    NSData *data=nil;
+    data=UIImagePNGRepresentation(self.createEvent_image);
+    //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+    if(data==nil){
+        //data=UIImagePNGRepresentation(self.createEvent_image);
+        data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+        format=@"jpeg";
+    }
+    [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
+}
+
 
 #pragma mark - View AntoRotation Method
 
