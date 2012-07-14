@@ -231,9 +231,13 @@
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
-            NSLog(@"%@",title);
-            NSLog(@"%@",photo);
-            NSLog(@"%@",description);
+            NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+            NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            //NSLog(@"%@",title);
+            //NSLog(@"%@",photo);
+            //NSLog(@"%@",description);
+            //NSLog(@"%@",num_pins);
+            //NSLog(@"%@",num_views);
             if (!title) {
                 continue;
             }
@@ -254,7 +258,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
@@ -269,7 +273,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -281,7 +285,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
@@ -305,9 +309,9 @@
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
-            //NSLog(@"%@",title);
-            //NSLog(@"%@",photo);
-            //NSLog(@"%@",description);
+            NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+            NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            
             if (!title) {
                 continue;
             }
@@ -328,7 +332,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -343,7 +347,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -355,7 +359,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
