@@ -70,7 +70,6 @@
     leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:leftRecognizer]; 
     
-
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
@@ -117,6 +116,11 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    //if there already has a connection, donot create a new one
+    if (![self.freshConnectionType isEqualToString:@"not"]) {
+        return;
+    }
+    
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/2) {
         //set the refresh view ahead
@@ -159,15 +163,22 @@
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
         self.mainScrollView.contentOffset = CGPointMake(0, 0);
     }
-    else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2)+0.2)){
+    //add more
+    else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-3))){
         //NSLog(@"add more");
+
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
+        NSLog(@"%@",request_string);
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        //set the freshConnectionType To @"Add"
+        self.freshConnectionType=@"Add";
+        [connection start];         
     }
 }
 
-#pragma mark - already load the new data, refresh the whole view
+#pragma mark - already load the new data, refresh the whole view/ or add more on the down side
 -(void)refreshAllTheMainScrollViewSUbviews{
-    
-    
     [self.refreshView removeFromSuperview];
     ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
@@ -175,7 +186,12 @@
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
     [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
-    
+}
+//use to add more (than 10) from down side
+-(void)addMoreDataToTheMainScrollViewSUbviews{
+    ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
+    [self.mainScrollView addSubview:Element.blockView];
+    [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -199,12 +215,13 @@
 
 
 //when the connection get the returned data (json form)
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    //renew the 10 newest features!!!!
     if ([self.freshConnectionType isEqualToString:@"New"]) {
+        //set the freshConnectionType to "not"
         self.freshConnectionType=@"not";
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
@@ -264,11 +281,76 @@
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
             }
-            
+        
         }
     }
-    else {
-        
+    else if([self.freshConnectionType isEqualToString:@"Add"]){
+        //set the freshConnectionType to "not"
+        self.freshConnectionType=@"not";
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        for (NSDictionary* event in json) {
+            NSString *title=[event objectForKey:@"title"];
+            NSString *description=[event objectForKey:@"description"];
+            NSString *photo=[event objectForKey:@"photo_url"];
+            //NSLog(@"%@",title);
+            //NSLog(@"%@",photo);
+            //NSLog(@"%@",description);
+            if (!title) {
+                continue;
+            }
+            NSURL *url=[NSURL URLWithString:photo];
+            if (![Cache isURLCached:url]) {
+                //using high priority queue to fetch the image
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+                    //get the image data
+                    NSData * imageData = nil;
+                    imageData = [[NSData alloc] initWithContentsOfURL: url];
+                    
+                    if ( imageData == nil ){
+                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                        //NSLog(@"downloaded %@ error, using a default image",url);
+                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        imageData=UIImagePNGRepresentation(image);
+                        
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:url withData:imageData];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                
+                                //refresh the whole view
+                                [self addMoreDataToTheMainScrollViewSUbviews];
+                                NSLog(@"123:   %d",[self.blockViews count]);
+                            });
+                        }
+                    }
+                    else {
+                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                        //NSLog(@"downloaded %@",url);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:url withData:imageData];
+                                
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                                //refresh the whole view
+                                [self addMoreDataToTheMainScrollViewSUbviews];
+                                NSLog(@"321:   %d",[self.blockViews count]);
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                dispatch_async( dispatch_get_main_queue(),^{
+                    
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:@"15" withJoinLabelString:@"25"] atIndex:[self.blockViews count]];
+                    //refresh the whole view
+                    [self addMoreDataToTheMainScrollViewSUbviews];
+                });
+            }
+            
+        }
+
     }
     
 }
