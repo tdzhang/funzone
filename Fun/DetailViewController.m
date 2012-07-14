@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
 @end
 
@@ -31,7 +32,9 @@
 @synthesize eventTimeLabel;
 @synthesize eventPriceLabel;
 @synthesize eventIntroLabel;
+@synthesize myScrollView;
 
+#pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,11 +61,15 @@
     [self setEventTimeLabel:nil];
     [self setEventPriceLabel:nil];
     [self setEventIntroLabel:nil];
+    [self setMyScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
-- (IBAction)exploreButtonPressed:(UIBarButtonItem *)sender {
-    [self dismissModalViewControllerAnimated:YES];
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.myScrollView setContentSize:CGSizeMake(320, 1000)];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

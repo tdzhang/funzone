@@ -382,6 +382,10 @@
     //get the index of the touched block view
     int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
     NSLog(@"%d",index);
+    
+    //do some pre-segue stuff with event_id and shared_id
+    [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
+    
     /*
      self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
      [self presentViewController:self.detailViewController animated:YES completion:^{}];

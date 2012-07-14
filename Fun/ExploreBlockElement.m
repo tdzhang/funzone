@@ -71,9 +71,13 @@
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
+    
     //Backgroud Image
     blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, BACKGROUND_Y, VIEW_WIDTH, BACKGROUND_HEIGHT)];
     blockElement.backGroundImageView.image=[backGroundImage copy];
+    [blockElement.backGroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [blockElement.backGroundImageView setClipsToBounds:YES];
+    
     [blockElement.blockView addSubview:blockElement.backGroundImageView];
     //Thumbnail Image
     blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y, THUMB_SIZE, THUMB_SIZE)];
