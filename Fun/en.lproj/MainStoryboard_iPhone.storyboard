@@ -3181,6 +3181,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="contributorNameLabel" destination="PIe-iT-tT3" id="HN4-mx-GlW"/>
                         <outlet property="contributorProfileImageView" destination="EZU-V7-GO7" id="MTd-gV-WUB"/>
+                        <outlet property="eventImageView" destination="bya-Ev-PtG" id="jhg-us-IrZ"/>
                         <outlet property="eventIntroLabel" destination="yTK-KM-L25" id="R7l-DX-Nfb"/>
                         <outlet property="eventLocationDistanceLabel" destination="FAQ-bU-QFB" id="KYf-ti-1x6"/>
                         <outlet property="eventLocationLabel" destination="ehG-JG-qoa" id="M0K-1s-WKc"/>
@@ -3262,6 +3263,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="contributorProfileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="eventLocationDistanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
