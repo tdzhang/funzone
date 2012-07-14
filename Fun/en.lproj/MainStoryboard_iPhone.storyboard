@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -3119,19 +3118,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <view contentMode="scaleToFill" id="JRN-eV-TJu">
                                         <rect key="frame" x="196" y="305" width="129" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="price.png" id="R3e-OF-AWA">
-                                                <rect key="frame" x="9" y="7" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YN3-yI-iFl">
-                                                <rect key="frame" x="42" y="7" width="62" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" none="YES" button="YES"/>
@@ -3185,7 +3171,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="eventIntroLabel" destination="yTK-KM-L25" id="R7l-DX-Nfb"/>
                         <outlet property="eventLocationDistanceLabel" destination="FAQ-bU-QFB" id="KYf-ti-1x6"/>
                         <outlet property="eventLocationLabel" destination="ehG-JG-qoa" id="M0K-1s-WKc"/>
-                        <outlet property="eventPriceLabel" destination="YN3-yI-iFl" id="YZH-VA-NZt"/>
                         <outlet property="eventTimeLabel" destination="5F2-kZ-pW6" id="ySn-Oh-6xS"/>
                         <outlet property="eventTitleLabel" destination="Lyi-PQ-tGH" id="MAy-mE-ffw"/>
                         <outlet property="myScrollView" destination="TbT-YT-OhJ" id="gRc-Uh-41q"/>
