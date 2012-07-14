@@ -58,6 +58,7 @@
 @property (nonatomic,strong) NSString *createEvent_latitude;
 @property (nonatomic,strong) NSString *createEvent_longitude;
 @property (nonatomic,strong) NSString *createEvent_locationName;
+@property (nonatomic,strong) NSString *createEvent_time;
 
 //Email Share Button handler
 -(void)useEmailToShare:(id)sender;
@@ -101,12 +102,18 @@
 @synthesize createEvent_latitude=_createEvent_latitude;
 @synthesize createEvent_longitude=_createEvent_longitude;
 @synthesize createEvent_locationName=_createEvent_locationName;
+@synthesize createEvent_time=_createEvent_time;
 
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
     _createEvent_image=[self.uIImageViewEvent.image copy];
     return _createEvent_image;
+}
+
+-(NSString *)createEvent_time{
+    _createEvent_time=[self.labelEventTime text];
+    return _createEvent_time;
 }
 
 -(NSString *)createEvent_title{
@@ -301,6 +308,7 @@
     [request setPostValue:self.createEvent_locationName forKey:@"location"];
     [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
     [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
+    [request setPostValue:self.createEvent_time forKey:@"time"];
     NSString *format=@"png";
     NSData *data=nil;
     data=UIImagePNGRepresentation(self.createEvent_image);

@@ -20,6 +20,8 @@
 @property(nonatomic,strong) UILabel *joinLabel;
 @property(nonatomic,strong) UIImageView *favorImageView;
 @property(nonatomic,strong) UILabel *favorLabel;
+@property(nonatomic,strong) NSString *event_id;
+@property(nonatomic,strong) NSString *shared_id;
 
 //used to reset the fram information
 -(void) resetFramWith:(CGFloat)position_y;

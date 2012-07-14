@@ -19,6 +19,8 @@
 @synthesize joinImageView=_joinImageView;
 @synthesize favorImageView=_favorImageView;
 @synthesize favorLabel=_favorLabel;
+@synthesize event_id=_event_id;
+@synthesize shared_id=_shared_id;
 
 
 #define VIEW_WIDTH 320
