@@ -119,13 +119,21 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    //if there already has a connection, donot create a new one
+    
+    //if there already has a connection, donot create a new one, just return
     if (![self.freshConnectionType isEqualToString:@"not"]) {
         return;
     }
     
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/2) {
+        //remove the main views
+        for (UIView *view in [self.mainScrollView subviews]) {
+            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
+            NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT);
+        }
+        [self.blockViews removeAllObjects];
+        
         //set the refresh view ahead
         NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
@@ -147,27 +155,20 @@
         spinning.frame =CGRectMake(120,80,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
         [self.refreshView addSubview:loading];
-        //remove the main views
-        for (int i=0;i<[self.blockViews count];i++) {
-            ExploreBlockElement* element = [self.blockViews objectAtIndex:i];
-            [element.blockView removeFromSuperview];
-        }
-        [self.blockViews removeAllObjects];
+        
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
-        //test json
         NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
         NSLog(@"%@",request_string);
+        
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         self.freshConnectionType=@"New";
         [connection start];
-        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
-        self.mainScrollView.contentOffset = CGPointMake(0, 0);
     }
     //add more
-    else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-3))){
+    else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-5))){
         //NSLog(@"add more");
 
         NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?page=%d",self.refresh_page_num];
