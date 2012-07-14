@@ -19,6 +19,7 @@
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
+@property (nonatomic) int refresh_page_num;
 @end
 
 @implementation ExploreViewController
@@ -29,6 +30,7 @@
 @synthesize mainScrollView = _mainScrollView;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
+@synthesize refresh_page_num=_refresh_page_num;
 
 #define VIEW_WIDTH 320
 #define View_HEIGHT 367
@@ -85,6 +87,7 @@
     
     
     //quest the most recent 10 featured events
+    self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
     NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
     NSLog(@"%@",request_string);
@@ -124,7 +127,7 @@
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/2) {
         //set the refresh view ahead
-        NSLog(@"called");
+        NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
@@ -167,7 +170,7 @@
     else if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-3))){
         //NSLog(@"add more");
 
-        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?page=%d",self.refresh_page_num];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -219,9 +222,11 @@
     //renew the 10 newest features!!!!
     if ([self.freshConnectionType isEqualToString:@"New"]) {
         //set the freshConnectionType to "not"
-        self.freshConnectionType=@"not";
+        self.freshConnectionType=@"not";  
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+        self.refresh_page_num=2;
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
@@ -289,6 +294,13 @@
         self.freshConnectionType=@"not";
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        //after receive the new page, add the next request page number
+        self.refresh_page_num++;
+        if ([json count]==0) {
+            //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
+            self.refresh_page_num--;
+            
+        }
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
