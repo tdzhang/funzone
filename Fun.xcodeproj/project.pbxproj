@@ -554,7 +554,6 @@
 				9298264F15A938D6003673CF /* facebook-ios-sdk */,
 				0F68DD5715A9036000B093BB /* Category */,
 				4698258F15A11DFC00204234 /* Friend Feed */,
-				463B9BF215A0F90B0087CDBA /* Detail Page */,
 				4668A7A01593F98600713A4C /* Images */,
 				4668A7981593F85500713A4C /* Model */,
 				4668A7911593F72600713A4C /* Explore */,
@@ -617,6 +616,7 @@
 		4668A7911593F72600713A4C /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				463B9BF215A0F90B0087CDBA /* Detail Page */,
 				0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */,
 				0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */,
 				463B9BE7159FC08D0087CDBA /* ExploreViewController.h */,
