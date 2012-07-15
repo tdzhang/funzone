@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (nonatomic,strong) NSMutableData *data;
+@property (nonatomic,strong) NSString *event_id;
+@property (nonatomic,strong) NSString *shared_event_id;
+
 
 @end
 
@@ -38,6 +41,8 @@
 @synthesize eventIntroLabel;
 @synthesize myScrollView;
 @synthesize data=_data;
+@synthesize event_id=_event_id;
+@synthesize shared_event_id=_shared_event_id;
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -78,7 +83,7 @@
     [self.myScrollView setContentSize:CGSizeMake(320, 500)];
     
     //start a new connection, to fetch data from the server (about event detail)
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=3&shared_event_id=1"];
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=%@&shared_event_id=%@",self.event_id,self.shared_event_id];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -88,6 +93,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - self defined method
+-(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id{
+    self.event_id = event_id;
+    self.shared_event_id = shared_event_id;
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -118,10 +129,14 @@
     //after reget the newest 10 popular event, the next page that need to be retrait is page 2
 
 
-        NSString *title=[event objectForKey:@"title"];
-        NSString *description=[event objectForKey:@"description"];
-        NSString *photo=[event objectForKey:@"photo_url"];
-        NSString *time=[event objectForKey:@"time"];
+    NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
+    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
+    NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
+    NSString *time=[event objectForKey:@"time"] !=[NSNull null]?[event objectForKey:@"time"]:@"some time";
+    NSLog(@"%@",title);
+    NSLog(@"%@",description);
+    NSLog(@"%@",photo);
+    NSLog(@"%@",time);
        // NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
         //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
         NSString *locationName=[event objectForKey:@"location"];

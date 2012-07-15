@@ -20,6 +20,8 @@
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
 @property (nonatomic) int refresh_page_num;
+@property (nonatomic,strong) NSString *tapped_event_id;
+@property (nonatomic,strong) NSString *tapped_shared_event_id;
 @end
 
 @implementation ExploreViewController
@@ -31,6 +33,8 @@
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize refresh_page_num=_refresh_page_num;
+@synthesize tapped_event_id=_tapped_event_id;
+@synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
 #define VIEW_WIDTH 320
 #define View_HEIGHT 367
@@ -234,6 +238,8 @@
             NSString *photo=[event objectForKey:@"photo_url"];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+            NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             //NSLog(@"%@",title);
             //NSLog(@"%@",photo);
             //NSLog(@"%@",description);
@@ -259,7 +265,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
@@ -274,7 +280,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -286,7 +292,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
@@ -312,6 +318,8 @@
             NSString *photo=[event objectForKey:@"photo_url"];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+            NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             
             if (!title) {
                 continue;
@@ -333,7 +341,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -348,7 +356,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -360,7 +368,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
@@ -371,7 +379,14 @@
     }
     
 }
-
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"ViewEventDetail"]) {
+        //if it's the segue to the view detail part, do this:
+        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
+    }
+}
 
 #pragma mark - Gesture handler
 
@@ -382,7 +397,9 @@
     //get the index of the touched block view
     int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
     NSLog(@"%d",index);
-    
+    ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
+    self.tapped_event_id=tapped_element.event_id;
+    self.tapped_shared_event_id=tapped_element.shared_event_id;
     //do some pre-segue stuff with event_id and shared_id
     [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
     

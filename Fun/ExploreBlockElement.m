@@ -20,7 +20,7 @@
 @synthesize favorImageView=_favorImageView;
 @synthesize favorLabel=_favorLabel;
 @synthesize event_id=_event_id;
-@synthesize shared_id=_shared_id;
+@synthesize shared_event_id=_shared_event_id;
 
 
 #define VIEW_WIDTH 320
@@ -52,7 +52,7 @@
     self.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
 }
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label{
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id{
 
     //get the backgroud image from the cache
     UIImage *backGroundImage = nil;
@@ -117,6 +117,10 @@
     blockElement.favorLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
     blockElement.favorLabel.font = [UIFont boldSystemFontOfSize:13.0];
     [blockElement.blockView addSubview:blockElement.favorLabel];
+    
+    //set the event_id and shared_event_id
+    blockElement.event_id=event_id;
+    blockElement.shared_event_id=shared_event_id;
     //return the already initialized ExploreBlcokElement
     return  blockElement;
 }

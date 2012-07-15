@@ -21,12 +21,12 @@
 @property(nonatomic,strong) UIImageView *favorImageView;
 @property(nonatomic,strong) UILabel *favorLabel;
 @property(nonatomic,strong) NSString *event_id;
-@property(nonatomic,strong) NSString *shared_id;
+@property(nonatomic,strong) NSString *shared_event_id;
 
 //used to reset the fram information
 -(void) resetFramWith:(CGFloat)position_y;
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label;
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id;
 @end
 
 
