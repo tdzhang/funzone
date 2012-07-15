@@ -379,11 +379,11 @@
 		0F128556159EB1D700430859 /* chooseLocation */ = {
 			isa = PBXGroup;
 			children = (
+				0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */,
+				0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */,
+				0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */,
 				0F128554159EB1D400430859 /* MapViewController.h */,
 				0F128555159EB1D400430859 /* MapViewController.m */,
-				0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */,
-				0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */,
-				0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */,
 				0F128549159EB14200430859 /* model class */,
 			);
 			name = chooseLocation;

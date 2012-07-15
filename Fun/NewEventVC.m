@@ -51,6 +51,7 @@
 @property (nonatomic,strong) NSDictionary *facebookFriendsGoOutWith; //the infomation of the facebook firends that user choose to go with
 @property (nonatomic,strong) NSString *currentFacebookConnect;
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
+ 
 
 //these property used to send back to server when create a event(image, title, location)
 @property (nonatomic,strong) UIImage *createEvent_image;
@@ -96,6 +97,7 @@
 @synthesize facebookFriendsGoOutWith=_facebookFriendsGoOutWith;
 @synthesize currentFacebookConnect=_currentFacebookConnect;
 @synthesize eventType=_eventType;
+@synthesize predefinedAnnotation=_predefinedAnnotation;
 
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -361,7 +363,7 @@
             else {
                 [mapViewC setPredefinedSeachingWords:@""];
             }
-            
+            mapViewC.predefinedAnnotation=self.predefinedAnnotation;
         }
     }
     else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){
@@ -962,6 +964,7 @@
 //implement the method for dealing with the return of the alertView
 -(void)UpdateLocation:(MKAnnotationView *)aView withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=aView.annotation;
+    self.predefinedAnnotation=annotation;
     NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
     //show the map snapshot
     //[self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];

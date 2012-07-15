@@ -29,6 +29,7 @@
 @synthesize foursquareSearchResults=_foursquareSearchResults;
 @synthesize data=_data;
 @synthesize tableViewControllerContainMap=_tableViewControllerContainMap;
+@synthesize predefinedAnnotation=_predefinedAnnotation;
 
 #pragma mark - self define setting and getting method
 -(TableViewContainMapviewTVC *)tableViewControllerContainMap{
@@ -173,6 +174,26 @@
         }
         
     }
+    
+    //if the predefined annotation, then show it (instead of current location)
+    if(self.predefinedAnnotation){
+        MKPointAnnotation *annotation=self.predefinedAnnotation;
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
+        span.longitudeDelta = DEFAULT_ZOOMING_SPAN_LONGITUDE;
+        self.currentZOOMVALUE=[NSNumber numberWithDouble:DEFAULT_ZOOMING_SPAN_LONGITUDE];
+
+        region.span=span;
+        region.center=annotation.coordinate;
+        [mapView setRegion:region animated:YES];
+        // add annotation at the point User pressed
+        self.annotation=annotation;
+        [self.myMapView addAnnotation:annotation];
+    }
+
+    
+    
 }
 
 
