@@ -18,6 +18,7 @@
 #import "ChooseFacebookFriendsToGoTableViewControllerViewController.h"
 #import "MovieAotoCompletionVC.h"
 #import "ASIFormDataRequest.h"
+#import "Cache.h"
 
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,FeedBackToFaceBookFriendToGoChange,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,FBRequestDelegate,movieInfoReturn>
 

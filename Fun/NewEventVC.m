@@ -33,7 +33,7 @@
 @property (nonatomic,strong) UIButton* buttonFacebookShare;
 @property (nonatomic) BOOL showNewButtonFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *uIImageViewEvent;
-@property (weak, nonatomic) IBOutlet UITextView *textViewEventDescription;
+@property (weak, nonatomic) IBOutlet UITextField *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventLocation;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTime;
@@ -42,15 +42,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTime;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
-@property (weak, nonatomic) IBOutlet UITextField *textFieldEventTitle;
+@property (weak, nonatomic) IBOutlet UITextView *textFieldEventTitle;
 //@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
 //@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
 @property (weak, nonatomic) IBOutlet UITextView *uITextViewPersonalMsg;
+@property (weak, nonatomic) IBOutlet UILabel *labelEventTitleHolder;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *facebookFriendsGoOutWith; //the infomation of the facebook firends that user choose to go with
 @property (nonatomic,strong) NSString *currentFacebookConnect;
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
+@property (weak, nonatomic) IBOutlet UIImageView *personProfileImage;
  
 
 //these property used to send back to server when create a event(image, title, location)
@@ -74,6 +76,7 @@
 
 @implementation NewEventVC
 @synthesize eventPeopleInfo = _eventPeopleInfo;
+@synthesize personProfileImage = _personProfileImage;
 @synthesize imgPicker=_imgPicker;
 @synthesize buttonEmailShare=_buttonEmailShare;
 @synthesize buttonTwitterShare=_buttonTwitterShare;
@@ -93,6 +96,7 @@
 //@synthesize textFieldEventPrice = _textFieldEventPrice;
 //@synthesize labelChoosePhoto = _labelChoosePhoto;
 @synthesize uITextViewPersonalMsg = _uITextViewPersonalMsg;
+@synthesize labelEventTitleHolder = _labelEventTitleHolder;
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize facebookFriendsGoOutWith=_facebookFriendsGoOutWith;
 @synthesize currentFacebookConnect=_currentFacebookConnect;
@@ -189,11 +193,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //set the title textfield uneditable  if it is for the movie
-    if([self.eventType isEqualToString:@"movie"]){
-        self.textFieldEventTitle.enabled = NO;
-    }
-    
+ 
     //initiate the config of the EventShare To Friends Function part
     //clean the possible remain button (when went back from segue)
     if(self.buttonEmailShare){
@@ -254,6 +254,22 @@
             [funAppdelegate.facebook authorize:permissions];
         }
     }
+    
+    
+    //get the photo of the user 
+    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    [params setObject:@"picture" forKey:@"fields"];
+    if ([delegate.facebook isSessionValid]) {
+        self.currentFacebookConnect=@"get user photo";
+        [delegate.facebook requestWithGraphPath:@"me" 
+                                      andParams:params 
+                                  andHttpMethod:@"GET" 
+                                    andDelegate:self];
+    }
+    else {
+        NSLog(@"Face book session invalid~~~");
+    }
 }
 
 - (void)viewDidLoad:(BOOL)animated {
@@ -279,6 +295,8 @@
     [self setLabelEventTime:nil];
     [self setEventPeopleInfo:nil];
     [self setUITextViewPersonalMsg:nil];
+    [self setLabelEventTitleHolder:nil];
+    [self setPersonProfileImage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -401,11 +419,11 @@
     [pop showFromTabBar:self.tabBarController.tabBar];
     */
     if([self.eventType isEqualToString:@"movie"]){
-        [self.textFieldEventTitle setEnabled:NO];
         [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
     }
     else {
         [self.textFieldEventTitle becomeFirstResponder];
+        [self.labelEventTitleHolder setHidden:YES];
     }
 }
 /*
@@ -574,7 +592,6 @@
         [UIView commitAnimations];
         self.showNewButtonFlag=NO;
     }
-
 }
 
 //Email Share Button handler
@@ -627,8 +644,8 @@
             
         }
     }
-
 }
+
 -(void)useEmailToShare:(id)sender{
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
@@ -753,7 +770,51 @@
         NSLog(@"%@",result);
         self.currentFacebookConnect=nil;
     }
-    
+    else if([self.currentFacebookConnect isEqualToString:@"get user photo"]){
+        NSLog(@"%@",result);
+        NSString *photo=[result objectForKey:@"picture"];
+        self.currentFacebookConnect = nil;
+        //set the user photo
+        NSURL *url=[NSURL URLWithString:photo];
+        if (![Cache isURLCached:url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    imageData=UIImagePNGRepresentation(image);
+                    
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [self.personProfileImage setImage:image];
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [self.personProfileImage setImage:[UIImage imageWithData:imageData ]];
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [self.personProfileImage setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+            }); 
+        }
+
+    }
 }
 
 
@@ -779,6 +840,8 @@
 ////////////////////////////////////////////////
 //implement the UIImagePickerControllerDelegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleToFill];
+    [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -787,6 +850,8 @@
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
 -(void)ChooseUIImage:(UIImage *)image From:(ChooseImageTableViewController *)sender{
+    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleToFill];
+    [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -826,12 +891,17 @@
 
 //deal with when user pressed the "done" button
 - (void)leaveEditMode {  
-    [self.uITextViewPersonalMsg resignFirstResponder];  
+    NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if ([enteredText length]==0) {
+        [self.labelEventTitleHolder setHidden:NO];
+    }
+    [self.textFieldEventTitle resignFirstResponder];  
 }
 //To compensate for the showing up keyboard
 - (void) animateTextView: (UITextView*) textView up: (BOOL) up
 {
-    const int movementDistance = 120; // tweak as needed
+    const int movementDistance = 20; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);
@@ -972,6 +1042,7 @@
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
+    [self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
 }

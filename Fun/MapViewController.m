@@ -643,8 +643,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
         MKCoordinateRegion region;
         region.center = annotationPoint.coordinate;
         MKCoordinateSpan span;
-        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*2;
-        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*2;
+        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*1;
+        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*1;
         region.span = span;
         [self.myMapView setRegion:region animated:NO];
         
@@ -660,7 +660,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         NSLog(@"height:%f",image.size.height);
         NSLog(@"width:%f",image.size.width);
         CGPoint center=CGPointMake(image.size.width/2, image.size.height/2);
-        CGFloat length=40;
+        CGFloat length=80;
         CGRect cropRect=CGRectMake(center.x-length, center.y-length, 2*length, 2*length);
         CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
         image = [UIImage imageWithCGImage:imageRef]; 
