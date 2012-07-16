@@ -79,6 +79,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
+    
     
     [self.myScrollView setContentSize:CGSizeMake(320, 500)];
     

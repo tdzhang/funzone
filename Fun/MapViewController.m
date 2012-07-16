@@ -402,7 +402,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         //Searching the key word
         double lat=userCoordinate.latitude;
         double lng=userCoordinate.longitude;
-        NSString *request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=30000&keyword=%@&sensor=false&key=%@",lat,lng,keyWords,oauthToken];
+        NSString *request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=50000&keyword=%@&sensor=false&key=%@",lat,lng,keyWords,oauthToken];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
