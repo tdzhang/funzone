@@ -364,7 +364,8 @@
     }
     return cell;
 }
-#define GOOGLE_API_TOKEN @"AIzaSyD9BEsxqFhS9ckAnUS8KCO7qyjee4I5LRA"
+#define GOOGLE_API_TOKEN1 @"AIzaSyD9BEsxqFhS9ckAnUS8KCO7qyjee4I5LRA"
+#define GOOGLE_API_TOKEN2 @"AIzaSyBtrzBUsPtnJrd7TsavS6WtyKetRWR_9lM"
 #define OAUTH_TOKEN1 @"ZH04LVGZECDJMXXQ4D1BHJXHBI1RIYNRMUTYKM3VSGZVMDAN"
 #define OAUTH_TOKEN2 @"ICJ4PDXPC4QR2HTT4REDDOUN5KYWJMM510ZPK0WWQDEI0CZX"
 #define OAUTH_TOKEN3 @"XK02KZWHY0QUYRAIX4550UJ2FR12ZZGKKX3UXE4HX0LUOKVI"
@@ -381,7 +382,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
     
     //using google api to do the search
-    NSString* oauthToken=GOOGLE_API_TOKEN;
+    NSString* oauthToken;
+    switch (arc4random() % 2) {
+        case 0:oauthToken=GOOGLE_API_TOKEN1;break;
+        case 1:oauthToken=GOOGLE_API_TOKEN2;break;
+        default:oauthToken=GOOGLE_API_TOKEN1;break;
+    }
     NSString *keyWords=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     //get User current Location
     CLLocation *userLoc = self.myMapView.userLocation.location;
