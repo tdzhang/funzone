@@ -7,6 +7,7 @@
 // 用于存储由foursquare得到的地点信息的类
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface FourSquarePlace : NSObject
 @property(nonatomic,strong) NSString *name;
@@ -21,7 +22,7 @@
 @property(nonatomic,strong) NSString *state;
 @property(nonatomic,strong) NSString *country;
 @property(nonatomic,strong) NSString *categories_shortName;
-
++(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue;
 - (NSComparisonResult)compare:(FourSquarePlace *)otherObject;
 @end

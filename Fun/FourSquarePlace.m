@@ -22,6 +22,43 @@
 @synthesize country=_country;
 @synthesize categories_shortName=_categories_shortName;
 
++(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate{
+    FourSquarePlace *place=[[FourSquarePlace alloc] init];
+    
+    //name
+    NSString *name=[venue objectForKey:@"name"];
+    place.name=name;
+    
+    //location information
+    NSDictionary *location = [[venue objectForKey:@"geometry"] objectForKey:@"location"];
+    NSNumber *latitude = [location objectForKey:@"lat"];
+    NSNumber *longitude = [location objectForKey:@"lng"];
+    place.latitude=latitude;
+    place.longitude=longitude;
+    NSString *crossStreet=[venue objectForKey:@"vicinity"];
+    place.crossStreet=crossStreet;
+    
+    //type
+    NSArray *categories=[venue objectForKey:@"types"];
+    int i=[categories count];
+    NSLog(@"%d",i);
+    if ([categories count]>0) {
+        NSString *categories_shortName = [categories objectAtIndex:0];
+        place.categories_shortName=categories_shortName;
+    }
+    
+    //calculate the distance
+    CLLocationCoordinate2D destination;
+    destination.latitude=[place.latitude doubleValue];
+    destination.longitude=[place.longitude doubleValue];
+    MKMapPoint p1 = MKMapPointForCoordinate(userCoordinate);
+    MKMapPoint p2 = MKMapPointForCoordinate(destination);
+    CLLocationDistance dist = MKMetersBetweenMapPoints(p1, p2);
+    place.distance=[NSNumber numberWithFloat:dist];
+    
+    return place;
+}
+
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue{
     FourSquarePlace *place=[[FourSquarePlace alloc] init];
     
