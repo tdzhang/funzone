@@ -30,7 +30,6 @@
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
-		0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */; };
 		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
 		0FCD2BED15A167F10004136E /* ImageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEA15A167F10004136E /* ImageTableCell.xib */; };
 		0FCD2BEE15A167F10004136E /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD2BEC15A167F10004136E /* ImageTableViewCell.m */; };
@@ -49,6 +48,7 @@
 		0FD0BB5A15AFAFF500357ADE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5915AFAFF500357ADE /* libz.dylib */; };
 		0FD0BB5C15B0E8B000357ADE /* FreshBigArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */; };
 		0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3515B49F4D000D68C3 /* 86-camera.png */; };
+		0FF00A3915B4DFA0000D68C3 /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3815B4DFA0000D68C3 /* AddEventControllerSnapShot.png */; };
 		463869E415962CE900E3A699 /* profile1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 463869E315962CE900E3A699 /* profile1.jpg */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
@@ -164,7 +164,6 @@
 		0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookContactObject.m; sourceTree = "<group>"; };
 		0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFacebookFriendsToGoTableViewControllerViewController.h; sourceTree = "<group>"; };
 		0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseFacebookFriendsToGoTableViewControllerViewController.m; sourceTree = "<group>"; };
-		0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0FC91A2E15A3727800EB3E9A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0FCD2BEA15A167F10004136E /* ImageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableCell.xib; sourceTree = "<group>"; };
 		0FCD2BEB15A167F10004136E /* ImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewCell.h; sourceTree = "<group>"; };
@@ -197,6 +196,7 @@
 		0FD0BB5915AFAFF500357ADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrowDown.png; sourceTree = "<group>"; };
 		0FF00A3515B49F4D000D68C3 /* 86-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "86-camera.png"; sourceTree = "<group>"; };
+		0FF00A3815B4DFA0000D68C3 /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		463869E315962CE900E3A699 /* profile1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile1.jpg; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
@@ -641,10 +641,10 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FF00A3815B4DFA0000D68C3 /* AddEventControllerSnapShot.png */,
 				0FF00A3515B49F4D000D68C3 /* 86-camera.png */,
 				0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */,
 				0F07F27615ADF11200BF41CF /* FreshBigArrow.png */,
-				0FC6FF7D15AC143500CC022C /* AddEventControllerSnapShot.png */,
 				923D003215AA274000A0818D /* subtle-pattern-1.jpg */,
 				46550E9815A8FD4B008FF360 /* Category-Entertainment.png */,
 				46550E9915A8FD4B008FF360 /* Category-Events.png */,
@@ -841,11 +841,11 @@
 				923D003C15AA464D00A0818D /* subtle-pattern-2.jpg in Resources */,
 				923D005215AA642400A0818D /* form.png in Resources */,
 				923D005415AA6C2B00A0818D /* seperator.png in Resources */,
-				0FC6FF7E15AC143500CC022C /* AddEventControllerSnapShot.png in Resources */,
 				0F07F27715ADF11200BF41CF /* FreshBigArrow.png in Resources */,
 				0F07F27F15AE26F500BF41CF /* movieAutoCompleteCell.xib in Resources */,
 				0FD0BB5C15B0E8B000357ADE /* FreshBigArrowDown.png in Resources */,
 				0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */,
+				0FF00A3915B4DFA0000D68C3 /* AddEventControllerSnapShot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
