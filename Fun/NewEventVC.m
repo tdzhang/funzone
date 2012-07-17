@@ -714,10 +714,80 @@
 
     [self performSelector:@selector(emailSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
+/*
+{
+    if ([TWTweetComposeViewController canSendTweet])
+    {
+        TWTweetComposeViewController *tweetSheet = 
+        [[TWTweetComposeViewController alloc] init];
+        [tweetSheet setInitialText:
+         @"Tweeting from iOS 5 By Tutorials! :)"];
+	    [self presentModalViewController:tweetSheet animated:YES];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Sorry"                                                             
+                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"                                                          
+                                  delegate:self                                              
+                                  cancelButtonTitle:@"OK"                                                   
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+ */
+-(void)twitterSelector:(id)sender{
+    //clean the screen of all the potential option buttons
+    [self.buttonEmailShare.layer removeAllAnimations];
+    [self.buttonTwitterShare.layer removeAllAnimations];
+    [self.buttonFacebookShare.layer removeAllAnimations];
+    [self.buttonEmailShare setHidden:YES];
+    [self.buttonTwitterShare setHidden:YES];
+    [self.buttonFacebookShare setHidden:YES];
+    
+    //compose the twitter
+    if ([TWTweetComposeViewController canSendTweet])
+    {
+        TWTweetComposeViewController *tweetSheet = 
+        [[TWTweetComposeViewController alloc] init];
+        
+        //get the event information from all the selection
+        NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+        NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+        NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+        
+        
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n %@ Cheers~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text]];
+        if (self.uIImageViewEvent.image) {
+            [tweetSheet addImage:self.uIImageViewEvent.image];
+        }
+	    [self presentModalViewController:tweetSheet animated:YES];
+        
+        
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Sorry"                                                             
+                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"                                                          
+                                  delegate:self                                              
+                                  cancelButtonTitle:@"OK"                                                   
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }      
+}
 
 //Twitter Share Button handler
 -(void)useTwitterToShare:(id)sender{
-    //to do sth here
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
+    //sender.frame = CGRectMake(100.0, 210.0, 160.0, 40.0);
+    [self.buttonTwitterShare setTransform:CGAffineTransformMakeScale(40, 40)];
+    [sender setAlpha:0];
+    [UIView commitAnimations];
+    
+    [self performSelector:@selector(twitterSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
 
 //Facebook Share Button handler
