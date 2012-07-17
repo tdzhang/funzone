@@ -591,7 +591,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 //when the user location update happen
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    [self showUserCurrentLocation];
+    if (!self.predefinedAnnotation) {
+        [self showUserCurrentLocation];
+    }
+    
     
     //if have predefined seaching words, search it
     if (self.predefinedSeachingWords) {
@@ -651,7 +654,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
         
         
         //do the snapshot of the map view
-        UIGraphicsBeginImageContext(mapView.frame.size);
+        UIGraphicsBeginImageContextWithOptions(mapView.frame.size, NO, 1.0);
+        //UIGraphicsBeginImageContext(mapView.frame.size);
         [mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext(); 
@@ -660,7 +664,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         NSLog(@"height:%f",image.size.height);
         NSLog(@"width:%f",image.size.width);
         CGPoint center=CGPointMake(image.size.width/2, image.size.height/2);
-        CGFloat length=80;
+        CGFloat length=100;
         CGRect cropRect=CGRectMake(center.x-length, center.y-length, 2*length, 2*length);
         CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
         image = [UIImage imageWithCGImage:imageRef]; 
