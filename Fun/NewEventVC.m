@@ -322,6 +322,8 @@
         [self.labelEventTitleHolder setHidden:YES];
         [self.locationLabel setText:self.detail_location_name];
         [self.uIImageViewEvent setImage:self.detail_image];
+        [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
+        [self.uIImageViewEvent clipsToBounds];
     }
     
 }
