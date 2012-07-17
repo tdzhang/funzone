@@ -756,14 +756,13 @@
         NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
         NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
         
-        
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n %@ Cheers~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text]];
+        NSString *sendMsg=[NSString stringWithFormat:@"Hi All, I want to %@ time: %@ location %@ ",eventName,eventTime,eventLocation];
+        NSLog(@"%@",sendMsg);
+        [tweetSheet setInitialText:[NSString stringWithFormat:sendMsg]];
         if (self.uIImageViewEvent.image) {
             [tweetSheet addImage:self.uIImageViewEvent.image];
         }
 	    [self presentModalViewController:tweetSheet animated:YES];
-        
-        
     }
     else
     {
