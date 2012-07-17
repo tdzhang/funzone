@@ -55,6 +55,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *personProfileImage;
 @property (weak, nonatomic) IBOutlet UIImageView *mapViewFeedBackImageView;
  
+//from detail View controller
+@property (nonatomic,strong) NSString *detail_event_id;
+@property (nonatomic,strong) NSString *detail_shared_event_id;
+@property (nonatomic,strong) NSString *detail_event_title;
+@property (nonatomic,strong) NSString *detail_event_time;
+@property (nonatomic,strong) NSString *detail_location_name;
+@property (nonatomic,strong) NSNumber *detail_longitude;
+@property (nonatomic,strong) NSNumber *detail_latitude;
+@property (nonatomic,strong) NSString *detail_description;
+@property (nonatomic,strong) UIImage *detail_image;
 
 //these property used to send back to server when create a event(image, title, location)
 @property (nonatomic,strong) UIImage *createEvent_image;
@@ -103,6 +113,17 @@
 @synthesize currentFacebookConnect=_currentFacebookConnect;
 @synthesize eventType=_eventType;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
+
+//from detail View controller
+@synthesize detail_event_id=_detail_event_id;
+@synthesize detail_shared_event_id=_detail_shared_event_id;
+@synthesize detail_event_title=_detail_event_title;
+@synthesize detail_event_time=_detail_event_time;
+@synthesize detail_location_name=_detail_location_name;
+@synthesize detail_longitude=_detail_longitude;
+@synthesize detail_latitude=_detail_latitude;
+@synthesize detail_description=_detail_description;
+@synthesize detail_image=_detail_image;
 
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -189,6 +210,29 @@
     return _facebookFriendsGoOutWith;	
 }
 
+#pragma mark - self defined
+-(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
+    self.detail_event_id=event_id;
+    self.detail_shared_event_id=shared_event_id;
+    self.detail_event_title=event_title;
+    self.detail_event_time=event_time;
+    self.detail_location_name=location_name;
+    NSLog(@"%@",location_name);
+    self.detail_longitude=longitude;
+    NSLog(@"%@",longitude);
+    self.detail_latitude=latitude;
+    NSLog(@"%@",latitude);
+    self.detail_description=description;
+    self.detail_image=[event_image copy];
+    
+    if (![[NSString stringWithFormat:@"%@",longitude] isEqualToString:@"<null>"] && ![[NSString stringWithFormat:@"%@",latitude] isEqualToString:@"<null>"]) {
+        MKPointAnnotation *annotation=[[MKPointAnnotation alloc] init];
+        [annotation setCoordinate:CLLocationCoordinate2DMake([latitude floatValue], [longitude floatValue])];
+        [annotation setTitle:location_name];
+        self.predefinedAnnotation = annotation;
+    }
+}
+
 
 #pragma mark - View lifecycle
 -(void)viewWillAppear:(BOOL)animated{
@@ -271,6 +315,15 @@
     else {
         NSLog(@"Face book session invalid~~~");
     }
+    
+    if(self.detail_event_id){
+        [self.textFieldEventTitle setText:self.detail_event_title];
+        [self.labelEventTime setText:self.detail_event_time];
+        [self.labelEventTitleHolder setHidden:YES];
+        [self.locationLabel setText:self.detail_location_name];
+        [self.uIImageViewEvent setImage:self.detail_image];
+    }
+    
 }
 
 - (void)viewDidLoad:(BOOL)animated {

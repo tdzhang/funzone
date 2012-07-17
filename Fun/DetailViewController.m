@@ -22,9 +22,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (nonatomic,strong) NSMutableData *data;
+
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
-
+@property (nonatomic,strong) NSString *event_title;
+@property (nonatomic,strong) NSString *event_time;
+@property (nonatomic,strong) NSString *location_name;
+@property (nonatomic,strong) NSNumber *longitude;
+@property (nonatomic,strong) NSNumber *latitude;
+@property (nonatomic,strong) NSString *description;
 
 @end
 
@@ -43,6 +49,12 @@
 @synthesize data=_data;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
+@synthesize event_title=_event_title;
+@synthesize event_time=_event_time;
+@synthesize location_name=_location_name;
+@synthesize longitude=_longitude;
+@synthesize latitude=_latitude;
+@synthesize description=_description;
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -103,6 +115,16 @@
     self.shared_event_id = shared_event_id;
 }
 
+
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"repin to create new event"]) {
+        NewEventVC *newEventVC = segue.destinationViewController;
+        [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name longitude:self.longitude latitude:self.latitude description:self.description];
+    }
+}
+
+
 #pragma mark - implement NSURLconnection delegate methods 
 //to deal with the returned data
 
@@ -149,12 +171,13 @@
             return;
         }
         
-        [self.eventTitleLabel setText:title];
-        [self.eventLocationLabel setText:locationName];
-        [self.eventTimeLabel setText:time];
-        [self.eventIntroLabel setText:description];
-        
-        
+    self.event_title=title;
+    self.event_time=time;
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";;
+    self.longitude=[event objectForKey:@"longitude"];
+    self.latitude=[event objectForKey:@"latitude"];
+    self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
+    
         //NSLog(@"%@",title);
         //NSLog(@"%@",photo);
         //NSLog(@"%@",description);
