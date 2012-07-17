@@ -17,7 +17,7 @@
 @property (nonatomic,retain) DetailViewController *detailViewController;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
-@property (nonatomic,retain) UIImageView *refreshViewdown;
+@property (nonatomic,retain) UIView *refreshViewdown;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
 @property (nonatomic) int refresh_page_num;
@@ -82,7 +82,6 @@
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
     [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
-    
 }
 
 - (void)viewDidLoad {
@@ -180,7 +179,7 @@
             [subview removeFromSuperview];
         }
         
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]+1),VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
@@ -193,7 +192,10 @@
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         spinning.frame =CGRectMake(120,80,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        [self.refreshView addSubview:loading];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        [self.refreshViewdown removeFromSuperview];
+        [self.refreshViewdown addSubview:loading];
+        [self.mainScrollView addSubview:self.refreshViewdown];
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
@@ -332,7 +334,7 @@
         if ([json count]==0) {
             //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
             self.refresh_page_num--;
-            
+            [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
         }
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
@@ -397,7 +399,8 @@
             }
             
         }
-
+        
+        [self.refreshViewdown removeFromSuperview];
     }
     
 }
