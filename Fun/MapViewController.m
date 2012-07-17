@@ -654,22 +654,23 @@ shouldReloadTableForSearchString:(NSString *)searchString
         
         
         //do the snapshot of the map view
-        UIGraphicsBeginImageContextWithOptions(mapView.frame.size, NO, 1.0);
+        UIGraphicsBeginImageContextWithOptions(mapView.frame.size, NO, 0.0);
         //UIGraphicsBeginImageContext(mapView.frame.size);
         [mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext(); 
         
         //then crop the snapshot
+        /*
         NSLog(@"height:%f",image.size.height);
         NSLog(@"width:%f",image.size.width);
         CGPoint center=CGPointMake(image.size.width/2, image.size.height/2);
-        CGFloat length=100;
+        CGFloat length=80;
         CGRect cropRect=CGRectMake(center.x-length, center.y-length, 2*length, 2*length);
         CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
         image = [UIImage imageWithCGImage:imageRef]; 
         CGImageRelease(imageRef);
-        
+        */
         //run the delegate method to feedback
         if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
             [self.delegate UpdateLocation:view withSnapShot:image sendFrom:self];

@@ -3296,10 +3296,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="210" y="217" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="form.png" id="T8Q-TO-MQu">
-                                        <rect key="frame" x="0.0" y="-1" width="100" height="100"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="mw1-5B-lbQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="97"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="07-map-marker.png" id="9cJ-fk-riH">
                                         <rect key="frame" x="43" y="24" width="14" height="23"/>
@@ -3314,6 +3314,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="form.png" id="T8Q-TO-MQu">
+                                        <rect key="frame" x="0.0" y="-1" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Y3c-5v-GEm">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3486,6 +3491,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
                         <outlet property="locationLabel" destination="WTA-La-v0G" id="pJr-yY-eJ9"/>
+                        <outlet property="mapViewFeedBackImageView" destination="T8Q-TO-MQu" id="B8f-ny-Lz4"/>
                         <outlet property="personProfileImage" destination="EUZ-07-DTq" id="iJG-dI-wSa"/>
                         <outlet property="textFieldEventTitle" destination="qFW-r8-Jhk" id="MwG-wR-9gG"/>
                         <outlet property="uIImageViewEvent" destination="Tq0-qs-KA0" id="rp9-uI-7PK"/>
@@ -3619,6 +3625,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextField"/>

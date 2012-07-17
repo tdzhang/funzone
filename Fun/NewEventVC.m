@@ -53,6 +53,7 @@
 @property (nonatomic,strong) NSString *currentFacebookConnect;
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 @property (weak, nonatomic) IBOutlet UIImageView *personProfileImage;
+@property (weak, nonatomic) IBOutlet UIImageView *mapViewFeedBackImageView;
  
 
 //these property used to send back to server when create a event(image, title, location)
@@ -109,7 +110,7 @@
 @synthesize createEvent_longitude=_createEvent_longitude;
 @synthesize createEvent_locationName=_createEvent_locationName;
 @synthesize createEvent_time=_createEvent_time;
-
+@synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
@@ -297,6 +298,7 @@
     [self setUITextViewPersonalMsg:nil];
     [self setLabelEventTitleHolder:nil];
     [self setPersonProfileImage:nil];
+    [self setMapViewFeedBackImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -1042,7 +1044,9 @@
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
-    [self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
+    [self.mapViewFeedBackImageView setImage:image];
+    [self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.mapViewFeedBackImageView setHidden:NO];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
 }
