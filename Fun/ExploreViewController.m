@@ -38,9 +38,9 @@
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
-#define VIEW_WIDTH 320
-#define View_HEIGHT 367
-#define BlOCK_VIEW_HEIGHT 168 
+#define VIEW_WIDTH 300
+#define VIEW_HEIGHT 125
+#define BlOCK_VIEW_HEIGHT 140
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -134,14 +134,14 @@
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/3) {
         //remove the main views
         for (UIView *view in [self.mainScrollView subviews]) {
-            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
+            [view setFrame:CGRectMake(10, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT);
         }
         [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
         NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+        [self.refreshView setFrame:CGRectMake(10, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
@@ -179,7 +179,7 @@
             [subview removeFromSuperview];
         }
         
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
@@ -272,6 +272,9 @@
             if (!title) {
                 continue;
             }
+            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
+                continue;
+            }
             NSURL *url=[NSURL URLWithString:photo];
             if (![Cache isURLCached:url]) {
                 //using high priority queue to fetch the image
@@ -346,6 +349,9 @@
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             
             if (!title) {
+                continue;
+            }
+            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];

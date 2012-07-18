@@ -23,26 +23,32 @@
 @synthesize shared_event_id=_shared_event_id;
 
 
-#define VIEW_WIDTH 320
-#define VIEW_HEIGHT 158 
+#define VIEW_WIDTH 300
+#define VIEW_HEIGHT 125 
 
-#define THUMB_X 10
-#define THUMB_Y 4
-#define THUMB_SIZE 50
+#define THUMB_X 8
+#define THUMB_Y 9
+#define THUMB_SIZE 37
 
-#define BACKGROUND_Y 25
-#define BACKGROUND_HEIGHT 137
+#define BACKGROUND_Y 51
+#define BACKGROUND_HEIGHT 74
 
-#define TITLE_X 60
-#define TITLE_Y 16
-#define TITLE_WIDTH 260
-#define TITLE_HEIGHT 36
+#define TITLE_X 0
+#define TITLE_Y 0
+#define TITLE_WIDTH 300
+#define TITLE_HEIGHT 53
 #define TITLE_TEXT_OFFSET 8
+
+#define TITLE_TEXT_X 58
+#define TITLE_TEXT_Y 7 
+#define TITLE_TEXT_WIDTH 227
+#define TITLE_TEXT_HEIGHT 24
+
 
 #define ICON_SIZE 20
 #define JOIN_X 13
-#define FAVOR_X 263
-#define ICON_Y 130
+#define FAVOR_X 230
+#define ICON_Y 100
 
 #define LABEL_WIDTH 24
 #define JOIN_LABEL_X 40
@@ -66,7 +72,7 @@
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(10,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
@@ -79,21 +85,24 @@
     [blockElement.backGroundImageView setClipsToBounds:YES];
     
     [blockElement.blockView addSubview:blockElement.backGroundImageView];
+    
+    //Title View
+    blockElement.titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT)];
+    blockElement.titleView.backgroundColor = [UIColor colorWithRed:0.3 green:1 blue:0.8 alpha:1.0];
+    [blockElement.blockView addSubview:blockElement.titleView];
+    
+    //Title Label
+    blockElement.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_TEXT_X, TITLE_TEXT_Y, TITLE_TEXT_WIDTH, TITLE_TEXT_HEIGHT)];
+    blockElement.titleLabel.text = title;
+    blockElement.titleLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    blockElement.titleLabel.textColor = [UIColor blackColor];
+    blockElement.titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
+    [blockElement.titleView addSubview:blockElement.titleLabel];
+    
     //Thumbnail Image
     blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y, THUMB_SIZE, THUMB_SIZE)];
     blockElement.thumbNailImageView.image=[backGroundImage copy];
     [blockElement.blockView addSubview:blockElement.thumbNailImageView];
-    //Title View
-    blockElement.titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT)];
-    blockElement.titleView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.56];
-    [blockElement.blockView addSubview:blockElement.titleView];
-    //Title Label
-    blockElement.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_TEXT_OFFSET, 0, TITLE_WIDTH-2*TITLE_TEXT_OFFSET, TITLE_HEIGHT)];
-    blockElement.titleLabel.text = title;
-    blockElement.titleLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    blockElement.titleLabel.textColor = [UIColor whiteColor];
-    blockElement.titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
-    [blockElement.titleView addSubview:blockElement.titleLabel];
     //Joined Image
     blockElement.joinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(JOIN_X, ICON_Y, ICON_SIZE, ICON_SIZE)];
     blockElement.joinImageView.image = [UIImage imageNamed:@"join.png"];
