@@ -260,12 +260,10 @@
             NSString *title=[event objectForKey:@"title"];
             NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
-
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
-<<<<<<< HEAD
             NSString *locationName=[event objectForKey:@"location"];
             //NSLog(@"%@",title);
             //NSLog(@"%@",photo);
@@ -273,14 +271,6 @@
             //NSLog(@"%@",num_pins);
             //NSLog(@"%@",num_views);
             if (!title) {
-=======
-            NSLog(@"%@",title);
-            NSLog(@"%@",photo);
-            NSLog(@"%@",description);
-            NSLog(@"%@",num_pins);
-            NSLog(@"%@",num_views);
-            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
->>>>>>> error testing
                 continue;
             }
             if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
@@ -360,7 +350,7 @@
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             NSString *locationName=[event objectForKey:@"location"];
             
-            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
+            if (!title) {
                 continue;
             }
             if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
