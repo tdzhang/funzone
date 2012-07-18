@@ -304,9 +304,9 @@
     //get the photo of the user 
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
-    [params setObject:@"picture" forKey:@"fields"];
+    [params setObject:@"id,picture" forKey:@"fields"];
     if ([delegate.facebook isSessionValid]) {
-        self.currentFacebookConnect=@"get user photo";
+        self.currentFacebookConnect=@"get user photo and id";
         [delegate.facebook requestWithGraphPath:@"me" 
                                       andParams:params 
                                   andHttpMethod:@"GET" 
@@ -325,7 +325,6 @@
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
     }
-    
 }
 
 - (void)viewDidLoad:(BOOL)animated {
@@ -379,7 +378,7 @@
         [notsuccess show];
     }];
     
-    [request setPostValue:@"1" forKey:@"user_id"];
+    [request setPostValue:@"1" forKey:@"user_id"]; //  at first ,just send 1 as user id
     [request setPostValue:self.createEvent_title forKey:@"title"];
     [request setPostValue:self.createEvent_locationName forKey:@"address"];
     [request setPostValue:self.createEvent_locationName forKey:@"location"];
@@ -800,7 +799,7 @@
     [self.buttonFacebookShare setHidden:YES];
     
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
-     NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
     
     //get the event information from all the selection
     NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
@@ -875,6 +874,7 @@
                 FacebookContactObject *contact=[self.facebookFriendsGoOutWith objectForKey:key];
                 if (temp_flag==NO) {
                     user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@"%@",contact.facebook_id]];
+                    temp_flag=YES;
                 }
                 else {
                     user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@",%@",contact.facebook_id]];
@@ -896,9 +896,11 @@
         NSLog(@"%@",result);
         self.currentFacebookConnect=nil;
     }
-    else if([self.currentFacebookConnect isEqualToString:@"get user photo"]){
+    else if([self.currentFacebookConnect isEqualToString:@"get user photo and id"]){
         NSLog(@"%@",result);
         NSString *photo=[result objectForKey:@"picture"];
+        NSString *facebook_user_id=[result objectForKey:@"id"];
+       // NSLog(@"%@",facebook_user_id);
         self.currentFacebookConnect = nil;
         //set the user photo
         NSURL *url=[NSURL URLWithString:photo];
