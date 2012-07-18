@@ -264,6 +264,7 @@
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+            NSString *locationName=[event objectForKey:@"location"];
             //NSLog(@"%@",title);
             //NSLog(@"%@",photo);
             //NSLog(@"%@",description);
@@ -292,7 +293,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
@@ -307,7 +308,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName]  atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -319,7 +320,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
@@ -347,6 +348,7 @@
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+            NSString *locationName=[event objectForKey:@"location"];
             
             if (!title) {
                 continue;
@@ -371,7 +373,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -386,7 +388,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -398,7 +400,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });

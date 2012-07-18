@@ -21,6 +21,7 @@
 @synthesize favorLabel=_favorLabel;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
+@synthesize locationLabel=_locationLabel;
 
 
 #define VIEW_WIDTH 300
@@ -67,7 +68,7 @@
     layer.shadowOffset = CGSizeMake(2.f, 3.f);
 }
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id{
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName{
 
     //get the backgroud image from the cache
     UIImage *backGroundImage = nil;
@@ -97,7 +98,8 @@
     
     //Title View
     blockElement.titleView = [[UIView alloc] initWithFrame:CGRectMake(TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT)];
-    blockElement.titleView.backgroundColor = [UIColor colorWithRed:0.3 green:1 blue:0.8 alpha:1.0];
+    float kk=0.85;
+    blockElement.titleView.backgroundColor = [UIColor colorWithRed:kk green:kk blue:kk alpha:1];
     [blockElement.blockView addSubview:blockElement.titleView];
     
     //Title Label
@@ -107,6 +109,14 @@
     blockElement.titleLabel.textColor = [UIColor blackColor];
     blockElement.titleLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
     [blockElement.titleView addSubview:blockElement.titleLabel];
+    
+    //location Label
+    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(TITLE_TEXT_X, TITLE_TEXT_Y+15, TITLE_TEXT_WIDTH, TITLE_TEXT_HEIGHT)];
+    blockElement.locationLabel.text = locationName;
+    blockElement.locationLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    blockElement.locationLabel.textColor = [UIColor blackColor];
+    blockElement.locationLabel.font = [UIFont fontWithName:@"Gurmukhi MN" size:14.0];
+    [blockElement.titleView addSubview:blockElement.locationLabel];
     
     //Thumbnail Image
     blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(THUMB_X, THUMB_Y, THUMB_SIZE, THUMB_SIZE)];
