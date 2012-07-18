@@ -52,10 +52,19 @@
 
 #define LABEL_WIDTH 24
 #define JOIN_LABEL_X 40
-#define FAVOR_LABEL_X 289
+#define FAVOR_LABEL_X 255
 
 -(void) resetFramWith:(CGFloat)position_y{
     self.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
+}
+
++ (void)setUpStyle:(CALayer*)layer {
+    layer.cornerRadius = 5;
+    layer.masksToBounds = YES;
+    layer.borderWidth = .2;
+    layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    layer.shadowColor = [[UIColor lightGrayColor] CGColor];
+    layer.shadowOffset = CGSizeMake(2.f, 3.f);
 }
 
 +(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id{
@@ -126,6 +135,10 @@
     blockElement.favorLabel.textColor = [UIColor colorWithWhite:1 alpha:1.0];
     blockElement.favorLabel.font = [UIFont boldSystemFontOfSize:13.0];
     [blockElement.blockView addSubview:blockElement.favorLabel];
+    
+    //add some style of the views
+    [ExploreBlockElement setUpStyle:blockElement.blockView.layer];
+    [ExploreBlockElement setUpStyle:blockElement.titleView.layer];
     
     //set the event_id and shared_event_id
     blockElement.event_id=event_id;
