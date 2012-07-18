@@ -27,6 +27,7 @@
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
 		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
 		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
+		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
@@ -159,6 +160,8 @@
 		0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyChooseViewController.m; sourceTree = "<group>"; };
 		0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
 		0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
+		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
+		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
@@ -512,6 +515,8 @@
 			children = (
 				463B9BF415A0F9210087CDBA /* DetailViewController.h */,
 				463B9BF515A0F9210087CDBA /* DetailViewController.m */,
+				0F8D008715B67CBC009A21E6 /* eventComment.h */,
+				0F8D008815B67CBC009A21E6 /* eventComment.m */,
 			);
 			name = "Detail Page";
 			sourceTree = "<group>";
@@ -910,6 +915,7 @@
 				0FD0BB5015AFAF6400357ADE /* ASIInputStream.m in Sources */,
 				0FD0BB5115AFAF6400357ADE /* ASINetworkQueue.m in Sources */,
 				0FD0BB5215AFAF6400357ADE /* Reachability.m in Sources */,
+				0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

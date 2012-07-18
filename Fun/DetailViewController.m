@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "Cache.h"
+#import "eventComment.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *contributorProfileImageView;
@@ -31,6 +32,7 @@
 @property (nonatomic,strong) NSNumber *longitude;
 @property (nonatomic,strong) NSNumber *latitude;
 @property (nonatomic,strong) NSString *description;
+@property (nonatomic,strong) NSArray *comments;
 
 @end
 
@@ -55,6 +57,16 @@
 @synthesize longitude=_longitude;
 @synthesize latitude=_latitude;
 @synthesize description=_description;
+@synthesize comments=_comments;
+
+#pragma mark - self defined getter and setter
+-(NSMutableArray *)comments{
+    if (!_comments) {
+        _comments=[NSMutableArray array];
+    }
+    return _comments;
+}
+
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -94,7 +106,7 @@
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
     
     
-    [self.myScrollView setContentSize:CGSizeMake(320, 500)];
+    [self.myScrollView setContentSize:CGSizeMake(320, 400)];
     
     //start a new connection, to fetch data from the server (about event detail)
     NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=%@&shared_event_id=%@",self.event_id,self.shared_event_id];
@@ -115,6 +127,53 @@
     self.shared_event_id = shared_event_id;
 }
 
+#pragma mark - comment handle part
+#define COMMENT_HEIGHT 40
+//handle the comment part from self.comments
+-(void)handleTheCommentPart{
+    //comment
+    float height=344;
+
+    for (int i = 0; i<[self.comments count]; i++) {
+        if(i==5)break;
+        eventComment* comment=[self.comments objectAtIndex:i];
+        
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
+        height+=COMMENT_HEIGHT+5;
+        UIImageView *commentImage=[[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 20, 20)];
+
+        [commentView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+  
+        [commentImage setImage:[UIImage imageNamed:@"intro.png"]];
+        [commentImage setContentMode:UIViewContentModeScaleAspectFill];
+        [commentImage clipsToBounds];
+        [commentView addSubview:commentImage];
+        UILabel *commentLabel1=[[UILabel alloc] initWithFrame:CGRectMake(35, 15, 280, 20)];
+        [commentLabel1 setBackgroundColor:[UIColor clearColor]];
+        [commentLabel1 setText:comment.content];
+        [commentView addSubview:commentLabel1];
+        UILabel *commentLabel2=[[UILabel alloc] initWithFrame:CGRectMake(20, 2, 280, 15)];
+        [commentLabel2 setBackgroundColor:[UIColor clearColor]];
+        NSString *temp_content =[NSString stringWithFormat:@"id:%@  time:%@",comment.user_id,comment.timestamp];
+        [commentLabel2 setFont:[UIFont fontWithName:@"Gurmukhi MN" size:12.0]];
+        [commentLabel2 setText:temp_content];
+        [commentView addSubview:commentLabel2];
+        [self.myScrollView addSubview:commentView];
+    }
+    
+    //button
+    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
+    height+=COMMENT_HEIGHT;
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, COMMENT_HEIGHT)];
+    [button setAlpha:0.5];
+    [buttonView setBackgroundColor:[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1]];
+    [button setTitle:@"See More / Add Comment" forState:UIControlStateNormal];
+    [buttonView addSubview:button];
+    [self.myScrollView addSubview:buttonView];
+    
+    //set the scroll view content size
+    [self.myScrollView setContentSize:CGSizeMake(320, height+5)];
+}
 
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -157,6 +216,8 @@
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
+    self.comments= [eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]];
+    [self handleTheCommentPart];
     NSLog(@"%@",title);
     NSLog(@"%@",description);
     NSLog(@"%@",photo);
@@ -178,11 +239,7 @@
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
-        //NSLog(@"%@",title);
-        //NSLog(@"%@",photo);
-        //NSLog(@"%@",description);
-        //NSLog(@"%@",num_pins);
-        //NSLog(@"%@",num_views);
+
     [self.eventLocationLabel setText:self.location_name];
     [self.eventTimeLabel setText:self.event_time];
 
