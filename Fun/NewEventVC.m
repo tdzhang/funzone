@@ -385,7 +385,7 @@
     [request setPostValue:self.createEvent_locationName forKey:@"location"];
     [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
     [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
-    [request setPostValue:self.createEvent_time forKey:@"time"];
+    [request setPostValue:self.createEvent_time forKey:@"start_time"];
     NSString *format=@"png";
     NSData *data=nil;
     data=UIImagePNGRepresentation(self.createEvent_image);

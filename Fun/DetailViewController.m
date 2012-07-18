@@ -156,7 +156,7 @@
     NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
-    NSString *time=[event objectForKey:@"time"] !=[NSNull null]?[event objectForKey:@"time"]:@"some time";
+    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
     NSLog(@"%@",title);
     NSLog(@"%@",description);
     NSLog(@"%@",photo);
@@ -183,6 +183,10 @@
         //NSLog(@"%@",description);
         //NSLog(@"%@",num_pins);
         //NSLog(@"%@",num_views);
+    [self.eventLocationLabel setText:self.location_name];
+    [self.eventTimeLabel setText:self.event_time];
+
+    
         
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
