@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -26,7 +25,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="821" y="1468"/>
+            <point key="canvasLocation" x="305" y="1488"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Mzo-sb-mPK">
@@ -206,7 +205,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1747" y="4207"/>
+            <point key="canvasLocation" x="1775" y="3979"/>
         </scene>
         <!--New EventVC - Add Event-->
         <scene sceneID="peY-Yc-bLe">
@@ -425,7 +424,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3073" y="-207"/>
+            <point key="canvasLocation" x="3633" y="-1360"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Bp8-Rs-W7V">
@@ -612,7 +611,7 @@
                     </tableView>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2617" y="-120"/>
+            <point key="canvasLocation" x="3150" y="-1360"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="8AS-Gi-EOt">
@@ -714,7 +713,7 @@
                     <navigationItem key="navigationItem" id="bwz-Es-Kjz"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1397" y="2867"/>
+            <point key="canvasLocation" x="1181" y="2795"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="MDo-xn-wHU">
@@ -729,7 +728,7 @@
                     <navigationItem key="navigationItem" id="UK2-Nq-Fsg"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1165" y="3955"/>
+            <point key="canvasLocation" x="1181" y="3979"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -753,7 +752,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="99" y="1084"/>
+            <point key="canvasLocation" x="-901" y="1012"/>
         </scene>
         <!--Navigation Controller - Featured-->
         <scene sceneID="a4u-tg-tVy">
@@ -773,7 +772,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="677" y="-714"/>
+            <point key="canvasLocation" x="305" y="-734"/>
         </scene>
         <!--Explore View Controller-->
         <scene sceneID="ZX0-g3-g0t">
@@ -878,7 +877,7 @@
                     <navigationItem key="navigationItem" title="Explore" id="163-bQ-kuz"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1181" y="-1276"/>
+            <point key="canvasLocation" x="1181" y="-1360"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="XzJ-bW-wVO">
@@ -1071,7 +1070,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2592" y="-734"/>
+            <point key="canvasLocation" x="2656" y="-1360"/>
         </scene>
         <!--Navigation Controller - Feeds-->
         <scene sceneID="lWy-O6-SIi">
@@ -1091,7 +1090,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="813" y="354"/>
+            <point key="canvasLocation" x="305" y="298"/>
         </scene>
         <!--Table View Controller - Friends-->
         <scene sceneID="u4x-dQ-Bip">
@@ -1181,7 +1180,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="xAd-hw-VSG"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1641" y="-1276"/>
+            <point key="canvasLocation" x="1653" y="-1360"/>
         </scene>
         <!--Navigation Controller - Profile-->
         <scene sceneID="93z-0B-UvQ">
@@ -1201,7 +1200,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="781" y="2867"/>
+            <point key="canvasLocation" x="305" y="2795"/>
         </scene>
         <!--Navigation Controller - Settings-->
         <scene sceneID="yBW-ic-o4f">
@@ -1221,7 +1220,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="661" y="3971"/>
+            <point key="canvasLocation" x="305" y="3979"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6dE-gu-dr9">
@@ -1240,7 +1239,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2124" y="-734"/>
+            <point key="canvasLocation" x="2188" y="-1360"/>
         </scene>
         <!--Choose Image Table View Controller-->
         <scene sceneID="Cnv-qM-cUF">
@@ -1282,7 +1281,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2194" y="2401"/>
+            <point key="canvasLocation" x="2958" y="613"/>
         </scene>
         <!--Time Choose View Controller-->
         <scene sceneID="aAO-fk-NZ4">
@@ -1364,7 +1363,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1768" y="3447"/>
+            <point key="canvasLocation" x="2958" y="3215"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="P4w-kC-xZF">
@@ -1414,7 +1413,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2274" y="3473"/>
+            <point key="canvasLocation" x="2950" y="2557"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="J7I-Bi-1WF">
@@ -1438,7 +1437,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1317" y="354"/>
+            <point key="canvasLocation" x="1181" y="298"/>
         </scene>
         <!--Map View Controller - view2-->
         <scene sceneID="50d-tt-Sfs">
@@ -1544,7 +1543,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2812" y="3372"/>
+            <point key="canvasLocation" x="2958" y="1912"/>
         </scene>
         <!--New EventVC - New Event-->
         <scene sceneID="CSv-vv-GQ1">
@@ -1832,7 +1831,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2330" y="1394"/>
+            <point key="canvasLocation" x="4323" y="279"/>
         </scene>
         <!--Movie Aoto CompletionVC-->
         <scene sceneID="GYM-7s-qOH">
@@ -1876,7 +1875,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2178" y="1840"/>
+            <point key="canvasLocation" x="2958" y="-60"/>
         </scene>
         <!--Categroy Choose View Controller - Category-->
         <scene sceneID="l1z-0j-Rje">
@@ -2219,7 +2218,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1298" y="1476"/>
+            <point key="canvasLocation" x="1181" y="1496"/>
         </scene>
         <!--Choose Facebook Friends To Go Table View Controller View Controller - Choose Friends-->
         <scene sceneID="PBb-PX-McL">
@@ -2278,7 +2277,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2525" y="2983"/>
+            <point key="canvasLocation" x="2958" y="1287"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rSM-7t-11w">
@@ -2518,7 +2517,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1731" y="1215"/>
+            <point key="canvasLocation" x="3968" y="279"/>
         </scene>
         <!--New EventVC - New Event-->
         <scene sceneID="JLO-2V-KRw">
@@ -2759,7 +2758,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2076" y="1003"/>
+            <point key="canvasLocation" x="3968" y="875"/>
         </scene>
         <!--New EventVC - New Event-->
         <scene sceneID="hpM-Cr-lUn">
@@ -3001,7 +3000,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2431" y="1003"/>
+            <point key="canvasLocation" x="4323" y="875"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="eaP-re-pOh">
@@ -3160,7 +3159,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1211" y="2100"/>
+            <point key="canvasLocation" x="1719" y="852"/>
         </scene>
         <!--New EventVC-->
         <scene sceneID="ovw-Dd-Shb">
@@ -3504,7 +3503,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1693" y="2044"/>
+            <point key="canvasLocation" x="2313" y="1488"/>
         </scene>
     </scenes>
     <resources>
@@ -3551,6 +3550,97 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="time.png" width="40" height="40"/>
         <image name="twitter.png" width="40" height="40"/>
     </resources>
+    <classes>
+        <class className="CategroyChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ChooseFacebookFriendsToGoTableViewControllerViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseFacebookFriendsToGoTableViewControllerViewController.h"/>
+        </class>
+        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+        </class>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="contributorProfileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventLocationDistanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="timestampLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ExploreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="FeaturedTVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedTVC.h"/>
+        </class>
+        <class className="FeedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myStepper" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
+        </class>
+        <class className="NewEventVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventFriends" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="eventPeopleInfo" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="textViewEventDescription" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="uITextViewPersonalMsg" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="TimeChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
