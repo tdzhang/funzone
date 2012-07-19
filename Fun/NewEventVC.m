@@ -295,7 +295,7 @@
         if (![funAppdelegate.facebook isSessionValid]) {
             NSArray *permissions = [[NSArray alloc] initWithObjects:
                                     @"publish_stream", 
-                                    @"read_stream",@"create_event",
+                                    @"read_stream",@"create_event",@"email",
                                     nil];
             [funAppdelegate.facebook authorize:permissions];
         }
