@@ -67,7 +67,8 @@
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    
+    //send notification of login finished
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"faceBookLoginFinished" object:nil];
 }
 -(void)fbDidNotLogin:(BOOL)cancelled{
     

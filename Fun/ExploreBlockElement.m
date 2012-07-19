@@ -25,7 +25,7 @@
 
 
 #define VIEW_WIDTH 300
-#define VIEW_HEIGHT 125 
+#define VIEW_HEIGHT 130 
 
 #define THUMB_X 8
 #define THUMB_Y 9

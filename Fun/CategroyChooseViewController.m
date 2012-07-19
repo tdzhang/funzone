@@ -59,7 +59,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    /*
+    
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
@@ -69,7 +69,7 @@
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
-    */
+    
      
     //clean the possible undeleted view
     if (self.flash) {

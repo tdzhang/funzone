@@ -14,6 +14,8 @@
 @property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIButton *normalLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
+
+-(void)faceBookLoginFinished; //deal with the finish of facebook login
 @end
 
 @implementation LoginPageViewController
@@ -40,10 +42,14 @@
     self.userPassword.secureTextEntry=YES;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //add notification handler
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
 
 - (void)viewDidUnload
@@ -74,7 +80,7 @@
 }
 
 - (IBAction)facebookLoginButtonClicked:(id)sender {
-    /*
+    
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {
@@ -90,27 +96,25 @@
             NSArray *permissions = [[NSArray alloc] initWithObjects:
                                     @"publish_stream", 
                                     @"read_stream",@"create_event",
+                                    @"email",
                                     nil];
             [funAppdelegate.facebook authorize:permissions];
         }
     }
-    
-    
-    //get the photo of the user 
-    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
-    NSMutableDictionary* params = [NSMutableDictionary dictionary];
-    [params setObject:@"id,picture" forKey:@"fields"];
-    if ([delegate.facebook isSessionValid]) {
-        self.currentFacebookConnect=@"get user photo and id";
-        [delegate.facebook requestWithGraphPath:@"me" 
-                                      andParams:params 
-                                  andHttpMethod:@"GET" 
-                                    andDelegate:self];
-    }
-    else {
-        NSLog(@"Face book session invalid~~~");
-    }
-  */
+}
+
+#pragma mark - facebook related process
+-(void)faceBookLoginFinished{
+    //when the facebook has login, send to the sever to get the user token
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_in?iphone=true&facebook_token=%@",[defaults objectForKey:@"FBAccessTokenKey"]];
+    NSLog(@"%@",request_string);
+    //start connection
+    //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    [request setHTTPMethod:@"POST"];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -138,9 +142,16 @@
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"all %@",[json allKeys]);
-    NSDictionary* responseData = [json objectForKey:@"responseData"];
-    NSArray *results = [responseData objectForKey:@"results"];
-    NSLog(@"get %d results",[results count]);
+    //if login success, then return to the page
+    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+        //save the login_auth_token for later use
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *login_auth_token=[json objectForKey:@"auth_token"];
+        [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+        [defaults synchronize];
+        //then return to the previouse page, quit login page
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 

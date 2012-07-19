@@ -39,7 +39,7 @@
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
 #define VIEW_WIDTH 300
-#define VIEW_HEIGHT 125
+#define VIEW_HEIGHT 130
 #define BlOCK_VIEW_HEIGHT 140
 
 
@@ -178,7 +178,8 @@
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
         }
-        
+        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        [underloading setBackgroundColor:[UIColor whiteColor]];
         UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
@@ -194,6 +195,7 @@
         [spinning startAnimating];[loading addSubview:spinning];
         self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         [self.refreshViewdown removeFromSuperview];
+        [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
