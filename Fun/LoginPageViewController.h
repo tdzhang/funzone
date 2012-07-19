@@ -10,6 +10,6 @@
 #import "FBConnect.h"
 #import "FunAppDelegate.h"
 
-@interface LoginPageViewController : UIViewController
+@interface LoginPageViewController : UIViewController<UIAlertViewDelegate>
 
 @end

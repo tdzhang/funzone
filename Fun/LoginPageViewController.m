@@ -14,6 +14,7 @@
 @property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIButton *normalLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
+@property (nonatomic,strong) NSString *currentConnection;
 
 -(void)faceBookLoginFinished; //deal with the finish of facebook login
 @end
@@ -24,6 +25,7 @@
 @synthesize normalLoginButton;
 @synthesize facebookLoginButton;
 @synthesize data=_data;
+@synthesize currentConnection;
 
 #pragma mark - view life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -69,13 +71,38 @@
 
 #pragma mark - button action
 - (IBAction)normalLoginButtonClicked:(id)sender {
-    /*
-     NSString *request_string=[NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=%d&q=%@",GOOGLE_IMAGE_NUM,searchKeywords];
-     NSLog(@"%@",request_string);
-     //start the image seaching connection using google image api
-     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-     [connection start];
+    //resign the firstResponser
+    [self.userName resignFirstResponder];
+    [self.userPassword resignFirstResponder];
+    
+    //if the name/password is too short, alert user
+    if ([self.userName.text length]<4||[self.userPassword.text length]<5) {
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"User Name/Password Error" message:@"Your name/password is too short, please input again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        [tooShort show];
+        return;
+    }
+    
+    
+    //login
+    self.currentConnection=@"normalEmailLogin_register";
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_in.json?iphone=true&user[email]=%@&user[password]=%@",self.userName.text,self.userPassword.text];
+    NSLog(@"%@",request_string);
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    [request setHTTPMethod:@"POST"];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+    
+    
+    /*log out
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_out.json?auth_token=%@",[defaults objectForKey:@"login_auth_token"]];
+    NSLog(@"%@",request_string);
+    [defaults removeObjectForKey:@"login_auth_token"];
+    [defaults synchronize];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    [request setHTTPMethod:@"DELETE"];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
      */
 }
 
@@ -111,6 +138,7 @@
     NSLog(@"%@",request_string);
     //start connection
     //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    self.currentConnection=@"facebookLogin";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     [request setHTTPMethod:@"POST"];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -138,20 +166,83 @@
 
 
 //when the connection get the returned data (json form)
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
-    NSError *error;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"all %@",[json allKeys]);
-    //if login success, then return to the page
-    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-        //save the login_auth_token for later use
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *login_auth_token=[json objectForKey:@"auth_token"];
-        [defaults setValue:login_auth_token forKey:@"login_auth_token"];
-        [defaults synchronize];
-        //then return to the previouse page, quit login page
-        [self dismissModalViewControllerAnimated:YES];
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection { 
+    if ([self.currentConnection isEqualToString:@"facebookLogin"]) {
+        self.currentConnection=nil;
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //if login success, then return to the page
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            [self dismissModalViewControllerAnimated:YES];
+        }
     }
+    else if([self.currentConnection isEqualToString:@"normalEmailLogin_register"]){
+        self.currentConnection=nil;
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //if login success, then return to the page
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            [self dismissModalViewControllerAnimated:YES];
+        }
+    }
+}
+
+#pragma mark - testfield delegate method
+////////////////////////////////////////////////
+//implement the method for dealing with the textfield
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//the next 3 method deal with the keyboard covering with the text field
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+    //if edit the add cost textfield, the whole view need to 
+    //scroll up, get rid of the keyboard covering
+    //if ([textField isEqual:self.textFieldSelfDefine]) {
+     //   [self animateTextField: textField up: YES];
+     //   self.uIViewUpFlag=YES;
+    //}
+    
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+    //if finished editign the add cost textfield, the whole view need to scroll down
+    //if ([textField isEqual:self.textFieldSelfDefine]) {
+    //    [self animateTextField: textField up: NO];
+     //   self.uIViewUpFlag=NO;
+    //}
+    
+}
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 
