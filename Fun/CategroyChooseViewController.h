@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewEventVC.h"
+#import "LoginPageViewController.h"
 
 @interface CategroyChooseViewController : UIViewController<UIAlertViewDelegate>
 

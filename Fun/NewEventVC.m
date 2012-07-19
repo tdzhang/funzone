@@ -289,6 +289,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
             funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            NSLog(@"%@",funAppdelegate.facebook.accessToken);
             funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
         }
         if (![funAppdelegate.facebook isSessionValid]) {

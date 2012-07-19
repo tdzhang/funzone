@@ -24,6 +24,7 @@
 		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
 		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
+		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
 		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
 		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
@@ -154,6 +155,8 @@
 		0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackToCreateActivityChange.h; sourceTree = "<group>"; };
 		0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
 		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
+		0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
+		0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		0F579A4F15A166B70006FCC6 /* ChooseImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseImageTableViewController.h; sourceTree = "<group>"; };
 		0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseImageTableViewController.m; sourceTree = "<group>"; };
 		0F68DD5915A903A000B093BB /* CategroyChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyChooseViewController.h; sourceTree = "<group>"; };
@@ -419,6 +422,15 @@
 			name = "choose Friends";
 			sourceTree = "<group>";
 		};
+		0F4093B115B7D8B6002C9F23 /* loginPage */ = {
+			isa = PBXGroup;
+			children = (
+				0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */,
+				0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */,
+			);
+			name = loginPage;
+			sourceTree = "<group>";
+		};
 		0F579A5315A166C60006FCC6 /* choose Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,6 +574,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F4093B115B7D8B6002C9F23 /* loginPage */,
 				0FD0BB3215AFAF4E00357ADE /* asiConnection */,
 				9251E9CB15A947F0007302A1 /* Auth */,
 				9298264F15A938D6003673CF /* facebook-ios-sdk */,
@@ -916,6 +929,7 @@
 				0FD0BB5115AFAF6400357ADE /* ASINetworkQueue.m in Sources */,
 				0FD0BB5215AFAF6400357ADE /* Reachability.m in Sources */,
 				0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */,
+				0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
