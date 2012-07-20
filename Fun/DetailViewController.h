@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NewEventVC.h"
 #import "eventComment.h"
+#import "AddCommentVC.h"
 
 @interface DetailViewController : UIViewController
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id;

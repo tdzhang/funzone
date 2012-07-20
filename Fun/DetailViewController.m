@@ -32,7 +32,7 @@
 @property (nonatomic,strong) NSNumber *longitude;
 @property (nonatomic,strong) NSNumber *latitude;
 @property (nonatomic,strong) NSString *description;
-@property (nonatomic,strong) NSArray *comments;
+@property (nonatomic,strong) NSMutableArray *comments;
 
 @end
 
@@ -128,6 +128,12 @@
     self.shared_event_id = shared_event_id;
 }
 
+
+//handle the action: addViewCommentButtonClicked
+-(void)addViewCommentButtonClicked:(id)sender{
+    [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
+}
+
 #pragma mark - comment handle part
 #define COMMENT_HEIGHT 40
 //handle the comment part from self.comments
@@ -167,6 +173,10 @@
     height+=COMMENT_HEIGHT;
     UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, COMMENT_HEIGHT)];
     [button setAlpha:0.5];
+    //add button action
+    [button addTarget:self 
+               action:@selector(addViewCommentButtonClicked:)
+     forControlEvents:UIControlEventTouchUpInside];
     [buttonView setBackgroundColor:[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1]];
     [button setTitle:@"See More / Add Comment" forState:UIControlStateNormal];
     [buttonView addSubview:button];
@@ -181,6 +191,14 @@
     if ([segue.identifier isEqualToString:@"repin to create new event"]) {
         NewEventVC *newEventVC = segue.destinationViewController;
         [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name longitude:self.longitude latitude:self.latitude description:self.description];
+    }
+    else if([segue.identifier isEqualToString:@"addAndViewComment"]){
+        if ([segue.destinationViewController isKindOfClass:[AddCommentVC class]]) {
+            AddCommentVC *commentVC=segue.destinationViewController;
+            commentVC.comments=[self.comments copy];
+            commentVC.event_id=self.event_id;
+            commentVC.shared_event_id=self.shared_event_id;
+        }
     }
 }
 

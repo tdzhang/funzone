@@ -27,9 +27,13 @@
 		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B715B8CBC1002C9F23 /* registerViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
+		0F5A84CC15B9DAEE000BD0FF /* AddCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5A84CB15B9DAEE000BD0FF /* AddCommentVC.m */; };
 		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
 		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
 		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
+		0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */; };
+		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
+		0F91EE4E15B9CD1200E7B1D3 /* commentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
@@ -162,12 +166,19 @@
 		0F4093B715B8CBC1002C9F23 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
 		0F579A4F15A166B70006FCC6 /* ChooseImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseImageTableViewController.h; sourceTree = "<group>"; };
 		0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseImageTableViewController.m; sourceTree = "<group>"; };
+		0F5A84CA15B9DAEE000BD0FF /* AddCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCommentVC.h; sourceTree = "<group>"; };
+		0F5A84CB15B9DAEE000BD0FF /* AddCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCommentVC.m; sourceTree = "<group>"; };
 		0F68DD5915A903A000B093BB /* CategroyChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategroyChooseViewController.h; sourceTree = "<group>"; };
 		0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyChooseViewController.m; sourceTree = "<group>"; };
 		0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
 		0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
 		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
 		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
+		0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAndViewCommentTVC.h; sourceTree = "<group>"; };
+		0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addAndViewCommentTVC.m; sourceTree = "<group>"; };
+		0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = commentTableViewCell.xib; sourceTree = "<group>"; };
+		0F91EE4C15B9CD1200E7B1D3 /* commentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commentTableViewCell.h; sourceTree = "<group>"; };
+		0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commentTableViewCell.m; sourceTree = "<group>"; };
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
@@ -458,6 +469,28 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		0F91EE4815B9CA5400E7B1D3 /* Add and View all Comment */ = {
+			isa = PBXGroup;
+			children = (
+				0F91EE4915B9CB9900E7B1D3 /* custom view */,
+				0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */,
+				0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */,
+				0F5A84CA15B9DAEE000BD0FF /* AddCommentVC.h */,
+				0F5A84CB15B9DAEE000BD0FF /* AddCommentVC.m */,
+			);
+			name = "Add and View all Comment";
+			sourceTree = "<group>";
+		};
+		0F91EE4915B9CB9900E7B1D3 /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */,
+				0F91EE4C15B9CD1200E7B1D3 /* commentTableViewCell.h */,
+				0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */,
+			);
+			name = "custom view";
+			sourceTree = "<group>";
+		};
 		0FC6FF6B15ABA7D200CC022C /* self defined model */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,6 +680,7 @@
 		4668A7911593F72600713A4C /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				0F91EE4815B9CA5400E7B1D3 /* Add and View all Comment */,
 				463B9BF215A0F90B0087CDBA /* Detail Page */,
 				0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */,
 				0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */,
@@ -877,6 +911,7 @@
 				0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */,
 				0FF00A3915B4DFA0000D68C3 /* AddEventControllerSnapShot.png in Resources */,
 				9257D71315B519FD00EBE123 /* 211119_16855985423_2849652_q.jpeg in Resources */,
+				0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +971,9 @@
 				0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */,
 				0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */,
 				0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */,
+				0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */,
+				0F91EE4E15B9CD1200E7B1D3 /* commentTableViewCell.m in Sources */,
+				0F5A84CC15B9DAEE000BD0FF /* AddCommentVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
