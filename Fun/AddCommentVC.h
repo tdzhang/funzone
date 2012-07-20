@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "addAndViewCommentTVC.h"
 #import "ASIFormDataRequest.h"
+#import "LoginPageViewController.h"
 
 @interface AddCommentVC : UIViewController<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
