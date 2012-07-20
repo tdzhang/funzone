@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import "FunAppDelegate.h"
+#import "CategroyChooseViewController.h"
 
 @interface LoginPageViewController : UIViewController<UIAlertViewDelegate>
-
+@property (weak,nonatomic) UIViewController* parentVC; //the parent view controller
 @end

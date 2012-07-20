@@ -74,6 +74,8 @@
 @property (nonatomic,strong) NSString *createEvent_locationName;
 @property (nonatomic,strong) NSString *createEvent_time;
 
+@property (nonatomic,strong) NSString *facebookCurrentProcess;//use this to diff the facebook request intention
+
 //Email Share Button handler
 -(void)useEmailToShare:(id)sender;
 //Twitter Share Button handler
@@ -132,6 +134,8 @@
 @synthesize createEvent_locationName=_createEvent_locationName;
 @synthesize createEvent_time=_createEvent_time;
 @synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
+
+@synthesize facebookCurrentProcess=_facebookCurrentProcess;
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
@@ -281,26 +285,7 @@
     [self.buttonFacebookShare setHidden:YES];
     [self.view addSubview:self.buttonFacebookShare];
     
-    //initial the face book
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    if (!funAppdelegate.facebook) {
-        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-            funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-            NSLog(@"%@",funAppdelegate.facebook.accessToken);
-            funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-        }
-        if (![funAppdelegate.facebook isSessionValid]) {
-            NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                    @"publish_stream", 
-                                    @"read_stream",@"create_event",@"email",
-                                    nil];
-            [funAppdelegate.facebook authorize:permissions];
-        }
-    }
-    
+
     
     //get the photo of the user 
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
@@ -500,24 +485,6 @@
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    /*
-    //for the what to do action sheet
-    if([actionSheet.title isEqualToString:@"What do you want to do?"]){
-        if(buttonIndex == 0){
-            [self.buttonEventTitle setTitle:@"getting together" forState:UIControlStateNormal];
-        }else if(buttonIndex == 1){
-            [self.buttonEventTitle setTitle:@"eatting" forState:UIControlStateNormal];
-        }else if(buttonIndex == 2){
-            [self.buttonEventTitle setTitle:@"movie" forState:UIControlStateNormal];
-        }else if(buttonIndex == 3){
-            [self.buttonEventTitle setTitle:@"coffee" forState:UIControlStateNormal];
-        }else if(buttonIndex == 4){
-            [self.textFieldEventTitle setHidden:NO];
-            [self.textFieldEventTitle becomeFirstResponder];
-            [self.buttonEventTitle setTitle:@"" forState:UIControlStateNormal];
-        }
-    }
-     */
     //for the when to go action sheet
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
@@ -535,29 +502,97 @@
         
     }
     //for choose people to go action sheet
-    if([actionSheet.title isEqualToString:@"Choose a friend source"]){
-        if(buttonIndex == 0){
+    else if([actionSheet.title isEqualToString:@"Choose a friend source"]){
+        if(buttonIndex == 0){//choose friends from address book
             [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
-        }else if(buttonIndex == 1){
-            [self performSegueWithIdentifier:@"ChooseFacebookFriends" sender:self];
+        }else if(buttonIndex == 1){//choose friends from facebook
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+                
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+                //if already login : start choose friends
+                funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+                funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+                [self performSegueWithIdentifier:@"ChooseFacebookFriends" sender:self];
+            }
+            if (![funAppdelegate.facebook isSessionValid]) {
+                    //if not login, do it
+                self.facebookCurrentProcess=@"chooseFriends";
+                NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                            @"publish_stream", 
+                                            @"read_stream",@"create_event",@"email",
+                                            nil];
+                [funAppdelegate.facebook authorize:permissions];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+            }
         }
     }
-    /*
-    //for the event cost action sheet
-    else if ([actionSheet.title isEqualToString:@"Estimate the event cost:"]) {
-        if (buttonIndex==0) {
-            [self.buttonEventPrice setTitle:@"Free" forState:UIControlStateNormal];
-        }else if (buttonIndex==1) {
-            [self.buttonEventPrice setTitle:@"less than $10" forState:UIControlStateNormal];
-        }else if (buttonIndex == 2){
-            [self.buttonEventPrice setTitle:@"less than $100" forState:UIControlStateNormal];
-        }else if(buttonIndex == 3){
-            [self.textFieldEventPrice setHidden:NO];
-            [self.textFieldEventPrice becomeFirstResponder];
-            [self.buttonEventPrice setTitle:@"" forState:UIControlStateNormal];
+    else if([actionSheet.title isEqualToString:@"Select Share:"]){
+        if (buttonIndex == 0) {
+            //post on the wall
+            NSLog(@"need to do sth about post on wall");
+            FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            
+            NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+            NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+            NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+            if ([eventTime length]<10) {
+                NSDate *now = [NSDate date];
+                eventTime=[now description];
+            }  
+
+            
+            [params setObject:@"funnect event" forKey:@"name"];
+            [params setObject:@"new funnect event" forKey:@"description"];
+            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"message"];
+            
+            if ([delegate.facebook isSessionValid]) {
+                self.currentFacebookConnect=@"create event";
+                [delegate.facebook requestWithGraphPath:@"me/feed" 
+                                              andParams:params 
+                                          andHttpMethod:@"POST" 
+                                            andDelegate:self];
+            }
+            else {
+                NSLog(@"Face book session invalid~~~");
+            }
+
+        }
+        else if(buttonIndex == 1){
+            //share event
+            FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            
+            //get the event information from all the selection
+            NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+            NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+            
+            NSLog(@"%@",self.locationLabel.text);
+            NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+            if ([eventTime length]<10) {
+                NSDate *now = [NSDate date];
+                eventTime=[now description];
+            }  
+            
+            [params setObject:eventName forKey:@"name"];
+            [params setObject:eventTime forKey:@"start_time"];
+            [params setObject:[NSString stringWithFormat:eventLocation] forKey:@"location"];
+            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"description"];
+            
+            if ([delegate.facebook isSessionValid]) {
+                self.currentFacebookConnect=@"create event";
+                [delegate.facebook requestWithGraphPath:@"me/events" 
+                                              andParams:params 
+                                          andHttpMethod:@"POST" 
+                                            andDelegate:self];
+            }
+            else {
+                NSLog(@"Face book session invalid~~~");
+            }
         }
     }
-    */
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose Photo Source"]){
         if (buttonIndex == 0) {
@@ -802,36 +837,36 @@
     [self.buttonTwitterShare setHidden:YES];
     [self.buttonFacebookShare setHidden:YES];
     
-    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
-    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    //initial the face book
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
     
-    //get the event information from all the selection
-    NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
-    NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        //if already login : start the action sheet
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create facebook event", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+
+    }
+    if (![funAppdelegate.facebook isSessionValid]) {
+        //if not login, do it
+        self.facebookCurrentProcess=@"Share";
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream", 
+                                @"read_stream",@"create_event",@"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+    }
     
-    NSLog(@"%@",self.locationLabel.text);
-    NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
-    if ([eventTime length]<10) {
-        NSDate *now = [NSDate date];
-        eventTime=[now description];
-    }  
     
-    [params setObject:eventName forKey:@"name"];
-    [params setObject:eventTime forKey:@"start_time"];
-    [params setObject:[NSString stringWithFormat:eventLocation] forKey:@"location"];
-    [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"description"];
     
-     if ([delegate.facebook isSessionValid]) {
-         self.currentFacebookConnect=@"create event";
-     [delegate.facebook requestWithGraphPath:@"me/events" 
-     andParams:params 
-     andHttpMethod:@"POST" 
-     andDelegate:self];
-     }
-     else {
-     NSLog(@"Face book session invalid~~~");
-     }
-    //[[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
+        
+    
+        //[[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
 }
 
 
@@ -856,6 +891,20 @@
 
 
 #pragma mark - facebook related protocal implement
+-(void)faceBookLoginFinished{
+    if ([self.facebookCurrentProcess isEqualToString:@"chooseFriends"]) {
+        self.facebookCurrentProcess=nil;
+        [self performSegueWithIdentifier:@"ChooseFacebookFriends" sender:self];
+    }
+    else if([self.facebookCurrentProcess isEqualToString:@"Share"]){
+        self.facebookCurrentProcess=nil;
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create facebook event", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
     NSLog(@"%@", [error localizedDescription]);
     NSLog(@"Err details: %@", [error description]);
@@ -946,6 +995,9 @@
             }); 
         }
 
+    }
+    else {
+        NSLog(@"%@",result);
     }
 }
 

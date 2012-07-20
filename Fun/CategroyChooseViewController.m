@@ -66,6 +66,7 @@
         //if not login, do it
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
         LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
+        loginVC.parentVC=self;
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:loginVC animated:YES completion:^{}];
     }

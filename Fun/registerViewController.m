@@ -53,8 +53,46 @@
 }
 
 #pragma mark - button action
-- (IBAction)registerButtonClicked:(id)sender {
+//cancel register
+- (IBAction)cancelRegister:(id)sender {
     
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+
+//start to register
+- (IBAction)registerButtonClicked:(id)sender {
+    //input too short
+    if (self.emailTextField.text.length<5||self.passwordTextField.text.length<5||self.rePasswordTextField.text.length<5) {
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Email/Password Too Short" message:@"The Email or the password you input is too short, please input a again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        tooShort.delegate=self;
+        [tooShort show];
+        [self.emailTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [self.rePasswordTextField resignFirstResponder];
+        return;
+    }
+    //the password not match
+    if(![self.passwordTextField.text isEqualToString:self.rePasswordTextField.text]){
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Password Not Match" message:@"The password doesnot match, please input a again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        tooShort.delegate=self;
+        [tooShort show];
+        [self.emailTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [self.rePasswordTextField resignFirstResponder];
+        [self.passwordTextField setText:@""];
+        [self.rePasswordTextField setText:@""];
+        return;
+    }
+    //else, start too register
+    
+    
+    /*
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Upload Complete!" message:@"The Event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    success.delegate=self;
+    [success show];
+     */
 }
 
 

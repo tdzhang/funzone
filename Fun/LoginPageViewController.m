@@ -26,6 +26,7 @@
 @synthesize facebookLoginButton;
 @synthesize data=_data;
 @synthesize currentConnection;
+@synthesize parentVC=_parentVC;
 
 #pragma mark - view life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +50,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     //add notification handler
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
@@ -70,6 +70,35 @@
 }
 
 #pragma mark - button action
+//cancel login part, return to the feature page
+- (IBAction)cancelLogin:(id)sender {
+    //if user don't login,return to the featurned page
+    int controllerIndex=0;
+    UIView * fromView = self.parentVC.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.parentVC.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+    // Get the size of the view area.
+    CGRect viewSize = fromView.frame;
+    // Add the to view to the tab bar view.
+    [fromView.superview addSubview:toView];
+    // Position it off screen.
+    toView.frame = CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
+    [UIView animateWithDuration:0.01 
+                     animations: ^{
+                         // Animate the views on and off the screen. This will appear to slide.
+                         fromView.frame =CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
+                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             // Remove the old view from the tabbar view.
+                             [fromView removeFromSuperview];              
+                         }
+                     }];
+    self.parentVC.tabBarController.selectedIndex = controllerIndex; 
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+//Start normal login
 - (IBAction)normalLoginButtonClicked:(id)sender {
     //resign the firstResponser
     [self.userName resignFirstResponder];
@@ -81,8 +110,6 @@
         [tooShort show];
         return;
     }
-    
-    
     //login
     self.currentConnection=@"normalEmailLogin_register";
     NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_in.json?iphone=true&user[email]=%@&user[password]=%@",self.userName.text,self.userPassword.text];
@@ -106,6 +133,7 @@
      */
 }
 
+//start facebook login
 - (IBAction)facebookLoginButtonClicked:(id)sender {
     
     //initial the face book
@@ -143,6 +171,7 @@
     [request setHTTPMethod:@"POST"];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
