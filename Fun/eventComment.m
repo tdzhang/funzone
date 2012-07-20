@@ -16,6 +16,7 @@
 @synthesize timestamp=_timestamp;
 
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments{
+    //using the comment json data to build up a comment array
     NSMutableArray *temp_array=[NSMutableArray array];
     for (NSDictionary *comment in comments) {
         NSNumber *user_id=[comment objectForKey:@"user_id"];

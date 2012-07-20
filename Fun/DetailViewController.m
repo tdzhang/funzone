@@ -121,7 +121,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - self defined method
+#pragma mark - self defined method 
+//(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id{
     self.event_id = event_id;
     self.shared_event_id = shared_event_id;
@@ -135,7 +136,7 @@
     float height=344;
 
     for (int i = 0; i<[self.comments count]; i++) {
-        if(i==5)break;
+        if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];
         
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
@@ -209,22 +210,23 @@
     //renew the 10 newest features!!!!
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-
-
+    
+    //get the detail information
     NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
+    //handle the comment part
     self.comments= [eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]];
     [self handleTheCommentPart];
+    
     NSLog(@"%@",title);
     NSLog(@"%@",description);
     NSLog(@"%@",photo);
     NSLog(@"%@",time);
        // NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
         //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
-        NSString *locationName=[event objectForKey:@"location"];
+    NSString *locationName=[event objectForKey:@"location"];
        // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
        // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
 
@@ -239,9 +241,11 @@
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
-
+    
+    //set the content on the screen
     [self.eventLocationLabel setText:self.location_name];
     [self.eventTimeLabel setText:self.event_time];
+    [self.eventTitleLabel setText:self.event_title];
 
     
         

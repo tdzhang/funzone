@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTime;
 //@property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;//---not using
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
+@property (weak, nonatomic) IBOutlet UIButton *buttonEditEventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTime;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
@@ -102,6 +103,7 @@
 @synthesize buttonEventTime = _eventTimeButton;
 //@synthesize buttonEventPrice = _eventPriceButton;
 @synthesize buttonEventFriends = _eventFriendsButton;
+@synthesize buttonEditEventTitle = _buttonEditEventTitle;
 @synthesize locationLabel = _locationLabel;
 @synthesize labelEventTime = _labelEventTime;
 @synthesize buttonEventTitle = _buttonEventTitle;
@@ -241,8 +243,7 @@
 #pragma mark - View lifecycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
- 
+
     //initiate the config of the EventShare To Friends Function part
     //clean the possible remain button (when went back from segue)
     if(self.buttonEmailShare){
@@ -348,6 +349,7 @@
     [self setLabelEventTitleHolder:nil];
     [self setPersonProfileImage:nil];
     [self setMapViewFeedBackImageView:nil];
+    [self setButtonEditEventTitle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -476,6 +478,7 @@
         [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
     }
     else {
+        [self.buttonEditEventTitle setHidden:YES];
         [self.textFieldEventTitle becomeFirstResponder];
         [self.labelEventTitleHolder setHidden:YES];
     }
@@ -1080,6 +1083,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {  
     self.navigationItem.rightBarButtonItem = nil; 
     [self animateTextView:textView up:NO];
+    [self.buttonEditEventTitle setHidden:NO];
 }  
 
 //deal with when user pressed the "done" button
