@@ -38,9 +38,9 @@
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
-#define VIEW_WIDTH 300
-#define VIEW_HEIGHT 130
-#define BlOCK_VIEW_HEIGHT 140
+#define VIEW_WIDTH 320
+#define VIEW_HEIGHT 160 
+#define BlOCK_VIEW_HEIGHT 165
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -134,7 +134,7 @@
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/3) {
         //remove the main views
         for (UIView *view in [self.mainScrollView subviews]) {
-            [view setFrame:CGRectMake(10, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
+            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT);
         }
         [self.blockViews removeAllObjects];
@@ -180,7 +180,7 @@
         }
         UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
@@ -267,11 +267,10 @@
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             NSString *locationName=[event objectForKey:@"location"];
-            //NSLog(@"%@",title);
-            //NSLog(@"%@",photo);
-            //NSLog(@"%@",description);
-            //NSLog(@"%@",num_pins);
-            //NSLog(@"%@",num_views);
+            NSString *creator_name=[event objectForKey:@"creator_name"];
+            NSString *creator_pic=[event objectForKey:@"creator_pic"];
+            
+            
             if (!title) {
                 continue;
             }
@@ -295,7 +294,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
@@ -310,7 +309,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName]  atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic]  atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self refreshAllTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -322,7 +321,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
@@ -351,7 +350,8 @@
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             NSString *locationName=[event objectForKey:@"location"];
-            
+            NSString *creator_name=[event objectForKey:@"creator_name"];
+            NSString *creator_pic=[event objectForKey:@"creator_pic"];
             if (!title) {
                 continue;
             }
@@ -375,7 +375,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
                                 
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -390,7 +390,7 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                                 NSLog(@"321:   %d",[self.blockViews count]);
@@ -402,7 +402,7 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
