@@ -154,7 +154,41 @@
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"all %@",[json allKeys]);
-    [self dismissModalViewControllerAnimated:YES];
+    //get the response and the autu_token
+    if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
+        //if the register is finished, get the auth_token
+        //save the login_auth_token for later use
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *login_auth_token=[json objectForKey:@"auth_token"];
+        [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+        [defaults synchronize];
+        //then return to the previouse page, quit login page
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Register Success" message:@"The register is finished." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        success.delegate=self;
+        [success show];
+    }
+    else {
+        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Register Error" message:@"The register is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        error.delegate=self;
+        [error show];
+    }
+    
+    
+}
+
+#pragma mark - uiAlertView delegate
+////////////////////////////////////////////////
+//implement the method for dealing with the return of the alertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //NSLog(@"%@",alertView.title);
+    //deal with the Input Empty Error for the activity category choose
+    if ([alertView.title isEqualToString:@"Register Success"]) {
+        NSLog(@"register success called");
+        [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+    }
+    if ([alertView.title isEqualToString:@"Register Error"]) {
+        NSLog(@"register error called");
+    }
 }
 
 
@@ -191,6 +225,7 @@
     if ([textField isEqual:self.rePasswordTextField]) {
         [self animateTextField:textField up:NO];
     }
+    
     //if finished editign the add cost textfield, the whole view need to scroll down
     //if ([textField isEqual:self.textFieldSelfDefine]) {
     //    [self animateTextField: textField up: NO];
