@@ -94,7 +94,7 @@
     //quest the most recent 10 featured events
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
+    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/tops"];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -164,7 +164,7 @@
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
-        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?refresh=true"];
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/tops"];
         NSLog(@"%@",request_string);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -201,7 +201,7 @@
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/featured?page=%d",self.refresh_page_num];
+        NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/tops?page=%d",self.refresh_page_num];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
