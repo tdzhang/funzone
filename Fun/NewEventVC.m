@@ -285,8 +285,6 @@
     [self.buttonFacebookShare setHidden:YES];
     [self.view addSubview:self.buttonFacebookShare];
     
-
-    
     //get the photo of the user 
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
@@ -303,6 +301,17 @@
     }
     
     if(self.detail_event_id){
+        //judge whether the user is login? if not, do the login
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if (![defaults objectForKey:@"login_auth_token"]) {
+            //if not login, do it
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+            LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
+            loginVC.parentVC=self;
+            loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:loginVC animated:YES completion:^{}];
+        }
+        //this is for the repin of a featured event
         [self.textFieldEventTitle setText:self.detail_event_title];
         [self.labelEventTime setText:self.detail_event_time];
         [self.labelEventTitleHolder setHidden:YES];

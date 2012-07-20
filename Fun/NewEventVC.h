@@ -20,6 +20,7 @@
 #import "ASIFormDataRequest.h"
 #import "Cache.h"
 #import <Twitter/Twitter.h>
+#import "LoginPageViewController.h"
 
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,FeedBackToFaceBookFriendToGoChange,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,FBRequestDelegate,movieInfoReturn>
 
