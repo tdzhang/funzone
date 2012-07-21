@@ -14,10 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *contributorProfileImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventLocationDistanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
@@ -40,10 +38,8 @@
 @synthesize contributorProfileImageView;
 @synthesize eventImageView;
 @synthesize contributorNameLabel;
-@synthesize timestampLabel;
 @synthesize eventTitleLabel;
 @synthesize eventLocationLabel;
-@synthesize eventLocationDistanceLabel;
 @synthesize eventTimeLabel;
 @synthesize eventPriceLabel;
 @synthesize eventIntroLabel;
@@ -88,10 +84,8 @@
 {
     [self setContributorProfileImageView:nil];
     [self setContributorNameLabel:nil];
-    [self setTimestampLabel:nil];
     [self setEventTitleLabel:nil];
     [self setEventLocationLabel:nil];
-    [self setEventLocationDistanceLabel:nil];
     [self setEventTimeLabel:nil];
     [self setEventPriceLabel:nil];
     [self setEventIntroLabel:nil];

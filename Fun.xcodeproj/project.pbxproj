@@ -39,6 +39,7 @@
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
 		0F91EE4E15B9CD1200E7B1D3 /* commentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
+		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
 		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
@@ -190,6 +191,7 @@
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
+		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
 		0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookContactObject.m; sourceTree = "<group>"; };
 		0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFacebookFriendsToGoTableViewControllerViewController.h; sourceTree = "<group>"; };
@@ -712,6 +714,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FA9002B15BA25EF0015E9C9 /* button_comment.png */,
 				0F5A84D815BA0B6A000BD0FF /* bookmark_64.png */,
 				0F5A84D615BA0B59000BD0FF /* 29-heart.png */,
 				0F5A84D415BA06C9000BD0FF /* Marker.png */,
@@ -928,6 +931,7 @@
 				0F5A84D515BA06C9000BD0FF /* Marker.png in Resources */,
 				0F5A84D715BA0B59000BD0FF /* 29-heart.png in Resources */,
 				0F5A84D915BA0B6A000BD0FF /* bookmark_64.png in Resources */,
+				0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
