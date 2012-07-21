@@ -11,6 +11,7 @@
 @interface TableViewContainMapviewTVC ()
 @property(nonatomic,strong)NSMutableData *data;
 @property (nonatomic,strong)NSArray *foursquareSearchResults;
+@property (nonatomic,strong)NSString *foursquareConnectionType;
 
 @end
 
@@ -20,6 +21,7 @@
 @synthesize myTableView=_myTableView;
 @synthesize myMapViewController=_myMapViewController;
 @synthesize delegate=_default;
+@synthesize foursquareConnectionType=_foursquareConnectionType;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -51,7 +53,7 @@
 
 
 
--(void)SearchTheKeyWords:(NSString*)searchString AtUserLocation:(CLLocation *)userLocation;
+-(void)SearchTheKeyWords:(NSString*)searchString AtUserLocation:(CLLocation *)userLocation withEventType:(NSString *)eventType
 {    
     //random select oauth_token from 2 exist token
     NSString* oauthToken;
@@ -72,7 +74,81 @@
     //Searching the key word
     double lat=userCoordinate.latitude;
     double lng=userCoordinate.longitude;
+    
+    
     NSString *request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+    self.foursquareConnectionType=@"search";
+    //if the search string is empty
+    if ([searchString isEqualToString:@""]) {
+        if ([eventType isEqualToString:@"food"]) {
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"food",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"party"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"drinks",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"outdoor"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"outdoors",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"shopping"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"shops",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"movie"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"cinema",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"entertain"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"theater",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"sports"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"sports",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"events"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"conference",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+    }
+    //else if the search string (user input title) is not empty
+    else {
+        if ([eventType isEqualToString:@"food"]) {
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"food",keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"party"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"drinks",keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"outdoor"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"outdoors",keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"shopping"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/explore?ll=%f,%f&section=%@&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"shops",keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"explore";
+        }
+        else if([eventType isEqualToString:@"movie"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,@"cinema",RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"entertain"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"sports"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+        else if([eventType isEqualToString:@"events"]){
+            request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
+            self.foursquareConnectionType=@"search";
+        }
+    }
+    
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -95,25 +171,47 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
     
+
+    NSMutableArray *searchResult = [NSMutableArray array];
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"all %@",[json allKeys]);
-    NSDictionary *meta = [json objectForKey:@"meta"];
-    NSNumber *meta_code=[meta objectForKey:@"code"];
-    NSLog(@"%@",meta_code);
     
-    NSMutableArray *searchResult = [NSMutableArray array];
-    if ([meta_code intValue] == 200) {
-        NSDictionary *response = [json objectForKey:@"response"];
-        NSArray *venues=[response objectForKey:@"venues"];
-        NSNumber *count =[NSNumber numberWithInt:[venues count]];
-        NSLog(@"Have %@ elements",count);
-        //start to put fetched data in to self.foursquareSearchResults
-        for (NSDictionary *venue in venues) {
-            FourSquarePlace *place = [FourSquarePlace initializeWithNSDictionary:venue];
-            [searchResult addObject:place];
+    if ([self.foursquareConnectionType isEqualToString:@"search"]) {
+        NSDictionary *meta = [json objectForKey:@"meta"];
+        NSNumber *meta_code=[meta objectForKey:@"code"];
+        NSLog(@"%@",meta_code);
+        if ([meta_code intValue] == 200) {
+            NSDictionary *response = [json objectForKey:@"response"];
+            NSArray *venues=[response objectForKey:@"venues"];
+            NSNumber *count =[NSNumber numberWithInt:[venues count]];
+            NSLog(@"Have %@ elements",count);
+            //start to put fetched data in to self.foursquareSearchResults
+            for (NSDictionary *venue in venues) {
+                FourSquarePlace *place = [FourSquarePlace initializeWithNSDictionary:venue];
+                [searchResult addObject:place];
+            }
         }
     }
+    else {
+        NSDictionary *meta = [json objectForKey:@"meta"];
+        NSNumber *meta_code=[meta objectForKey:@"code"];
+        NSLog(@"%@",meta_code);
+        if ([meta_code intValue] == 200) {
+            NSDictionary *response = [json objectForKey:@"response"];
+            NSArray *groups=[response objectForKey:@"groups"];
+            NSDictionary *group=[groups objectAtIndex:0];
+            NSArray *items=[group objectForKey:@"items"];
+            
+            //start to put fetched data in to self.foursquareSearchResults
+            for (NSDictionary *item in items) {
+                FourSquarePlace *place = [FourSquarePlace initializeWithNSDictionary:[item objectForKey:@"venue"]];
+                [searchResult addObject:place];
+            }
+        }
+    }
+    
+    
     self.foursquareSearchResults=[searchResult sortedArrayUsingSelector:@selector(compare:)];//sorting the result using distance from the current location
     //reload data for the search result receiving
     [self.myTableView reloadData];

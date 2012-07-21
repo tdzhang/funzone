@@ -116,6 +116,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+
+
 #pragma mark - segue related
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"NewEvent"]) {
@@ -124,7 +127,29 @@
         if ([self.eventPrepareCategory isEqualToString:@"movie"]) {
             [(NewEventVC *)segue.destinationViewController setEventType:@"movie"];
         }
+        else if ([self.eventPrepareCategory isEqualToString:@"party"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"party"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"shopping"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"shopping"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"sports"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"sports"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"outdoor"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"outdoor"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"entertain"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"entertain"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"event"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"event"];
+        }
+        else if ([self.eventPrepareCategory isEqualToString:@"food"]) {
+            [(NewEventVC *)segue.destinationViewController setEventType:@"food"];
+        }
         else {
+            //need to set up the title using user typedin words
             [(NewEventVC *)segue.destinationViewController setEventType:@"other"];
         }
     }

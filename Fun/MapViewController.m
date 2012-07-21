@@ -30,6 +30,7 @@
 @synthesize data=_data;
 @synthesize tableViewControllerContainMap=_tableViewControllerContainMap;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
+@synthesize preDefinedEventType=_preDefinedEventType;
 
 #pragma mark - self define setting and getting method
 -(TableViewContainMapviewTVC *)tableViewControllerContainMap{
@@ -170,7 +171,7 @@
     if (userCoordinate.latitude>0.001) {
         [self showUserCurrentLocation];
         if (self.predefinedSeachingWords) {
-            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
+            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc withEventType:self.preDefinedEventType];
         }
         
     }
@@ -598,7 +599,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     //if have predefined seaching words, search it
     if (self.predefinedSeachingWords) {
-        [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLocation.location];
+        [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLocation.location withEventType:self.preDefinedEventType];
     }
 }
 

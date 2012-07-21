@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExploreBlockElement.h"
+#import "Cache.h"
 
-@interface FeedViewController : UIViewController<UITextFieldDelegate>
+#define DEFAULT_IMAGE_REPLACEMENT @"big40.jpg" //to replace the image which cannot get the 
+@interface FeedViewController : UIViewController<UIScrollViewDelegate>
 
 @end

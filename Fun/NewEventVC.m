@@ -301,6 +301,7 @@
         NSLog(@"Face book session invalid~~~");
     }
     
+    //if this view is used to repin a event
     if(self.detail_event_id){
         //judge whether the user is login? if not, do the login
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -431,6 +432,8 @@
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
             MapViewController *mapViewC=segue.destinationViewController;
             [mapViewC setDelegate:self];
+            //pass in the event type to the destination(8 types)
+            [mapViewC setPreDefinedEventType:self.eventType];
             if (![self.textFieldEventTitle.text isEqualToString:@""]) {
                 [mapViewC setPredefinedSeachingWords:self.textFieldEventTitle.text];
             }
