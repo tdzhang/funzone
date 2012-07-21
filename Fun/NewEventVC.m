@@ -357,7 +357,7 @@
 
 #pragma mark - create event to server
 - (IBAction)CreateEventToSever:(id)sender {
-    NSURL *url=[NSURL URLWithString:@"http://www.funnect.me/events/add"];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/add",CONNECT_DOMIAN_NAME]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{

@@ -192,6 +192,7 @@
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
+		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
 		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
 		0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookContactObject.m; sourceTree = "<group>"; };
 		0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFacebookFriendsToGoTableViewControllerViewController.h; sourceTree = "<group>"; };
@@ -636,6 +637,7 @@
 				4668A7511593E56400713A4C /* FunAppDelegate.h */,
 				4668A7521593E56400713A4C /* FunAppDelegate.m */,
 				4668A7541593E56400713A4C /* MainStoryboard_iPhone.storyboard */,
+				0FA9003215BB546E0015E9C9 /* GlobalConstant.h */,
 				4668A7571593E56400713A4C /* MainStoryboard_iPad.storyboard */,
 				4668A75A1593E56400713A4C /* FunFirstViewController.h */,
 				4668A75B1593E56400713A4C /* FunFirstViewController.m */,

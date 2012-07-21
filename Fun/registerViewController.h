@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GlobalConstant.h"
 
 @interface registerViewController : UIViewController<UIAlertViewDelegate>
 

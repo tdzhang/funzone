@@ -121,7 +121,7 @@
     }
     //else, start too register
     
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users.json?user[first_name]=%@&user[last_name]=%@&user[email]=%@&user[password]=%@&user[password_confirmation]=%@",self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.rePasswordTextField.text];
+    NSString *request_string=[NSString stringWithFormat:@"%@/users.json?user[first_name]=%@&user[last_name]=%@&user[email]=%@&user[password]=%@&user[password_confirmation]=%@",CONNECT_DOMIAN_NAME,self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.rePasswordTextField.text];
     NSLog(@"%@",request_string);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     [request setHTTPMethod:@"POST"];

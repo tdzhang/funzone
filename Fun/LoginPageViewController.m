@@ -112,7 +112,7 @@
     }
     //login
     self.currentConnection=@"normalEmailLogin_register";
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_in.json?iphone=true&user[email]=%@&user[password]=%@",self.userName.text,self.userPassword.text];
+    NSString *request_string=[NSString stringWithFormat:@"%@/users/sign_in.json?iphone=true&user[email]=%@&user[password]=%@",CONNECT_DOMIAN_NAME,self.userName.text,self.userPassword.text];
     NSLog(@"%@",request_string);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     [request setHTTPMethod:@"POST"];
@@ -162,7 +162,7 @@
 -(void)faceBookLoginFinished{
     //when the facebook has login, send to the sever to get the user token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_in?iphone=true&facebook_token=%@",[defaults objectForKey:@"FBAccessTokenKey"]];
+    NSString *request_string=[NSString stringWithFormat:@"%@/users/sign_in?iphone=true&facebook_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"FBAccessTokenKey"]];
     NSLog(@"%@",request_string);
     //start connection
     //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];

@@ -86,7 +86,7 @@
 - (IBAction)addCommentButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
     if (self.addCommentTextView.text.length>0) {
-        NSURL *url=[NSURL URLWithString:@"http://www.funnect.me/events/comment"];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/comment",CONNECT_DOMIAN_NAME]];
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         __block ASIFormDataRequest *block_request=request;
         [request setCompletionBlock:^{

@@ -329,18 +329,15 @@
     span.longitudeDelta= DEFAULT_ZOOMING_SPAN_LONGITUDE;
     region.span = span;
         
-        //add annotation
-    MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+    //add annotation
+    MKPointAnnotation *annotationPoint =   [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = region.center;
     annotationPoint.title = title;
     if(!annotationPoint.title)annotationPoint.title=@"NO name:";
     annotationPoint.subtitle = detail;
     if(!annotationPoint.subtitle)annotationPoint.subtitle=@"No subtitle name.";
-    
     [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region];
-    
     [self.myTableView setContentOffset:CGPointZero animated:YES];
-
 }
 
 @end

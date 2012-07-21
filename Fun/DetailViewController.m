@@ -103,7 +103,7 @@
     [self.myScrollView setContentSize:CGSizeMake(320, 400)];
     
     //start a new connection, to fetch data from the server (about event detail)
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/events/view?event_id=%@&shared_event_id=%@",self.event_id,self.shared_event_id];
+    NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
