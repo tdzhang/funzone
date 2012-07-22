@@ -96,6 +96,7 @@
     blockElement.backGroundImageView.image=[backGroundImage copy];
     [blockElement.backGroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [blockElement.backGroundImageView setClipsToBounds:YES];
+    [blockElement.backGroundImageView setAlpha:1.0];
     [blockElement.view addSubview:blockElement.backGroundImageView];
     
     //mask on the backgroud Image

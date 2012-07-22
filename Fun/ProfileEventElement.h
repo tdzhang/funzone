@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Cache.h"
 
 @interface ProfileEventElement : NSObject
 @property(nonatomic,strong)UIView *blockView;
@@ -20,5 +21,5 @@
 @property(nonatomic,strong)NSString *shared_event_id;
 
 
-+(ProfileEventElement *)initialWithPositionY:(CGFloat)position_y eventImageURL:(NSURL *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName;
++(ProfileEventElement *)initialWithPositionY:(CGFloat)position_y eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName;
 @end
