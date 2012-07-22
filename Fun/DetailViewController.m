@@ -11,7 +11,6 @@
 #import "eventComment.h"
 
 @interface DetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *contributorProfileImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
@@ -35,7 +34,6 @@
 @end
 
 @implementation DetailViewController
-@synthesize contributorProfileImageView;
 @synthesize eventImageView;
 @synthesize contributorNameLabel;
 @synthesize eventTitleLabel;
@@ -82,7 +80,6 @@
 
 - (void)viewDidUnload
 {
-    [self setContributorProfileImageView:nil];
     [self setContributorNameLabel:nil];
     [self setEventTitleLabel:nil];
     [self setEventLocationLabel:nil];
@@ -228,6 +225,7 @@
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
+    NSString *creator_name=[event objectForKey:@"creator_name"];
     //handle the comment part
     self.comments= [eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]];
     [self handleTheCommentPart];
@@ -258,6 +256,7 @@
     [self.eventLocationLabel setText:self.location_name];
     [self.eventTimeLabel setText:self.event_time];
     [self.eventTitleLabel setText:self.event_title];
+    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
 
     
         

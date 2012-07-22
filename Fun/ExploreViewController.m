@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 
+#define VIEW_WIDTH 320
+#define VIEW_HEIGHT 150 
+#define BlOCK_VIEW_HEIGHT 152
 
 @interface ExploreViewController ()
 @property CGFloat currentY;
@@ -38,9 +41,7 @@
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
-#define VIEW_WIDTH 320
-#define VIEW_HEIGHT 160 
-#define BlOCK_VIEW_HEIGHT 165
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -86,6 +87,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Navigation Bar Style
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStylePlain
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
+    
+    
+    //init the detail page for later segue
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     

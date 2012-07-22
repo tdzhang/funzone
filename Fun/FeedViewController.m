@@ -38,8 +38,8 @@
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 160 
-#define BlOCK_VIEW_HEIGHT 165
+#define VIEW_HEIGHT 150 
+#define BlOCK_VIEW_HEIGHT 152
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -104,7 +104,8 @@
     //quest the most recent 10 featured events
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
-    NSString *request_string=[NSString stringWithFormat:@"%@/tops",CONNECT_DOMIAN_NAME];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -174,7 +175,8 @@
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
-        NSString *request_string=[NSString stringWithFormat:@"%@/tops",CONNECT_DOMIAN_NAME];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
         NSLog(@"%@",request_string);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -211,7 +213,8 @@
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"%@/tops?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];

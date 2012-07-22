@@ -26,7 +26,7 @@
 
 
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 160 
+#define VIEW_HEIGHT 150 
 
 #define SUB_VIEW_X 10
 #define SUB_VIEW_Y 10
