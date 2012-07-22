@@ -22,6 +22,7 @@
 @property (nonatomic) int refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
+@property (nonatomic,strong) NSMutableArray *garbageCollection;
 @end
 
 @implementation FeedViewController
@@ -36,6 +37,7 @@
 @synthesize refresh_page_num=_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
+@synthesize garbageCollection=_garbageCollection;
 
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 150 
@@ -156,9 +158,11 @@
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-BlOCK_VIEW_HEIGHT/3) {
         //remove the main views
+        self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
             [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT);
+            [self.garbageCollection addObject:view];
         }
         [self.blockViews removeAllObjects];
         
@@ -342,6 +346,10 @@
                         }
                     }
                 });
+                for (UIView* view in self.garbageCollection) {
+                    [view removeFromSuperview];
+                }
+                [self.garbageCollection removeAllObjects];
             }
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
@@ -350,6 +358,10 @@
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                 });
+                for (UIView* view in self.garbageCollection) {
+                    [view removeFromSuperview];
+                }
+                [self.garbageCollection removeAllObjects];
             }
             
         }
