@@ -287,7 +287,20 @@
     [self.view addSubview:self.buttonFacebookShare];
     
     //get the photo of the user 
+    
+    //initial the face book
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+    if (!delegate.facebook) {
+        delegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)delegate];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+            delegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            NSLog(@"%@",delegate.facebook.accessToken);
+            delegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        }
+    }
+
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     [params setObject:@"id,picture" forKey:@"fields"];
     if ([delegate.facebook isSessionValid]) {

@@ -135,27 +135,26 @@
 
 //start facebook login
 - (IBAction)facebookLoginButtonClicked:(id)sender {
-    
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {
         funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
             funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
             NSLog(@"%@",funAppdelegate.facebook.accessToken);
             funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-        }
-        if (![funAppdelegate.facebook isSessionValid]) {
-            NSArray *permissions = [[NSArray alloc] initWithObjects:
+    }
+    if (![funAppdelegate.facebook isSessionValid]) {
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
                                     @"publish_stream", 
                                     @"read_stream",@"create_event",
                                     @"email",
                                     nil];
-            [funAppdelegate.facebook authorize:permissions];
-        }
+        [funAppdelegate.facebook authorize:permissions];
     }
+
 }
 
 #pragma mark - facebook related process

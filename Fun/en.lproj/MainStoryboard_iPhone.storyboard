@@ -3263,7 +3263,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4323" y="875"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Detail View Controller - Detail-->
         <scene sceneID="eaP-re-pOh">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qo0-g8-Ohx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3413,7 +3413,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="62l-aV-1OU"/>
+                    <navigationItem key="navigationItem" title="Detail" id="62l-aV-1OU"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -3487,7 +3487,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2259" y="739"/>
         </scene>
-        <!--New EventVC-->
+        <!--New EventVC - New Event-->
         <scene sceneID="ovw-Dd-Shb">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSf-i0-mFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3517,12 +3517,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="showAllOptionButtons:" destination="ZbQ-zo-m0r" eventType="touchUpInside" id="s7J-md-u3N"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="211119_16855985423_2849652_q.jpeg" id="EUZ-07-DTq">
-                                <rect key="frame" x="10" y="56" width="40" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="EUZ-07-DTq">
+                                <rect key="frame" x="10" y="19" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="I want to go to..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hYR-a3-CJ4">
-                                <rect key="frame" x="63" y="65" width="142" height="21"/>
+                                <rect key="frame" x="63" y="38" width="142" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="DevanagariSangamMN-Bold" family="Devanagari Sangam MN" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -3531,7 +3531,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <view contentMode="scaleToFill" id="0is-UK-mz6">
-                                <rect key="frame" x="10" y="104" width="300" height="105"/>
+                                <rect key="frame" x="10" y="75" width="300" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="form.png" id="Sd2-oe-MN9">
@@ -3666,7 +3666,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </accessibility>
                             </view>
                             <view contentMode="scaleToFill" id="731-iH-70Y">
-                                <rect key="frame" x="12" y="218" width="190" height="50"/>
+                                <rect key="frame" x="12" y="216" width="190" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="11-clock.png" id="qdx-h4-mF5">
@@ -3793,7 +3793,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="9it-sC-7RX"/>
+                    <navigationItem key="navigationItem" title="New Event" id="9it-sC-7RX"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
@@ -3826,7 +3826,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="11-clock.png" width="25" height="25"/>
         <image name="112-group.png" width="32" height="21"/>
         <image name="169-8ball.png" width="16" height="16"/>
-        <image name="211119_16855985423_2849652_q.jpeg" width="50" height="50"/>
         <image name="46-movie-2.png" width="16" height="16"/>
         <image name="48-fork-and-knife.png" width="16" height="16"/>
         <image name="52-pine-tree.png" width="16" height="16"/>
@@ -3987,7 +3986,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Idn-d1-X1d"/>
+        <segue reference="Yrc-z9-85p"/>
         <segue reference="Mwv-fE-YHU"/>
     </inferredMetricsTieBreakers>
 </document>
