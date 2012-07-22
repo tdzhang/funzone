@@ -274,7 +274,7 @@
         self.refresh_page_num=2;
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
-            NSString *description=[event objectForKey:@"description"];
+            //NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
