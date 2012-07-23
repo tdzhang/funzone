@@ -152,7 +152,7 @@
         [notsuccess show];
     }];
     //add login auth_token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
