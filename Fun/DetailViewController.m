@@ -55,6 +55,7 @@
 @synthesize description=_description;
 @synthesize comments=_comments;
 @synthesize creator_id=_creator_id;
+@synthesize event_address=_event_address;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{

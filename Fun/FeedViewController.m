@@ -287,6 +287,12 @@
         self.freshConnectionType=@"not";  
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        
+        //clean the page
+        for (UIView* subView in self.mainScrollView.subviews) {
+            [subView removeFromSuperview];
+        }
+        
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         self.refresh_page_num=2;
         for (NSDictionary* event in json) {
@@ -309,62 +315,9 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            if (![Cache isURLCached:url]) {
-                //using high priority queue to fetch the image
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-                    //get the image data
-                    NSData * imageData = nil;
-                    imageData = [[NSData alloc] initWithContentsOfURL: url];
-                    
-                    if ( imageData == nil ){
-                        //if the image data is nil, the image url is not reachable. using a default image to replace that
-                        //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                        imageData=UIImagePNGRepresentation(image);
-                        
-                        if(imageData){
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
-                                
-                                //refresh the whole view
-                                [self refreshAllTheMainScrollViewSUbviews];
-                                NSLog(@"123:   %d",[self.blockViews count]);
-                            });
-                        }
-                    }
-                    else {
-                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                        //NSLog(@"downloaded %@",url);
-                        if(imageData){
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic]  atIndex:[self.blockViews count]];
-                                //refresh the whole view
-                                [self refreshAllTheMainScrollViewSUbviews];
-                                NSLog(@"321:   %d",[self.blockViews count]);
-                            });
-                        }
-                    }
-                });
-                for (UIView* view in self.garbageCollection) {
-                    [view removeFromSuperview];
-                }
-                [self.garbageCollection removeAllObjects];
-            }
-            else {
-                dispatch_async( dispatch_get_main_queue(),^{
-                    
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
-                    //refresh the whole view
-                    [self refreshAllTheMainScrollViewSUbviews];
-                });
-                for (UIView* view in self.garbageCollection) {
-                    [view removeFromSuperview];
-                }
-                [self.garbageCollection removeAllObjects];
-            }
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            //refresh the whole view
+            [self refreshAllTheMainScrollViewSUbviews];
             
         }
     }
@@ -398,55 +351,9 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            if (![Cache isURLCached:url]) {
-                //using high priority queue to fetch the image
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-                    //get the image data
-                    NSData * imageData = nil;
-                    imageData = [[NSData alloc] initWithContentsOfURL: url];
-                    
-                    if ( imageData == nil ){
-                        //if the image data is nil, the image url is not reachable. using a default image to replace that
-                        //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                        imageData=UIImagePNGRepresentation(image);
-                        
-                        if(imageData){
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
-                                
-                                //refresh the whole view
-                                [self addMoreDataToTheMainScrollViewSUbviews];
-                                NSLog(@"123:   %d",[self.blockViews count]);
-                            });
-                        }
-                    }
-                    else {
-                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                        //NSLog(@"downloaded %@",url);
-                        if(imageData){
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                
-                                [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
-                                //refresh the whole view
-                                [self addMoreDataToTheMainScrollViewSUbviews];
-                                NSLog(@"321:   %d",[self.blockViews count]);
-                            });
-                        }
-                    }
-                });
-            }
-            else {
-                dispatch_async( dispatch_get_main_queue(),^{
-                    
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
-                    //refresh the whole view
-                    [self addMoreDataToTheMainScrollViewSUbviews];
-                });
-            }
-            
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            //refresh the whole view
+            [self addMoreDataToTheMainScrollViewSUbviews];
         }
         
         [self.refreshViewdown removeFromSuperview];
