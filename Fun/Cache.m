@@ -9,7 +9,7 @@
 #import "Cache.h"
 
 @interface Cache ()
-#define CACHE_LIMIT 1024*1024*10
+//#define CACHE_LIMIT 1024*1024*50
 @end
 
 @implementation Cache

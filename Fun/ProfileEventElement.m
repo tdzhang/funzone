@@ -35,7 +35,7 @@
     
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, EVENT_IMAGE_SIZE, VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
@@ -94,7 +94,7 @@
     }
     
     //add event title
-    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(48, 2, 231, 36)];
+    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(55, 2, 231, 36)];
     blockElement.eventTitleLabel.numberOfLines = 2;
     [blockElement.eventTitleLabel setText:title];
     [blockElement.blockView addSubview:blockElement.eventTitleLabel];
@@ -113,6 +113,9 @@
     blockElement.heartNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(296, 18, 21, 21)];
     [blockElement.heartNumberLabel setText:favor_label];
     [blockElement.blockView addSubview:blockElement.heartNumberLabel];
+    
+    
+    
     
     return  blockElement;
 }

@@ -392,7 +392,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
     //add content
-    [request setPostValue:@"1" forKey:@"user_id"]; //  at first ,just send 1 as user id
     [request setPostValue:self.createEvent_title forKey:@"title"];
     [request setPostValue:self.createEvent_locationName forKey:@"address"];
     [request setPostValue:self.createEvent_locationName forKey:@"location"];

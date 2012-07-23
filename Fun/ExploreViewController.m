@@ -77,13 +77,15 @@
     
 
     //........towards left Gesture recogniser for swiping.....// used to change view
+    /*
     UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
     leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:leftRecognizer]; 
+    */
     
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
-    [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
 }
 
@@ -160,7 +162,7 @@
         
         //set the refresh view ahead
         NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(10, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
@@ -236,7 +238,7 @@
     ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -BlOCK_VIEW_HEIGHT, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
-    [self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
     [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
 }
@@ -275,6 +277,7 @@
         self.freshConnectionType=@"not";  
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        NSLog(@"%@",json);
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         self.refresh_page_num=2;
         for (NSDictionary* event in json) {

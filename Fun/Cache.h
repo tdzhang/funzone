@@ -10,7 +10,7 @@
 
 #define DEFAULT_RECENT_VIEW_LIST_FILE @"recentlist.plist"
 #define DEFAULT_CACHE_DICT_FILE @"cachedict.plist"
-#define CACHE_LIMIT 1024*1024*10
+#define CACHE_LIMIT 1024*1024*50
 
 #define ENABLE_MANUAL_LATENCY 1
 #if ENABLE_MANUAL_LATENCY

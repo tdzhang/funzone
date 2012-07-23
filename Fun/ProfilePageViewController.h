@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
+#import "ProfileEventElement.h"
 
-@interface ProfilePageViewController : UIViewController
+@interface ProfilePageViewController : UIViewController<UIScrollViewDelegate>
 
 @end
