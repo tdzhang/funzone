@@ -206,6 +206,8 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *login_auth_token=[json objectForKey:@"auth_token"];
             [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
+            NSLog(@"%@",[json objectForKey:@"user_id"]);
             [defaults synchronize];
             //then return to the previouse page, quit login page
             [self dismissModalViewControllerAnimated:YES];
@@ -222,6 +224,7 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *login_auth_token=[json objectForKey:@"auth_token"];
             [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
             [defaults synchronize];
             //then return to the previouse page, quit login page
             [self dismissModalViewControllerAnimated:YES];

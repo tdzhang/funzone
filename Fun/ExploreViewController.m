@@ -11,7 +11,7 @@
 #import "DetailViewController.h"
 
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 150 
+#define VIEW_HEIGHT 155 
 #define BlOCK_VIEW_HEIGHT 155
 
 @interface ExploreViewController ()
@@ -27,6 +27,7 @@
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
+@property (nonatomic,strong) NSString *tapped_creator_id;
 @end
 
 @implementation ExploreViewController
@@ -42,6 +43,7 @@
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 @synthesize garbageCollection=_garbageCollection;
+@synthesize tapped_creator_id=_tapped_creator_id;
 
 
 
@@ -297,6 +299,7 @@
             NSString *locationName=[event objectForKey:@"location"];
             NSString *creator_name=[event objectForKey:@"creator_name"];
             NSString *creator_pic=[event objectForKey:@"creator_pic"];
+            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
             
             
             if (!title) {
@@ -306,7 +309,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
         
@@ -335,6 +338,8 @@
             NSString *locationName=[event objectForKey:@"location"];
             NSString *creator_name=[event objectForKey:@"creator_name"];
             NSString *creator_pic=[event objectForKey:@"creator_pic"];
+            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+            
             if (!title) {
                 continue;
             }
@@ -343,7 +348,7 @@
             }
             
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
@@ -361,6 +366,10 @@
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
     }
+    else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tapped_creator_id;
+    }
 }
 
 #pragma mark - Gesture handler
@@ -371,12 +380,23 @@
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
     //get the index of the touched block view
     int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
-    NSLog(@"%d",index);
+    //NSLog(@"%d",index);
+    //NSLog(@"click_position:%f,%f",touchPoint.x,touchPoint.y-index*BlOCK_VIEW_HEIGHT);
+    float x=touchPoint.x;
+    float y=touchPoint.y-index*BlOCK_VIEW_HEIGHT;
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
+    self.tapped_creator_id=tapped_element.creator_id;
+    if((x>=10&&x<=120)||(y>=125&&y<=157)){
+        [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
+    }
+    
     //do some pre-segue stuff with event_id and shared_id
-    [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
+
     
     /*
      self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;

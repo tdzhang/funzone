@@ -23,10 +23,10 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize locationLabel=_locationLabel;
-
+@synthesize creator_id=_creator_id;
 
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 150 
+#define VIEW_HEIGHT 155 
 
 #define SUB_VIEW_X 10
 #define SUB_VIEW_Y 10
@@ -66,7 +66,7 @@
     layer.shadowOffset = CGSizeMake(2.f, 3.f);
 }
 
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo{
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id{
     
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
@@ -77,6 +77,8 @@
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
     
+    //set the creator id
+    blockElement.creator_id=creator_id;
     
     //create View
     blockElement.view=[[UIView alloc] initWithFrame:CGRectMake(SUB_VIEW_X,SUB_VIEW_Y, SUB_VIEW_WIDTH, SUB_VIEW_HEIGHT)];

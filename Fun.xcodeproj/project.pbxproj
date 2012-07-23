@@ -24,6 +24,7 @@
 		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
 		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
+		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
 		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B715B8CBC1002C9F23 /* registerViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
@@ -171,6 +172,8 @@
 		0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackToCreateActivityChange.h; sourceTree = "<group>"; };
 		0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
 		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
+		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
+		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
 		0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
 		0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		0F4093B615B8CBC1002C9F23 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
@@ -487,6 +490,8 @@
 			children = (
 				0F60F3FC15BC6A0A00053D25 /* ProfilePageViewController.h */,
 				0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */,
+				0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */,
+				0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */,
 				0F60F40115BC72F100053D25 /* ProfileEventElement.h */,
 				0F60F40215BC72F100053D25 /* ProfileEventElement.m */,
 			);
@@ -1032,6 +1037,7 @@
 				0F5A84CC15B9DAEE000BD0FF /* AddCommentVC.m in Sources */,
 				0F60F3FE15BC6A0A00053D25 /* ProfilePageViewController.m in Sources */,
 				0F60F40315BC72F100053D25 /* ProfileEventElement.m in Sources */,
+				0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

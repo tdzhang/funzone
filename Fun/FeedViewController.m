@@ -306,7 +306,7 @@
             NSString *locationName=[event objectForKey:@"location"];
             NSString *creator_name=[event objectForKey:@"creator_name"];
             NSString *creator_pic=[event objectForKey:@"creator_pic"];
-            
+            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
             
             if (!title) {
                 continue;
@@ -315,7 +315,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
             
@@ -344,6 +344,8 @@
             NSString *locationName=[event objectForKey:@"location"];
             NSString *creator_name=[event objectForKey:@"creator_name"];
             NSString *creator_pic=[event objectForKey:@"creator_pic"];
+            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+            
             if (!title) {
                 continue;
             }
@@ -351,7 +353,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
         }
