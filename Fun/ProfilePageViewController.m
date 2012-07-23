@@ -71,28 +71,8 @@
 }
 
 #pragma mark - View Life Circle
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //........towards left Gesture recogniser for swiping.....// used to change view
-    /*
-    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:leftRecognizer]; 
-    */
-    
-    //Navigation Bar Style
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBarHidden = NO;
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Back" style:UIBarButtonItemStylePlain
-                                   target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
-    [self.navigationItem setBackBarButtonItem:backButton];
-    
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     //init the detail page for later segue
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
@@ -165,10 +145,10 @@
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
-
+    
     //quest the most recent 10 events
     self.refresh_page_num=2; //the next page that need to refresh is 2
-    self.freshConnectionType=@"p";
+    self.freshConnectionType=@"new";
     NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
     NSLog(@"%@",request_string);
     NSURLRequest* URLrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -176,6 +156,29 @@
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 0);
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    //........towards left Gesture recogniser for swiping.....// used to change view
+    /*
+    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:leftRecognizer]; 
+    */
+    
+    //Navigation Bar Style
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStylePlain
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
 }
 
 - (void)viewDidUnload
@@ -199,7 +202,7 @@
 //when the scrolling over 最上方，need refresh process
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
     
     //if there already has a connection, donot create a new one, just return
     if (![self.freshConnectionType isEqualToString:@"not"]) {
@@ -208,6 +211,7 @@
     
         //add more
     if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2.5))){
+        
         //add the content add refresh indicator
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
@@ -277,6 +281,14 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if ([self.freshConnectionType isEqualToString:@"new"]) {
+        //that means all the block view need to be reset
+        for (ProfileEventElement* event in self.blockViews) {
+            [event.blockView removeFromSuperview];
+        }
+        [self.blockViews removeAllObjects];
+    }
+    
     NSError *error;
     NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"%@",json);
@@ -296,6 +308,9 @@
         NSString *event_photo_url=[event objectForKey:@"photo_url"];
         NSString *locationName=[event objectForKey:@"location"];
         NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+        
+        NSLog(@"event_id=%@",event_id);
+        NSLog(@"photo_url=%@",event_photo_url);
         
         if (!title) {
             continue;
@@ -323,6 +338,7 @@
                                 [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                               ;
                                 //refresh the whole view
+                                NSLog(@"profile0:%d",[self.blockViews count]);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -335,6 +351,7 @@
                                 [Cache addDataToCache:url withData:imageData];
                                 [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                                 //refresh the whole view
+                                NSLog(@"profile1:%d",[self.blockViews count]);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -345,6 +362,7 @@
                 dispatch_async( dispatch_get_main_queue(),^{
                     [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                     //refresh the whole view
+                    NSLog(@"profile2:%d",[self.blockViews count]);
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
             }

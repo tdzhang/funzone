@@ -153,8 +153,8 @@
         //remove the main views
         self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
-            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT, view.frame.size.width, view.frame.size.height)];
-            NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT);
+            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT/2);
             [self.garbageCollection addObject:view];
         }
         
@@ -162,23 +162,23 @@
         
         //set the refresh view ahead
         NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT)];
+        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT/2)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
         
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT/2)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
-        loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
+        loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
         loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
+        loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
         loadLabel.backgroundColor =[UIColor clearColor];
         [loading addSubview:loadLabel];
-        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame =CGRectMake(120,80,80,80);
+        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinning.frame =CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
         [self.refreshView addSubview:loading];
         
