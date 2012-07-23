@@ -2622,7 +2622,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1213" y="1488"/>
+            <point key="canvasLocation" x="1181" y="1496"/>
         </scene>
         <!--Choose Facebook Friends To Go Table View Controller View Controller - Choose Friends-->
         <scene sceneID="PBb-PX-McL">
@@ -3628,7 +3628,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2313" y="527"/>
+            <point key="canvasLocation" x="2259" y="739"/>
         </scene>
         <!--New EventVC - New Event-->
         <scene sceneID="ovw-Dd-Shb">
@@ -3747,7 +3747,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="UOZ-GP-9Qo">
-                                <rect key="frame" x="210" y="174" width="100" height="100"/>
+                                <rect key="frame" x="213" y="174" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="form.png" id="mw1-5B-lbQ">
@@ -3809,7 +3809,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </accessibility>
                             </view>
                             <view contentMode="scaleToFill" id="731-iH-70Y">
-                                <rect key="frame" x="10" y="174" width="190" height="50"/>
+                                <rect key="frame" x="12" y="174" width="190" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="11-clock.png" id="qdx-h4-mF5">
@@ -4301,6 +4301,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Idn-d1-X1d"/>
-        <segue reference="UWz-iO-Edm"/>
+        <segue reference="Mwv-fE-YHU"/>
     </inferredMetricsTieBreakers>
 </document>
