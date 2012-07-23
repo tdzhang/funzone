@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSNumber *latitude;
 @property (nonatomic,strong) NSString *description;
 @property (nonatomic,strong) NSMutableArray *comments;
+@property (nonatomic,strong) NSString *creator_id;
 
 @end
 
@@ -52,6 +53,7 @@
 @synthesize latitude=_latitude;
 @synthesize description=_description;
 @synthesize comments=_comments;
+@synthesize creator_id=_creator_id;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
@@ -181,7 +183,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"repin to create new event"]) {
         NewEventVC *newEventVC = segue.destinationViewController;
-        [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name longitude:self.longitude latitude:self.latitude description:self.description];
+        [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name longitude:self.longitude latitude:self.latitude description:self.description];
     }
     else if([segue.identifier isEqualToString:@"addAndViewComment"]){
         if ([segue.destinationViewController isKindOfClass:[AddCommentVC class]]) {
@@ -226,8 +228,12 @@
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
     NSString *creator_name=[event objectForKey:@"creator_name"];
+    NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+    NSLog(@"%@",creator_id);
+    self.creator_id=creator_id;
+    
     //handle the comment part
-    self.comments= [eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]];
+    self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
     
     NSLog(@"%@",title);

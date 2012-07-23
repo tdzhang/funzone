@@ -66,6 +66,7 @@
 @property (nonatomic,strong) NSNumber *detail_latitude;
 @property (nonatomic,strong) NSString *detail_description;
 @property (nonatomic,strong) UIImage *detail_image;
+@property (nonatomic,strong) NSString *detail_creator_id;
 
 //these property used to send back to server when create a event(image, title, location)
 @property (nonatomic,strong) UIImage *createEvent_image;
@@ -128,6 +129,8 @@
 @synthesize detail_latitude=_detail_latitude;
 @synthesize detail_description=_detail_description;
 @synthesize detail_image=_detail_image;
+@synthesize detail_creator_id=_detail_creator_id;
+
 
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -141,7 +144,7 @@
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
-    _createEvent_image=[self.uIImageViewEvent.image copy];
+    _createEvent_image=self.uIImageViewEvent.image;
     return _createEvent_image;
 }
 
@@ -217,12 +220,13 @@
 }
 
 #pragma mark - self defined
--(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
+-(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
     self.detail_shared_event_id=shared_event_id;
     self.detail_event_title=event_title;
     self.detail_event_time=event_time;
     self.detail_location_name=location_name;
+    self.detail_creator_id=creator_id;
     NSLog(@"%@",location_name);
     self.detail_longitude=longitude;
     NSLog(@"%@",longitude);
@@ -391,23 +395,44 @@
     //add login auth_token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-    //add content
     [request setPostValue:self.createEvent_title forKey:@"title"];
     [request setPostValue:self.createEvent_locationName forKey:@"address"];
     [request setPostValue:self.createEvent_locationName forKey:@"location"];
     [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
     [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
     [request setPostValue:self.createEvent_time forKey:@"start_time"];
-    NSString *format=@"png";
-    NSData *data=nil;
-    data=UIImagePNGRepresentation(self.createEvent_image);
-    //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
-    if(data==nil){
-        //data=UIImagePNGRepresentation(self.createEvent_image);
-        data=UIImageJPEGRepresentation(self.createEvent_image, 1);
-        format=@"jpeg";
+    if (self.detail_creator_id) {
+        if (![self.createEvent_image isEqual:self.detail_image]) {
+            //add content
+            NSString *format=@"png";
+            NSData *data=nil;
+            data=UIImagePNGRepresentation(self.createEvent_image);
+            //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+            if(data==nil){
+                //data=UIImagePNGRepresentation(self.createEvent_image);
+                data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+                format=@"jpeg";
+            }
+            [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+        }
+        [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
+        [request setPostValue:self.detail_event_id forKey:@"event_id"];
+        [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
     }
-    [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+    else {
+        //add content
+        NSString *format=@"png";
+        NSData *data=nil;
+        data=UIImagePNGRepresentation(self.createEvent_image);
+        //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+        if(data==nil){
+            //data=UIImagePNGRepresentation(self.createEvent_image);
+            data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+            format=@"jpeg";
+        }
+        [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+    }
+    
     [request setRequestMethod:@"POST"];
     [request startAsynchronous];
 }
