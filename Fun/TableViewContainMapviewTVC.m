@@ -252,23 +252,23 @@
     // Configure the cell...
     FourSquarePlace *place=nil;
     place=(FourSquarePlace*)[self.foursquareSearchResults objectAtIndex:indexPath.row];
-    NSString *venue_title=(place.name)?place.name:@"No name";
-    if (place.categories_shortName) {
-        venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
-    }
-    NSString *crossStreet=(place.crossStreet);
-    //show the place name and location
-    [cell.textLabel setText:venue_title];
-    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:DEFAULT_TABLE_CELL_FONT_SIZE]];
+    NSString *crossStreet=(place.crossStreet);    
     if (place.crossStreet) {
         NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",crossStreet,place.distance];
         [cell.detailTextLabel setText:detail];
         [cell.detailTextLabel setFont:[UIFont systemFontOfSize:DEFAULT_TABLE_CELL_SUBTITLE_SIZE]];
     }
     else {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         [cell.detailTextLabel setHidden:TRUE];
-        cell.selectionStyle = UITableViewCellStyleDefault;
     }
+    //show the place name and location
+    NSString *venue_title=(place.name)?place.name:@"No name";
+    if (place.categories_shortName) {
+        venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+    }
+    [cell.textLabel setText:venue_title];
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:DEFAULT_TABLE_CELL_FONT_SIZE]];
     return cell;
 }
 
