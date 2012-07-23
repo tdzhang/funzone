@@ -216,7 +216,7 @@
 
 -(NSDictionary*)facebookFriendsGoOutWith{
     if (_facebookFriendsGoOutWith == nil){
-        _facebookFriendsGoOutWith = [[NSDictionary alloc	] init];
+        _facebookFriendsGoOutWith = [[NSDictionary alloc] init];
     }
     return _facebookFriendsGoOutWith;	
 }
