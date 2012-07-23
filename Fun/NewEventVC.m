@@ -507,13 +507,13 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"anytime",@"today",@"tomorrow",@"this weekend",@"self enter", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"now",@"today",@"tonight",@"tomorrow",@"self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (IBAction)ChoosePeopleToGo:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose a friend source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"via Email",@"via Facebook message", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose a friend source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Address Book",@"Facebook", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -551,13 +551,13 @@
     //for the when to go action sheet
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.labelEventTime setText:@"anytime"];
+            [self.labelEventTime setText:@"now"];
         }else if(buttonIndex == 1){
             [self.labelEventTime setText:@"today"];
         }else if(buttonIndex == 2){
-            [self.labelEventTime setText:@"tomorrow"];
+            [self.labelEventTime setText:@"tonight"];
         }else if(buttonIndex == 3){
-            [self.labelEventTime setText:@"this weekend"];
+            [self.labelEventTime setText:@"tomorrow"];
         }else if(buttonIndex == 4){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
@@ -619,7 +619,7 @@
                                             andDelegate:self];
             }
             else {
-                NSLog(@"Facebook session invalid~~~");
+                NSLog(@"Face book session invalid~~~");
             }
 
         }
@@ -652,7 +652,7 @@
                                             andDelegate:self];
             }
             else {
-                NSLog(@"Facebook session invalid~~~");
+                NSLog(@"Face book session invalid~~~");
             }
         }
     }
