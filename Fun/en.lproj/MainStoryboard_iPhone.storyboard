@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -742,7 +742,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1181" y="2795"/>
+            <point key="canvasLocation" x="1197" y="2795"/>
         </scene>
         <!--View Controller - More-->
         <scene sceneID="MDo-xn-wHU">
@@ -1071,6 +1071,7 @@
                         <outlet property="mainScrollView" destination="Wz8-2i-zgi" id="Huc-yj-AOf"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Idn-d1-X1d"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="HUl-1w-jPL"/>
+                        <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="e9f-Ec-HCG"/>
                     </connections>
                 </viewController>
             </objects>
@@ -4100,6 +4101,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="bookmarkNumLabel" destination="vL5-Wk-KQD" id="WUP-me-ivd"/>
                         <outlet property="creatorImageView" destination="K2K-fx-y3B" id="e9w-Ob-UBX"/>
                         <outlet property="creatorNameLabel" destination="wPB-XC-qc8" id="xqD-2E-laV"/>
+                        <outlet property="followButton" destination="S4f-Qf-n1a" id="q6X-rT-ebj"/>
                         <outlet property="followerNumLabel" destination="Ro9-jb-Vwh" id="eFw-3X-oH8"/>
                         <outlet property="followingNumLabel" destination="H4i-h2-XbF" id="Udy-OS-5lu"/>
                         <outlet property="mainScrollView" destination="Php-mD-Smt" id="WVS-Wl-fUI"/>
@@ -4260,6 +4262,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
@@ -4300,7 +4303,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Idn-d1-X1d"/>
         <segue reference="UWz-iO-Edm"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="Idn-d1-X1d"/>
     </inferredMetricsTieBreakers>
 </document>

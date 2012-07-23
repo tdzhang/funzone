@@ -108,6 +108,7 @@
         [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
         //if already followed, changed the button name to "unfollow"
+        NSLog(@"%@",json);
         if ([[NSString stringWithFormat:@"%@",[json objectForKey:@"followed"]]isEqualToString:@"1"]) {
             [self.followButton setTitle:@"unfollow" forState:UIControlStateNormal];
         }
@@ -228,8 +229,8 @@
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
         // Use when fetching text data
-        //NSString *responseString = [block_request responseString];
-        //NSLog(@"%@",responseString);
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if ([self.followButton.titleLabel.text isEqualToString:@"unfollow"]) {

@@ -389,7 +389,14 @@
     self.tapped_shared_event_id=tapped_element.shared_event_id;
     self.tapped_creator_id=tapped_element.creator_id;
     if((x>=10&&x<=120)||(y>=125&&y<=157)){
-        [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *myid=[defaults objectForKey:@"user_id"];
+        if ([myid isEqualToString:tapped_element.creator_id]) {
+            [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+        }
     }
     else {
         [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
