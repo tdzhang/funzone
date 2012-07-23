@@ -507,13 +507,13 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"now",@"today",@"tonight",@"tomorrow",@"self enter", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Any Time",@"Today",@"Tomorrow",@"This Weekend",@"Self Enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
 - (IBAction)ChoosePeopleToGo:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose a friend source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Address Book",@"Facebook", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose a friend source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"via Email",@"via Facebook Message", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -551,13 +551,13 @@
     //for the when to go action sheet
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.labelEventTime setText:@"now"];
+            [self.labelEventTime setText:@"Any Time"];
         }else if(buttonIndex == 1){
-            [self.labelEventTime setText:@"today"];
+            [self.labelEventTime setText:@"Today"];
         }else if(buttonIndex == 2){
-            [self.labelEventTime setText:@"tonight"];
+            [self.labelEventTime setText:@"This Weekend"];
         }else if(buttonIndex == 3){
-            [self.labelEventTime setText:@"tomorrow"];
+            [self.labelEventTime setText:@"Self Enter"];
         }else if(buttonIndex == 4){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
