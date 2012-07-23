@@ -74,6 +74,17 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //judge whether the user is login? if not, do the login
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"login_auth_token"]) {
+        //if not login, do it
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
+        loginVC.parentVC=self;
+        loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:loginVC animated:YES completion:^{}];
+    }
+    
     //init the detail page for later segue
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];

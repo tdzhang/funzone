@@ -422,6 +422,8 @@
         [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
         [request setPostValue:self.detail_event_id forKey:@"event_id"];
         [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
+        [request setPostValue:self.detail_longitude forKey:@"longitude"];
+        [request setPostValue:self.detail_latitude forKey:@"latitude"];
     }
     else {
         //add content
