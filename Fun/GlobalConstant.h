@@ -8,3 +8,5 @@
 
 //Connection related constant
 #define CONNECT_DOMIAN_NAME @"http://www.funnect.me"
+#define DEFAULT_TABLE_CELL_FONT_SIZE 15
+#define DEFAULT_TABLE_CELL_SUBTITLE_SIZE 14

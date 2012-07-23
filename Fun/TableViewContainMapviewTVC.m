@@ -7,6 +7,7 @@
 //
 
 #import "TableViewContainMapviewTVC.h"
+#import "GlobalConstant.h"
 
 @interface TableViewContainMapviewTVC ()
 @property(nonatomic,strong)NSMutableData *data;
@@ -261,15 +262,22 @@
     // Configure the cell...
     FourSquarePlace *place=nil;
     place=(FourSquarePlace*)[self.foursquareSearchResults objectAtIndex:indexPath.row];
-    NSString *name=(place.name)?place.name:@"No name";
-    NSString *categories_shortName=(place.categories_shortName)?place.categories_shortName:@"No Cateogry";
-    NSString *title=[NSString stringWithFormat:@"%@ (%@)",name,categories_shortName];
-    NSString *crossStreet=(place.crossStreet)?place.crossStreet:@"No Street Info";
-    NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",crossStreet,place.distance];
+    NSString *venue_title=(place.name)?place.name:@"No name";
+    if (place.categories_shortName) {
+        venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+    }
+    NSString *crossStreet=(place.crossStreet);
     //show the place name and location
-    [cell.textLabel setText:title];
-    [cell.detailTextLabel setText:detail];
-
+    [cell.textLabel setText:venue_title];
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:DEFAULT_TABLE_CELL_FONT_SIZE]];
+    if (place.crossStreet) {
+        NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",crossStreet,place.distance];
+        [cell.detailTextLabel setText:detail];
+        [cell.detailTextLabel setFont:[UIFont systemFontOfSize:DEFAULT_TABLE_CELL_SUBTITLE_SIZE]];
+    }
+    else {
+        [cell.detailTextLabel setHidden:TRUE];
+    }
     return cell;
 }
 
@@ -317,8 +325,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
-    NSString *title=[NSString stringWithFormat:@"%@ (%@)",place.name,place.categories_shortName];
-    NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
+    NSString *venue_title=(place.name)?place.name:@"No name";
+    if (place.categories_shortName) {
+        venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+    }
         
     //set mapview region( where to show the map veiw)
     MKCoordinateRegion region;
@@ -332,10 +342,10 @@
     //add annotation
     MKPointAnnotation *annotationPoint =   [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = region.center;
-    annotationPoint.title = title;
-    if(!annotationPoint.title)annotationPoint.title=@"NO name:";
-    annotationPoint.subtitle = detail;
-    if(!annotationPoint.subtitle)annotationPoint.subtitle=@"No subtitle name.";
+    annotationPoint.title = venue_title;
+    if (place.crossStreet) {
+        annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
+    }
     [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region];
     [self.myTableView setContentOffset:CGPointZero animated:YES];
 }

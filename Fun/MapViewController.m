@@ -7,9 +7,10 @@
 //
 
 #import "MapViewController.h"
+#import "GlobalConstant.h"
 
 @interface  MapViewController()
-@property (nonatomic,strong)NSNumber* oldZoom;
+//@property (nonatomic,strong)NSNumber* oldZoom;
 @property (nonatomic,strong)NSNumber* currentZOOMVALUE;
 @property (nonatomic,strong)NSArray *foursquareSearchResults;
 @property(nonatomic,retain) NSMutableData *data;  //using to restore the http connection data
@@ -20,11 +21,11 @@
 @synthesize predefinedSeachingWords=_predefinedSeachingWords;
 @synthesize myMapView=_myMapView;
 @synthesize mySearchBar = _mySearchBar;
-@synthesize myStepper = _myStepper;
+//@synthesize myStepper = _myStepper;
 @synthesize annotation=_annotation;
 @synthesize delegate=_delegate;
 @synthesize myTableView = _myTableView;
-@synthesize oldZoom=_oldZoom;
+//@synthesize oldZoom=_oldZoom;
 @synthesize currentZOOMVALUE=_currentZOOMVALUE;
 @synthesize foursquareSearchResults=_foursquareSearchResults;
 @synthesize data=_data;
@@ -109,18 +110,18 @@
     MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = location;
     annotationPoint.title=@"Current Location";
-    annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
+    //annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
     self.annotation=annotationPoint;
     [self.myMapView addAnnotation:annotationPoint];
     
-    self.myStepper.minimumValue = 1;
-    self.myStepper.maximumValue = 9;
-    self.myStepper.stepValue = 1;
-    self.myStepper.wraps = NO;
-    self.myStepper.autorepeat = NO;
-    self.myStepper.continuous = NO;   
-    [self.myStepper setValue:5];
-    self.oldZoom =[NSNumber numberWithDouble:5];
+//    self.myStepper.minimumValue = 1;
+//    self.myStepper.maximumValue = 9;
+//    self.myStepper.stepValue = 1;
+//    self.myStepper.wraps = NO;
+//    self.myStepper.autorepeat = NO;
+//    self.myStepper.continuous = NO;   
+//    [self.myStepper setValue:5];
+//    self.oldZoom =[NSNumber numberWithDouble:5];
 }
 
 
@@ -151,14 +152,14 @@
     
     
     //initailize the zooming part
-    self.myStepper.minimumValue = 1;
-    self.myStepper.maximumValue = 9;
-    self.myStepper.stepValue = 1;
-    self.myStepper.wraps = NO;
-    self.myStepper.autorepeat = NO;
-    self.myStepper.continuous = NO;   
-    [self.myStepper setValue:5];
-    self.oldZoom =[NSNumber numberWithDouble:5];
+//    self.myStepper.minimumValue = 1;
+//    self.myStepper.maximumValue = 9;
+//    self.myStepper.stepValue = 1;
+//    self.myStepper.wraps = NO;
+//    self.myStepper.autorepeat = NO;
+//    self.myStepper.continuous = NO;   
+//    [self.myStepper setValue:5];
+//    self.oldZoom =[NSNumber numberWithDouble:5];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -202,7 +203,7 @@
 {
     [self setMyMapView:nil];
     [self setMySearchBar:nil];
-    [self setMyStepper:nil];
+//    [self setMyStepper:nil];
     [self setMyTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -249,36 +250,36 @@
     }
 }
 
-#pragma mark - implement the Stepper part (ZooMing)
-- (IBAction)Zooming:(id)sender {
-    double oldzoom=[self.oldZoom doubleValue];
-    double zoom = self.myStepper.value;
-    NSLog(@"oldzoom: %f",oldzoom);
-    NSLog(@"zoom: %f",zoom);
-    double la,lo;
-    if (zoom<oldzoom) {
-        la=[self.currentZOOMVALUE doubleValue]*ZOOM_RATIO;
-        lo=[self.currentZOOMVALUE doubleValue]*ZOOM_RATIO;
-        self.currentZOOMVALUE = [NSNumber numberWithDouble:la];
-    }else{
-        la=[self.currentZOOMVALUE doubleValue]/ZOOM_RATIO;
-        lo=[self.currentZOOMVALUE doubleValue]/ZOOM_RATIO;
-         self.currentZOOMVALUE = [NSNumber numberWithDouble:la];
-    }
-    self.oldZoom = [NSNumber numberWithDouble:zoom];
-    MKCoordinateRegion region;
-    CLLocationCoordinate2D coordinate;
-   
-    coordinate.latitude= self.myMapView.centerCoordinate.latitude;
-    coordinate.longitude= self.myMapView.centerCoordinate.longitude;
-    region.center=coordinate;
-    MKCoordinateSpan span;
-    span.latitudeDelta = la;
-    span.longitudeDelta = lo;
-    region.span = span;
-    [self.myMapView setRegion:region animated:YES];
-
-}
+//#pragma mark - implement the Stepper part (ZooMing)
+//- (IBAction)Zooming:(id)sender {
+//    double oldzoom=[self.oldZoom doubleValue];
+//    double zoom = self.myStepper.value;
+//    NSLog(@"oldzoom: %f",oldzoom);
+//    NSLog(@"zoom: %f",zoom);
+//    double la,lo;
+//    if (zoom<oldzoom) {
+//        la=[self.currentZOOMVALUE doubleValue]*ZOOM_RATIO;
+//        lo=[self.currentZOOMVALUE doubleValue]*ZOOM_RATIO;
+//        self.currentZOOMVALUE = [NSNumber numberWithDouble:la];
+//    }else{
+//        la=[self.currentZOOMVALUE doubleValue]/ZOOM_RATIO;
+//        lo=[self.currentZOOMVALUE doubleValue]/ZOOM_RATIO;
+//         self.currentZOOMVALUE = [NSNumber numberWithDouble:la];
+//    }
+//    self.oldZoom = [NSNumber numberWithDouble:zoom];
+//    MKCoordinateRegion region;
+//    CLLocationCoordinate2D coordinate;
+//   
+//    coordinate.latitude= self.myMapView.centerCoordinate.latitude;
+//    coordinate.longitude= self.myMapView.centerCoordinate.longitude;
+//    region.center=coordinate;
+//    MKCoordinateSpan span;
+//    span.latitudeDelta = la;
+//    span.longitudeDelta = lo;
+//    region.span = span;
+//    [self.myMapView setRegion:region animated:YES];
+//
+//}
 
 - (IBAction)returnToMyLocation {
     [self showUserCurrentLocation];
@@ -357,11 +358,22 @@
     /* Configure the cell.  if the table view is used for showing search results*/
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
-        NSString *title=[NSString stringWithFormat:@"%@ (%@)",place.name,place.categories_shortName];
-        NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
+        NSString *venue_title=(place.name)?place.name:@"No name";
+        if (place.categories_shortName) {
+            venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+        }
+        NSString *crossStreet=(place.crossStreet);
         //show the place name and location
-        [cell.textLabel setText:title];
-        [cell.detailTextLabel setText:detail];
+        [cell.textLabel setText:venue_title];
+        [cell.textLabel setFont:[UIFont boldSystemFontOfSize:DEFAULT_TABLE_CELL_FONT_SIZE]];
+        if (place.crossStreet) {
+            NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",crossStreet,place.distance];
+            [cell.detailTextLabel setText:detail];
+            [cell.detailTextLabel setFont:[UIFont systemFontOfSize:DEFAULT_TABLE_CELL_SUBTITLE_SIZE]];
+        }
+        else {
+            [cell.detailTextLabel setHidden:TRUE];
+        }
     }
     return cell;
 }
@@ -473,11 +485,12 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //if the notificaiton is from the user select search results
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
-        NSString *title=[NSString stringWithFormat:@"%@ (%@)",place.name,place.categories_shortName];
-        NSString *detail=[NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
-        
+        NSString *venue_title=(place.name)?place.name:@"No name";
+        if (place.categories_shortName) {
+            venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+        }
         //set the Search Bar and give up the Firstresponsder
-        [self.mySearchBar setText:title];
+        [self.mySearchBar setText:venue_title];
         
         //set mapview region( where to show the map veiw)
         MKCoordinateRegion region;
@@ -491,10 +504,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
         //add annotation
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = region.center;
-        annotationPoint.title = title;
-        if(!annotationPoint.title)annotationPoint.title=@"NO name:";
-        annotationPoint.subtitle = detail;
-        if(!annotationPoint.subtitle)annotationPoint.subtitle=@"No subtitle name.";
+        annotationPoint.title = venue_title;
+        if (place.crossStreet) {
+            annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
+        }
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
         [self.myMapView setRegion:region animated:YES];
