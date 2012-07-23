@@ -689,9 +689,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
             [self.delegate UpdateLocation:view withSnapShot:image sendFrom:self];
         }
-        [self.navigationController popViewControllerAnimated:YES];
-
-        
+        [self.navigationController popViewControllerAnimated:YES];        
     }
 }
 

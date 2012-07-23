@@ -149,7 +149,6 @@
             self.foursquareConnectionType=@"search";
         }
     }
-    
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -171,8 +170,6 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
-    
-
     NSMutableArray *searchResult = [NSMutableArray array];
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
@@ -211,17 +208,10 @@
             }
         }
     }
-    
-    
     self.foursquareSearchResults=[searchResult sortedArrayUsingSelector:@selector(compare:)];//sorting the result using distance from the current location
     //reload data for the search result receiving
     [self.myTableView reloadData];
 }
-
-
-
-
-
 
 - (void)viewDidUnload
 {
@@ -277,6 +267,7 @@
     }
     else {
         [cell.detailTextLabel setHidden:TRUE];
+        cell.selectionStyle = UITableViewCellStyleDefault;
     }
     return cell;
 }
