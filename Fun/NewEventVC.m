@@ -62,6 +62,7 @@
 @property (nonatomic,strong) NSString *detail_event_title;
 @property (nonatomic,strong) NSString *detail_event_time;
 @property (nonatomic,strong) NSString *detail_location_name;
+@property (nonatomic,strong) NSString *detail_address;
 @property (nonatomic,strong) NSNumber *detail_longitude;
 @property (nonatomic,strong) NSNumber *detail_latitude;
 @property (nonatomic,strong) NSString *detail_description;
@@ -125,6 +126,7 @@
 @synthesize detail_event_title=_detail_event_title;
 @synthesize detail_event_time=_detail_event_time;
 @synthesize detail_location_name=_detail_location_name;
+@synthesize detail_address=_detail_address;
 @synthesize detail_longitude=_detail_longitude;
 @synthesize detail_latitude=_detail_latitude;
 @synthesize detail_description=_detail_description;
@@ -220,7 +222,7 @@
 }
 
 #pragma mark - self defined
--(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
+-(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
     self.detail_shared_event_id=shared_event_id;
     self.detail_event_title=event_title;
@@ -234,6 +236,7 @@
     NSLog(@"%@",latitude);
     self.detail_description=description;
     self.detail_image=[event_image copy];
+    self.detail_address=address;
     
     if (![[NSString stringWithFormat:@"%@",longitude] isEqualToString:@"<null>"] && ![[NSString stringWithFormat:@"%@",latitude] isEqualToString:@"<null>"]) {
         MKPointAnnotation *annotation=[[MKPointAnnotation alloc] init];
@@ -424,6 +427,8 @@
         [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
         [request setPostValue:self.detail_longitude forKey:@"longitude"];
         [request setPostValue:self.detail_latitude forKey:@"latitude"];
+        [request setPostValue:self.detail_address forKey:@"address"];
+        [request setPostValue:self.detail_location_name forKey:@"location"];
     }
     else {
         //add content

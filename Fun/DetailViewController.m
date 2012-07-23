@@ -31,6 +31,7 @@
 @property (nonatomic,strong) NSString *description;
 @property (nonatomic,strong) NSMutableArray *comments;
 @property (nonatomic,strong) NSString *creator_id;
+@property (nonatomic,strong) NSString *event_address;
 
 @end
 
@@ -183,7 +184,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"repin to create new event"]) {
         NewEventVC *newEventVC = segue.destinationViewController;
-        [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name longitude:self.longitude latitude:self.latitude description:self.description];
+        [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name address:self.event_address longitude:self.longitude latitude:self.latitude description:self.description];
     }
     else if([segue.identifier isEqualToString:@"addAndViewComment"]){
         if ([segue.destinationViewController isKindOfClass:[AddCommentVC class]]) {
@@ -243,6 +244,9 @@
        // NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
         //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
     NSString *locationName=[event objectForKey:@"location"];
+    self.location_name=locationName;
+    NSString *address=[event objectForKey:@"address"];
+    self.event_address=address;
        // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
        // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
 
@@ -252,14 +256,15 @@
         
     self.event_title=title;
     self.event_time=time;
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";;
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+    
     self.longitude=[event objectForKey:@"longitude"];
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
     
     //set the content on the screen
-    [self.eventLocationLabel setText:self.location_name];
+    [self.eventLocationLabel setText:locationName];
     [self.eventTimeLabel setText:self.event_time];
     [self.eventTitleLabel setText:self.event_title];
     [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
