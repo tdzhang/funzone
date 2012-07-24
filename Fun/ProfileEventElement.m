@@ -41,7 +41,7 @@
     
     //set event_id and shared_event_id
     blockElement.event_id = event_id;
-    blockElement.shared_event_id=event_id;
+    blockElement.shared_event_id=shared_event_id;
     
     //Event Image
     blockElement.eventImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EVENT_IMAGE_X, EVENT_IMAGE_Y, EVENT_IMAGE_SIZE, EVENT_IMAGE_SIZE)];

@@ -266,7 +266,7 @@
     if ([segue.identifier isEqualToString:@"ViewEventDetail"]) {
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
-        
+        NSLog(@"%@ %@",self.tapped_event_id,self.tapped_shared_event_id);
         [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
     }
 }
@@ -331,7 +331,7 @@
         NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
         
         NSLog(@"event_id=%@",event_id);
-        NSLog(@"photo_url=%@",event_photo_url);
+        NSLog(@"photo_url=%@",shared_event_id);
         
         if (!title) {
             continue;
