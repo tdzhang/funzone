@@ -154,21 +154,12 @@
         [commentLabel1 setFont:[UIFont boldSystemFontOfSize:14]];
         [commentLabel1 setTextColor:[UIColor darkGrayColor]];
         [commentView addSubview:commentLabel1];
-<<<<<<< HEAD
         UILabel *commentLabel2=[[UILabel alloc] initWithFrame:CGRectMake(20, 2, 280, 15)];
         [commentLabel2 setBackgroundColor:[UIColor clearColor]];
         NSString *temp_content =[NSString stringWithFormat:@"%@  time:%@",comment.user_name,comment.timestamp];
         [commentLabel2 setFont:[UIFont fontWithName:@"Gurmukhi MN" size:12.0]];
         [commentLabel2 setText:temp_content];
         [commentView addSubview:commentLabel2];
-=======
-//        UILabel *commentLabel2=[[UILabel alloc] initWithFrame:CGRectMake(20, 2, 280, 15)];
-//        [commentLabel2 setBackgroundColor:[UIColor clearColor]];
-//        NSString *temp_content =[NSString stringWithFormat:@"id:%@  time:%@",comment.user_id,comment.timestamp];
-//        [commentLabel2 setFont:[UIFont fontWithName:@"Gurmukhi MN" size:12.0]];
-//        [commentLabel2 setText:temp_content];
-//        [commentView addSubview:commentLabel2];
->>>>>>> update comment
         [self.myScrollView addSubview:commentView];
     }
     
