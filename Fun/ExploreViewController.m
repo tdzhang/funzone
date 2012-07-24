@@ -388,7 +388,7 @@
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
     self.tapped_creator_id=tapped_element.creator_id;
-    if((x>=10&&x<=120)||(y>=125&&y<=157)){
+    if((x>=10&&x<=120)&&(y>=125&&y<=157)){
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *myid=[defaults objectForKey:@"user_id"];
         if ([myid isEqualToString:tapped_element.creator_id]) {
