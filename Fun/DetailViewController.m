@@ -130,29 +130,31 @@
 }
 
 #pragma mark - comment handle part
-#define COMMENT_HEIGHT 15
+#define COMMENT_HEIGHT 24
 //handle the comment part from self.comments
 -(void)handleTheCommentPart{
     //comment
-    float height=344;
+    float height=340;
     for (int i = 0; i<[self.comments count]; i++) {
         if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];        
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
-        height+=COMMENT_HEIGHT+15;
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(5, height, 300, COMMENT_HEIGHT)];
+        height+=COMMENT_HEIGHT;
         
-        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 15)];
-        [comment_user_name setBackgroundColor:[UIColor clearColor]];
         NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
-        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
+        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(0, commentView.frame.size.height/2-12, 100, 24)];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
         [comment_user_name setText:content];
         [comment_user_name sizeToFit];
+        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_user_name setTextAlignment:UITextAlignmentCenter];
         [commentView addSubview:comment_user_name];
         
-        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+5, 0, 200, 15)];
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width, commentView.frame.size.height/2-12, 150, 24)];
         [comment_content setBackgroundColor:[UIColor clearColor]];
         [comment_content setText:comment.content];
         [comment_content sizeToFit];
+        [comment_content setTextAlignment:UITextAlignmentCenter];
         [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
         [comment_content setTextColor:[UIColor darkGrayColor]];
         [commentView addSubview:comment_content];
