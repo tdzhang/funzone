@@ -95,12 +95,22 @@
     }    
     //pending operation with the imageview of a cell cell.userPhotoImageView setImage:xxx
     eventComment *comment=[self.comments objectAtIndex:indexPath.row];
+    
     cell.userNameLabel.text=[NSString stringWithFormat:@"%@",comment.user_name];
+    cell.userNameLabel.frame = CGRectMake(40, 5, 320, 30);
+    [cell.userNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [cell.userNameLabel sizeToFit];
+    
     cell.commentContentLabel.text=comment.content;
+    cell.commentContentLabel.frame = CGRectMake(cell.userNameLabel.frame.size.width+45, 5, 150, 30);
+    [cell.commentContentLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [cell.commentContentLabel  sizeToFit];
+    
     cell.commentTimeLabel.text=comment.timestamp;
-    [cell.userNameLabel setBackgroundColor:[UIColor greenColor]];
-    [cell.commentTimeLabel setBackgroundColor:[UIColor yellowColor]];
-    [cell.commentContentLabel setBackgroundColor:[UIColor redColor]];
+    cell.commentTimeLabel.frame = CGRectMake(40, 53, 320, 30);
+    [cell.commentTimeLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [cell.commentTimeLabel  setTextColor:[UIColor lightGrayColor]];
+    [cell.commentTimeLabel sizeToFit];
     
     return cell;  				
 }

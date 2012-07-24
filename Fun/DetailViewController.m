@@ -229,7 +229,7 @@
     NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
-    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"some time";
+    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Any Time";
     NSString *creator_name=[event objectForKey:@"creator_name"];
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
     NSLog(@"%@",creator_id);
@@ -243,8 +243,8 @@
     NSLog(@"%@",description);
     NSLog(@"%@",photo);
     NSLog(@"%@",time);
-       // NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-        //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+    //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+    //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
     NSString *locationName=[event objectForKey:@"location"];
     self.location_name=locationName;
     NSString *address=[event objectForKey:@"address"];
@@ -258,8 +258,7 @@
         
     self.event_title=title;
     self.event_time=time;
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";    
     self.longitude=[event objectForKey:@"longitude"];
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
