@@ -110,7 +110,7 @@
         //if already followed, changed the button name to "unfollow"
         NSLog(@"%@",json);
         if ([[NSString stringWithFormat:@"%@",[json objectForKey:@"followed"]]isEqualToString:@"1"]) {
-            [self.followButton setTitle:@"unfollow" forState:UIControlStateNormal];
+            [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
         }
         
         NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
