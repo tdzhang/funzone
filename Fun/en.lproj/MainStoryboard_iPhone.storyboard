@@ -614,7 +614,7 @@
             </objects>
             <point key="canvasLocation" x="3150" y="-1360"/>
         </scene>
-        <!--Profile Page View Controller-->
+        <!--Profile Page View Controller - Profile-->
         <scene sceneID="8AS-Gi-EOt">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -731,7 +731,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bwz-Es-Kjz"/>
+                    <navigationItem key="navigationItem" title="Profile" id="bwz-Es-Kjz"/>
                     <connections>
                         <outlet property="bookmarkNumLabel" destination="7Iq-MC-xQY" id="Jwo-WV-Tf0"/>
                         <outlet property="creatorImageView" destination="yo5-zF-E3a" id="rSs-Jd-ltx"/>
@@ -1824,7 +1824,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2950" y="2557"/>
         </scene>
-        <!--Feed View Controller-->
+        <!--Feed View Controller - Feeds-->
         <scene sceneID="J7I-Bi-1WF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEz-ia-77P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1843,7 +1843,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="k0H-05-gmF"/>
+                    <navigationItem key="navigationItem" title="Feeds" id="k0H-05-gmF"/>
                     <connections>
                         <outlet property="mainScrollView" destination="Zlp-hj-00h" id="rWg-p4-8HU"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Yrc-z9-85p"/>
@@ -4145,7 +4145,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter.png" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
