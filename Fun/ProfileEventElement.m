@@ -8,7 +8,7 @@
 
 #import "ProfileEventElement.h"
 #define VIEW_WIDTH 320
-#define VIEW_HEIGHT 55 
+#define VIEW_HEIGHT 60 
 
 #define EVENT_IMAGE_X 5
 #define EVENT_IMAGE_Y 5
@@ -93,15 +93,19 @@
         });
     }
     
+    
     //add event title
-    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(55, 2, 231, 36)];
+    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(55, 0, 200, 30)];
     blockElement.eventTitleLabel.numberOfLines = 2;
     [blockElement.eventTitleLabel setText:title];
+    [blockElement.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:15]];
     [blockElement.blockView addSubview:blockElement.eventTitleLabel];
     
     //add location label
-    blockElement.locationNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(58, 28, 85, 21)];
+    blockElement.locationNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 28, 150, 21)];
     [blockElement.locationNameLabel setText:locationName];
+    [blockElement.locationNameLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [blockElement.locationNameLabel setTextColor:[UIColor lightGrayColor]];
     [blockElement.blockView addSubview:blockElement.locationNameLabel];
     
     //add heart image
@@ -112,11 +116,8 @@
     //add heart label
     blockElement.heartNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(296, 18, 21, 21)];
     [blockElement.heartNumberLabel setText:favor_label];
+    [blockElement.heartNumberLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [blockElement.blockView addSubview:blockElement.heartNumberLabel];
-    
-    
-    
-    
     return  blockElement;
 }
 @end
