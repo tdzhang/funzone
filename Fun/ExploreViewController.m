@@ -52,8 +52,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        
     }
     return self;
 }
@@ -207,21 +205,21 @@
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor clearColor];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
         loadLabel.text =@"Adding More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
+        loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
         loadLabel.backgroundColor =[UIColor clearColor];
         [loading addSubview:loadLabel];
-        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame =CGRectMake(120,80,80,80);
+        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinning.frame =CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,BlOCK_VIEW_HEIGHT/2)];
         [self.refreshViewdown removeFromSuperview];
         [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
+        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+0.5)*BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
         NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
