@@ -100,6 +100,10 @@
     [super viewWillAppear:animated];
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
     
+    //clean up the comment part
+    for (UIView *oneview in [self.myScrollView subviews]) {
+        [oneview removeFromSuperview];
+    }
     
     [self.myScrollView setContentSize:CGSizeMake(320, 400)];
     
