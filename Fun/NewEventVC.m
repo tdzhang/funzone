@@ -18,12 +18,12 @@
 #define SHOW_OPTION_BUTTON_LOCATION_Y 360
 #define SHOW_OPTION_BUTTON_LOCATION_WIDTH 40
 #define SHOW_OPTION_BUTTON_LOCATION_HEIGHT 40
-#define SHARE_BY_EMAIL_X 230
-#define SHARE_BY_EMAIL_Y 360
-#define SHARE_BY_FACEBOOK_X 150
-#define SHARE_BY_FACEBOOK_Y 360
-#define SHARE_BY_TWITTER_X 70
-#define SHARE_BY_TWITTER_Y 360
+#define SHARE_BY_EMAIL_X 270
+#define SHARE_BY_EMAIL_Y 285
+#define SHARE_BY_FACEBOOK_X 220
+#define SHARE_BY_FACEBOOK_Y 285
+#define SHARE_BY_TWITTER_X 170
+#define SHARE_BY_TWITTER_Y 285
 
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
@@ -269,7 +269,7 @@
     [self.buttonEmailShare addTarget:self 
                      action:@selector(useEmailToShare:)
            forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
+    [self.buttonEmailShare setImage:[UIImage imageNamed:@"weixin_icon.JPEG"] forState:UIControlStateNormal];
     self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonEmailShare setHidden:NO];
     [self.view addSubview:self.buttonEmailShare];
@@ -278,7 +278,7 @@
     [self.buttonTwitterShare addTarget:self 
                               action:@selector(useTwitterToShare:)
                     forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter-bird-white-on-blue.png"] forState:UIControlStateNormal];
     self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonTwitterShare setHidden:NO];
     [self.view addSubview:self.buttonTwitterShare];
@@ -287,7 +287,7 @@
     [self.buttonFacebookShare addTarget:self 
                                 action:@selector(useFacebookToShare:)
                       forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook_icon.png"] forState:UIControlStateNormal];
     self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonFacebookShare setHidden:NO];
     [self.view addSubview:self.buttonFacebookShare];
