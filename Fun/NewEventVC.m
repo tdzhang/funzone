@@ -845,11 +845,11 @@
         //if already login : start the action sheet
         funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-        /*
+        
         UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create facebook event", nil];
         pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
         [pop showFromTabBar:self.tabBarController.tabBar];
-         */
+         /*
         //post on the wall
         NSLog(@"need to do sth about post on wall");
         FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
@@ -876,7 +876,7 @@
         else {
             NSLog(@"Face book session invalid~~~");
         }
-
+          */
 
     }
     if (![funAppdelegate.facebook isSessionValid]) {
