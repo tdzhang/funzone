@@ -74,6 +74,13 @@
     
 }
 
+-(void)fbDidLogout{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:nil forKey:@"FBAccessTokenKey"];
+    [defaults setValue:nil forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
     NSLog(@"%@",response);
 }

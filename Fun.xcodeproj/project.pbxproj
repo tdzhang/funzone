@@ -42,6 +42,7 @@
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
 		0F91EE4E15B9CD1200E7B1D3 /* commentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
+		0F9A531B15BE7F9A008E6F3B /* SettingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A531A15BE7F9A008E6F3B /* SettingPageViewController.m */; };
 		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
@@ -200,6 +201,8 @@
 		0F968BF715A2B4B500BDBC44 /* TableViewContainMapviewTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewContainMapviewTVC.h; sourceTree = "<group>"; };
 		0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewContainMapviewTVC.m; sourceTree = "<group>"; };
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
+		0F9A531915BE7F9A008E6F3B /* SettingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingPageViewController.h; sourceTree = "<group>"; };
+		0F9A531A15BE7F9A008E6F3B /* SettingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingPageViewController.m; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
 		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
@@ -524,6 +527,15 @@
 			name = "custom view";
 			sourceTree = "<group>";
 		};
+		0F9A531715BE7F87008E6F3B /* setting page */ = {
+			isa = PBXGroup;
+			children = (
+				0F9A531915BE7F9A008E6F3B /* SettingPageViewController.h */,
+				0F9A531A15BE7F9A008E6F3B /* SettingPageViewController.m */,
+			);
+			name = "setting page";
+			sourceTree = "<group>";
+		};
 		0FC6FF6B15ABA7D200CC022C /* self defined model */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +661,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F9A531715BE7F87008E6F3B /* setting page */,
 				0F60F3FA15BC699A00053D25 /* Profile page */,
 				0F4093B115B7D8B6002C9F23 /* loginPage */,
 				0FD0BB3215AFAF4E00357ADE /* asiConnection */,
@@ -1022,6 +1035,7 @@
 				0F60F3FE15BC6A0A00053D25 /* ProfilePageViewController.m in Sources */,
 				0F60F40315BC72F100053D25 /* ProfileEventElement.m in Sources */,
 				0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */,
+				0F9A531B15BE7F9A008E6F3B /* SettingPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

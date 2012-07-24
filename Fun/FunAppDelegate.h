@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
-@interface FunAppDelegate : UIResponder <UIApplicationDelegate> 
+@interface FunAppDelegate : UIResponder <UIApplicationDelegate,FBSessionDelegate> 
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) Facebook *facebook;
