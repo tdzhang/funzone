@@ -66,7 +66,7 @@
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
         if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment Complete!" message:@"The Comment has been successfully added to our server." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log Out Complete!" message:@"The Log Out is finished." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
             success.delegate=self;
             [success show];
         }
@@ -74,7 +74,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Log Out Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
