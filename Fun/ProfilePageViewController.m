@@ -266,6 +266,7 @@
     if ([segue.identifier isEqualToString:@"ViewEventDetail"]) {
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+        
         [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
     }
 }
@@ -358,7 +359,7 @@
                                 [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                               ;
                                 //refresh the whole view
-                                NSLog(@"profile0:%d",[self.blockViews count]);
+                                NSLog(@"profile0:%@",event_id);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -371,7 +372,7 @@
                                 [Cache addDataToCache:url withData:imageData];
                                 [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                                 //refresh the whole view
-                                NSLog(@"profile1:%d",[self.blockViews count]);
+                                NSLog(@"profile0:%@",event_id);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -382,7 +383,7 @@
                 dispatch_async( dispatch_get_main_queue(),^{
                     [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
                     //refresh the whole view
-                    NSLog(@"profile2:%d",[self.blockViews count]);
+                    NSLog(@"profile1:%@",shared_event_id);
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
             }
@@ -403,6 +404,9 @@
     ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
+    
+    NSLog(@"%@  %@",self.tapped_event_id,self.tapped_shared_event_id);
+    
     //do some pre-segue stuff with event_id and shared_id
     [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
     /*

@@ -30,9 +30,7 @@
 @synthesize shared_event_id=_shared_event_id;
 
 +(ProfileEventElement *)initialWithPositionY:(CGFloat)position_y eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName{
-    
-    
-    
+
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
@@ -41,7 +39,9 @@
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
     
-    
+    //set event_id and shared_event_id
+    blockElement.event_id = event_id;
+    blockElement.shared_event_id=event_id;
     
     //Event Image
     blockElement.eventImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EVENT_IMAGE_X, EVENT_IMAGE_Y, EVENT_IMAGE_SIZE, EVENT_IMAGE_SIZE)];
