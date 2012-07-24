@@ -102,16 +102,20 @@
     [cell.userNameLabel sizeToFit];
     
     cell.commentContentLabel.text=comment.content;
-    cell.commentContentLabel.frame = CGRectMake(cell.userNameLabel.frame.size.width+45, 5, 150, 30);
+    cell.commentContentLabel.frame = CGRectMake(cell.userNameLabel.frame.size.width+45, 5, 180, 30);
     [cell.commentContentLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [cell.commentContentLabel setTextColor:[UIColor darkGrayColor]];
+    cell.commentContentLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.commentContentLabel.numberOfLines = 0;
     [cell.commentContentLabel  sizeToFit];
     
     cell.commentTimeLabel.text=comment.timestamp;
-    cell.commentTimeLabel.frame = CGRectMake(40, 53, 320, 30);
+    cell.commentTimeLabel.frame = CGRectMake(40, cell.commentContentLabel.frame.size.height+10, 320, 30);
     [cell.commentTimeLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [cell.commentTimeLabel  setTextColor:[UIColor lightGrayColor]];
     [cell.commentTimeLabel sizeToFit];
     
+    [cell setSelectionStyle:UITableViewCellEditingStyleNone];
     return cell;  				
 }
 

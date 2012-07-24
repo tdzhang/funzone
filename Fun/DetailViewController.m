@@ -138,31 +138,33 @@
     for (int i = 0; i<[self.comments count]; i++) {
         if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];        
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(5, height, 300, COMMENT_HEIGHT)];
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, COMMENT_HEIGHT)];
         height+=COMMENT_HEIGHT;
         
         NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
         UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(0, commentView.frame.size.height/2-12, 100, 24)];
         [comment_user_name setBackgroundColor:[UIColor clearColor]];
         [comment_user_name setText:content];
-        [comment_user_name sizeToFit];
         [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
         [comment_user_name setTextAlignment:UITextAlignmentCenter];
+        [comment_user_name sizeToFit];
         [commentView addSubview:comment_user_name];
         
-        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width, commentView.frame.size.height/2-12, 150, 24)];
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+5, commentView.frame.size.height/2-12, 100, 24)];
         [comment_content setBackgroundColor:[UIColor clearColor]];
         [comment_content setText:comment.content];
-        [comment_content sizeToFit];
         [comment_content setTextAlignment:UITextAlignmentCenter];
         [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
         [comment_content setTextColor:[UIColor darkGrayColor]];
+        comment_content.lineBreakMode = UILineBreakModeWordWrap;
+        comment_content.numberOfLines = 2;
+        [comment_content sizeToFit];
         [commentView addSubview:comment_content];
         [self.myScrollView addSubview:commentView];
     }    
     //button
     //UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
-    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 90, 30)];
+    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 90, 60)];
     height+=COMMENT_HEIGHT;
     UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
     [button setAlpha:1];
@@ -170,7 +172,7 @@
     [button addTarget:self 
                action:@selector(addViewCommentButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [buttonView setBackgroundColor:[UIColor clearColor]];
+    [buttonView setBackgroundColor:[UIColor whiteColor]];
     [button setTitle:@"Comment" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
@@ -179,7 +181,7 @@
     [self.myScrollView addSubview:buttonView];
     
     //set the scroll view content size
-    [self.myScrollView setContentSize:CGSizeMake(320, height+5)];
+    [self.myScrollView setContentSize:CGSizeMake(320, height+30)];
 }
 
 #pragma mark - segue related stuff
@@ -229,7 +231,7 @@
     NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
-    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Any Time";
+    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
     NSString *creator_name=[event objectForKey:@"creator_name"];
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
     NSLog(@"%@",creator_id);

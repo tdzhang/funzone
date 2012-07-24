@@ -157,7 +157,7 @@
 //To compensate for the showing up keyboard
 - (void) animateTextView: (UITextView*) textView up: (BOOL) up
 {
-    const int movementDistance = 200; // tweak as needed
+    const int movementDistance = 215; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);

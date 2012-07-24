@@ -507,7 +507,7 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Any Time",@"Today",@"Tomorrow",@"This Weekend",@"Self Enter", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Anytime",@"Today",@"Tomorrow",@"This Weekend",@"Self Enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -551,13 +551,13 @@
     //for the when to go action sheet
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.labelEventTime setText:@"Any Time"];
+            [self.labelEventTime setText:@"Anytime"];
         }else if(buttonIndex == 1){
             [self.labelEventTime setText:@"Today"];
         }else if(buttonIndex == 2){
-            [self.labelEventTime setText:@"This Weekend"];
+            [self.labelEventTime setText:@"Tomorrow"];
         }else if(buttonIndex == 3){
-            [self.labelEventTime setText:@"Self Enter"];
+            [self.labelEventTime setText:@"This Weekend"];
         }else if(buttonIndex == 4){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
