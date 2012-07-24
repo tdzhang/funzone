@@ -12,6 +12,6 @@
 #import "CategroyChooseViewController.h"
 #import "GlobalConstant.h"
 
-@interface LoginPageViewController : UIViewController<UIAlertViewDelegate>
+@interface LoginPageViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 @property (weak,nonatomic) UIViewController* parentVC; //the parent view controller
 @end

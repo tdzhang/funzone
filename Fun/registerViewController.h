@@ -11,6 +11,6 @@
 #import "FunAppDelegate.h"
 #import "CategroyChooseViewController.h"
 #import "GlobalConstant.h"
-@interface registerViewController : UIViewController<UIAlertViewDelegate>
+@interface registerViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 
 @end

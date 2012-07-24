@@ -154,7 +154,6 @@
                                 nil];
         [funAppdelegate.facebook authorize:permissions];
     }
-
 }
 
 
@@ -255,7 +254,7 @@
     //if edit the add cost textfield, the whole view need to 
     //scroll up, get rid of the keyboard covering
     //if ([textField isEqual:self.textFieldSelfDefine]) {
-     //   [self animateTextField: textField up: YES];
+        [self animateTextField: textField up: YES];
      //   self.uIViewUpFlag=YES;
     //}
     
@@ -265,14 +264,14 @@
     
     //if finished editign the add cost textfield, the whole view need to scroll down
     //if ([textField isEqual:self.textFieldSelfDefine]) {
-    //    [self animateTextField: textField up: NO];
+       [self animateTextField: textField up: NO];
      //   self.uIViewUpFlag=NO;
     //}
     
 }
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
-    const int movementDistance = 80; // tweak as needed
+    const int movementDistance = 120; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);
