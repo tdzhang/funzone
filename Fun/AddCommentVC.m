@@ -102,6 +102,12 @@
                 [success show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            else{
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment Went Wrong!" message:@"Sorry, The Comment has not been uploaded to our sever, please try again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }];
         [request setFailedBlock:^{
             NSError *error = [block_request error];
