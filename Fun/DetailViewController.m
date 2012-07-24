@@ -164,16 +164,20 @@
     }
     
     //button
-    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
+    //UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
+    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 90, 30)];
     height+=COMMENT_HEIGHT;
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, COMMENT_HEIGHT)];
-    [button setAlpha:0.5];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
+    [button setAlpha:1];
     //add button action
     [button addTarget:self 
                action:@selector(addViewCommentButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [buttonView setBackgroundColor:[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1]];
-    [button setTitle:@"See More / Add Comment" forState:UIControlStateNormal];
+    [buttonView setBackgroundColor:[UIColor clearColor]];
+    [button setTitle:@"Comment" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
     [buttonView addSubview:button];
     [self.myScrollView addSubview:buttonView];
     
