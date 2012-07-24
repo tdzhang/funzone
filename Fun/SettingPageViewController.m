@@ -9,11 +9,9 @@
 #import "SettingPageViewController.h"
 
 @interface SettingPageViewController ()
-
 @end
 
 @implementation SettingPageViewController
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,7 +24,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    //Navigation Bar Style
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStylePlain
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
+    
 }
 
 - (void)viewDidUnload

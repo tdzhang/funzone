@@ -1494,7 +1494,7 @@
         <scene sceneID="yBW-ic-o4f">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCo-ZO-kJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="1vV-J8-L5m" sceneMemberID="viewController">
+                <navigationController title="More" id="1vV-J8-L5m" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="More" image="settings.png" id="L5h-V5-sUv"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -1519,12 +1519,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EOx-ts-78K">
-                                <rect key="frame" x="36" y="12" width="249" height="343"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EOx-ts-78K">
+                                <rect key="frame" x="20" y="52" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="55"/>
-                                <state key="normal" title="Log out">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Log out" backgroundImage="create_account_button.png">
+                                    <color key="titleColor" red="0.90155220030000005" green="0.38804696830000002" blue="0.035024054999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -3496,12 +3496,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="AXj-7C-tjG">
-                                <rect key="frame" x="0.0" y="44" width="320" height="276"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="323"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" id="8Lh-nZ-81Q">
-                                <rect key="frame" x="0.0" y="365" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="366" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="YmI-ra-0Dr">
@@ -4625,9 +4625,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="maZ-xV-hRy"/>
+        <segue reference="5YL-VF-kXv"/>
         <segue reference="Hfw-Db-bjl"/>
         <segue reference="hTB-gn-88u"/>
-        <segue reference="Mwv-fE-YHU"/>
+        <segue reference="UWz-iO-Edm"/>
     </inferredMetricsTieBreakers>
 </document>
