@@ -14,8 +14,8 @@
 UIViewController *src = (UIViewController *) self.sourceViewController;
 UIViewController *dst = (UIViewController *) self.destinationViewController;
    
-[UIView transitionWithView:src.navigationController.view duration:0.0
-                     options:UIViewAnimationOptionTransitionNone
+[UIView transitionWithView:src.navigationController.view duration:0.5
+                     options:UIViewAnimationOptionTransitionCrossDissolve
                    animations:^{
                        [src.navigationController pushViewController:dst animated:NO];
                         }
@@ -23,3 +23,4 @@ UIViewController *dst = (UIViewController *) self.destinationViewController;
 }
 
 @end
+//UIViewAnimationOptionTransitionNone

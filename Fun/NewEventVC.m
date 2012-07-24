@@ -13,7 +13,7 @@
 
 #pragma mark - Constant Value Declarition
 
-#define ANIMATION_TIME_DURATION 0.5
+#define ANIMATION_TIME_DURATION 0.0
 #define SHOW_OPTION_BUTTON_LOCATION_X 280
 #define SHOW_OPTION_BUTTON_LOCATION_Y 360
 #define SHOW_OPTION_BUTTON_LOCATION_WIDTH 40
@@ -263,16 +263,15 @@
         [self.buttonFacebookShare removeFromSuperview];
     }
     
-    //set the show flag to NO;
-    self.showNewButtonFlag=NO;
+
     //set up all the potential button(email,twitter,facebook)
     self.buttonEmailShare = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.buttonEmailShare addTarget:self 
                      action:@selector(useEmailToShare:)
            forControlEvents:UIControlEventTouchUpInside];
     [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
-    self.buttonEmailShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-    [self.buttonEmailShare setHidden:YES];
+    self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonEmailShare setHidden:NO];
     [self.view addSubview:self.buttonEmailShare];
     
     self.buttonTwitterShare = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -280,8 +279,8 @@
                               action:@selector(useTwitterToShare:)
                     forControlEvents:UIControlEventTouchUpInside];
     [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
-    self.buttonTwitterShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-    [self.buttonTwitterShare setHidden:YES];
+    self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonTwitterShare setHidden:NO];
     [self.view addSubview:self.buttonTwitterShare];
     
     self.buttonFacebookShare = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -289,11 +288,11 @@
                                 action:@selector(useFacebookToShare:)
                       forControlEvents:UIControlEventTouchUpInside];
     [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
-    self.buttonFacebookShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X, SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH, SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-    [self.buttonFacebookShare setHidden:YES];
+    self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonFacebookShare setHidden:NO];
     [self.view addSubview:self.buttonFacebookShare];
     
-    //get the photo of the user 
+
     
     //initial the face book
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
@@ -591,6 +590,7 @@
             }
         }
     }
+    /*
     else if([actionSheet.title isEqualToString:@"Select Share:"]){
         if (buttonIndex == 0) {
             //post on the wall
@@ -623,6 +623,7 @@
             }
 
         }
+     
         else if(buttonIndex == 1){
             //share event
             FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
@@ -656,6 +657,7 @@
             }
         }
     }
+    */
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose Photo Source"]){
         if (buttonIndex == 0) {
@@ -694,73 +696,20 @@
 
 
 
-#pragma mark - Share the event to Friends
-//show all the option button
-- (IBAction)showAllOptionButtons:(id)sender {
-    if (self.showNewButtonFlag==NO) {
-        [self.buttonEmailShare setHidden:NO];
-        [self.buttonEmailShare setAlpha:0];
-        [self.buttonTwitterShare setHidden:NO];
-        [self.buttonTwitterShare setAlpha:0];
-        [self.buttonFacebookShare setHidden:NO];
-        [self.buttonFacebookShare setAlpha:0];
-        
-        CABasicAnimation *fullRotation;
-        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        fullRotation.fromValue = [NSNumber numberWithFloat:0];
-        fullRotation.toValue = [NSNumber numberWithFloat:((10*M_PI))];
-        fullRotation.duration = ANIMATION_TIME_DURATION;
-        fullRotation.repeatCount = 1;
-        [self.buttonEmailShare.layer addAnimation:fullRotation forKey:@"360"];
-        [self.buttonTwitterShare.layer addAnimation:fullRotation forKey:@"360"];
-        [self.buttonFacebookShare.layer addAnimation:fullRotation forKey:@"360"];
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-        
 
-        self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-        self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-        self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-        [self.buttonEmailShare setAlpha:1];
-        [self.buttonTwitterShare setAlpha:1];
-        [self.buttonFacebookShare setAlpha:1];
-        [UIView commitAnimations];
-        self.showNewButtonFlag=YES;
-    }
-    else{
-        CABasicAnimation *fullRotation;
-        fullRotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-        fullRotation.fromValue = [NSNumber numberWithFloat:0];
-        fullRotation.toValue = [NSNumber numberWithFloat:((10*M_PI))];
-        fullRotation.duration = ANIMATION_TIME_DURATION;
-        fullRotation.repeatCount = 1;
-        [self.buttonEmailShare.layer addAnimation:fullRotation forKey:@"360"];
-        [self.buttonTwitterShare.layer addAnimation:fullRotation forKey:@"360"];
-        [self.buttonFacebookShare.layer addAnimation:fullRotation forKey:@"360"];
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-        self.buttonEmailShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-        self.buttonTwitterShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
-        self.buttonFacebookShare.frame = CGRectMake(SHOW_OPTION_BUTTON_LOCATION_X,SHOW_OPTION_BUTTON_LOCATION_Y, SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);        
-        [self.buttonEmailShare setAlpha:0];
-        [self.buttonTwitterShare setAlpha:0];
-        [self.buttonFacebookShare setAlpha:0];
-        [UIView commitAnimations];
-        self.showNewButtonFlag=NO;
-    }
-}
 
 //Email Share Button handler
 -(void)emailSelector:(id)sender{
-    //clean the screen of all the potential option buttons
-    [self.buttonEmailShare.layer removeAllAnimations];
-    [self.buttonTwitterShare.layer removeAllAnimations];
-    [self.buttonFacebookShare.layer removeAllAnimations];
-    [self.buttonEmailShare setHidden:YES];
-    [self.buttonTwitterShare setHidden:YES];
-    [self.buttonFacebookShare setHidden:YES];
+    //reset the email share button
+    [self.buttonEmailShare removeFromSuperview];
+    self.buttonEmailShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonEmailShare addTarget:self 
+                              action:@selector(useEmailToShare:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
+    self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonEmailShare setHidden:NO];
+    [self.view addSubview:self.buttonEmailShare];
     
     //compose the email
     if (self.peopleGoOutWith) {
@@ -815,36 +764,18 @@
 
     [self performSelector:@selector(emailSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
-/*
-{
-    if ([TWTweetComposeViewController canSendTweet])
-    {
-        TWTweetComposeViewController *tweetSheet = 
-        [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:
-         @"Tweeting from iOS 5 By Tutorials! :)"];
-	    [self presentModalViewController:tweetSheet animated:YES];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] 
-                                  initWithTitle:@"Sorry"                                                             
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"                                                          
-                                  delegate:self                                              
-                                  cancelButtonTitle:@"OK"                                                   
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
- */
+
 -(void)twitterSelector:(id)sender{
-    //clean the screen of all the potential option buttons
-    [self.buttonEmailShare.layer removeAllAnimations];
-    [self.buttonTwitterShare.layer removeAllAnimations];
-    [self.buttonFacebookShare.layer removeAllAnimations];
-    [self.buttonEmailShare setHidden:YES];
-    [self.buttonTwitterShare setHidden:YES];
-    [self.buttonFacebookShare setHidden:YES];
+    //reset the button
+    [self.buttonTwitterShare removeFromSuperview];
+    self.buttonTwitterShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonTwitterShare addTarget:self 
+                                action:@selector(useTwitterToShare:)
+                      forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+    self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonTwitterShare setHidden:NO];
+    [self.view addSubview:self.buttonTwitterShare];
     
     //compose the twitter
     if ([TWTweetComposeViewController canSendTweet])
@@ -892,13 +823,17 @@
 
 //Facebook Share Button handler
 -(void)facebookSelector:(id)sender{
-    //clean the screen of all the potential option buttons
-    [self.buttonEmailShare.layer removeAllAnimations];
-    [self.buttonTwitterShare.layer removeAllAnimations];
-    [self.buttonFacebookShare.layer removeAllAnimations];
-    [self.buttonEmailShare setHidden:YES];
-    [self.buttonTwitterShare setHidden:YES];
-    [self.buttonFacebookShare setHidden:YES];
+    //reset button
+    [self.buttonFacebookShare removeFromSuperview];
+    self.buttonFacebookShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.buttonFacebookShare addTarget:self 
+                                 action:@selector(useFacebookToShare:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+    self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
+    [self.buttonFacebookShare setHidden:NO];
+    [self.view addSubview:self.buttonFacebookShare];
+
     
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
@@ -909,9 +844,38 @@
         //if already login : start the action sheet
         funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        /*
         UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create facebook event", nil];
         pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
         [pop showFromTabBar:self.tabBarController.tabBar];
+         */
+        //post on the wall
+        NSLog(@"need to do sth about post on wall");
+        FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+        NSMutableDictionary* params = [NSMutableDictionary dictionary];
+        
+        NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
+        NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
+        NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+        if ([eventTime length]<10) {
+            NSDate *now = [NSDate date];
+            eventTime=[now description];
+        }  
+        [params setObject:@"funnect event" forKey:@"name"];
+        [params setObject:@"new funnect event" forKey:@"description"];
+        [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"message"];
+        
+        if ([delegate.facebook isSessionValid]) {
+            self.currentFacebookConnect=@"post on wall";
+            [delegate.facebook requestWithGraphPath:@"me/feed" 
+                                          andParams:params 
+                                      andHttpMethod:@"POST" 
+                                        andDelegate:self];
+        }
+        else {
+            NSLog(@"Face book session invalid~~~");
+        }
+
 
     }
     if (![funAppdelegate.facebook isSessionValid]) {
@@ -1058,6 +1022,10 @@
             }); 
         }
 
+    }
+    else if([self.currentFacebookConnect isEqualToString:@"post on wall"]){
+         self.currentFacebookConnect = nil;
+        NSLog(@"%@",result);
     }
     else {
         NSLog(@"%@",result);

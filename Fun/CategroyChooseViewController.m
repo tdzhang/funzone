@@ -252,50 +252,50 @@
 - (IBAction)FoodButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"food";
     [self FlashTransition1:GOTO_FOOD_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_FOOD];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //events
 - (IBAction)EventButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"event";
     [self FlashTransition1:GOTO_EVENT_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_EVENTS];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //Entertain
 - (IBAction)EntertainButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"entertain";
     [self FlashTransition1:GOTO_ENTERTAIN_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_ENTERTAIN];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //Outdoor
 - (IBAction)OutdoorButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"outdoor";
     [self FlashTransition1:GOTO_OUTDOOR_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_OUTDOOR];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //Sports
 - (IBAction)SportsButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"sports";
     [self FlashTransition1:GOTO_SPORTS_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_SPORTS];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
     
 }
 //Movie
 - (IBAction)MovieButtonClicked:(id)sender {
     self.eventPrepareCategory=@"movie";
     [self FlashTransition1:GOTO_MOVIE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_MOVIE];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //shopping
 - (IBAction)ShoppingButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"shopping";
     [self FlashTransition1:GOTO_SHOPPING_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_SHOPPTING];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //Party
 - (IBAction)PartyButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"party";
     [self FlashTransition1:GOTO_PARTY_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_PARTY];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
 }
 //hit the self define button "Go"
 - (IBAction)SelfDefineButtonClicked:(id)sender {
