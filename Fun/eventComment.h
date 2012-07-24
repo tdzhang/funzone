@@ -13,6 +13,7 @@
 @property (nonatomic,strong) NSNumber* fb_id;
 @property (nonatomic,strong) NSString* content;
 @property (nonatomic,strong) NSString* timestamp;
+@property (nonatomic,strong) NSString* user_name;
 
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments;
 @end

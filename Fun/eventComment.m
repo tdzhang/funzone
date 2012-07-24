@@ -14,6 +14,7 @@
 @synthesize fb_id=_fb_id;
 @synthesize content=_content;
 @synthesize timestamp=_timestamp;
+@synthesize user_name=_user_name;
 
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments{
     //using the comment json data to build up a comment array
@@ -23,11 +24,13 @@
         NSNumber *fb_id=[comment objectForKey:@"fb_id"];
         NSString *content=[comment objectForKey:@"content"];
         NSString *timestamp=[comment objectForKey:@"timestamp"];
+        NSString *username=[comment objectForKey:@"user_name"];
         eventComment *commentOne=[[eventComment alloc] init];
         commentOne.user_id=user_id;
         commentOne.fb_id=fb_id;
         commentOne.content=content;
         commentOne.timestamp=timestamp;
+        commentOne.user_name=username;
         [temp_array addObject:commentOne];
     }
     return temp_array;

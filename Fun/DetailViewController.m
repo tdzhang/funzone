@@ -156,7 +156,7 @@
         [commentView addSubview:commentLabel1];
         UILabel *commentLabel2=[[UILabel alloc] initWithFrame:CGRectMake(20, 2, 280, 15)];
         [commentLabel2 setBackgroundColor:[UIColor clearColor]];
-        NSString *temp_content =[NSString stringWithFormat:@"id:%@  time:%@",comment.user_id,comment.timestamp];
+        NSString *temp_content =[NSString stringWithFormat:@"%@  time:%@",comment.user_name,comment.timestamp];
         [commentLabel2 setFont:[UIFont fontWithName:@"Gurmukhi MN" size:12.0]];
         [commentLabel2 setText:temp_content];
         [commentView addSubview:commentLabel2];
