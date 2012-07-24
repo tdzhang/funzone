@@ -139,30 +139,25 @@
         if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];        
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
-        height+=COMMENT_HEIGHT+5;
-        //UIImageView *commentImage=[[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 20, 20)];
-
-        //[commentView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
-  
-        //[commentImage setImage:[UIImage imageNamed:@"intro.png"]];
-        //[commentImage setContentMode:UIViewContentModeScaleAspectFill];
-        //[commentImage clipsToBounds];
-        //[commentView addSubview:commentImage];
-        UILabel *commentLabel1=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 12)];
-        [commentLabel1 setBackgroundColor:[UIColor clearColor]];
-        [commentLabel1 setText:comment.content];
-        [commentLabel1 setFont:[UIFont boldSystemFontOfSize:14]];
-        [commentLabel1 setTextColor:[UIColor darkGrayColor]];
-        [commentView addSubview:commentLabel1];
-        UILabel *commentLabel2=[[UILabel alloc] initWithFrame:CGRectMake(20, 2, 280, 15)];
-        [commentLabel2 setBackgroundColor:[UIColor clearColor]];
-        NSString *temp_content =[NSString stringWithFormat:@"%@  time:%@",comment.user_name,comment.timestamp];
-        [commentLabel2 setFont:[UIFont fontWithName:@"Gurmukhi MN" size:12.0]];
-        [commentLabel2 setText:temp_content];
-        [commentView addSubview:commentLabel2];
+        height+=COMMENT_HEIGHT+15;
+        
+        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 15)];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
+        NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
+        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_user_name setText:content];
+        [comment_user_name sizeToFit];
+        [commentView addSubview:comment_user_name];
+        
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+5, 0, 200, 15)];
+        [comment_content setBackgroundColor:[UIColor clearColor]];
+        [comment_content setText:comment.content];
+        [comment_content sizeToFit];
+        [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_content setTextColor:[UIColor darkGrayColor]];
+        [commentView addSubview:comment_content];
         [self.myScrollView addSubview:commentView];
-    }
-    
+    }    
     //button
     //UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
     UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 90, 30)];
