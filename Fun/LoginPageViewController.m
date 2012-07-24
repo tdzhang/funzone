@@ -43,15 +43,23 @@
     
     //set the password field property
     self.userPassword.secureTextEntry=YES;
+    
+    //add notification receiver
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //delete notification
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //add notification handler
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
 
 - (void)viewDidUnload
@@ -70,8 +78,7 @@
 }
 
 #pragma mark - button action
-//cancel login part, return to the feature page
-- (IBAction)cancelLogin:(id)sender {
+- (IBAction)cancelLoginNew:(id)sender {
     //if user don't login,return to the featurned page
     int controllerIndex=0;
     UIView * fromView = self.parentVC.tabBarController.selectedViewController.view;
@@ -98,8 +105,10 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
+
 //Start normal login
-- (IBAction)normalLoginButtonClicked:(id)sender {
+- (IBAction)normalLoginButtonClickedNew:(id)sender {
     //resign the firstResponser
     [self.userName resignFirstResponder];
     [self.userPassword resignFirstResponder];
@@ -118,23 +127,14 @@
     [request setHTTPMethod:@"POST"];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    
-    
-    /*log out
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *request_string=[NSString stringWithFormat:@"http://www.funnect.me/users/sign_out.json?auth_token=%@",[defaults objectForKey:@"login_auth_token"]];
-    NSLog(@"%@",request_string);
-    [defaults removeObjectForKey:@"login_auth_token"];
-    [defaults synchronize];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    [request setHTTPMethod:@"DELETE"];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-     */
 }
 
+
+
+
 //start facebook login
-- (IBAction)facebookLoginButtonClicked:(id)sender {
+- (IBAction)facebookLoginButtonClickedNew:(id)sender {    
+    
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {
@@ -142,20 +142,22 @@
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-            funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-            NSLog(@"%@",funAppdelegate.facebook.accessToken);
-            funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        NSLog(@"%@",funAppdelegate.facebook.accessToken);
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     if (![funAppdelegate.facebook isSessionValid]) {
         NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                    @"publish_stream", 
-                                    @"read_stream",@"create_event",
-                                    @"email",
-                                    nil];
+                                @"publish_stream", 
+                                @"read_stream",@"create_event",
+                                @"email",
+                                nil];
         [funAppdelegate.facebook authorize:permissions];
     }
 
 }
+
+
 
 #pragma mark - facebook related process
 -(void)faceBookLoginFinished{
@@ -170,7 +172,6 @@
     [request setHTTPMethod:@"POST"];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -229,6 +230,13 @@
             //then return to the previouse page, quit login page
             [self dismissModalViewControllerAnimated:YES];
         }
+    }
+}
+
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"12345"]) {
+        NSLog(@"12312342");
     }
 }
 

@@ -43,6 +43,9 @@
 		0F91EE4E15B9CD1200E7B1D3 /* commentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */; };
 		0F968BF915A2B4B500BDBC44 /* TableViewContainMapviewTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F968BF815A2B4B500BDBC44 /* TableViewContainMapviewTVC.m */; };
 		0F9A531B15BE7F9A008E6F3B /* SettingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9A531A15BE7F9A008E6F3B /* SettingPageViewController.m */; };
+		0F9A532515BE84E5008E6F3B /* facebook_signin_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */; };
+		0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532615BE84F6008E6F3B /* create_account_button.png */; };
+		0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532815BE8527008E6F3B /* cancel_button.png */; };
 		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
@@ -203,6 +206,9 @@
 		0F968BFA15A2D4F600BDBC44 /* FunTableViewContainMapviewTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunTableViewContainMapviewTVCDelegate.h; sourceTree = "<group>"; };
 		0F9A531915BE7F9A008E6F3B /* SettingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingPageViewController.h; sourceTree = "<group>"; };
 		0F9A531A15BE7F9A008E6F3B /* SettingPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingPageViewController.m; sourceTree = "<group>"; };
+		0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_signin_button.png; sourceTree = "<group>"; };
+		0F9A532615BE84F6008E6F3B /* create_account_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_account_button.png; sourceTree = "<group>"; };
+		0F9A532815BE8527008E6F3B /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
 		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
@@ -756,6 +762,9 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F9A532815BE8527008E6F3B /* cancel_button.png */,
+				0F9A532615BE84F6008E6F3B /* create_account_button.png */,
+				0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */,
 				46DBFA8C15BD387A00130749 /* 06-magnify.png */,
 				0F60F3FF15BC6B1600053D25 /* seperator_vertical.png */,
 				0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */,
@@ -970,6 +979,9 @@
 				92B2FF6415BE65F2003E8290 /* weixin_icon.JPEG in Resources */,
 				46C170DE15BE6E770015B5FC /* Default@2x.png in Resources */,
 				46C170E115BE6E7A0015B5FC /* Default.png in Resources */,
+				0F9A532515BE84E5008E6F3B /* facebook_signin_button.png in Resources */,
+				0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */,
+				0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

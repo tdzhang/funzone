@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (nonatomic,strong) NSMutableData *data;
+@property (nonatomic,strong) NSString *currentConnection;
 @end
 
 @implementation registerViewController
@@ -24,6 +25,7 @@
 @synthesize firstNameTextField;
 @synthesize lastNameTextField;
 @synthesize data=_data;
+@synthesize currentConnection=_currentConnection;
 
 #pragma mark - View life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +35,20 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //add notification receiver
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //delete notification
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -72,15 +88,13 @@
 
 #pragma mark - button action
 //cancel register
-- (IBAction)cancelRegister:(id)sender {
-    
+- (IBAction)cancelRegisterNew:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
 
 
-
 //start to register
-- (IBAction)registerButtonClicked:(id)sender {
+- (IBAction)registerButtonBlicked:(id)sender {
     //input too short
     if (self.firstNameTextField.text.length<1||self.lastNameTextField.text.length<1||self.emailTextField.text.length<5||self.passwordTextField.text.length<6||self.rePasswordTextField.text.length<6) {
         UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Name/Email/Password Too Short" message:@"The Name, Email or the password you input is too short, please input a again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
@@ -127,15 +141,53 @@
     [request setHTTPMethod:@"POST"];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-
 }
+
+- (IBAction)stillWantToSignInWithFaceBook:(id)sender {
+
+    
+    //initial the face book
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) {
+        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        NSLog(@"%@",funAppdelegate.facebook.accessToken);
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![funAppdelegate.facebook isSessionValid]) {
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream", 
+                                @"read_stream",@"create_event",
+                                @"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+    }
+}
+
+#pragma mark - facebook related process
+-(void)faceBookLoginFinished{
+    //when the facebook has login, send to the sever to get the user token
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *request_string=[NSString stringWithFormat:@"%@/users/sign_in?iphone=true&facebook_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"FBAccessTokenKey"]];
+    NSLog(@"%@",request_string);
+    //start connection
+    //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    self.currentConnection=@"facebookLogin";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    [request setHTTPMethod:@"POST"];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+}
+
+
 #pragma mark - implement NSURLconnection delegate methods 
 //to deal with the returned data
-
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     self.data = [[NSMutableData alloc] init];
 }
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.data appendData:data];
@@ -151,29 +203,48 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection { 
-    NSError *error;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"all %@",[json allKeys]);
-    //get the response and the autu_token
-    if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
-        //if the register is finished, get the auth_token
-        //save the login_auth_token for later use
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *login_auth_token=[json objectForKey:@"auth_token"];
-        [defaults setValue:login_auth_token forKey:@"login_auth_token"];
-        [defaults synchronize];
-        //then return to the previouse page, quit login page
-        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Register Success" message:@"The register is finished." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        success.delegate=self;
-        [success show];
+    
+    if ([self.currentConnection isEqualToString:@"facebookLogin"]) {
+        self.currentConnection=nil;
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //if login success, then return to the page
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
+            NSLog(@"%@",[json objectForKey:@"user_id"]);
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+        }
     }
     else {
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Register Error" message:@"The register is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        error.delegate=self;
-        [error show];
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //get the response and the autu_token
+        if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
+            //if the register is finished, get the auth_token
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Register Success" message:@"The register is finished." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            success.delegate=self;
+            [success show];
+        }
+        else {
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Register Error" message:@"The register is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            error.delegate=self;
+            [error show];
+        }
     }
-    
-    
 }
 
 #pragma mark - uiAlertView delegate
