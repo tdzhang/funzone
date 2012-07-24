@@ -21,7 +21,7 @@
 
 @protocol SelfChooseLocation <NSObject>
 
--(void)UpdateLocation:(MKAnnotationView*)aView withSnapShot:(UIImage*)image sendFrom:(MapViewController*)sender;
+-(void)UpdateLocation:(MKAnnotationView*)aView withLocationName:(NSString*)locationName withSnapShot:(UIImage*)image sendFrom:(MapViewController*)sender;
 
 @end
 

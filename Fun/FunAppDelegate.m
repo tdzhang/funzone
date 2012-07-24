@@ -8,7 +8,7 @@
 
 #import "FunAppDelegate.h"
 
-@interface FunAppDelegate() <FBSessionDelegate>
+@interface FunAppDelegate() <FBSessionDelegate,UIApplicationDelegate>
 @end
 
 @implementation FunAppDelegate

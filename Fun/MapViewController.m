@@ -110,7 +110,7 @@
     MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = location;
     annotationPoint.title=@"Current Location";
-    //annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
+    annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
     self.annotation=annotationPoint;
     [self.myMapView addAnnotation:annotationPoint];
     
@@ -688,7 +688,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
         */
         //run the delegate method to feedback
         if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
-            [self.delegate UpdateLocation:view withSnapShot:image sendFrom:self];
+             NSLog(@"%@",view.annotation.title);
+            [self.delegate UpdateLocation:view  withLocationName:view.annotation.title withSnapShot:image sendFrom:self];
+            
+           
         }
         [self.navigationController popViewControllerAnimated:YES];        
     }

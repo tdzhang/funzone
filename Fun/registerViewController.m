@@ -144,8 +144,6 @@
 }
 
 - (IBAction)stillWantToSignInWithFaceBook:(id)sender {
-
-    
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {

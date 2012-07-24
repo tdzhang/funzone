@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 @property (weak, nonatomic) IBOutlet UIImageView *personProfileImage;
 @property (weak, nonatomic) IBOutlet UIImageView *mapViewFeedBackImageView;
+@property (nonatomic,strong) NSString* eventLocationName;
  
 //from detail View controller
 @property (nonatomic,strong) NSString *detail_event_id;
@@ -76,6 +77,7 @@
 @property (nonatomic,strong) NSString *createEvent_longitude;
 @property (nonatomic,strong) NSString *createEvent_locationName;
 @property (nonatomic,strong) NSString *createEvent_time;
+@property (nonatomic,strong) NSString *createEvent_address;
 
 @property (nonatomic,strong) NSString *facebookCurrentProcess;//use this to diff the facebook request intention
 
@@ -119,6 +121,7 @@
 @synthesize currentFacebookConnect=_currentFacebookConnect;
 @synthesize eventType=_eventType;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
+@synthesize eventLocationName=_eventLocationName;
 
 //from detail View controller
 @synthesize detail_event_id=_detail_event_id;
@@ -140,6 +143,7 @@
 @synthesize createEvent_longitude=_createEvent_longitude;
 @synthesize createEvent_locationName=_createEvent_locationName;
 @synthesize createEvent_time=_createEvent_time;
+@synthesize createEvent_address=_createEvent_address;
 @synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
 
 @synthesize facebookCurrentProcess=_facebookCurrentProcess;
@@ -161,11 +165,6 @@
         _createEvent_title=@"some thing";
     }
     return _createEvent_title;
-}
-
--(NSString *)createEvent_locationName{
-    _createEvent_locationName=self.locationLabel.text;
-    return _createEvent_locationName;
 }
 
 -(UIImagePickerController *)imgPicker{
@@ -402,7 +401,9 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
     [request setPostValue:self.createEvent_title forKey:@"title"];
-    [request setPostValue:self.createEvent_locationName forKey:@"address"];
+    NSLog(@"%@",self.createEvent_address);
+    [request setPostValue:self.createEvent_address forKey:@"address"];
+    NSLog(@"%@",self.createEvent_locationName);
     [request setPostValue:self.createEvent_locationName forKey:@"location"];
     [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
     [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
@@ -590,7 +591,7 @@
             }
         }
     }
-    /*
+    
     else if([actionSheet.title isEqualToString:@"Select Share:"]){
         if (buttonIndex == 0) {
             //post on the wall
@@ -657,7 +658,7 @@
             }
         }
     }
-    */
+    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose Photo Source"]){
         if (buttonIndex == 0) {
@@ -706,7 +707,7 @@
     [self.buttonEmailShare addTarget:self 
                               action:@selector(useEmailToShare:)
                     forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonEmailShare setImage:[UIImage imageNamed:@"email.png"] forState:UIControlStateNormal];
+    [self.buttonEmailShare setImage:[UIImage imageNamed:@"weixin_icon.JPEG"] forState:UIControlStateNormal];
     self.buttonEmailShare.frame = CGRectMake(SHARE_BY_EMAIL_X,SHARE_BY_EMAIL_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonEmailShare setHidden:NO];
     [self.view addSubview:self.buttonEmailShare];
@@ -772,7 +773,7 @@
     [self.buttonTwitterShare addTarget:self 
                                 action:@selector(useTwitterToShare:)
                       forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+    [self.buttonTwitterShare setImage:[UIImage imageNamed:@"twitter-bird-white-on-blue.png"] forState:UIControlStateNormal];
     self.buttonTwitterShare.frame = CGRectMake(SHARE_BY_TWITTER_X,SHARE_BY_TWITTER_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonTwitterShare setHidden:NO];
     [self.view addSubview:self.buttonTwitterShare];
@@ -829,7 +830,7 @@
     [self.buttonFacebookShare addTarget:self 
                                  action:@selector(useFacebookToShare:)
                        forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+    [self.buttonFacebookShare setImage:[UIImage imageNamed:@"facebook_icon.png"] forState:UIControlStateNormal];
     self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonFacebookShare setHidden:NO];
     [self.view addSubview:self.buttonFacebookShare];
@@ -1248,7 +1249,7 @@
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
--(void)UpdateLocation:(MKAnnotationView *)aView withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
+-(void)UpdateLocation:(MKAnnotationView *)aView withLocationName:(NSString *)locationName withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=aView.annotation;
     self.predefinedAnnotation=annotation;
     NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
@@ -1258,11 +1259,19 @@
     [self.locationLabel setText:locationDescription];
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
+    
     [self.mapViewFeedBackImageView setImage:image];
     [self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.mapViewFeedBackImageView setHidden:NO];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
+    
+    self.createEvent_locationName=[locationName copy];
+    NSLog(@"%@",self.createEvent_locationName);
+    if (annotation.subtitle) {
+        self.createEvent_address=[NSString stringWithFormat:@"%@",annotation.subtitle];
+        NSLog(@"%@",self.createEvent_address);
+    }
 }
 
 ////////////////////////////////////////////////
