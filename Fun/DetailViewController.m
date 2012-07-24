@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSNumber *latitude;
 @property (nonatomic,strong) NSString *description;
 @property (nonatomic,strong) NSMutableArray *comments;
+@property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSString *event_address;
 
@@ -56,6 +57,7 @@
 @synthesize comments=_comments;
 @synthesize creator_id=_creator_id;
 @synthesize event_address=_event_address;
+@synthesize garbageCollection=_garbageCollection;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
@@ -100,10 +102,7 @@
     [super viewWillAppear:animated];
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
     
-    //clean up the comment part
-    for (UIView *oneview in [self.myScrollView subviews]) {
-        [oneview removeFromSuperview];
-    }
+
     
     [self.myScrollView setContentSize:CGSizeMake(320, 400)];
     
@@ -137,6 +136,14 @@
 #define COMMENT_HEIGHT 24
 //handle the comment part from self.comments
 -(void)handleTheCommentPart{
+    if (self.garbageCollection) {
+        for (UIView* view in self.garbageCollection) {
+            [view removeFromSuperview];
+        }
+        [self.garbageCollection removeAllObjects];
+    }
+    
+    self.garbageCollection=[NSMutableArray array];
     //comment
     float height=340;
     for (int i = 0; i<[self.comments count]; i++) {
@@ -165,6 +172,7 @@
         [comment_content sizeToFit];
         [commentView addSubview:comment_content];
         [self.myScrollView addSubview:commentView];
+        [self.garbageCollection addObject:commentView];
     }    
     //button
     //UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
