@@ -79,8 +79,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
+{    
     static NSString *CellIdentifier = @"commentTableViewCell";
     
     commentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -93,13 +92,15 @@
                 cell = (commentTableViewCell*)view;
             }
         }
-    }
-    
+    }    
     //pending operation with the imageview of a cell cell.userPhotoImageView setImage:xxx
     eventComment *comment=[self.comments objectAtIndex:indexPath.row];
-    cell.userNameLabel.text=[NSString stringWithFormat:@"%@",comment.user_id];
+    cell.userNameLabel.text=[NSString stringWithFormat:@"%@",comment.user_name];
     cell.commentContentLabel.text=comment.content;
     cell.commentTimeLabel.text=comment.timestamp;
+    [cell.userNameLabel setBackgroundColor:[UIColor greenColor]];
+    [cell.commentTimeLabel setBackgroundColor:[UIColor yellowColor]];
+    [cell.commentContentLabel setBackgroundColor:[UIColor redColor]];
     
     return cell;  				
 }
