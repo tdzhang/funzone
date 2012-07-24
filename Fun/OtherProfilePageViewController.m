@@ -273,6 +273,14 @@
     [request startAsynchronous];
 }
 
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"ViewEventDetail"]) {
+        //if it's the segue to the view detail part, do this:
+        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
+    }
+}
 
 #pragma mark - implement the UIScrollViewDelegate
 //when the scrolling over 最上方，need refresh process
@@ -455,14 +463,14 @@
     //get the index of the touched block view
     int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
     NSLog(@"%d",index);
-    /*
-     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
+    
+     ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index];
      self.tapped_event_id=tapped_element.event_id;
      self.tapped_shared_event_id=tapped_element.shared_event_id;
      //do some pre-segue stuff with event_id and shared_id
      [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
      
-     
+     /*
      self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
      [self presentViewController:self.detailViewController animated:YES completion:^{}];
      */
