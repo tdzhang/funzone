@@ -10,7 +10,7 @@
 #import "Cache.h"
 #import "eventComment.h"
 
-@interface DetailViewController ()
+@interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
@@ -130,6 +130,45 @@
 //handle the action: addViewCommentButtonClicked
 -(void)addViewCommentButtonClicked:(id)sender{
     [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
+}
+
+
+- (IBAction)shareButton:(UIButton *)sender {
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook",@"Twitter",@"Weixin", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;    
+    [pop showFromTabBar:self.tabBarController.tabBar];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        NSLog(@"email");
+        if([MFMailComposeViewController canSendMail]) {
+            //if the device allowed sending email
+            MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+            mailCont.mailComposeDelegate = self;
+                        
+            //get the event information from all the selection
+            NSString *eventName=(![self.event_title isEqualToString:@""])?self.event_title:@"Some Stuff";
+            NSString *eventTime=(![self.event_time isEqualToString:@"time"])?self.event_time:@"Some Time";
+            NSString *eventLocation=(![self.event_address isEqualToString:@"location"])?self.event_address:@"TBD";
+            
+            //email subject
+            [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",eventName]];
+            //email body
+            [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time is %@. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n Cheers~",eventName,eventTime,eventLocation] isHTML:NO];
+            //go!
+            [self presentModalViewController:mailCont animated:YES];
+        }
+    }
+    else if (buttonIndex == 1) {
+        NSLog(@"facebook");
+    }
+    else if (buttonIndex == 2) {
+        NSLog(@"twitter");
+    }
+    else if (buttonIndex == 3) {
+        NSLog(@"weixin");
+    }
 }
 
 #pragma mark - comment handle part
