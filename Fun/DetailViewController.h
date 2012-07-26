@@ -10,6 +10,8 @@
 #import "NewEventVC.h"
 #import "eventComment.h"
 #import "AddCommentVC.h"
+#import "ProfileInfoElement.h"
+#import "Cache.h"
 
 @interface DetailViewController : UIViewController
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id;

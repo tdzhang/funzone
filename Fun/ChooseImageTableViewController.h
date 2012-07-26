@@ -16,7 +16,7 @@
 
 @protocol ChooseImageFeedBackDelegate 
 
--(void)ChooseUIImage:(UIImage*)image From:(ChooseImageTableViewController*) sender;
+-(void)ChooseUIImage:(UIImage*)image  WithUrlName:(NSString*)URLName From:(ChooseImageTableViewController*) sender;
 
 @end
 

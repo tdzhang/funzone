@@ -13,7 +13,7 @@
 
 #pragma mark - Constant Value Declarition
 
-#define ANIMATION_TIME_DURATION 0.0
+#define ANIMATION_TIME_DURATION 0.5
 #define SHOW_OPTION_BUTTON_LOCATION_X 280
 #define SHOW_OPTION_BUTTON_LOCATION_Y 360
 #define SHOW_OPTION_BUTTON_LOCATION_WIDTH 40
@@ -69,6 +69,7 @@
 @property (nonatomic,strong) NSString *detail_description;
 @property (nonatomic,strong) UIImage *detail_image;
 @property (nonatomic,strong) NSString *detail_creator_id;
+@property (nonatomic,strong) NSString *already_load_detail_event_id;
 
 //these property used to send back to server when create a event(image, title, location)
 @property (nonatomic,strong) UIImage *createEvent_image;
@@ -78,6 +79,7 @@
 @property (nonatomic,strong) NSString *createEvent_locationName;
 @property (nonatomic,strong) NSString *createEvent_time;
 @property (nonatomic,strong) NSString *createEvent_address;
+@property (nonatomic,strong) NSString *createEvent_imageUrlName;
 
 @property (nonatomic,strong) NSString *facebookCurrentProcess;//use this to diff the facebook request intention
 
@@ -135,6 +137,7 @@
 @synthesize detail_description=_detail_description;
 @synthesize detail_image=_detail_image;
 @synthesize detail_creator_id=_detail_creator_id;
+@synthesize already_load_detail_event_id=_already_load_detail_event_id;
 
 
 @synthesize createEvent_image=_createEvent_image;
@@ -144,6 +147,7 @@
 @synthesize createEvent_locationName=_createEvent_locationName;
 @synthesize createEvent_time=_createEvent_time;
 @synthesize createEvent_address=_createEvent_address;
+@synthesize createEvent_imageUrlName=_createEvent_imageUrlName;
 @synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
 
 @synthesize facebookCurrentProcess=_facebookCurrentProcess;
@@ -320,7 +324,8 @@
     }
     
     //if this view is used to repin a event
-    if(self.detail_event_id){
+    if(self.detail_event_id&&(self.detail_event_id!=self.already_load_detail_event_id)){
+        self.already_load_detail_event_id=self.detail_event_id;
         //judge whether the user is login? if not, do the login
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if (![defaults objectForKey:@"login_auth_token"]) {
@@ -409,7 +414,40 @@
     [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
     [request setPostValue:self.createEvent_time forKey:@"start_time"];
     if (self.detail_creator_id) {
+        //if it is from repin
         if (![self.createEvent_image isEqual:self.detail_image]) {
+            //add content
+            if (self.createEvent_imageUrlName) {
+                //if has image url, then no need to upload the image
+                [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
+            }
+            else{
+                NSString *format=@"png";
+                NSData *data=nil;
+                data=UIImagePNGRepresentation(self.createEvent_image);
+                //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+                if(data==nil){
+                    //data=UIImagePNGRepresentation(self.createEvent_image);
+                    data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+                    format=@"jpeg";
+                }
+                [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+            }
+        }
+        [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
+        [request setPostValue:self.detail_event_id forKey:@"event_id"];
+        [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
+        [request setPostValue:self.detail_longitude forKey:@"longitude"];
+        [request setPostValue:self.detail_latitude forKey:@"latitude"];
+        [request setPostValue:self.detail_address forKey:@"address"];
+        [request setPostValue:self.detail_location_name forKey:@"location"];
+    }
+    else {
+        if (self.createEvent_imageUrlName) {
+            //if has image url, then no need to upload the image
+            [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
+        }
+        else{
             //add content
             NSString *format=@"png";
             NSData *data=nil;
@@ -422,28 +460,7 @@
             }
             [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
         }
-        [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
-        [request setPostValue:self.detail_event_id forKey:@"event_id"];
-        [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
-        [request setPostValue:self.detail_longitude forKey:@"longitude"];
-        [request setPostValue:self.detail_latitude forKey:@"latitude"];
-        [request setPostValue:self.detail_address forKey:@"address"];
-        [request setPostValue:self.detail_location_name forKey:@"location"];
     }
-    else {
-        //add content
-        NSString *format=@"png";
-        NSData *data=nil;
-        data=UIImagePNGRepresentation(self.createEvent_image);
-        //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
-        if(data==nil){
-            //data=UIImagePNGRepresentation(self.createEvent_image);
-            data=UIImageJPEGRepresentation(self.createEvent_image, 1);
-            format=@"jpeg";
-        }
-        [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
-    }
-    
     [request setRequestMethod:@"POST"];
     [request startAsynchronous];
 }
@@ -1065,10 +1082,11 @@
 
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
--(void)ChooseUIImage:(UIImage *)image From:(ChooseImageTableViewController *)sender{
+-(void)ChooseUIImage:(UIImage *)image WithUrlName:(NSString*)URLName From:(ChooseImageTableViewController *)sender{
     [self.uIImageViewEvent setContentMode:UIViewContentModeScaleToFill];
     [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
+    self.createEvent_imageUrlName= URLName;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -352,11 +352,11 @@
     if ([self.cacheImage objectForKey:urlString]) { 
         UIImage *image=nil;
         image=[UIImage imageWithData:(NSData*)[self.cacheImage objectForKey:urlString]];
-        [self.delegate ChooseUIImage:image From:self];
+        [self.delegate ChooseUIImage:image  WithUrlName:urlString From:self];
     } 
     else {
         UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-        [self.delegate ChooseUIImage:image From:self];
+        [self.delegate ChooseUIImage:image  WithUrlName:nil From:self];
     }
 }
 

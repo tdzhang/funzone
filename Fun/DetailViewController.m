@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSNumber *latitude;
 @property (nonatomic,strong) NSString *description;
 @property (nonatomic,strong) NSMutableArray *comments;
+@property (nonatomic,strong) NSMutableArray *interestedPeople;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSString *event_address;
@@ -58,6 +59,7 @@
 @synthesize creator_id=_creator_id;
 @synthesize event_address=_event_address;
 @synthesize garbageCollection=_garbageCollection;
+@synthesize interestedPeople=_interestedPeople;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
@@ -67,6 +69,12 @@
     return _comments;
 }
 
+-(NSMutableArray *)interestedPeople{
+    if (!_interestedPeople) {
+        _interestedPeople=[NSMutableArray array];
+    }
+    return _interestedPeople;
+}
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -207,7 +215,7 @@
 
 #pragma mark - comment handle part
 #define COMMENT_HEIGHT 24
-//handle the comment part from self.comments
+//handle the intereted people part
 //handle the comment part from self.comments
 -(void)handleTheCommentPart{
     if (self.garbageCollection) {
@@ -219,7 +227,63 @@
     
     self.garbageCollection=[NSMutableArray array];
     //comment
-    float height=340;
+    float height=340; //default 340
+    
+    //handle the interest people part
+    if ([self.interestedPeople count]>0) {
+        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, height, 300, 20)];
+        [interestedPeopleLable setText:[NSString stringWithFormat:@"%d people are intereted:",[self.interestedPeople count]]];
+        [self.myScrollView addSubview:interestedPeopleLable];
+        [self.garbageCollection addObject:interestedPeopleLable];
+        
+        height+=23;
+        int x_position_photo=5;
+        for (int i=0; i<5&&i<([self.interestedPeople count]); i++) {
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo, height, 35, 35)];;
+            ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
+            NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
+            if (![Cache isURLCached:backGroundImageUrl]) {
+                //using high priority queue to fetch the image
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                    //get the image data
+                    NSData * imageData = nil;
+                    imageData = [[NSData alloc] initWithContentsOfURL: backGroundImageUrl];
+                    if (imageData == nil ){
+                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                        //NSLog(@"downloaded %@ error, using a default image",url);
+                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        imageData=UIImagePNGRepresentation(image);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                    else {
+                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                        //NSLog(@"downloaded %@",url);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                dispatch_async( dispatch_get_main_queue(),^{
+                    userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
+                });
+            }
+            [self.myScrollView addSubview:userImageView];
+            [self.garbageCollection addObject:userImageView];
+            x_position_photo+=38;
+        }
+        height+=40;
+        
+    }
     
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
@@ -367,7 +431,8 @@
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
     NSLog(@"%@",creator_id);
     self.creator_id=creator_id;
-    
+    //handle the interest people part
+    self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];

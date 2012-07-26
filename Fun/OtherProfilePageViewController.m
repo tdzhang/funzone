@@ -95,8 +95,9 @@
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
     //query the user profile information
-    
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile",CONNECT_DOMIAN_NAME]];
+    //add login auth_token
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
@@ -163,10 +164,6 @@
         notsuccess.delegate=self;
         [notsuccess show];
     }];
-    //add login auth_token
-    defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-    [request setPostValue:self.creator_id forKey:@"user_id"];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
     
