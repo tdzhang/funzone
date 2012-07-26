@@ -206,7 +206,6 @@
 }
 
 #pragma mark - comment handle part
-#define COMMENT_HEIGHT 24
 //handle the comment part from self.comments
 -(void)handleTheCommentPart{
     if (self.garbageCollection) {
@@ -219,54 +218,99 @@
     self.garbageCollection=[NSMutableArray array];
     //comment
     float height=340;
-    for (int i = 0; i<[self.comments count]; i++) {
-        if(i==5)break; //in this page, only present a few comments
-        eventComment* comment=[self.comments objectAtIndex:i];        
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, COMMENT_HEIGHT)];
-        height+=COMMENT_HEIGHT;
+    
+    //comment header view
+    UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
+    [comments_header_view setBackgroundColor:[UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1]];
+    [self.myScrollView addSubview:comments_header_view];
         
-        NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
-        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(0, commentView.frame.size.height/2-12, 100, 24)];
-        [comment_user_name setBackgroundColor:[UIColor clearColor]];
-        [comment_user_name setText:content];
-        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
-        [comment_user_name setTextAlignment:UITextAlignmentCenter];
-        [comment_user_name sizeToFit];
-        [commentView addSubview:comment_user_name];
-        
-        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+5, commentView.frame.size.height/2-12, 100, 24)];
-        [comment_content setBackgroundColor:[UIColor clearColor]];
-        [comment_content setText:comment.content];
-        [comment_content setTextAlignment:UITextAlignmentCenter];
-        [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
-        [comment_content setTextColor:[UIColor darkGrayColor]];
-        comment_content.lineBreakMode = UILineBreakModeWordWrap;
-        comment_content.numberOfLines = 2;
-        [comment_content sizeToFit];
-        [commentView addSubview:comment_content];
-        [self.myScrollView addSubview:commentView];
-        [self.garbageCollection addObject:commentView];
-    }    
+    //comment icon
+    UIImageView *comment_icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 1, 12, 30)];
+    UIImage *image_comment_icon = [UIImage imageNamed:@"comments.png"]; 
+    [comment_icon setImage:image_comment_icon];
+    [comment_icon setContentMode:UIViewContentModeScaleAspectFit];
+    [comment_icon setAlpha:0.4];
+    [comments_header_view addSubview:comment_icon];
+    
+    //comment header label
+    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 30)];
+    NSString *comment_header;
+    if ([self.comments count] != 0) {
+        comment_header = [NSString stringWithFormat:@"%d comments", [self.comments count]];
+    }else {
+        comment_header = [NSString stringWithFormat:@"0 comment"];
+    }
+    [comment_header_label setText:comment_header];
+    [comment_header_label setBackgroundColor:[UIColor clearColor]];
+    [comment_header_label setFont:[UIFont boldSystemFontOfSize:14]];
+    [comment_header_label setTextColor:[UIColor darkGrayColor]];
+    [comment_header_label setShadowColor:[UIColor whiteColor]];
+    [comment_header_label setShadowOffset: CGSizeMake(0, 1)];
+    [comments_header_view addSubview:comment_header_label];
+    
     //button
-    //UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, COMMENT_HEIGHT)];
-    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 90, 60)];
-    height+=COMMENT_HEIGHT;
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 30)];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(230, 4, 65, 22)];
     [button setAlpha:1];
     //add button action
     [button addTarget:self 
                action:@selector(addViewCommentButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [buttonView setBackgroundColor:[UIColor whiteColor]];
     [button setTitle:@"Comment" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
-    [buttonView addSubview:button];
-    [self.myScrollView addSubview:buttonView];
+    [comments_header_view addSubview:button];
     [self.garbageCollection addObject:button];
+    
+    UIView *comments_holder_view = [[UIView alloc] initWithFrame:CGRectMake(10, 32 + height, 300, 0)];
+    [self.myScrollView addSubview:comments_holder_view];
+    int temp_height = 0;
+    for (int i = 0; i<[self.comments count]; i++) {
+        if(i==5)break; //in this page, only present a few comments
+        eventComment* comment=[self.comments objectAtIndex:i];     
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, temp_height, 300, 30)];
+        [commentView setBackgroundColor:[UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1]];        
+        NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
+        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 25)];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
+        [comment_user_name setText:content];
+        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
+        [comment_user_name setTextAlignment:UITextAlignmentCenter];
+        [comment_user_name sizeToFit];
+        [commentView addSubview:comment_user_name];
+        
+//        NSString *time =[NSString stringWithFormat:@"%@",comment.timestamp];
+//        UILabel *comment_time=[[UILabel alloc] initWithFrame:CGRectMake(160, 0, 150, 25)];
+//        [comment_time setBackgroundColor:[UIColor clearColor]];
+//        [comment_time setText:time];
+//        [comment_time setFont:[UIFont boldSystemFontOfSize:12]];
+//        //[comment_time setTextAlignment:UITextAlignmentRight];
+//        [comment_time setTextColor:[UIColor lightGrayColor]];
+//        [comment_time setTextAlignment:UITextAlignmentCenter];
+//        [comment_time setBackgroundColor:[UIColor greenColor]];
+//        //[comment_time sizeToFit];
+//        [commentView addSubview:comment_time];
+
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+10, 5, 200, 25)];
+        [comment_content setBackgroundColor:[UIColor clearColor]];
+        [comment_content setText:comment.content];
+        [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_content setTextColor:[UIColor darkGrayColor]];
+        [comment_content setBackgroundColor:[UIColor clearColor]];
+        comment_content.lineBreakMode = UILineBreakModeWordWrap;
+        comment_content.numberOfLines = 0;
+        [comment_content sizeToFit];
+        [commentView addSubview:comment_content];
+        [commentView sizeToFit];
+
+        [comments_holder_view addSubview:commentView];
+        [self.garbageCollection addObject:commentView];
+        
+        temp_height+=31;
+    }
     //set the scroll view content size
-    [self.myScrollView setContentSize:CGSizeMake(320, height+30)];
+    [self.myScrollView setContentSize:CGSizeMake(320, comments_holder_view.frame.origin.y+temp_height+10)];
 }
 
 #pragma mark - segue related stuff

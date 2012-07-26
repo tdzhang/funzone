@@ -2,8 +2,8 @@
 //  Event.m
 //  Fun
 //
-//  Created by He Yang on 6/21/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Yizhou Zhu on 7/25/12.
+//  Copyright (c) 2012 Stanford University. All rights reserved.
 //
 
 #import "Event.h"
@@ -11,17 +11,17 @@
 
 @implementation Event
 
-@dynamic event_id;
 @dynamic creator_id;
-@dynamic title;
-@dynamic location;
+@dynamic event_id;
 @dynamic img_url;
 @dynamic intro;
-@dynamic price;
-@dynamic num_shares;
+@dynamic location;
 @dynamic num_likes;
 @dynamic num_pins;
+@dynamic num_shares;
 @dynamic num_views;
+@dynamic price;
 @dynamic timestamps;
+@dynamic title;
 
 @end
