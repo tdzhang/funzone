@@ -231,15 +231,21 @@
     
     //handle the interest people part
     if ([self.interestedPeople count]>0) {
-        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, height, 300, 20)];
-        [interestedPeopleLable setText:[NSString stringWithFormat:@"%d people are intereted:",[self.interestedPeople count]]];
+        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, height, 300, 25)];
+        [interestedPeopleLable setText:[NSString stringWithFormat:@" %d interested",[self.interestedPeople count]]];
+        [interestedPeopleLable setFont:[UIFont boldSystemFontOfSize:15]];
+        [interestedPeopleLable setTextColor:[UIColor darkGrayColor]];
+        [interestedPeopleLable setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.myScrollView addSubview:interestedPeopleLable];
         [self.garbageCollection addObject:interestedPeopleLable];
+        height+=25;
         
-        height+=23;
-        int x_position_photo=5;
+        UIView *interested_people_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 45)];
+        [interested_people_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        
+        int x_position_photo=0;
         for (int i=0; i<5&&i<([self.interestedPeople count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo, height, 35, 35)];;
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 3, 35, 35)];
             ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
@@ -277,17 +283,17 @@
                     userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
                 });
             }
-            [self.myScrollView addSubview:userImageView];
+            [interested_people_view addSubview:userImageView];
             [self.garbageCollection addObject:userImageView];
             x_position_photo+=38;
         }
-        height+=40;
-        
+        [self.myScrollView addSubview:interested_people_view];
+        height+=60;        
     }
     
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
-    [comments_header_view setBackgroundColor:[UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1]];
+    [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
     [self.myScrollView addSubview:comments_header_view];
     
     //comment icon
@@ -299,7 +305,7 @@
     [comments_header_view addSubview:comment_icon];
     
     //comment header label
-    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 30)];
+    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(22, 0, 100, 30)];
     NSString *comment_header;
     if ([self.comments count] != 0) {
         comment_header = [NSString stringWithFormat:@"%d comments", [self.comments count]];
@@ -335,7 +341,7 @@
         if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];     
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, temp_height, 300, 30)];
-        [commentView setBackgroundColor:[UIColor colorWithRed:231/255.0 green:231/255.0 blue:231/255.0 alpha:1]];        
+        [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
         NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
         UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 25)];
         [comment_user_name setBackgroundColor:[UIColor clearColor]];
@@ -442,7 +448,7 @@
     NSLog(@"%@",time);
     //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
     //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
-    NSString *locationName=[event objectForKey:@"location"];
+    NSString *locationName=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
     self.location_name=locationName;
     NSString *address=[event objectForKey:@"address"];
     self.event_address=address;
@@ -460,15 +466,15 @@
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
-    
     //set the content on the screen
+    if ([locationName isEqualToString:@""]) {
+        locationName = [NSString stringWithFormat:@"TBD"];
+    }
     [self.eventLocationLabel setText:locationName];
     [self.eventTimeLabel setText:self.event_time];
     [self.eventTitleLabel setText:self.event_title];
     [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
 
-    
-        
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
             //using high priority queue to fetch the image
