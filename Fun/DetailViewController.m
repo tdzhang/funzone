@@ -230,7 +230,7 @@
     [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
     [buttonView addSubview:button];
     [self.myScrollView addSubview:buttonView];
-    
+    [self.garbageCollection addObject:button];
     //set the scroll view content size
     [self.myScrollView setContentSize:CGSizeMake(320, height+30)];
 }
