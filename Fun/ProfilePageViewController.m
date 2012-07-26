@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
+@property (nonatomic, strong) UIButton* showAllFollowingsButton;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
 @property (nonatomic,strong) NSMutableData *data;
@@ -39,6 +40,7 @@
 @synthesize bookmarkNumLabel = _bookmarkNumLabel;
 @synthesize followingNumLabel = _followingNumLabel;
 @synthesize followerNumLabel = _followerNumLabel;
+@synthesize showAllFollowingsButton = _showAllFollowingsButton;
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
@@ -89,8 +91,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
-    //query the user profile information
-    
+    //query the user profile information    
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile",CONNECT_DOMIAN_NAME]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
