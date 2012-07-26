@@ -368,7 +368,6 @@
         comment_content.numberOfLines = 0;
         [comment_content sizeToFit];
         [commentView addSubview:comment_content];
-        [commentView sizeToFit];
         
         [comments_holder_view addSubview:commentView];
         [self.garbageCollection addObject:commentView];
