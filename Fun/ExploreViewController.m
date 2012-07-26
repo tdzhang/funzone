@@ -156,26 +156,17 @@
         //remove the main views
         self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
-<<<<<<< HEAD
             [view setFrame:CGRectMake(0, view.frame.origin.y+CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+CONTENT_HEIGHT/2);
-=======
-            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-            //NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT/2);
->>>>>>> add local data save part
             [self.garbageCollection addObject:view];
         }
         
         [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
-<<<<<<< HEAD
         NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, SCROLLVIEW_CONTENT_WIDTH, CONTENT_HEIGHT/2)];
-=======
-        //NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT/2)];
->>>>>>> add local data save part
+
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
