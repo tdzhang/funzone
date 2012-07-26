@@ -279,7 +279,7 @@
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     
     //get the detail information
-    NSString *title=[event objectForKey:@"title"]!=[NSNull null]?[event objectForKey:@"title"]:@"some thing";
+    NSString *title=[event objectForKey:@"title"];
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";

@@ -222,7 +222,7 @@
 #pragma mark - button action
 - (IBAction)startFollowAction:(id)sender {
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow",CONNECT_DOMIAN_NAME]];
-    if ([self.followButton.titleLabel.text isEqualToString:@"unfollow"]) {
+    if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow",CONNECT_DOMIAN_NAME]];
     }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

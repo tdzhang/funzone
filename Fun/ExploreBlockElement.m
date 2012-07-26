@@ -100,7 +100,7 @@
             //get the image data
             NSData * imageData = nil;
             imageData = [[NSData alloc] initWithContentsOfURL: backGroundImageUrl];
-            if ( imageData == nil ){
+            if (imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
                 UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
