@@ -219,15 +219,13 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)showAllFollowings:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"showAllFollowings" sender:self];
-}
+
 
 #pragma mark - button action
 - (IBAction)startFollowAction:(id)sender {
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow",CONNECT_DOMIAN_NAME]];
     if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow",CONNECT_DOMIAN_NAME]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/Unfollow",CONNECT_DOMIAN_NAME]];
     }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;

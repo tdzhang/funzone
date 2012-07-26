@@ -12,6 +12,10 @@
 		0F07F27F15AE26F500BF41CF /* movieAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F07F27E15AE26F500BF41CF /* movieAutoCompleteCell.xib */; };
 		0F07F28215AE273D00BF41CF /* movieAutoCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F28115AE273D00BF41CF /* movieAutoCCell.m */; };
 		0F07F28615AE29F300BF41CF /* rottenTomatoMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F28515AE29F300BF41CF /* rottenTomatoMovieModel.m */; };
+		0F0EA75415C0F9C80062BA1B /* MyFollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EA75315C0F9C80062BA1B /* MyFollowingTableViewController.m */; };
+		0F0EA75A15C0FB8F0062BA1B /* MyFollowingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F0EA75915C0FB8F0062BA1B /* MyFollowingTableViewCell.xib */; };
+		0F0EA75D15C0FC110062BA1B /* MyFollowingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EA75C15C0FC110062BA1B /* MyFollowingTableViewCell.m */; };
+		0F0EA76015C0FFAB0062BA1B /* ProfileInfoElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EA75F15C0FFAB0062BA1B /* ProfileInfoElement.m */; };
 		0F128542159EB0AD00430859 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128541159EB0AD00430859 /* CoreLocation.framework */; };
 		0F128545159EB0B600430859 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128544159EB0B600430859 /* AddressBook.framework */; };
 		0F128547159EB0BE00430859 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F128546159EB0BE00430859 /* MapKit.framework */; };
@@ -154,6 +158,13 @@
 		0F07F28115AE273D00BF41CF /* movieAutoCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieAutoCCell.m; sourceTree = "<group>"; };
 		0F07F28415AE29F300BF41CF /* rottenTomatoMovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rottenTomatoMovieModel.h; sourceTree = "<group>"; };
 		0F07F28515AE29F300BF41CF /* rottenTomatoMovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rottenTomatoMovieModel.m; sourceTree = "<group>"; };
+		0F0EA75215C0F9C80062BA1B /* MyFollowingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowingTableViewController.h; sourceTree = "<group>"; };
+		0F0EA75315C0F9C80062BA1B /* MyFollowingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowingTableViewController.m; sourceTree = "<group>"; };
+		0F0EA75915C0FB8F0062BA1B /* MyFollowingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFollowingTableViewCell.xib; sourceTree = "<group>"; };
+		0F0EA75B15C0FC110062BA1B /* MyFollowingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowingTableViewCell.h; sourceTree = "<group>"; };
+		0F0EA75C15C0FC110062BA1B /* MyFollowingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowingTableViewCell.m; sourceTree = "<group>"; };
+		0F0EA75E15C0FFAB0062BA1B /* ProfileInfoElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInfoElement.h; sourceTree = "<group>"; };
+		0F0EA75F15C0FFAB0062BA1B /* ProfileInfoElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInfoElement.m; sourceTree = "<group>"; };
 		0F128541159EB0AD00430859 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0F128544159EB0B600430859 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0F128546159EB0BE00430859 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -417,6 +428,18 @@
 			name = "self define model";
 			sourceTree = "<group>";
 		};
+		0F0EA75615C0FA930062BA1B /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				0F0EA75915C0FB8F0062BA1B /* MyFollowingTableViewCell.xib */,
+				0F0EA75B15C0FC110062BA1B /* MyFollowingTableViewCell.h */,
+				0F0EA75C15C0FC110062BA1B /* MyFollowingTableViewCell.m */,
+				0F0EA75E15C0FFAB0062BA1B /* ProfileInfoElement.h */,
+				0F0EA75F15C0FFAB0062BA1B /* ProfileInfoElement.m */,
+			);
+			name = "custom view";
+			sourceTree = "<group>";
+		};
 		0F128549159EB14200430859 /* model class */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +518,9 @@
 		0F60F3FA15BC699A00053D25 /* Profile page */ = {
 			isa = PBXGroup;
 			children = (
+				0F0EA75615C0FA930062BA1B /* custom view */,
+				0F0EA75215C0F9C80062BA1B /* MyFollowingTableViewController.h */,
+				0F0EA75315C0F9C80062BA1B /* MyFollowingTableViewController.m */,
 				0F60F3FC15BC6A0A00053D25 /* ProfilePageViewController.h */,
 				0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */,
 				0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */,
@@ -992,6 +1018,7 @@
 				0F9A532515BE84E5008E6F3B /* facebook_signin_button.png in Resources */,
 				0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */,
 				0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */,
+				0F0EA75A15C0FB8F0062BA1B /* MyFollowingTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1087,9 @@
 				0F9A531B15BE7F9A008E6F3B /* SettingPageViewController.m in Sources */,
 				0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */,
 				0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */,
+				0F0EA75415C0F9C80062BA1B /* MyFollowingTableViewController.m in Sources */,
+				0F0EA75D15C0FC110062BA1B /* MyFollowingTableViewCell.m in Sources */,
+				0F0EA76015C0FFAB0062BA1B /* ProfileInfoElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

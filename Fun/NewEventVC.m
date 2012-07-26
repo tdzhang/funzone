@@ -190,7 +190,7 @@
         [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d add ; %d facebook",i,j]];
     }
     else{
-        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"invite your friends",i]];
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"invite your friends"]];
     }
 }
 
@@ -209,7 +209,7 @@
         [self.eventPeopleInfo setText:[NSString stringWithFormat:@"%d add ; %d facebook",i,j]];
     }
     else{
-        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"Don't forget to invite your friends",i]];
+        [self.eventPeopleInfo setText:[NSString stringWithFormat:@"Don't forget to invite your friends"]];
     }
 }
 
