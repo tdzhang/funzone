@@ -28,6 +28,7 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (nonatomic) BOOL followed;
 
 @end
 
@@ -49,6 +50,7 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize followButton = _followButton;
 @synthesize creator_id=_creator_id;
+@synthesize followed=_followed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -109,8 +111,10 @@
         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
         //if already followed, changed the button name to "unfollow"
         NSLog(@"%@",json);
+        self.followed=NO;
         if ([[NSString stringWithFormat:@"%@",[json objectForKey:@"followed"]]isEqualToString:@"1"]) {
             [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+            self.followed=YES;
         }
         
         NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
@@ -226,7 +230,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
-    if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
+    if (self.followed) {
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
     }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -237,11 +241,13 @@
         NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
+        if (self.followed) {
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                 UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow Success." message: [NSString stringWithFormat:@"You have successfully unfollowed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
                 success.delegate=self;
-                [success show];        
+                [success show];
+                [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+                self.followed=NO;
             }
             else {
                 UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not Success." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
@@ -249,11 +255,13 @@
                 [unsuccess show];
             }
         }
-        else if ([self.followButton.titleLabel.text isEqualToString:@"Follow"]){
+        else if (!self.followed){
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                 UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow Success." message: [NSString stringWithFormat:@"You have successfully followed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
                 success.delegate=self;
-                [success show];        
+                [success show];
+                [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+                self.followed=YES;
             }
             else {
                 UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not Success." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
