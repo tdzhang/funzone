@@ -13,6 +13,7 @@ static UIManagedDocument *document;
 static NSMutableArray* url2datas;
 static NSMutableDictionary* keyToFindIfExist;
 static int datasize;
+static int data_add_count;
 static bool init_flag=false;
 
 +(NSMutableArray *)url2datas{
@@ -20,6 +21,7 @@ static bool init_flag=false;
 }
 
 +(void)init{
+    data_add_count=0;
     NSURL *url=[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     url=[url URLByAppendingPathComponent:@"DefaultURLConnectionCacheDatabaseOrangeParc"];
     keyToFindIfExist=[NSMutableDictionary dictionary];
@@ -109,6 +111,21 @@ static bool init_flag=false;
         oneMap.urlName=key;
         oneMap.data=data;
 
+        data_add_count++;
+    if (data_add_count%8==0) {
+        [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+            if(!success)
+            {
+                NSLog(@"failed to save document %@",document.localizedName);
+                NSLog(@"%@ ---%d",key,[data length]);
+            }
+            else{
+                datasize+=[data length];
+                NSLog(@"success saved");
+                NSLog(@"%@ ---%d",key,[data length]);
+            }
+        }];
+    }
         /*
         [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
             if(!success) 
@@ -151,10 +168,12 @@ static bool init_flag=false;
         while (datasize>MYPERMANENTCACHEPART_SATASIZE_LIMITE/2&&url2datas&&[url2datas count]>0) {
             //remove the middle part data until it reached the half size of the limite;
             URLConnectionCache *event=[url2datas objectAtIndex:([url2datas count]-1)/2];
+            datasize-=[event.data length];
             [url2datas removeObject:event];
             [document.managedObjectContext deleteObject:event];
             [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
                 if(!success) NSLog(@"failed to delete document %@",document.localizedName);
+                else NSLog(@"success delete a event, now %d",datasize);
             }];
         }
     }

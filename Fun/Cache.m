@@ -28,7 +28,12 @@ static NSString* recentViewListPath;
 /*****************************************************************
  
  *****************************************************************/
-
++ (BOOL) isInitialized{
+    if (cacheInitialized) {
+        return YES;
+    }
+    return NO;
+}
 
 + (void)init {
     cacheInitialized = YES;

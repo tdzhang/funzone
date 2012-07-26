@@ -23,6 +23,7 @@
 @interface Cache: NSObject
 
 + (void) init;
++ (BOOL) isInitialized;
 + (BOOL) isURLCached:(NSURL*)url;
 + (NSData*) getCachedData:(NSURL*)url;
 + (BOOL) addDataToCache:(NSURL*)url withData:(NSData*)data;

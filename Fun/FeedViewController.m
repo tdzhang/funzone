@@ -171,7 +171,7 @@
         [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
-        NSLog(@"get most 10 popular pages called");
+        //NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT/2)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
@@ -233,7 +233,7 @@
         self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+0.5)*BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];

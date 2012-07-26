@@ -86,13 +86,15 @@
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
-    
+    else{
     //init the detail page for later segue
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
 	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
-    //query the user profile information    
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile",CONNECT_DOMIAN_NAME]];
+    //query the user profile information
+    //add login auth_token
+    defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
@@ -152,9 +154,6 @@
         notsuccess.delegate=self;
         [notsuccess show];
     }];
-    //add login auth_token
-    defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
     
@@ -168,6 +167,7 @@
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    }
 }
 
 - (void)viewDidLoad
