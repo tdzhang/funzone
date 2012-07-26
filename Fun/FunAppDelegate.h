@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
+#import "Cache.h"
+#import "MyPermenentCachePart.h"
 @interface FunAppDelegate : UIResponder  
 
 @property (strong, nonatomic) UIWindow *window;

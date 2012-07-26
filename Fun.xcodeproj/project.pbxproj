@@ -67,6 +67,8 @@
 		0FD0BB5815AFAFE400357ADE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */; };
 		0FD0BB5A15AFAFF500357ADE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5915AFAFF500357ADE /* libz.dylib */; };
 		0FD0BB5C15B0E8B000357ADE /* FreshBigArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */; };
+		0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */; };
+		0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */; };
 		0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3515B49F4D000D68C3 /* 86-camera.png */; };
 		0FF9C57F15BB9003002D1998 /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
@@ -247,6 +249,10 @@
 		0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0FD0BB5915AFAFF500357ADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrowDown.png; sourceTree = "<group>"; };
+		0FEC5BED15C0A63600E3C8A3 /* MyPermenentCachePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPermenentCachePart.h; sourceTree = "<group>"; };
+		0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPermenentCachePart.m; sourceTree = "<group>"; };
+		0FEC5BF115C0A6E500E3C8A3 /* URLConnectionCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionCache.h; sourceTree = "<group>"; };
+		0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionCache.m; sourceTree = "<group>"; };
 		0FF00A3515B49F4D000D68C3 /* 86-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "86-camera.png"; sourceTree = "<group>"; };
 		0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
@@ -710,6 +716,8 @@
 				4668A78E1593F69300713A4C /* Event.h */,
 				4668A78F1593F69300713A4C /* Event.m */,
 				4668A7711593F1DD00713A4C /* Model.xcdatamodeld */,
+				0FEC5BF115C0A6E500E3C8A3 /* URLConnectionCache.h */,
+				0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */,
 				4668A7771593F35100713A4C /* User.h */,
 				4668A7781593F35100713A4C /* User.m */,
 			);
@@ -721,6 +729,8 @@
 			children = (
 				46500E741594E24E00535824 /* Cache.h */,
 				4668A77D1593F3E500713A4C /* Cache.m */,
+				0FEC5BED15C0A63600E3C8A3 /* MyPermenentCachePart.h */,
+				0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */,
 				4668A77E1593F3E500713A4C /* DocManager.h */,
 				4668A77F1593F3E500713A4C /* DocManager.m */,
 				4668A7801593F3E500713A4C /* XMLParser.h */,
@@ -1048,6 +1058,8 @@
 				0F60F40315BC72F100053D25 /* ProfileEventElement.m in Sources */,
 				0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */,
 				0F9A531B15BE7F9A008E6F3B /* SettingPageViewController.m in Sources */,
+				0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */,
+				0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

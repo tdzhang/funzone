@@ -26,8 +26,8 @@ static NSString* cacheDictPath;
 static NSMutableArray* recentViewList;
 static NSString* recentViewListPath;
 /*****************************************************************
-
-*****************************************************************/
+ 
+ *****************************************************************/
 
 
 + (void)init {
@@ -60,7 +60,10 @@ static NSString* recentViewListPath;
     if (recentViewList == nil) {
         recentViewList = [[NSMutableArray alloc] init];
     }
-
+    
+    //Add all the data from the permenentCachePartInto this dynamic part
+    [MyPermenentCachePart init];
+    
     
 }
 
@@ -69,11 +72,51 @@ static NSString* recentViewListPath;
     return [key stringByReplacingOccurrencesOfString:@"/" withString:@"."];
 }
 
++ (BOOL) preAddDataToCache:(NSString*)urlName withData:(NSData*)data
+{
+    NSLog(@"preadd: -->%@ -->%d",urlName,[data length]);
+    BOOL result = NO;
+    NSString *key = [Cache generateKeyFromURL:[NSURL URLWithString:urlName]];
+    if (key) {
+        NSString *path = [documentDir stringByAppendingPathComponent:key];
+        result = [data writeToFile:path atomically:YES];
+        if (result) {
+            @synchronized(self) {
+                usedCacheSize += [data length];
+                [cacheDict setValue:path forKey:key];
+                
+                while (usedCacheSize > cacheSize) {
+                    NSString* key = [recentViewList objectAtIndex:0];
+                    if (key != nil) {
+                        [self removeCachedDataWithKey:key];
+                    }
+                    //NSLog(@"%@", recentViewList);
+                    //NSLog(@"usedCacheSize = %d/%d\n", usedCacheSize, cacheSize);
+                }
+                [cacheDict writeToFile:cacheDictPath atomically:YES];
+                [recentViewList writeToFile:recentViewListPath atomically:YES];
+            }
+        }
+    }
+    return result;
+}
+
+
+
 + (BOOL) addDataToCache:(NSURL*)url withData:(NSData*)data
 {
+    
     if (!cacheInitialized) {
         [Cache init];
     }
+    //add the data into permanent cache
+    
+    //dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{  
+        //get the image data
+    [MyPermenentCachePart addDataToCache:[NSString stringWithFormat:@"%@",url] withData:[data copy]];
+    //});
+    
+    
     BOOL result = NO;
     NSString *key = [Cache generateKeyFromURL:url];
     if (key) {
@@ -83,7 +126,7 @@ static NSString* recentViewListPath;
             @synchronized(self) {
                 usedCacheSize += [data length];
                 [cacheDict setValue:path forKey:key];
-                                
+                
                 while (usedCacheSize > cacheSize) {
                     NSString* key = [recentViewList objectAtIndex:0];
                     if (key != nil) {
@@ -182,5 +225,5 @@ static NSString* recentViewListPath;
 
 @end
 
- 
+
 

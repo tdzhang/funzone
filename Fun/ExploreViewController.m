@@ -114,7 +114,7 @@
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
     NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-    NSLog(@"%@",request_string);
+    NSLog(@"request %@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
@@ -156,16 +156,26 @@
         //remove the main views
         self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
+<<<<<<< HEAD
             [view setFrame:CGRectMake(0, view.frame.origin.y+CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+CONTENT_HEIGHT/2);
+=======
+            [view setFrame:CGRectMake(0, view.frame.origin.y+BlOCK_VIEW_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            //NSLog(@"put %f",view.frame.origin.y+BlOCK_VIEW_HEIGHT/2);
+>>>>>>> add local data save part
             [self.garbageCollection addObject:view];
         }
         
         [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
+<<<<<<< HEAD
         NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, SCROLLVIEW_CONTENT_WIDTH, CONTENT_HEIGHT/2)];
+=======
+        //NSLog(@"get most 10 popular pages called");
+        [self.refreshView setFrame:CGRectMake(0, 0, VIEW_WIDTH, BlOCK_VIEW_HEIGHT/2)];
+>>>>>>> add local data save part
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
@@ -189,7 +199,7 @@
         
         //and then do the refresh process
         NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-        NSLog(@"%@",request_string);
+        NSLog(@"request %@",request_string);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -280,7 +290,7 @@
         self.freshConnectionType=@"not";  
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        NSLog(@"%@",json);
+        //NSLog(@"%@",json);
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         self.refresh_page_num=2;
         
