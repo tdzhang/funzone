@@ -131,11 +131,10 @@
 #pragma mark - self defined method
 - (void) buttonPressed: (id) sender withEvent: (UIEvent *) event
 {
-    UITouch * touch = [[event touchesForView:self.tableView] anyObject];
+    UITouch * touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView: self.tableView];
     NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint: location];
-    NSLog(@"%d",indexPath.row);
-    
+
     ProfileInfoElement*element=[self.arrayProfileInfoElements objectAtIndex:indexPath.row];
     //add login auth_token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

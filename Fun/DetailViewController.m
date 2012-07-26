@@ -134,7 +134,7 @@
 
 
 - (IBAction)shareButton:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook",@"Twitter",@"WeiChat", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook",@"Twitter",@"WeChat", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;    
     [pop showFromTabBar:self.tabBarController.tabBar];
 }

@@ -13,6 +13,12 @@
 @synthesize profileNameLabel;
 @synthesize unfollowButton;
 
+@synthesize user_id=_user_id;
+@synthesize user_name=_user_name;
+@synthesize user_pic=_user_pic;
+@synthesize facebook_id=_facebook_id;
+
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

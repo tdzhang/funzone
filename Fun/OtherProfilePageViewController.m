@@ -223,9 +223,11 @@
 
 #pragma mark - button action
 - (IBAction)startFollowAction:(id)sender {
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow",CONNECT_DOMIAN_NAME]];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
     if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/Unfollow",CONNECT_DOMIAN_NAME]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
     }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
@@ -235,7 +237,7 @@
         NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([self.followButton.titleLabel.text isEqualToString:@"unfollow"]) {
+        if ([self.followButton.titleLabel.text isEqualToString:@"Unfollow"]) {
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                 UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow Success." message: [NSString stringWithFormat:@"You have successfully unfollowed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
                 success.delegate=self;
@@ -247,7 +249,7 @@
                 [unsuccess show];
             }
         }
-        else if ([self.followButton.titleLabel.text isEqualToString:@"follow"]){
+        else if ([self.followButton.titleLabel.text isEqualToString:@"Follow"]){
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                 UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow Success." message: [NSString stringWithFormat:@"You have successfully followed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
                 success.delegate=self;
@@ -268,9 +270,6 @@
         [notsuccess show];
     }];
     //add login auth_token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-    [request setPostValue:self.creator_id forKey:@"followee_id"];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
 }

@@ -19,4 +19,5 @@
 @property (nonatomic,strong) NSString *user_pic;
 @property (nonatomic,strong) NSString *facebook_id;
 
+
 @end
