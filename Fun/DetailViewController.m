@@ -126,17 +126,51 @@
     self.shared_event_id = shared_event_id;
 }
 
-
 //handle the action: addViewCommentButtonClicked
 -(void)addViewCommentButtonClicked:(id)sender{
     [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
 }
 
-
 - (IBAction)shareButton:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook",@"Twitter",@"WeChat", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;    
     [pop showFromTabBar:self.tabBarController.tabBar];
+}
+
+//handle the action: interestedButtonClicked
+- (IBAction)interestedButtonClicked:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    NSLog(@"request: %@",url);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Interest showed" message: [NSString stringWithFormat:@"Your Interested is upload to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            success.delegate=self;
+            [success show];
+        }
+        else {
+            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            unsuccess.delegate=self;
+            [unsuccess show];
+        }
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
