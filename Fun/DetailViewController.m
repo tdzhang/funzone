@@ -357,7 +357,7 @@
     //renew the 10 newest features!!!!
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    
+    NSLog(@"%@",event);
     //get the detail information
     NSString *title=[event objectForKey:@"title"];
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
