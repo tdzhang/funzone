@@ -160,7 +160,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Get User Profile Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Errow getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
@@ -240,28 +240,28 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if (self.followed) {
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow Success." message: [NSString stringWithFormat:@"You have successfully unfollowed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 success.delegate=self;
                 [success show];
                 [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
                 self.followed=NO;
             }
             else {
-                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not Success." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 unsuccess.delegate=self;
                 [unsuccess show];
             }
         }
         else if (!self.followed){
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow Success." message: [NSString stringWithFormat:@"You have successfully followed the person you choose."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 success.delegate=self;
                 [success show];
                 [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                 self.followed=YES;
             }
             else {
-                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not Success." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 unsuccess.delegate=self;
                 [unsuccess show];
             }
@@ -270,7 +270,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Get User Profile Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
@@ -313,7 +313,7 @@
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
         UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
-        loadLabel.text =@"Adding More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loadLabel.text =@"Loading more...";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
         loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
         loadLabel.backgroundColor =[UIColor clearColor];

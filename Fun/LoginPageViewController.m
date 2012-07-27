@@ -115,7 +115,7 @@
     
     //if the name/password is too short, alert user
     if ([self.userName.text length]<4||[self.userPassword.text length]<5) {
-        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"User Name/Password Error" message:@"Your name/password is too short, please input again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Username / Password Error" message:@"Your name/password is wrong, please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         [tooShort show];
         return;
     }

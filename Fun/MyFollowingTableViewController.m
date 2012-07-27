@@ -96,7 +96,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Get User Profile Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
@@ -153,7 +153,7 @@
             NSLog(@"cool");
         }
         else {
-            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not Success." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not completed." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
             unsuccess.delegate=self;
             [unsuccess show];
         }
@@ -161,7 +161,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Get Unfollow Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting unfollow!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];

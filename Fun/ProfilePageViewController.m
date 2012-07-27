@@ -148,7 +148,7 @@
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Get User Profile Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
@@ -233,7 +233,7 @@
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
         UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
-        loadLabel.text =@"Adding More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loadLabel.text =@"Loading more...";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
         loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
         loadLabel.backgroundColor =[UIColor clearColor];

@@ -391,14 +391,14 @@
         // Use when fetching text data
         NSString *responseString = [block_request responseString];
         NSLog(@"%@",responseString);
-        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Upload Complete!" message:@"The Event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded posted." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         success.delegate=self;
         [success show];
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];
         NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }];
@@ -524,7 +524,7 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Anytime",@"Today",@"Tomorrow",@"This Weekend",@"Self Enter", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Anytime",@"Today",@"Tomorrow",@"This weekend",@"Self enter", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -559,7 +559,7 @@
 }
 */
 - (IBAction)ChoosePhoto:(UIButton *)sender {
-    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose Photo Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"In Album",@"Google Image", nil];
+    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from album",@"via Google Image", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -626,7 +626,7 @@
 
             [params setObject:@"funnect event" forKey:@"name"];
             [params setObject:@"new funnect event" forKey:@"description"];
-            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"message"];
+            [params setObject:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"message"];
             
             if ([delegate.facebook isSessionValid]) {
                 self.currentFacebookConnect=@"create event";
@@ -659,7 +659,7 @@
             [params setObject:eventName forKey:@"name"];
             [params setObject:eventTime forKey:@"start_time"];
             [params setObject:[NSString stringWithFormat:@"%@",eventLocation] forKey:@"location"];
-            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"description"];
+            [params setObject:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",eventName,eventTime,eventLocation] forKey:@"description"];
             
             if ([delegate.facebook isSessionValid]) {
                 self.currentFacebookConnect=@"create event";
@@ -683,7 +683,7 @@
                 [self presentModalViewController:self.imgPicker animated:YES];
             }
             else {
-                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Camera Not Exist" message:@"Your device do not support Camera." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Camera Not Exist" message:@"Your device does not support camera." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }
@@ -696,7 +696,7 @@
                 [self presentModalViewController:self.imgPicker animated:YES];
             }
             else {
-                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Album Not Exist" message:@"Your device do not support Photo Album." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Album doesn't exist" message:@"Your device does not support photo album." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }
@@ -754,7 +754,7 @@
                 //email list
                 [mailCont setToRecipients:emailList];
                 //email body
-                [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n %@ Cheers~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text] isHTML:NO];
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text] isHTML:NO];
                 //go!
                 [self presentModalViewController:mailCont animated:YES];
             }
@@ -795,9 +795,9 @@
         [[TWTweetComposeViewController alloc] init];
         
         //get the event information from all the selection
-        NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some Stuff";
-        NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"Some Time";
-        NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"some where";
+        NSString *eventName=(![self.textFieldEventTitle.text isEqualToString:@""])?self.textFieldEventTitle.text:@"Some fun stuff";
+        NSString *eventTime=(![self.labelEventTime.text isEqualToString:@"time"])?self.labelEventTime.text:@"To be decided";
+        NSString *eventLocation=(![self.locationLabel.text isEqualToString:@"location"])?self.locationLabel.text:@"To be announced";
         
         NSString *sendMsg=[NSString stringWithFormat:@"Hi All, I want to %@ time: %@ location %@ ",eventName,eventTime,eventLocation];
         NSLog(@"%@",sendMsg);
@@ -811,7 +811,7 @@
     {
         UIAlertView *alertView = [[UIAlertView alloc] 
                                   initWithTitle:@"Sorry"                                                             
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"                                                          
+                                  message:@"You can't send a tweet right now, make sure your device has an Internet connection and you have at least one Twitter account setup"                                                          
                                   delegate:self                                              
                                   cancelButtonTitle:@"OK"                                                   
                                   otherButtonTitles:nil];
@@ -853,7 +853,7 @@
         funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
         
-        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create facebook event", nil];
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Select Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post on wall",@"Create Facebook event", nil];
         pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
         [pop showFromTabBar:self.tabBarController.tabBar];
          /*
@@ -1040,7 +1040,7 @@
 //implement the MFMailComposeViewControllerDelegate Method
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     if (error) {
-        NSLog(@"Sending Email Error Happended!");
+        NSLog(@"Sending Email Error Happened!");
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -1131,7 +1131,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if ([textField isEqual:self.textFieldEventTitle]) {
         if ([textField.text length]==0) {
-            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Title Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
+            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Title Input Empty" message:@"Oops! You didn't input anything. Please try again." delegate:self  cancelButtonTitle:@"Input again" otherButtonTitles:@"Cancel",nil];
             inputEmptyError.delegate=self;
             [inputEmptyError show];
             return YES;

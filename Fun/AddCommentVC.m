@@ -97,13 +97,13 @@
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment Complete!" message:@"The Comment has been successfully added to our server." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 success.delegate=self;
                 [success show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else{
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment Went Wrong!" message:@"Sorry, The Comment has not been uploaded to our sever, please try again." delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:@"Sorry, the comment wasn't completed. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -112,7 +112,7 @@
         [request setFailedBlock:^{
             NSError *error = [block_request error];
             NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             notsuccess.delegate=self;
             [notsuccess show];
         }];
@@ -126,7 +126,7 @@
         [request startAsynchronous];
     }
     else {
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment Too Short!" message:@"please input the comment again!" delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment too short!" message:@"Sorry, your comment is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         notsuccess.delegate=self;
         [notsuccess show];
     }
