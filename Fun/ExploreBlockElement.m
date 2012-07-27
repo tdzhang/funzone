@@ -104,23 +104,33 @@
     blockElement.titleLabel.backgroundColor = [UIColor clearColor];
     blockElement.titleLabel.textColor = [UIColor whiteColor];
     blockElement.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    blockElement.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+    blockElement.titleLabel.numberOfLines = 3;
+    [blockElement.titleLabel setShadowColor:[UIColor blackColor]];
+    [blockElement.titleLabel setShadowOffset:CGSizeMake(0, 1)]; 
+    CGSize maximumLabelSize = CGSizeMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_WIDTH,9999);    
+    CGSize expectedLabelSize = [title sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
+    CGRect newFrame = blockElement.titleLabel.frame;
+    newFrame.origin.y -= expectedLabelSize.height - EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT;
+    newFrame.size.height = expectedLabelSize.height;
+    blockElement.titleLabel.frame = newFrame;
     [blockElement.view addSubview:blockElement.titleLabel];
     
     //marker image
-    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
-    [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
-    [marker setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MARKER_IMAGENAME]];
-    [marker setContentMode:UIViewContentModeScaleToFill];
-    [blockElement.view addSubview:marker];
+//    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
+//    [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
+//    [marker setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MARKER_IMAGENAME]];
+//    [marker setContentMode:UIViewContentModeScaleToFill];
+//    [blockElement.view addSubview:marker];
     
     //location Label
-    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_X, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_Y, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_HEIGHT)];
-    blockElement.locationLabel.text = locationName;
-    blockElement.locationLabel.backgroundColor = [UIColor clearColor];
-    blockElement.locationLabel.textColor = [UIColor whiteColor];
-    blockElement.locationLabel.shadowColor=[UIColor darkTextColor];
-    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [blockElement.view addSubview:blockElement.locationLabel];
+//    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_X, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_Y, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_HEIGHT)];
+//    blockElement.locationLabel.text = locationName;
+//    blockElement.locationLabel.backgroundColor = [UIColor clearColor];
+//    blockElement.locationLabel.textColor = [UIColor whiteColor];
+//    blockElement.locationLabel.shadowColor=[UIColor darkTextColor];
+//    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:12.0];
+//    [blockElement.view addSubview:blockElement.locationLabel];
     
     //event view
     blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_EVENTVIEW_X,EXPLORE_BLOCK_ELEMENT_EVENTVIEW_Y, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
