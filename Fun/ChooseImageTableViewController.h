@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageTableViewCell.h"
+#import "GlobalConstant.h"
 
 //define the constant variable
 #define GOOGLE_IMAGE_NUM 8 //between 1~8
-#define DEFAULT_IMAGE_REPLACEMENT @"big40.jpg" //to replace the image which cannot get the 
 @class ChooseImageTableViewController;
 
 @protocol ChooseImageFeedBackDelegate 

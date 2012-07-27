@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
 #import "ProfileEventElement.h"
+#import "GlobalConstant.h"
 
 @interface ProfilePageViewController : UIViewController<UIScrollViewDelegate>
 

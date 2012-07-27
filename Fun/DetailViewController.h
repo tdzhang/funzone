@@ -12,6 +12,7 @@
 #import "AddCommentVC.h"
 #import "ProfileInfoElement.h"
 #import "Cache.h"
+#import "GlobalConstant.h"
 
 @interface DetailViewController : UIViewController
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id;

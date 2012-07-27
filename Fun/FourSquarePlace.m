@@ -22,6 +22,7 @@
 @synthesize country=_country;
 @synthesize categories_shortName=_categories_shortName;
 
+//use google api
 +(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate{
     FourSquarePlace *place=[[FourSquarePlace alloc] init];
     
@@ -59,6 +60,7 @@
     return place;
 }
 
+//use foursquare api
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue{
     FourSquarePlace *place=[[FourSquarePlace alloc] init];
     

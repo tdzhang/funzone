@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+//The class file for a comment
 #import <Foundation/Foundation.h>
 
 @interface eventComment : NSObject
@@ -15,5 +16,6 @@
 @property (nonatomic,strong) NSString* timestamp;
 @property (nonatomic,strong) NSString* user_name;
 
+//generate the array of the eventComment from the json got from the sever
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments;
 @end

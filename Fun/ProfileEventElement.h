@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Cache.h"
+#import "GlobalConstant.h"
 
 @interface ProfileEventElement : NSObject
 @property(nonatomic,strong)UIView *blockView;

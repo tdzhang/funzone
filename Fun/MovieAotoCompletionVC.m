@@ -7,8 +7,7 @@
 //
 
 #import "MovieAotoCompletionVC.h"
-
-#define DEFAULT_IMAGE_REPLACEMENT @"big40.jpg"
+#import "GlobalConstant.h"
 
 @interface MovieAotoCompletionVC ()
 

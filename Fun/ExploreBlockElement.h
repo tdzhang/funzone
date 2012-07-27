@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "Cache.h"
+#import "GlobalConstant.h"
 
 @interface ExploreBlockElement : NSObject
 @property(nonatomic,strong) UIView *blockView;
@@ -30,8 +31,7 @@
 //used to reset the fram information
 -(void) resetFramWith:(CGFloat)position_y;
 
-+ (void)setUpStyle:(CALayer*)layer;
-
+//generate a explore block element
 +(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id;
 @end
 

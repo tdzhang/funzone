@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NewEventVC.h"
 #import "LoginPageViewController.h"
+#import "GlobalConstant.h"
 
 @interface CategroyChooseViewController : UIViewController<UIAlertViewDelegate>
 

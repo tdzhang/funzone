@@ -109,10 +109,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
-    
-
-    
-    [self.myScrollView setContentSize:CGSizeMake(320, 400)];
+    //initial the contentsize of the myScrollView
+    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT)];
     
     //start a new connection, to fetch data from the server (about event detail)
     NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id];
@@ -134,7 +132,7 @@
     self.shared_event_id = shared_event_id;
 }
 
-//handle the action: addViewCommentButtonClicked
+//handle the action: addViewCommentButtonClicked (the TableViewControlelr that used to show all the comment and add the comment)
 -(void)addViewCommentButtonClicked:(id)sender{
     [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
 }
@@ -181,6 +179,7 @@
     [request startAsynchronous];
 }
 
+#pragma mark - action sheet related stuff
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         NSLog(@"email");
@@ -214,9 +213,8 @@
 }
 
 #pragma mark - comment handle part
-#define COMMENT_HEIGHT 24
-//handle the intereted people part
-//handle the comment part from self.comments
+
+//handle the intereted people part and handle the comment part from self.comments
 -(void)handleTheCommentPart{
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
@@ -231,14 +229,14 @@
     
     //handle the interest people part
     if ([self.interestedPeople count]>0) {
-        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, height, 300, 25)];
+        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [interestedPeopleLable setText:[NSString stringWithFormat:@" %d interested",[self.interestedPeople count]]];
         [interestedPeopleLable setFont:[UIFont boldSystemFontOfSize:15]];
         [interestedPeopleLable setTextColor:[UIColor darkGrayColor]];
         [interestedPeopleLable setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.myScrollView addSubview:interestedPeopleLable];
         [self.garbageCollection addObject:interestedPeopleLable];
-        height+=25;
+        height+=DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT;
         
         UIView *interested_people_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 45)];
         [interested_people_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -257,7 +255,7 @@
                     if (imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                         imageData=UIImagePNGRepresentation(image);
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
@@ -343,7 +341,7 @@
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, temp_height, 300, 30)];
         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
         NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
-        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 25)];
+        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [comment_user_name setBackgroundColor:[UIColor clearColor]];
         [comment_user_name setText:content];
         [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
@@ -364,7 +362,7 @@
         //        //[comment_time sizeToFit];
         //        [commentView addSubview:comment_time];
         
-        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+10, 5, 200, 25)];
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+10, 5, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [comment_content setBackgroundColor:[UIColor clearColor]];
         [comment_content setText:comment.content];
         [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
@@ -455,9 +453,7 @@
        // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
        // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
 
-        if (!title) {
-            return;
-        }
+    if (!title) {return;}
         
     self.event_title=title;
     self.event_time=time;

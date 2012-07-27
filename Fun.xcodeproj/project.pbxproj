@@ -119,7 +119,6 @@
 		4668A79B1593F86100713A4C /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668A79A1593F86100713A4C /* AppData.m */; };
 		4668A79F1593F97C00713A4C /* Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4668A79D1593F97C00713A4C /* Placeholder.png */; };
 		4668A7A21593FA5100713A4C /* events.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4668A7A11593FA5100713A4C /* events.xml */; };
-		4668A7A51593FBC800713A4C /* FeaturedTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668A7A41593FBC800713A4C /* FeaturedTVC.m */; };
 		4668A7A71593FC8100713A4C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7A61593FC8100713A4C /* QuartzCore.framework */; };
 		4668A7A91593FC8800713A4C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7A81593FC8800713A4C /* CoreData.framework */; };
 		4668A7AF15943B4000713A4C /* NewEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668A7AE15943B4000713A4C /* NewEventVC.m */; };
@@ -325,8 +324,6 @@
 		4668A79A1593F86100713A4C /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		4668A79D1593F97C00713A4C /* Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Placeholder.png; sourceTree = "<group>"; };
 		4668A7A11593FA5100713A4C /* events.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = events.xml; sourceTree = "<group>"; };
-		4668A7A31593FBC800713A4C /* FeaturedTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedTVC.h; sourceTree = "<group>"; };
-		4668A7A41593FBC800713A4C /* FeaturedTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedTVC.m; sourceTree = "<group>"; };
 		4668A7A61593FC8100713A4C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4668A7A81593FC8800713A4C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4668A7AD15943B4000713A4C /* NewEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventVC.h; sourceTree = "<group>"; };
@@ -780,8 +777,6 @@
 				0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */,
 				463B9BE7159FC08D0087CDBA /* ExploreViewController.h */,
 				463B9BE8159FC08D0087CDBA /* ExploreViewController.m */,
-				4668A7A31593FBC800713A4C /* FeaturedTVC.h */,
-				4668A7A41593FBC800713A4C /* FeaturedTVC.m */,
 			);
 			name = Explore;
 			sourceTree = "<group>";
@@ -1046,7 +1041,6 @@
 				4668A78A1593F3E500713A4C /* DictDataConverter.m in Sources */,
 				4668A7901593F69300713A4C /* Event.m in Sources */,
 				4668A79B1593F86100713A4C /* AppData.m in Sources */,
-				4668A7A51593FBC800713A4C /* FeaturedTVC.m in Sources */,
 				4668A7AF15943B4000713A4C /* NewEventVC.m in Sources */,
 				0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */,
 				0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */,

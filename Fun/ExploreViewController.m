@@ -10,12 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 
-#define SCROLLVIEW_CONTENT_WIDTH 310
-#define SCROLLVIEW_CONTENT_OFFSET_X 5
-#define SCROLLVIEW_CONTENT_OFFSET_Y 5
-#define SCROLLVIEW_REFRESH_HEIGHT 20
-#define CONTENT_WIDTH 310
-#define CONTENT_HEIGHT 155
+
 
 @interface ExploreViewController ()
 @property CGFloat currentY;
@@ -78,17 +73,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-
-    //........towards left Gesture recogniser for swiping.....// used to change view
-    /*
-    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:leftRecognizer]; 
-    */
-    
     //refresh part
-    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -SCROLLVIEW_REFRESH_HEIGHT, SCROLLVIEW_CONTENT_WIDTH, SCROLLVIEW_REFRESH_HEIGHT)];
-    //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
     [self.mainScrollView addSubview:self.refreshView];
 }
 
@@ -120,8 +106,8 @@
     [connection start];
     
     //set mainScrollView layout styles
-    self.mainScrollView.contentSize = CGSizeMake(SCROLLVIEW_CONTENT_WIDTH, 0);
-    [self.mainScrollView setContentOffset:CGPointMake(SCROLLVIEW_CONTENT_OFFSET_X, SCROLLVIEW_CONTENT_OFFSET_Y)];
+    self.mainScrollView.contentSize = CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, 0);
+    [self.mainScrollView setContentOffset:CGPointMake(EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_X, EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_Y)];
 }
 
 
@@ -152,26 +138,26 @@
     }
     
     //this is the upper most position that need to reget the most popular 10 events
-    if (scrollView.contentOffset.y<-CONTENT_HEIGHT/3) {
+    if (scrollView.contentOffset.y<-EVENT_ELEMENT_CONTENT_HEIGHT/3) {
         //remove the main views
         self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
-            [view setFrame:CGRectMake(0, view.frame.origin.y+CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-            NSLog(@"put %f",view.frame.origin.y+CONTENT_HEIGHT/2);
+            [view setFrame:CGRectMake(0, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
             [self.garbageCollection addObject:view];
         }
         
         [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
-        NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(0, 0, SCROLLVIEW_CONTENT_WIDTH, CONTENT_HEIGHT/2)];
+        //NSLog(@"get most 10 popular pages called");
+        [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT/2)];
 
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
         
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,SCROLLVIEW_CONTENT_WIDTH,CONTENT_HEIGHT/2)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
@@ -190,22 +176,22 @@
         
         //and then do the refresh process
         NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-        NSLog(@"request %@",request_string);
+        NSLog(@"ExploreViewController request1: %@",request_string);
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         self.freshConnectionType=@"New";
         [connection start];
     }
-    //add more
-    else if(scrollView.contentOffset.y>CONTENT_HEIGHT*(([self.blockViews count]-2.5))){
+    //add more of the featured event
+    else if(scrollView.contentOffset.y>EVENT_ELEMENT_CONTENT_HEIGHT*(([self.blockViews count]-2.5))){
         //add the content add refresh indicator
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
         }
-        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,SCROLLVIEW_CONTENT_WIDTH,CONTENT_HEIGHT)];
+        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT)];
         [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,SCROLLVIEW_CONTENT_WIDTH,CONTENT_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor clearColor];
@@ -218,16 +204,16 @@
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         spinning.frame =CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,CONTENT_HEIGHT*([self.blockViews count]),SCROLLVIEW_CONTENT_WIDTH,CONTENT_HEIGHT/2)];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,EVENT_ELEMENT_CONTENT_HEIGHT*([self.blockViews count]),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
         [self.refreshViewdown removeFromSuperview];
         [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]+0.5)*CONTENT_HEIGHT);
+        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]+0.5)*EVENT_ELEMENT_CONTENT_HEIGHT);
         
         //NSLog(@"add more");
         NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
-        NSLog(@"%@",request_string);
+        NSLog(@"ExploreViewController request2:%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         //set the freshConnectionType To @"Add"
@@ -241,16 +227,15 @@
     [self.refreshView removeFromSuperview];
     ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -CONTENT_HEIGHT, SCROLLVIEW_CONTENT_WIDTH, CONTENT_HEIGHT)];
-    //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EVENT_ELEMENT_CONTENT_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT)];
     [self.mainScrollView addSubview:self.refreshView];
-    [self.mainScrollView setContentSize:CGSizeMake(SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*CONTENT_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
 }
 //use to add more (than 10) from down side
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    [self.mainScrollView setContentSize:CGSizeMake(SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*CONTENT_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -304,14 +289,10 @@
             NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
             
             
-            if (!title) {
-                continue;
-            }
-            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
-                continue;
-            }
+            if (!title) {continue;}
+            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
         
@@ -327,11 +308,11 @@
         if ([json count]==0) {
             //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
             self.refresh_page_num--;
-            [self.mainScrollView setContentSize:CGSizeMake(SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*CONTENT_HEIGHT)];
+            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
         }
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
-            NSString *description=[event objectForKey:@"description"];
+            //NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
@@ -342,15 +323,11 @@
             NSString *creator_pic=[event objectForKey:@"creator_pic"];
             NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
             
-            if (!title) {
-                continue;
-            }
-            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
-                continue;
-            }
+            if (!title) {continue;}
+            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
             
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id] atIndex:[self.blockViews count]];
             
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
@@ -381,11 +358,11 @@
     
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
     //get the index of the touched block view
-    int index=touchPoint.y/CONTENT_HEIGHT;
+    int index=touchPoint.y/EVENT_ELEMENT_CONTENT_HEIGHT;
     //NSLog(@"%d",index);
     //NSLog(@"click_position:%f,%f",touchPoint.x,touchPoint.y-index*BlOCK_VIEW_HEIGHT);
     float x=touchPoint.x;
-    float y=touchPoint.y-index*CONTENT_HEIGHT;
+    float y=touchPoint.y-index*EVENT_ELEMENT_CONTENT_HEIGHT;
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
@@ -405,40 +382,10 @@
     }
     
     //do some pre-segue stuff with event_id and shared_id
-
-    
     /*
      self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
      [self presentViewController:self.detailViewController animated:YES completion:^{}];
      */
-}
-
-//the swipe gesture to change the view
--(void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
-    //left swipe need to change to the right view
-    // Get the views.
-    int controllerIndex=1;
-    UIView * fromView = self.tabBarController.selectedViewController.view;
-    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
-    // Get the size of the view area.
-    CGRect viewSize = fromView.frame;
-    // Add the to view to the tab bar view.
-    [fromView.superview addSubview:toView];
-    // Position it off screen.
-    toView.frame = CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
-    [UIView animateWithDuration:0.4 
-                     animations: ^{
-                         // Animate the views on and off the screen. This will appear to slide.
-                         fromView.frame =CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
-                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
-                     }
-                     completion:^(BOOL finished) {
-                         if (finished) {
-                             // Remove the old view from the tabbar view.
-                             [fromView removeFromSuperview];
-                             self.tabBarController.selectedIndex = controllerIndex;                
-                         }
-                     }];
 }
 
 @end

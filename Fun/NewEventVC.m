@@ -624,7 +624,6 @@
                 eventTime=[now description];
             }  
 
-            
             [params setObject:@"funnect event" forKey:@"name"];
             [params setObject:@"new funnect event" forKey:@"description"];
             [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"message"];
@@ -639,7 +638,6 @@
             else {
                 NSLog(@"Face book session invalid~~~");
             }
-
         }
      
         else if(buttonIndex == 1){
@@ -660,7 +658,7 @@
             
             [params setObject:eventName forKey:@"name"];
             [params setObject:eventTime forKey:@"start_time"];
-            [params setObject:[NSString stringWithFormat:eventLocation] forKey:@"location"];
+            [params setObject:[NSString stringWithFormat:@"%@",eventLocation] forKey:@"location"];
             [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",eventName,eventTime,eventLocation] forKey:@"description"];
             
             if ([delegate.facebook isSessionValid]) {
@@ -689,7 +687,6 @@
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }
-            
         }
         else if(buttonIndex == 1){
             //do sth. about choose photo from the album
@@ -710,10 +707,6 @@
         }
     }
 }
-
-
-
-
 
 
 //Email Share Button handler
@@ -808,7 +801,7 @@
         
         NSString *sendMsg=[NSString stringWithFormat:@"Hi All, I want to %@ time: %@ location %@ ",eventName,eventTime,eventLocation];
         NSLog(@"%@",sendMsg);
-        [tweetSheet setInitialText:[NSString stringWithFormat:sendMsg]];
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"%@",sendMsg]];
         if (self.uIImageViewEvent.image) {
             [tweetSheet addImage:self.uIImageViewEvent.image];
         }
@@ -831,11 +824,9 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-    //sender.frame = CGRectMake(100.0, 210.0, 160.0, 40.0);
     [self.buttonTwitterShare setTransform:CGAffineTransformMakeScale(40, 40)];
     [sender setAlpha:0];
     [UIView commitAnimations];
-    
     [self performSelector:@selector(twitterSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
 
@@ -851,7 +842,6 @@
     self.buttonFacebookShare.frame = CGRectMake(SHARE_BY_FACEBOOK_X,SHARE_BY_FACEBOOK_Y,SHOW_OPTION_BUTTON_LOCATION_WIDTH,SHOW_OPTION_BUTTON_LOCATION_HEIGHT);
     [self.buttonFacebookShare setHidden:NO];
     [self.view addSubview:self.buttonFacebookShare];
-
     
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
@@ -906,12 +896,7 @@
         [funAppdelegate.facebook authorize:permissions];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
     }
-    
-    
-    
-        
-    
-        //[[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
+    //[[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
 }
 
 
@@ -920,20 +905,11 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationDuration:ANIMATION_TIME_DURATION];
-    //sender.frame = CGRectMake(100.0, 210.0, 160.0, 40.0);
     [self.buttonFacebookShare setTransform:CGAffineTransformMakeScale(40, 40)];
     [sender setAlpha:0];
     [UIView commitAnimations];
-    
     [self performSelector:@selector(facebookSelector:) withObject:sender afterDelay:ANIMATION_TIME_DURATION];
 }
-
-
-//the button activite the email sending event
-- (void)SendInvitationByEmail {
-            
-}
-
 
 #pragma mark - facebook related protocal implement
 -(void)faceBookLoginFinished{
@@ -957,7 +933,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     if ([self.currentFacebookConnect isEqualToString:@"create event"]) {
-        NSLog(@"%@",result);
+        //NSLog(@"%@",result);
         //get the event id
         NSString *event_id = [result objectForKey:@"id"];
         NSLog(@"start to invite people");
@@ -997,7 +973,7 @@
     else if([self.currentFacebookConnect isEqualToString:@"get user photo and id"]){
         NSLog(@"%@",result);
         NSString *photo=[result objectForKey:@"picture"];
-        NSString *facebook_user_id=[result objectForKey:@"id"];
+        //NSString *facebook_user_id=[result objectForKey:@"id"];
        // NSLog(@"%@",facebook_user_id);
         self.currentFacebookConnect = nil;
         //set the user photo
@@ -1012,7 +988,7 @@
                 if ( imageData == nil ){
                     //if the image data is nil, the image url is not reachable. using a default image to replace that
                     //NSLog(@"downloaded %@ error, using a default image",url);
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                     imageData=UIImagePNGRepresentation(image);
                     
                     if(imageData){
@@ -1043,10 +1019,10 @@
     }
     else if([self.currentFacebookConnect isEqualToString:@"post on wall"]){
          self.currentFacebookConnect = nil;
-        NSLog(@"%@",result);
+        //NSLog(@"%@",result);
     }
     else {
-        NSLog(@"%@",result);
+        //NSLog(@"%@",result);
     }
 }
 

@@ -5,24 +5,7 @@
 //  Created by Tongda Zhang on 7/7/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-#define FLASH_TRANSITION_DURATION 0.5
-#define GOTO_FOOD_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_EVENT_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_ENTERTAIN_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_OUTDOOR_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_SPORTS_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_MOVIE_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_SHOPPING_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_PARTY_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
-#define CATEGORY_FOOD @"Category-Food.png"
-#define CATEGORY_EVENTS @"Category-Events.png"
-#define CATEGORY_ENTERTAIN @"Category-Entertainment.png"
-#define CATEGORY_MOVIE @"Category-Movie.jpeg"
-#define CATEGORY_OUTDOOR @"Category-Outdoor.png"
-#define CATEGORY_PARTY @"Category-Party.png"
-#define CATEGORY_SHOPPTING @"Category-Shopping.png"
-#define CATEGORY_SPORTS @"Category-Sports.png"
+
 
 
 #import "CategroyChooseViewController.h"
@@ -182,7 +165,7 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
-    [UIView setAnimationDuration:FLASH_TRANSITION_DURATION];
+    [UIView setAnimationDuration:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
     [self.flash setAlpha:0.0];
     [self.flashBackImageView setAlpha:1.0];
     [UIView commitAnimations];
@@ -191,22 +174,22 @@
 //the imageName is the snapshot for the next loading view
 -(void)FlashTransition1:(NSString *)imageName withCategoryImage:(NSString *)categoryImageName{
     //set up the flashOut image
-    if ([categoryImageName isEqualToString:CATEGORY_FOOD])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_EVENTS])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 0, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_ENTERTAIN])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_OUTDOOR])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 0, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_SPORTS])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 183, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_MOVIE])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 183, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_SHOPPTING])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 183, 80, 184)];
-    if ([categoryImageName isEqualToString:CATEGORY_PARTY])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 183, 80, 184)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_FOOD])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_EVENTS])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_ENTERTAIN])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_OUTDOOR])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_SPORTS])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_MOVIE])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_SHOPPTING])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
+    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_PARTY])
+        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
 
     if (self.flashZoomOutImageView) {
         [self.flashZoomOutImageView setImage:[UIImage imageNamed:categoryImageName]];
@@ -231,7 +214,7 @@
     [self.flash setAlpha:0.1];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
-    [UIView setAnimationDuration:FLASH_TRANSITION_DURATION];
+    [UIView setAnimationDuration:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
     [self.flash setAlpha:1.0];
     [self.flashBackImageView setAlpha:0.5];
     if (self.flashZoomOutImageView){
@@ -239,7 +222,7 @@
         [self.flashZoomOutImageView setAlpha:0.2];
     }
     [UIView commitAnimations];
-    [self performSelector:@selector(FlashTransition2:) withObject:self afterDelay:FLASH_TRANSITION_DURATION];
+    [self performSelector:@selector(FlashTransition2:) withObject:self afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 
 #pragma mark - button action
@@ -251,51 +234,51 @@
 //food
 - (IBAction)FoodButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"food";
-    [self FlashTransition1:GOTO_FOOD_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_FOOD];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_FOOD_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_FOOD];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //events
 - (IBAction)EventButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"event";
-    [self FlashTransition1:GOTO_EVENT_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_EVENTS];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:GOTO_EVENT_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_EVENTS];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //Entertain
 - (IBAction)EntertainButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"entertain";
-    [self FlashTransition1:GOTO_ENTERTAIN_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_ENTERTAIN];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_ENTERTAIN_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_ENTERTAIN];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //Outdoor
 - (IBAction)OutdoorButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"outdoor";
-    [self FlashTransition1:GOTO_OUTDOOR_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_OUTDOOR];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_OUTDOOR_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_OUTDOOR];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //Sports
 - (IBAction)SportsButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"sports";
-    [self FlashTransition1:GOTO_SPORTS_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_SPORTS];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_SPORTS_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_SPORTS];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
     
 }
 //Movie
 - (IBAction)MovieButtonClicked:(id)sender {
     self.eventPrepareCategory=@"movie";
-    [self FlashTransition1:GOTO_MOVIE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_MOVIE];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_MOVIE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_MOVIE];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //shopping
 - (IBAction)ShoppingButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"shopping";
-    [self FlashTransition1:GOTO_SHOPPING_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_SHOPPTING];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_SHOPPING_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_SHOPPTING];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //Party
 - (IBAction)PartyButtonClicked:(UIButton *)sender {
     self.eventPrepareCategory=@"party";
-    [self FlashTransition1:GOTO_PARTY_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_PARTY];
-    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION];
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_PARTY_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_PARTY];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 //hit the self define button "Go"
 - (IBAction)SelfDefineButtonClicked:(id)sender {
@@ -309,8 +292,8 @@
     else {
         //otherwise, do the segue
         [self.textFieldSelfDefine resignFirstResponder];
-        [self FlashTransition1:GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:@"NO"];
-        [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:FLASH_TRANSITION_DURATION*2];
+        [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:@"NO"];
+        [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION*2];
     }
     
 }

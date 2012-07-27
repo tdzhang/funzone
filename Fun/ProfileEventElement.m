@@ -7,16 +7,6 @@
 //
 
 #import "ProfileEventElement.h"
-#define VIEW_WIDTH 320
-#define VIEW_HEIGHT 60 
-
-#define EVENT_IMAGE_X 5
-#define EVENT_IMAGE_Y 5
-#define EVENT_IMAGE_SIZE 45
-
-
-
-
 
 @implementation ProfileEventElement
 @synthesize blockView=_blockView;
@@ -30,10 +20,9 @@
 @synthesize shared_event_id=_shared_event_id;
 
 +(ProfileEventElement *)initialWithPositionY:(CGFloat)position_y eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName{
-
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, VIEW_WIDTH, VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
@@ -44,7 +33,7 @@
     blockElement.shared_event_id=shared_event_id;
     
     //Event Image
-    blockElement.eventImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EVENT_IMAGE_X, EVENT_IMAGE_Y, EVENT_IMAGE_SIZE, EVENT_IMAGE_SIZE)];
+    blockElement.eventImageView=[[UIImageView alloc] initWithFrame:CGRectMake(PROFILE_ELEMENT_EVENT_IMAGE_X, PROFILE_ELEMENT_EVENT_IMAGE_Y, PROFILE_ELEMENT_EVENT_IMAGE_SIZE, PROFILE_ELEMENT_EVENT_IMAGE_SIZE)];
     [blockElement.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
     [blockElement.eventImageView setClipsToBounds:YES];
     [blockElement.blockView addSubview:blockElement.eventImageView];
@@ -61,7 +50,7 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 
                 if(imageData){
