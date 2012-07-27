@@ -1,9 +1,9 @@
 //
-//  ExploreViewController.h
+//  ExploreBlockElement.m
 //  Fun
 //
-//  Created by He Yang on 6/29/12.
-//  Copyright (c) 2012 Stanford University. All rights reserved.
+//  Created by Tongda Zhang on 7/10/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

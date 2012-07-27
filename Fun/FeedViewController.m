@@ -155,7 +155,6 @@
             NSLog(@"put %f",view.frame.origin.y+EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2);
             [self.garbageCollection addObject:view];
         }
-        [self.blockViews removeAllObjects];
         
         //set the refresh view ahead
         //NSLog(@"get most 10 popular pages called");
@@ -280,7 +279,7 @@
         for (UIView* subView in self.mainScrollView.subviews) {
             [subView removeFromSuperview];
         }
-        
+        [self.blockViews removeAllObjects];
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         self.refresh_page_num=2;
         for (NSDictionary* event in json) {
@@ -367,13 +366,21 @@
 
 //handle when user tap a certain block view
 -(void)tapBlock:(UITapGestureRecognizer *)tapGR {
+    if ([self.blockViews count]==0) {
+        return;
+    }
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
+    float tempTouchPointY=touchPoint.y;
+    float tempTouchPointX=touchPoint.x;
+    if ([self.freshConnectionType isEqualToString:@"New"]) {
+        tempTouchPointY-=EVENT_ELEMENT_CONTENT_HEIGHT/2;
+    }
     //get the index of the touched block view
     int index=touchPoint.y/EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT;
     //NSLog(@"%d",index);
     //NSLog(@"click_position:%f,%f",touchPoint.x,touchPoint.y-index*BlOCK_VIEW_HEIGHT);
-    float x=touchPoint.x;
-    float y=touchPoint.y-index*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT;
+    float x=tempTouchPointX;
+    float y=tempTouchPointY-index*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT;
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;

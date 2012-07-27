@@ -1,9 +1,9 @@
 //
-//  ExploreViewController.m
+//  ExploreBlockElement.m
 //  Fun
 //
-//  Created by He Yang on 6/29/12.
-//  Copyright (c) 2012 Stanford University. All rights reserved.
+//  Created by Tongda Zhang on 7/10/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "ExploreViewController.h"
@@ -19,6 +19,7 @@
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,retain) UIView *refreshViewdown;
+@property (nonatomic,retain) UIView *antiTouchMaskView;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
 @property (nonatomic) int refresh_page_num;
@@ -42,6 +43,7 @@
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 @synthesize garbageCollection=_garbageCollection;
 @synthesize tapped_creator_id=_tapped_creator_id;
+@synthesize antiTouchMaskView=_antiTouchMaskView;
 
 
 
@@ -147,9 +149,8 @@
             [self.garbageCollection addObject:view];
         }
         
-        [self.blockViews removeAllObjects];
         
-        //set the refresh view ahead
+        //set the refresh view ahead & and also the anti touch mask
         //NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT/2)];
 
@@ -177,8 +178,8 @@
         //and then do the refresh process
         NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
         NSLog(@"ExploreViewController request1: %@",request_string);
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLRequest *request = [NSURLRequest  requestWithURL:[NSURL URLWithString:request_string] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
+        //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         self.freshConnectionType=@"New";
         [connection start];
@@ -263,7 +264,7 @@
     //renew the 10 newest features!!!!
     if ([self.freshConnectionType isEqualToString:@"New"]) {
         //set the freshConnectionType to "not"
-        self.freshConnectionType=@"not";  
+         
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
         //NSLog(@"%@",json);
@@ -274,7 +275,7 @@
         for (UIView* subView in self.mainScrollView.subviews) {
             [subView removeFromSuperview];
         }
-        
+        [self.blockViews removeAllObjects];
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
             //NSString *description=[event objectForKey:@"description"];
@@ -297,6 +298,7 @@
             [self refreshAllTheMainScrollViewSUbviews];
         
         }
+        self.freshConnectionType=@"not"; 
     }
     else if([self.freshConnectionType isEqualToString:@"Add"]){
         //set the freshConnectionType to "not"
@@ -355,14 +357,21 @@
 
 //handle when user tap a certain block view
 -(void)tapBlock:(UITapGestureRecognizer *)tapGR {
-    
+    if ([self.blockViews count]==0) {
+        return;
+    }
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
+    float tempTouchPointY=touchPoint.y;
+    float tempTouchPointX=touchPoint.x;
+    if ([self.freshConnectionType isEqualToString:@"New"]) {
+        tempTouchPointY-=EVENT_ELEMENT_CONTENT_HEIGHT/2;
+    }
     //get the index of the touched block view
-    int index=touchPoint.y/EVENT_ELEMENT_CONTENT_HEIGHT;
+    int index=tempTouchPointY/EVENT_ELEMENT_CONTENT_HEIGHT;
     //NSLog(@"%d",index);
     //NSLog(@"click_position:%f,%f",touchPoint.x,touchPoint.y-index*BlOCK_VIEW_HEIGHT);
-    float x=touchPoint.x;
-    float y=touchPoint.y-index*EVENT_ELEMENT_CONTENT_HEIGHT;
+    float x=tempTouchPointX;
+    float y=tempTouchPointY-index*EVENT_ELEMENT_CONTENT_HEIGHT;
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
