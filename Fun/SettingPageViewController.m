@@ -50,15 +50,14 @@
     //logout from facebook
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {
-        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
         funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         NSLog(@"%@",funAppdelegate.facebook.accessToken);
         funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-        [funAppdelegate.facebook logout:funAppdelegate];
-        
+        [funAppdelegate.facebook logout:(id)funAppdelegate];
     }
     
     //signout the auth_token

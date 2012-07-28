@@ -9,6 +9,8 @@
 //Server Connection related constant
 #pragma mark - Server Connection
 #define CONNECT_DOMIAN_NAME @"http://www.funnect.me"   //the server domain name
+#define FACEBOOK_APP_ID @"433716793339720"   //The app id of the facebook
+
 
 //Explore Function Part
 #pragma mark - Explore Part
