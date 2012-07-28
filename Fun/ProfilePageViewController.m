@@ -11,7 +11,6 @@
 
 @interface ProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-@property (nonatomic,retain) DetailViewController *detailViewController;
 @property (weak, nonatomic) IBOutlet UIImageView *creatorImageView;
 @property (weak, nonatomic) IBOutlet UILabel *creatorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
@@ -32,7 +31,6 @@
 @implementation ProfilePageViewController
 @synthesize mainScrollView;
 @synthesize refreshViewdown=_refreshViewdown;
-@synthesize detailViewController = _detailViewController;
 @synthesize creatorImageView = _creatorImageView;
 @synthesize creatorNameLabel = _creatorNameLabel;
 @synthesize bookmarkNumLabel = _bookmarkNumLabel;
@@ -63,12 +61,6 @@
     return _blockViews;
 }
 
-- (DetailViewController *)detailViewController {
-    if (_detailViewController == nil) {
-        _detailViewController = [[DetailViewController alloc] init];
-    }
-    return _detailViewController;
-}
 
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
@@ -85,9 +77,6 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
-    //init the detail page for later segue
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
     //query the user profile information
     //add login auth_token

@@ -416,199 +416,6 @@
             </objects>
             <point key="canvasLocation" x="1181" y="-714"/>
         </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="XzJ-bW-wVO">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yoi-Ge-bOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="gax-uG-jYq" customClass="DetailViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vs4-4R-7Os">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="n9x-Ui-7vm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="pKR-26-Ohm">
-                                        <rect key="frame" x="0.0" y="266" width="320" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="location-gray.png" id="TR2-EL-NzS">
-                                                <rect key="frame" x="9" y="5" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="60 miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YkX-6o-OA5">
-                                                <rect key="frame" x="214" y="7" width="72" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Monterey Bay Aquarium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="k9m-XQ-IJg">
-                                                <rect key="frame" x="42" y="7" width="184" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detailButton.png" id="XAy-nY-5qA">
-                                                <rect key="frame" x="300" y="10" width="11" height="15"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="monterey.jpg" id="1Xt-Sw-atS">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="224"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" id="bLJ-aP-PNK">
-                                        <rect key="frame" x="29" y="203" width="291" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89795918367346939" green="0.89795918367346939" blue="0.89795918367346939" alpha="0.60999999999999999" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="World Ocean's Day Celebration" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="cbW-r6-Fjy">
-                                        <rect key="frame" x="43" y="203" width="264" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="iv4-ro-k7r">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Jackie Chan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5Lh-XX-zAG">
-                                                <rect key="frame" x="41" y="11" width="105" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3 days ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YpI-bV-9a9">
-                                                <rect key="frame" x="195" y="11" width="105" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile1.jpg" id="lBq-Nc-C59">
-                                                <rect key="frame" x="8" y="9" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="wm9-Fs-wfw">
-                                        <rect key="frame" x="0.0" y="305" width="193" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="time.png" id="MZR-Ng-jM6">
-                                                <rect key="frame" x="9" y="5" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sat Jun 25   14:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xg3-ny-mvg">
-                                                <rect key="frame" x="42" y="7" width="115" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="8Kc-x4-7eU">
-                                        <rect key="frame" x="196" y="305" width="129" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="price.png" id="NgU-Dw-wnv">
-                                                <rect key="frame" x="9" y="7" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RQW-ms-7OF">
-                                                <rect key="frame" x="42" y="7" width="62" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="pDp-fO-jPs">
-                                        <rect key="frame" x="0.0" y="344" width="320" height="72"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="intro.png" id="RFd-ML-IaP">
-                                                <rect key="frame" x="12" y="9" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="World ocean's day is a very important day. You can feed fish and angry birds during the event. And you will see ..." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="DXo-lM-pla">
-                                                <rect key="frame" x="41" y="13" width="250" height="45"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="See more" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oVm-RK-FjA">
-                                                <rect key="frame" x="217" y="41" width="74" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.95918367346938771" green="0.95918367346938771" blue="0.95918367346938771" alpha="1" colorSpace="calibratedRGB"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="v9a-xd-m5M">
-                        <barButtonItem key="backBarButtonItem" title="Explore" id="Lgn-9X-dlB"/>
-                        <barButtonItem key="leftBarButtonItem" image="Featured.png" id="0Z6-J2-iwE">
-                            <connections>
-                                <action selector="exploreButtonPressed:" destination="gax-uG-jYq" id="dfF-qG-m70"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="share.png" id="3kk-ml-te5"/>
-                    </navigationItem>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="contributorNameLabel" destination="5Lh-XX-zAG" id="mkR-KA-WBS"/>
-                        <outlet property="contributorProfileImageView" destination="lBq-Nc-C59" id="P9I-s7-Nh4"/>
-                        <outlet property="eventIntroLabel" destination="DXo-lM-pla" id="drU-iy-7SD"/>
-                        <outlet property="eventLocationDistanceLabel" destination="YkX-6o-OA5" id="jqf-d1-2CE"/>
-                        <outlet property="eventLocationLabel" destination="k9m-XQ-IJg" id="g0S-Nz-lk6"/>
-                        <outlet property="eventPriceLabel" destination="RQW-ms-7OF" id="IfT-jf-0WD"/>
-                        <outlet property="eventTimeLabel" destination="xg3-ny-mvg" id="rce-Dw-xtf"/>
-                        <outlet property="eventTitleLabel" destination="cbW-r6-Fjy" id="bWS-aP-VyR"/>
-                        <outlet property="timestampLabel" destination="YpI-bV-9a9" id="9y2-4j-9Cf"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2656" y="-1360"/>
-        </scene>
         <!--Navigation Controller - Orange Parc-->
         <scene sceneID="lWy-O6-SIi">
             <objects>
@@ -668,25 +475,6 @@
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="305" y="3979"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6dE-gu-dr9">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="73G-LF-CYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="detailPageNavigationController" id="JUF-V0-McS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="mJA-ow-ER1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gax-uG-jYq" kind="relationship" relationship="rootViewController" id="NFz-5P-Me0"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="2188" y="-1360"/>
         </scene>
         <!--Choose Image Table View Controller-->
         <scene sceneID="Cnv-qM-cUF">
@@ -2444,19 +2232,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="facebook_signin_button.png" width="1167" height="200"/>
         <image name="form.png" width="994" height="417"/>
         <image name="header.png" width="320" height="44"/>
-        <image name="intro.png" width="16" height="16"/>
-        <image name="location-gray.png" width="16" height="16"/>
-        <image name="monterey.jpg" width="16" height="16"/>
-        <image name="price.png" width="40" height="40"/>
         <image name="profile.png" width="30" height="30"/>
-        <image name="profile1.jpg" width="16" height="16"/>
         <image name="profile_pic_4.jpeg" width="16" height="16"/>
         <image name="seperator.png" width="110" height="1"/>
         <image name="settings.png" width="30" height="30"/>
-        <image name="share.png" width="16" height="16"/>
         <image name="subtle-pattern-1.jpg" width="1000" height="1000"/>
         <image name="subtle-pattern-2.jpg" width="1000" height="1000"/>
-        <image name="time.png" width="40" height="40"/>
     </resources>
     <classes>
         <class className="AddCommentVC" superclassName="UIViewController">
@@ -2560,6 +2341,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>

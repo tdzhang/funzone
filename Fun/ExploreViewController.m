@@ -15,7 +15,7 @@
 @interface ExploreViewController ()
 @property CGFloat currentY;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-@property (nonatomic,retain) DetailViewController *detailViewController;
+
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -32,7 +32,7 @@
 @implementation ExploreViewController
 @synthesize refreshView=_refreshView;
 @synthesize refreshViewdown=_refreshViewdown;
-@synthesize detailViewController = _detailViewController;
+
 @synthesize blockViews = _blockViews;
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
@@ -63,13 +63,6 @@
     return _blockViews;
 }
 
-- (DetailViewController *)detailViewController {
-    if (_detailViewController == nil) {
-        _detailViewController = [[DetailViewController alloc] init];
-    }
-    return _detailViewController;
-}
-
 
 #pragma mark - View Life circle
 -(void)viewWillAppear:(BOOL)animated{
@@ -92,11 +85,7 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
-    
 
-    //init the detail page for later segue
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
     //quest the most recent 10 featured events
     self.refresh_page_num=2; //the next page that need to refresh is 2

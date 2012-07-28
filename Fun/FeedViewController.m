@@ -13,7 +13,6 @@
 @interface FeedViewController ()
 @property CGFloat currentY;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
-@property (nonatomic,retain) DetailViewController *detailViewController;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -29,7 +28,6 @@
 @implementation FeedViewController
 @synthesize refreshView=_refreshView;
 @synthesize refreshViewdown=_refreshViewdown;
-@synthesize detailViewController = _detailViewController;
 @synthesize blockViews = _blockViews;
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
@@ -56,13 +54,6 @@
         _blockViews = [[NSMutableArray alloc] init];
     }
     return _blockViews;
-}
-
-- (DetailViewController *)detailViewController {
-    if (_detailViewController == nil) {
-        _detailViewController = [[DetailViewController alloc] init];
-    }
-    return _detailViewController;
 }
 
 
@@ -109,9 +100,6 @@
     backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-	_detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"detailPageNavigationController"];
     
     
     
