@@ -22,6 +22,7 @@
 @synthesize delegate = _delegate;
 @synthesize alreadySelectedContacts=_alreadySelectedContacts;
 @synthesize searchResultContacts=_searchResultContacts;
+@synthesize preDefinedMode=_preDefinedMode;
 
 
 #pragma mark - self defined setter and getter
@@ -134,7 +135,16 @@
         contact.lastName=lastName;
         contact.phone=[phoneNumbersList copy];
         contact.email=[emailList copy];
-        [constactsMutable addObject:contact];
+        if ([self.preDefinedMode isEqualToString:@"email"]) {
+            if ([contact.email count]>0) {
+                [constactsMutable addObject:contact];
+            }
+        } else if([self.preDefinedMode isEqualToString:@"message"]) {
+            if ([contact.phone count]>0) {
+                [constactsMutable addObject:contact];
+            }
+        }
+        
     }
     //set the contacts property
     self.contacts = [constactsMutable copy];
@@ -161,6 +171,17 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - self defined button clilcked
+- (IBAction)InviteButtonClicked:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.preDefinedMode isEqualToString:@"email"]) {
+        [self.delegate StartComposeEmail];
+    } else if([self.preDefinedMode isEqualToString:@"message"]) {
+        [self.delegate StartComposeMessage];
+    }
 }
 
 
@@ -228,7 +249,6 @@
             cell = [[UITableViewCell alloc] 
                     initWithStyle:UITableViewCellStyleSubtitle //the style of the cell
                     reuseIdentifier:CellIdentifier] ;
-            
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         UserContactObject* contact=[self.searchResultContacts objectAtIndex:indexPath.row];
@@ -243,12 +263,26 @@
             nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
         }
         [cell.textLabel setText:nameText];
-        if ([contact.email count]>0) {
-            [cell.detailTextLabel setText:[contact.email objectAtIndex:0]];
+        
+        if ([self.preDefinedMode isEqualToString:@"email"]) {
+            if ([contact.email count]>0) {
+                [cell.detailTextLabel setText:[contact.email objectAtIndex:0]];
+            }
+            else {
+                [cell.detailTextLabel setText:@"No Email Information Found."];
+            }
         }
-        else {
-            [cell.detailTextLabel setText:@"No Email Information Found."];
+        else if([self.preDefinedMode isEqualToString:@"message"]) {
+            if ([contact.phone count]>0) {
+                NSString *phoneNumber=[NSString stringWithFormat:@"%@",[contact.phone objectAtIndex:0]];
+                [cell.detailTextLabel setText:phoneNumber];
+                //NSLog(@"%@",phoneNumber);
+            }
+            else {
+                [cell.detailTextLabel setText:@"No Phone Information Found."];
+            }
         }
+
         //[cell setSelected:YES];
         return cell;
     }
@@ -282,22 +316,30 @@
         }
         
         cell.userName.text= nameText;
-        if ([contact.email count]>0) {
-            cell.userEmail.text=[contact.email objectAtIndex:0];
+        
+        if ([self.preDefinedMode isEqualToString:@"email"]) {
+            if ([contact.email count]>0) {
+                [cell.userInfo setText:[contact.email objectAtIndex:0]];
+            }
+            else {
+                [cell.userInfo setText:@"No Email Information Found."];
+            }
         }
-        else {
-            cell.userEmail.text=@"No Email Information Found.";
+        else if([self.preDefinedMode isEqualToString:@"message"]) {
+            if ([contact.phone count]>0) {
+                [cell.userInfo setText:[contact.phone objectAtIndex:0]];
+            }
+            else {
+                [cell.userInfo setText:@"No Phone Information Found."];
+            }
         }
         
         if ([self.alreadySelectedContacts objectForKey:nameText]) {
             //[cell setSelected:YES animated:YES];
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-            
         }
         return cell;
     }
-
-    
 }
 
 /*
@@ -366,7 +408,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
             }
         }
         if(flag)[self.searchResultContacts addObject:contact];
-
     }
     return YES;
 }
@@ -407,13 +448,17 @@ shouldReloadTableForSearchString:(NSString *)searchString
             [alreadySelected setObject:person forKey:nameText];
             self.alreadySelectedContacts = alreadySelected;
             //activate the delegate method
-            [self.delegate AddContactInformtionToPeopleList:person];
-           
+            
+            if ([self.preDefinedMode isEqualToString:@"email"]) {
+                [self.delegate AddContactInformtionToPeopleList:person];
+            } else if([self.preDefinedMode isEqualToString:@"message"]) {
+                [self.delegate AddMessageContactInformtionToPeopleList:person];
+            }
+            
             [self.searchDisplayController setActive:NO]; 
             //after change, update the table view
             [self getTheDividedContacts];
             [self.tableView reloadData];
-
         }
 
     }
@@ -436,8 +481,13 @@ shouldReloadTableForSearchString:(NSString *)searchString
             //add the object in the alreadySelected Dictionary
             [alreadySelected setObject:person forKey:nameText];
             self.alreadySelectedContacts = alreadySelected;
+            
             //activate the delegate method
-            [self.delegate AddContactInformtionToPeopleList:person];
+            if ([self.preDefinedMode isEqualToString:@"email"]) {
+                [self.delegate AddContactInformtionToPeopleList:person];
+            } else if([self.preDefinedMode isEqualToString:@"message"]) {
+                [self.delegate AddMessageContactInformtionToPeopleList:person];
+            }
         }
     }
 }
@@ -461,8 +511,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
             [alreadySelected removeObjectForKey:nameText];
             self.alreadySelectedContacts = alreadySelected;
             //activate the delegate method
-            [self.delegate DeleteContactInformtionToPeopleList:person];
-        
+            if ([self.preDefinedMode isEqualToString:@"email"]) {
+                [self.delegate DeleteContactInformtionToPeopleList:person];
+            } else if([self.preDefinedMode isEqualToString:@"message"]) {
+                [self.delegate DeleteMessageContactInformtionToPeopleList:person];
+            }
     }
 }
 

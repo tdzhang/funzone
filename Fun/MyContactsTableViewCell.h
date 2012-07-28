@@ -10,7 +10,7 @@
 
 @interface MyContactsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UILabel *userEmail;
+@property (weak, nonatomic) IBOutlet UILabel *userInfo;
 
 
 @end

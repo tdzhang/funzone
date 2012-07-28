@@ -274,7 +274,7 @@
         NSLog(@"%@",responseString);
         UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         success.delegate=self;
-        [success show];
+        //[success show];
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];
@@ -343,7 +343,7 @@
         }
     }
     [request setRequestMethod:@"POST"];
-    //[request startAsynchronous];
+    [request startAsynchronous];
     
     //go to the next page
     [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];

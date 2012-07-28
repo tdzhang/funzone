@@ -17,11 +17,9 @@
 @property (nonatomic,strong) NSString *createEvent_time;
 @property (nonatomic,strong) NSString *createEvent_address;
 @property (nonatomic,strong) NSString *createEvent_imageUrlName;
-
+@property (nonatomic,strong) NSString *preDefinedMode;
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
-@property (nonatomic,strong) NSDictionary *facebookFriendsGoOutWith; //the infomation of the facebook firends that user choose to go with
-@property (nonatomic,strong) NSString *currentFacebookConnect;
-@property (nonatomic,strong) NSString *facebookCurrentProcess;//use this to diff the facebook request intention
+@property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
 
 @end
 
@@ -34,11 +32,11 @@
 @synthesize createEvent_time=_createEvent_time;
 @synthesize createEvent_address=_createEvent_address;
 @synthesize createEvent_imageUrlName=_createEvent_imageUrlName;
+@synthesize preDefinedMode=_preDefinedMode;
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
-@synthesize facebookFriendsGoOutWith=_facebookFriendsGoOutWith;
-@synthesize currentFacebookConnect=_currentFacebookConnect;
-@synthesize facebookCurrentProcess=_facebookCurrentProcess;
+@synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
+
 
 #pragma mark - self defined setter and getter
 -(void)setPeopleGoOutWith:(NSDictionary *)peopleGoOutWith{
@@ -52,26 +50,18 @@
     return _peopleGoOutWith;
 }
 
--(void)setFacebookFriendsGoOutWith:(NSDictionary *)facebookFriendsGoOutWith{
-    _facebookFriendsGoOutWith=facebookFriendsGoOutWith;
+-(void)peopleGoOutWithMessage:(NSDictionary *)peopleGoOutWithMessage{
+    _peopleGoOutWithMessage=peopleGoOutWithMessage;
 }
 
--(NSDictionary*)facebookFriendsGoOutWith{
-    if (_facebookFriendsGoOutWith == nil){
-        _facebookFriendsGoOutWith = [[NSDictionary alloc] init];
+-(NSDictionary*)peopleGoOutWithMessage{
+    if (_peopleGoOutWithMessage == nil){
+        _peopleGoOutWithMessage = [[NSDictionary alloc] init];
     }
-    return _facebookFriendsGoOutWith;
+    return _peopleGoOutWithMessage;
 }
 
 #pragma mark - View Life Cycle
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
@@ -82,17 +72,6 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -113,17 +92,16 @@
 
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"ChooseFacebookFriends"] && [segue.destinationViewController isKindOfClass:[ChooseFacebookFriendsToGoTableViewControllerViewController class]]){
-        ChooseFacebookFriendsToGoTableViewControllerViewController *peopleController=nil;
-        peopleController = segue.destinationViewController;
-        peopleController.delegate=self;
-        peopleController.alreadySelectedContacts=[self.facebookFriendsGoOutWith copy];
-    }
-    else if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){
+    if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){
         ChoosePeopleToGoTableViewController *peopleController=nil;
         peopleController = segue.destinationViewController;
         peopleController.delegate=self;
-        peopleController.alreadySelectedContacts=[self.peopleGoOutWith copy];
+        if ([self.preDefinedMode isEqualToString:@"email"]) {
+            peopleController.alreadySelectedContacts=[self.peopleGoOutWith copy];
+        } else {
+            peopleController.alreadySelectedContacts=[self.peopleGoOutWithMessage copy];
+        }
+        peopleController.preDefinedMode=self.preDefinedMode;
     }
 }
 
@@ -133,98 +111,101 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (IBAction)PostOnFaceBookWall:(id)sender {
-    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
-    NSMutableDictionary* params = [NSMutableDictionary dictionary];
-    
-    [params setObject:@"funnect event" forKey:@"name"];
-    [params setObject:@"new funnect event" forKey:@"description"];
-    [params setObject:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName] forKey:@"message"];
-    
-    if ([delegate.facebook isSessionValid]) {
-        self.currentFacebookConnect=@"create event";
-        [delegate.facebook requestWithGraphPath:@"me/feed"
-                                      andParams:params
-                                  andHttpMethod:@"POST"
-                                    andDelegate:self];
-    }
-    else {
-        NSLog(@"Face book session invalid~~~");
-    }
-}
-
-- (IBAction)CreateFacebookEvent:(id)sender {
-    //invite friends first
-    [self performSegueWithIdentifier:@"ChooseFacebookFriends" sender:self];
-    
-}
-
-- (IBAction)Twitter:(id)sender {
-}
-
 - (IBAction)EmailShare:(id)sender {
+    self.preDefinedMode=@"email";
     [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
 }
 
-- (IBAction)WechatMoment:(id)sender {
+- (IBAction)MesssgeShare:(id)sender {
+    self.preDefinedMode=@"message";
+    [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
 }
 
-- (IBAction)StartingAWechatDiscusion:(id)sender {
-}
 
-#pragma mark - facebook related protocal implement
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
-    NSLog(@"%@", [error localizedDescription]);
-    NSLog(@"Err details: %@", [error description]);
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    if ([self.currentFacebookConnect isEqualToString:@"create event"]) {
-        //NSLog(@"%@",result);
-        //get the event id
-        NSString *event_id = [result objectForKey:@"id"];
-        NSLog(@"start to invite people");
-        //start to invite people
-        if ([self.facebookFriendsGoOutWith count]>0) {
-            FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
-            
-            NSMutableDictionary* params = [NSMutableDictionary dictionary];
-            NSString* user_ids=[NSString stringWithFormat:@""];
-            BOOL temp_flag=NO;
-            for (NSString *key in self.facebookFriendsGoOutWith) {
-                FacebookContactObject *contact=[self.facebookFriendsGoOutWith objectForKey:key];
-                if (temp_flag==NO) {
-                    user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@"%@",contact.facebook_id]];
-                    temp_flag=YES;
-                }
-                else {
-                    user_ids=[user_ids stringByAppendingString:[NSString stringWithFormat:@",%@",contact.facebook_id]];
+//start to compose email(the FeedBackToCreateActivityChange)
+-(void)StartComposeEmail{
+    //compose the email
+    if (self.peopleGoOutWith) {
+        if ([self.peopleGoOutWith count] > 0) {
+            //Now we have friends to be invided using email
+            //get the email list
+            NSMutableArray *emailList=[NSMutableArray array];
+            for (NSString* key in [self.peopleGoOutWith allKeys] ){
+                UserContactObject *user=[self.peopleGoOutWith objectForKey:key];
+                if (user.email) {
+                    if ([user.email count]>0) {
+                        [emailList addObject:[user.email objectAtIndex:0]];
+                    }
                 }
             }
-            [params setObject:user_ids forKey:@"users"];
-            
-            if ([delegate.facebook isSessionValid]) {
-                self.currentFacebookConnect=@"add invite";
-                NSLog(@"%@",event_id);
-                [delegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/invited",event_id] andParams:params andHttpMethod:@"POST" andDelegate:self];
-            }
-            else {
-                NSLog(@"Face book session invalid~~~");
+            //we have the email list, now try to send email invitation
+            if([MFMailComposeViewController canSendMail]) {
+                //if the device allowed sending email
+                MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+                mailCont.mailComposeDelegate = self;
+        
+                //email subject
+                [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",self.createEvent_title]];
+                //email list
+                [mailCont setToRecipients:emailList];
+                //email body
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName] isHTML:NO];
+                //go!
+                [self presentModalViewController:mailCont animated:YES];
             }
         }
     }
-    else if ([self.currentFacebookConnect isEqualToString:@"add invite"]) {
-        NSLog(@"%@",result);
-        self.currentFacebookConnect=nil;
+}
+//start to compose message(the FeedBackToCreateActivityChange)
+-(void)StartComposeMessage{
+    //compose the message
+    if (self.peopleGoOutWithMessage) {
+        if ([self.peopleGoOutWithMessage count] > 0) {
+            //Now we have friends to be invided using email
+            //get the email list
+            NSMutableArray *phoneList=[NSMutableArray array];
+            for (NSString* key in [self.peopleGoOutWithMessage allKeys] ){
+                UserContactObject *user=[self.peopleGoOutWithMessage objectForKey:key];
+                if (user.phone) {
+                    if ([user.phone count]>0) {
+                        [phoneList addObject:[user.phone objectAtIndex:0]];
+                    }
+                }
+            }
+            //we have the phone list, now try to send email invitation
+            if([MFMessageComposeViewController canSendText]) {
+                //if the device allowed sending email
+                MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
+                messageSender.messageComposeDelegate = self;
+                //phone list
+                [messageSender setRecipients:phoneList];
+                //phone body
+                [messageSender setBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+                //go!
+                [self presentModalViewController:messageSender animated:YES];
+            }
+        }
     }
-    else if([self.currentFacebookConnect isEqualToString:@"post on wall"]){
-        self.currentFacebookConnect = nil;
-        //NSLog(@"%@",result);
-    }
-    else {
-        //NSLog(@"%@",result);
-    }
+
+    
+    /*
+     if ([MFMessageComposeViewController canSendText]) {
+     MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
+     
+     NSString *messageText = [[NSString stringWithFormat:@"Hi, your friend just shared recipe of %@ with you. Check it out here: ",_dish.name] stringByAppendingFormat:_dish.dishURL];
+     
+     [messageSender setBody:messageText];
+     [self presentModalViewController:messageSender animated:YES];
+     } else {
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to sent SMS"
+     message:@"Your device cannot send SMS for now. Please check."
+     delegate:nil
+     cancelButtonTitle:@"Cancel"
+     otherButtonTitles: nil];
+     [alert show];
+     }
+     */
+    
 }
 
 #pragma mark - self defined protocal method implementation
@@ -246,20 +227,35 @@
 }
 
 ////////////////////////////////////////////////
-//implement the method for the adding or delete Facebook contacts that will be go out with (FeedBackToFaceBookFriendToGoChange)
--(void)AddFacebookContactTogoInformtionToPeopleList:(FacebookContactObject*)person{
+//implement the method for the adding or delete Message contacts that will be go out with
+-(void)AddMessageContactInformtionToPeopleList:(UserContactObject*)person{
     //NSLog(@"input person:%@",person.firstName);
-    NSMutableDictionary *people=[self.facebookFriendsGoOutWith mutableCopy];
-    NSString * key=person.facebook_name;
+    NSMutableDictionary *people=[self.peopleGoOutWithMessage mutableCopy];
+    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
     [people setObject:(id)person forKey:key];
-    self.facebookFriendsGoOutWith = [people copy];
+    self.peopleGoOutWithMessage = [people copy];
 }
 
--(void)DeleteFacebookContactTogoInformtionToPeopleList:(FacebookContactObject*)person{
-    NSMutableDictionary *people=[self.facebookFriendsGoOutWith mutableCopy];
-    NSString *key=person.facebook_name;
+-(void)DeleteMessageContactInformtionToPeopleList:(UserContactObject*)person{
+    NSMutableDictionary *people=[self.peopleGoOutWithMessage mutableCopy];
+    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
     [people removeObjectForKey:key];
-    self.facebookFriendsGoOutWith = [people copy];
+    self.peopleGoOutWithMessage = [people copy];
 }
+
+#pragma mark - implement protocals
+////////////////////////////////////////////////
+//implement the MFMailComposeViewControllerDelegate Method
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (error) {
+        NSLog(@"Sending Email Error Happended!");
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 @end

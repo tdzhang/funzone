@@ -10,7 +10,7 @@
 
 @implementation MyContactsTableViewCell
 @synthesize userName=_userName;
-@synthesize userEmail=_userEmail;
+@synthesize userInfo=_userInfo;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

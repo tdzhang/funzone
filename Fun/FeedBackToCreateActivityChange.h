@@ -20,6 +20,10 @@ WithContent:(NSString*)content;
            WithPropertyCategory:(NSString*)kind
                     WithContent:(NSString*)content;
 //the methods for choosing people to go out with
+-(void)AddMessageContactInformtionToPeopleList:(UserContactObject*)person;
+-(void)DeleteMessageContactInformtionToPeopleList:(UserContactObject*)person;
 -(void)AddContactInformtionToPeopleList:(UserContactObject*)person;
 -(void)DeleteContactInformtionToPeopleList:(UserContactObject*)person;
+-(void)StartComposeEmail;
+-(void)StartComposeMessage;
 @end
