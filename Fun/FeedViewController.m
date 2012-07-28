@@ -85,6 +85,15 @@
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
     //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
+
+    //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    #warning Potentially incomplete method implementation.
+    //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
+    //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    if([self.blockViews count]==0){
+        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
+        self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    }
 }
 
 - (void)viewDidLoad {
