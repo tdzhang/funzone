@@ -77,7 +77,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"faceBookLoginFinished" object:nil];
 }
 -(void)fbDidNotLogin:(BOOL)cancelled{
-    
+    NSLog(@"fbDidNotLogin called at FunAppDelegate.m, but nothing has been done");
+}
+-(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt{
+ //need to do sth
+    NSLog(@"fbDidExtendToken called at FunAppDelegate.m, but nothing has been done");
+}
+
+-(void)fbSessionInvalidated{
+    NSLog(@"fbSessionInvalidated called at FunAppDelegate.m, but nothing has been done");
 }
 
 -(void)fbDidLogout{

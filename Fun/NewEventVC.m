@@ -754,7 +754,7 @@
                 //email list
                 [mailCont setToRecipients:emailList];
                 //email body
-                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",eventName,eventTime,eventLocation,self.uITextViewPersonalMsg.text] isHTML:NO];
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",eventName,eventTime,eventLocation] isHTML:NO];
                 //go!
                 [self presentModalViewController:mailCont animated:YES];
             }
