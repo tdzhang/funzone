@@ -192,7 +192,7 @@
         loadLabel.backgroundColor =[UIColor clearColor];
         [loading addSubview:loadLabel];
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        spinning.frame =CGRectMake(120,20,80,80);
+        spinning.frame = CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
         self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,EVENT_ELEMENT_CONTENT_HEIGHT*([self.blockViews count]),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
         [self.refreshViewdown removeFromSuperview];

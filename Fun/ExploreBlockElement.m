@@ -28,7 +28,7 @@
 
 //reset the fram of a element's block view
 -(void) resetFramWith:(CGFloat)position_y{
-    self.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
+    self.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X,position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
 }
 
 //generate a explore block element
@@ -37,14 +37,14 @@
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(0,position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X, position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
     
     //blockElementHolder View
-    blockElement.blockElementHolderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
+    blockElement.blockElementHolderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_HOLDER_VIEW_HEIGHT)];
     [blockElement.blockElementHolderView setImage:[UIImage imageNamed:@"blockelementholder.png"]];
     [blockElement.blockView addSubview:blockElement.blockElementHolderView];
     
@@ -56,7 +56,7 @@
     [blockElement.blockView addSubview:blockElement.view];
     
     //Backgroud Image
-    blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
+    blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SUB_VIEW_X, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_Y, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
     [blockElement.backGroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [blockElement.backGroundImageView setClipsToBounds:YES];
     [blockElement.backGroundImageView setAlpha:1.0];
@@ -140,7 +140,7 @@
     
     //event view
     blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_EVENTVIEW_X,EXPLORE_BLOCK_ELEMENT_EVENTVIEW_Y, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
-    [blockElement.creator setBackgroundColor:[UIColor whiteColor]];
+    [blockElement.creator setBackgroundColor:[UIColor clearColor]];
     [blockElement.blockView addSubview:blockElement.creator];
     
     
@@ -224,11 +224,11 @@
     [blockElement.creator addSubview:blockElement.favorLabel];
     
     //add seperator
-    UIImageView* seperator=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SEPERATOR_X, EXPLORE_BLOCK_ELEMENT_SEPERATOR_Y, EXPLORE_BLOCK_ELEMENT_SEPERATOR_WIDTH, EXPLORE_BLOCK_ELEMENT_SEPERATOR_HEIGHT)];
-    [seperator setAlpha:1];
-    [seperator setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_SEPERATOR_IMAGE]];
-    [seperator setContentMode:UIViewContentModeScaleToFill];
-    [blockElement.blockView addSubview:seperator];
+//    UIImageView* seperator=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SEPERATOR_X, EXPLORE_BLOCK_ELEMENT_SEPERATOR_Y, EXPLORE_BLOCK_ELEMENT_SEPERATOR_WIDTH, EXPLORE_BLOCK_ELEMENT_SEPERATOR_HEIGHT)];
+//    [seperator setAlpha:1];
+//    [seperator setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_SEPERATOR_IMAGE]];
+//    [seperator setContentMode:UIViewContentModeScaleToFill];
+//    [blockElement.blockView addSubview:seperator];
 
     
     //set the event_id and shared_event_id
