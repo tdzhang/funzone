@@ -91,8 +91,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //do the preload stuff
-    //[self getTheDividedContacts];
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+    if (!delegate.facebook) {
+        delegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)delegate];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+            delegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            NSLog(@"%@",delegate.facebook.accessToken);
+            delegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        }
+    }
+    //[self getTheDividedContacts];
     [[delegate facebook] requestWithGraphPath:@"me/friends" andDelegate:self];
 }
 
