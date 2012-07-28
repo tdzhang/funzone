@@ -185,7 +185,7 @@
     self.navigationController.navigationBarHidden = NO;
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Back" style:UIBarButtonItemStylePlain
+                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];

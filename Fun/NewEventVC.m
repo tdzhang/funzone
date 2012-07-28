@@ -1089,7 +1089,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {  
     
     UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
-    
+    [done setStyle:UIBarButtonItemStyleBordered];
     self.navigationItem.rightBarButtonItem = done;      
     [self animateTextView:textView up:YES];
 }  
