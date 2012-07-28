@@ -16,6 +16,7 @@
 @property(nonatomic,strong) UIView *blockView;
 @property (nonatomic,strong) UIView *view;
 @property (nonatomic,strong) UIView *creator;
+@property (nonatomic,strong) UIImageView *blockElementHolderView;
 @property(nonatomic,strong) UIImageView *backGroundImageView;
 @property(nonatomic,strong) UIImageView *thumbNailImageView;
 @property(nonatomic,strong) UILabel *titleLabel;

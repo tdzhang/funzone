@@ -146,6 +146,7 @@
 		92B2FF6015BE65DA003E8290 /* facebook_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF5F15BE65DA003E8290 /* facebook_icon.png */; };
 		92B2FF6215BE65EA003E8290 /* twitter-bird-white-on-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF6115BE65EA003E8290 /* twitter-bird-white-on-blue.png */; };
 		92B2FF6415BE65F2003E8290 /* weixin_icon.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF6315BE65F2003E8290 /* weixin_icon.JPEG */; };
+		92E9659B15C3C1A500461048 /* blockelementholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E9659A15C3C1A500461048 /* blockelementholder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -370,6 +371,7 @@
 		92B2FF5F15BE65DA003E8290 /* facebook_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_icon.png; sourceTree = "<group>"; };
 		92B2FF6115BE65EA003E8290 /* twitter-bird-white-on-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-white-on-blue.png"; sourceTree = "<group>"; };
 		92B2FF6315BE65F2003E8290 /* weixin_icon.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = weixin_icon.JPEG; sourceTree = "<group>"; };
+		92E9659A15C3C1A500461048 /* blockelementholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blockelementholder.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -807,6 +809,7 @@
 				46C170D315BE58AA0015B5FC /* logo_114.png */,
 				46C170D015BE58A60015B5FC /* logo_57.png */,
 				0F9A532815BE8527008E6F3B /* cancel_button.png */,
+				92E9659A15C3C1A500461048 /* blockelementholder.png */,
 				0F9A532615BE84F6008E6F3B /* create_account_button.png */,
 				0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */,
 				46DBFA8C15BD387A00130749 /* 06-magnify.png */,
@@ -1027,6 +1030,7 @@
 				0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */,
 				0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */,
 				0F0EA75A15C0FB8F0062BA1B /* MyFollowingTableViewCell.xib in Resources */,
+				92E9659B15C3C1A500461048 /* blockelementholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

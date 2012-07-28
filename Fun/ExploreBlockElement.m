@@ -11,6 +11,7 @@
 
 @implementation ExploreBlockElement
 @synthesize blockView=_blockView;
+@synthesize blockElementHolderView = _blockElementHolderView;
 @synthesize view=_view;
 @synthesize creator=_creator;
 @synthesize backGroundImageView=_backGroundImageView;
@@ -41,6 +42,11 @@
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
+    
+    //blockElementHolder View
+    blockElement.blockElementHolderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
+    [blockElement.blockElementHolderView setImage:[UIImage imageNamed:@"blockelementholder.png"]];
+    [blockElement.blockView addSubview:blockElement.blockElementHolderView];
     
     //set the creator id
     blockElement.creator_id=creator_id;
