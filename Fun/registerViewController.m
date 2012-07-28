@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *rePasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
+
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *currentConnection;
 @end
@@ -23,7 +23,7 @@
 @synthesize passwordTextField;
 @synthesize rePasswordTextField;
 @synthesize firstNameTextField;
-@synthesize lastNameTextField;
+
 @synthesize data=_data;
 @synthesize currentConnection=_currentConnection;
 
@@ -65,7 +65,6 @@
     [self setPasswordTextField:nil];
     [self setRePasswordTextField:nil];
     [self setFirstNameTextField:nil];
-    [self setLastNameTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -96,12 +95,11 @@
 //start to register
 - (IBAction)registerButtonBlicked:(id)sender {
     //input too short
-    if (self.firstNameTextField.text.length<1||self.lastNameTextField.text.length<1||self.emailTextField.text.length<5||self.passwordTextField.text.length<6||self.rePasswordTextField.text.length<6) {
+    if (self.firstNameTextField.text.length<1||self.emailTextField.text.length<5||self.passwordTextField.text.length<6||self.rePasswordTextField.text.length<6) {
         UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Name/Email/Password Too Short" message:@"The Name, Email or the password you input is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
-        [self.lastNameTextField resignFirstResponder];
         [self.emailTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [self.rePasswordTextField resignFirstResponder];
@@ -112,7 +110,6 @@
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
-        [self.lastNameTextField resignFirstResponder];
         [self.emailTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [self.rePasswordTextField resignFirstResponder];
@@ -125,7 +122,6 @@
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
-        [self.lastNameTextField resignFirstResponder];
         [self.emailTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [self.rePasswordTextField resignFirstResponder];
@@ -135,7 +131,7 @@
     }
     //else, start too register
     
-    NSString *request_string=[NSString stringWithFormat:@"%@/users.json?user[first_name]=%@&user[last_name]=%@&user[email]=%@&user[password]=%@&user[password_confirmation]=%@",CONNECT_DOMIAN_NAME,self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.rePasswordTextField.text];
+    NSString *request_string=[NSString stringWithFormat:@"%@/users.json?user[first_name]=%@&user[last_name]=%@&user[email]=%@&user[password]=%@&user[password_confirmation]=%@",CONNECT_DOMIAN_NAME,self.firstNameTextField.text,@" ",self.emailTextField.text,self.passwordTextField.text,self.rePasswordTextField.text];
     NSLog(@"%@",request_string);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     [request setHTTPMethod:@"POST"];

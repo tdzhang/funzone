@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (nonatomic,strong) NSString *currentConnection;
 
+
 -(void)faceBookLoginFinished; //deal with the finish of facebook login
 @end
 
