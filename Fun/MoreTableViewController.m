@@ -88,16 +88,73 @@
 */
 
 #pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    //notification
+    if (indexPath.row == 0) {
+        
+    }
+    //log out
+    else if(indexPath.row == 1){
+        //logout from facebook
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        if (!funAppdelegate.facebook) {
+            funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
+        }
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+            funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            NSLog(@"%@",funAppdelegate.facebook.accessToken);
+            funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+            [funAppdelegate.facebook logout:(id)funAppdelegate];
+        }
+        
+        //signout the auth_token
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_out.json?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        __block ASIFormDataRequest *block_request=request;
+        [request setCompletionBlock:^{
+            // Use when fetching text data
+            NSString *responseString = [block_request responseString];
+            NSLog(@"%@",responseString);
+            
+            NSError *error;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+            if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log out complete!" message:@"You have successfully logged out." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                success.delegate=self;
+                [success show];
+            }
+        }];
+        [request setFailedBlock:^{
+            NSError *error = [block_request error];
+            NSLog(@"%@",error.description);
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Log Out Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }];
+        
+        //add login auth_token //add content
+        //[request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setRequestMethod:@"DELETE"];
+        [request startAsynchronous];
+        
+        [defaults setValue:nil forKey:@"login_auth_token"];
+        [defaults synchronize];
+    }
 }
+/*
+    NSString* urlString=[self.imageUrls objectAtIndex:indexPath.row];
+    //if the image url can be found in the temp cache, get the image from the cache
+    if ([self.cacheImage objectForKey:urlString]) {
+        UIImage *image=nil;
+        image=[UIImage imageWithData:(NSData*)[self.cacheImage objectForKey:urlString]];
+        [self.delegate ChooseUIImage:image  WithUrlName:urlString From:self];
+    }
+    else {
+        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+        [self.delegate ChooseUIImage:image  WithUrlName:nil From:self];
+    }
+*/
 
 @end
