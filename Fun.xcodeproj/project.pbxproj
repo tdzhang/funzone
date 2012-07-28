@@ -27,6 +27,7 @@
 		0F12855C159EB5FC00430859 /* GeneralActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F12854F159EB16A00430859 /* GeneralActivityModel.m */; };
 		0F128564159ECA8800430859 /* TimeChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128563159ECA8800430859 /* TimeChooseViewController.m */; };
 		0F128569159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */; };
+		0F1401C815C4616B0080DA38 /* ShareAfterNewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1401C715C4616B0080DA38 /* ShareAfterNewEventViewController.m */; };
 		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
 		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B715B8CBC1002C9F23 /* registerViewController.m */; };
@@ -184,6 +185,8 @@
 		0F128566159ECC6F00430859 /* FeedBackToCreateActivityChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackToCreateActivityChange.h; sourceTree = "<group>"; };
 		0F128567159ECC6F00430859 /* ChoosePeopleToGoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleToGoTableViewController.h; sourceTree = "<group>"; };
 		0F128568159ECC6F00430859 /* ChoosePeopleToGoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleToGoTableViewController.m; sourceTree = "<group>"; };
+		0F1401C615C4616B0080DA38 /* ShareAfterNewEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareAfterNewEventViewController.h; sourceTree = "<group>"; };
+		0F1401C715C4616B0080DA38 /* ShareAfterNewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareAfterNewEventViewController.m; sourceTree = "<group>"; };
 		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
 		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
 		0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
@@ -859,6 +862,8 @@
 				0F128556159EB1D700430859 /* chooseLocation */,
 				4668A7AD15943B4000713A4C /* NewEventVC.h */,
 				4668A7AE15943B4000713A4C /* NewEventVC.m */,
+				0F1401C615C4616B0080DA38 /* ShareAfterNewEventViewController.h */,
+				0F1401C715C4616B0080DA38 /* ShareAfterNewEventViewController.m */,
 			);
 			name = "Add Event";
 			sourceTree = "<group>";
@@ -1088,6 +1093,7 @@
 				0F0EA75D15C0FC110062BA1B /* MyFollowingTableViewCell.m in Sources */,
 				0F0EA76015C0FFAB0062BA1B /* ProfileInfoElement.m in Sources */,
 				0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */,
+				0F1401C815C4616B0080DA38 /* ShareAfterNewEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

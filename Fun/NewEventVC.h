@@ -8,22 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #include "MapViewController.h"
-#include "ChoosePeopleToGoTableViewController.h"
 #include "TimeChooseViewController.h"
 #include "FeedBackToCreateActivityChange.h"
 #import "ChooseImageTableViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "FBConnect.h"
 #import "FunAppDelegate.h"
-#import "ChooseFacebookFriendsToGoTableViewControllerViewController.h"
 #import "MovieAotoCompletionVC.h"
 #import "ASIFormDataRequest.h"
 #import "Cache.h"
 #import <Twitter/Twitter.h>
 #import "LoginPageViewController.h"
 #import "GlobalConstant.h"
+#import "ShareAfterNewEventViewController.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,FeedBackToCreateActivityChange,FeedBackToFaceBookFriendToGoChange,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,FBRequestDelegate,movieInfoReturn>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn>
 
 @property (nonatomic,strong) NSString *eventType;//used to differentiate the different style for different event category.
 @property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation; //used to store the location infomation that need to show when the location part is segued

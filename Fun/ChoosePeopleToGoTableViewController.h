@@ -13,8 +13,6 @@
 #import "FeedBackToCreateActivityChange.h"
 
 
-
-
 @interface ChoosePeopleToGoTableViewController : UITableViewController<UISearchBarDelegate,UISearchDisplayDelegate>
 //this delegate is used to add contact info to activity
 @property(nonatomic, weak) id<FeedBackToCreateActivityChange> delegate;
