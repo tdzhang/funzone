@@ -99,6 +99,8 @@
 		46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9D15A8FD4B008FF360 /* Category-Party.png */; };
 		46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9E15A8FD4B008FF360 /* Category-Shopping.png */; };
 		46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9F15A8FD4B008FF360 /* Category-Sports.png */; };
+		4664C8AE15C485E100F2B43C /* OrangeParc-WeChat108.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */; };
+		4664C8B215C4861D00F2B43C /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4664C8B115C4861D00F2B43C /* ConfirmationViewController.m */; };
 		4665120715A8D2B2004BEA73 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4665120615A8D2B2004BEA73 /* 07-map-marker.png */; };
 		4668A7431593E56400713A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7421593E56400713A4C /* UIKit.framework */; };
 		4668A7451593E56400713A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7441593E56400713A4C /* Foundation.framework */; };
@@ -295,6 +297,9 @@
 		46550E9D15A8FD4B008FF360 /* Category-Party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Party.png"; sourceTree = "<group>"; };
 		46550E9E15A8FD4B008FF360 /* Category-Shopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Shopping.png"; sourceTree = "<group>"; };
 		46550E9F15A8FD4B008FF360 /* Category-Sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Sports.png"; sourceTree = "<group>"; };
+		4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OrangeParc-WeChat108.png"; sourceTree = "<group>"; };
+		4664C8B015C4861D00F2B43C /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
+		4664C8B115C4861D00F2B43C /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		4665120615A8D2B2004BEA73 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		4668A73E1593E56400713A4C /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4668A7421593E56400713A4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -697,6 +702,8 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				4664C8B015C4861D00F2B43C /* ConfirmationViewController.h */,
+				4664C8B115C4861D00F2B43C /* ConfirmationViewController.m */,
 				0FFC95C815C3796200800B23 /* More */,
 				0F60F3FA15BC699A00053D25 /* Profile page */,
 				0F4093B115B7D8B6002C9F23 /* loginPage */,
@@ -794,6 +801,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */,
 				46C170E015BE6E7A0015B5FC /* Default.png */,
 				46C170DD15BE6E770015B5FC /* Default@2x.png */,
 				46C170D315BE58AA0015B5FC /* logo_114.png */,
@@ -1023,6 +1031,7 @@
 				0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */,
 				0F0EA75A15C0FB8F0062BA1B /* MyFollowingTableViewCell.xib in Resources */,
 				92E9659B15C3C1A500461048 /* blockelementholder.png in Resources */,
+				4664C8AE15C485E100F2B43C /* OrangeParc-WeChat108.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1094,6 +1103,7 @@
 				0F0EA76015C0FFAB0062BA1B /* ProfileInfoElement.m in Sources */,
 				0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */,
 				0F1401C815C4616B0080DA38 /* ShareAfterNewEventViewController.m in Sources */,
+				4664C8B215C4861D00F2B43C /* ConfirmationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
