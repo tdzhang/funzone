@@ -12,6 +12,7 @@
 
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
@@ -39,6 +40,7 @@
 
 @implementation DetailViewController
 @synthesize eventImageView;
+@synthesize creatorProfileImageView;
 @synthesize contributorNameLabel;
 @synthesize eventTitleLabel;
 @synthesize eventLocationLabel;
@@ -430,7 +432,6 @@
     NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
-    NSString *creator_name=[event objectForKey:@"creator_name"];
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
     NSLog(@"%@",creator_id);
     self.creator_id=creator_id;
@@ -454,7 +455,54 @@
        // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
 
     if (!title) {return;}
-        
+    
+#warning add link back to his/her parc page using coordinates
+    //add creator's profile image and name. Link back to his/her profile page.
+    self.creatorProfileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 145, 35, 35)];
+    NSURL *profile_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+    if (![Cache isURLCached:profile_url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: profile_url];
+            
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",profile_url);
+                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                imageData=UIImagePNGRepresentation(image);
+                
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:profile_url withData:imageData];
+                        [self.creatorProfileImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",profile_url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:profile_url withData:imageData];
+                        [self.creatorProfileImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.creatorProfileImageView setImage:[UIImage imageWithData:[Cache getCachedData:profile_url]]];
+        });
+    }
+    
+    
+    [self.myScrollView addSubview:self.creatorProfileImageView];
+    NSString *creator_name=[event objectForKey:@"creator_name"];
+    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
+    
     self.event_title=title;
     self.event_time=time;
     self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";    
@@ -469,7 +517,6 @@
     [self.eventLocationLabel setText:locationName];
     [self.eventTimeLabel setText:self.event_time];
     [self.eventTitleLabel setText:self.event_title];
-    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
 
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
