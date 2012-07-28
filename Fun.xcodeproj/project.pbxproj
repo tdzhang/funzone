@@ -112,6 +112,8 @@
 		46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9E15A8FD4B008FF360 /* Category-Shopping.png */; };
 		46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9F15A8FD4B008FF360 /* Category-Sports.png */; };
 		4664C8AE15C485E100F2B43C /* OrangeParc-WeChat108.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */; };
+		4664C8CA15C4AFE000F2B43C /* button-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8C815C4AFE000F2B43C /* button-24.png */; };
+		4664C8CB15C4AFE000F2B43C /* deal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8C915C4AFE000F2B43C /* deal_icon.png */; };
 		4665120715A8D2B2004BEA73 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 4665120615A8D2B2004BEA73 /* 07-map-marker.png */; };
 		4668A7431593E56400713A4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7421593E56400713A4C /* UIKit.framework */; };
 		4668A7451593E56400713A4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4668A7441593E56400713A4C /* Foundation.framework */; };
@@ -321,6 +323,8 @@
 		46550E9E15A8FD4B008FF360 /* Category-Shopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Shopping.png"; sourceTree = "<group>"; };
 		46550E9F15A8FD4B008FF360 /* Category-Sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Sports.png"; sourceTree = "<group>"; };
 		4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OrangeParc-WeChat108.png"; sourceTree = "<group>"; };
+		4664C8C815C4AFE000F2B43C /* button-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-24.png"; sourceTree = "<group>"; };
+		4664C8C915C4AFE000F2B43C /* deal_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deal_icon.png; sourceTree = "<group>"; };
 		4665120615A8D2B2004BEA73 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		4668A73E1593E56400713A4C /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4668A7421593E56400713A4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -820,6 +824,8 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4664C8C815C4AFE000F2B43C /* button-24.png */,
+				4664C8C915C4AFE000F2B43C /* deal_icon.png */,
 				0F1401E915C487D40080DA38 /* mail-icon-128x128.png */,
 				0F1401D215C487B20080DA38 /* 09-chat-2.png */,
 				0F1401D315C487B20080DA38 /* big40.jpg */,
@@ -1075,6 +1081,8 @@
 				0F1401E615C487B20080DA38 /* smile_64.png in Resources */,
 				0F1401E715C487B20080DA38 /* thumbnail_layer.png in Resources */,
 				0F1401EA15C487D40080DA38 /* mail-icon-128x128.png in Resources */,
+				4664C8CA15C4AFE000F2B43C /* button-24.png in Resources */,
+				4664C8CB15C4AFE000F2B43C /* deal_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
