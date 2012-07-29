@@ -13,6 +13,7 @@
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *originalCreatorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
@@ -41,6 +42,7 @@
 @implementation DetailViewController
 @synthesize eventImageView;
 @synthesize creatorProfileImageView;
+@synthesize originalCreatorLabel;
 @synthesize contributorNameLabel;
 @synthesize eventTitleLabel;
 @synthesize eventLocationLabel;
@@ -498,10 +500,13 @@
         });
     }
     
-    
     [self.myScrollView addSubview:self.creatorProfileImageView];
     NSString *creator_name=[event objectForKey:@"creator_name"];
     [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
+    
+#warning fetch original creator info
+    //show original creator
+    self.originalCreatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 145, 100, 25)];
     
     self.event_title=title;
     self.event_time=time;
