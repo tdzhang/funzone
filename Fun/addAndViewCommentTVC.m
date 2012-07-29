@@ -87,7 +87,9 @@
     CGSize expectedLabelSize1 = [user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeClip];
     CGSize maximumLabelSize2 = CGSizeMake(260,9999);
     CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
-    return expectedLabelSize1.height + expectedLabelSize2.height + 5*2;
+    NSInteger height = expectedLabelSize1.height + expectedLabelSize2.height + 5*2;
+    height = (height > 56)? height:56;
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -147,7 +149,9 @@
     newFrame3.size.height = expectedLabelSize3.height;
     cell.commentContentLabel.frame = newFrame3;
     
-    cell.userPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
+#warning why don't display?
+    //cell.userPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
+    cell.userPhotoImageView.frame = CGRectMake(8, 8, 40, 40);
     NSLog(@"!!!!!%@", comment.user_picture_url);
     if (![Cache isURLCached:comment.user_picture_url]) {
         //using high priority queue to fetch the image

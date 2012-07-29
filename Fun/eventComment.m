@@ -26,7 +26,7 @@
         NSString *content=[comment objectForKey:@"content"];
         NSString *timestamp=[comment objectForKey:@"timestamp"];
         NSString *username=[comment objectForKey:@"user_name"];
-        NSString *user_picture = [comment objectForKey:@"user_picture"];
+        NSString *user_picture = [comment objectForKey:@"user_pic"];
         NSURL *url=[NSURL URLWithString:user_picture];
         eventComment *commentOne=[[eventComment alloc] init];
         commentOne.user_id=user_id;
