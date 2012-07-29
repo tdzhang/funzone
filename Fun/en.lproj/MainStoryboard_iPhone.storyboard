@@ -1341,6 +1341,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contributorNameLabel" destination="cBz-O5-fEj" id="gDh-sQ-rax"/>
+                        <outlet property="creatorProfileImageView" destination="xIW-oE-umD" id="SBT-AI-dMV"/>
                         <outlet property="eventImageView" destination="lnT-2H-pye" id="1vS-aq-XMO"/>
                         <outlet property="eventLocationLabel" destination="LrL-xH-Xzc" id="4m4-tg-KFa"/>
                         <outlet property="eventTimeLabel" destination="NUC-ux-N5k" id="vvN-Ih-fZW"/>
@@ -3085,6 +3086,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="interestedButtonClicked:"/>
+                <relationship kind="action" name="shareButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
@@ -3180,10 +3183,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EmailShare:"/>
-                <relationship kind="action" name="FinishedThisSharePage:"/>
-                <relationship kind="action" name="MesssgeShare:"/>
-                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>

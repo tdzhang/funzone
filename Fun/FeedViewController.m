@@ -78,7 +78,7 @@
     [self.mainScrollView addSubview:self.refreshView];
 
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #warning Potentially incomplete method implementation.
+    #warning need to add instruction to find friends
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     if([self.blockViews count]==0){

@@ -450,7 +450,7 @@
     NSLog(@"%@",event);
     //get the detail information
     NSString *title=[event objectForKey:@"title"];
-    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
+    //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
@@ -462,10 +462,10 @@
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
     
-    NSLog(@"%@",title);
-    NSLog(@"%@",description);
-    NSLog(@"%@",photo);
-    NSLog(@"%@",time);
+    //NSLog(@"%@",title);
+    //NSLog(@"%@",description);
+    //NSLog(@"%@",photo);
+    //NSLog(@"%@",time);
     //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
     //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
     NSString *locationName=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
@@ -479,8 +479,9 @@
     
 #warning add link back to his/her parc page using coordinates
     //add creator's profile image and name. Link back to his/her profile page.
-    self.creatorProfileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 145, 35, 35)];
+    //self.creatorProfileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 145, 35, 35)];
     NSURL *profile_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+    NSLog(@"%@",profile_url);
     if (![Cache isURLCached:profile_url]) {
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
@@ -491,7 +492,7 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",profile_url);
-                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 
                 if(imageData){
@@ -519,7 +520,7 @@
         });
     }
     
-    [self.myScrollView addSubview:self.creatorProfileImageView];
+    //[self.myScrollView addSubview:self.creatorProfileImageView];
     NSString *creator_name=[event objectForKey:@"creator_name"];
     [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
     
