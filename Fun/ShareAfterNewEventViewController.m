@@ -121,6 +121,9 @@
     [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
 }
 
+- (IBAction)WechatShare:(id)sender {
+    
+}
 
 //start to compose email(the FeedBackToCreateActivityChange)
 -(void)StartComposeEmail{
