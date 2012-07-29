@@ -79,6 +79,7 @@
     return [self.comments count];
 }
 
+//set the height for each row
 - (NSInteger) heightForRow: (NSInteger) row {
     eventComment *comment=[self.comments objectAtIndex:row];
     NSString *user_name = comment.user_name;
@@ -149,7 +150,6 @@
     newFrame3.size.height = expectedLabelSize3.height;
     cell.commentContentLabel.frame = newFrame3;
     
-#warning why don't display?
     //cell.userPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
     cell.userPhotoImageView.frame = CGRectMake(8, 8, 40, 40);
     NSLog(@"!!!!!%@", comment.user_picture_url);
