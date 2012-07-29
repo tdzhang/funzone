@@ -37,6 +37,10 @@
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSString *event_address;
 
+@property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
+@property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
+@property (nonatomic,strong) NSString *preDefinedMode; //change between sms mode and email mode
+
 @end
 
 @implementation DetailViewController
@@ -65,6 +69,10 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
 
+@synthesize peopleGoOutWith=_peopleGoOutWith;
+@synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
+@synthesize preDefinedMode=_preDefinedMode;
+
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
     if (!_comments) {
@@ -78,6 +86,30 @@
         _interestedPeople=[NSMutableArray array];
     }
     return _interestedPeople;
+}
+
+//used by choose email people
+-(void)setPeopleGoOutWith:(NSDictionary *)peopleGoOutWith{
+    _peopleGoOutWith=peopleGoOutWith;
+}
+
+-(NSDictionary*)peopleGoOutWith{
+    if (_peopleGoOutWith == nil){
+        _peopleGoOutWith = [[NSDictionary alloc	] init];
+    }
+    return _peopleGoOutWith;
+}
+
+//used by choose sms people
+-(void)peopleGoOutWithMessage:(NSDictionary *)peopleGoOutWithMessage{
+    _peopleGoOutWithMessage=peopleGoOutWithMessage;
+}
+
+-(NSDictionary*)peopleGoOutWithMessage{
+    if (_peopleGoOutWithMessage == nil){
+        _peopleGoOutWithMessage = [[NSDictionary alloc] init];
+    }
+    return _peopleGoOutWithMessage;
 }
 
 #pragma mark - View Life Circle
@@ -94,6 +126,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //set up the weixin delegate
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    self.delegate=(id)appDelegate;
 }
 
 - (void)viewDidUnload
@@ -142,8 +177,9 @@
 }
 
 - (IBAction)shareButton:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook",@"Twitter",@"WeChat", nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;    
+    //give user several way to share
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"Wechat", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
@@ -185,35 +221,80 @@
 
 #pragma mark - action sheet related stuff
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {
-        NSLog(@"email");
-        if([MFMailComposeViewController canSendMail]) {
-            //if the device allowed sending email
-            MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
-            mailCont.mailComposeDelegate = self;
-                        
-            //get the event information from all the selection
-            NSString *eventName=(![self.event_title isEqualToString:@""])?self.event_title:@"Some Stuff";
-            NSString *eventTime=(![self.event_time isEqualToString:@"time"])?self.event_time:@"Some Time";
-            NSString *eventLocation=(![self.event_address isEqualToString:@"location"])?self.event_address:@"TBD";
+    
+    /*
+     //give user several way to share
+     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook Wall",@"Twitter",@"Wechat",@"Self enter", nil];
+     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+     [pop showFromTabBar:self.tabBarController.tabBar];
+     */
+    if([actionSheet.title isEqualToString:@"Choose To Share:"]){
+        if (buttonIndex == 0) {
+            NSLog(@"email");
+            self.preDefinedMode=@"email";
+            [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+        }
+        else if (buttonIndex == 1) {
+            NSLog(@"SMS message");
+            self.preDefinedMode=@"message";
+            [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+        }
+        else if (buttonIndex == 2) {
+            NSLog(@"facebook");
+            NSLog(@"need to do sth about post on wall");
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+                //if already login : start the action sheet
+                funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+                funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+            }
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            [params setObject:@"OrangeParc event" forKey:@"name"];
+            [params setObject:@"new OrangeParc event" forKey:@"description"];
+            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",self.event_title,self.event_time,self.location_name] forKey:@"message"];
             
-            //email subject
-            [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",eventName]];
-            //email body
-            [mailCont setMessageBody:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time is %@. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\n Cheers~",eventName,eventTime,eventLocation] isHTML:NO];
-            //go!
-            [self presentModalViewController:mailCont animated:YES];
+            if ([funAppdelegate.facebook isSessionValid]) {
+                [funAppdelegate.facebook requestWithGraphPath:@"me/feed"
+                                              andParams:params
+                                          andHttpMethod:@"POST"
+                                            andDelegate:self];
+            }
+            else{
+                //if not login, do it
+                NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                        @"publish_stream",
+                                        @"read_stream",@"create_event",@"email",
+                                        nil];
+                [funAppdelegate.facebook authorize:permissions];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+            }
+        }
+        else if (buttonIndex == 3) {
+            NSLog(@"twitter");
+        #warning need twitter api
+        }
+        else if (buttonIndex == 4) {
+            NSLog(@"wechat");
+            UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose A WeChat Way" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share On Moment",@"Send Friend Message", nil];
+            pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+            [pop showFromTabBar:self.tabBarController.tabBar];
         }
     }
-    else if (buttonIndex == 1) {
-        NSLog(@"facebook");
+    else if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
+        if(buttonIndex == 0){
+            //shared on moment
+            [self.delegate SendMoment:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+        }
+        else if(buttonIndex == 1){
+            //send message to friend
+            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+            
+        }
     }
-    else if (buttonIndex == 2) {
-        NSLog(@"twitter");
-    }
-    else if (buttonIndex == 3) {
-        NSLog(@"weixin");
-    }
+    
+    
 }
 
 #pragma mark - comment handle part
@@ -419,7 +500,19 @@
             commentVC.shared_event_id=self.shared_event_id;
         }
     }
+    else if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){
+        ChoosePeopleToGoTableViewController *peopleController=nil;
+        peopleController = segue.destinationViewController;
+        peopleController.delegate=self;
+        if ([self.preDefinedMode isEqualToString:@"email"]) {
+            peopleController.alreadySelectedContacts=[self.peopleGoOutWith copy];
+        } else {
+            peopleController.alreadySelectedContacts=[self.peopleGoOutWithMessage copy];
+        }
+        peopleController.preDefinedMode=self.preDefinedMode;
+    }
 }
+
 
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -580,6 +673,163 @@
                 [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
             });
         }
+}
+
+
+#pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
+////////////////////////////////////////////////
+//implement the method for the adding or delete contacts that will be go out with
+-(void)AddContactInformtionToPeopleList:(UserContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people setObject:(id)person forKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
+-(void)DeleteContactInformtionToPeopleList:(UserContactObject*)person{
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people removeObjectForKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
+////////////////////////////////////////////////
+//implement the method for the adding or delete Message contacts that will be go out with
+-(void)AddMessageContactInformtionToPeopleList:(UserContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSMutableDictionary *people=[self.peopleGoOutWithMessage mutableCopy];
+    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people setObject:(id)person forKey:key];
+    self.peopleGoOutWithMessage = [people copy];
+}
+
+-(void)DeleteMessageContactInformtionToPeopleList:(UserContactObject*)person{
+    NSMutableDictionary *people=[self.peopleGoOutWithMessage mutableCopy];
+    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people removeObjectForKey:key];
+    self.peopleGoOutWithMessage = [people copy];
+}
+
+//start to compose email(the FeedBackToCreateActivityChange)
+-(void)StartComposeEmail{
+    //compose the email
+    if (self.peopleGoOutWith) {
+        if ([self.peopleGoOutWith count] > 0) {
+            //Now we have friends to be invided using email
+            //get the email list
+            NSMutableArray *emailList=[NSMutableArray array];
+            for (NSString* key in [self.peopleGoOutWith allKeys] ){
+                UserContactObject *user=[self.peopleGoOutWith objectForKey:key];
+                if (user.email) {
+                    if ([user.email count]>0) {
+                        [emailList addObject:[user.email objectAtIndex:0]];
+                    }
+                }
+            }
+            //we have the email list, now try to send email invitation
+            if([MFMailComposeViewController canSendMail]) {
+                //if the device allowed sending email
+                MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+                mailCont.mailComposeDelegate = self;
+                
+                //email subject
+                [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",self.event_title]];
+                //email list
+                [mailCont setToRecipients:emailList];
+                //email body
+                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name] isHTML:NO];
+                //go!
+                [self presentModalViewController:mailCont animated:YES];
+            }
+        }
+    }
+}
+//start to compose message(the FeedBackToCreateActivityChange)
+-(void)StartComposeMessage{
+    //compose the message
+    if (self.peopleGoOutWithMessage) {
+        if ([self.peopleGoOutWithMessage count] > 0) {
+            //Now we have friends to be invided using email
+            //get the email list
+            NSMutableArray *phoneList=[NSMutableArray array];
+            for (NSString* key in [self.peopleGoOutWithMessage allKeys] ){
+                UserContactObject *user=[self.peopleGoOutWithMessage objectForKey:key];
+                if (user.phone) {
+                    if ([user.phone count]>0) {
+                        [phoneList addObject:[user.phone objectAtIndex:0]];
+                    }
+                }
+            }
+            //we have the phone list, now try to send email invitation
+            if([MFMessageComposeViewController canSendText]) {
+                //if the device allowed sending email
+                MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
+                messageSender.messageComposeDelegate = self;
+                //phone list
+                [messageSender setRecipients:phoneList];
+                //phone body
+                [messageSender setBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+                //go!
+                [self presentModalViewController:messageSender animated:YES];
+            }
+        }
+    }
+    
+    
+    /*
+     if ([MFMessageComposeViewController canSendText]) {
+     MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
+     
+     NSString *messageText = [[NSString stringWithFormat:@"Hi, your friend just shared recipe of %@ with you. Check it out here: ",_dish.name] stringByAppendingFormat:_dish.dishURL];
+     
+     [messageSender setBody:messageText];
+     [self presentModalViewController:messageSender animated:YES];
+     } else {
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to sent SMS"
+     message:@"Your device cannot send SMS for now. Please check."
+     delegate:nil
+     cancelButtonTitle:@"Cancel"
+     otherButtonTitles: nil];
+     [alert show];
+     }
+     */
+    
+}
+
+
+#pragma mark - facebook related protocal implement
+-(void)faceBookLoginFinished{
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"Wechat", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [pop showFromTabBar:self.tabBarController.tabBar];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"Err details: %@", [error description]);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+        NSLog(@"%@",result);
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Posted on wall" message: [NSString stringWithFormat:@"Your event is uploaded to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    success.delegate=self;
+    [success show];
+}
+
+#pragma mark - implement protocals <MFMessageComposeViewControllerDelegate>
+////////////////////////////////////////////////
+//implement the MFMailComposeViewControllerDelegate Method
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (error) {
+        NSLog(@"Sending Email Error Happended!");
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
