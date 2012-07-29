@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSString* content;
 @property (nonatomic,strong) NSString* timestamp;
 @property (nonatomic,strong) NSString* user_name;
+@property (nonatomic,strong) NSURL* user_picture_url;
 
 //generate the array of the eventComment from the json got from the sever
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments;

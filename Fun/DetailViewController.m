@@ -345,7 +345,7 @@
         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
         
         //        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        
+    
         UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 0)];
         NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
@@ -367,8 +367,6 @@
         [indent setFont:[UIFont boldSystemFontOfSize:14]];
         NSString *indent_string = [NSString stringWithFormat:@" "];
         while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
-            NSLog(@"####%f",indent.frame.size.width);
-            NSLog(@"$$$$%f",comment_user_name_label.frame.size.width);
             indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
             [indent setText:indent_string];
             CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
@@ -376,7 +374,6 @@
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        NSLog(@"!!!%@!!!",indent_string);
         UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 290, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];

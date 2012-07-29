@@ -15,6 +15,7 @@
 @synthesize content=_content;
 @synthesize timestamp=_timestamp;
 @synthesize user_name=_user_name;
+@synthesize user_picture_url = _user_picture_url;
 
 +(NSArray *)getEventComentArrayFromArray:(NSArray *)comments{
     //using the comment json data to build up a comment array
@@ -25,12 +26,15 @@
         NSString *content=[comment objectForKey:@"content"];
         NSString *timestamp=[comment objectForKey:@"timestamp"];
         NSString *username=[comment objectForKey:@"user_name"];
+        NSString *user_picture = [comment objectForKey:@"user_picture"];
+        NSURL *url=[NSURL URLWithString:user_picture];
         eventComment *commentOne=[[eventComment alloc] init];
         commentOne.user_id=user_id;
         commentOne.fb_id=fb_id;
         commentOne.content=content;
         commentOne.timestamp=timestamp;
         commentOne.user_name=username;
+        commentOne.user_picture_url=url;
         [temp_array addObject:commentOne];
     }
     return temp_array;
