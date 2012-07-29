@@ -76,12 +76,8 @@
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
 @synthesize preDefinedMode=_preDefinedMode;
-<<<<<<< HEAD
 @synthesize delegate=_delegate;
 
-=======
-@synthesize delegate = _delegate;
->>>>>>> finish twitter integration
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
     if (!_comments) {
