@@ -92,9 +92,11 @@ static NSString* recentViewListPath;
                 
                 while (usedCacheSize > cacheSize) {
                     NSString* key = [recentViewList objectAtIndex:0];
+                    usedCacheSize -=[[Cache getCachedData:[NSURL URLWithString:key]] length];
                     if (key != nil) {
                         [self removeCachedDataWithKey:key];
                     }
+                    
                     //NSLog(@"%@", recentViewList);
                     //NSLog(@"usedCacheSize = %d/%d\n", usedCacheSize, cacheSize);
                 }
