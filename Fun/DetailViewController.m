@@ -9,6 +9,8 @@
 #import "DetailViewController.h"
 #import "Cache.h"
 #import "eventComment.h"
+#import <Accounts/Accounts.h>
+#import <Twitter/TWTweetComposeViewController.h>
 
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
@@ -277,6 +279,17 @@
         }
         else if (buttonIndex == 3) {
             NSLog(@"twitter");
+            Class twitterClass = NSClassFromString(@"TWTweetComposeViewController");
+            if (twitterClass) {
+                if ([TWTweetComposeViewController canSendTweet]) {
+                    TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+                    [tweetViewController setInitialText:@"test"];
+                    if (self.eventImageView.image != nil) {
+                        [tweetViewController addImage:self.eventImageView.image];
+                    }
+                    [self presentViewController:tweetViewController animated:YES completion:nil];
+                }
+            }
         #warning need twitter api
         }
         else if (buttonIndex == 4) {

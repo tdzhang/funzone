@@ -157,6 +157,7 @@
 		46CF988F1595771700563423 /* detailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CF988E1595771700563423 /* detailButton.png */; };
 		46DBFA8D15BD387A00130749 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFA8C15BD387A00130749 /* 06-magnify.png */; };
 		921D57F115BE1BC800A49422 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 921D57F015BE1BC800A49422 /* header.png */; };
+		9222BF4415C5D63A00489704 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922FF4F115C5D2190096C81A /* Accounts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		92360FB815A94C9B006A559C /* FacebookSSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92360FB715A94C9B006A559C /* FacebookSSOViewController.m */; };
 		923D003315AA274000A0818D /* subtle-pattern-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 923D003215AA274000A0818D /* subtle-pattern-1.jpg */; };
 		923D003615AA316C00A0818D /* 11-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 923D003515AA316C00A0818D /* 11-clock.png */; };
@@ -394,6 +395,7 @@
 		46CF988E1595771700563423 /* detailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailButton.png; sourceTree = "<group>"; };
 		46DBFA8C15BD387A00130749 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		921D57F015BE1BC800A49422 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
+		922FF4F115C5D2190096C81A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		92360FB615A94C9B006A559C /* FacebookSSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSSOViewController.h; sourceTree = "<group>"; };
 		92360FB715A94C9B006A559C /* FacebookSSOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSSOViewController.m; sourceTree = "<group>"; };
 		923D003215AA274000A0818D /* subtle-pattern-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subtle-pattern-1.jpg"; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9222BF4415C5D63A00489704 /* Accounts.framework in Frameworks */,
 				0FCC6E6815B621B500861F0B /* Twitter.framework in Frameworks */,
 				0FD0BB5A15AFAFF500357ADE /* libz.dylib in Frameworks */,
 				0FD0BB5815AFAFE400357ADE /* MobileCoreServices.framework in Frameworks */,
@@ -724,17 +727,7 @@
 			children = (
 				469F4A1115C5073200D06CE1 /* iphone-logo-57.png */,
 				469F4A0F15C5070B00D06CE1 /* iphone-logo-114.png */,
-				0FCC6E6715B621B500861F0B /* Twitter.framework */,
 				0FD0BB5915AFAFF500357ADE /* libz.dylib */,
-				0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */,
-				0FD0BB5515AFAFD600357ADE /* SystemConfiguration.framework */,
-				0FD0BB5315AFAFCB00357ADE /* CFNetwork.framework */,
-				0FC91A2E15A3727800EB3E9A /* MessageUI.framework */,
-				0F128546159EB0BE00430859 /* MapKit.framework */,
-				0F128544159EB0B600430859 /* AddressBook.framework */,
-				0F128541159EB0AD00430859 /* CoreLocation.framework */,
-				4668A7A81593FC8800713A4C /* CoreData.framework */,
-				4668A7A61593FC8100713A4C /* QuartzCore.framework */,
 				4668A7481593E56400713A4C /* Fun */,
 				4668A7411593E56400713A4C /* Frameworks */,
 				4668A73F1593E56400713A4C /* Products */,
@@ -752,6 +745,17 @@
 		4668A7411593E56400713A4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FCC6E6715B621B500861F0B /* Twitter.framework */,
+				0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */,
+				0FD0BB5515AFAFD600357ADE /* SystemConfiguration.framework */,
+				0FD0BB5315AFAFCB00357ADE /* CFNetwork.framework */,
+				0FC91A2E15A3727800EB3E9A /* MessageUI.framework */,
+				0F128546159EB0BE00430859 /* MapKit.framework */,
+				0F128544159EB0B600430859 /* AddressBook.framework */,
+				0F128541159EB0AD00430859 /* CoreLocation.framework */,
+				4668A7A81593FC8800713A4C /* CoreData.framework */,
+				4668A7A61593FC8100713A4C /* QuartzCore.framework */,
+				922FF4F115C5D2190096C81A /* Accounts.framework */,
 				4668A7421593E56400713A4C /* UIKit.framework */,
 				4668A7441593E56400713A4C /* Foundation.framework */,
 				4668A7461593E56400713A4C /* CoreGraphics.framework */,
@@ -998,6 +1002,16 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		9222BF4315C5D3BC00489704 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		4668A73D1593E56400713A4C /* Fun */ = {
 			isa = PBXNativeTarget;
@@ -1006,6 +1020,7 @@
 				4668A73A1593E56400713A4C /* Sources */,
 				4668A73B1593E56400713A4C /* Frameworks */,
 				4668A73C1593E56400713A4C /* Resources */,
+				9222BF4315C5D3BC00489704 /* Headers */,
 			);
 			buildRules = (
 			);
