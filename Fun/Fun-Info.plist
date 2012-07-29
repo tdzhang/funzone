@@ -14,8 +14,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>logo_57.png</string>
-				<string>logo_114.png</string>
+				<string>iphone-logo-57.png</string>
+				<string>iphone-logo-114.png</string>
 				<string>Default.png</string>
 				<string>Default.png</string>
 				<string>Default@2x.png</string>
