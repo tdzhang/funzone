@@ -290,7 +290,6 @@
                     [self presentViewController:tweetViewController animated:YES completion:nil];
                 }
             }
-        #warning need twitter api
         }
         else if (buttonIndex == 4) {
             NSLog(@"wechat");
