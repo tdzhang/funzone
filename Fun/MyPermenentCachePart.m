@@ -57,7 +57,6 @@ static bool init_flag=false;
         init_flag=true;
         [self sizeControl];
         NSLog(@"success sizeControl document3");
-        
     }
 }
 
@@ -80,7 +79,7 @@ static bool init_flag=false;
     for (URLConnectionCache* temp_url2data in url2datas) {
         [keyToFindIfExist setValue:@"1" forKey:temp_url2data.urlName];
         datasize+=[temp_url2data.data length];
-        //NSLog(@"c:%@ ------> %d",temp_url2data.urlName,[temp_url2data.data length]);
+        NSLog(@"c:%@ ------> %d",temp_url2data.urlName,[temp_url2data.data length]);
     }
     //NSLog(@"a:%d",[url2datas count]);
 
@@ -161,7 +160,7 @@ static bool init_flag=false;
 //control the total size within a certain range
 +(void)sizeControl{
     if (datasize<MYPERMANENTCACHEPART_SATASIZE_LIMITE) {
-        NSLog(@"%d",datasize);
+        NSLog(@"sizeControl not activate:%d",datasize);
         return;
     } 
     else {
