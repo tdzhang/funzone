@@ -8,7 +8,7 @@
 
 #import "FunAppDelegate.h"
 
-@interface FunAppDelegate() <FBSessionDelegate,UIApplicationDelegate>
+@interface FunAppDelegate() <FBSessionDelegate,UIApplicationDelegate,WXApiDelegate>
 @end
 
 @implementation FunAppDelegate
@@ -20,6 +20,8 @@
 {
     // Override point for customization after application launch.
     [Cache init];
+    //向微信注册
+    [WXApi registerApp:@"wx2089110c987d6949"];
     return YES;
 }
 							
@@ -57,14 +59,40 @@
 /////////////
 // Pre iOS 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url]; 
+    return [self.facebook handleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
 }
+#pragma mark - weichat related stuff
+-(void)sendText:(NSString*)content{
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = YES;
+    req.text = content;
+    req.scene=WXSceneSession;
+    [WXApi sendReq:req];
+    [self RespTextContent:content];
+}
+
+-(void)SendMoment:(NSString*)content{
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = YES;
+    req.text = content;
+    req.scene=WXSceneTimeline;
+    [WXApi sendReq:req];
+}
+
+-(void) RespTextContent:(NSString*)content
+{
+    GetMessageFromWXResp* resp = [[GetMessageFromWXResp alloc] init];
+    resp.text = content;
+    resp.bText = YES;
+    [WXApi sendResp:resp];
+}
+
 
 #pragma mark - facebook related stuff
 // For iOS 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url]; 
+    return [self.facebook handleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
 }
 
 

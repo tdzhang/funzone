@@ -63,6 +63,7 @@
 		0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532615BE84F6008E6F3B /* create_account_button.png */; };
 		0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532815BE8527008E6F3B /* cancel_button.png */; };
 		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
+		0FC659A315C517AF00727ED4 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC659A215C517AF00727ED4 /* libWeChatSDK.a */; };
 		0FC6FF6F15ABA7FB00CC022C /* FacebookContactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */; };
 		0FC6FF7315ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC6FF7215ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.m */; };
 		0FC91A2F15A3727800EB3E9A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC91A2E15A3727800EB3E9A /* MessageUI.framework */; };
@@ -258,6 +259,9 @@
 		0F9A532815BE8527008E6F3B /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
+		0FC659A215C517AF00727ED4 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		0FC659A515C517BF00727ED4 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		0FC659A615C517BF00727ED4 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		0FC6FF6D15ABA7FB00CC022C /* FacebookContactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookContactObject.h; sourceTree = "<group>"; };
 		0FC6FF6E15ABA7FB00CC022C /* FacebookContactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookContactObject.m; sourceTree = "<group>"; };
 		0FC6FF7115ABA82000CC022C /* ChooseFacebookFriendsToGoTableViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseFacebookFriendsToGoTableViewControllerViewController.h; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 				4668A7451593E56400713A4C /* Foundation.framework in Frameworks */,
 				4668A7471593E56400713A4C /* CoreGraphics.framework in Frameworks */,
 				9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */,
+				0FC659A315C517AF00727ED4 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +541,16 @@
 				0F128550159EB18200430859 /* custom view */,
 			);
 			name = "choose Friends";
+			sourceTree = "<group>";
+		};
+		0F14023F15C516CE0080DA38 /* WechatApi */ = {
+			isa = PBXGroup;
+			children = (
+				0FC659A515C517BF00727ED4 /* WXApi.h */,
+				0FC659A615C517BF00727ED4 /* WXApiObject.h */,
+				0FC659A215C517AF00727ED4 /* libWeChatSDK.a */,
+			);
+			name = WechatApi;
 			sourceTree = "<group>";
 		};
 		0F4093B115B7D8B6002C9F23 /* loginPage */ = {
@@ -741,6 +756,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F14023F15C516CE0080DA38 /* WechatApi */,
 				0FFC95C815C3796200800B23 /* More */,
 				0F60F3FA15BC699A00053D25 /* Profile page */,
 				0F4093B115B7D8B6002C9F23 /* loginPage */,
@@ -1268,6 +1284,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/Fun\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1284,6 +1301,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
+					"\"$(SRCROOT)/Fun\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

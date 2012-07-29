@@ -24,6 +24,7 @@
 @end
 
 @implementation ShareAfterNewEventViewController
+@synthesize delegate=_delegate;
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
 @synthesize createEvent_latitude=_createEvent_latitude;
@@ -65,6 +66,10 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    //set up the weixin delegate
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    self.delegate=(id)appDelegate;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -122,7 +127,9 @@
 }
 
 - (IBAction)WechatShare:(id)sender {
-    
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose A WeChat Way" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share On Moment",@"Send Friend Message", nil];
+    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
 //start to compose email(the FeedBackToCreateActivityChange)
@@ -260,5 +267,22 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+////////////////////////////////////////////////
+//implement the UIActionSheetDelegate Method
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //for the when to go action sheet
+    NSLog(@"%@",actionSheet.title);
+    if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
+        if(buttonIndex == 0){
+            //shared on moment
+            [self.delegate SendMoment:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+        }
+        else if(buttonIndex == 1){
+            //send message to friend
+            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+            
+        }
+    }
+}
 
 @end

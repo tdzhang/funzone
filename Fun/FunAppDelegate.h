@@ -10,6 +10,8 @@
 #import "FBConnect.h"
 #import "Cache.h"
 #import "MyPermenentCachePart.h"
+#import "WXApi.h"
+#import "ShareAfterNewEventViewController.h"
 @interface FunAppDelegate : UIResponder  
 
 @property (strong, nonatomic) UIWindow *window;

@@ -46,6 +46,16 @@
 				<string>fb433716793339720</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx2089110c987d6949</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
