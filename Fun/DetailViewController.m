@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *originalCreatorLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *originalCreatorIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
@@ -47,6 +48,7 @@
 @synthesize eventImageView;
 @synthesize creatorProfileImageView;
 @synthesize originalCreatorLabel;
+@synthesize originalCreatorIndicator = _originalCreatorIndicator;
 @synthesize contributorNameLabel;
 @synthesize eventTitleLabel;
 @synthesize eventLocationLabel;
@@ -142,6 +144,7 @@
     [self setEventIntroLabel:nil];
     [self setMyScrollView:nil];
     [self setEventImageView:nil];
+    [self setOriginalCreatorIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -616,7 +619,8 @@
     
     //[self.myScrollView addSubview:self.creatorProfileImageView];
     NSString *creator_name=[event objectForKey:@"creator_name"];
-    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@ would like to",creator_name]];
+    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@",creator_name]];
+    
     
 #warning fetch original creator info
     //show original creator

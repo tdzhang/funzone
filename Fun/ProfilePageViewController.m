@@ -7,6 +7,7 @@
 //
 
 #import "ProfilePageViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface ProfilePageViewController ()
@@ -178,6 +179,17 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+    
+    
+#warning might need a class for style here
+    _creatorImageView.layer.cornerRadius = 5;
+    _creatorImageView.layer.masksToBounds = YES;
+    _creatorImageView.layer.shadowOpacity = 0.85f;
+    _creatorImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _creatorImageView.layer.shadowRadius = 2.f;
+    [_creatorImageView.layer setShadowOffset:CGSizeMake(1, 1)];
+    //_creatorImageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    //_creatorImageView.layer.borderWidth = 1.f;
 }
 
 - (void)viewDidUnload
