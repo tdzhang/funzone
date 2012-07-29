@@ -131,12 +131,46 @@
     }
     //else, start too register
     
-    NSString *request_string=[NSString stringWithFormat:@"%@/users.json?user[first_name]=%@&user[last_name]=%@&user[email]=%@&user[password]=%@&user[password_confirmation]=%@",CONNECT_DOMIAN_NAME,self.firstNameTextField.text,@" ",self.emailTextField.text,self.passwordTextField.text,self.rePasswordTextField.text];
-    NSLog(@"%@",request_string);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    [request setHTTPMethod:@"POST"];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users.json",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //get the response and the autu_token
+        if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
+            //if the register is finished, get the auth_token
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Registration Success" message:@"The registration is finished." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            success.delegate=self;
+            [success show];
+        }
+        else {
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            error.delegate=self;
+            [error show];
+        }
+    }];
+    [request setFailedBlock:^{
+        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        error.delegate=self;
+        [error show];
+    }];
+    
+    [request setPostValue:self.firstNameTextField.text forKey:@"user[username]"];
+    [request setPostValue:self.emailTextField.text forKey:@"user[email]"];
+    [request setPostValue:self.passwordTextField.text forKey:@"user[password]"];
+    [request setPostValue:self.rePasswordTextField.text forKey:@"password_confirmation"];
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
+    
 }
 
 - (IBAction)stillWantToSignInWithFaceBook:(id)sender {
@@ -163,17 +197,43 @@
 
 #pragma mark - facebook related process
 -(void)faceBookLoginFinished{
-    //when the facebook has login, send to the sever to get the user token
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        NSLog(@"all %@",[json allKeys]);
+        //if login success, then return to the page
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            //save the login_auth_token for later use
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *login_auth_token=[json objectForKey:@"auth_token"];
+            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
+            NSLog(@"%@",[json objectForKey:@"user_id"]);
+            [defaults synchronize];
+            //then return to the previouse page, quit login page
+            [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+        }
+        else {
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            error.delegate=self;
+            [error show];
+        }
+    }];
+    [request setFailedBlock:^{
+        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        error.delegate=self;
+        [error show];
+    }];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *request_string=[NSString stringWithFormat:@"%@/users/sign_in?iphone=true&facebook_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"FBAccessTokenKey"]];
-    NSLog(@"%@",request_string);
-    //start connection
-    //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    self.currentConnection=@"facebookLogin";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    [request setHTTPMethod:@"POST"];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+    [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"facebook_token"];
+    [request setPostValue:@"true" forKey:@"iphone"];
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
 }
 
 
@@ -247,7 +307,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //NSLog(@"%@",alertView.title);
     //deal with the Input Empty Error for the activity category choose
-    if ([alertView.title isEqualToString:@"Register Success"]) {
+    if ([alertView.title isEqualToString:@"Registration Success"]) {
         NSLog(@"register success called");
         [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
     }
@@ -296,7 +356,6 @@
     //    [self animateTextField: textField up: NO];
     //   self.uIViewUpFlag=NO;
     //}
-    
 }
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
