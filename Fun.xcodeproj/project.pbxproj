@@ -89,6 +89,9 @@
 		0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3515B49F4D000D68C3 /* 86-camera.png */; };
 		0FF9C57F15BB9003002D1998 /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */; };
 		0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC95CE15C379E500800B23 /* MoreTableViewController.m */; };
+		4633375315C5E5AB00ACFAE8 /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375215C5E5AB00ACFAE8 /* 18-envelope.png */; };
+		4633375515C5E6C400ACFAE8 /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375415C5E6C400ACFAE8 /* 145-persondot.png */; };
+		4633375715C5E73600ACFAE8 /* OrangeParc-WeChat28.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375615C5E73600ACFAE8 /* OrangeParc-WeChat28.png */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
 		463B9BE9159FC08D0087CDBA /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 463B9BE8159FC08D0087CDBA /* ExploreViewController.m */; };
@@ -306,6 +309,9 @@
 		0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0FFC95CD15C379E500800B23 /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
 		0FFC95CE15C379E500800B23 /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		4633375215C5E5AB00ACFAE8 /* 18-envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-envelope.png"; sourceTree = "<group>"; };
+		4633375415C5E6C400ACFAE8 /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
+		4633375615C5E73600ACFAE8 /* OrangeParc-WeChat28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OrangeParc-WeChat28.png"; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
 		463B9BE7159FC08D0087CDBA /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
@@ -854,6 +860,9 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4633375615C5E73600ACFAE8 /* OrangeParc-WeChat28.png */,
+				4633375415C5E6C400ACFAE8 /* 145-persondot.png */,
+				4633375215C5E5AB00ACFAE8 /* 18-envelope.png */,
 				469F4A1315C50B9A00D06CE1 /* logo-orange.png */,
 				469F4A0915C4FB0400D06CE1 /* dashed-frame.png */,
 				469F4A0715C4F41F00D06CE1 /* button_orange-2.png */,
@@ -1123,6 +1132,9 @@
 				469F4A1015C5070B00D06CE1 /* iphone-logo-114.png in Resources */,
 				469F4A1215C5073200D06CE1 /* iphone-logo-57.png in Resources */,
 				469F4A1415C50B9B00D06CE1 /* logo-orange.png in Resources */,
+				4633375315C5E5AB00ACFAE8 /* 18-envelope.png in Resources */,
+				4633375515C5E6C400ACFAE8 /* 145-persondot.png in Resources */,
+				4633375715C5E73600ACFAE8 /* OrangeParc-WeChat28.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
