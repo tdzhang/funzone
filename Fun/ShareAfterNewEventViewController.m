@@ -20,10 +20,14 @@
 @property (nonatomic,strong) NSString *preDefinedMode;
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
+@property (weak, nonatomic) IBOutlet UIButton *WeixinButton;
+@property (weak, nonatomic) IBOutlet UIButton *EmailButton;
 
 @end
 
 @implementation ShareAfterNewEventViewController
+@synthesize WeixinButton = _WeixinButton;
+@synthesize EmailButton = _EmailButton;
 @synthesize delegate=_delegate;
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -70,6 +74,12 @@
     //set up the weixin delegate
     FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
     self.delegate=(id)appDelegate;
+    
+    //set the button to be a circle
+    self.WeixinButton.layer.cornerRadius = 20;
+    self.WeixinButton.clipsToBounds=YES;
+    self.EmailButton.layer.cornerRadius = 20;
+    self.EmailButton.clipsToBounds=YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -285,4 +295,9 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setWeixinButton:nil];
+    [self setEmailButton:nil];
+    [super viewDidUnload];
+}
 @end

@@ -2303,6 +2303,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="EmailButton" destination="fl7-kT-hJz" id="6zO-eN-S9Q"/>
+                        <outlet property="WeixinButton" destination="A5H-SC-yxB" id="Ocg-EL-OyS"/>
                         <segue destination="i8q-Ty-eGM" kind="push" identifier="ChooseFriends" id="yT5-mz-bg3"/>
                     </connections>
                 </viewController>
@@ -3067,15 +3069,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="MovieButtonClicked:"/>
-                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SelfDefineButtonClicked:"/>
-                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -3119,9 +3112,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelLoginNew:"/>
-                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
-                <relationship kind="action" name="normalLoginButtonClickedNew:"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
@@ -3148,6 +3138,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
                 <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
@@ -3191,14 +3184,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="FinishedThisSharePage:"/>
                 <relationship kind="action" name="MesssgeShare:"/>
                 <relationship kind="action" name="WechatShare:"/>
+                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="DecideToCancel:"/>
-                <relationship kind="action" name="DecideToChoose:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
@@ -3206,9 +3198,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="registerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelRegisterNew:"/>
-                <relationship kind="action" name="registerButtonBlicked:"/>
-                <relationship kind="action" name="stillWantToSignInWithFaceBook:"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
