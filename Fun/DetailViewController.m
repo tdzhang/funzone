@@ -336,77 +336,54 @@
     [comments_header_view addSubview:button];
     [self.garbageCollection addObject:button];
     
-    height = 32 + height;
-    //add every single comment entry
+    UIView *comments_holder_view = [[UIView alloc] initWithFrame:CGRectMake(10, 32 + height, 300, 0)];
+    [self.myScrollView addSubview:comments_holder_view];
+    int temp_height = 0;
     for (int i = 0; i<[self.comments count]; i++) {
         if(i==5)break; //in this page, only present a few comments
-        eventComment* comment=[self.comments objectAtIndex:i];  
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 0)];
+        eventComment* comment=[self.comments objectAtIndex:i];     
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, temp_height, 300, 30)];
         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
-
-        //        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        NSString *content =[NSString stringWithFormat:@"%@",comment.user_name];
+        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
+        [comment_user_name setText:content];
+        [comment_user_name setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_user_name setBackgroundColor:[UIColor clearColor]];
+        [comment_user_name setTextAlignment:UITextAlignmentCenter];
+        [comment_user_name sizeToFit];
+        [commentView addSubview:comment_user_name];
         
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 0)];
-        NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
-        [comment_user_name_label setText:comment_user_name];
-        [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
-        [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
-        comment_user_name_label.lineBreakMode = UILineBreakModeWordWrap;
-        comment_user_name_label.numberOfLines = 0;
+        //        NSString *time =[NSString stringWithFormat:@"%@",comment.timestamp];
+        //        UILabel *comment_time=[[UILabel alloc] initWithFrame:CGRectMake(160, 0, 150, 25)];
+        //        [comment_time setBackgroundColor:[UIColor clearColor]];
+        //        [comment_time setText:time];
+        //        [comment_time setFont:[UIFont boldSystemFontOfSize:12]];
+        //        //[comment_time setTextAlignment:UITextAlignmentRight];
+        //        [comment_time setTextColor:[UIColor lightGrayColor]];
+        //        [comment_time setTextAlignment:UITextAlignmentCenter];
+        //        [comment_time setBackgroundColor:[UIColor greenColor]];
+        //        //[comment_time sizeToFit];
+        //        [commentView addSubview:comment_time];
         
-        CGSize maximumLabelSize1 = CGSizeMake(100,9999);
-        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-        CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+        UILabel *comment_content=[[UILabel alloc] initWithFrame:CGRectMake(comment_user_name.frame.size.width+10, 5, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        [comment_content setBackgroundColor:[UIColor clearColor]];
+        [comment_content setText:comment.content];
+        [comment_content setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_content setTextColor:[UIColor darkGrayColor]];
+        [comment_content setBackgroundColor:[UIColor clearColor]];
+        comment_content.lineBreakMode = UILineBreakModeWordWrap;
+        comment_content.numberOfLines = 0;
+        [comment_content sizeToFit];
+        [commentView addSubview:comment_content];
         
-        CGRect newFrame1 = comment_user_name_label.frame;
-        newFrame1.size.height = expectedLabelSize1.height;
-        newFrame1.size.width = expectedWidth.width;
-        comment_user_name_label.frame = newFrame1;
+        [comments_holder_view addSubview:commentView];
+        [self.garbageCollection addObject:commentView];
         
-        UILabel *indent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [indent setFont:[UIFont boldSystemFontOfSize:14]];
-        NSString *indent_string = [NSString stringWithFormat:@" "];
-        while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
-            NSLog(@"####%f",indent.frame.size.width);
-            NSLog(@"$$$$%f",comment_user_name_label.frame.size.width);
-            indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
-            [indent setText:indent_string];
-            CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
-            CGRect indentNewFrame = indent.frame;
-            indentNewFrame.size.width = indentExpectedWidth.width;
-            indent.frame = indentNewFrame;
-        }
-        NSLog(@"!!!%@!!!",indent_string);
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 290, 0)];
-        NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
-        [comment_content_label setText:comment_content];
-        [comment_content_label setFont:[UIFont systemFontOfSize:14]];
-        [comment_content_label setBackgroundColor:[UIColor clearColor]];
-        comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
-        comment_content_label.numberOfLines = 0;
-        
-        CGSize maximumLabelSize2 = CGSizeMake(290,9999);
-        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];   
-        
-        CGRect newFrame2 = comment_content_label.frame;
-        newFrame2.size.height = expectedLabelSize2.height;
-        comment_content_label.frame = newFrame2;
-        
-        [commentView addSubview:comment_content_label];
-        [commentView addSubview:comment_user_name_label];
-        
-        CGRect newFrame3 = commentView.frame;
-        newFrame3.size.height = comment_content_label.bounds.size.height+10;
-        commentView.frame = newFrame3;
-    
-        [self.myScrollView addSubview:commentView];
-        //distance between two comment view is 1px.
-        height = height + commentView.bounds.size.height + 1;
-        
-        [self.garbageCollection addObject:commentView];        
+        temp_height+=31;
     }
     //set the scroll view content size
-    [self.myScrollView setContentSize:CGSizeMake(320, height+10)];
+    [self.myScrollView setContentSize:CGSizeMake(320, comments_holder_view.frame.origin.y+temp_height+10)];
 }
 
 #pragma mark - segue related stuff
