@@ -72,6 +72,7 @@
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
 @synthesize preDefinedMode=_preDefinedMode;
+@synthesize delegate=_delegate;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
