@@ -149,6 +149,9 @@
     [self setOriginalCreatorIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    
+    //delete notification
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
