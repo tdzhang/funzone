@@ -154,7 +154,7 @@
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:URLrequest delegate:self];
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
-    self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    self.mainScrollView.contentOffset = CGPointMake(0, 10);
     }
 }
 
@@ -276,7 +276,7 @@
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, [self.blockViews count]*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
 }
 
 
@@ -317,7 +317,7 @@
     if ([json count]==0) {
         //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
         self.refresh_page_num--;
-        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, [self.blockViews count]*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
     }
     for (NSDictionary *event in json) {
         //set the freshConnectionType to "not"
@@ -361,7 +361,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                               ;
                                 //refresh the whole view
                                 NSLog(@"profile0:%@",event_id);
@@ -375,7 +375,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 NSLog(@"profile0:%@",event_id);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -386,7 +386,7 @@
             }
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
-                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     NSLog(@"profile1:%@",shared_event_id);
                     [self addMoreDataToTheMainScrollViewSUbviews];

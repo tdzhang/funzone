@@ -20,10 +20,10 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 
-+(ProfileEventElement *)initialWithPositionY:(CGFloat)position_y eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance:(float)distance{
++(ProfileEventElement *)initialWithPositionY:(int)index eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance:(float)distance{
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(5,position_y, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(5 + 155*(index%2),(index/2)*PROFILE_ELEMENT_VIEW_HEIGHT, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
@@ -106,29 +106,25 @@
     
     //add distance label
     blockElement.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 130, 120, 20)];
-    [blockElement.distanceLabel setText:[NSString stringWithFormat:@"%f", distance]];
+    [blockElement.distanceLabel setText:[NSString stringWithFormat:@"%.1f mi", distance]];
     blockElement.distanceLabel.numberOfLines = 1;
     blockElement.distanceLabel.lineBreakMode = UILineBreakModeClip;
-    [blockElement.distanceLabel setFont:[UIFont systemFontOfSize:12]];
+    [blockElement.distanceLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [blockElement.distanceLabel setTextColor:[UIColor lightGrayColor]];
-    CGSize maximumLabelSize2 = CGSizeMake(120,9999);
-    CGSize expectedLabelSize2 = [[NSString stringWithFormat:@"%f", distance] sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame2 = blockElement.distanceLabel.frame;
-    newFrame2.size.height = expectedLabelSize2.height;
-    newFrame2.origin.y = 150 - 5 - expectedLabelSize2.height;
-    blockElement.distanceLabel.frame = newFrame2;
     [blockElement.blockHolderView addSubview:blockElement.distanceLabel];
     
     //add heart image
-    blockElement.heartImageView = [[UIImageView alloc] initWithFrame:CGRectMake(120, 135, 10, 10)];
+    blockElement.heartImageView = [[UIImageView alloc] initWithFrame:CGRectMake(115, 130 + blockElement.distanceLabel.frame.size.height/2 - 5, 10, 10)];
     [blockElement.heartImageView setImage:[UIImage imageNamed:@"29-heart.png"]];
     [blockElement.blockHolderView addSubview:blockElement.heartImageView];
     
     //add heart label
-    blockElement.heartNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 135, 10, 21)];
+    blockElement.heartNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, 130, 10, 20)];
     [blockElement.heartNumberLabel setText:favor_label];
     [blockElement.heartNumberLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [blockElement.blockHolderView addSubview:blockElement.heartNumberLabel];
+    [blockElement.blockHolderView addSubview:blockElement.heartNumberLabel];
+    
     return  blockElement;
 }
 @end

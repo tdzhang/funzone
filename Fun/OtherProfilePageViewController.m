@@ -9,7 +9,7 @@
 #import "OtherProfilePageViewController.h"
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 55 
-#define BlOCK_VIEW_HEIGHT 155
+#define PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT 165
 
 @interface OtherProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -163,8 +163,8 @@
     NSURLRequest* URLrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:URLrequest delegate:self];
     [connection start];
-    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*BlOCK_VIEW_HEIGHT);
-    self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
+    self.mainScrollView.contentOffset = CGPointMake(0, 10);
 }
 
 - (void)viewDidLoad
@@ -288,15 +288,15 @@
     }
     
     //add more
-    if(scrollView.contentOffset.y>BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2.5))){
+    if(scrollView.contentOffset.y>PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2.5))){
         
         //add the content add refresh indicator
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
         }
-        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
         [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
         loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
@@ -309,12 +309,12 @@
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         spinning.frame =CGRectMake(120,80,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,BlOCK_VIEW_HEIGHT)];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
         [self.refreshViewdown removeFromSuperview];
         [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*BlOCK_VIEW_HEIGHT);
+        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
         
         //NSLog(@"add more");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -333,7 +333,7 @@
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
 }
 
 
@@ -374,7 +374,7 @@
     if ([json count]==0) {
         //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
         self.refresh_page_num--;
-        [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, [self.blockViews count]*BlOCK_VIEW_HEIGHT)];
+        [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
     }
     for (NSDictionary *event in json) {
         //set the freshConnectionType to "not"
@@ -420,7 +420,7 @@
                     if(imageData){
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
-                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                             ;
                             //refresh the whole view
                             NSLog(@"profile0:%d",[self.blockViews count]);
@@ -434,7 +434,7 @@
                     if(imageData){
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
-                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                             //refresh the whole view
                             NSLog(@"profile1:%d",[self.blockViews count]);
                             [self addMoreDataToTheMainScrollViewSUbviews];
@@ -445,7 +445,7 @@
         }
         else {
             dispatch_async( dispatch_get_main_queue(),^{
-                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                 //refresh the whole view
                 NSLog(@"profile2:%d",[self.blockViews count]);
                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -462,7 +462,7 @@
     
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
     //get the index of the touched block view
-    int index=touchPoint.y/BlOCK_VIEW_HEIGHT;
+    int index=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
     NSLog(@"%d",index);
     
      ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index];
