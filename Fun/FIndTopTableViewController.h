@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchedFriend.h"
+#import "FindFriendTableViewCell.h"
+#import "FunAppDelegate.h"
 
 @interface FIndTopTableViewController : UITableViewController
 

@@ -9,11 +9,27 @@
 #import "FIndTopTableViewController.h"
 
 @interface FIndTopTableViewController ()
-
+@property(nonatomic,strong)NSArray* topfriends;
 @end
 
 @implementation FIndTopTableViewController
+@synthesize topfriends=_topfriends;
 
+#pragma mark - self defined setter and getter
+-(NSArray *)topfriends{
+    if (!_topfriends){
+        _topfriends=[NSArray new];
+    }
+    return _topfriends;
+}
+
+-(void)setTopfriends:(NSArray *)topfriends{
+    if (![_topfriends isEqual:topfriends]) {
+        _topfriends=[topfriends copy];
+    }
+}
+
+#pragma mark - View Life Cycle
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -26,12 +42,63 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //initial the face book
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) {
+        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        NSLog(@"%@",funAppdelegate.facebook.accessToken);
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![funAppdelegate.facebook isSessionValid]) {
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream",
+                                @"read_stream",@"create_event",
+                                @"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+    }
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/top_users",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+        
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        self.topfriends=[SearchedFriend TopFriendsWithJson:json];
+        //NSLog(@"%d",[self.topfriends count]);
+        [self.tableView reloadData];
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        /*
+         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+         notsuccess.delegate=self;
+         [notsuccess show];
+         */
+    }];
+    
+    //add login auth_token //add content
+    defaults = [NSUserDefaults standardUserDefaults];
+    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
+
 }
 
 - (void)viewDidUnload
@@ -50,24 +117,33 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+
+    return [self.topfriends count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"FindFriendTableViewCell";
     
-    // Configure the cell...
+    
+    FindFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"FindFriendTableViewCell" owner:nil options:nil];
+        
+        for (UIView *view in views) {
+            if([view isKindOfClass:[UITableViewCell class]])
+            {
+                cell = (FindFriendTableViewCell*)view;
+            }
+        }
+    }
+    
+    [cell resetWithTopFriend:[self.topfriends objectAtIndex:indexPath.row]];
     
     return cell;
 }

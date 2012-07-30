@@ -18,5 +18,5 @@
 @property(nonatomic) BOOL followed; //the bool indicate the follow status
 
 +(NSArray *)SearchedFriendsWithJson:(NSArray *)json;
-
++(NSArray *)TopFriendsWithJson:(NSArray *)json;
 @end

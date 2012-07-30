@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendName;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
 -(void)resetWithSearchedFriend:(SearchedFriend *)friend;
+-(void)resetWithTopFriend:(SearchedFriend *)friend;
 @end
