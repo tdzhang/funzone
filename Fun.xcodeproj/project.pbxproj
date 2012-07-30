@@ -48,6 +48,8 @@
 		0F2EEB4D15C72B200087111B /* FindFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4C15C72B200087111B /* FindFriendTableViewCell.xib */; };
 		0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4E15C72BFD0087111B /* FindFriendTableViewCell.h */; };
 		0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4F15C72BFD0087111B /* FindFriendTableViewCell.m */; };
+		0F2EEB5A15C743EA0087111B /* FIndTopTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB5815C743EA0087111B /* FIndTopTableViewController.h */; };
+		0F2EEB5B15C743EA0087111B /* FIndTopTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB5915C743EA0087111B /* FIndTopTableViewController.m */; };
 		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B715B8CBC1002C9F23 /* registerViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
@@ -246,6 +248,8 @@
 		0F2EEB4C15C72B200087111B /* FindFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindFriendTableViewCell.xib; sourceTree = "<group>"; };
 		0F2EEB4E15C72BFD0087111B /* FindFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewCell.h; sourceTree = "<group>"; };
 		0F2EEB4F15C72BFD0087111B /* FindFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendTableViewCell.m; sourceTree = "<group>"; };
+		0F2EEB5815C743EA0087111B /* FIndTopTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIndTopTableViewController.h; sourceTree = "<group>"; };
+		0F2EEB5915C743EA0087111B /* FIndTopTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIndTopTableViewController.m; sourceTree = "<group>"; };
 		0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
 		0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		0F4093B615B8CBC1002C9F23 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
@@ -608,6 +612,15 @@
 			name = "custom cell";
 			sourceTree = "<group>";
 		};
+		0F2EEB5615C743680087111B /* Find Top Friend */ = {
+			isa = PBXGroup;
+			children = (
+				0F2EEB5815C743EA0087111B /* FIndTopTableViewController.h */,
+				0F2EEB5915C743EA0087111B /* FIndTopTableViewController.m */,
+			);
+			name = "Find Top Friend";
+			sourceTree = "<group>";
+		};
 		0F4093B115B7D8B6002C9F23 /* loginPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +772,7 @@
 		0FFC95C815C3796200800B23 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				0F2EEB5615C743680087111B /* Find Top Friend */,
 				0F2EEB4115C719200087111B /* Find Friend */,
 				0FFC95CD15C379E500800B23 /* MoreTableViewController.h */,
 				0FFC95CE15C379E500800B23 /* MoreTableViewController.m */,
@@ -1070,6 +1084,7 @@
 				0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */,
 				0F2EEB4915C71A470087111B /* SearchedFriend.h in Headers */,
 				0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */,
+				0F2EEB5A15C743EA0087111B /* FIndTopTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1308,7 @@
 				0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */,
 				0F2EEB4A15C71A470087111B /* SearchedFriend.m in Sources */,
 				0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */,
+				0F2EEB5B15C743EA0087111B /* FIndTopTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

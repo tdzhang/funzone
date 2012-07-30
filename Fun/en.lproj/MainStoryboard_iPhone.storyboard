@@ -230,25 +230,50 @@
                                             <segue destination="1g0-Yu-0Mu" kind="push" id="2Cw-4j-quL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="I5H-c9-8JM" detailTextLabel="Joy-cp-eYN" imageView="BWN-y7-s1Y" rowHeight="60" style="IBUITableViewCellStyleValue1" id="SDl-Jy-bfZ">
-                                        <rect key="frame" x="0.0" y="71" width="320" height="61"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="this one" textLabel="hiG-sq-E6x" imageView="jwb-JZ-KQA" rowHeight="60" style="IBUITableViewCellStyleDefault" id="nPL-CG-L5a">
+                                        <rect key="frame" x="0.0" y="71" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="267" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Find Top Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiG-sq-E6x">
+                                                    <rect key="frame" x="44" y="0.0" width="213" height="59"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="06-magnify.png" id="jwb-JZ-KQA">
+                                                    <rect key="frame" x="10" y="17" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="E0p-qY-vtY" kind="push" id="I5V-BE-h5K"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pwU-GL-F9B" detailTextLabel="T5F-8a-65G" imageView="Iov-u7-hRw" rowHeight="60" style="IBUITableViewCellStyleValue1" id="Ond-Bs-zP3">
+                                        <rect key="frame" x="0.0" y="131" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I5H-c9-8JM">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pwU-GL-F9B">
                                                     <rect key="frame" x="44" y="19" width="103" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="18-envelope.png" id="BWN-y7-s1Y">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="18-envelope.png" id="Iov-u7-hRw">
                                                     <rect key="frame" x="10" y="21" width="24" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="3 new" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Joy-cp-eYN">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="3 new" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T5F-8a-65G">
                                                     <rect key="frame" x="247" y="20" width="43" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -264,7 +289,7 @@
                             <tableViewSection id="pef-jE-Gf1">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Yt3-Dp-CaG" imageView="Ll4-cM-oU3" rowHeight="45" style="IBUITableViewCellStyleDefault" id="u6N-cO-N6J">
-                                        <rect key="frame" x="0.0" y="152" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="212" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="280" height="44"/>
@@ -286,7 +311,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="eAz-gt-u2B" imageView="q2Y-AH-H7S" rowHeight="45" style="IBUITableViewCellStyleDefault" id="XYB-8B-yaJ">
-                                        <rect key="frame" x="0.0" y="198" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="258" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="280" height="44"/>
@@ -312,7 +337,7 @@
                             <tableViewSection id="8N7-Gm-E9D">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="NFb-Ti-188" imageView="Kq7-fo-qZf" style="IBUITableViewCellStyleDefault" id="cFU-Bz-iW0">
-                                        <rect key="frame" x="0.0" y="264" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="324" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -334,7 +359,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Cnn-2H-Xno" imageView="VOp-YE-HKV" style="IBUITableViewCellStyleDefault" id="YOl-Gi-VWy">
-                                        <rect key="frame" x="0.0" y="309" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="369" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -356,7 +381,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="this one" textLabel="y3s-lx-o2Q" imageView="PXx-Np-F81" style="IBUITableViewCellStyleDefault" id="UBf-pd-P7f">
-                                        <rect key="frame" x="0.0" y="353" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="413" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -432,7 +457,37 @@
                     <navigationItem key="navigationItem" id="FKP-TG-z0x"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1273" y="3984"/>
+            <point key="canvasLocation" x="1383" y="3656"/>
+        </scene>
+        <!--Ind Top Table View Controller-->
+        <scene sceneID="9tX-NJ-k1z">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="81h-zi-eyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="E0p-qY-vtY" customClass="FIndTopTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bbQ-YI-143">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MZr-zH-xRp">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="E0p-qY-vtY" id="9QI-t1-3jR"/>
+                            <outlet property="delegate" destination="E0p-qY-vtY" id="WCd-x6-0os"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="1wE-oF-Xji"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1385" y="4224"/>
         </scene>
         <!--View Controller - Account-->
         <scene sceneID="ozm-we-qtV">
@@ -3710,152 +3765,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
         <image name="weixin_icon.JPEG" width="256" height="256"/>
     </resources>
-    <classes>
-        <class className="AddCommentVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CategroyChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
-        </class>
-        <class className="DetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="originalCreatorIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="originalCreatorLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ExploreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FindFriendTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindFriendTableViewController.h"/>
-        </class>
-        <class className="LoginPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MoreTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
-        </class>
-        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
-        </class>
-        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
-        </class>
-        <class className="NewEventVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="OtherProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TimeChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="registerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
