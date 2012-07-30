@@ -41,6 +41,13 @@
 		0F1401E715C487B20080DA38 /* thumbnail_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1401DC15C487B20080DA38 /* thumbnail_layer.png */; };
 		0F1401EA15C487D40080DA38 /* mail-icon-128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1401E915C487D40080DA38 /* mail-icon-128x128.png */; };
 		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
+		0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4315C719540087111B /* FindFriendTableViewController.h */; };
+		0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4415C719540087111B /* FindFriendTableViewController.m */; };
+		0F2EEB4915C71A470087111B /* SearchedFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4715C71A470087111B /* SearchedFriend.h */; };
+		0F2EEB4A15C71A470087111B /* SearchedFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4815C71A470087111B /* SearchedFriend.m */; };
+		0F2EEB4D15C72B200087111B /* FindFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4C15C72B200087111B /* FindFriendTableViewCell.xib */; };
+		0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4E15C72BFD0087111B /* FindFriendTableViewCell.h */; };
+		0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4F15C72BFD0087111B /* FindFriendTableViewCell.m */; };
 		0F4093B515B7D97D002C9F23 /* LoginPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */; };
 		0F4093B815B8CBC1002C9F23 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4093B715B8CBC1002C9F23 /* registerViewController.m */; };
 		0F579A5115A166B70006FCC6 /* ChooseImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A5015A166B70006FCC6 /* ChooseImageTableViewController.m */; };
@@ -232,6 +239,13 @@
 		0F1401E915C487D40080DA38 /* mail-icon-128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail-icon-128x128.png"; sourceTree = "<group>"; };
 		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
 		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
+		0F2EEB4315C719540087111B /* FindFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewController.h; sourceTree = "<group>"; };
+		0F2EEB4415C719540087111B /* FindFriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendTableViewController.m; sourceTree = "<group>"; };
+		0F2EEB4715C71A470087111B /* SearchedFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchedFriend.h; sourceTree = "<group>"; };
+		0F2EEB4815C71A470087111B /* SearchedFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchedFriend.m; sourceTree = "<group>"; };
+		0F2EEB4C15C72B200087111B /* FindFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindFriendTableViewCell.xib; sourceTree = "<group>"; };
+		0F2EEB4E15C72BFD0087111B /* FindFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewCell.h; sourceTree = "<group>"; };
+		0F2EEB4F15C72BFD0087111B /* FindFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendTableViewCell.m; sourceTree = "<group>"; };
 		0F4093B315B7D97D002C9F23 /* LoginPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPageViewController.h; sourceTree = "<group>"; };
 		0F4093B415B7D97D002C9F23 /* LoginPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPageViewController.m; sourceTree = "<group>"; };
 		0F4093B615B8CBC1002C9F23 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
@@ -572,6 +586,28 @@
 			name = WechatApi;
 			sourceTree = "<group>";
 		};
+		0F2EEB4115C719200087111B /* Find Friend */ = {
+			isa = PBXGroup;
+			children = (
+				0F2EEB4B15C72AEB0087111B /* custom cell */,
+				0F2EEB4315C719540087111B /* FindFriendTableViewController.h */,
+				0F2EEB4415C719540087111B /* FindFriendTableViewController.m */,
+				0F2EEB4715C71A470087111B /* SearchedFriend.h */,
+				0F2EEB4815C71A470087111B /* SearchedFriend.m */,
+			);
+			name = "Find Friend";
+			sourceTree = "<group>";
+		};
+		0F2EEB4B15C72AEB0087111B /* custom cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F2EEB4C15C72B200087111B /* FindFriendTableViewCell.xib */,
+				0F2EEB4E15C72BFD0087111B /* FindFriendTableViewCell.h */,
+				0F2EEB4F15C72BFD0087111B /* FindFriendTableViewCell.m */,
+			);
+			name = "custom cell";
+			sourceTree = "<group>";
+		};
 		0F4093B115B7D8B6002C9F23 /* loginPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +759,7 @@
 		0FFC95C815C3796200800B23 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				0F2EEB4115C719200087111B /* Find Friend */,
 				0FFC95CD15C379E500800B23 /* MoreTableViewController.h */,
 				0FFC95CE15C379E500800B23 /* MoreTableViewController.m */,
 			);
@@ -1030,6 +1067,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */,
+				0F2EEB4915C71A470087111B /* SearchedFriend.h in Headers */,
+				0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,6 +1218,7 @@
 				4633376915C5FA5E00ACFAE8 /* event-time.png in Resources */,
 				46C2EF1E15C7019200013DD5 /* iphone-icon-orangeblack-114.png in Resources */,
 				46C2EF2115C7019B00013DD5 /* iphone-icon-orangeblack-57.png in Resources */,
+				0F2EEB4D15C72B200087111B /* FindFriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,6 +1290,9 @@
 				0F0EA76015C0FFAB0062BA1B /* ProfileInfoElement.m in Sources */,
 				0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */,
 				0F1401C815C4616B0080DA38 /* ShareAfterNewEventViewController.m in Sources */,
+				0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */,
+				0F2EEB4A15C71A470087111B /* SearchedFriend.m in Sources */,
+				0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
