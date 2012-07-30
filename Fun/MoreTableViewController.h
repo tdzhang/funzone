@@ -13,6 +13,6 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
-@interface MoreTableViewController : UITableViewController
+@interface MoreTableViewController : UITableViewController<UIAlertViewDelegate>
 
 @end

@@ -86,23 +86,35 @@
     return YES;
 }
 */
+- (IBAction)signOutButtonClicked:(id)sender {
+    UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Do you want to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
+    inputEmptyError.delegate=self;
+    [inputEmptyError show];
+}
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        ;
     }
     else if (indexPath.section == 1){
-        
     }
     else if (indexPath.section ==2){
-        //notification
-        if (indexPath.row == 0) {
-            
-        }
-        //log out
-        else if(indexPath.row == 1){
+    }
+    
+}
+
+
+#pragma mark - alertview delegate method implementation
+////////////////////////////////////////////////
+//implement the method for dealing with the return of the alertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //NSLog(@"%@",alertView.title);
+    //deal with the Input Empty Error for the activity category choose
+    if ([alertView.title isEqualToString:@"Sign Out"]) {
+        //NSLog(@"%d",buttonIndex);
+        if (buttonIndex == 0) {
+            //sign out
             //logout from facebook
             FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
             if (!funAppdelegate.facebook) {
@@ -148,22 +160,14 @@
             
             [defaults setValue:nil forKey:@"login_auth_token"];
             [defaults synchronize];
+            
+        }
+        else if(buttonIndex == 1){
+            //Cancel
+            NSLog(@"Sign Out Cancelled.");
         }
     }
-    
+
 }
-/*
-    NSString* urlString=[self.imageUrls objectAtIndex:indexPath.row];
-    //if the image url can be found in the temp cache, get the image from the cache
-    if ([self.cacheImage objectForKey:urlString]) {
-        UIImage *image=nil;
-        image=[UIImage imageWithData:(NSData*)[self.cacheImage objectForKey:urlString]];
-        [self.delegate ChooseUIImage:image  WithUrlName:urlString From:self];
-    }
-    else {
-        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-        [self.delegate ChooseUIImage:image  WithUrlName:nil From:self];
-    }
-*/
 
 @end
