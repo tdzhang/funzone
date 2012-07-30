@@ -592,6 +592,7 @@
 		0F60F3FA15BC699A00053D25 /* Profile page */ = {
 			isa = PBXGroup;
 			children = (
+				0FB35F5815C6EF24008F872D /* More */,
 				0F0EA75615C0FA930062BA1B /* custom view */,
 				0F0EA75215C0F9C80062BA1B /* MyFollowingTableViewController.h */,
 				0F0EA75315C0F9C80062BA1B /* MyFollowingTableViewController.m */,
@@ -637,6 +638,13 @@
 				0F91EE4D15B9CD1200E7B1D3 /* commentTableViewCell.m */,
 			);
 			name = "custom view";
+			sourceTree = "<group>";
+		};
+		0FB35F5815C6EF24008F872D /* More */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = More;
 			sourceTree = "<group>";
 		};
 		0FC6FF6B15ABA7D200CC022C /* self defined model */ = {
