@@ -9,7 +9,7 @@
 #import "OtherProfilePageViewController.h"
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 55 
-#define BlOCK_VIEW_HEIGHT 60
+#define BlOCK_VIEW_HEIGHT 155
 
 @interface OtherProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -386,6 +386,13 @@
         NSString *event_photo_url=[event objectForKey:@"photo_url"];
         NSString *locationName=[event objectForKey:@"location"];
         NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+        NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+        NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+        CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+        [current_location_manager startMonitoringSignificantLocationChanges];
+        CLLocation *current_location = current_location_manager.location;
+        CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
         
         NSLog(@"event_id=%@",event_id);
         NSLog(@"photo_url=%@",event_photo_url);
@@ -413,7 +420,7 @@
                     if(imageData){
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
-                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                             ;
                             //refresh the whole view
                             NSLog(@"profile0:%d",[self.blockViews count]);
@@ -427,7 +434,7 @@
                     if(imageData){
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
-                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                             //refresh the whole view
                             NSLog(@"profile1:%d",[self.blockViews count]);
                             [self addMoreDataToTheMainScrollViewSUbviews];
@@ -438,7 +445,7 @@
         }
         else {
             dispatch_async( dispatch_get_main_queue(),^{
-                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName] atIndex:[self.blockViews count]];
+                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count]*BlOCK_VIEW_HEIGHT eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
                 //refresh the whole view
                 NSLog(@"profile2:%d",[self.blockViews count]);
                 [self addMoreDataToTheMainScrollViewSUbviews];
