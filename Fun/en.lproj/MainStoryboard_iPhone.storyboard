@@ -652,6 +652,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="EJE-pE-2x8" id="A5v-o5-p31"/>
+                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="something" textLabel="Vwa-zM-KVm" style="IBUITableViewCellStyleDefault" id="Nuu-2R-MNi">
@@ -682,6 +685,7 @@
                 <searchDisplayController id="EJE-pE-2x8">
                     <connections>
                         <outlet property="delegate" destination="HmM-Kf-AGR" id="Ja0-eR-NP6"/>
+                        <outlet property="searchBar" destination="74G-mc-e60" id="fl8-uR-zib"/>
                         <outlet property="searchContentsController" destination="HmM-Kf-AGR" id="5Si-St-U5B"/>
                         <outlet property="searchResultsDataSource" destination="HmM-Kf-AGR" id="eaN-sl-lfe"/>
                         <outlet property="searchResultsDelegate" destination="HmM-Kf-AGR" id="PCr-28-ij7"/>
@@ -3723,157 +3727,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
         <image name="weixin_icon.JPEG" width="256" height="256"/>
     </resources>
-    <classes>
-        <class className="AddCommentVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CategroyChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
-        </class>
-        <class className="DetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="originalCreatorIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="originalCreatorLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ExploreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="LoginPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MoreTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signOutButtonClicked:"/>
-            </relationships>
-        </class>
-        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
-        </class>
-        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
-        </class>
-        <class className="NewEventVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
-            <relationships>
-                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
-                <relationship kind="action" name="CreateEventToSever:"/>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="OtherProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="startFollowAction:"/>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TimeChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="registerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
