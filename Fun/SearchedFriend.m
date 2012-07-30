@@ -24,7 +24,8 @@
         friend.user_name=[element objectForKey:@"user_name"];
         friend.user_pic=[element objectForKey:@"user_pic"];
         friend.fb_id=[element objectForKey:@"fb_id"];
-        if ([element objectForKey:@"registered"] == 0) {
+        NSLog(@"%@",[element objectForKey:@"registered"]);
+        if ([[NSString stringWithFormat:@"%@",[element objectForKey:@"registered"]] isEqualToString:@"0"]) {
             friend.registerd=NO;
         }
         else{
