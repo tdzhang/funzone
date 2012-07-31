@@ -114,6 +114,8 @@
 		4637FD6A15C861EA00149C74 /* share-email.png in Resources */ = {isa = PBXBuildFile; fileRef = 4637FD6715C861EA00149C74 /* share-email.png */; };
 		4637FD6B15C861EA00149C74 /* share-sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 4637FD6815C861EA00149C74 /* share-sms.png */; };
 		4637FD6C15C861EA00149C74 /* share-wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 4637FD6915C861EA00149C74 /* share-wechat.png */; };
+		4637FD7415C86A1000149C74 /* texture-path.png in Resources */ = {isa = PBXBuildFile; fileRef = 4637FD7315C86A1000149C74 /* texture-path.png */; };
+		4637FD7915C88A8D00149C74 /* talkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 4637FD7815C88A8D00149C74 /* talkbox.png */; };
 		463869E7159645E400E3A699 /* heart-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E6159645E400E3A699 /* heart-white.png */; };
 		463869E91596472300E3A699 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = 463869E81596472300E3A699 /* join.png */; };
 		463B9BE9159FC08D0087CDBA /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 463B9BE8159FC08D0087CDBA /* ExploreViewController.m */; };
@@ -378,6 +380,8 @@
 		4637FD6715C861EA00149C74 /* share-email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-email.png"; sourceTree = "<group>"; };
 		4637FD6815C861EA00149C74 /* share-sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-sms.png"; sourceTree = "<group>"; };
 		4637FD6915C861EA00149C74 /* share-wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-wechat.png"; sourceTree = "<group>"; };
+		4637FD7315C86A1000149C74 /* texture-path.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "texture-path.png"; sourceTree = "<group>"; };
+		4637FD7815C88A8D00149C74 /* talkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talkbox.png; sourceTree = "<group>"; };
 		463869E6159645E400E3A699 /* heart-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-white.png"; sourceTree = "<group>"; };
 		463869E81596472300E3A699 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = join.png; sourceTree = "<group>"; };
 		463B9BE7159FC08D0087CDBA /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
@@ -1014,6 +1018,8 @@
 			isa = PBXGroup;
 			children = (
 				4637FD6415C860E000149C74 /* done.png */,
+				4637FD7315C86A1000149C74 /* texture-path.png */,
+				4637FD7815C88A8D00149C74 /* talkbox.png */,
 				4637FD5F15C860D500149C74 /* share-facebook-on.png */,
 				4637FD6015C860D500149C74 /* share-twitter-on.png */,
 				4637FD6715C861EA00149C74 /* share-email.png */,
@@ -1364,6 +1370,8 @@
 				4637FD6A15C861EA00149C74 /* share-email.png in Resources */,
 				4637FD6B15C861EA00149C74 /* share-sms.png in Resources */,
 				4637FD6C15C861EA00149C74 /* share-wechat.png in Resources */,
+				4637FD7415C86A1000149C74 /* texture-path.png in Resources */,
+				4637FD7915C88A8D00149C74 /* talkbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
