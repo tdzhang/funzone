@@ -226,6 +226,9 @@
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
     }
+    //set up profile picture
+    
+
 }
 
 - (void)viewDidLoad:(BOOL)animated {
