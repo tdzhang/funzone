@@ -116,6 +116,7 @@
 		46415B5115C7AA73000E7787 /* detail-share-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 46415B4C15C7AA73000E7787 /* detail-share-color.png */; };
 		46415B5215C7AA73000E7787 /* detail-pick-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 46415B4D15C7AA73000E7787 /* detail-pick-color.png */; };
 		46415B5315C7AA73000E7787 /* detail-interested-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 46415B4E15C7AA73000E7787 /* detail-interested-color.png */; };
+		46415B5515C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 46415B5415C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg */; };
 		46500E6B1594DF3F00535824 /* price.png in Resources */ = {isa = PBXBuildFile; fileRef = 46500E6A1594DF3F00535824 /* price.png */; };
 		46500E6D1594E01F00535824 /* Featured.png in Resources */ = {isa = PBXBuildFile; fileRef = 46500E6C1594E01F00535824 /* Featured.png */; };
 		46500E711594E1F800535824 /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 46500E6E1594E1F800535824 /* Home.png */; };
@@ -359,6 +360,7 @@
 		46415B4C15C7AA73000E7787 /* detail-share-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-share-color.png"; sourceTree = "<group>"; };
 		46415B4D15C7AA73000E7787 /* detail-pick-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-pick-color.png"; sourceTree = "<group>"; };
 		46415B4E15C7AA73000E7787 /* detail-interested-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-interested-color.png"; sourceTree = "<group>"; };
+		46415B5415C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bamboo-huts-thai-restaurant.jpg"; sourceTree = "<group>"; };
 		46500E6A1594DF3F00535824 /* price.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = price.png; sourceTree = "<group>"; };
 		46500E6C1594E01F00535824 /* Featured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Featured.png; sourceTree = "<group>"; };
 		46500E6E1594E1F800535824 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -947,6 +949,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				46415B5415C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg */,
 				46415B4715C7AA4D000E7787 /* deal-pink.png */,
 				46415B4A15C7AA73000E7787 /* dashed-deal.png */,
 				46415B4B15C7AA73000E7787 /* detail-deal.png */,
@@ -1258,6 +1261,7 @@
 				46415B5115C7AA73000E7787 /* detail-share-color.png in Resources */,
 				46415B5215C7AA73000E7787 /* detail-pick-color.png in Resources */,
 				46415B5315C7AA73000E7787 /* detail-interested-color.png in Resources */,
+				46415B5515C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
