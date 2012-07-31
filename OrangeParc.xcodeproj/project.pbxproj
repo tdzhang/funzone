@@ -63,6 +63,8 @@
 		0F60F40315BC72F100053D25 /* ProfileEventElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F60F40215BC72F100053D25 /* ProfileEventElement.m */; };
 		0F68DD5B15A903A000B093BB /* CategroyChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */; };
 		0F68DD5E15A90C4200B093BB /* NoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */; };
+		0F6C5B1615C83C9200A95CEE /* ActivityTabeleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F6C5B1415C83C9200A95CEE /* ActivityTabeleViewController.h */; };
+		0F6C5B1715C83C9200A95CEE /* ActivityTabeleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1515C83C9200A95CEE /* ActivityTabeleViewController.m */; };
 		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
 		0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */; };
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
@@ -292,6 +294,8 @@
 		0F68DD5A15A903A000B093BB /* CategroyChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategroyChooseViewController.m; sourceTree = "<group>"; };
 		0F68DD5C15A90C4200B093BB /* NoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoAnimationSegue.h; sourceTree = "<group>"; };
 		0F68DD5D15A90C4200B093BB /* NoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoAnimationSegue.m; sourceTree = "<group>"; };
+		0F6C5B1415C83C9200A95CEE /* ActivityTabeleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabeleViewController.h; sourceTree = "<group>"; };
+		0F6C5B1515C83C9200A95CEE /* ActivityTabeleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTabeleViewController.m; sourceTree = "<group>"; };
 		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
 		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
 		0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAndViewCommentTVC.h; sourceTree = "<group>"; };
@@ -814,6 +818,8 @@
 		0FF6040015C7B1FA00AE89CF /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				0F6C5B1415C83C9200A95CEE /* ActivityTabeleViewController.h */,
+				0F6C5B1515C83C9200A95CEE /* ActivityTabeleViewController.m */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -1165,6 +1171,7 @@
 				0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */,
 				0F2EEB5A15C743EA0087111B /* FIndTopTableViewController.h in Headers */,
 				0FF6040815C7B6C600AE89CF /* PushNotificationHandler.h in Headers */,
+				0F6C5B1615C83C9200A95CEE /* ActivityTabeleViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1409,6 +1416,7 @@
 				0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */,
 				0F2EEB5B15C743EA0087111B /* FIndTopTableViewController.m in Sources */,
 				0FF6040915C7B6C600AE89CF /* PushNotificationHandler.m in Sources */,
+				0F6C5B1715C83C9200A95CEE /* ActivityTabeleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

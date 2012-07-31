@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller - Create-->
@@ -836,26 +836,41 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vu0-MF-Bcp" kind="relationship" relationship="rootViewController" id="OFu-Hv-Eb9"/>
+                        <segue destination="vbx-9i-lGG" kind="relationship" relationship="rootViewController" id="hIA-y1-0jl"/>
                     </connections>
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="305" y="3979"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="pHM-MC-cbk">
+        <!--Activity Tabele View Controller-->
+        <scene sceneID="JpV-6f-yHG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t9G-7x-Hda" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="vu0-MF-Bcp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1Mw-Gr-NcA">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0z-oZ-XOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="vbx-9i-lGG" customClass="ActivityTabeleViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fMT-HW-MPh">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="8RM-Sg-odf"/>
-                </viewController>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="raG-Nz-Gig">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vbx-9i-lGG" id="Uaw-G5-7Ue"/>
+                            <outlet property="delegate" destination="vbx-9i-lGG" id="ben-Cr-rVk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="03C-YY-18j"/>
+                </tableViewController>
             </objects>
-            <point key="canvasLocation" x="793" y="3979"/>
+            <point key="canvasLocation" x="868" y="3974"/>
         </scene>
         <!--Choose Image Table View Controller-->
         <scene sceneID="Cnv-qM-cUF">
@@ -4025,6 +4040,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="weixin_icon.JPEG" width="256" height="256"/>
     </resources>
     <classes>
+        <class className="ActivityTabeleViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
+        </class>
         <class className="AddCommentVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
             <relationships>
@@ -4047,6 +4065,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="InviteButtonClicked:"/>
+            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>

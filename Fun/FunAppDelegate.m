@@ -23,15 +23,8 @@
     //push notification register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
     
-    if (launchOptions != nil)
-	{
-		NSDictionary* dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-		if (dictionary != nil)
-		{
-			NSLog(@"Launched from push notification: %@", dictionary);
-			[PushNotificationHandler ProcessNotificationUserInfo:dictionary ChangeTabBarController:self.thisTabBarController];
-		}
-	}
+    //if has notification, synchronize the number
+    [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
     
     
     // Override point for customization after application launch.
@@ -79,6 +72,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self.thisTabBarController setSelectedIndex:1];
+    [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -118,6 +113,7 @@
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
     NSLog(@"here received notification userinfo");
+    //handle the push notification
     [PushNotificationHandler ProcessNotificationUserInfo:userInfo ChangeTabBarController:self.thisTabBarController];
 }
 
