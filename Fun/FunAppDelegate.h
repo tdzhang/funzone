@@ -13,7 +13,7 @@
 #import "WXApi.h"
 #import "ShareAfterNewEventViewController.h"
 #import "PushNotificationHandler.h"
-@interface FunAppDelegate : UIResponder  
+@interface FunAppDelegate : UIResponder<UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) Facebook *facebook;

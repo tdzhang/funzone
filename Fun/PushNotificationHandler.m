@@ -10,8 +10,11 @@
 
 @implementation PushNotificationHandler
 
-+(void)ProcessNotificationUserInfo:(NSDictionary *)userInfo{
++(void)ProcessNotificationUserInfo:(NSDictionary *)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController{
     NSLog(@"did receive push notification %@",userInfo);
+    NSDictionary *aps=[userInfo objectForKey:@"aps"];
+    
+    [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%@",[aps objectForKey:@"badge"]]];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 

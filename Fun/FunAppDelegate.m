@@ -8,7 +8,7 @@
 
 #import "FunAppDelegate.h"
 
-@interface FunAppDelegate() <FBSessionDelegate,UIApplicationDelegate,WXApiDelegate>
+@interface FunAppDelegate() <FBSessionDelegate,WXApiDelegate>
 @property (strong, nonatomic) UITabBarController *thisTabBarController;
 @end
 
@@ -23,8 +23,16 @@
     //push notification register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
     
-    //temp handle the notifacation
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    if (launchOptions != nil)
+	{
+		NSDictionary* dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+		if (dictionary != nil)
+		{
+			NSLog(@"Launched from push notification: %@", dictionary);
+			[PushNotificationHandler ProcessNotificationUserInfo:dictionary ChangeTabBarController:self.thisTabBarController];
+		}
+	}
+    
     
     // Override point for customization after application launch.
     [Cache init];
@@ -109,8 +117,8 @@
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
-    [PushNotificationHandler ProcessNotificationUserInfo:userInfo];
-    
+    NSLog(@"here received notification userinfo");
+    [PushNotificationHandler ProcessNotificationUserInfo:userInfo ChangeTabBarController:self.thisTabBarController];
 }
 
 #pragma mark - weichat related stuff

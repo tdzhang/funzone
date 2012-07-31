@@ -11,7 +11,7 @@
 @interface PushNotificationHandler : NSObject
 
 //handle the received push notification userInfo
-+(void)ProcessNotificationUserInfo:(NSDictionary*)userInfo;
++(void)ProcessNotificationUserInfo:(NSDictionary*)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController;
 //After update the token, send to the server
 +(void)SendeAPNStokenToServer:(NSString*) newToken;
 

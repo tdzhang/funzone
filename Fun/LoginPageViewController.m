@@ -204,6 +204,7 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *login_auth_token=[json objectForKey:@"auth_token"];
             [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+            NSLog(@"%@",login_auth_token);
             [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
             NSLog(@"%@",[json objectForKey:@"user_id"]);
             [defaults synchronize];
