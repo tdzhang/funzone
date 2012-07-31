@@ -102,6 +102,13 @@
 }
 
 -(void)resetWithTopFriend:(SearchedFriend *)friend{
+    self.user_id=friend.user_id;
+    self.user_name=friend.user_name;
+    self.user_pic=friend.user_pic;
+    self.fb_id=friend.fb_id;
+    self.registerd=friend.registerd;
+    self.followed=friend.followed;
+    
     [self.friendName setText:friend.user_name];
     
     NSURL *backGroundImageUrl=[NSURL URLWithString:friend.user_pic];
@@ -142,19 +149,21 @@
 
     if(friend.followed){
         [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+        self.actionCategory=@"unfollow";
     }
     else{
         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
+       self.actionCategory=@"follow"; 
     }
 
 }
 
 - (IBAction)actionButtonClicke:(id)sender {
     [self.actionButton setEnabled:NO];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([self.actionCategory isEqualToString:@"follow"]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
+        NSLog(@"%@",url);
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         __block ASIFormDataRequest *block_request=request;
         [request setCompletionBlock:^{
@@ -191,10 +200,44 @@
         [request startAsynchronous];
     }
     else if ([self.actionCategory isEqualToString:@"unfollow"]) {
-        ;
+        NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        __block ASIFormDataRequest *block_request=request;
+        [request setCompletionBlock:^{
+            // Use when fetching text data
+            NSString *responseString = [block_request responseString];
+            NSLog(@"%@",responseString);
+            NSError *error;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    success.delegate=self;
+                    [success show];
+                    [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
+                    self.actionCategory=@"follow";
+                }
+                else {
+                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    unsuccess.delegate=self;
+                    [unsuccess show];
+                }
+            [self.actionButton setEnabled:YES];
+        }];
+        [request setFailedBlock:^{
+            NSError *error = [block_request error];
+            NSLog(@"%@",error.description);
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+            [self.actionButton setEnabled:YES];
+        }];
+        //add login auth_token
+        [request setRequestMethod:@"GET"];
+        [request startAsynchronous];
     }
     else if ([self.actionCategory isEqualToString:@"invite"]) {
-        ;
+        //do sth about the facebook invite comment;
     }
 }
 
