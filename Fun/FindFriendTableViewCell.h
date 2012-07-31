@@ -10,6 +10,7 @@
 #import "SearchedFriend.h"
 #import "Cache.h"
 #import "GlobalConstant.h"
+#import "ASIFormDataRequest.h"
 
 @interface FindFriendTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *friendImageView;
