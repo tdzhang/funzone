@@ -40,8 +40,17 @@
     UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tab-bar-background-graytexture.png"]];
     background.frame = newFrame;
     [self.thisTabBarController.tabBar insertSubview:background atIndex:1];
-    [[self.thisTabBarController.tabBar.items objectAtIndex:1] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-myParc-color.png"] withFinishedUnselectedImage:[UIImage imageNamed: @"tab-bar-myParc.png"]];
+    [[self.thisTabBarController.tabBar.items objectAtIndex:0] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-orangeParc-color.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-orangeParc-gray.png"]];
     self.window.rootViewController = self.thisTabBarController;
+    [[self.thisTabBarController.tabBar.items objectAtIndex:1] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-topPicks-color.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-topPicks-gray.png"]];
+    self.window.rootViewController = self.thisTabBarController;
+    [[self.thisTabBarController.tabBar.items objectAtIndex:2] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-create-selected.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-create-selected.png"]];
+    self.window.rootViewController = self.thisTabBarController;
+    [[self.thisTabBarController.tabBar.items objectAtIndex:3] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-activity-color.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-activity.png"]];
+    self.window.rootViewController = self.thisTabBarController;
+    [[self.thisTabBarController.tabBar.items objectAtIndex:4] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-myParc-color.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-myParc.png"]];
+    self.window.rootViewController = self.thisTabBarController;
+    
     
     return YES;
 }
