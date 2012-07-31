@@ -9,14 +9,12 @@
 #import "FunAppDelegate.h"
 
 @interface FunAppDelegate() <FBSessionDelegate,UIApplicationDelegate,WXApiDelegate>
-@property (nonatomic, strong) UITabBarController *thisTabBarController;
 @end
 
 @implementation FunAppDelegate
 
 @synthesize window = _window;
 @synthesize facebook=_facebook;
-@synthesize thisTabBarController = _thisTabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,18 +24,6 @@
     [Cache init];
     //向微信注册
     [WXApi registerApp:@"wx2089110c987d6949"];
-    
-    //customize tab bar
-    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName: @"MainStoryboard_iPhone" bundle: nil];
-    self.thisTabBarController = (UITabBarController*) [mainStoryboard instantiateViewControllerWithIdentifier: @"mainTabBarController"];
-    CGRect newFrame = self.thisTabBarController.tabBar.frame;
-    newFrame.size.height = 69;
-    newFrame.origin.y = self.thisTabBarController.tabBar.frame.origin.y - 20;
-    self.thisTabBarController.tabBar.frame = newFrame;
-    [self.thisTabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-background-graytexture.png"]];
-    [[self.thisTabBarController.tabBar.items objectAtIndex:1] setFinishedSelectedImage: [UIImage imageNamed:@"smile_64.png"] withFinishedUnselectedImage:[UIImage imageNamed: @"smile_64.png"]];
-    self.window.rootViewController = self.thisTabBarController;
-    
     return YES;
 }
 							

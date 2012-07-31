@@ -100,6 +100,9 @@
     backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
+    
+    
+    
     //quest the most recent 10 featured events
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
