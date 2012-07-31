@@ -187,6 +187,7 @@
 		923D003C15AA464D00A0818D /* subtle-pattern-2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 923D003B15AA464D00A0818D /* subtle-pattern-2.jpg */; };
 		923D005215AA642400A0818D /* form.png in Resources */ = {isa = PBXBuildFile; fileRef = 923D005115AA642400A0818D /* form.png */; };
 		923D005415AA6C2B00A0818D /* seperator.png in Resources */ = {isa = PBXBuildFile; fileRef = 923D005315AA6C2B00A0818D /* seperator.png */; };
+		9297E0D015C7AB9900B35D14 /* tab-bar-background-graytexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9297E0CF15C7AB9900B35D14 /* tab-bar-background-graytexture.png */; };
 		9298265F15A938D6003673CF /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9298265215A938D6003673CF /* FBDialog.bundle */; };
 		9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9298265815A938D6003673CF /* libfacebook_ios_sdk.a */; };
 		92B026A215A7BCCA0069B96D /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B026A115A7BCCA0069B96D /* JSON.m */; };
@@ -447,6 +448,7 @@
 		923D003B15AA464D00A0818D /* subtle-pattern-2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "subtle-pattern-2.jpg"; sourceTree = "<group>"; };
 		923D005115AA642400A0818D /* form.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = form.png; sourceTree = "<group>"; };
 		923D005315AA6C2B00A0818D /* seperator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seperator.png; sourceTree = "<group>"; };
+		9297E0CF15C7AB9900B35D14 /* tab-bar-background-graytexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-background-graytexture.png"; sourceTree = "<group>"; };
 		9298265015A938D6003673CF /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		9298265115A938D6003673CF /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
 		9298265215A938D6003673CF /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
@@ -949,6 +951,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				46415B5415C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg */,
 				46415B4715C7AA4D000E7787 /* deal-pink.png */,
 				46415B4A15C7AA73000E7787 /* dashed-deal.png */,
@@ -956,6 +959,9 @@
 				46415B4C15C7AA73000E7787 /* detail-share-color.png */,
 				46415B4D15C7AA73000E7787 /* detail-pick-color.png */,
 				46415B4E15C7AA73000E7787 /* detail-interested-color.png */,
+=======
+				9297E0CF15C7AB9900B35D14 /* tab-bar-background-graytexture.png */,
+>>>>>>> customize tab bar
 				4633376415C5FA5E00ACFAE8 /* event-location.png */,
 				4633376515C5FA5E00ACFAE8 /* event-pic.png */,
 				4633376615C5FA5E00ACFAE8 /* event-time.png */,
@@ -1255,6 +1261,7 @@
 				46C2EF1E15C7019200013DD5 /* iphone-icon-orangeblack-114.png in Resources */,
 				46C2EF2115C7019B00013DD5 /* iphone-icon-orangeblack-57.png in Resources */,
 				0F2EEB4D15C72B200087111B /* FindFriendTableViewCell.xib in Resources */,
+<<<<<<< HEAD
 				46415B4815C7AA4D000E7787 /* deal-pink.png in Resources */,
 				46415B4F15C7AA73000E7787 /* dashed-deal.png in Resources */,
 				46415B5015C7AA73000E7787 /* detail-deal.png in Resources */,
@@ -1262,6 +1269,9 @@
 				46415B5215C7AA73000E7787 /* detail-pick-color.png in Resources */,
 				46415B5315C7AA73000E7787 /* detail-interested-color.png in Resources */,
 				46415B5515C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg in Resources */,
+=======
+				9297E0D015C7AB9900B35D14 /* tab-bar-background-graytexture.png in Resources */,
+>>>>>>> customize tab bar
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
