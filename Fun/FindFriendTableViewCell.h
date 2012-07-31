@@ -11,8 +11,9 @@
 #import "Cache.h"
 #import "GlobalConstant.h"
 #import "ASIFormDataRequest.h"
+#import "FunAppDelegate.h"
 
-@interface FindFriendTableViewCell : UITableViewCell
+@interface FindFriendTableViewCell : UITableViewCell<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *friendImageView;
 @property (weak, nonatomic) IBOutlet UILabel *friendName;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
