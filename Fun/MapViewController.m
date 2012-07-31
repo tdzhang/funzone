@@ -19,6 +19,7 @@
 
 @implementation MapViewController
 @synthesize predefinedSeachingWords=_predefinedSeachingWords;
+@synthesize locationNameTextField = _locationNameTextField;
 @synthesize myMapView=_myMapView;
 @synthesize mySearchBar = _mySearchBar;
 //@synthesize myStepper = _myStepper;
@@ -205,6 +206,7 @@
     [self setMySearchBar:nil];
 //    [self setMyStepper:nil];
     [self setMyTableView:nil];
+    [self setLocationNameTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

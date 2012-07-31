@@ -204,6 +204,31 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //get the photo of the user
+    //initial the face book
+    FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
+    if (!delegate.facebook) {
+        delegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)delegate];
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        delegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        NSLog(@"%@",delegate.facebook.accessToken);
+        delegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    [params setObject:@"id,picture" forKey:@"fields"];
+    if ([delegate.facebook isSessionValid]) {
+        [delegate.facebook requestWithGraphPath:@"me"
+                                      andParams:params
+                                  andHttpMethod:@"GET"
+                                    andDelegate:self];
+    }
+    else {
+        NSLog(@"Face book session invalid~~~");
+    }
+    
     //if this view is used to repin a event
     if(self.detail_event_id&&(self.detail_event_id!=self.already_load_detail_event_id)){
         self.already_load_detail_event_id=self.detail_event_id;
@@ -487,6 +512,57 @@
     }
 }
 
+
+#pragma mark - facebook related protocal implement
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"Err details: %@", [error description]);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+        NSLog(@"%@",result);
+        NSString *photo=[result objectForKey:@"picture"];
+        NSString *facebook_user_id=[result objectForKey:@"id"];
+        //set the user photo
+        NSURL *url=[NSURL URLWithString:photo];
+        if (![Cache isURLCached:url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    imageData=UIImagePNGRepresentation(image);
+                    
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [self.personProfileImage setImage:image];
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [self.personProfileImage setImage:[UIImage imageWithData:imageData ]];
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [self.personProfileImage setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+            });
+        }
+}
 
 
 

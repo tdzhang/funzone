@@ -22,7 +22,7 @@
 #import "GlobalConstant.h"
 #import "ShareAfterNewEventViewController.h"
 
-@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn>
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn,FBRequestDelegate>
 
 @property (nonatomic,strong) NSString *eventType;//used to differentiate the different style for different event category.
 @property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation; //used to store the location infomation that need to show when the location part is segued
