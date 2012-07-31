@@ -114,7 +114,7 @@
 {
     NSLog(@"here received notification userinfo");
     //handle the push notification
-    [PushNotificationHandler ProcessNotificationUserInfo:userInfo ChangeTabBarController:self.thisTabBarController];
+    [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
 }
 
 #pragma mark - weichat related stuff

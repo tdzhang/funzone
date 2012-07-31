@@ -22,7 +22,12 @@ static bool isFetchingData=false;
 
 +(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController{
     //set the number of the tab bar
-    [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%d",[[UIApplication sharedApplication] applicationIconBadgeNumber]]];
+    if ([[UIApplication sharedApplication] applicationIconBadgeNumber]>0) {
+        [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%d",[[UIApplication sharedApplication] applicationIconBadgeNumber]]];
+    } else {
+        [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
+    }
+    
     //start fetching data
     if([[UIApplication sharedApplication] applicationIconBadgeNumber]>0&&(!isFetchingData)){
         [PushNotificationHandler StartFetchingNotificationsFromServer];
