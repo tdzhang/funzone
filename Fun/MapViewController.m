@@ -15,6 +15,9 @@
 @property (nonatomic,strong)NSArray *foursquareSearchResults;
 @property(nonatomic,retain) NSMutableData *data;  //using to restore the http connection data
 @property (nonatomic, strong)MKPointAnnotation* annotation;
+
+@property (nonatomic,strong)MKPointAnnotation* feedBackAnnotation; //used to give back the location information of the user choosed location
+
 @end
 
 @implementation MapViewController
@@ -34,6 +37,8 @@
 @synthesize predefinedAnnotation=_predefinedAnnotation;
 @synthesize preDefinedEventType=_preDefinedEventType;
 
+@synthesize feedBackAnnotation=_feedBackAnnotation;
+
 #pragma mark - self define setting and getting method
 -(TableViewContainMapviewTVC *)tableViewControllerContainMap{
     if (_tableViewControllerContainMap == nil) {
@@ -51,6 +56,21 @@
 
 
 #pragma mark - init
+-(MKPointAnnotation *)feedBackAnnotation{
+    if (!_feedBackAnnotation) {
+        _feedBackAnnotation=[[MKPointAnnotation alloc] init];
+    }
+    return _feedBackAnnotation;
+}
+
+-(void)setFeedBackAnnotation:(MKPointAnnotation *)feedBackAnnotation{
+    if (![_feedBackAnnotation isEqual:feedBackAnnotation]) {
+        _feedBackAnnotation=feedBackAnnotation;
+        [self.locationNameTextField setText:@""];
+        [self.locationNameTextField setPlaceholder:feedBackAnnotation.title];
+    }
+}
+
 -(void)setAnnotation:(MKPointAnnotation *)annotation
 {
     
@@ -114,6 +134,9 @@
     annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
     self.annotation=annotationPoint;
     [self.myMapView addAnnotation:annotationPoint];
+    
+    //set the feed back annotation
+    [self setFeedBackAnnotation:annotationPoint];
     
 //    self.myStepper.minimumValue = 1;
 //    self.myStepper.maximumValue = 9;
@@ -231,12 +254,13 @@
         // add annotation at the point User pressed
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = coordinate;
-        annotationPoint.title=@"You Choose Here:";
+        annotationPoint.title=@"Pinned Location";
         annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",coordinate.latitude,coordinate.longitude];
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
         
-
+        //set feedback annotation location information
+        [self setFeedBackAnnotation:annotationPoint];
         
         //[self.myMapView selectAnnotation:annotationPoint animated:YES];
         
@@ -354,7 +378,7 @@
                 initWithStyle:UITableViewCellStyleSubtitle //the style of the cell
                 reuseIdentifier:CellIdentifier] ;
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     /* Configure the cell.  if the table view is used for showing search results*/
@@ -514,12 +538,41 @@ shouldReloadTableForSearchString:(NSString *)searchString
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
         [self.myMapView setRegion:region animated:YES];
-        
         [self.searchDisplayController setActive:NO];
+        
+        //set the feedback annotation location information
+        [self setFeedBackAnnotation:annotationPoint];
     }
 }
 
+#pragma mark - implement the UITextFieldDelegate method
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField.text length]>0) {
+        [self.feedBackAnnotation setTitle:textField.text];
+    }
+    [textField resignFirstResponder];
+    return YES;
+}
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    /*
+     //if edit the add cost textfield, the whole view need to
+     //scroll up, get rid of the keyboard covering
+     if ([textField isEqual:self.textFieldEventPrice]) {
+     [self animateTextField: textField up: YES];
+     }
+     */
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    /*
+     //if finished editign the add cost textfield, the whole view need to scroll down
+     if ([textField isEqual:self.textFieldEventPrice]) {
+     [self animateTextField: textField up: NO];
+     }
+     */
+}
 
 #pragma mark - implement NSURLconnection delegate methods 
 //to deal with the returned data
@@ -591,6 +644,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 #pragma mark - implemetn the FunTableViewContainMapviewTVCDelegate protocal
 -(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region{
     self.annotation=annotation;
+    [self setFeedBackAnnotation:annotation];
     [self.myMapView addAnnotation:annotation];
     [self.myMapView setRegion:region animated:YES];
 }
@@ -652,7 +706,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //[(UIImageView *)view.leftCalloutAccessoryView setImage:image];
 }*/
 
-
+/*
 //do the right thing when user tap the button of the annotation
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     if ([(UIButton*)control buttonType]==UIButtonTypeContactAdd) {
@@ -678,16 +732,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
         UIGraphicsEndImageContext(); 
         
         //then crop the snapshot
-        /*
-        NSLog(@"height:%f",image.size.height);
-        NSLog(@"width:%f",image.size.width);
-        CGPoint center=CGPointMake(image.size.width/2, image.size.height/2);
-        CGFloat length=80;
-        CGRect cropRect=CGRectMake(center.x-length, center.y-length, 2*length, 2*length);
-        CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
-        image = [UIImage imageWithCGImage:imageRef]; 
-        CGImageRelease(imageRef);
-        */
         //run the delegate method to feedback
         if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
              NSLog(@"%@",view.annotation.title);
@@ -698,5 +742,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [self.navigationController popViewControllerAnimated:YES];        
     }
 }
+*/
 
 @end
