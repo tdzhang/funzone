@@ -158,6 +158,39 @@
 
 }
 
+-(void)iniviteByPostingOnOtherFacebookWall{
+    //do sth about the facebook invite comment;
+    NSLog(@"facebook invite friend.");
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        //if already login : start the action sheet
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    [params setObject:@"OrangeParc event" forKey:@"name"];
+    [params setObject:@"new OrangeParc event" forKey:@"description"];
+    [params setObject:[NSString stringWithFormat:@"Hi, %@. I am using OrangeParc to find and create event, you should definitely try it.",self.user_name] forKey:@"message"];
+    
+    if ([funAppdelegate.facebook isSessionValid]) {
+        [funAppdelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/feed",self.fb_id]
+                                            andParams:params
+                                        andHttpMethod:@"POST"
+                                          andDelegate:self];
+    }
+    else{
+        //if not login, do it
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream",
+                                @"read_stream",@"create_event",@"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+    }
+}
+
 - (IBAction)actionButtonClicke:(id)sender {
     [self.actionButton setEnabled:NO];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -237,8 +270,27 @@
         [request startAsynchronous];
     }
     else if ([self.actionCategory isEqualToString:@"invite"]) {
-        //do sth about the facebook invite comment;
+        [self iniviteByPostingOnOtherFacebookWall];
     }
+}
+
+
+#pragma mark - facebook related protocal implement
+-(void)faceBookLoginFinished{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self iniviteByPostingOnOtherFacebookWall];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"Err details: %@", [error description]);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSLog(@"%@",result);
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Invite Success" message: [NSString stringWithFormat:@"You have post the invitation on your friends wall."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    success.delegate=self;
+    [success show];
 }
 
 @end

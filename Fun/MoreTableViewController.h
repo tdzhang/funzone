@@ -13,6 +13,6 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
-@interface MoreTableViewController : UITableViewController<UIAlertViewDelegate>
-
+@interface MoreTableViewController : UITableViewController<UIAlertViewDelegate,FBRequestDelegate>
+-(void)likeUsOnFaceBook;
 @end

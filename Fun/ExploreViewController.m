@@ -165,6 +165,11 @@
         
         //and then do the refresh process
         NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //if has auth_token, add it in the get url
+        if ([defaults objectForKey:@"login_auth_token"]) {
+            request_string=[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+        }
         NSLog(@"ExploreViewController request1: %@",request_string);
         NSURLRequest *request = [NSURLRequest  requestWithURL:[NSURL URLWithString:request_string] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
         //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -202,6 +207,11 @@
         
         //NSLog(@"add more");
         NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //if has auth_token, add it in the get url
+        if ([defaults objectForKey:@"login_auth_token"]) {
+            request_string=[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
+        }
         NSLog(@"ExploreViewController request2:%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];

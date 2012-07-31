@@ -100,6 +100,10 @@
     if (indexPath.section == 0) {
     }
     else if (indexPath.section == 1){
+        if (indexPath.row == 1) {
+            //like use on face book(start to generate the facebook like  Request)
+            [self likeUsOnFaceBook];
+        }
     }
     else if (indexPath.section ==2){
         if (indexPath.row == 2) {
@@ -111,7 +115,35 @@
     
 }
 
-
+#pragma mark - self defined method
+-(void)likeUsOnFaceBook{
+    NSLog(@"facebook invite friend.");
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        //if already login : start the action sheet
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    NSMutableDictionary* params = [NSMutableDictionary dictionary];
+    [params setObject:@"http://www.orangeparc.com/" forKey:@"object"];
+    if ([funAppdelegate.facebook isSessionValid]) {
+        [funAppdelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/og.likes"]
+                                            andParams:params
+                                        andHttpMethod:@"POST"
+                                          andDelegate:self];
+    }
+    else{
+        //if not login, do it
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream",
+                                @"read_stream",@"create_event",@"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+    }
+}
 #pragma mark - alertview delegate method implementation
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
@@ -176,5 +208,24 @@
     }
 
 }
+
+#pragma mark - facebook related protocal implement
+-(void)faceBookLoginFinished{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self likeUsOnFaceBook];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"%@", [error localizedDescription]);
+    NSLog(@"Err details: %@", [error description]);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSLog(@"%@",result);
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Like Success" message: [NSString stringWithFormat:@"Thank you for liking us."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    success.delegate=self;
+    [success show];
+}
+
 
 @end

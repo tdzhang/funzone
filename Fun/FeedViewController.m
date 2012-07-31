@@ -215,8 +215,10 @@
         [self.mainScrollView addSubview:self.refreshViewdown];
         self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, ([self.blockViews count]+0.5)*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
         
-        //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+       //NSLog(@"add more");
+        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
