@@ -96,6 +96,8 @@
 		0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */; };
 		0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */; };
 		0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3515B49F4D000D68C3 /* 86-camera.png */; };
+		0FF6040815C7B6C600AE89CF /* PushNotificationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FF6040615C7B6C600AE89CF /* PushNotificationHandler.h */; };
+		0FF6040915C7B6C600AE89CF /* PushNotificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6040715C7B6C600AE89CF /* PushNotificationHandler.m */; };
 		0FF9C57F15BB9003002D1998 /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */; };
 		0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC95CE15C379E500800B23 /* MoreTableViewController.m */; };
 		4633375315C5E5AB00ACFAE8 /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375215C5E5AB00ACFAE8 /* 18-envelope.png */; };
@@ -337,6 +339,8 @@
 		0FEC5BF115C0A6E500E3C8A3 /* URLConnectionCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionCache.h; sourceTree = "<group>"; };
 		0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConnectionCache.m; sourceTree = "<group>"; };
 		0FF00A3515B49F4D000D68C3 /* 86-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "86-camera.png"; sourceTree = "<group>"; };
+		0FF6040615C7B6C600AE89CF /* PushNotificationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationHandler.h; sourceTree = "<group>"; };
+		0FF6040715C7B6C600AE89CF /* PushNotificationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationHandler.m; sourceTree = "<group>"; };
 		0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0FFC95CD15C379E500800B23 /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
 		0FFC95CE15C379E500800B23 /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
@@ -790,6 +794,15 @@
 			name = Activity;
 			sourceTree = "<group>";
 		};
+		0FF6040A15C7B6D000AE89CF /* PushNotificationHandler */ = {
+			isa = PBXGroup;
+			children = (
+				0FF6040615C7B6C600AE89CF /* PushNotificationHandler.h */,
+				0FF6040715C7B6C600AE89CF /* PushNotificationHandler.m */,
+			);
+			name = PushNotificationHandler;
+			sourceTree = "<group>";
+		};
 		0FFC95C815C3796200800B23 /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +871,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0FF6040A15C7B6D000AE89CF /* PushNotificationHandler */,
 				0FF6040015C7B1FA00AE89CF /* Activity */,
 				0F14023F15C516CE0080DA38 /* WechatApi */,
 				0FFC95C815C3796200800B23 /* More */,
@@ -1114,6 +1128,7 @@
 				0F2EEB4915C71A470087111B /* SearchedFriend.h in Headers */,
 				0F2EEB5015C72BFD0087111B /* FindFriendTableViewCell.h in Headers */,
 				0F2EEB5A15C743EA0087111B /* FIndTopTableViewController.h in Headers */,
+				0FF6040815C7B6C600AE89CF /* PushNotificationHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1345,6 +1360,7 @@
 				0F2EEB4A15C71A470087111B /* SearchedFriend.m in Sources */,
 				0F2EEB5115C72BFD0087111B /* FindFriendTableViewCell.m in Sources */,
 				0F2EEB5B15C743EA0087111B /* FIndTopTableViewController.m in Sources */,
+				0FF6040915C7B6C600AE89CF /* PushNotificationHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

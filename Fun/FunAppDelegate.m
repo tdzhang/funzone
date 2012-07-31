@@ -22,6 +22,10 @@
 {
     //push notification register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
+    
+    //temp handle the notifacation
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
     // Override point for customization after application launch.
     [Cache init];
     //向微信注册
@@ -83,7 +87,8 @@
 	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
 	NSLog(@"My token is: %@", newToken);
-    
+    //send the new token to the sever;
+    [PushNotificationHandler SendeAPNStokenToServer:newToken];
 
 }
 
@@ -94,7 +99,8 @@
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
-	NSLog(@"Received notification: %@", userInfo);
+    [PushNotificationHandler ProcessNotificationUserInfo:userInfo];
+    
 }
 
 #pragma mark - weichat related stuff
