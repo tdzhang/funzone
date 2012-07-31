@@ -13,6 +13,15 @@
 @synthesize friendName;
 @synthesize actionButton;
 
+@synthesize actionCategory=_actionCategory;
+
+@synthesize user_name=_user_name;
+@synthesize user_pic=_user_pic;
+@synthesize fb_id=_fb_id;
+@synthesize registerd=_registerd;
+@synthesize user_id=_user_id;
+@synthesize followed=_followed;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -30,6 +39,14 @@
 }
 
 -(void)resetWithSearchedFriend:(SearchedFriend *)friend{
+    //get the user information in to the cell, used for the "followed/unfollow/invite button"
+    self.user_id=friend.user_id;
+    self.user_name=friend.user_name;
+    self.user_pic=friend.user_pic;
+    self.fb_id=friend.fb_id;
+    self.registerd=friend.registerd;
+    self.followed=friend.followed;
+    
     [self.friendName setText:friend.user_name];
     
     NSURL *backGroundImageUrl=[NSURL URLWithString:friend.user_pic];
@@ -71,13 +88,16 @@
     if (friend.registerd) {
         if(friend.followed){
             [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+            self.actionCategory=@"unfollow";
         }
         else{
             [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
+            self.actionCategory=@"follow";
         }
     }
     else{
         [self.actionButton setTitle:@"Invite" forState:UIControlStateNormal];
+            self.actionCategory=@"invite";
     }
 }
 
@@ -127,6 +147,18 @@
         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
     }
 
+}
+
+- (IBAction)actionButtonClicke:(id)sender {
+    if ([self.actionCategory isEqualToString:@"follow"]) {
+        ;
+    }
+    else if ([self.actionCategory isEqualToString:@"unfollow"]) {
+        ;
+    }
+    else if ([self.actionCategory isEqualToString:@"invite"]) {
+        ;
+    }
 }
 
 @end
