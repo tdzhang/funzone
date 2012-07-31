@@ -34,12 +34,13 @@
     //customize tab bar
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName: @"MainStoryboard_iPhone" bundle: nil];
     self.thisTabBarController = (UITabBarController*) [mainStoryboard instantiateViewControllerWithIdentifier: @"mainTabBarController"];
-    CGRect newFrame = self.thisTabBarController.tabBar.frame;
+    CGRect newFrame = self.thisTabBarController.view.frame;
     newFrame.size.height = 69;
-    newFrame.origin.y = self.thisTabBarController.tabBar.frame.origin.y - 20;
-    self.thisTabBarController.tabBar.frame = newFrame;
-    [self.thisTabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar-background-graytexture.png"]];
-    //[[self.thisTabBarController.tabBar.items objectAtIndex:1] setFinishedSelectedImage: [UIImage imageNamed:@"smile_64.png"] withFinishedUnselectedImage:[UIImage imageNamed: @"smile_64.png"]];
+    newFrame.origin.y -= 20;
+    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tab-bar-background-graytexture.png"]];
+    background.frame = newFrame;
+    [self.thisTabBarController.tabBar insertSubview:background atIndex:1];
+    [[self.thisTabBarController.tabBar.items objectAtIndex:1] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-myParc-color.png"] withFinishedUnselectedImage:[UIImage imageNamed: @"tab-bar-myParc.png"]];
     self.window.rootViewController = self.thisTabBarController;
     
     return YES;
