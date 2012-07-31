@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller - Create-->
@@ -10,7 +10,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zoe-hB-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="UCH-1w-VJE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Create" image="addEvent.png" id="JGj-2K-dkc"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Create" image="addEvent.png" id="JGj-2K-dkc"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="fDb-5C-P3m">
                         <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
@@ -739,7 +739,7 @@
                 <tabBarController id="4" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -761,14 +761,19 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgR-Sh-5uC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Q8M-ox-ewY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Top Picks" image="Featured.png" id="7"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Top Picks" id="7"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="eSH-yu-1Cm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Hk4-t4-C3R">
+                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="3gf-sz-pKR" kind="relationship" relationship="rootViewController" id="JJc-ow-YZ3"/>
                     </connections>
@@ -831,7 +836,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1s-w2-VsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="yO2-58-RfF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Parc" image="profile.png" id="NL6-fp-Lxs"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="My Parc" image="profile.png" id="NL6-fp-Lxs"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="hNb-CQ-xsf">
@@ -851,7 +856,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCo-ZO-kJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="More" id="1vV-J8-L5m" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity" image="settings.png" id="L5h-V5-sUv"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Activity" image="settings.png" id="L5h-V5-sUv"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="9YZ-pr-mlj">
@@ -3765,154 +3770,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
         <image name="weixin_icon.JPEG" width="256" height="256"/>
     </resources>
-    <classes>
-        <class className="AddCommentVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CategroyChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-        </class>
-        <class className="DetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="interestedButtonClicked:"/>
-                <relationship kind="action" name="shareButton:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="originalCreatorIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="originalCreatorLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ExploreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FIndTopTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FIndTopTableViewController.h"/>
-        </class>
-        <class className="FeedViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FindFriendTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindFriendTableViewController.h"/>
-        </class>
-        <class className="LoginPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MoreTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
-        </class>
-        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
-        </class>
-        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
-        </class>
-        <class className="NewEventVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="OtherProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ProfilePageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TimeChooseViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="registerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

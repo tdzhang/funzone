@@ -369,14 +369,14 @@
 		4664C8C815C4AFE000F2B43C /* button-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-24.png"; sourceTree = "<group>"; };
 		4664C8C915C4AFE000F2B43C /* deal_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deal_icon.png; sourceTree = "<group>"; };
 		4665120615A8D2B2004BEA73 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
-		4668A73E1593E56400713A4C /* Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4668A73E1593E56400713A4C /* OrangeParc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrangeParc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4668A7421593E56400713A4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4668A7441593E56400713A4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4668A7461593E56400713A4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4668A74A1593E56400713A4C /* Fun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Fun-Info.plist"; sourceTree = "<group>"; };
+		4668A74A1593E56400713A4C /* OrangeParc-Info.plist */ = {isa = PBXFileReference; path = "OrangeParc-Info.plist"; sourceTree = "<group>"; };
 		4668A74C1593E56400713A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4668A74E1593E56400713A4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4668A7501593E56400713A4C /* Fun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fun-Prefix.pch"; sourceTree = "<group>"; };
+		4668A7501593E56400713A4C /* OrangeParc-Prefix.pch */ = {isa = PBXFileReference; path = "OrangeParc-Prefix.pch"; sourceTree = "<group>"; };
 		4668A7511593E56400713A4C /* FunAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunAppDelegate.h; sourceTree = "<group>"; };
 		4668A7521593E56400713A4C /* FunAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FunAppDelegate.m; sourceTree = "<group>"; };
 		4668A7551593E56400713A4C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -817,7 +817,7 @@
 		4668A73F1593E56400713A4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4668A73E1593E56400713A4C /* Fun.app */,
+				4668A73E1593E56400713A4C /* OrangeParc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -875,10 +875,10 @@
 		4668A7491593E56400713A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4668A74A1593E56400713A4C /* Fun-Info.plist */,
+				4668A74A1593E56400713A4C /* OrangeParc-Info.plist */,
 				4668A74B1593E56400713A4C /* InfoPlist.strings */,
 				4668A74E1593E56400713A4C /* main.m */,
-				4668A7501593E56400713A4C /* Fun-Prefix.pch */,
+				4668A7501593E56400713A4C /* OrangeParc-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1109,9 +1109,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4668A73D1593E56400713A4C /* Fun */ = {
+		4668A73D1593E56400713A4C /* OrangeParc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4668A76A1593E56400713A4C /* Build configuration list for PBXNativeTarget "Fun" */;
+			buildConfigurationList = 4668A76A1593E56400713A4C /* Build configuration list for PBXNativeTarget "OrangeParc" */;
 			buildPhases = (
 				4668A73A1593E56400713A4C /* Sources */,
 				4668A73B1593E56400713A4C /* Frameworks */,
@@ -1122,9 +1122,9 @@
 			);
 			dependencies = (
 			);
-			name = Fun;
+			name = OrangeParc;
 			productName = Fun;
-			productReference = 4668A73E1593E56400713A4C /* Fun.app */;
+			productReference = 4668A73E1593E56400713A4C /* OrangeParc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1136,7 +1136,7 @@
 				CLASSPREFIX = Fun;
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 4668A7381593E56400713A4C /* Build configuration list for PBXProject "Fun" */;
+			buildConfigurationList = 4668A7381593E56400713A4C /* Build configuration list for PBXProject "OrangeParc" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1148,7 +1148,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4668A73D1593E56400713A4C /* Fun */,
+				4668A73D1593E56400713A4C /* OrangeParc */,
 			);
 		};
 /* End PBXProject section */
@@ -1411,15 +1411,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Fun/Fun-Prefix.pch";
-				INFOPLIST_FILE = "Fun/Fun-Info.plist";
+				GCC_PREFIX_HEADER = "Fun/OrangeParc-Prefix.pch";
+				INFOPLIST_FILE = "Fun/OrangeParc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OrangeParc;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1428,15 +1428,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Fun/Fun-Prefix.pch";
-				INFOPLIST_FILE = "Fun/Fun-Info.plist";
+				GCC_PREFIX_HEADER = "Fun/OrangeParc-Prefix.pch";
+				INFOPLIST_FILE = "Fun/OrangeParc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OrangeParc;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1444,7 +1444,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4668A7381593E56400713A4C /* Build configuration list for PBXProject "Fun" */ = {
+		4668A7381593E56400713A4C /* Build configuration list for PBXProject "OrangeParc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4668A7681593E56400713A4C /* Debug */,
@@ -1453,7 +1453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4668A76A1593E56400713A4C /* Build configuration list for PBXNativeTarget "Fun" */ = {
+		4668A76A1593E56400713A4C /* Build configuration list for PBXNativeTarget "OrangeParc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4668A76B1593E56400713A4C /* Debug */,
