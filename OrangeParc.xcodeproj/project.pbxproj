@@ -783,6 +783,13 @@
 			name = asiConnection;
 			sourceTree = "<group>";
 		};
+		0FF6040015C7B1FA00AE89CF /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
 		0FFC95C815C3796200800B23 /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,6 +858,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0FF6040015C7B1FA00AE89CF /* Activity */,
 				0F14023F15C516CE0080DA38 /* WechatApi */,
 				0FFC95C815C3796200800B23 /* More */,
 				0F60F3FA15BC699A00053D25 /* Profile page */,

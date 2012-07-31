@@ -92,6 +92,8 @@
     [inputEmptyError show];
 }
 
+
+
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -100,6 +102,11 @@
     else if (indexPath.section == 1){
     }
     else if (indexPath.section ==2){
+        if (indexPath.row == 2) {
+            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Do you want to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
+            inputEmptyError.delegate=self;
+            [inputEmptyError show];
+        }
     }
     
 }
