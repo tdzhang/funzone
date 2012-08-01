@@ -338,15 +338,128 @@
 
 #pragma mark - create/delete/edite event to server
 - (IBAction)deleteEventButton:(id)sender {
-    #warning add delete Event request to server
     //after delete, need to return to myparc
+    //create event
+    //Adding Create Event
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        //NSString *responseString = [block_request responseString];
+        //NSLog(@"%@",responseString);
+        
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Delete error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }
+        /*
+        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully deleted." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            success.delegate=self;
+        [success show];
+         */
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+
+
+    
+    
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
+    
+    //go to the next page
+    [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
 }
 
 
 - (IBAction)CreateEventToSever:(id)sender {
     if (self.isEditPage) {
     //edit event
-#warning add edit Event request to server
+        //Adding Create Event
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/edit",CONNECT_DOMIAN_NAME]];
+
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        __block ASIFormDataRequest *block_request=request;
+        [request setCompletionBlock:^{
+            // Use when fetching text data
+            //NSString *responseString = [block_request responseString];
+            //NSLog(@"%@",responseString);
+            
+            NSError *error;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+            if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+            }
+            //        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            //        success.delegate=self;
+            //[success show];
+        }];
+        [request setFailedBlock:^{
+            NSError *error = [block_request error];
+            NSLog(@"%@",error.description);
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }];
+        //add login auth_token
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:self.createEvent_title forKey:@"title"];
+        NSLog(@"%@",self.createEvent_address);
+        [request setPostValue:self.createEvent_address forKey:@"address"];
+        NSLog(@"%@",self.createEvent_locationName);
+        [request setPostValue:self.createEvent_locationName forKey:@"location"];
+        [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
+        [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
+        [request setPostValue:self.createEvent_time forKey:@"start_time"];
+        if (self.detail_creator_id) {
+            //if it is from repin
+            if (![self.createEvent_image isEqual:self.detail_image]) {
+                //add content
+                if (self.createEvent_imageUrlName) {
+                    //if has image url, then no need to upload the image
+                    [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
+                }
+                else{
+                    NSString *format=@"png";
+                    NSData *data=nil;
+                    data=UIImagePNGRepresentation(self.createEvent_image);
+                    //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+                    if(data==nil){
+                        //data=UIImagePNGRepresentation(self.createEvent_image);
+                        data=UIImageJPEGRepresentation(self.createEvent_image, 1);
+                        format=@"jpeg";
+                    }
+                    if (data) {
+                        [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+                    }
+                }
+            }
+            [request setPostValue:self.detail_event_id forKey:@"event_id"];
+            [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
+            [request setPostValue:self.detail_longitude forKey:@"longitude"];
+            [request setPostValue:self.detail_latitude forKey:@"latitude"];
+            [request setPostValue:self.detail_address forKey:@"address"];
+            [request setPostValue:self.detail_location_name forKey:@"location"];
+        }
+        
+        [request setRequestMethod:@"POST"];
+        [request startAsynchronous];
+        
+        //go to the next page
+        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
     }
     else {
     //create event
