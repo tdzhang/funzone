@@ -472,19 +472,18 @@
     
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
     //get the index of the touched block view
-    int index=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
-    NSLog(@"%d",index);
+    int index_y=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
+    int index_x=touchPoint.x/160;
+    ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index_y*2+index_x];
+    self.tapped_event_id=tapped_element.event_id;
+    self.tapped_shared_event_id=tapped_element.shared_event_id;
+    //do some pre-segue stuff with event_id and shared_id
+    [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
     
-     ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index];
-     self.tapped_event_id=tapped_element.event_id;
-     self.tapped_shared_event_id=tapped_element.shared_event_id;
-     //do some pre-segue stuff with event_id and shared_id
-     [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
-     
-     /*
-     self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-     [self presentViewController:self.detailViewController animated:YES completion:^{}];
-     */
+    /*
+    self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:self.detailViewController animated:YES completion:^{}];
+    */
 }
 
 @end
