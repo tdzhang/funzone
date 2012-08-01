@@ -124,6 +124,8 @@
 #pragma mark - Button Action
 - (IBAction)FinishedThisSharePage:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    [funAppdelegate.thisTabBarController setSelectedIndex:4];
 }
 
 - (IBAction)EmailShare:(id)sender {

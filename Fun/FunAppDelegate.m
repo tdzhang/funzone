@@ -9,7 +9,6 @@
 #import "FunAppDelegate.h"
 
 @interface FunAppDelegate() <FBSessionDelegate,WXApiDelegate>
-@property (strong, nonatomic) UITabBarController *thisTabBarController;
 @end
 
 @implementation FunAppDelegate
