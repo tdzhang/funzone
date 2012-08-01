@@ -166,9 +166,9 @@
 //used to map between the activity type and its int value
 #pragma mark - activity page constant mapping
 #define VIEW_EVENT 1         // via
-#define INTEREST_EVENT 2     // via
+#define INTEREST_EVENT 2     // some one show interest on your event/////
 #define SHARE_EVENT 3        // separate API, via, channel
-#define COMMENT_EVENT 4      // via
+#define COMMENT_EVENT 4      // some comment on your event////////
 #define PIN_EVENT 5          // via
 #define VIEW_MAP 6           // separate API, via
 #define VIEW_COMMENTS 7      // separate API, via
@@ -183,8 +183,8 @@
 #define SHOW_ACTIVITIES 23
 #define FIND_FRIENDS 24
 
-#define VIEW_PROFILE 101     // via
-#define FOLLOW_SOMEONE 102   // sb follow you
+#define VIEW_PROFILE 101     
+#define FOLLOW_SOMEONE 102   // sb follow you/////////////////
 #define SHOW_FOLLOWINGS 103  // via
 #define SHOW_FOLLOWERS 104   // via
 #define VIEW_BOOKMARKS 105   // via

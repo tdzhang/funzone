@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F00545915C8FE05000EBF67 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F00545815C8FE05000EBF67 /* View.xib */; };
+		0F00545915C8FE05000EBF67 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F00545815C8FE05000EBF67 /* ActivityTableViewCell.xib */; };
 		0F00545C15C8FE8D000EBF67 /* ActivityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */; };
 		0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */; };
 		0F00546015C90315000EBF67 /* activityElementObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545E15C90315000EBF67 /* activityElementObject.h */; };
@@ -241,7 +241,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0F00545815C8FE05000EBF67 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		0F00545815C8FE05000EBF67 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
 		0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		0F00545E15C90315000EBF67 /* activityElementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityElementObject.h; sourceTree = "<group>"; };
@@ -589,7 +589,7 @@
 		0F00545615C8FDCF000EBF67 /* custom cell */ = {
 			isa = PBXGroup;
 			children = (
-				0F00545815C8FE05000EBF67 /* View.xib */,
+				0F00545815C8FE05000EBF67 /* ActivityTableViewCell.xib */,
 				0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */,
 				0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */,
 				0F00545E15C90315000EBF67 /* activityElementObject.h */,
@@ -1457,7 +1457,7 @@
 				9256611115C8FB4B00BED665 /* ActivityOrange.png in Resources */,
 				9256611815C8FD4A00BED665 /* AddOrange.png in Resources */,
 				9256611915C8FD4A00BED665 /* AddGrey.png in Resources */,
-				0F00545915C8FE05000EBF67 /* View.xib in Resources */,
+				0F00545915C8FE05000EBF67 /* ActivityTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

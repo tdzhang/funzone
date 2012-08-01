@@ -370,6 +370,12 @@
             //add content
             NSString *format=@"png";
             NSData *data=nil;
+            if (self.createEvent_image) {
+                NSLog(@"198 called!");
+            }
+            else{
+                NSLog(@"%@",self.createEvent_image);
+            }
             data=UIImagePNGRepresentation(self.createEvent_image);
             //data=UIImageJPEGRepresentation(self.createEvent_image, 1);
             if(data==nil){
@@ -377,7 +383,9 @@
                 data=UIImageJPEGRepresentation(self.createEvent_image, 1);
                 format=@"jpeg";
             }
-            [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+            if (data!=nil) {
+                [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
+            }
         }
     }
     [request setRequestMethod:@"POST"];

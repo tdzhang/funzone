@@ -71,25 +71,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.activities count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"ActivityTableViewCell";
     
-    // Configure the cell...
-    
+    ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+        
+        for (UIView *view in views) {
+            if([view isKindOfClass:[UITableViewCell class]])
+            {
+                cell = (ActivityTableViewCell*)view;
+            }
+        }
+    }
+    [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -145,16 +152,9 @@
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
         //deal with json
-        for (NSDictionary *element in json) {
-            NSString* type=[element objectForKey:@"type"];
-            NSString* user_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"user_id"]];
-            NSString* user_name=[element objectForKey:@"user_name"];
-            NSString* user_pic=[element objectForKey:@"user_pic"];
-            NSString* event_id=[element objectForKey:@"event_id"];
-            NSString* shared_event_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"shared_event_id"]];
-        }
-        
-        
+        self.activities=[activityElementObject getActivityElementsArrayByJson:json];
+        NSLog(@"Have fetched %d Activities",[self.activities count]);
+        [self.tableView reloadData];
         //reset the tabbat notification number
         [PushNotificationHandler clearApplicationPushNotifNumber];
         [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
