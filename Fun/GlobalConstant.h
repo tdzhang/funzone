@@ -162,3 +162,31 @@
 #define VIA_EMAIL 4
 #define VIA_SMS 5
 
+
+//used to map between the activity type and its int value
+#pragma mark - activity page constant mapping
+#define VIEW_EVENT 1         // via
+#define INTEREST_EVENT 2     // via
+#define SHARE_EVENT 3        // separate API, via, channel
+#define COMMENT_EVENT 4      // via
+#define PIN_EVENT 5          // via
+#define VIEW_MAP 6           // separate API, via
+#define VIEW_COMMENTS 7      // separate API, via
+
+#define CREATE_EVENT 11
+#define INVITE_FRIENDS 12    // separate API, channel
+#define EDIT_EVENT 13
+#define DELETE_EVENT 14
+
+#define SHOW_EXPLORE 21
+#define SHOW_FEEDS 22
+#define SHOW_ACTIVITIES 23
+#define FIND_FRIENDS 24
+
+#define VIEW_PROFILE 101     // via
+#define FOLLOW_SOMEONE 102   // via
+#define SHOW_FOLLOWINGS 103  // via
+#define SHOW_FOLLOWERS 104   // via
+#define VIEW_BOOKMARKS 105   // via
+#define UNFOLLOW_SOMEONE 106 // via
+#define SHOW_INTERESTS 107
