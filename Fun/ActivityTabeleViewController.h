@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PushNotificationHandler.h"
+#import "GlobalConstant.h"
 
 @interface ActivityTabeleViewController : UITableViewController
 

@@ -184,7 +184,7 @@
 #define FIND_FRIENDS 24
 
 #define VIEW_PROFILE 101     // via
-#define FOLLOW_SOMEONE 102   // via
+#define FOLLOW_SOMEONE 102   // sb follow you
 #define SHOW_FOLLOWINGS 103  // via
 #define SHOW_FOLLOWERS 104   // via
 #define VIEW_BOOKMARKS 105   // via

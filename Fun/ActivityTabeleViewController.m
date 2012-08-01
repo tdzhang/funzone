@@ -10,10 +10,22 @@
 
 
 @interface ActivityTabeleViewController ()
+@property(nonatomic,strong)NSMutableArray* activities;
 
+//start fetching activity data from the sever(and did the badge clean job)
+-(void)startFetchingActivityData;
 @end
 
 @implementation ActivityTabeleViewController
+@synthesize activities=_activities;
+
+#pragma mark - self defined setter and getter
+-(NSMutableArray *)activities{
+    if (!_activities) {
+        _activities=[NSMutableArray array];
+    }
+    return _activities;
+}
 
 #pragma mark - View Life Cycle
 - (id)initWithStyle:(UITableViewStyle)style
@@ -29,11 +41,7 @@
     [super viewWillAppear:animated];
     
     //get the notification list from the server
-    #warning need add notification fetching from server implementation
-    //reset the tabbat notification number
-    [PushNotificationHandler clearApplicationPushNotifNumber];
-    [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
-    
+    [self startFetchingActivityData];    
 }
 
 - (void)viewDidLoad
@@ -123,6 +131,45 @@
     return YES;
 }
 */
+#pragma mark - Start Fetching Data
+-(void)startFetchingActivityData{
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+        
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        //deal with json
+        for (NSDictionary *element in json) {
+            NSString* type=[element objectForKey:@"type"];
+            NSString* user_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"user_id"]];
+            NSString* user_name=[element objectForKey:@"user_name"];
+            NSString* user_pic=[element objectForKey:@"user_pic"];
+            NSString* event_id=[element objectForKey:@"event_id"];
+            NSString* shared_event_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"shared_event_id"]];
+        }
+        
+        
+        //reset the tabbat notification number
+        [PushNotificationHandler clearApplicationPushNotifNumber];
+        [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
+}
 
 #pragma mark - Table view delegate
 
