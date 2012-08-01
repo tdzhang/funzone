@@ -31,6 +31,7 @@
 @property (nonatomic,strong) UIButton* buttonEmailShare;
 @property (nonatomic,strong) UIButton* buttonTwitterShare;
 @property (nonatomic,strong) UIButton* buttonFacebookShare;
+@property (weak, nonatomic) IBOutlet UIToolbar *keyboardToolbar;
 @property (nonatomic) BOOL showNewButtonFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *uIImageViewEvent;
 //@property (weak, nonatomic) IBOutlet UITextField *textViewEventDescription;
@@ -92,6 +93,7 @@
 @synthesize buttonTwitterShare=_buttonTwitterShare;
 @synthesize uIImageViewEvent = _uIImageViewEvent;
 @synthesize buttonFacebookShare=_buttonFacebookShare;
+@synthesize keyboardToolbar = _keyboardToolbar;
 //@synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
 @synthesize buttonChooseEventLocation = _buttonChooseEventLocation;
@@ -251,6 +253,16 @@
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad:(BOOL)animated {
@@ -280,6 +292,7 @@
     [self setPersonProfileImage:nil];
     [self setMapViewFeedBackImageView:nil];
     [self setButtonEditEventTitle:nil];
+    [self setKeyboardToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -610,45 +623,43 @@
 
 ////////////////////////////////////////////////
 //implement the Protocal UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView {  
-    
-    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
-    [done setStyle:UIBarButtonItemStyleBordered];
-    self.navigationItem.rightBarButtonItem = done;      
-    [self animateTextView:textView up:YES];
-}  
-
-- (void)textViewDidEndEditing:(UITextView *)textView {  
-    self.navigationItem.rightBarButtonItem = nil; 
-    [self animateTextView:textView up:NO];
-    [self.buttonEditEventTitle setHidden:NO];
-}  
-
-//deal with when user pressed the "done" button
-- (void)leaveEditMode {  
-    NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    if ([enteredText length]==0) {
-        [self.labelEventTitleHolder setHidden:NO];
-    }
-    [self.textFieldEventTitle resignFirstResponder];  
-}
-//To compensate for the showing up keyboard
-- (void) animateTextView: (UITextView*) textView up: (BOOL) up
-{
-    const int movementDistance = 20; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
-    
-    int movement = (up ? -movementDistance : movementDistance);
-    
-    [UIView beginAnimations: @"anim" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: movementDuration];
-    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-    [UIView commitAnimations];
-}
-
-
+//- (void)textViewDidBeginEditing:(UITextView *)textView {      
+//    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
+//    [done setStyle:UIBarButtonItemStyleBordered];
+//    self.navigationItem.rightBarButtonItem = done;      
+//    //[self animateTextView:textView up:YES];
+//}  
+//
+//- (void)textViewDidEndEditing:(UITextView *)textView {  
+//    self.navigationItem.rightBarButtonItem = nil; 
+//    //[self animateTextView:textView up:NO];
+//    [self.buttonEditEventTitle setHidden:NO];
+//}  
+//
+////deal with when user pressed the "done" button
+//- (void)leaveEditMode {  
+//    NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//    if ([enteredText length]==0) {
+//        [self.labelEventTitleHolder setHidden:NO];
+//    }
+//    [self.textFieldEventTitle resignFirstResponder];  
+//}
+//
+////To compensate for the showing up keyboard
+//- (void) animateTextView: (UITextView*) textView up: (BOOL) up
+//{
+//    const int movementDistance = 20; // tweak as needed
+//    const float movementDuration = 0.3f; // tweak as needed
+//    
+//    int movement = (up ? -movementDistance : movementDistance);
+//    
+//    [UIView beginAnimations: @"anim" context: nil];
+//    [UIView setAnimationBeginsFromCurrentState: YES];
+//    [UIView setAnimationDuration: movementDuration];
+//    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+//    [UIView commitAnimations];
+//}
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the textfield
@@ -698,6 +709,42 @@
     [UIView setAnimationDuration: movementDuration];
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
+}
+
+#pragma mark -
+#pragma mark Notifications
+- (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
+    NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if ([enteredText length]==0) {
+        [self.labelEventTitleHolder setHidden:NO];
+    }
+    [self.textFieldEventTitle resignFirstResponder];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    
+    CGRect frame = self.keyboardToolbar.frame;
+    frame.origin.y = self.view.frame.size.height - 260.0;
+    self.keyboardToolbar.frame = frame;
+    [self.keyboardToolbar setHidden:FALSE];
+    UIBarButtonItem *doneButton = [self.keyboardToolbar.items objectAtIndex:0];
+    doneButton.target = self;
+    doneButton.action = @selector(leaveEditMode);
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.25];
+	
+	CGRect frame = self.keyboardToolbar.frame;
+	frame.origin.y = self.view.frame.size.height;
+	self.keyboardToolbar.frame = frame;
+	
+	[UIView commitAnimations];
 }
 
 ////////////////////////////////////////////////

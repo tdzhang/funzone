@@ -13,6 +13,9 @@
 #import "WXApi.h"
 #import "ShareAfterNewEventViewController.h"
 #import "PushNotificationHandler.h"
+
+@class FunFirstViewController;
+
 @interface FunAppDelegate : UIResponder<UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

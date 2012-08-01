@@ -52,7 +52,6 @@
     [[self.thisTabBarController.tabBar.items objectAtIndex:4] setFinishedSelectedImage: [UIImage imageNamed:@"tab-bar-myParc-color.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"tab-bar-myParc.png"]];
     self.window.rootViewController = self.thisTabBarController;
     
-    
     return YES;
 }
 							

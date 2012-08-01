@@ -9,7 +9,6 @@
 #import "FunFirstViewController.h"
 
 @interface FunFirstViewController ()
-
 @end
 
 @implementation FunFirstViewController
@@ -34,7 +33,4 @@
         return YES;
     }
 }
-
-
-
 @end

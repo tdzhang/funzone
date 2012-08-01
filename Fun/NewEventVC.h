@@ -22,7 +22,14 @@
 #import "GlobalConstant.h"
 #import "ShareAfterNewEventViewController.h"
 
+<<<<<<< HEAD
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn,FBRequestDelegate>
+=======
+@interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn>{
+    UITextView *textView;
+	UIToolbar *keyboardToolbar;
+}
+>>>>>>> add keyboard toolbar
 
 @property (nonatomic,strong) NSString *eventType;//used to differentiate the different style for different event category.
 @property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation; //used to store the location infomation that need to show when the location part is segued
