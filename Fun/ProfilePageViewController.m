@@ -27,6 +27,8 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 
+@property (nonatomic,strong)CLLocationManager *current_location_manager;
+
 @end
 
 @implementation ProfilePageViewController
@@ -45,6 +47,8 @@
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 @synthesize garbageCollection=_garbageCollection;
+
+@synthesize current_location_manager=_current_location_manager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -155,6 +159,15 @@
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 10);
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    if (self.current_location_manager) {
+        [self.current_location_manager stopMonitoringSignificantLocationChanges];
+        [self.current_location_manager stopUpdatingLocation];
     }
 }
 
@@ -332,14 +345,14 @@
         NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
         NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
 #warning need furthur investigation
-        /*
+        
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
         CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
         [current_location_manager startMonitoringSignificantLocationChanges];
         CLLocation *current_location = current_location_manager.location;
         CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-        */
-        CLLocationDistance distance =12;
+        self.current_location_manager=current_location_manager;
+        
         if (!title) {
             continue;
         }
