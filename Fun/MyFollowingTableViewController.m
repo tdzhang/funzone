@@ -209,6 +209,15 @@
     else{
         [cell.unfollowButton setTitle:@"Follow" forState:UIControlStateNormal];
     }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults objectForKey:@"user_id"] isEqualToString:cell.user_id]) {
+        [cell.unfollowButton setTitle:@"Your Self" forState:UIControlStateNormal];
+        [cell.unfollowButton setEnabled:NO];
+    }
+    else{
+        [cell.unfollowButton setEnabled:YES];
+    }
+    
     [cell.unfollowButton addTarget: self
                             action: @selector(buttonPressed:withEvent:)
                   forControlEvents: UIControlEventTouchUpInside];

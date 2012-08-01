@@ -177,6 +177,16 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
+    
+    //change the button title based on the BOOL isOwner
+    if (self.isEventOwner) {
+        [self.interestOrInviteButton setTitle:@"Invite" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"Edit" forState:UIControlStateNormal];
+    }
+    else{
+        [self.interestOrInviteButton setTitle:@"Like" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"Pick" forState:UIControlStateNormal];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
