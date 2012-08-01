@@ -406,6 +406,7 @@
         }
     }
     [request setPostValue:@"0" forKey:@"category_id"];
+#warning furthur category_id information need to be added into the createEvent connection to server
     [request setRequestMethod:@"POST"];
     [request startAsynchronous];
     
