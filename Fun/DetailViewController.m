@@ -689,8 +689,8 @@
         locationName = [NSString stringWithFormat:@"TBD"];
     }
     //set event title
+    self.eventTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 185, 310, 40)];
     [self.eventTitleLabel setText:self.event_title];
-    self.eventTitleLabel.frame =CGRectMake(5, 185, 310, 40);
     [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.eventTitleLabel.numberOfLines = 0;
@@ -699,6 +699,7 @@
     CGRect newFrame1 = self.eventTitleLabel.frame;
     newFrame1.size.height = expectedLabelSize1.height;
     self.eventTitleLabel.frame = newFrame1;
+    [self.myScrollView addSubview:self.eventTitleLabel];
     
     //set seperator
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 1, 310)];
@@ -736,51 +737,53 @@
     UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
     [self.myScrollView addSubview:locationIcon];
-    UILabel *map_indicator = [[UILabel alloc] initWithFrame:CGRectMake(260, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-12, 30,24)];
-    [map_indicator setText:@"Map"];
-    [map_indicator setFont:[UIFont boldSystemFontOfSize:13]];
-    [map_indicator setTextColor:[UIColor lightGrayColor]];
-    [self.myScrollView addSubview:map_indicator];
-    //UIImageView right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, <#CGFloat y#>, 11, 14)]
-    
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(260, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-12, 30,24)];
+    [map_indicator_label setText:@"Map"];
+    [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
+    [map_indicator_label setTextColor:[UIColor lightGrayColor]];
+    [self.myScrollView addSubview:map_indicator_label];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 11, 14)];
+    [self.myScrollView addSubview:right_Arrow];
 
-        NSURL *url=[NSURL URLWithString:photo];
-        if (![Cache isURLCached:url]) {
-            //using high priority queue to fetch the image
-            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-                //get the image data
-                NSData * imageData = nil;
-                imageData = [[NSData alloc] initWithContentsOfURL: url];
-                
-                if ( imageData == nil ){
-                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                    //NSLog(@"downloaded %@ error, using a default image",url);
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                    imageData=UIImagePNGRepresentation(image);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            [self.eventImageView setImage:image];
-                        });
-                    }
+    //set original creator name
+    //set event image
+    NSURL *url=[NSURL URLWithString:photo];
+    if (![Cache isURLCached:url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: url];
+            
+            if ( imageData == nil ){
+            //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.eventImageView setImage:image];
+                    });
                 }
-                else {
-                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                    //NSLog(@"downloaded %@",url);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            [self.eventImageView setImage:[UIImage imageWithData:imageData]];
-                        });
-                    }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.eventImageView setImage:[UIImage imageWithData:imageData]];
+                    });
                 }
-            });
-        }
-        else {
-            dispatch_async( dispatch_get_main_queue(),^{
-                [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
-            });
-        }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+        });
+    }
 }
 
 
