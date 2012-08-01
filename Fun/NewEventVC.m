@@ -737,8 +737,8 @@
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the alertView
--(void)UpdateLocation:(MKAnnotationView *)aView withLocationName:(NSString *)locationName withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
-    MKPointAnnotation *annotation=aView.annotation;
+-(void)UpdateLocation:(MKPointAnnotation *)fromannotation withLocationName:(NSString *)locationName withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
+    MKPointAnnotation *annotation=fromannotation;
     self.predefinedAnnotation=annotation;
     //NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
     //show the map snapshot

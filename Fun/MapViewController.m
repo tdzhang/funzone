@@ -744,4 +744,33 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 */
 
+- (IBAction)DoneWithChooseLocation:(id)sender {
+    MKPointAnnotation *annotationPoint = self.annotation;
+    [self.myMapView deselectAnnotation:annotationPoint animated:NO];
+    //Move the target into the center of the mapview
+    MKCoordinateRegion region;
+    region.center = annotationPoint.coordinate;
+    MKCoordinateSpan span;
+    span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*1;
+    span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*1;
+    region.span = span;
+    [self.myMapView setRegion:region animated:NO];
+    
+    
+    
+    //do the snapshot of the map view
+    UIGraphicsBeginImageContextWithOptions(self.myMapView.frame.size, NO, 0.0);
+    //UIGraphicsBeginImageContext(mapView.frame.size);
+    [self.myMapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //then crop the snapshot
+    //run the delegate method to feedback
+    if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
+        NSLog(@"%@",self.annotation.title);
+        [self.delegate UpdateLocation:self.feedBackAnnotation  withLocationName:self.feedBackAnnotation.title withSnapShot:image sendFrom:self];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

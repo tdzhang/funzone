@@ -1145,7 +1145,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Places" id="NBF-hl-i5p">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="0x4-Fo-iC8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="0x4-Fo-iC8">
+                            <connections>
+                                <action selector="DoneWithChooseLocation:" destination="smM-VS-7bp" id="4Ug-Fq-uYH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="locationNameTextField" destination="WaL-l3-o16" id="iiZ-71-C2y"/>
