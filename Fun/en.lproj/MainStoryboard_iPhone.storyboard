@@ -1278,316 +1278,6 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="3798" y="100"/>
         </scene>
-        <!--Categroy Choose View Controller - Pick a Category-->
-        <scene sceneID="l1z-0j-Rje">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aId-lj-6dv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Fdw-Lk-27j" customClass="CategroyChooseViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7CD-EV-ang">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="8tj-Ee-jqd" userLabel="View - Food">
-                                <rect key="frame" x="0.0" y="0.0" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView contentMode="scaleToFill" image="Category-Food.png" id="Abh-ns-mxk">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="184"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8vp-lY-AcM">
-                                        <rect key="frame" x="19" y="12" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OSx-sA-KVp">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="FoodButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="eAW-do-8Wv"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                            </view>
-                            <view contentMode="scaleToFill" id="Rjm-xt-psQ" userLabel="View - Events">
-                                <rect key="frame" x="80" y="0.0" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Events.png" id="JA2-D0-wH3">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="184"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="wem-NC-HGX">
-                                        <rect key="frame" x="15" y="12" width="50" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pJf-hY-tEj">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="EventButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="hBK-si-NA0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Oy8-cV-KwN" userLabel="View - Entertainment">
-                                <rect key="frame" x="240" y="0.0" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Entertainment.png" id="ZWy-Oe-B9d">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="184"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="MOe-1c-yhc">
-                                        <rect key="frame" x="6" y="12" width="68" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h2A-5n-81r">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="EntertainButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="VpW-pi-5zp"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="EQt-Xc-uQ1" userLabel="View - Outdoor">
-                                <rect key="frame" x="160" y="0.0" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Outdoor.png" id="rKW-Up-vUF">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="184"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Outdoor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="loo-6V-g6u">
-                                        <rect key="frame" x="6" y="12" width="69" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cCu-rp-YfJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="OutdoorButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="mX0-iD-VpH"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="Duv-FV-SEk" userLabel="View - Sports">
-                                <rect key="frame" x="0.0" y="183" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Sports.png" id="v2F-X8-Hcq">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="185"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sports" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="VLs-h2-X9P">
-                                        <rect key="frame" x="13" y="150" width="55" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3jM-HF-rr8">
-                                        <rect key="frame" x="0.0" y="28" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="SportsButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="qYK-W9-4hz"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="T33-EW-wvB" userLabel="View - Movie">
-                                <rect key="frame" x="80" y="183" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Movie.jpeg" id="ZIy-3L-OMb">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="185"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Bbe-bb-o2P">
-                                        <rect key="frame" x="6" y="151" width="69" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uh1-4n-1Gr">
-                                        <rect key="frame" x="0.0" y="28" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="MovieButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="2mO-Zi-TSU"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="CFw-W9-m7b" userLabel="View - Shopping">
-                                <rect key="frame" x="160" y="183" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Shopping.png" id="gwV-Ie-Z2m">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="185"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shopping" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lw7-5X-Y9r">
-                                        <rect key="frame" x="1" y="151" width="79" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="97i-vJ-TwM">
-                                        <rect key="frame" x="0.0" y="28" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ShoppingButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="vgZ-M8-C06"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="0e0-nL-cXh" userLabel="View - Shopping">
-                                <rect key="frame" x="240" y="183" width="80" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category-Party.png" id="D6F-72-lFo">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="185"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nightlife" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0QT-yB-b8l">
-                                        <rect key="frame" x="1" y="151" width="79" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LqI-An-ETL">
-                                        <rect key="frame" x="0.0" y="28" width="80" height="157"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="PartyButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="QJ5-hl-5K4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Pick a Category" id="lSU-Oi-RQE">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="rSU-tX-iwN">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oXL-vz-IER">
-                                <rect key="frame" x="235" y="-57" width="80" height="157"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="EventButtonClicked:" destination="Fdw-Lk-27j" eventType="touchUpInside" id="BzM-Oy-WqZ"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <connections>
-                        <segue destination="aP0-zW-Vs1" kind="custom" identifier="NewEvent" customClass="NoAnimationSegue" id="UWz-iO-Edm"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1356" y="1283"/>
-        </scene>
         <!--Detail View Controller - Detail-->
         <scene sceneID="eaP-re-pOh">
             <objects>
@@ -1985,6 +1675,9 @@ Find us @OrangeParc.com</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteEventButton:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="tlV-dn-K7s"/>
+                                </connections>
                             </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="6YF-WD-7Gl">
                                 <rect key="frame" x="0.0" y="372" width="320" height="44"/>
@@ -2011,6 +1704,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="buttonEditEventTitle" destination="vdu-0c-Ml0" id="LFo-X5-gYg"/>
                         <outlet property="buttonEventTime" destination="8Y1-I1-bf4" id="pdn-9K-iKA"/>
                         <outlet property="deleteButton" destination="xFV-X9-FJO" id="vMC-iR-caR"/>
+                        <outlet property="doneButton" destination="odU-a6-oWR" id="Mqp-1v-f6n"/>
                         <outlet property="keyboardToolbar" destination="6YF-WD-7Gl" id="VTH-v2-tZo"/>
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
@@ -4531,6 +4225,141 @@ Find us @OrangeParc.com</string>
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Yr-l8-opE">
+                                <rect key="frame" x="26" y="34" width="82" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="FoodButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="gbW-Rm-0cb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rRq-3t-HTv">
+                                <rect key="frame" x="116" y="34" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="MovieButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="6GY-U3-t0M"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X9V-n0-FhT">
+                                <rect key="frame" x="206" y="34" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SportsButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="UoK-4b-uvU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m6u-kl-3Jc">
+                                <rect key="frame" x="216" y="126" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="EntertainButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="kMG-oS-JOr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8C-Tu-cms">
+                                <rect key="frame" x="116" y="126" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OutdoorButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="znb-Aq-cGa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V2o-Hu-zgA">
+                                <rect key="frame" x="27" y="132" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="PartyButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="SzD-ex-jLR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KiR-uV-k1p">
+                                <rect key="frame" x="27" y="234" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="EventButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="EeS-lF-6bX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H3i-AN-UmI">
+                                <rect key="frame" x="116" y="236" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ShoppingButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="lGg-B1-v4e"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p6Z-ki-z5E">
+                                <rect key="frame" x="209" y="236" width="92" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SelfDefineButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="bUC-QA-YDH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -4547,13 +4376,13 @@ Find us @OrangeParc.com</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="EventButtonClicked:" destination="cDZ-cT-Wh3" eventType="touchUpInside" id="v9U-oC-0US"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <connections>
+                        <segue destination="aP0-zW-Vs1" kind="custom" identifier="NewEvent" customClass="NoAnimationSegue" id="lqc-Cx-NBX"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="977" y="1283"/>
@@ -4564,14 +4393,6 @@ Find us @OrangeParc.com</string>
         <image name="07-map-marker.png" width="28" height="46"/>
         <image name="11-clock.png" width="40" height="40"/>
         <image name="145-persondot.png" width="24" height="26"/>
-        <image name="Category-Entertainment.png" width="80" height="184"/>
-        <image name="Category-Events.png" width="80" height="184"/>
-        <image name="Category-Food.png" width="80" height="184"/>
-        <image name="Category-Movie.jpeg" width="80" height="184"/>
-        <image name="Category-Outdoor.png" width="80" height="184"/>
-        <image name="Category-Party.png" width="80" height="184"/>
-        <image name="Category-Shopping.png" width="80" height="184"/>
-        <image name="Category-Sports.png" width="80" height="184"/>
         <image name="Category@2x.png" width="640" height="734"/>
         <image name="Featured.png" width="30" height="30"/>
         <image name="OrangeParc-WeChat28.png" width="28" height="28"/>
@@ -4629,6 +4450,15 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="MovieButtonClicked:"/>
+                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SelfDefineButtonClicked:"/>
+                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -4648,9 +4478,6 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="PickButtonClicked:"/>
-                <relationship kind="action" name="interestedButtonClicked:"/>
-                <relationship kind="action" name="shareButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
@@ -4715,11 +4542,13 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
@@ -4735,7 +4564,6 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -4789,6 +4617,6 @@ Find us @OrangeParc.com</string>
         <segue reference="maZ-xV-hRy"/>
         <segue reference="Hfw-Db-bjl"/>
         <segue reference="nyH-Sx-6aU"/>
-        <segue reference="eX7-7v-GIv"/>
+        <segue reference="lqc-Cx-NBX"/>
     </inferredMetricsTieBreakers>
 </document>

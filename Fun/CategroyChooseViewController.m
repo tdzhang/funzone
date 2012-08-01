@@ -12,8 +12,6 @@
 
 @interface CategroyChooseViewController ()
 @property (nonatomic,strong) UIView *flash;
-@property (nonatomic,strong) UIImageView *flashBackImageView;
-@property (nonatomic,strong) UIImageView *flashZoomOutImageView;
 @property (nonatomic,strong) NSString *eventPrepareCategory;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldSelfDefine;
 @property (nonatomic) BOOL uIViewUpFlag; //using to say whether the view is puting up to avoid keyboard shadowing
@@ -22,8 +20,6 @@
 @implementation CategroyChooseViewController
 @synthesize flash=_flash;
 @synthesize uIViewUpFlag=_uIViewUpFlag;
-@synthesize flashZoomOutImageView=_flashZoomOutImageView;
-@synthesize flashBackImageView=_flashBackImageView;
 @synthesize eventPrepareCategory=_eventPrepareCategory;
 @synthesize textFieldSelfDefine = _textFieldSelfDefine;
 
@@ -59,20 +55,7 @@
     if (self.flash) {
         [self.flash removeFromSuperview];
     }
-    if (self.flashBackImageView) {
-        [self.flashBackImageView removeFromSuperview];
-    }
     
-    //........towards right Gesture recogniser for swiping.....// usded to change view
-    UISwipeGestureRecognizer* rightRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
-    rightRecognizer.direction =UISwipeGestureRecognizerDirectionRight;
-    [rightRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:rightRecognizer];
-    //........towards left Gesture recogniser for swiping.....// used to change view
-    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:leftRecognizer]; 
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -162,51 +145,15 @@
 //these two function is used to create a flash in and out before segue effect
 -(void)FlashTransition2:(id)sender{
     //if has the flashZoomOUtImageView, clean it
-    if (self.flashZoomOutImageView){
-        [self.flashZoomOutImageView removeFromSuperview];
-        self.flashZoomOutImageView = nil;
-    }
-    [UIView beginAnimations:nil context:NULL];
+     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationDuration:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
     [self.flash setAlpha:0.0];
-    [self.flashBackImageView setAlpha:1.0];
     [UIView commitAnimations];
 }
 
 //the imageName is the snapshot for the next loading view
 -(void)FlashTransition1:(NSString *)imageName withCategoryImage:(NSString *)categoryImageName{
-    //set up the flashOut image
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_FOOD])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_EVENTS])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_ENTERTAIN])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_OUTDOOR])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 0, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_SPORTS])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_MOVIE])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_SHOPPTING])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-    if ([categoryImageName isEqualToString:CATEGORY_CHOOSE_VC_CATEGORY_PARTY])
-        self.flashZoomOutImageView = [[UIImageView alloc] initWithFrame:CGRectMake(240, 183, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_WIDTH, CATEGORY_CHOOSE_VC_CATEGORY_IMAGESIZE_HEIGHT)];
-
-    if (self.flashZoomOutImageView) {
-        [self.flashZoomOutImageView setImage:[UIImage imageNamed:categoryImageName]];
-        [self.view addSubview:self.flashZoomOutImageView];
-    }
-    
-    
-    //set up the background snap image
-    UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 367)];
-    self.flashBackImageView=imageView;
-    [imageView setImage:[UIImage imageNamed:imageName]];
-    [self.view addSubview:imageView];
-    [self.flashBackImageView setAlpha:0.05];
-    
     
     //set up the flash transition
     UIView *flash=[[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 367)];
@@ -219,19 +166,12 @@
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationDuration:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
     [self.flash setAlpha:1.0];
-    [self.flashBackImageView setAlpha:0.5];
-    if (self.flashZoomOutImageView){
-        [self.flashZoomOutImageView setTransform:CGAffineTransformMakeScale(10, 10)];
-        [self.flashZoomOutImageView setAlpha:0.2];
-    }
     [UIView commitAnimations];
     [self performSelector:@selector(FlashTransition2:) withObject:self afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 
 #pragma mark - button action
 -(void)GoToNextViewEvent:(id)sender{
-    [self.flashBackImageView removeFromSuperview];
-    self.flashBackImageView=nil;
     [self performSegueWithIdentifier:@"NewEvent" sender:sender];
 }
 //food
@@ -285,75 +225,9 @@
 }
 //hit the self define button "Go"
 - (IBAction)SelfDefineButtonClicked:(id)sender {
-    UITextField *textField=self.textFieldSelfDefine;
-    //if input is empty, pop out the alert
-    if ([textField.text length]==0) {
-        UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Self Define Input Empty" message:@"You did not input anything" delegate:self  cancelButtonTitle:@"Input Again" otherButtonTitles:@"Cancel",nil];
-        inputEmptyError.delegate=self;
-        [inputEmptyError show];
-    }
-    else {
-        //otherwise, do the segue
-        [self.textFieldSelfDefine resignFirstResponder];
-        [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_SELFDEFINE_VIEWCONTROLLER_SNAPSHOT withCategoryImage:@"NO"];
-        [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION*2];
-    }
-    
-}
-
-#pragma mark - Gesture handler
--(void)rightSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
-    //right swipe need to change to the left view
-    // Get the views.
-    int controllerIndex=1;
-    UIView * fromView = self.tabBarController.selectedViewController.view;
-    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
-    // Get the size of the view area.
-    CGRect viewSize = fromView.frame;
-    // Add the to view to the tab bar view.
-    [fromView.superview addSubview:toView];
-    // Position it off screen.
-    toView.frame = CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
-    [UIView animateWithDuration:0.4 
-                     animations: ^{
-                         // Animate the views on and off the screen. This will appear to slide.
-                         fromView.frame =CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
-                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
-                     }
-                     completion:^(BOOL finished) {
-                         if (finished) {
-                             // Remove the old view from the tabbar view.
-                             [fromView removeFromSuperview];
-                             self.tabBarController.selectedIndex = controllerIndex;                
-                         }
-                     }];
-}
-
--(void)leftSwipeHandle:(UISwipeGestureRecognizer*)gestureRecognizer{
-    //left swipe need to change to the right view
-    // Get the views.
-    int controllerIndex=3;
-    UIView * fromView = self.tabBarController.selectedViewController.view;
-    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
-    // Get the size of the view area.
-    CGRect viewSize = fromView.frame;
-    // Add the to view to the tab bar view.
-    [fromView.superview addSubview:toView];
-    // Position it off screen.
-    toView.frame = CGRectMake(320, viewSize.origin.y, 320, viewSize.size.height);
-    [UIView animateWithDuration:0.4 
-                     animations: ^{
-                         // Animate the views on and off the screen. This will appear to slide.
-                         fromView.frame =CGRectMake(-320, viewSize.origin.y, 320, viewSize.size.height);
-                         toView.frame =CGRectMake(0, viewSize.origin.y, 320, viewSize.size.height);
-                     }
-                     completion:^(BOOL finished) {
-                         if (finished) {
-                             // Remove the old view from the tabbar view.
-                             [fromView removeFromSuperview];
-                             self.tabBarController.selectedIndex = controllerIndex;                
-                         }
-                     }];
+    self.eventPrepareCategory=@"other";
+    [self FlashTransition1:CATEGORY_CHOOSE_VC_GOTO_PARTY_VIEWCONTROLLER_SNAPSHOT withCategoryImage:CATEGORY_CHOOSE_VC_CATEGORY_PARTY];
+    [self performSelector:@selector(GoToNextViewEvent:) withObject:sender afterDelay:CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION];
 }
 
 
