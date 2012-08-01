@@ -35,9 +35,9 @@
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName: @"MainStoryboard_iPhone" bundle: nil];
     self.thisTabBarController = (UITabBarController*) [mainStoryboard instantiateViewControllerWithIdentifier: @"mainTabBarController"];
     CGRect newFrame = self.thisTabBarController.view.frame;
-    newFrame.size.height = 59;
-    newFrame.origin.y -= 10;
-    newFrame.origin.x -= 5;
+    newFrame.size.height = 57.5;
+    newFrame.origin.y -= 8.5;
+    //newFrame.origin.x -= 5;
     UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.png"]];
     background.frame = newFrame;
     [self.thisTabBarController.tabBar insertSubview:background atIndex:1];
