@@ -307,7 +307,7 @@
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         NSLog(@"%@ %@",self.tapped_event_id,self.tapped_shared_event_id);
-        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
+        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:YES];
         [detailVC preSetServerLogViaParameter:VIA_MY_PROFILE];
     }
 }

@@ -24,7 +24,7 @@
 @property(nonatomic,weak)id<WEICHATprotocal>delegate;
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
--(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id;
+-(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner;
 //server log need method
 -(void)preSetServerLogViaParameter:(int)via;
 @end

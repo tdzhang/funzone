@@ -354,9 +354,10 @@
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"ViewEventDetail"]) {
+         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
-        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
+        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:[[NSString stringWithFormat:@"%@",[defaults objectForKey:@"user_id"]] isEqualToString:self.tapped_creator_id]];
         [detailVC preSetServerLogViaParameter:VIA_EXPLORE];
     }
     else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){

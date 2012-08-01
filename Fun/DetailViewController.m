@@ -43,7 +43,9 @@
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSString *preDefinedMode; //change between sms mode and email mode
-@property (nonatomic) int via; 
+@property (nonatomic) int via;//used to keep track theuser activity , then send to the server
+@property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
+
 
 @end
 
@@ -79,8 +81,9 @@
 @synthesize preDefinedMode=_preDefinedMode;
 @synthesize delegate=_delegate;
 @synthesize via=_via;
-
+@synthesize isEventOwner=_isEventOwner;
 #pragma mark - self defined getter and setter
+
 -(NSMutableArray *)comments{
     if (!_comments) {
         _comments=[NSMutableArray array];
@@ -177,9 +180,10 @@
 
 #pragma mark - self defined method 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
--(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id{
+-(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner{
     self.event_id = event_id;
     self.shared_event_id = shared_event_id;
+    self.isEventOwner=isOwner;
 }
 
 //server log need method
