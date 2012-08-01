@@ -27,6 +27,7 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *tapped_creator_id;
+@property (nonatomic,strong) CLLocationManager *myLocationManager;
 @end
 
 @implementation ExploreViewController
@@ -44,6 +45,7 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize tapped_creator_id=_tapped_creator_id;
 @synthesize antiTouchMaskView=_antiTouchMaskView;
+@synthesize myLocationManager=_myLocationManager;
 
 
 
@@ -67,10 +69,19 @@
 #pragma mark - View Life circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //ask user to require location
+    CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+    [current_location_manager startUpdatingLocation];
+    self.myLocationManager=current_location_manager;
     
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
     [self.mainScrollView addSubview:self.refreshView];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.myLocationManager stopUpdatingLocation];
 }
 
 - (void)viewDidLoad {

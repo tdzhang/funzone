@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *normalLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
 @property (nonatomic,strong) NSString *currentConnection;
+@property (nonatomic,strong) CLLocationManager *myLocationManager;
 
 
 -(void)faceBookLoginFinished; //deal with the finish of facebook login
@@ -28,6 +29,7 @@
 @synthesize data=_data;
 @synthesize currentConnection;
 @synthesize parentVC=_parentVC;
+@synthesize myLocationManager=_myLocationManager;
 
 #pragma mark - view life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,7 +43,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //ask user to require location
+    CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+    [current_location_manager startUpdatingLocation];
+    self.myLocationManager=current_location_manager;
     
+    //[current_location_manager stopUpdatingLocation];
     //set the password field property
     self.userPassword.secureTextEntry=YES;
     
@@ -51,7 +58,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    [self.myLocationManager stopUpdatingLocation];
     //delete notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PushNotificationHandler SendAPNStokenToServer];
