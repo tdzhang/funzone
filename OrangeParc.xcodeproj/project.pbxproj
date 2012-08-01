@@ -107,6 +107,7 @@
 		0FF6040915C7B6C600AE89CF /* PushNotificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6040715C7B6C600AE89CF /* PushNotificationHandler.m */; };
 		0FF9C57F15BB9003002D1998 /* AddEventControllerSnapShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */; };
 		0FFC95CF15C379E500800B23 /* MoreTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC95CE15C379E500800B23 /* MoreTableViewController.m */; };
+		4600236D15C919490036BCAE /* texture-path-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 4600236C15C919490036BCAE /* texture-path-small.png */; };
 		460ED7F315C8F51B00893597 /* share-twitter-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7F115C8F51B00893597 /* share-twitter-off.png */; };
 		460ED7F415C8F51B00893597 /* share-facebook-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7F215C8F51B00893597 /* share-facebook-off.png */; };
 		460ED7FB15C8F5D700893597 /* detail-interested-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7FA15C8F5D700893597 /* detail-interested-gray.png */; };
@@ -393,6 +394,7 @@
 		0FF9C57E15BB9003002D1998 /* AddEventControllerSnapShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddEventControllerSnapShot.png; sourceTree = "<group>"; };
 		0FFC95CD15C379E500800B23 /* MoreTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewController.h; sourceTree = "<group>"; };
 		0FFC95CE15C379E500800B23 /* MoreTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewController.m; sourceTree = "<group>"; };
+		4600236C15C919490036BCAE /* texture-path-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "texture-path-small.png"; sourceTree = "<group>"; };
 		460ED7F115C8F51B00893597 /* share-twitter-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-twitter-off.png"; sourceTree = "<group>"; };
 		460ED7F215C8F51B00893597 /* share-facebook-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-facebook-off.png"; sourceTree = "<group>"; };
 		460ED7FA15C8F5D700893597 /* detail-interested-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-interested-gray.png"; sourceTree = "<group>"; };
@@ -1071,6 +1073,7 @@
 			isa = PBXGroup;
 			children = (
 				9256610015C8F96700BED665 /* Background.png */,
+				4600236C15C919490036BCAE /* texture-path-small.png */,
 				9256611615C8FD4A00BED665 /* AddOrange.png */,
 				9256611715C8FD4A00BED665 /* AddGrey.png */,
 				9256610215C8FB4B00BED665 /* StarOrange.png */,
@@ -1458,6 +1461,7 @@
 				9256611815C8FD4A00BED665 /* AddOrange.png in Resources */,
 				9256611915C8FD4A00BED665 /* AddGrey.png in Resources */,
 				0F00545915C8FE05000EBF67 /* ActivityTableViewCell.xib in Resources */,
+				4600236D15C919490036BCAE /* texture-path-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
