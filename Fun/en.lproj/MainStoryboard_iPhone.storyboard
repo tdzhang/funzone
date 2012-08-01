@@ -1838,11 +1838,11 @@ Find us @OrangeParc.com</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="0is-UK-mz6">
-                                <rect key="frame" x="50" y="10" width="265" height="80"/>
+                                <rect key="frame" x="50" y="10" width="263" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="talkbox.png" id="Sd2-oe-MN9">
-                                        <rect key="frame" x="0.0" y="0.0" width="265" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="263" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
@@ -1882,19 +1882,14 @@ Find us @OrangeParc.com</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="ZCn-tk-8NR">
-                                <rect key="frame" x="10" y="95" width="300" height="113"/>
+                                <rect key="frame" x="0.0" y="90" width="320" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="86-camera.png" id="Tq0-qs-KA0">
-                                        <rect key="frame" x="20" y="12" width="90" height="89"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oRr-dR-l35">
-                                        <rect key="frame" x="20" y="12" width="90" height="89"/>
+                                        <rect key="frame" x="2" y="5" width="316" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
+                                        <state key="normal" backgroundImage="blockelementholder.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1905,24 +1900,29 @@ Find us @OrangeParc.com</string>
                                             <action selector="ChoosePhoto:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="vzy-mV-dAz"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000000000000016" contentMode="center" image="86-camera.png" id="Tq0-qs-KA0">
+                                        <rect key="frame" x="10" y="10" width="300" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="UOZ-GP-9Qo">
-                                <rect key="frame" x="10" y="267" width="303" height="50"/>
+                                <rect key="frame" x="165" y="234" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dashed-deal.png" id="mw1-5B-lbQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" image="07-map-marker.png" id="9cJ-fk-riH">
-                                        <rect key="frame" x="22" y="14" width="14" height="22"/>
+                                        <rect key="frame" x="15" y="14" width="14" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find a place" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="wvA-yO-1ra">
-                                        <rect key="frame" x="60" y="0.0" width="130" height="50"/>
+                                        <rect key="frame" x="45" y="0.0" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1931,12 +1931,12 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" id="T8Q-TO-MQu">
-                                        <rect key="frame" x="48" y="0.0" width="255" height="50"/>
+                                        <rect key="frame" x="150" y="0.0" width="255" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4fc-Jc-98h">
-                                        <rect key="frame" x="48" y="0.0" width="255" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1959,19 +1959,19 @@ Find us @OrangeParc.com</string>
                                 </accessibility>
                             </view>
                             <view contentMode="scaleToFill" id="731-iH-70Y">
-                                <rect key="frame" x="10" y="222" width="304" height="50"/>
+                                <rect key="frame" x="10" y="234" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dashed-deal.png" id="NEb-c3-dVN">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" image="11-clock.png" id="qdx-h4-mF5">
-                                        <rect key="frame" x="19" y="15" width="20" height="20"/>
+                                        <rect key="frame" x="12" y="15" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find a time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="HI8-q6-ylp">
-                                        <rect key="frame" x="60" y="0.0" width="130" height="50"/>
+                                        <rect key="frame" x="45" y="0.0" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1980,7 +1980,7 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Y1-I1-bf4">
-                                        <rect key="frame" x="29" y="0.0" width="190" height="49"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -2001,8 +2001,16 @@ Find us @OrangeParc.com</string>
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="share-twitter-on.png" id="tMl-jk-e64">
+                                <rect key="frame" x="275" y="318" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="share-facebook-on.png" id="suZ-Sa-iIK">
+                                <rect key="frame" x="236" y="318" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="odU-a6-oWR">
-                                <rect key="frame" x="15" y="346" width="290" height="45"/>
+                                <rect key="frame" x="15" y="361" width="290" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Done" backgroundImage="create_account_button.png">
@@ -2017,7 +2025,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="6YF-WD-7Gl">
-                                <rect key="frame" x="0.0" y="291" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem width="249" style="plain" systemItem="fixedSpace" id="hhG-hJ-7zh"/>
@@ -4485,6 +4493,7 @@ Find us @OrangeParc.com</string>
         <image name="Featured.png" width="30" height="30"/>
         <image name="OrangeParc-WeChat28.png" width="28" height="28"/>
         <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
+        <image name="blockelementholder.png" width="1350" height="679"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="button_orange-2.png" width="608" height="97"/>
         <image name="cancel_button.png" width="250" height="121"/>
@@ -4511,10 +4520,10 @@ Find us @OrangeParc.com</string>
         <image name="seperator.png" width="110" height="1"/>
         <image name="settings.png" width="30" height="30"/>
         <image name="share-email.png" width="100" height="100"/>
-        <image name="share-facebook-on.png" width="191" height="191"/>
-        <image name="share-sms.png" width="192" height="191"/>
-        <image name="share-twitter-on.png" width="199" height="200"/>
-        <image name="share-wechat.png" width="192" height="191"/>
+        <image name="share-facebook-on.png" width="100" height="100"/>
+        <image name="share-sms.png" width="101" height="100"/>
+        <image name="share-twitter-on.png" width="100" height="100"/>
+        <image name="share-wechat.png" width="100" height="100"/>
         <image name="subtle-pattern-1.jpg" width="1000" height="1000"/>
         <image name="subtle-pattern-2.jpg" width="1000" height="1000"/>
         <image name="talkbox.png" width="1115" height="704"/>
@@ -4679,9 +4688,9 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="e9f-Ec-HCG"/>
-        <segue reference="Idn-d1-X1d"/>
-        <segue reference="HUl-1w-jPL"/>
-        <segue reference="UWz-iO-Edm"/>
+        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="maZ-xV-hRy"/>
+        <segue reference="Yrc-z9-85p"/>
+        <segue reference="Mwv-fE-YHU"/>
     </inferredMetricsTieBreakers>
 </document>
