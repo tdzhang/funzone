@@ -332,12 +332,14 @@
         NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
         NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
 #warning need furthur investigation
+        /*
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
         CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
         [current_location_manager startMonitoringSignificantLocationChanges];
         CLLocation *current_location = current_location_manager.location;
         CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-        
+        */
+        CLLocationDistance distance =12;
         if (!title) {
             continue;
         }

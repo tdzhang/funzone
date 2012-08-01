@@ -28,6 +28,7 @@
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (nonatomic) BOOL followed;
+@property (nonatomic,strong)CLLocationManager *current_location_manager;
 
 @end
 
@@ -49,7 +50,7 @@
 @synthesize followButton = _followButton;
 @synthesize creator_id=_creator_id;
 @synthesize followed=_followed;
-
+@synthesize current_location_manager=_current_location_manager;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -165,6 +166,12 @@
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 10);
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [self.current_location_manager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)viewDidLoad
@@ -388,12 +395,14 @@
         NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
         NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
         NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-        CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
-        [current_location_manager startMonitoringSignificantLocationChanges];
-        CLLocation *current_location = current_location_manager.location;
-        CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-        
+        //CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+        //CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+        //[current_location_manager startMonitoringSignificantLocationChanges];
+        //self.current_location_manager=current_location_manager;
+        //CLLocation *current_location = current_location_manager.location;
+        //CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
+#warning CLLocationPart 
+        CLLocationDistance distance =12;
         NSLog(@"event_id=%@",event_id);
         NSLog(@"photo_url=%@",event_photo_url);
         

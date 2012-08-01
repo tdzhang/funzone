@@ -158,6 +158,7 @@
     mapView.showsUserLocation=YES;
     mapView.mapType=MKMapTypeStandard;
     mapView.delegate=self;
+    
 
     
     
@@ -220,6 +221,10 @@
 
     
     
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.myMapView.showsUserLocation=NO;
 }
 
 
