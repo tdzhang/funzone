@@ -2013,6 +2013,18 @@ Find us @OrangeParc.com</string>
                                     <action selector="CreateEventToSever:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="8dZ-Kt-WTL"/>
                                 </connections>
                             </button>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="6YF-WD-7Gl">
+                                <rect key="frame" x="0.0" y="291" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="249" style="plain" systemItem="fixedSpace" id="hhG-hJ-7zh"/>
+                                    <barButtonItem systemItem="done" id="IrN-Gv-VCe">
+                                        <connections>
+                                            <action selector="leaveEditMode:" destination="aP0-zW-Vs1" id="2Xp-3c-o0G"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -2025,6 +2037,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="buttonChooseEventPhoto" destination="oRr-dR-l35" id="KK8-HB-IZ3"/>
                         <outlet property="buttonEditEventTitle" destination="vdu-0c-Ml0" id="LFo-X5-gYg"/>
                         <outlet property="buttonEventTime" destination="8Y1-I1-bf4" id="pdn-9K-iKA"/>
+                        <outlet property="keyboardToolbar" destination="6YF-WD-7Gl" id="VTH-v2-tZo"/>
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
                         <outlet property="mapViewFeedBackImageView" destination="T8Q-TO-MQu" id="B8f-ny-Lz4"/>
@@ -4604,6 +4617,7 @@ Find us @OrangeParc.com</string>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
@@ -4665,9 +4679,9 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5YL-VF-kXv"/>
-        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="Idn-d1-X1d"/>
+        <segue reference="HUl-1w-jPL"/>
         <segue reference="UWz-iO-Edm"/>
-        <segue reference="Hfw-Db-bjl"/>
     </inferredMetricsTieBreakers>
 </document>
