@@ -208,6 +208,11 @@
 		46D2BC9D15C9BD7700E14FE7 /* HomeOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BC9915C9BD7700E14FE7 /* HomeOrange@2x.png */; };
 		46D2BC9E15C9BD7700E14FE7 /* ParcOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BC9A15C9BD7700E14FE7 /* ParcOrange@2x.png */; };
 		46D2BC9F15C9BD7700E14FE7 /* StarOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BC9B15C9BD7700E14FE7 /* StarOrange@2x.png */; };
+		46D2BCA115C9D58700E14FE7 /* AddGrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA015C9D58700E14FE7 /* AddGrey@2x.png */; };
+		46D2BCA415C9D5C900E14FE7 /* texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA215C9D5C900E14FE7 /* texture.png */; };
+		46D2BCA515C9D5C900E14FE7 /* texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA315C9D5C900E14FE7 /* texture@2x.png */; };
+		46D2BCA815C9D5D600E14FE7 /* Category.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA615C9D5D600E14FE7 /* Category.png */; };
+		46D2BCA915C9D5D600E14FE7 /* Category@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA715C9D5D600E14FE7 /* Category@2x.png */; };
 		46DBFA8D15BD387A00130749 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFA8C15BD387A00130749 /* 06-magnify.png */; };
 		92099E2515C7CB240087E8EC /* tab-bar-myParc.png in Resources */ = {isa = PBXBuildFile; fileRef = 92099E2315C7CB240087E8EC /* tab-bar-myParc.png */; };
 		92099E2615C7CB240087E8EC /* tab-bar-myParc-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 92099E2415C7CB240087E8EC /* tab-bar-myParc-color.png */; };
@@ -522,6 +527,11 @@
 		46D2BC9915C9BD7700E14FE7 /* HomeOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HomeOrange@2x.png"; sourceTree = "<group>"; };
 		46D2BC9A15C9BD7700E14FE7 /* ParcOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ParcOrange@2x.png"; sourceTree = "<group>"; };
 		46D2BC9B15C9BD7700E14FE7 /* StarOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarOrange@2x.png"; sourceTree = "<group>"; };
+		46D2BCA015C9D58700E14FE7 /* AddGrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddGrey@2x.png"; sourceTree = "<group>"; };
+		46D2BCA215C9D5C900E14FE7 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
+		46D2BCA315C9D5C900E14FE7 /* texture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "texture@2x.png"; sourceTree = "<group>"; };
+		46D2BCA615C9D5D600E14FE7 /* Category.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Category.png; sourceTree = "<group>"; };
+		46D2BCA715C9D5D600E14FE7 /* Category@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category@2x.png"; sourceTree = "<group>"; };
 		46DBFA8C15BD387A00130749 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		92099E2315C7CB240087E8EC /* tab-bar-myParc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-myParc.png"; sourceTree = "<group>"; };
 		92099E2415C7CB240087E8EC /* tab-bar-myParc-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-bar-myParc-color.png"; sourceTree = "<group>"; };
@@ -1092,6 +1102,11 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				46D2BCA615C9D5D600E14FE7 /* Category.png */,
+				46D2BCA715C9D5D600E14FE7 /* Category@2x.png */,
+				46D2BCA215C9D5C900E14FE7 /* texture.png */,
+				46D2BCA315C9D5C900E14FE7 /* texture@2x.png */,
+				46D2BCA015C9D58700E14FE7 /* AddGrey@2x.png */,
 				46D2BC9815C9BD7700E14FE7 /* ActivityOrange@2x.png */,
 				46D2BC9915C9BD7700E14FE7 /* HomeOrange@2x.png */,
 				46D2BC9A15C9BD7700E14FE7 /* ParcOrange@2x.png */,
@@ -1502,6 +1517,11 @@
 				46D2BC9D15C9BD7700E14FE7 /* HomeOrange@2x.png in Resources */,
 				46D2BC9E15C9BD7700E14FE7 /* ParcOrange@2x.png in Resources */,
 				46D2BC9F15C9BD7700E14FE7 /* StarOrange@2x.png in Resources */,
+				46D2BCA115C9D58700E14FE7 /* AddGrey@2x.png in Resources */,
+				46D2BCA415C9D5C900E14FE7 /* texture.png in Resources */,
+				46D2BCA515C9D5C900E14FE7 /* texture@2x.png in Resources */,
+				46D2BCA815C9D5D600E14FE7 /* Category.png in Resources */,
+				46D2BCA915C9D5D600E14FE7 /* Category@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
