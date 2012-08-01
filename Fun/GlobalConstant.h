@@ -140,3 +140,25 @@
 #define DEFAULT_TABLE_CELL_FONT_SIZE 15
 #define DEFAULT_TABLE_CELL_SUBTITLE_SIZE 14
 
+
+//Sever Log Configuration Constant
+#pragma mark - Server Log Config Constants
+#define VIA_EXPLORE 1             // event, profile
+#define VIA_FEEDS 2               // event, profile
+#define VIA_OTHERS_PROFILE 3      // event
+#define VIA_MY_PROFILE 4          // event
+#define VIA_FACEBOOK_SEARCH 5     // profile, find friend
+#define VIA_TOP_USERS 6           // profile, find friend
+#define VIA_ACTIVITY 7            // event, profile
+#define VIA_MY_INTERESTS 8        // event
+#define VIA_EXPLORE_DETAIL 9      // profile(external)
+#define VIA_FEEDS_DETAIL 10       // profile(external)
+#define VIA_INSPIRED_BY 11        // profile(external)
+
+// Share Channel
+#define VIA_FACEBOOK 1
+#define VIA_TWITTER 2
+#define VIA_WECHAT 3
+#define VIA_EMAIL 4
+#define VIA_SMS 5
+

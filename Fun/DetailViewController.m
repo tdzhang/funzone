@@ -43,6 +43,7 @@
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSString *preDefinedMode; //change between sms mode and email mode
+@property (nonatomic) int via; 
 
 @end
 
@@ -77,6 +78,7 @@
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
 @synthesize preDefinedMode=_preDefinedMode;
 @synthesize delegate=_delegate;
+@synthesize via=_via;
 
 #pragma mark - self defined getter and setter
 -(NSMutableArray *)comments{
@@ -161,7 +163,7 @@
     [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT)];
     
     //start a new connection, to fetch data from the server (about event detail)
-    NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id];
+    NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -178,6 +180,11 @@
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id{
     self.event_id = event_id;
     self.shared_event_id = shared_event_id;
+}
+
+//server log need method
+-(void)preSetServerLogViaParameter:(int)via{
+    self.via=via;
 }
 
 //handle the action: addViewCommentButtonClicked (the TableViewControlelr that used to show all the comment and add the comment)

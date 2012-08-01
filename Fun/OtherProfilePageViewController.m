@@ -282,6 +282,7 @@
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
+        [detailVC preSetServerLogViaParameter:VIA_OTHERS_PROFILE];
     }
 }
 
