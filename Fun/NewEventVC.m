@@ -572,7 +572,7 @@
                     if(imageData){
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
-                            [self.personProfileImage setImage:[UIImage imageWithData:imageData ]];
+                            [self.personProfileImage setImage:[UIImage imageWithData:imageData]];
                         });
                     }
                 }
@@ -609,7 +609,7 @@
 ////////////////////////////////////////////////
 //implement the UIImagePickerControllerDelegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleToFill];
+    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
     [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     [self dismissModalViewControllerAnimated:YES];
@@ -619,7 +619,7 @@
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
 -(void)ChooseUIImage:(UIImage *)image WithUrlName:(NSString*)URLName From:(ChooseImageTableViewController *)sender{
-    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleToFill];
+    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
     [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     self.createEvent_imageUrlName= URLName;
