@@ -80,6 +80,9 @@
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
 @synthesize preDefinedMode=_preDefinedMode;
 @synthesize delegate=_delegate;
+@synthesize interestOrInviteButton = _interestOrInviteButton;
+@synthesize pickOrEditButton = _pickOrEditButton;
+@synthesize shareButton = _shareButton;
 @synthesize via=_via;
 @synthesize isEventOwner=_isEventOwner;
 #pragma mark - self defined getter and setter
@@ -152,6 +155,9 @@
     [self setMyScrollView:nil];
     [self setEventImageView:nil];
     [self setOriginalCreatorIndicator:nil];
+    [self setInterestOrInviteButton:nil];
+    [self setPickOrEditButton:nil];
+    [self setShareButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
