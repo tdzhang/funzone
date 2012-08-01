@@ -11,6 +11,7 @@
 
 @interface ActivityTabeleViewController ()
 @property(nonatomic,strong)NSMutableArray* activities;
+@property(nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequecy
 
 //start fetching activity data from the sever(and did the badge clean job)
 -(void)startFetchingActivityData;
@@ -18,6 +19,7 @@
 
 @implementation ActivityTabeleViewController
 @synthesize activities=_activities;
+@synthesize lastReceivedJson=_lastReceivedJson;
 
 #pragma mark - self defined setter and getter
 -(NSMutableArray *)activities{
@@ -25,6 +27,12 @@
         _activities=[NSMutableArray array];
     }
     return _activities;
+}
+-(NSArray*)lastReceivedJson{
+    if (!_lastReceivedJson) {
+        _lastReceivedJson=[NSArray array];
+    }
+    return _lastReceivedJson;
 }
 
 #pragma mark - View Life Cycle
@@ -151,10 +159,14 @@
         
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        //deal with json
-        self.activities=[activityElementObject getActivityElementsArrayByJson:json];
-        NSLog(@"Have fetched %d Activities",[self.activities count]);
-        [self.tableView reloadData];
+        if (![self.lastReceivedJson isEqualToArray:json]) {
+            //not equal, update the last reveived json
+            self.lastReceivedJson=json;
+            //deal with json
+            self.activities=[activityElementObject getActivityElementsArrayByJson:json];
+            NSLog(@"Have fetched %d Activities",[self.activities count]);
+            [self.tableView reloadData];
+        }        
         //reset the tabbat notification number
         [PushNotificationHandler clearApplicationPushNotifNumber];
         [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];

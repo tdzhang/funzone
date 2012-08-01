@@ -10,10 +10,12 @@
 
 @interface MyFollowingTableViewController ()
 @property (nonatomic,strong)NSMutableArray *arrayProfileInfoElements;
+@property (nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequency
 @end
 
 @implementation MyFollowingTableViewController
 @synthesize arrayProfileInfoElements=_arrayProfileInfoElements;
+@synthesize lastReceivedJson=_lastReceivedJson;
 
 #pragma mark - self defined setter getter
 -(NSArray *)arrayProfileInfoElements{
@@ -21,6 +23,13 @@
         _arrayProfileInfoElements=[NSMutableArray array];
     }
     return _arrayProfileInfoElements;
+}
+
+-(NSArray *)lastReceivedJson{
+    if (!_lastReceivedJson) {
+        _lastReceivedJson=[NSArray array];
+    }
+    return _lastReceivedJson;
 }
 
 #pragma mark - View Life Circle
@@ -46,52 +55,15 @@
         // Use when fetching text data
         //NSString *responseString = [block_request responseString];
         //NSLog(@"%@",responseString);
-        
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        self.arrayProfileInfoElements=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:json] mutableCopy];
-        NSLog(@"%d",[self.arrayProfileInfoElements count]);
-        [self.tableView reloadData];
-        /*
-        NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
-        if (![Cache isURLCached:url]) {
-            //using high priority queue to fetch the image
-            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                //get the image data
-                NSData * imageData = nil;
-                imageData = [[NSData alloc] initWithContentsOfURL: url];
-                
-                if ( imageData == nil ){
-                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                    //NSLog(@"downloaded %@ error, using a default image",url);
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                    imageData=UIImagePNGRepresentation(image);
-                    
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
-                        });
-                    }
-                }
-                else {
-                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                    //NSLog(@"downloaded %@",url);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:url withData:imageData];
-                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
-                        });
-                    }
-                }
-            });
+        if (![self.lastReceivedJson isEqualToArray:json]) {
+            //if there is a difference, start to fetch data
+            self.lastReceivedJson=json;
+            self.arrayProfileInfoElements=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:json] mutableCopy];
+            NSLog(@"%d",[self.arrayProfileInfoElements count]);
+            [self.tableView reloadData];
         }
-        else {
-            dispatch_async( dispatch_get_main_queue(),^{
-                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
-            });
-        }
-         */
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];
