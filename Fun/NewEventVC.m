@@ -44,6 +44,9 @@
 //@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTime;
 //@property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *locationIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *timeIcon;
 @property (weak, nonatomic) IBOutlet UITextView *textFieldEventTitle;
 //@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
 //@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
@@ -104,6 +107,9 @@
 //@synthesize locationLabel = _locationLabel;
 @synthesize labelEventTime = _labelEventTime;
 //@synthesize buttonEventTitle = _buttonEventTitle;
+@synthesize locationLabel = _locationLabel;
+@synthesize locationIcon = _locationIcon;
+@synthesize timeIcon = _timeIcon;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
 //@synthesize textFieldEventPrice = _textFieldEventPrice;
 //@synthesize labelChoosePhoto = _labelChoosePhoto;
@@ -248,7 +254,7 @@
         [self.textFieldEventTitle setText:self.detail_event_title];
         [self.labelEventTime setText:self.detail_event_time];
         [self.labelEventTitleHolder setHidden:YES];
-        //[self.locationLabel setText:self.detail_location_name];
+        [self.locationLabel setText:self.detail_location_name];
         [self.uIImageViewEvent setImage:self.detail_image];
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
@@ -293,6 +299,9 @@
     [self setMapViewFeedBackImageView:nil];
     [self setButtonEditEventTitle:nil];
     [self setKeyboardToolbar:nil];
+    [self setLocationLabel:nil];
+    [self setLocationIcon:nil];
+    [self setTimeIcon:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -498,6 +507,9 @@
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
+        [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:16]];
+        [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+        [self.timeIcon setAlpha:0.8];
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
@@ -724,7 +736,6 @@
 - (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
     NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    NSLog(@"###%d",[enteredText length]);
     if ([enteredText length]==0) {
         [self.labelEventTitleHolder setHidden:NO];
     }
@@ -797,11 +808,17 @@
 -(void)UpdateLocation:(MKPointAnnotation *)fromannotation withLocationName:(NSString *)locationName withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=fromannotation;
     self.predefinedAnnotation=annotation;
-    //NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
+    
+    //show event address name;
+    NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
+    [self.locationLabel setText:locationDescription];
+    [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+    [self.locationIcon setAlpha:0.8];
     //show the map snapshot
     //[self.buttonChooseEventLocation setBackgroundImage:image forState:UIControlStateNormal];
     //add discription
-    //[self.locationLabel setText:locationDescription];
+    
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
     
