@@ -83,12 +83,18 @@
 @property (nonatomic,strong) NSString *createEvent_address;
 @property (nonatomic,strong) NSString *createEvent_imageUrlName;
 
+//the property used to chaneg the UI between edit and create
+@property (nonatomic) BOOL isEditPage;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+
 @end
 
 //////////////////////////////////////
 
 @implementation NewEventVC
 //@synthesize eventPeopleInfo = _eventPeopleInfo;
+@synthesize deleteButton = _deleteButton;
 @synthesize showNewButtonFlag=_showNewButtonFlag;
 @synthesize personProfileImage = _personProfileImage;
 @synthesize imgPicker=_imgPicker;
@@ -144,6 +150,8 @@
 @synthesize createEvent_imageUrlName=_createEvent_imageUrlName;
 @synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
 
+//the property used to chaneg the UI between edit and create
+@synthesize isEditPage=_isEditPage;
 
 
 #pragma mark - self defined synthesize
@@ -183,6 +191,14 @@
 
 
 #pragma mark - self defined
+//make the Page for Edit
+-(void)presetIsEditPageToTrue{
+    self.isEditPage=YES;
+}
+//make the Page for Create
+-(void)presetIsEditPageToFalse{
+    self.isEditPage=NO;
+}
 -(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
     self.detail_shared_event_id=shared_event_id;
@@ -302,6 +318,7 @@
     [self setLocationLabel:nil];
     [self setLocationIcon:nil];
     [self setTimeIcon:nil];
+    [self setDeleteButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

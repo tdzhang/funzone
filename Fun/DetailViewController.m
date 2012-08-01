@@ -541,6 +541,11 @@
     if ([segue.identifier isEqualToString:@"repin to create new event"]) {
         NewEventVC *newEventVC = segue.destinationViewController;
         [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name address:self.event_address longitude:self.longitude latitude:self.latitude description:self.description];
+        if (self.isEventOwner) {
+            [newEventVC presetIsEditPageToTrue];
+        } else {
+            [newEventVC presetIsEditPageToFalse];
+        }
     }
     else if([segue.identifier isEqualToString:@"addAndViewComment"]){
         if ([segue.destinationViewController isKindOfClass:[AddCommentVC class]]) {

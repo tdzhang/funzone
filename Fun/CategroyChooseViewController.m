@@ -147,6 +147,8 @@
             //need to set up the title using user typedin words
             [(NewEventVC *)segue.destinationViewController setEventType:@"other"];
         }
+        //make the next page used for create event
+        [(NewEventVC *)segue.destinationViewController presetIsEditPageToFalse];
     }
     //clean up the unprocess UIView up rolling stuff(shadowing keyboard related stuff)
     if (self.uIViewUpFlag) {

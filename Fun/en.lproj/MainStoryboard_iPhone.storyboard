@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -1974,6 +1974,18 @@ Find us @OrangeParc.com</string>
                                     <action selector="CreateEventToSever:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="8dZ-Kt-WTL"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xFV-X9-FJO">
+                                <rect key="frame" x="16" y="302" width="290" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Delete" backgroundImage="create_account_button.png">
+                                    <color key="titleColor" red="0.90155220030000005" green="0.38804696830000002" blue="0.035024054999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="6YF-WD-7Gl">
                                 <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1998,6 +2010,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="buttonChooseEventPhoto" destination="oRr-dR-l35" id="KK8-HB-IZ3"/>
                         <outlet property="buttonEditEventTitle" destination="vdu-0c-Ml0" id="LFo-X5-gYg"/>
                         <outlet property="buttonEventTime" destination="8Y1-I1-bf4" id="pdn-9K-iKA"/>
+                        <outlet property="deleteButton" destination="xFV-X9-FJO" id="vMC-iR-caR"/>
                         <outlet property="keyboardToolbar" destination="6YF-WD-7Gl" id="VTH-v2-tZo"/>
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
@@ -4616,6 +4629,15 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="MovieButtonClicked:"/>
+                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SelfDefineButtonClicked:"/>
+                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -4628,10 +4650,16 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="InviteButtonClicked:"/>
+            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="PickButtonClicked:"/>
+                <relationship kind="action" name="interestedButtonClicked:"/>
+                <relationship kind="action" name="shareButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
@@ -4686,6 +4714,9 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="MoreTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="signOutButtonClicked:"/>
+            </relationships>
         </class>
         <class className="MovieAotoCompletionVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
@@ -4696,10 +4727,16 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
+                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
@@ -4715,6 +4752,7 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -4768,6 +4806,6 @@ Find us @OrangeParc.com</string>
         <segue reference="maZ-xV-hRy"/>
         <segue reference="Hfw-Db-bjl"/>
         <segue reference="nyH-Sx-6aU"/>
-        <segue reference="UWz-iO-Edm"/>
+        <segue reference="eX7-7v-GIv"/>
     </inferredMetricsTieBreakers>
 </document>
