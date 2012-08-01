@@ -189,7 +189,6 @@
 #define UNFOLLOW_SOMEONE 106 // via
 #define SHOW_INTERESTS 107
 
-<<<<<<< HEAD
 //category id mapping information
 #define FOOD  @"1"
 #define MOVIE  @"2"
@@ -214,10 +213,4 @@
 #define SHOPPING_REPLACEMENT @"8"
 #define OTHERS_REPLACEMENT @"iphone-logo-114.png"
 #define NILL_REPLACEMENT @""  //used for myparc default event image
-=======
 
-//icon files
-#define LOCATION_ICON @"07-map-marker.png"
-#define TIME_ICON @"1-clock.png"
-#define RIGHT_ARROW @"detailButton.png"
->>>>>>> in middle of connect detail page
