@@ -145,7 +145,7 @@
     
     //add heart image
     blockElement.heartImageView = [[UIImageView alloc] initWithFrame:CGRectMake(115, 130 + blockElement.distanceLabel.frame.size.height/2 - 5, 10, 10)];
-    [blockElement.heartImageView setImage:[UIImage imageNamed:@"29-heart.png"]];
+    [blockElement.heartImageView setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_REPIN_IMAGE]];
     [blockElement.blockHolderView addSubview:blockElement.heartImageView];
     
     //add heart label
