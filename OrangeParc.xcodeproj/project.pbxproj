@@ -10,6 +10,8 @@
 		0F00545915C8FE05000EBF67 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F00545815C8FE05000EBF67 /* View.xib */; };
 		0F00545C15C8FE8D000EBF67 /* ActivityTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */; };
 		0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */; };
+		0F00546015C90315000EBF67 /* activityElementObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545E15C90315000EBF67 /* activityElementObject.h */; };
+		0F00546115C90315000EBF67 /* activityElementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545F15C90315000EBF67 /* activityElementObject.m */; };
 		0F07F27015ADEEB200BF41CF /* ExploreBlockElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */; };
 		0F07F27C15AE1C2500BF41CF /* MovieAotoCompletionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07F27B15AE1C2500BF41CF /* MovieAotoCompletionVC.m */; };
 		0F07F27F15AE26F500BF41CF /* movieAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F07F27E15AE26F500BF41CF /* movieAutoCompleteCell.xib */; };
@@ -242,6 +244,8 @@
 		0F00545815C8FE05000EBF67 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
 		0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
+		0F00545E15C90315000EBF67 /* activityElementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityElementObject.h; sourceTree = "<group>"; };
+		0F00545F15C90315000EBF67 /* activityElementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activityElementObject.m; sourceTree = "<group>"; };
 		0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreBlockElement.h; sourceTree = "<group>"; };
 		0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreBlockElement.m; sourceTree = "<group>"; };
 		0F07F27A15AE1C2500BF41CF /* MovieAotoCompletionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieAotoCompletionVC.h; sourceTree = "<group>"; };
@@ -588,6 +592,8 @@
 				0F00545815C8FE05000EBF67 /* View.xib */,
 				0F00545A15C8FE8D000EBF67 /* ActivityTableViewCell.h */,
 				0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */,
+				0F00545E15C90315000EBF67 /* activityElementObject.h */,
+				0F00545F15C90315000EBF67 /* activityElementObject.m */,
 			);
 			name = "custom cell";
 			sourceTree = "<group>";
@@ -1259,6 +1265,7 @@
 				0FF6040815C7B6C600AE89CF /* PushNotificationHandler.h in Headers */,
 				0F6C5B1615C83C9200A95CEE /* ActivityTabeleViewController.h in Headers */,
 				0F00545C15C8FE8D000EBF67 /* ActivityTableViewCell.h in Headers */,
+				0F00546015C90315000EBF67 /* activityElementObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1529,6 +1536,7 @@
 				0FF6040915C7B6C600AE89CF /* PushNotificationHandler.m in Sources */,
 				0F6C5B1715C83C9200A95CEE /* ActivityTabeleViewController.m in Sources */,
 				0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */,
+				0F00546115C90315000EBF67 /* activityElementObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
