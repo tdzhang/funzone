@@ -15,7 +15,7 @@
 //Explore Function Part
 #pragma mark - Explore Part
 //ExploreViewController
-#define DEFAULT_IMAGE_REPLACEMENT @"monterey.jpg" //to replace the image which cannot get the data from the internet
+#define DEFAULT_IMAGE_REPLACEMENT @"iphone-icon-orangeblack-114.png" //to replace the image which cannot get the data from the internet
 #define EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH 310 //The width of the scroll view content
 #define EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT 20 //The height of the refresh view on the scroll view content
 #define EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_X 5 //The content x offset of the scroll view

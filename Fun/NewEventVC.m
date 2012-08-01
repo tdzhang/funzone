@@ -317,10 +317,18 @@
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
         // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        success.delegate=self;
+        //NSString *responseString = [block_request responseString];
+        //NSLog(@"%@",responseString);
+        
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }
+//        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//        success.delegate=self;
         //[success show];
     }];
     [request setFailedBlock:^{
@@ -397,6 +405,7 @@
             }
         }
     }
+    [request setPostValue:@"0" forKey:@"category_id"];
     [request setRequestMethod:@"POST"];
     [request startAsynchronous];
     
