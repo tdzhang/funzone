@@ -708,20 +708,20 @@
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
     //set event title
-    self.eventTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 185, 310, 40)];
-    [self.eventTitleLabel setText:self.event_title];
-    [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-    self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
-    self.eventTitleLabel.numberOfLines = 0;
+    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 185, 310, 40)];
+    [eventTitle setText:self.event_title];
+    [eventTitle setFont:[UIFont boldSystemFontOfSize:16]];
+    eventTitle.lineBreakMode = UILineBreakModeWordWrap;
+    eventTitle.numberOfLines = 0;
     CGSize maximumLabelSize1 = CGSizeMake(310,9999);    
     CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect newFrame1 = self.eventTitleLabel.frame;
+    CGRect newFrame1 = eventTitle.frame;
     newFrame1.size.height = expectedLabelSize1.height;
-    self.eventTitleLabel.frame = newFrame1;
-    [self.myScrollView addSubview:self.eventTitleLabel];
+    eventTitle.frame = newFrame1;
+    [self.myScrollView addSubview:eventTitle];
     
     //set seperator
-    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 1, 310)];
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 310, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
     [self.myScrollView addSubview:seperator];
     
