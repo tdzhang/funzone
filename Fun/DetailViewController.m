@@ -701,10 +701,44 @@
     [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
     [self.myScrollView addSubview:seperator];
     
-    //set time label
+    //set time label and clock icon
     [self.eventTimeLabel setText:self.event_time];
+    self.eventTimeLabel.frame = CGRectMake(10+12+5, seperator.frame.origin.y + 10, 230, 20);
+    [self.eventTimeLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.eventTimeLabel setTextColor:[UIColor darkGrayColor]];
+    self.eventTimeLabel.lineBreakMode = UILineBreakModeClip;
+    self.eventTimeLabel.numberOfLines = 1;
+    CGSize maximumLabelSize2 = CGSizeMake(230,9999);    
+    CGSize expectedLabelSize2 = [title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
+    CGRect newFrame2 = self.eventTimeLabel.frame;
+    newFrame2.size.height = expectedLabelSize2.height;
+    self.eventTimeLabel.frame = newFrame2;
+    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height/2 - 6, 12, 12)];
+    [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
+    [self.myScrollView addSubview:timeIcon];
 
-    [self.eventLocationLabel setText:locationName];
+    //set address section
+    [self.eventLocationLabel setText:self.location_name];
+    self.eventLocationLabel.frame = CGRectMake(10+12+5, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height +10, 230, 20);
+    [self.eventLocationLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.eventLocationLabel setTextColor:[UIColor darkGrayColor]];
+    self.eventLocationLabel.lineBreakMode = UILineBreakModeClip;
+    self.eventLocationLabel.numberOfLines = 1;
+    CGSize maximumLabelSize3 = CGSizeMake(230,9999);    
+    CGSize expectedLabelSize3 = [title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeClip];
+    CGRect newFrame3 = self.eventLocationLabel.frame;
+    newFrame3.size.height = expectedLabelSize3.height;
+    self.eventLocationLabel.frame = newFrame3;
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 8, 14)];
+    [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
+    [self.myScrollView addSubview:locationIcon];
+    UILabel *map_indicator = [[UILabel alloc] initWithFrame:CGRectMake(260, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-12, 30,24)];
+    [map_indicator setText:@"Map"];
+    [map_indicator setFont:[UIFont boldSystemFontOfSize:13]];
+    [map_indicator setTextColor:[UIColor lightGrayColor]];
+    [self.myScrollView addSubview:map_indicator];
+    //UIImageView right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, <#CGFloat y#>, 11, 14)]
+    
 
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
