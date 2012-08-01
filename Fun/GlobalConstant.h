@@ -98,7 +98,7 @@
 
 #pragma mark - category part(new event)
 //CategoryCHooseViewController
-#define CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION 0.5
+#define CATEGORY_CHOOSE_VC_FLASH_TRANSITION_DURATION 0.3
 #define CATEGORY_CHOOSE_VC_GOTO_FOOD_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
 #define GOTO_EVENT_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"
 #define CATEGORY_CHOOSE_VC_GOTO_ENTERTAIN_VIEWCONTROLLER_SNAPSHOT @"AddEventControllerSnapShot.png"

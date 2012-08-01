@@ -447,8 +447,35 @@
                 }
             }
         }
-        [request setPostValue:@"0" forKey:@"category_id"];
-#warning furthur category_id information need to be added into the createEvent connection to server
+        //decide the category_id
+        NSString *category_id=nil;
+        if ([category_id isEqualToString:@"movie"]) {
+            [request setPostValue:MOVIE forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"party"]) {
+            [request setPostValue:NIGHTLIFE forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"shopping"]) {
+            [request setPostValue:SHOPPING forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"sports"]) {
+            [request setPostValue:SPORTS forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"outdoor"]) {
+            [request setPostValue:OUTDOOR forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"entertain"]) {
+            [request setPostValue:ENTERTAIN forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"event"]) {
+            [request setPostValue:EVENTS forKey:@"category_id"];
+        }
+        else if ([category_id isEqualToString:@"food"]) {            [request setPostValue:FOOD forKey:@"category_id"];
+        }
+        else {
+            [request setPostValue:OTHERS forKey:@"category_id"];
+        }
+
         [request setRequestMethod:@"POST"];
         [request startAsynchronous];
         
