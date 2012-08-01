@@ -58,8 +58,8 @@
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
         // Use when fetching text data
-        //NSString *responseString = [block_request responseString];
-        //NSLog(@"%@",responseString);
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if (![self.lastReceivedJson isEqualToArray:json]) {
@@ -117,6 +117,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?followee_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,element.user_id,[defaults objectForKey:@"login_auth_token"]]];
+    if (!element.followed) {
+        //if not followed
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],element.user_id]];
+    }
     NSLog(@"request: %@",url);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
@@ -145,9 +149,19 @@
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
 
-    
-    [self.arrayProfileInfoElements removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    if (!self.other_user_id) {
+        [self.arrayProfileInfoElements removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
+    else{
+        if (element.followed) {
+            [[self.arrayProfileInfoElements objectAtIndex:indexPath.row] setFollowed:NO];
+        }
+        else{
+            [[self.arrayProfileInfoElements objectAtIndex:indexPath.row] setFollowed:YES];
+        }
+        [self.tableView reloadData];
+    }
     /* indexPath contains the index of the row containing the button */
     /* do whatever it is you need to do with the row data now */
 }
@@ -189,6 +203,12 @@
     cell.user_name=element.user_name;
     cell.user_pic=element.user_pic;
     cell.facebook_id=element.facebook_id;
+    if (element.followed) {
+        [cell.unfollowButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+    }
+    else{
+        [cell.unfollowButton setTitle:@"Follow" forState:UIControlStateNormal];
+    }
     [cell.unfollowButton addTarget: self
                             action: @selector(buttonPressed:withEvent:)
                   forControlEvents: UIControlEventTouchUpInside];
