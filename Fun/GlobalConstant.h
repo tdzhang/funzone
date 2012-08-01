@@ -200,7 +200,6 @@
 #define SHOPPING @"8"
 #define OTHERS @"0"
 
-
 //default image part
 #define DEFAULT_PROFILE_IMAGE_REPLACEMENT @"iphone-icon-orangeblack-114.png" //to replace the image which cannot get the data from the internet
 #define FOOD_REPLACEMENT  @"1"
