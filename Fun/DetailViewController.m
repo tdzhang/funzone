@@ -768,6 +768,7 @@
     [self.myScrollView addSubview:eventTime];
     UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(12, eventTime.frame.origin.y + eventTime.frame.size.height/2 - 6, 12, 12)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
+    [timeIcon setAlpha:0.7];
     [self.myScrollView addSubview:timeIcon];
 
     //set address section
@@ -783,8 +784,9 @@
     newFrame3.size.height = expectedLabelSize3.height;
     eventLocation.frame = newFrame3;
     [self.myScrollView addSubview:eventLocation];
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 8, 14)];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(13, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
+    [locationIcon setAlpha:0.7];
     [self.myScrollView addSubview:locationIcon];
     UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(260, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-12, 30,24)];
     [map_indicator_label setText:@"Map"];
@@ -792,11 +794,15 @@
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
     [self.myScrollView addSubview:map_indicator_label];
     UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 11, 14)];
+    [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
     [self.myScrollView addSubview:right_Arrow];
 
     CGRect newFrame = self.interestOrInviteButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.interestOrInviteButton.frame = newFrame;
+    UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+    like_icon.frame = CGRectMake(7, 5, 20, 20);
+    [self.interestOrInviteButton addSubview:like_icon];
     newFrame = self.pickOrEditButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.pickOrEditButton.frame = newFrame;
