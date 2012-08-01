@@ -218,5 +218,5 @@
 
 //icon files
 #define LOCATION_ICON @"07-map-marker.png"
-#define TIME_ICON @"1-clock.png"
+#define TIME_ICON @"11-clock.png"
 #define RIGHT_ARROW @"detailButton.png"

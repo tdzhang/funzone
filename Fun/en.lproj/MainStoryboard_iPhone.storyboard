@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -4450,15 +4450,6 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="MovieButtonClicked:"/>
-                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SelfDefineButtonClicked:"/>
-                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -4471,9 +4462,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -4542,7 +4530,6 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -4617,6 +4604,6 @@ Find us @OrangeParc.com</string>
         <segue reference="maZ-xV-hRy"/>
         <segue reference="Hfw-Db-bjl"/>
         <segue reference="nyH-Sx-6aU"/>
-        <segue reference="lqc-Cx-NBX"/>
+        <segue reference="eX7-7v-GIv"/>
     </inferredMetricsTieBreakers>
 </document>

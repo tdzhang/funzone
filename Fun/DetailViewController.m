@@ -721,25 +721,27 @@
     
 #warning fetch original creator info
     //show original creator
-    self.originalCreatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 145, 100, 25)];
-    
+    self.originalCreatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 145, 100, 25)];    
     self.event_title=title;
     self.event_time=time;
+    if ([self.event_time isEqualToString:@""]) {
+        self.event_time = [NSString stringWithFormat:@"TBD"];
+    }
     self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    if ([locationName isEqualToString:@""]) {
-        locationName = [NSString stringWithFormat:@"TBD"];
+    if ([self.location_name isEqualToString:@""]) {
+        self.location_name = [NSString stringWithFormat:@"TBD"];
     }
     self.longitude=[event objectForKey:@"longitude"];
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
     //set event title
-    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 185, 310, 40)];
+    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 190, 300, 40)];
     [eventTitle setText:self.event_title];
     [eventTitle setFont:[UIFont boldSystemFontOfSize:16]];
     eventTitle.lineBreakMode = UILineBreakModeWordWrap;
     eventTitle.numberOfLines = 0;
-    CGSize maximumLabelSize1 = CGSizeMake(310,9999);    
+    CGSize maximumLabelSize1 = CGSizeMake(300,9999);    
     CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame1 = eventTitle.frame;
     newFrame1.size.height = expectedLabelSize1.height;
@@ -747,50 +749,60 @@
     [self.myScrollView addSubview:eventTitle];
     
     //set seperator
-    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 310, 1)];
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, eventTitle.frame.origin.y+eventTitle.frame.size.height + 10, 310, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
     [self.myScrollView addSubview:seperator];
     
     //set time label and clock icon
-    self.eventTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10+12+5, seperator.frame.origin.y + 10, 230, 20)];
-    [self.eventTimeLabel setText:self.event_time];
-    [self.eventTimeLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [self.eventTimeLabel setTextColor:[UIColor darkGrayColor]];
-    self.eventTimeLabel.lineBreakMode = UILineBreakModeClip;
-    self.eventTimeLabel.numberOfLines = 1;
+    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(10+12+5, seperator.frame.origin.y + 10, 230, 20)];
+    [eventTime setText:self.event_time];
+    [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
+    [eventTime setTextColor:[UIColor darkGrayColor]];
+    eventTime.lineBreakMode = UILineBreakModeClip;
+    eventTime.numberOfLines = 1;
     CGSize maximumLabelSize2 = CGSizeMake(230,9999);    
     CGSize expectedLabelSize2 = [self.event_time sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame2 = self.eventTimeLabel.frame;
+    CGRect newFrame2 = eventTime.frame;
     newFrame2.size.height = expectedLabelSize2.height;
-    self.eventTimeLabel.frame = newFrame2;
-    [self.myScrollView addSubview:self.eventTimeLabel];
-    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height/2 - 6, 12, 12)];
+    eventTime.frame = newFrame2;
+    [self.myScrollView addSubview:eventTime];
+    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(12, eventTime.frame.origin.y + eventTime.frame.size.height/2 - 6, 12, 12)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
     [self.myScrollView addSubview:timeIcon];
 
     //set address section
-    self.eventLocationLabel = [[UILabel alloc] initWithFrame: CGRectMake(10+12+5, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height +10, 230, 20)];
-    [self.eventLocationLabel setText:self.location_name];
-    [self.eventLocationLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [self.eventLocationLabel setTextColor:[UIColor darkGrayColor]];
-    self.eventLocationLabel.lineBreakMode = UILineBreakModeClip;
-    self.eventLocationLabel.numberOfLines = 1;
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(10+12+5, eventTime.frame.origin.y + eventTime.frame.size.height +10, 230, 20)];
+    [eventLocation setText:self.location_name];
+    [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
+    [eventLocation setTextColor:[UIColor darkGrayColor]];
+    eventLocation.lineBreakMode = UILineBreakModeClip;
+    eventLocation.numberOfLines = 1;
     CGSize maximumLabelSize3 = CGSizeMake(230,9999);    
     CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame3 = self.eventLocationLabel.frame;
+    CGRect newFrame3 = eventLocation.frame;
     newFrame3.size.height = expectedLabelSize3.height;
-    self.eventLocationLabel.frame = newFrame3;
-    [self.myScrollView addSubview:self.eventLocationLabel];
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 8, 14)];
+    eventLocation.frame = newFrame3;
+    [self.myScrollView addSubview:eventLocation];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
     [self.myScrollView addSubview:locationIcon];
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(260, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-12, 30,24)];
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(260, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-12, 30,24)];
     [map_indicator_label setText:@"Map"];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
     [self.myScrollView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 11, 14)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 11, 14)];
     [self.myScrollView addSubview:right_Arrow];
+
+    CGRect newFrame = self.interestOrInviteButton.frame;
+    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+    self.interestOrInviteButton.frame = newFrame;
+    newFrame = self.pickOrEditButton.frame;
+    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+    self.pickOrEditButton.frame = newFrame;
+    newFrame = self.shareButton.frame;
+    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+    self.shareButton.frame = newFrame;
 
     //set event image
     NSURL *url=[NSURL URLWithString:photo];
