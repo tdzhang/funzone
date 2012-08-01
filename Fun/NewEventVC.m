@@ -535,7 +535,7 @@
 - (void)request:(FBRequest *)request didLoad:(id)result {
         NSLog(@"%@",result);
         NSString *photo=[result objectForKey:@"picture"];
-        NSString *facebook_user_id=[result objectForKey:@"id"];
+        //NSString *facebook_user_id=[result objectForKey:@"id"];
         //set the user photo
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {

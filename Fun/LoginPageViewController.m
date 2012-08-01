@@ -54,6 +54,7 @@
     
     //delete notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [PushNotificationHandler SendAPNStokenToServer];
 }
 
 - (void)viewDidLoad

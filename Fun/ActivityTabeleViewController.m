@@ -28,6 +28,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //get the notification list from the server
+    #warning need add notification fetching from server implementation
     //reset the tabbat notification number
     [PushNotificationHandler clearApplicationPushNotifNumber];
     [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];

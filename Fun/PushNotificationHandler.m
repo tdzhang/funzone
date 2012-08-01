@@ -9,16 +9,7 @@
 #import "PushNotificationHandler.h"
 
 @implementation PushNotificationHandler
-static NSArray* notifications;
-static bool isFetchingData=false;
 
-+(void)StartFetchingNotificationsFromServer{
-    isFetchingData=true;
-    NSLog(@"fetching notification from server");
-    //deal with notifications
-#warning need to fetching notif from sever, and then set the isFetchingData to false, reload the activity data source
-    //note: this action need to be make sure only called onece
-}
 
 +(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController{
     //set the number of the tab bar
@@ -28,10 +19,6 @@ static bool isFetchingData=false;
         [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
     }
     
-    //start fetching data
-    if([[UIApplication sharedApplication] applicationIconBadgeNumber]>0&&(!isFetchingData)){
-        [PushNotificationHandler StartFetchingNotificationsFromServer];
-    }
 }
 
 +(void)ProcessNotificationUserInfo:(NSDictionary *)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController{
@@ -46,6 +33,57 @@ static bool isFetchingData=false;
 +(void)SendeAPNStokenToServer:(NSString*) newToken{
     NSLog(@"send the apns token to the sever");
     //handle the new token
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+    }];
+    
+    //add login auth_token //add content
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"login_auth_token"]) {
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:newToken forKey:@"device_token"];
+        [request setRequestMethod:@"POST"];
+        [request startAsynchronous];
+    }
+    else{
+        [defaults setValue:newToken forKey:@"push_notification_token"];
+        [defaults synchronize];
+    }
+}
+
++(void)SendAPNStokenToServer{
+    NSLog(@"send old apns token to the sever");
+    //handle the new token
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+    }];
+    
+    //add login auth_token //add content
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"login_auth_token"]&&[defaults objectForKey:@"push_notification_token"]) {
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:[defaults objectForKey:@"push_notification_token"] forKey:@"device_token"];
+        [request setRequestMethod:@"POST"];
+        [request startAsynchronous];
+    }
 }
 
 +(void)clearApplicationPushNotifNumber{

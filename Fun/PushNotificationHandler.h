@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ASIFormDataRequest.h"
+#import "GlobalConstant.h"
 
 @interface PushNotificationHandler : NSObject
-//fetching notification from server
-+(void)StartFetchingNotificationsFromServer;
 
 //make the badeg number of activity adn application same
 +(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController;
@@ -23,4 +23,7 @@
 
 //clear the pushnotification numbver
 +(void)clearApplicationPushNotifNumber;
+
+//send the last token to the server with token
++(void)SendAPNStokenToServer;
 @end
