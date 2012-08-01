@@ -82,6 +82,7 @@
 #define EXPLORE_BLOCK_ELEMENT_SEPERATOR_WIDTH 320
 #define EXPLORE_BLOCK_ELEMENT_SEPERATOR_HEIGHT 1
 #define EXPLORE_BLOCK_ELEMENT_SEPERATOR_IMAGE @"seperator.png"
+#define TEXTURE_IMAGE @"texture.png"
 
 //the Event Detail Part
 #pragma mark - Event Detail part
