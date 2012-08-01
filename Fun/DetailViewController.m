@@ -192,6 +192,10 @@
     [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
 }
 
+- (IBAction)PickButtonClicked:(id)sender {
+    [self performSegueWithIdentifier:@"repin to create new event" sender:self];
+}
+
 - (IBAction)shareButton:(UIButton *)sender {
     //give user several way to share
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"Wechat", nil];

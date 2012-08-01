@@ -112,8 +112,8 @@
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
         // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
+        //NSString *responseString = [block_request responseString];
+        //NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if (![self.lastReceivedJson_profile isEqualToDictionary:json]) {
