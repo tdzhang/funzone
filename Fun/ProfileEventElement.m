@@ -20,7 +20,37 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 
-+(ProfileEventElement *)initialWithPositionY:(int)index eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance:(float)distance{
++(ProfileEventElement *)initialWithPositionY:(int)index eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance:(float)distance withCategory:(NSString *)event_category{
+    
+    NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
+    if ([event_category isEqualToString:FOOD]) {
+        DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:MOVIE]){
+        DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SPORTS]){
+        DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:NIGHTLIFE]){
+        DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OUTDOOR]){
+        DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:ENTERTAIN]){
+        DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SHOPPING]){
+        DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OTHERS]){
+        DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
+    }
+    else if(!event_category){
+        DEFAULT_IMAGE_REPLACEMENT=NILL_REPLACEMENT;
+    }
+
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(5 + 155*(index%2),(index/2)*PROFILE_ELEMENT_VIEW_HEIGHT, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];

@@ -370,7 +370,7 @@
                     if (imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                         imageData=UIImagePNGRepresentation(image);
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
@@ -577,6 +577,7 @@
     NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
     NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
     NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+    NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
     NSLog(@"%@",creator_id);
     self.creator_id=creator_id;
     //handle the interest people part
@@ -585,12 +586,32 @@
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
     
-    //NSLog(@"%@",title);
-    //NSLog(@"%@",description);
-    //NSLog(@"%@",photo);
-    //NSLog(@"%@",time);
-    //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-    //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+    NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
+    if ([event_category isEqualToString:FOOD]) {
+        DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:MOVIE]){
+        DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SPORTS]){
+        DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:NIGHTLIFE]){
+        DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OUTDOOR]){
+        DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:ENTERTAIN]){
+        DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SHOPPING]){
+        DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OTHERS]){
+        DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
+    }
+    
     NSString *locationName=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
     self.location_name=locationName;
     NSString *address=[event objectForKey:@"address"];

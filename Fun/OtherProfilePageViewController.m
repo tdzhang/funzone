@@ -431,6 +431,7 @@
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
             NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+            NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
             CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
             [current_location_manager startMonitoringSignificantLocationChanges];
@@ -464,7 +465,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
                                 ;
                                 //refresh the whole view
                                 NSLog(@"profile0:%d",[self.blockViews count]);
@@ -478,7 +479,7 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
                                 //refresh the whole view
                                 NSLog(@"profile1:%d",[self.blockViews count]);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
@@ -489,7 +490,7 @@
             }
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
-                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     NSLog(@"profile2:%d",[self.blockViews count]);
                     [self addMoreDataToTheMainScrollViewSUbviews];

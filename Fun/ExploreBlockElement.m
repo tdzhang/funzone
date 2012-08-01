@@ -25,6 +25,8 @@
 @synthesize shared_event_id=_shared_event_id;
 @synthesize locationLabel=_locationLabel;
 @synthesize creator_id=_creator_id;
+@synthesize event_category=_event_category;
+
 
 //reset the fram of a element's block view
 -(void) resetFramWith:(CGFloat)position_y{
@@ -32,8 +34,34 @@
 }
 
 //generate a explore block element
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id{
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category{
     
+    //choose the default image when facing others
+    NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
+    if ([event_category isEqualToString:FOOD]) {
+        DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:MOVIE]){
+        DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SPORTS]){
+        DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:NIGHTLIFE]){
+        DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OUTDOOR]){
+        DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:ENTERTAIN]){
+        DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:SHOPPING]){
+        DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
+    }
+    else if([event_category isEqualToString:OTHERS]){
+        DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
+    }
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
     //initial the blockElement frame

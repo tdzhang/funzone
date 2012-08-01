@@ -319,7 +319,7 @@
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
                 
-                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData)[self.cacheImage setObject:imageData forKey:url];
                 dispatch_async( dispatch_get_main_queue(),^{
@@ -355,7 +355,7 @@
         [self.delegate ChooseUIImage:image  WithUrlName:urlString From:self];
     } 
     else {
-        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
         [self.delegate ChooseUIImage:image  WithUrlName:nil From:self];
     }
 }

@@ -15,7 +15,6 @@
 //Explore Function Part
 #pragma mark - Explore Part
 //ExploreViewController
-#define DEFAULT_IMAGE_REPLACEMENT @"iphone-icon-orangeblack-114.png" //to replace the image which cannot get the data from the internet
 #define EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH 310 //The width of the scroll view content
 #define EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT 20 //The height of the refresh view on the scroll view content
 #define EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_X 5 //The content x offset of the scroll view
@@ -190,3 +189,28 @@
 #define VIEW_BOOKMARKS 105   // via
 #define UNFOLLOW_SOMEONE 106 // via
 #define SHOW_INTERESTS 107
+
+//category id mapping information
+#define FOOD  @"1"
+#define MOVIE  @"2"
+#define SPORTS  @"3"
+#define NIGHTLIFE  @"4"
+#define OUTDOOR  @"5"
+#define ENTERTAIN  @"6"
+#define EVENTS  @"7"
+#define SHOPPING @"8"
+#define OTHERS @"0"
+
+
+//default image part
+#define DEFAULT_PROFILE_IMAGE_REPLACEMENT @"iphone-icon-orangeblack-114.png" //to replace the image which cannot get the data from the internet
+#define FOOD_REPLACEMENT  @"1"
+#define MOVIE_REPLACEMENT  @"2"
+#define SPORTS_REPLACEMENT  @"3"
+#define NIGHTLIFE_REPLACEMENT  @"4"
+#define OUTDOOR_REPLACEMENT  @"5"
+#define ENTERTAIN_REPLACEMENT  @"6"
+#define EVENTS_REPLACEMENT  @"7"
+#define SHOPPING_REPLACEMENT @"8"
+#define OTHERS_REPLACEMENT @"iphone-logo-114.png"
+#define NILL_REPLACEMENT @""  //used for myparc default event image

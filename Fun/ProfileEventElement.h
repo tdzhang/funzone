@@ -23,5 +23,5 @@
 @property(nonatomic,strong)NSString *shared_event_id;
 
 
-+(ProfileEventElement *)initialWithPositionY:(int)index eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance: (float)distance;
++(ProfileEventElement *)initialWithPositionY:(int)index eventImageURL:(NSString *)eventImageURL tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withDistance: (float)distance withCategory:(NSString *)event_category;
 @end
