@@ -716,6 +716,7 @@
 - (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
     NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    NSLog(@"###%d",[enteredText length]);
     if ([enteredText length]==0) {
         [self.labelEventTitleHolder setHidden:NO];
     }
@@ -726,6 +727,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.25];
     
+    [self.labelEventTitleHolder setHidden:YES];
     CGRect frame = self.keyboardToolbar.frame;
     frame.origin.y = self.view.frame.size.height - 260.0;
     self.keyboardToolbar.frame = frame;
