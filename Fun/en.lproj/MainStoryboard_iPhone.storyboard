@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -1592,7 +1592,7 @@ Find us @OrangeParc.com</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="8kQ-9J-BdD">
-                                        <rect key="frame" x="0.0" y="139" width="320" height="91"/>
+                                        <rect key="frame" x="0.0" y="139" width="320" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="cBz-O5-fEj">
@@ -1616,10 +1616,6 @@ Find us @OrangeParc.com</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="seperator.png" id="djU-OH-Xdn">
-                                        <rect key="frame" x="10" y="230" width="300" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FCz-IF-S0G">
                                         <rect key="frame" x="17" y="238" width="90" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1665,45 +1661,6 @@ Find us @OrangeParc.com</string>
                                             <action selector="shareButton:" destination="BPi-pg-2E0" eventType="touchUpInside" id="39G-5c-lYL"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" id="ENB-DK-WNB">
-                                        <rect key="frame" x="0.0" y="271" width="320" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="NUC-ux-N5k">
-                                                <rect key="frame" x="33" y="6" width="150" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="vgz-Ir-HNe">
-                                        <rect key="frame" x="0.0" y="303" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LrL-xH-Xzc">
-                                                <rect key="frame" x="32" y="5" width="229" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1716,8 +1673,6 @@ Find us @OrangeParc.com</string>
                         <outlet property="contributorNameLabel" destination="cBz-O5-fEj" id="gDh-sQ-rax"/>
                         <outlet property="creatorProfileImageView" destination="xIW-oE-umD" id="SBT-AI-dMV"/>
                         <outlet property="eventImageView" destination="lnT-2H-pye" id="1vS-aq-XMO"/>
-                        <outlet property="eventLocationLabel" destination="LrL-xH-Xzc" id="4m4-tg-KFa"/>
-                        <outlet property="eventTimeLabel" destination="NUC-ux-N5k" id="vvN-Ih-fZW"/>
                         <outlet property="interestOrInviteButton" destination="FCz-IF-S0G" id="Jbv-64-fko"/>
                         <outlet property="myScrollView" destination="ODl-hu-66N" id="oS3-2F-YcI"/>
                         <outlet property="originalCreatorLabel" destination="TN1-Tq-wZc" id="TkE-48-m7j"/>
@@ -4540,9 +4495,6 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="PickButtonClicked:"/>
-                <relationship kind="action" name="interestedButtonClicked:"/>
-                <relationship kind="action" name="shareButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>

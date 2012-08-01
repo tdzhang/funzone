@@ -580,7 +580,6 @@
     //renew the 10 newest features!!!!
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"%@",event);
     //get the detail information
     NSString *title=[event objectForKey:@"title"];
     //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
@@ -685,15 +684,14 @@
     
     self.event_title=title;
     self.event_time=time;
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";    
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+    if ([locationName isEqualToString:@""]) {
+        locationName = [NSString stringWithFormat:@"TBD"];
+    }
     self.longitude=[event objectForKey:@"longitude"];
     self.latitude=[event objectForKey:@"latitude"];
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
-    //set the content on the screen
-    if ([locationName isEqualToString:@""]) {
-        locationName = [NSString stringWithFormat:@"TBD"];
-    }
     //set event title
     self.eventTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 185, 310, 40)];
     [self.eventTitleLabel setText:self.event_title];
@@ -701,7 +699,7 @@
     self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.eventTitleLabel.numberOfLines = 0;
     CGSize maximumLabelSize1 = CGSizeMake(310,9999);    
-    CGSize expectedLabelSize1 = [title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+    CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame1 = self.eventTitleLabel.frame;
     newFrame1.size.height = expectedLabelSize1.height;
     self.eventTitleLabel.frame = newFrame1;
@@ -713,33 +711,35 @@
     [self.myScrollView addSubview:seperator];
     
     //set time label and clock icon
+    self.eventTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10+12+5, seperator.frame.origin.y + 10, 230, 20)];
     [self.eventTimeLabel setText:self.event_time];
-    self.eventTimeLabel.frame = CGRectMake(10+12+5, seperator.frame.origin.y + 10, 230, 20);
     [self.eventTimeLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [self.eventTimeLabel setTextColor:[UIColor darkGrayColor]];
     self.eventTimeLabel.lineBreakMode = UILineBreakModeClip;
     self.eventTimeLabel.numberOfLines = 1;
     CGSize maximumLabelSize2 = CGSizeMake(230,9999);    
-    CGSize expectedLabelSize2 = [title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
+    CGSize expectedLabelSize2 = [self.event_time sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
     CGRect newFrame2 = self.eventTimeLabel.frame;
     newFrame2.size.height = expectedLabelSize2.height;
     self.eventTimeLabel.frame = newFrame2;
+    [self.myScrollView addSubview:self.eventTimeLabel];
     UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height/2 - 6, 12, 12)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
     [self.myScrollView addSubview:timeIcon];
 
     //set address section
+    self.eventLocationLabel = [[UILabel alloc] initWithFrame: CGRectMake(10+12+5, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height +10, 230, 20)];
     [self.eventLocationLabel setText:self.location_name];
-    self.eventLocationLabel.frame = CGRectMake(10+12+5, self.eventTimeLabel.frame.origin.y + self.eventTimeLabel.frame.size.height +10, 230, 20);
     [self.eventLocationLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [self.eventLocationLabel setTextColor:[UIColor darkGrayColor]];
     self.eventLocationLabel.lineBreakMode = UILineBreakModeClip;
     self.eventLocationLabel.numberOfLines = 1;
     CGSize maximumLabelSize3 = CGSizeMake(230,9999);    
-    CGSize expectedLabelSize3 = [title sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeClip];
+    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeClip];
     CGRect newFrame3 = self.eventLocationLabel.frame;
     newFrame3.size.height = expectedLabelSize3.height;
     self.eventLocationLabel.frame = newFrame3;
+    [self.myScrollView addSubview:self.eventLocationLabel];
     UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
     [self.myScrollView addSubview:locationIcon];
@@ -751,7 +751,6 @@
     UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, self.eventLocationLabel.frame.origin.y + self.eventLocationLabel.frame.size.height/2-7, 11, 14)];
     [self.myScrollView addSubview:right_Arrow];
 
-    //set original creator name
     //set event image
     NSURL *url=[NSURL URLWithString:photo];
     if (![Cache isURLCached:url]) {
