@@ -4629,15 +4629,6 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="MovieButtonClicked:"/>
-                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SelfDefineButtonClicked:"/>
-                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -4714,9 +4705,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="MoreTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signOutButtonClicked:"/>
-            </relationships>
         </class>
         <class className="MovieAotoCompletionVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
@@ -4727,11 +4715,6 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
-                <relationship kind="action" name="CreateEventToSever:"/>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
-                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>

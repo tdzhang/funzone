@@ -225,38 +225,47 @@
 
 //handle the action: interestedButtonClicked
 - (IBAction)interestedButtonClicked:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
-    NSLog(@"request: %@",url);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Interest showed" message: [NSString stringWithFormat:@"Your Interested is upload to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            success.delegate=self;
-            [success show];
-        }
-        else {
-            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            unsuccess.delegate=self;
-            [unsuccess show];
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
-    }];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    if (self.isEventOwner) {
+        //if is event owner, this button is invite people, need action sheet to do this
+        //give user several way to invite friend
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Invite Friend:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"via Email",@"via SMS Message",@"Wechat", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    else {
+        //send interest information to server
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        NSLog(@"request: %@",url);
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        __block ASIFormDataRequest *block_request=request;
+        [request setCompletionBlock:^{
+            // Use when fetching text data
+            NSString *responseString = [block_request responseString];
+            NSLog(@"%@",responseString);
+            NSError *error;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+            if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Interest showed" message: [NSString stringWithFormat:@"Your Interested is upload to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                success.delegate=self;
+                [success show];
+            }
+            else {
+                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                unsuccess.delegate=self;
+                [unsuccess show];
+            }
+        }];
+        [request setFailedBlock:^{
+            NSError *error = [block_request error];
+            NSLog(@"%@",error.description);
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }];
+        [request setRequestMethod:@"GET"];
+        [request startAsynchronous];
+    }
 }
 
 #pragma mark - action sheet related stuff
@@ -343,8 +352,25 @@
             
         }
     }
-    
-    
+    else if ([actionSheet.title isEqualToString:@"Invite Friend:"]){
+        if(buttonIndex == 0){
+            //email invite
+            NSLog(@"email invite");
+            self.preDefinedMode=@"email";
+            [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+        }
+        else if(buttonIndex == 1){
+            //sms invite
+            NSLog(@"SMS message invite");
+            self.preDefinedMode=@"message";
+            [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+        }
+        else if (buttonIndex ==2){
+            //WeChat Invite
+            //send message to friend
+            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+        }
+    }
 }
 
 #pragma mark - comment handle part
