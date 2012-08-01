@@ -308,6 +308,10 @@
         [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id];
         [detailVC preSetServerLogViaParameter:VIA_OTHERS_PROFILE];
     }
+    else if([segue.identifier isEqualToString:@"viewFollowingUser"]){
+        MyFollowingTableViewController* VC=(MyFollowingTableViewController *)segue.destinationViewController;
+        [VC setOther_user_id:self.creator_id];
+    }
 }
 
 #pragma mark - implement the UIScrollViewDelegate

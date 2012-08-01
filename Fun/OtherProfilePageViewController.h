@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DetailViewController.h"
 #import "ProfileEventElement.h"
+#import "MyFollowingTableViewController.h"
 
 @interface OtherProfilePageViewController : UIViewController<UIScrollViewDelegate>
 

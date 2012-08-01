@@ -16,6 +16,7 @@
 @implementation MyFollowingTableViewController
 @synthesize arrayProfileInfoElements=_arrayProfileInfoElements;
 @synthesize lastReceivedJson=_lastReceivedJson;
+@synthesize other_user_id=_other_user_id;
 
 #pragma mark - self defined setter getter
 -(NSArray *)arrayProfileInfoElements{
@@ -49,6 +50,10 @@
     //query the user profile information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+    if (self.other_user_id) {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.other_user_id]];
+    }
+    NSLog(@"request following:%@",url);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
