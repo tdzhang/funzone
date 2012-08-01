@@ -663,9 +663,27 @@
     if ([locationName isEqualToString:@""]) {
         locationName = [NSString stringWithFormat:@"TBD"];
     }
-    [self.eventLocationLabel setText:locationName];
-    [self.eventTimeLabel setText:self.event_time];
+    //set event title
     [self.eventTitleLabel setText:self.event_title];
+    self.eventTitleLabel.frame =CGRectMake(5, 185, 310, 40);
+    [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.eventTitleLabel.numberOfLines = 0;
+    CGSize maximumLabelSize1 = CGSizeMake(310,9999);    
+    CGSize expectedLabelSize1 = [title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+    CGRect newFrame1 = self.eventTitleLabel.frame;
+    newFrame1.size.height = expectedLabelSize1.height;
+    self.eventTitleLabel.frame = newFrame1;
+    
+    //set seperator
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 1, 310)];
+    [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
+    [self.myScrollView addSubview:seperator];
+    
+    //set time label
+    [self.eventTimeLabel setText:self.event_time];
+
+    [self.eventLocationLabel setText:locationName];
 
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
