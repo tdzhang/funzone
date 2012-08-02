@@ -62,6 +62,14 @@
 @synthesize lastReceivedJson_bookmark=_lastReceivedJson_bookmark;
 @synthesize lastReceivedJson_profile=_lastReceivedJson_profile;
 
+
+-(CLLocationManager *)current_location_manager{
+    if (!_current_location_manager) {
+        _current_location_manager=[[CLLocationManager alloc] init];
+    }
+    return _current_location_manager;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -501,11 +509,10 @@
                 NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
                 NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-                CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
-                [current_location_manager startMonitoringSignificantLocationChanges];
-                CLLocation *current_location = current_location_manager.location;
+
+                [self.current_location_manager startMonitoringSignificantLocationChanges];
+                CLLocation *current_location = self.current_location_manager.location;
                 CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-                self.current_location_manager=current_location_manager;
                 
                 if (!title) {
                     continue;
@@ -594,11 +601,11 @@
             NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
             
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-            CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
-            [current_location_manager startMonitoringSignificantLocationChanges];
-            CLLocation *current_location = current_location_manager.location;
+
+            [self.current_location_manager startMonitoringSignificantLocationChanges];
+            CLLocation *current_location = self.current_location_manager.location;
             CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-            self.current_location_manager=current_location_manager;
+
             
             if (!title) {
                 continue;
