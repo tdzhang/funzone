@@ -396,8 +396,10 @@
     [request setRequestMethod:@"POST"];
     [request startAsynchronous];
     
-    //go to the next page
-    [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+    //go to my parc
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    [funAppdelegate.thisTabBarController setSelectedIndex:3];
 }
 
 
