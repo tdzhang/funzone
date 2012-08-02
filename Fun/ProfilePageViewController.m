@@ -31,8 +31,6 @@
 
 @property(nonatomic,strong)NSDictionary* lastReceivedJson_profile; //used to limite the refresh frequecy
 @property(nonatomic,strong)NSArray* lastReceivedJson_bookmark; //used to limite the refresh frequecy
-
-
 @end
 
 @implementation ProfilePageViewController

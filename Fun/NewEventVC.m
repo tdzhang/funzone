@@ -1031,9 +1031,9 @@
     //[self.buttonLocation setTitle:locationDescription forState:UIControlStateNormal];
     //[self.locationLabel setText:[NSString stringWithFormat:@"lati:%f; long%f",annotation.coordinate.latitude,annotation.coordinate.longitude]];
     
-    [self.mapViewFeedBackImageView setImage:image];
-    [self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
-    [self.mapViewFeedBackImageView setHidden:NO];
+    //[self.mapViewFeedBackImageView setImage:image];
+    //[self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
+    //[self.mapViewFeedBackImageView setHidden:NO];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
     self.detail_latitude=[NSNumber numberWithFloat:[self.createEvent_latitude floatValue]];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
