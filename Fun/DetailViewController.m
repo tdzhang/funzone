@@ -394,7 +394,7 @@
     if ([self.interestedPeople count]>0) {
         UIView *interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [interested_people_label_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [interestedPeopleLable setText:[NSString stringWithFormat:@"%d interested",[self.interestedPeople count]]];
         [interestedPeopleLable setFont:[UIFont boldSystemFontOfSize:15]];
         [interestedPeopleLable setTextColor:[UIColor darkGrayColor]];

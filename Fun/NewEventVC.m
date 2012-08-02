@@ -701,9 +701,15 @@
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
-        [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:16]];
-        [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
-        [self.timeIcon setAlpha:0.8];
+        if (buttonIndex == 5) {
+            [self.labelEventTime setFont:[UIFont italicSystemFontOfSize:16]];
+            [self.labelEventTime setTextColor:[UIColor lightGrayColor]];
+            [self.timeIcon setAlpha:0.4];
+        }else {
+            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:16]];
+            [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+            [self.timeIcon setAlpha:0.8];
+        }
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
