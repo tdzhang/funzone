@@ -23,6 +23,7 @@
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
+@property (nonatomic) BOOL isViewAppearConnection;
 @property (nonatomic) int refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
@@ -48,6 +49,7 @@
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
+@synthesize isViewAppearConnection=_isViewAppearConnection;
 @synthesize refresh_page_num=_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
@@ -185,6 +187,7 @@
     //quest the most recent 10 events
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
+    self.isViewAppearConnection=YES;
     NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id];
     NSLog(@"%@",request_string);
     NSURLRequest* URLrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -371,6 +374,7 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         self.freshConnectionType=@"New";
+        self.isViewAppearConnection=NO;
         [connection start];
     }
     //add more of the featured event
@@ -466,10 +470,12 @@
             //do nothing here, if there is no diff
             self.refresh_page_num=2;
             self.freshConnectionType=@"not";
-            for (UIView *view in [self.mainScrollView subviews]) {
-                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-                [self.garbageCollection addObject:view];
+            if (!self.isViewAppearConnection) {
+                for (UIView *view in [self.mainScrollView subviews]) {
+                    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                    //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
+                    [self.garbageCollection addObject:view];
+                }
             }
         }
         else{
