@@ -111,6 +111,14 @@
 		460ED7F415C8F51B00893597 /* share-facebook-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7F215C8F51B00893597 /* share-facebook-off.png */; };
 		460ED7FB15C8F5D700893597 /* detail-interested-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7FA15C8F5D700893597 /* detail-interested-gray.png */; };
 		460ED7FE15C8F5DE00893597 /* detail-pick-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 460ED7FD15C8F5DE00893597 /* detail-pick-gray.png */; };
+		462B842D15CB10EB0009F816 /* administrator_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B842C15CB10EB0009F816 /* administrator_40.png */; };
+		462B843015CB111D0009F816 /* administrator_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B842F15CB111D0009F816 /* administrator_30.png */; };
+		462B843215CB114F0009F816 /* hand_thumbsup_30.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843115CB114F0009F816 /* hand_thumbsup_30.png */; };
+		462B843415CB122D0009F816 /* zoom_in_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843315CB122D0009F816 /* zoom_in_40.png */; };
+		462B843615CB124F0009F816 /* wizard_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843515CB124F0009F816 /* wizard_40.png */; };
+		462B843815CB128E0009F816 /* gear_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843715CB128E0009F816 /* gear_40.png */; };
+		462B843A15CB12E60009F816 /* help_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843915CB12E60009F816 /* help_40.png */; };
+		462B843C15CB16AD0009F816 /* info_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 462B843B15CB16AD0009F816 /* info_40.png */; };
 		4633375315C5E5AB00ACFAE8 /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375215C5E5AB00ACFAE8 /* 18-envelope.png */; };
 		4633375515C5E6C400ACFAE8 /* 145-persondot.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375415C5E6C400ACFAE8 /* 145-persondot.png */; };
 		4633375715C5E73600ACFAE8 /* OrangeParc-WeChat28.png in Resources */ = {isa = PBXBuildFile; fileRef = 4633375615C5E73600ACFAE8 /* OrangeParc-WeChat28.png */; };
@@ -406,6 +414,14 @@
 		460ED7F215C8F51B00893597 /* share-facebook-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-facebook-off.png"; sourceTree = "<group>"; };
 		460ED7FA15C8F5D700893597 /* detail-interested-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-interested-gray.png"; sourceTree = "<group>"; };
 		460ED7FD15C8F5DE00893597 /* detail-pick-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-pick-gray.png"; sourceTree = "<group>"; };
+		462B842C15CB10EB0009F816 /* administrator_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = administrator_40.png; sourceTree = "<group>"; };
+		462B842F15CB111D0009F816 /* administrator_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = administrator_30.png; sourceTree = "<group>"; };
+		462B843115CB114F0009F816 /* hand_thumbsup_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hand_thumbsup_30.png; sourceTree = "<group>"; };
+		462B843315CB122D0009F816 /* zoom_in_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoom_in_40.png; sourceTree = "<group>"; };
+		462B843515CB124F0009F816 /* wizard_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wizard_40.png; sourceTree = "<group>"; };
+		462B843715CB128E0009F816 /* gear_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear_40.png; sourceTree = "<group>"; };
+		462B843915CB12E60009F816 /* help_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_40.png; sourceTree = "<group>"; };
+		462B843B15CB16AD0009F816 /* info_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_40.png; sourceTree = "<group>"; };
 		4633375215C5E5AB00ACFAE8 /* 18-envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-envelope.png"; sourceTree = "<group>"; };
 		4633375415C5E6C400ACFAE8 /* 145-persondot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "145-persondot.png"; sourceTree = "<group>"; };
 		4633375615C5E73600ACFAE8 /* OrangeParc-WeChat28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OrangeParc-WeChat28.png"; sourceTree = "<group>"; };
@@ -1111,6 +1127,7 @@
 				4633375215C5E5AB00ACFAE8 /* 18-envelope.png */,
 				0F5A84D615BA0B59000BD0FF /* 29-heart.png */,
 				0FF00A3515B49F4D000D68C3 /* 86-camera.png */,
+				462B843915CB12E60009F816 /* help_40.png */,
 				9256610815C8FB4B00BED665 /* ActivityGrey.png */,
 				46D2BC9615C9BB7700E14FE7 /* ActivityGrey@2x.png */,
 				9256610915C8FB4B00BED665 /* ActivityOrange.png */,
@@ -1218,6 +1235,13 @@
 				0F1401DC15C487B20080DA38 /* thumbnail_layer.png */,
 				4668A7B41594491900713A4C /* time.png */,
 				92B2FF6115BE65EA003E8290 /* twitter-bird-white-on-blue.png */,
+				462B842C15CB10EB0009F816 /* administrator_40.png */,
+				462B842F15CB111D0009F816 /* administrator_30.png */,
+				462B843115CB114F0009F816 /* hand_thumbsup_30.png */,
+				462B843315CB122D0009F816 /* zoom_in_40.png */,
+				462B843515CB124F0009F816 /* wizard_40.png */,
+				462B843715CB128E0009F816 /* gear_40.png */,
+				462B843B15CB16AD0009F816 /* info_40.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1494,6 +1518,14 @@
 				4661DAED15CA75E100E898A7 /* detail-edit-color.png in Resources */,
 				9284699815CA786600556004 /* detail-edit-color.png in Resources */,
 				9284699D15CA7A5700556004 /* detail-invite-color.png in Resources */,
+				462B842D15CB10EB0009F816 /* administrator_40.png in Resources */,
+				462B843015CB111D0009F816 /* administrator_30.png in Resources */,
+				462B843215CB114F0009F816 /* hand_thumbsup_30.png in Resources */,
+				462B843415CB122D0009F816 /* zoom_in_40.png in Resources */,
+				462B843615CB124F0009F816 /* wizard_40.png in Resources */,
+				462B843815CB128E0009F816 /* gear_40.png in Resources */,
+				462B843A15CB12E60009F816 /* help_40.png in Resources */,
+				462B843C15CB16AD0009F816 /* info_40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
