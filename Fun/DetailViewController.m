@@ -521,7 +521,7 @@
         
         //        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 0)];
+        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 0)];
         NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
@@ -549,7 +549,7 @@
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 290, 0)];
+        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 290, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];
         [comment_content_label setFont:[UIFont systemFontOfSize:14]];
@@ -751,7 +751,7 @@
     self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
     
     //set event title
-    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 195, 300, 40)];
+    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(18, 200, 300, 40)];
     [eventTitle setText:self.event_title];
     [eventTitle setFont:[UIFont boldSystemFontOfSize:16]];
     eventTitle.lineBreakMode = UILineBreakModeWordWrap;
