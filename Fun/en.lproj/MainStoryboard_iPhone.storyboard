@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -2267,6 +2267,9 @@ Find us @OrangeParc.com</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="FinishedThisSharePage:" destination="aqP-Jo-YAA" eventType="touchUpInside" id="aDm-cq-gSe"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo-orange.png" id="Fwi-gZ-lVW">
                                 <rect key="frame" x="118" y="62" width="67" height="67"/>
@@ -4289,6 +4292,10 @@ Find us @OrangeParc.com</string>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EmailShare:"/>
+                <relationship kind="action" name="FinishedThisSharePage:"/>
+                <relationship kind="action" name="MesssgeShare:"/>
+                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>
