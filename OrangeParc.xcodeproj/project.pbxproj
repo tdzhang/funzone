@@ -154,6 +154,8 @@
 		46550EA515A8FD4B008FF360 /* Category-Party.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9D15A8FD4B008FF360 /* Category-Party.png */; };
 		46550EA615A8FD4B008FF360 /* Category-Shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9E15A8FD4B008FF360 /* Category-Shopping.png */; };
 		46550EA715A8FD4B008FF360 /* Category-Sports.png in Resources */ = {isa = PBXBuildFile; fileRef = 46550E9F15A8FD4B008FF360 /* Category-Sports.png */; };
+		4661DAED15CA75E100E898A7 /* detail-edit-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 4661DAEB15CA75E100E898A7 /* detail-edit-color.png */; };
+		4661DAEE15CA75E100E898A7 /* detail-invite-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 4661DAEC15CA75E100E898A7 /* detail-invite-color.png */; };
 		4664C8AE15C485E100F2B43C /* OrangeParc-WeChat108.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */; };
 		4664C8CA15C4AFE000F2B43C /* button-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8C815C4AFE000F2B43C /* button-24.png */; };
 		4664C8CB15C4AFE000F2B43C /* deal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4664C8C915C4AFE000F2B43C /* deal_icon.png */; };
@@ -449,6 +451,8 @@
 		46550E9D15A8FD4B008FF360 /* Category-Party.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Party.png"; sourceTree = "<group>"; };
 		46550E9E15A8FD4B008FF360 /* Category-Shopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Shopping.png"; sourceTree = "<group>"; };
 		46550E9F15A8FD4B008FF360 /* Category-Sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category-Sports.png"; sourceTree = "<group>"; };
+		4661DAEB15CA75E100E898A7 /* detail-edit-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-edit-color.png"; sourceTree = "<group>"; };
+		4661DAEC15CA75E100E898A7 /* detail-invite-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-invite-color.png"; sourceTree = "<group>"; };
 		4664C8AD15C485E100F2B43C /* OrangeParc-WeChat108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OrangeParc-WeChat108.png"; sourceTree = "<group>"; };
 		4664C8C815C4AFE000F2B43C /* button-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-24.png"; sourceTree = "<group>"; };
 		4664C8C915C4AFE000F2B43C /* deal_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deal_icon.png; sourceTree = "<group>"; };
@@ -1080,6 +1084,8 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4661DAEB15CA75E100E898A7 /* detail-edit-color.png */,
+				4661DAEC15CA75E100E898A7 /* detail-invite-color.png */,
 				9237B1A515CA469300F8D939 /* current_location_icon.png */,
 				46D2BCBA15C9FFE300E14FE7 /* event-dashed-border.png */,
 				46D2BCBB15C9FFE300E14FE7 /* event-imageborder.png */,
@@ -1482,6 +1488,8 @@
 				46D2BCC615CA33F000E14FE7 /* iphone-icon-orange-114.png in Resources */,
 				46D2BCC815CA33F400E14FE7 /* iphone-icon-orange-57.png in Resources */,
 				9237B1A615CA469300F8D939 /* current_location_icon.png in Resources */,
+				4661DAED15CA75E100E898A7 /* detail-edit-color.png in Resources */,
+				4661DAEE15CA75E100E898A7 /* detail-invite-color.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
