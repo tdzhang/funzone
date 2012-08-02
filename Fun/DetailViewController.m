@@ -803,12 +803,21 @@
     UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
     like_icon.frame = CGRectMake(7, 5, 20, 20);
     [self.interestOrInviteButton addSubview:like_icon];
+
+    
     newFrame = self.pickOrEditButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.pickOrEditButton.frame = newFrame;
+    UIImageView *pick_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+    pick_icon.frame = CGRectMake(7, 5, 20, 20);
+    [self.pickOrEditButton addSubview:pick_icon];
+    
     newFrame = self.shareButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.shareButton.frame = newFrame;
+    UIImageView *share_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-share-color.png"]];
+    share_icon.frame = CGRectMake(7, 5, 20, 20);
+    [self.shareButton addSubview:share_icon];
 
     //set event image
     NSURL *url=[NSURL URLWithString:photo];
