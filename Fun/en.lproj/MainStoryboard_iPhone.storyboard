@@ -609,8 +609,8 @@
                         <segue destination="eqn-h2-xv5" kind="relationship" relationship="viewControllers" id="27"/>
                         <segue destination="Q8M-ox-ewY" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="UCH-1w-VJE" kind="relationship" relationship="viewControllers" id="3ME-tp-B2y"/>
-                        <segue destination="1vV-J8-L5m" kind="relationship" relationship="viewControllers" id="pFT-bk-muS"/>
                         <segue destination="yO2-58-RfF" kind="relationship" relationship="viewControllers" id="77E-67-VMs"/>
+                        <segue destination="1vV-J8-L5m" kind="relationship" relationship="viewControllers" id="pFT-bk-muS"/>
                     </connections>
                 </tabBarController>
             </objects>
