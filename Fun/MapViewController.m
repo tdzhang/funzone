@@ -72,8 +72,7 @@
 }
 
 -(void)setAnnotation:(MKPointAnnotation *)annotation
-{
-    
+{    
     if(![_annotation isEqual:annotation]){
         _annotation=annotation; 
     }
