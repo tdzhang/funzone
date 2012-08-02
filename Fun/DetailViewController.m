@@ -193,7 +193,7 @@
     
     //change the button title based on the BOOL isOwner
     if (self.isEventOwner) {
-        [self.interestOrInviteButton setTitle:@"   Invite" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
         [self.pickOrEditButton setTitle:@"    Edit" forState:UIControlStateNormal];
         [self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
@@ -815,17 +815,28 @@
     CGRect newFrame = self.interestOrInviteButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.interestOrInviteButton.frame = newFrame;
-    UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-    like_icon.frame = CGRectMake(7, 5, 20, 20);
-    [self.interestOrInviteButton addSubview:like_icon];
-
+    if (self.isEventOwner) {
+        UIImageView *invite_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
+        invite_icon.frame = CGRectMake(7, 5, 20, 20);
+        [self.interestOrInviteButton addSubview:invite_icon];
+    }else {
+        UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+        like_icon.frame = CGRectMake(7, 5, 20, 20);
+        [self.interestOrInviteButton addSubview:like_icon];
+    }
     
     newFrame = self.pickOrEditButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
     self.pickOrEditButton.frame = newFrame;
-    UIImageView *pick_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-    pick_icon.frame = CGRectMake(7, 5, 20, 20);
-    [self.pickOrEditButton addSubview:pick_icon];
+    if (self.isEventOwner) {
+        UIImageView *edit_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-edit-color.png"]];
+        edit_icon.frame = CGRectMake(7, 5, 20, 20);
+        [self.pickOrEditButton addSubview:edit_icon];
+    }else {
+        UIImageView *pick_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+        pick_icon.frame = CGRectMake(7, 5, 20, 20);
+        [self.pickOrEditButton addSubview:pick_icon];
+    }
     
     newFrame = self.shareButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
