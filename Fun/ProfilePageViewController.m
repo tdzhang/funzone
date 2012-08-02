@@ -215,11 +215,10 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.84111 green:0.5373 blue:0.1 alpha:1];
+    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
     
-#warning might need a class for style here
     _creatorImageView.layer.cornerRadius = 5;
     _creatorImageView.layer.masksToBounds = YES;
     _creatorImageView.layer.shadowOpacity = 0.85f;
