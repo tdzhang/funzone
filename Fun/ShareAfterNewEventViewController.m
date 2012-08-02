@@ -102,7 +102,7 @@
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"I just find an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName,self.createEvent_time];
+    return [NSString stringWithFormat:@"I just found an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName,self.createEvent_time];
 }
 
 
