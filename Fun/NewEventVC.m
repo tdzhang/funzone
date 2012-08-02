@@ -310,6 +310,8 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+    
+    self.navigationController.navigationBar.topItem.title = self.eventType;
 }
 
 
@@ -576,7 +578,7 @@
         }
         //decide the category_id
         if (!self.detail_creator_id){
-            NSString *category_id=nil;
+            NSString *category_id=self.eventType;
             if ([category_id isEqualToString:@"movie"]) {
                 [request setPostValue:MOVIE forKey:@"category_id"];
             }
@@ -598,7 +600,8 @@
             else if ([category_id isEqualToString:@"event"]) {
                 [request setPostValue:EVENTS forKey:@"category_id"];
             }
-            else if ([category_id isEqualToString:@"food"]) {            [request setPostValue:FOOD forKey:@"category_id"];
+            else if ([category_id isEqualToString:@"food"]) {            
+                [request setPostValue:FOOD forKey:@"category_id"];
             }
             else {
                 [request setPostValue:OTHERS forKey:@"category_id"];
