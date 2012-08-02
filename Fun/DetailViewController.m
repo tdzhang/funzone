@@ -193,14 +193,14 @@
     
     //change the button title based on the BOOL isOwner
     if (self.isEventOwner) {
-        [self.interestOrInviteButton setTitle:@"Invite" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"   Invite" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"    Edit" forState:UIControlStateNormal];
+        [self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
-        [self.interestOrInviteButton setTitle:@"Like" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"Pick" forState:UIControlStateNormal];
-        [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"    Like" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"    Pick" forState:UIControlStateNormal];
+        [self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
 
@@ -408,7 +408,7 @@
         UIView *interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [interested_people_label_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [interestedPeopleLable setText:[NSString stringWithFormat:@"%d interested",[self.interestedPeople count]]];
+        [interestedPeopleLable setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
         [interestedPeopleLable setFont:[UIFont boldSystemFontOfSize:15]];
         [interestedPeopleLable setTextColor:[UIColor darkGrayColor]];
         [interestedPeopleLable setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
