@@ -807,10 +807,10 @@
     [map_indicator_label setText:@"Map"];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
-    [self.myScrollView addSubview:map_indicator_label];
+    //[self.myScrollView addSubview:map_indicator_label];
     UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(290, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 11, 14)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
-    [self.myScrollView addSubview:right_Arrow];
+    //[self.myScrollView addSubview:right_Arrow];
 
     CGRect newFrame = self.interestOrInviteButton.frame;
     newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
