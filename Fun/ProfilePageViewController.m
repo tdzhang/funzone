@@ -136,7 +136,7 @@
                     if ( imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                         imageData=UIImagePNGRepresentation(image);
                         
                         if(imageData){
@@ -259,7 +259,6 @@
 {
     //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
     
-    NSLog(@"%@",self.freshConnectionType);
     //if there already has a connection, donot create a new one, just return
     if (![self.freshConnectionType isEqualToString:@"not"]) {
         return;
@@ -453,6 +452,14 @@
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         if ([self.lastReceivedJson_bookmark isEqualToArray: json]) {
             //do nothing here, if there is no diff
+            self.refresh_page_num=2;
+            self.freshConnectionType=@"not";
+            [self.refreshView removeFromSuperview];
+            for (UIView *view in [self.mainScrollView subviews]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
+                [self.garbageCollection addObject:view];
+            }
         }
         else{
             self.refresh_page_num=2;

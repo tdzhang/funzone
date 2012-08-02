@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
+@property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
 @property (nonatomic) int refresh_page_num;
@@ -37,6 +38,7 @@
 
 @implementation OtherProfilePageViewController
 @synthesize mainScrollView;
+@synthesize refreshView=_refreshView;
 @synthesize refreshViewdown=_refreshViewdown;
 @synthesize creatorImageView = _creatorImageView;
 @synthesize creatorNameLabel = _creatorNameLabel;
@@ -141,7 +143,7 @@
                     if ( imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                         imageData=UIImagePNGRepresentation(image);
                         
                         if(imageData){
@@ -182,7 +184,7 @@
     
     //quest the most recent 10 events
     self.refresh_page_num=2; //the next page that need to refresh is 2
-    self.freshConnectionType=@"new";
+    self.freshConnectionType=@"New";
     NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id];
     NSLog(@"%@",request_string);
     NSURLRequest* URLrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -190,6 +192,10 @@
     [connection start];
     self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
     self.mainScrollView.contentOffset = CGPointMake(0, 10);
+    
+    //refresh part
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
+    [self.mainScrollView addSubview:self.refreshView];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -323,56 +329,101 @@
 //when the scrolling over 最上方，need refresh process
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    
-    //if there already has a connection, donot create a new one, just return
-    if (![self.freshConnectionType isEqualToString:@"not"]) {
-        return;
-    }
-    
-    //add more
-    if(scrollView.contentOffset.y>PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2.5))){
+    if (scrollView.contentOffset.y<-EVENT_ELEMENT_CONTENT_HEIGHT/3) {
+        //remove the main views
+        self.garbageCollection=[NSMutableArray array];
+        for (UIView *view in [self.mainScrollView subviews]) {
+            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
+            [self.garbageCollection addObject:view];
+        }
         
+        
+        //set the refresh view ahead & and also the anti touch mask
+        //NSLog(@"get most 10 popular pages called");
+        [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+        
+        for(UIView *subview in [self.refreshView subviews]) {
+            [subview removeFromSuperview];
+        }
+        
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+        loading.layer.cornerRadius =15;
+        loading.opaque = NO;
+        loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
+        loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loadLabel.textAlignment =UITextAlignmentCenter;
+        loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
+        loadLabel.backgroundColor =[UIColor clearColor];
+        [loading addSubview:loadLabel];
+        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinning.frame =CGRectMake(120,20,80,80);
+        [spinning startAnimating];[loading addSubview:spinning];
+        [self.refreshView addSubview:loading];
+        
+        [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        
+        
+        //and then do the refresh process
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        self.freshConnectionType=@"New";
+        [connection start];
+    }
+    //add more of the featured event
+    else if(scrollView.contentOffset.y>PROFILE_ELEMENT_VIEW_HEIGHT*(([self.blockViews count]/2+[self.blockViews count]%2-1.5))){
         //add the content add refresh indicator
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
         }
-        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT)];
         [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT)];
         loading.layer.cornerRadius =15;
         loading.opaque = NO;
-        loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
-        loadLabel.text =@"Loading more...";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loading.backgroundColor =[UIColor clearColor];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
+        loadLabel.text =@"Adding More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
+        loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
         loadLabel.backgroundColor =[UIColor clearColor];
         [loading addSubview:loadLabel];
-        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame =CGRectMake(120,80,80,80);
+        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinning.frame = CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*([self.blockViews count]),VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_ELEMENT_VIEW_HEIGHT*([self.blockViews count]/2+[self.blockViews count]%2),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
         [self.refreshViewdown removeFromSuperview];
         [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, ([self.blockViews count]+1)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
+        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2+0.5)*PROFILE_ELEMENT_VIEW_HEIGHT);
         
-        //NSLog(@"add more");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
+            NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@&user_id=%@&page=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id,self.refresh_page_num];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        NSLog(@"ExploreViewController request2:%@",request_string);
         //set the freshConnectionType To @"Add"
         self.freshConnectionType=@"Add";
-        [connection start];         
+        [connection start];
     }
     
 }
 
 #pragma mark - get more data and show the more event
+-(void)refreshAllTheMainScrollViewSUbviews{
+    [self.refreshView removeFromSuperview];
+    ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
+    [self.mainScrollView addSubview:Element.blockView];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EVENT_ELEMENT_CONTENT_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT)];
+    [self.mainScrollView addSubview:self.refreshView];
+    
+    [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+}
 //use to add more (than 10) from down side
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
@@ -403,31 +454,127 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    NSError *error;
-    NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"%@",json);
-    
-    if (![self.lastReceivedJson_bookmark isEqualToArray:json]) {
-        self.lastReceivedJson_bookmark=json;
-        //only refresh the date when there is a different
-        if ([self.freshConnectionType isEqualToString:@"new"]) {
-            //that means all the block view need to be reset
-            for (ProfileEventElement* event in self.blockViews) {
-                [event.blockView removeFromSuperview];
+    //renew the 10 newest features!!!!
+    if ([self.freshConnectionType isEqualToString:@"New"]) {
+        //set the freshConnectionType to "not"
+        
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        //NSLog(@"%@",json);
+        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+        if ([self.lastReceivedJson_bookmark isEqualToArray: json]) {
+            //do nothing here, if there is no diff
+            self.refresh_page_num=2;
+            self.freshConnectionType=@"not";
+            for (UIView *view in [self.mainScrollView subviews]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
+                [self.garbageCollection addObject:view];
+            }
+        }
+        else{
+            self.refresh_page_num=2;
+            self.lastReceivedJson_bookmark=json;
+            //clean the page
+            for (UIView* subView in self.mainScrollView.subviews) {
+                [subView removeFromSuperview];
             }
             [self.blockViews removeAllObjects];
+            //set the freshConnectionType to "not"
+            self.freshConnectionType=@"not";
+            for (NSDictionary *event in json) {
+                //after receive the new page, add the next request page number
+                NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                NSString *title=[event objectForKey:@"title"];
+                NSString *event_photo_url=[event objectForKey:@"photo_url"];
+                NSString *locationName=[event objectForKey:@"location"];
+                NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+                NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+                CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+                [current_location_manager startMonitoringSignificantLocationChanges];
+                CLLocation *current_location = current_location_manager.location;
+                CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
+                self.current_location_manager=current_location_manager;
+                
+                if (!title) {
+                    continue;
+                }
+                if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
+                    continue;
+                }
+                NSURL *url=[NSURL URLWithString:event_photo_url];
+                if (![Cache isURLCached:url]) {
+                    //using high priority queue to fetch the image
+                    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                        //get the image data
+                        NSData * imageData = nil;
+                        imageData = [[NSData alloc] initWithContentsOfURL: url];
+                        
+                        if ( imageData == nil ){
+                            //if the image data is nil, the image url is not reachable. using a default image to replace that
+                            //NSLog(@"downloaded %@ error, using a default image",url);
+                            UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                            imageData=UIImagePNGRepresentation(image);
+                            
+                            if(imageData){
+                                dispatch_async( dispatch_get_main_queue(),^{
+                                    [Cache addDataToCache:url withData:imageData];
+                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
+                                    ;
+                                    //refresh the whole view
+                                    NSLog(@"profile0:%@",event_id);
+                                    [self refreshAllTheMainScrollViewSUbviews];
+                                });
+                            }
+                        }
+                        else {
+                            //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                            //NSLog(@"downloaded %@",url);
+                            if(imageData){
+                                dispatch_async( dispatch_get_main_queue(),^{
+                                    [Cache addDataToCache:url withData:imageData];
+                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                                    //refresh the whole view
+                                    NSLog(@"profile0:%@",event_id);
+                                    [self refreshAllTheMainScrollViewSUbviews];
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                        //refresh the whole view
+                        NSLog(@"profile1:%@",shared_event_id);
+                        [self refreshAllTheMainScrollViewSUbviews];
+                    });
+                }
+                [self.refreshViewdown removeFromSuperview];
+            }
+            self.freshConnectionType=@"not";
         }
         
+    }
+    else if([self.freshConnectionType isEqualToString:@"Add"]){
+        //set the freshConnectionType to "not"
+        //self.freshConnectionType=@"not";
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+        //after receive the new page, add the next request page number
         self.refresh_page_num++;
         if ([json count]==0) {
             //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
             self.refresh_page_num--;
-            [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
         }
+        
+        //set the freshConnectionType to "not"
+        self.freshConnectionType=@"not";
         for (NSDictionary *event in json) {
-            //set the freshConnectionType to "not"
-            self.freshConnectionType=@"not";
             //after receive the new page, add the next request page number
             NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
@@ -437,16 +584,13 @@
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
             NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-            NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+            
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
             CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
             [current_location_manager startMonitoringSignificantLocationChanges];
-            self.current_location_manager=current_location_manager;
             CLLocation *current_location = current_location_manager.location;
             CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
-            
-            NSLog(@"event_id=%@",event_id);
-            NSLog(@"photo_url=%@",event_photo_url);
+            self.current_location_manager=current_location_manager;
             
             if (!title) {
                 continue;
@@ -471,10 +615,10 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
                                 ;
                                 //refresh the whole view
-                                NSLog(@"profile0:%d",[self.blockViews count]);
+                                NSLog(@"profile0:%@",event_id);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -485,9 +629,9 @@
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
-                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
+                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
                                 //refresh the whole view
-                                NSLog(@"profile1:%d",[self.blockViews count]);
+                                NSLog(@"profile0:%@",event_id);
                                 [self addMoreDataToTheMainScrollViewSUbviews];
                             });
                         }
@@ -496,16 +640,18 @@
             }
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
-                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:event_category] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
                     //refresh the whole view
-                    NSLog(@"profile2:%d",[self.blockViews count]);
+                    NSLog(@"profile1:%@",shared_event_id);
                     [self addMoreDataToTheMainScrollViewSUbviews];
                 });
             }
             [self.refreshViewdown removeFromSuperview];
         }
+        
+        [self.refreshViewdown removeFromSuperview];
     }
-    
+
 }
 
 #pragma mark - Gesture handler
