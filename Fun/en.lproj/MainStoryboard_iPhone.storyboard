@@ -1039,7 +1039,7 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="4687" y="1501"/>
         </scene>
-        <!--Feed View Controller - Orange Parc-->
+        <!--Feed View Controller - OrangeParc-->
         <scene sceneID="J7I-Bi-1WF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEz-ia-77P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1064,7 +1064,7 @@ Find us @OrangeParc.com</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Orange Parc" id="k0H-05-gmF"/>
+                    <navigationItem key="navigationItem" title="OrangeParc" id="k0H-05-gmF"/>
                     <connections>
                         <outlet property="mainScrollView" destination="Zlp-hj-00h" id="rWg-p4-8HU"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Yrc-z9-85p"/>
@@ -1383,7 +1383,7 @@ Find us @OrangeParc.com</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="bGQ-ML-0nM" id="Lgp-HP-p0T"/>
                                         </connections>
