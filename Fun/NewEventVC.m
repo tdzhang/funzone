@@ -663,6 +663,13 @@
                 [segue.destinationViewController setPredefinedKeyWord:self.textFieldEventTitle.text];
             }
             [segue.destinationViewController setDelegate:self];
+            UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                           initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+                                           target:self action:@selector(createeventpage)];
+            backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+            [self.navigationItem setBackBarButtonItem:backButton];
+
+            //[segue.destinationViewController setBackBarButtonItem:backButton];
         }
     }
     else if([segue.identifier isEqualToString:@"moviewAutoCompletion"]){
