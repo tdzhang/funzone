@@ -219,7 +219,7 @@
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"Hi, I just find an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"I just find an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
