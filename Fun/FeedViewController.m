@@ -39,6 +39,7 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize tapped_creator_id=_tapped_creator_id;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -81,7 +82,17 @@
     #warning need to add instruction to find friends
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    if([self.blockViews count]==0){
+    //quest the most recent 10 featured events
+    if ([self.blockViews count]<3) {
+        self.refresh_page_num=2; //the next page that need to refresh is 2
+        self.freshConnectionType=@"New";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+        NSLog(@"%@",request_string);
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        self.freshConnectionType=@"New";
+        [connection start];
         self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
         self.mainScrollView.contentOffset = CGPointMake(0, 0);
     }
@@ -112,8 +123,10 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
-    self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
-    self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    if ([self.blockViews count]<3) {
+        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
+        self.mainScrollView.contentOffset = CGPointMake(0, 0);
+    }
 }
 
 
@@ -273,7 +286,7 @@
         self.freshConnectionType=@"not";  
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        
+        NSLog(@"%@",json);
         //clean the page
         for (UIView* subView in self.mainScrollView.subviews) {
             [subView removeFromSuperview];

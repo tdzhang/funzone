@@ -235,11 +235,9 @@
     //chaneg the Ui for the edit/create event
     if (self.isEditPage) {
         [self.deleteButton setHidden:NO];
-        [self.doneButton setTitle:@"Edit" forState:UIControlStateNormal];
     }
     else{
         [self.deleteButton setHidden:YES];
-        [self.doneButton setTitle:@"Done" forState:UIControlStateNormal];
     }
     
     //get the photo of the user

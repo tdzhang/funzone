@@ -454,7 +454,7 @@
             //do nothing here, if there is no diff
             self.refresh_page_num=2;
             self.freshConnectionType=@"not";
-            [self.refreshView removeFromSuperview];
+            //[self.refreshView removeFromSuperview];
             for (UIView *view in [self.mainScrollView subviews]) {
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
                 //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
