@@ -4190,6 +4190,9 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="InviteButtonClicked:"/>
+            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -4258,6 +4261,12 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
+                <relationship kind="action" name="deleteEventButton:"/>
+                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>

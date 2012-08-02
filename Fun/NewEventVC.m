@@ -393,8 +393,8 @@
         __block ASIFormDataRequest *block_request=request;
         [request setCompletionBlock:^{
             // Use when fetching text data
-            //NSString *responseString = [block_request responseString];
-            //NSLog(@"%@",responseString);
+            NSString *responseString = [block_request responseString];
+            NSLog(@"%@",responseString);
             
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
@@ -473,13 +473,13 @@
         __block ASIFormDataRequest *block_request=request;
         [request setCompletionBlock:^{
             // Use when fetching text data
-            //NSString *responseString = [block_request responseString];
-            //NSLog(@"%@",responseString);
+            NSString *responseString = [block_request responseString];
+            NSLog(@"%@",responseString);
             
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
             if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
             }
@@ -562,37 +562,39 @@
             }
         }
         //decide the category_id
-        NSString *category_id=nil;
-        if ([category_id isEqualToString:@"movie"]) {
-            [request setPostValue:MOVIE forKey:@"category_id"];
+        if (!self.detail_creator_id){
+            NSString *category_id=nil;
+            if ([category_id isEqualToString:@"movie"]) {
+                [request setPostValue:MOVIE forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"party"]) {
+                [request setPostValue:NIGHTLIFE forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"shopping"]) {
+                [request setPostValue:SHOPPING forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"sports"]) {
+                [request setPostValue:SPORTS forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"outdoor"]) {
+                [request setPostValue:OUTDOOR forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"entertain"]) {
+                [request setPostValue:ENTERTAIN forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"event"]) {
+                [request setPostValue:EVENTS forKey:@"category_id"];
+            }
+            else if ([category_id isEqualToString:@"food"]) {            [request setPostValue:FOOD forKey:@"category_id"];
+            }
+            else {
+                [request setPostValue:OTHERS forKey:@"category_id"];
+            }
+            
+            
         }
-        else if ([category_id isEqualToString:@"party"]) {
-            [request setPostValue:NIGHTLIFE forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"shopping"]) {
-            [request setPostValue:SHOPPING forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"sports"]) {
-            [request setPostValue:SPORTS forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"outdoor"]) {
-            [request setPostValue:OUTDOOR forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"entertain"]) {
-            [request setPostValue:ENTERTAIN forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"event"]) {
-            [request setPostValue:EVENTS forKey:@"category_id"];
-        }
-        else if ([category_id isEqualToString:@"food"]) {            [request setPostValue:FOOD forKey:@"category_id"];
-        }
-        else {
-            [request setPostValue:OTHERS forKey:@"category_id"];
-        }
-
         [request setRequestMethod:@"POST"];
         [request startAsynchronous];
-        
         //go to the next page
         [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
     }
@@ -1017,6 +1019,7 @@
     
     //show event address name;
     NSString *locationDescription=[NSString stringWithFormat:@"%@",annotation.title];
+    
     [self.locationLabel setText:locationDescription];
     [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [self.locationLabel setTextColor:[UIColor darkGrayColor]];
@@ -1032,12 +1035,15 @@
     [self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.mapViewFeedBackImageView setHidden:NO];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
+    self.detail_latitude=[NSNumber numberWithFloat:[self.createEvent_latitude floatValue]];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
-    
+    self.detail_longitude=[NSNumber numberWithFloat:[self.createEvent_longitude floatValue]];
     self.createEvent_locationName=[locationName copy];
+    self.detail_location_name=self.createEvent_locationName;
     NSLog(@"%@",self.createEvent_locationName);
     if (annotation.subtitle) {
         self.createEvent_address=[NSString stringWithFormat:@"%@",annotation.subtitle];
+        self.detail_address=self.createEvent_address;
         NSLog(@"%@",self.createEvent_address);
     }
 }
@@ -1057,6 +1063,7 @@
     NSInteger minute = [weekdayComponents minute];
     NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d %d:%d",month,day,year,hour,minute];
     [self.labelEventTime setText:showDateString];
+    self.detail_event_time=showDateString;
     
     /*
      NSCalendar *gregorian = [[NSCalendar alloc]

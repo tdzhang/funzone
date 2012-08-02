@@ -260,9 +260,9 @@
         return;
     }
     
-        //add more
-    if(scrollView.contentOffset.y>PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]-2.5))){
-        
+    //add more
+    NSLog(@"%f,%d",scrollView.contentOffset.y,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]/5)));
+    if(scrollView.contentOffset.y>PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]/5))){
         //add the content add refresh indicator
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
