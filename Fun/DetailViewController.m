@@ -45,6 +45,7 @@
 @property (nonatomic,strong) NSString *preDefinedMode; //change between sms mode and email mode
 @property (nonatomic) int via;//used to keep track theuser activity , then send to the server
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
+@property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 
 
 @end
@@ -85,6 +86,7 @@
 @synthesize shareButton = _shareButton;
 @synthesize via=_via;
 @synthesize isEventOwner=_isEventOwner;
+@synthesize mysendMessageType=_mysendMessageType;
 #pragma mark - self defined getter and setter
 
 -(NSMutableArray *)comments{
@@ -210,6 +212,16 @@
 }
 
 #pragma mark - self defined method 
+//return the share message
+-(NSString*)shareMessagetoSend{
+    return [NSString stringWithFormat:@"I am using OrangeParc,just find an insteresting event \"%@\" at %@?\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name];
+}
+
+//return the share message
+-(NSString*)inviteMessagetoSend{
+    return [NSString stringWithFormat:@"Hi, I just find an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
+}
+
 //(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner{
     self.event_id = event_id;
@@ -293,6 +305,8 @@
      [pop showFromTabBar:self.tabBarController.tabBar];
      */
     if([actionSheet.title isEqualToString:@"Choose To Share:"]){
+        //this is for share, the message/email is different
+        self.mysendMessageType=@"share";
         if (buttonIndex == 0) {
             NSLog(@"email");
             self.preDefinedMode=@"email";
@@ -317,7 +331,8 @@
             NSMutableDictionary* params = [NSMutableDictionary dictionary];
             [params setObject:@"OrangeParc event" forKey:@"name"];
             [params setObject:@"new OrangeParc event" forKey:@"description"];
-            [params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",self.event_title,self.event_time,self.location_name] forKey:@"message"];
+            [params setObject:[self shareMessagetoSend] forKey:@"message"];
+            //[params setObject:[NSString stringWithFormat:@"Hi All,\n\nI feels good, want to inivite you to do %@ . The time I think %@ is good. Dose that sounds good? Shall we meet at %@?\n\nYeah~\n\nCheers~",self.event_title,self.event_time,self.location_name] forKey:@"message"];
             
             if ([funAppdelegate.facebook isSessionValid]) {
                 [funAppdelegate.facebook requestWithGraphPath:@"me/feed"
@@ -359,15 +374,17 @@
     else if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
         if(buttonIndex == 0){
             //shared on moment
-            [self.delegate SendMoment:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+            [self.delegate SendMoment:[self shareMessagetoSend]];
         }
         else if(buttonIndex == 1){
             //send message to friend
-            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+            [self.delegate sendText:[self shareMessagetoSend]];
             
         }
     }
     else if ([actionSheet.title isEqualToString:@"Invite Friend:"]){
+        //this type if for inviting people
+        self.mysendMessageType=@"invite";
         if(buttonIndex == 0){
             //email invite
             NSLog(@"email invite");
@@ -383,7 +400,7 @@
         else if (buttonIndex ==2){
             //WeChat Invite
             //send message to friend
-            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+            [self.delegate sendText:[self inviteMessagetoSend]];
         }
     }
 }
@@ -947,12 +964,23 @@
                 MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
                 mailCont.mailComposeDelegate = self;
                 
-                //email subject
-                [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",self.event_title]];
-                //email list
-                [mailCont setToRecipients:emailList];
-                //email body
-                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name] isHTML:NO];
+                if ([self.mysendMessageType isEqualToString:@"invite"]) {
+                    //email subject
+                    [mailCont setSubject:[NSString stringWithFormat:@"I want invite you to %@",self.event_title]];
+                    //email list
+                    [mailCont setToRecipients:emailList];
+                    //email body
+                    [mailCont setMessageBody:[self inviteMessagetoSend] isHTML:NO];
+                }
+                else if([self.mysendMessageType isEqualToString:@"share"]){
+                    //email subject
+                    [mailCont setSubject:[NSString stringWithFormat:@"You may interest about %@",self.event_title]];
+                    //email list
+                    [mailCont setToRecipients:emailList];
+                    //email body
+                    [mailCont setMessageBody:[self shareMessagetoSend] isHTML:NO];
+                }
+                
                 //go!
                 [self presentModalViewController:mailCont animated:YES];
             }
@@ -983,7 +1011,14 @@
                 //phone list
                 [messageSender setRecipients:phoneList];
                 //phone body
-                [messageSender setBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.event_title,self.event_time,self.location_name]];
+                if ([self.mysendMessageType isEqualToString:@"invite"]) {
+                    [messageSender setBody:[self inviteMessagetoSend]];
+                }
+                else if([self.mysendMessageType isEqualToString:@"share"]){
+                    [messageSender setBody:[self shareMessagetoSend]];
+                }
+                
+                
                 //go!
                 [self presentModalViewController:messageSender animated:YES];
             }

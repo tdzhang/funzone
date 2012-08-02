@@ -94,6 +94,18 @@
 }
 
 #pragma mark - self defined method
+
+//return the share message
+-(NSString*)shareMessagetoSend{
+    return [NSString stringWithFormat:@"I am using OrangeParc,just find an insteresting event \"%@\" at %@?\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName];
+}
+
+//return the share message
+-(NSString*)inviteMessagetoSend{
+    return [NSString stringWithFormat:@"Hi, I just find an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName,self.createEvent_time];
+}
+
+
 -(void)presetEventImage:(UIImage*)createEvent_image WithTiTle:(NSString*)createEvent_title WithLatitude:(NSString*)createEvent_latitude WithLongitude:(NSString*)createEvent_longitude WithLocationName:(NSString*)createEvent_locationName WithTime:(NSString*)createEvent_time WithAddress:(NSString*)createEvent_address WithImageUrlName:(NSString*)createEvent_imageUrlName{
     self.createEvent_image=createEvent_image;
     self.createEvent_title=createEvent_title;
@@ -167,11 +179,11 @@
                 mailCont.mailComposeDelegate = self;
         
                 //email subject
-                [mailCont setSubject:[NSString stringWithFormat:@"Event Invitation! Yeah, Let's %@",self.createEvent_title]];
+                [mailCont setSubject:[NSString stringWithFormat:@"I want to invite you to %@",self.createEvent_title]];
                 //email list
                 [mailCont setToRecipients:emailList];
                 //email body
-                [mailCont setMessageBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName] isHTML:NO];
+                [mailCont setMessageBody:[self inviteMessagetoSend] isHTML:NO];
                 //go!
                 [self presentModalViewController:mailCont animated:YES];
             }
@@ -202,7 +214,7 @@
                 //phone list
                 [messageSender setRecipients:phoneList];
                 //phone body
-                [messageSender setBody:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+                [messageSender setBody:[self inviteMessagetoSend]];
                 //go!
                 [self presentModalViewController:messageSender animated:YES];
             }
@@ -287,11 +299,11 @@
     if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
         if(buttonIndex == 0){
             //shared on moment
-            [self.delegate SendMoment:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+            [self.delegate SendMoment:[self shareMessagetoSend]];
         }
         else if(buttonIndex == 1){
             //send message to friend
-            [self.delegate sendText:[NSString stringWithFormat:@"Hey,\n\nfeel like %@ together? What about %@ at %@?\n\nCheers~~",self.createEvent_title,self.createEvent_time,self.createEvent_locationName]];
+            [self.delegate sendText:[self inviteMessagetoSend]];
             
         }
     }

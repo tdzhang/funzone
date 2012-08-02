@@ -174,7 +174,7 @@
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     [params setObject:@"OrangeParc event" forKey:@"name"];
     [params setObject:@"new OrangeParc event" forKey:@"description"];
-    [params setObject:[NSString stringWithFormat:@"Hi, %@. I am using OrangeParc to find and create event, you should definitely try it.",self.user_name] forKey:@"message"];
+    [params setObject:[NSString stringWithFormat:@"Hi, %@. I am using OrangeParc to find and create event, you should definitely try it. Find detail at http://www.orangeparc.com",self.user_name] forKey:@"message"];
     
     if ([funAppdelegate.facebook isSessionValid]) {
         [funAppdelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/feed",self.fb_id]
