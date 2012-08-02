@@ -585,6 +585,13 @@
                     [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
                 }
             }
+            else{
+                //the user haven't choosen a picture
+                UIAlertView *notChosenAPic = [[UIAlertView alloc] initWithTitle:@"No Picture Choosen" message:@"Please choose a picture first." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                notChosenAPic.delegate=self;
+                [notChosenAPic show];
+                return;
+            }
         }
         //decide the category_id
         if (!self.detail_creator_id){
