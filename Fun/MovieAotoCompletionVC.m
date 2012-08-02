@@ -38,8 +38,9 @@
     [self.searchDisplayController.searchBar becomeFirstResponder];
 }
 
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
@@ -51,8 +52,8 @@
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
-	// Do any additional setup after loading the view.
 }
+
 
 - (void)viewDidUnload
 {

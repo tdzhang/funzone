@@ -93,8 +93,8 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];

@@ -1268,29 +1268,22 @@ Find us @OrangeParc.com</string>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="8kQ-9J-BdD">
-                                        <rect key="frame" x="0.0" y="139" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="139" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="cBz-O5-fEj">
-                                                <rect key="frame" x="65" y="16" width="135" height="20"/>
+                                                <rect key="frame" x="65" y="15" width="135" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="xIW-oE-umD">
-                                                <rect key="frame" x="20" y="9" width="35" height="35"/>
+                                                <rect key="frame" x="20" y="7" width="35" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="TN1-Tq-wZc">
-                                                <rect key="frame" x="214" y="13" width="96" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FCz-IF-S0G">
                                         <rect key="frame" x="17" y="238" width="90" height="30"/>
@@ -1351,7 +1344,6 @@ Find us @OrangeParc.com</string>
                         <outlet property="eventImageView" destination="lnT-2H-pye" id="1vS-aq-XMO"/>
                         <outlet property="interestOrInviteButton" destination="FCz-IF-S0G" id="Jbv-64-fko"/>
                         <outlet property="myScrollView" destination="ODl-hu-66N" id="oS3-2F-YcI"/>
-                        <outlet property="originalCreatorLabel" destination="TN1-Tq-wZc" id="TkE-48-m7j"/>
                         <outlet property="pickOrEditButton" destination="wsl-l8-Jjl" id="QmU-S2-u0d"/>
                         <outlet property="shareButton" destination="RKF-7f-UaA" id="B93-Nd-mPs"/>
                         <segue destination="bGQ-ML-0nM" kind="push" identifier="addAndViewComment" id="25d-mw-vo9"/>
@@ -3571,7 +3563,7 @@ Find us @OrangeParc.com</string>
     <inferredMetricsTieBreakers>
         <segue reference="1jG-3L-8vd"/>
         <segue reference="hTB-gn-88u"/>
-        <segue reference="eX7-7v-GIv"/>
         <segue reference="maZ-xV-hRy"/>
+        <segue reference="lqc-Cx-NBX"/>
     </inferredMetricsTieBreakers>
 </document>
