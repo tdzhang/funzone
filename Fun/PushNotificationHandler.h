@@ -15,6 +15,10 @@
 //make the badeg number of activity adn application same
 +(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController;
 
+//make the badeg number equal to the userinfo
++(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController withUserInfo:(NSDictionary *)userInfo;
+
+
 //handle the received push notification userInfo
 +(void)ProcessNotificationUserInfo:(NSDictionary*)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController;
 

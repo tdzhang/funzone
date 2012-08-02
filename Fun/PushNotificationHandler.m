@@ -20,11 +20,17 @@
     }
 }
 
++(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController withUserInfo:(NSDictionary *)userInfo{
+    NSLog(@"%@",userInfo);
+    //set the badge number inside the badge
+    [[myTabBarController.tabBar.items objectAtIndex:4] setBadgeValue:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@",[[userInfo objectForKey:@"aps"] objectForKey:@"badge"]]]];
+}
+
 +(void)ProcessNotificationUserInfo:(NSDictionary *)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController{
     NSLog(@"did receive push notification %@",userInfo);
     NSDictionary *aps=[userInfo objectForKey:@"aps"];
     
-    [[myTabBarController.tabBar.items objectAtIndex:4] setBadgeValue:[NSString stringWithFormat:@"%@",[aps objectForKey:@"badge"]]];
+    [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%@",[aps objectForKey:@"badge"]]];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
