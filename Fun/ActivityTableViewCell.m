@@ -47,21 +47,21 @@
     self.shared_event_id=element.shared_event_id;
     
     
-    
+    [self.userNameLabel setText:@""];
     if ([self.type isEqualToString:@"2"]) {
         // some one show interest on your event/////
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ is interested at your event",self.user_name]];
-        [self.userNameLabel setText:@"Interested Event:"];
+        //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([self.type isEqualToString:@"102"]){
         //some one followed you
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has followed you.",self.user_name]];
-        [self.userNameLabel setText:@"Followed Event:"];
+        //[self.userNameLabel setText:@"Followed Event:"];
     }
     else if([self.type isEqualToString:@"4"]){
         //some one comment on you event
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has comment on your event.",self.user_name]];
-        [self.userNameLabel setText:@"Comment Event:"];
+        //[self.userNameLabel setText:@"Comment Event:"];
     }
     
     NSURL *imageUrl=[NSURL URLWithString:self.user_pic];
@@ -75,7 +75,7 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:@"smile_64.png"];
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
