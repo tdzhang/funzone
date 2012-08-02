@@ -384,6 +384,11 @@
 
 
 - (IBAction)CreateEventToSever:(id)sender {
+    if ([self.textFieldEventTitle.text isEqualToString:@""]) {
+        UIAlertView *noTitleInput = [[UIAlertView alloc] initWithTitle:@"Empty Description" message:@"Please enter what you are up to." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [noTitleInput show];
+        return;
+    }
     if (self.isEditPage) {
     //edit event
         //Adding Create Event
