@@ -64,10 +64,12 @@
 }
 
 -(void)setFeedBackAnnotation:(MKPointAnnotation *)feedBackAnnotation{
-    if (![_feedBackAnnotation isEqual:feedBackAnnotation]) {
+    if (![_feedBackAnnotation isEqual:feedBackAnnotation] && ![feedBackAnnotation.title isEqual:@"Current Location"]) {
         _feedBackAnnotation=feedBackAnnotation;
-        [self.locationNameTextField setText:@""];
-        [self.locationNameTextField setPlaceholder:feedBackAnnotation.title];
+        //[self.locationNameTextField setText:@""];
+        [self.locationNameTextField setText:feedBackAnnotation.title];
+        [self.locationNameTextField setFont:[UIFont systemFontOfSize:14]];
+        [self.locationNameTextField setTextColor:[UIColor blackColor]];
     }
 }
 
@@ -123,14 +125,13 @@
     location.longitude=userCoordinate.longitude;
     region.span=span;
     region.center=location;
-    [mapView setRegion:region animated:YES];
-    
+    [mapView setRegion:region animated:YES];    
     
     // add annotation at the point User pressed
     MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = location;
     annotationPoint.title=@"Current Location";
-    annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
+    //annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",location.latitude,location.longitude];
     self.annotation=annotationPoint;
     [self.myMapView addAnnotation:annotationPoint];
     
@@ -217,10 +218,8 @@
         self.annotation=annotation;
         [self.myMapView addAnnotation:annotation];
     }
-
-    
-    
 }
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.myMapView.showsUserLocation=NO;
@@ -691,11 +690,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
     aView.annotation=annotation;
     
     //add button on the right of the annotation detail
-    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeContactAdd];
-    [rightButton setTitle:@"Choose" forState:UIControlStateNormal];
-    aView.rightCalloutAccessoryView = rightButton;
-    
-    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
+//    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeContactAdd];
+//    [rightButton setTitle:@"Choose" forState:UIControlStateNormal];
+//    aView.rightCalloutAccessoryView = rightButton;    
+//    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
  
     return aView;
 }
