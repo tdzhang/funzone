@@ -19,5 +19,6 @@
 +(UIManagedDocument *)document;//return the UIManagedDocument
 + (void) addDataToCache:(NSString*)urlName withData:(NSData*)data;//add data to the core data
 +(NSMutableArray *)url2datas;
++(NSMutableDictionary *)url2dataDictionary;
 +(void)EXITit;
 @end

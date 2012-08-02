@@ -273,7 +273,7 @@
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Interest showed" message: [NSString stringWithFormat:@"Your Interested is upload to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 success.delegate=self;
                 [success show];
             }

@@ -65,8 +65,6 @@
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -159,7 +157,7 @@
 */
 #pragma mark - Start Fetching Data
 -(void)startFetchingActivityData{
-     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
@@ -180,7 +178,7 @@
         }        
         //reset the tabbat notification number
         [PushNotificationHandler clearApplicationPushNotifNumber];
-        [[self.tabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
+        [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];

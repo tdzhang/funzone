@@ -11,6 +11,7 @@
 @implementation MyPermenentCachePart
 static UIManagedDocument *document;
 static NSMutableArray* url2datas;
+static NSMutableDictionary* url2dataDictionary;
 static NSMutableDictionary* keyToFindIfExist;
 static int datasize;
 static int data_add_count;
@@ -18,6 +19,10 @@ static bool init_flag=false;
 
 +(NSMutableArray *)url2datas{
     return url2datas;
+}
+
++(NSMutableDictionary *)url2dataDictionary{
+    return url2dataDictionary;
 }
 
 +(void)init{
@@ -74,19 +79,16 @@ static bool init_flag=false;
     url2datas = [[moc executeFetchRequest:request error:&error] mutableCopy];
     
     datasize=0;
-
+    url2dataDictionary=[NSMutableDictionary dictionary];
     NSLog(@"a:%d",[url2datas count]);
     for (URLConnectionCache* temp_url2data in url2datas) {
         [keyToFindIfExist setValue:@"1" forKey:temp_url2data.urlName];
         datasize+=[temp_url2data.data length];
+        NSString *key = [Cache generateKeyFromURL:[NSURL URLWithString:temp_url2data.urlName]];
+        [url2dataDictionary setValue:[temp_url2data.data copy] forKey:[key copy]];
         NSLog(@"c:%@ ------> %d",temp_url2data.urlName,[temp_url2data.data length]);
     }
     //NSLog(@"a:%d",[url2datas count]);
-
-    //add the data to cache
-    for (URLConnectionCache* url2data in [MyPermenentCachePart url2datas]) {
-        [Cache preAddDataToCache:url2data.urlName withData:url2data.data];
-    }
 }
 
 

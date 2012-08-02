@@ -29,6 +29,6 @@
 + (BOOL) addDataToCache:(NSURL*)url withData:(NSData*)data;
 + (BOOL) removeDataFromCache:(NSURL *)url;
 + (BOOL) removeCachedDataWithKey:(NSString *)key;
-+ (BOOL) preAddDataToCache:(NSString*)urlName withData:(NSData*)data;
++ (NSString*) generateKeyFromURL:(NSURL*)url;
 @end
 

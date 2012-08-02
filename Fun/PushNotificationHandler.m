@@ -14,18 +14,17 @@
 +(void)synTheBadgeNumberOfActivityAndAllpication:(UITabBarController*)myTabBarController{
     //set the number of the tab bar
     if ([[UIApplication sharedApplication] applicationIconBadgeNumber]>0) {
-        [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%d",[[UIApplication sharedApplication] applicationIconBadgeNumber]]];
+        [[myTabBarController.tabBar.items objectAtIndex:4] setBadgeValue:[NSString stringWithFormat:@"%d",[[UIApplication sharedApplication] applicationIconBadgeNumber]]];
     } else {
-        [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:nil];
+        [[myTabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
     }
-    
 }
 
 +(void)ProcessNotificationUserInfo:(NSDictionary *)userInfo ChangeTabBarController:(UITabBarController*)myTabBarController{
     NSLog(@"did receive push notification %@",userInfo);
     NSDictionary *aps=[userInfo objectForKey:@"aps"];
     
-    [[myTabBarController.tabBar.items objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%@",[aps objectForKey:@"badge"]]];
+    [[myTabBarController.tabBar.items objectAtIndex:4] setBadgeValue:[NSString stringWithFormat:@"%@",[aps objectForKey:@"badge"]]];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
