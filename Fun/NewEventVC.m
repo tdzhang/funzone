@@ -230,6 +230,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBar.topItem.title = self.eventType;
+    
     //chaneg the Ui for the edit/create event
     if (self.isEditPage) {
         [self.deleteButton setHidden:NO];
@@ -310,8 +312,6 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
-    
-    self.navigationController.navigationBar.topItem.title = self.eventType;
 }
 
 
