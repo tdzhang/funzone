@@ -9,10 +9,12 @@
 #import "MoreTableViewController.h"
 
 @interface MoreTableViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *signOutButton;
 
 @end
 
 @implementation MoreTableViewController
+@synthesize signOutButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,10 +34,25 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //--------Navigation bar and Back button--------//
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
+    
+    self.signOutButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    
+    
 }
 
 - (void)viewDidUnload
 {
+    [self setSignOutButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

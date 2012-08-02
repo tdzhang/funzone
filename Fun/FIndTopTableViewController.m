@@ -43,6 +43,13 @@
 {
     [super viewDidLoad];
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Find Friends" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

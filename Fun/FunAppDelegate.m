@@ -47,9 +47,9 @@
     self.window.rootViewController = self.thisTabBarController;
     [[self.thisTabBarController.tabBar.items objectAtIndex:2] setFinishedSelectedImage: [UIImage imageNamed:@"AddOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"AddGrey.png"]];
     self.window.rootViewController = self.thisTabBarController;
-    [[self.thisTabBarController.tabBar.items objectAtIndex:3] setFinishedSelectedImage: [UIImage imageNamed:@"ActivityOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"ActivityGrey.png"]];
+    [[self.thisTabBarController.tabBar.items objectAtIndex:4] setFinishedSelectedImage: [UIImage imageNamed:@"ActivityOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"ActivityGrey.png"]];
     self.window.rootViewController = self.thisTabBarController;
-    [[self.thisTabBarController.tabBar.items objectAtIndex:4] setFinishedSelectedImage: [UIImage imageNamed:@"ParcOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"ParcGrey.png"]];
+    [[self.thisTabBarController.tabBar.items objectAtIndex:3] setFinishedSelectedImage: [UIImage imageNamed:@"ParcOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"ParcGrey.png"]];
     self.window.rootViewController = self.thisTabBarController;
     
     return YES;

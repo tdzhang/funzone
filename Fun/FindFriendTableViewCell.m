@@ -27,6 +27,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        //self.actionButton.imageView.image = [UIImage imageNamed:@"button_comment.png"];
+        //self.actionButton.imageView.frame.size = self.actionButton.frame.size;
     }
     return self;
 }

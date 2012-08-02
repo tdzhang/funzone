@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 @property (nonatomic, strong) UIButton* showAllFollowingsButton;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -41,6 +42,7 @@
 @synthesize bookmarkNumLabel = _bookmarkNumLabel;
 @synthesize followingNumLabel = _followingNumLabel;
 @synthesize followerNumLabel = _followerNumLabel;
+@synthesize moreButton = _moreButton;
 @synthesize showAllFollowingsButton = _showAllFollowingsButton;
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
@@ -217,16 +219,14 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+
+    self.moreButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+   
     
     
-    _creatorImageView.layer.cornerRadius = 5;
+    _creatorImageView.layer.cornerRadius = 7;
     _creatorImageView.layer.masksToBounds = YES;
-    _creatorImageView.layer.shadowOpacity = 0.85f;
-    _creatorImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _creatorImageView.layer.shadowRadius = 2.f;
-    [_creatorImageView.layer setShadowOffset:CGSizeMake(1, 1)];
-    //_creatorImageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    //_creatorImageView.layer.borderWidth = 1.f;
+
 }
 
 - (void)viewDidUnload
@@ -237,6 +237,7 @@
     [self setBookmarkNumLabel:nil];
     [self setFollowingNumLabel:nil];
     [self setFollowerNumLabel:nil];
+    [self setMoreButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

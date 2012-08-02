@@ -221,6 +221,11 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+    
+    _creatorImageView.layer.cornerRadius = 7;
+    _creatorImageView.layer.masksToBounds = YES;
+    
+
 }
 
 - (void)viewDidUnload
@@ -364,6 +369,7 @@
         self.freshConnectionType=@"Add";
         [connection start];         
     }
+    
 }
 
 #pragma mark - get more data and show the more event
