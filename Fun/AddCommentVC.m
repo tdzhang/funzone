@@ -99,7 +99,7 @@
             if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                 UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 success.delegate=self;
-                [success show];
+                //[success show];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else{
