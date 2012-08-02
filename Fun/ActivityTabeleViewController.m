@@ -12,6 +12,7 @@
 @interface ActivityTabeleViewController ()
 @property(nonatomic,strong)NSMutableArray* activities;
 @property(nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequecy
+@property(nonatomic,strong)activityElementObject* tapped_element;
 
 //start fetching activity data from the sever(and did the badge clean job)
 -(void)startFetchingActivityData;
@@ -20,6 +21,7 @@
 @implementation ActivityTabeleViewController
 @synthesize activities=_activities;
 @synthesize lastReceivedJson=_lastReceivedJson;
+@synthesize tapped_element=_tapped_element;
 
 #pragma mark - self defined setter and getter
 -(NSMutableArray *)activities{
@@ -196,13 +198,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    activityElementObject* element=[self.activities objectAtIndex:indexPath.row];
+    self.tapped_element=element;
+    if ([element.type isEqualToString:@"2"]) {
+        // some one show interest on your event// go to that event
+        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+    }
+    else if([element.type isEqualToString:@"102"]){
+        //some one followed you
+        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
+        
+    }
+    else if([element.type isEqualToString:@"4"]){
+        //some one comment on you event
+        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+    }
+    
+}
+
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"seeMyEvent"]) {
+        //if it's the segue to the view detail part, do this:
+        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+        [detailVC preSetTheEventID:self.tapped_element.event_id andSetTheSharedEventID:self.tapped_element.shared_event_id andSetIsOwner:YES];
+        [detailVC preSetServerLogViaParameter:VIA_ACTIVITY];
+    }
+    else if([segue.identifier isEqualToString:@"seeOtherProfile"]) {
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tapped_element.user_id;
+    }
 }
 
 @end

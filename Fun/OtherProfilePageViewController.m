@@ -193,8 +193,10 @@
     NSURLRequest* URLrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:URLrequest delegate:self];
     [connection start];
-    self.mainScrollView.contentSize =CGSizeMake(VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
-    self.mainScrollView.contentOffset = CGPointMake(0, 10);
+    if ([self.lastReceivedJson_bookmark count]<5) {
+        self.mainScrollView.contentSize =CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 5*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
+        self.mainScrollView.contentOffset = CGPointMake(0, 10);
+    }
     
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];

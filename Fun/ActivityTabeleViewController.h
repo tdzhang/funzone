@@ -11,6 +11,8 @@
 #import "GlobalConstant.h"
 #import "activityElementObject.h"
 #import "ActivityTableViewCell.h"
+#import "DetailViewController.h"
+#import "OtherProfilePageViewController.h"
 
 @interface ActivityTabeleViewController : UITableViewController
 

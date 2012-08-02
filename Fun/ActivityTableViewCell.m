@@ -50,7 +50,7 @@
     [self.userNameLabel setText:@""];
     if ([self.type isEqualToString:@"2"]) {
         // some one show interest on your event/////
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ is interested at your event",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ is interested in your event.",self.user_name]];
         //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([self.type isEqualToString:@"102"]){
@@ -60,7 +60,7 @@
     }
     else if([self.type isEqualToString:@"4"]){
         //some one comment on you event
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has comment on your event.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has commented on your event.",self.user_name]];
         //[self.userNameLabel setText:@"Comment Event:"];
     }
     

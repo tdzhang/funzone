@@ -11,7 +11,7 @@
 #import "URLConnectionCache.h"
 #import "Cache.h"
 
-#define MYPERMANENTCACHEPART_SATASIZE_LIMITE 1024*1024*10
+#define MYPERMANENTCACHEPART_SATASIZE_LIMITE 1024*1024*7
 
 @interface MyPermenentCachePart : NSObject
 +(void)init; // init the PermenetCachePart(including call startFrtchingData subroutine)
