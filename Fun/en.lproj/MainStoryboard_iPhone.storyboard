@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -1468,26 +1468,30 @@ Find us @OrangeParc.com</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="subtle-pattern-2.jpg" id="3r8-m5-n6x">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="3r8-m5-n6x">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-profile-back.png" id="FT8-7B-UJ2">
+                                <rect key="frame" x="9" y="13" width="47" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="EUZ-07-DTq">
-                                <rect key="frame" x="10" y="14" width="40" height="40"/>
+                                <rect key="frame" x="11" y="15" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="0is-UK-mz6">
-                                <rect key="frame" x="50" y="10" width="263" height="80"/>
+                                <rect key="frame" x="59" y="11" width="251" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="talkbox.png" id="Sd2-oe-MN9">
-                                        <rect key="frame" x="0.0" y="0.0" width="263" height="80"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-talkbox.png" id="Sd2-oe-MN9">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="86"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="icZ-bJ-Eeg">
-                                        <rect key="frame" x="12" y="7" width="244" height="65"/>
+                                        <rect key="frame" x="12" y="7" width="230" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1497,7 +1501,7 @@ Find us @OrangeParc.com</string>
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="headTruncation" id="vdu-0c-Ml0">
-                                        <rect key="frame" x="16" y="11" width="237" height="40"/>
+                                        <rect key="frame" x="12" y="7" width="230" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -1511,10 +1515,10 @@ Find us @OrangeParc.com</string>
                                             <action selector="ChooseEventTitle:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="ERg-qa-hZj"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000000000000016" contentMode="left" text="Enter the title and content..." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qeP-fy-EsK">
-                                        <rect key="frame" x="16" y="2" width="174" height="24"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="left" text="What are you up to?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qeP-fy-EsK">
+                                        <rect key="frame" x="16" y="9" width="174" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1526,10 +1530,10 @@ Find us @OrangeParc.com</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oRr-dR-l35">
-                                        <rect key="frame" x="7" y="5" width="308" height="140"/>
+                                        <rect key="frame" x="9" y="5" width="300" height="145"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" backgroundImage="blockelementholder.png">
+                                        <state key="normal" backgroundImage="event-imageborder.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1540,20 +1544,27 @@ Find us @OrangeParc.com</string>
                                             <action selector="ChoosePhoto:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="vzy-mV-dAz"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="Tq0-qs-KA0">
-                                        <rect key="frame" x="18" y="17" width="285" height="115"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="event-imageholder.png" id="Tq0-qs-KA0">
+                                        <rect key="frame" x="19" y="13" width="280" height="126"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" text="Choose a photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="P9F-AI-DLK">
+                                        <rect key="frame" x="70" y="91" width="180" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="UOZ-GP-9Qo">
-                                <rect key="frame" x="165" y="247" width="145" height="50"/>
+                                <rect key="frame" x="162" y="247" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dashed-deal.png" id="mw1-5B-lbQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-dashed-border.png" id="mw1-5B-lbQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="144" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
@@ -1576,7 +1587,7 @@ Find us @OrangeParc.com</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4fc-Jc-98h">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1599,11 +1610,11 @@ Find us @OrangeParc.com</string>
                                 </accessibility>
                             </view>
                             <view contentMode="scaleToFill" id="731-iH-70Y">
-                                <rect key="frame" x="10" y="247" width="145" height="50"/>
+                                <rect key="frame" x="12" y="247" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dashed-deal.png" id="NEb-c3-dVN">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-dashed-border.png" id="NEb-c3-dVN">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" image="11-clock.png" id="qdx-h4-mF5">
@@ -1620,7 +1631,7 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Y1-I1-bf4">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal">
@@ -1711,7 +1722,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="locationIcon" destination="9cJ-fk-riH" id="y9y-Us-YgD"/>
                         <outlet property="locationLabel" destination="wvA-yO-1ra" id="Xay-fD-6NG"/>
                         <outlet property="mapViewFeedBackImageView" destination="T8Q-TO-MQu" id="B8f-ny-Lz4"/>
-                        <outlet property="personProfileImage" destination="EUZ-07-DTq" id="iJG-dI-wSa"/>
+                        <outlet property="personProfileImage" destination="EUZ-07-DTq" id="n3K-yZ-qDk"/>
                         <outlet property="textFieldEventTitle" destination="icZ-bJ-Eeg" id="8Yh-wh-dkW"/>
                         <outlet property="timeIcon" destination="qdx-h4-mF5" id="Mbc-mL-bGS"/>
                         <outlet property="uIImageViewEvent" destination="Tq0-qs-KA0" id="rp9-uI-7PK"/>
@@ -4116,7 +4127,6 @@ Find us @OrangeParc.com</string>
         <image name="Featured.png" width="30" height="30"/>
         <image name="OrangeParc-WeChat28.png" width="28" height="28"/>
         <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
-        <image name="blockelementholder.png" width="1350" height="679"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="button_orange-2.png" width="608" height="97"/>
         <image name="cancel_button.png" width="250" height="121"/>
@@ -4130,7 +4140,12 @@ Find us @OrangeParc.com</string>
         <image name="detail-share-color.png" width="40" height="40"/>
         <image name="detailButton.png" width="11" height="15"/>
         <image name="done.png" width="295" height="207"/>
+        <image name="event-dashed-border.png" width="288" height="108"/>
+        <image name="event-imageborder.png" width="608" height="291"/>
+        <image name="event-imageholder.png" width="589" height="271"/>
         <image name="event-location.png" width="94" height="155"/>
+        <image name="event-profile-back.png" width="96" height="96"/>
+        <image name="event-talkbox.png" width="502" height="172"/>
         <image name="event-time.png" width="144" height="131"/>
         <image name="facebook_icon.png" width="125" height="125"/>
         <image name="facebook_signin_button.png" width="1167" height="200"/>
@@ -4292,10 +4307,6 @@ Find us @OrangeParc.com</string>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EmailShare:"/>
-                <relationship kind="action" name="FinishedThisSharePage:"/>
-                <relationship kind="action" name="MesssgeShare:"/>
-                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>

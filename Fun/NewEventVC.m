@@ -301,7 +301,7 @@
 
 - (void)viewDidLoad:(BOOL)animated {
     [super viewDidLoad];
-    
+
 }
 
 
@@ -324,6 +324,7 @@
     //[self setUITextViewPersonalMsg:nil];
     [self setLabelEventTitleHolder:nil];
     [self setPersonProfileImage:nil];
+        
     [self setMapViewFeedBackImageView:nil];
     [self setButtonEditEventTitle:nil];
     [self setKeyboardToolbar:nil];
@@ -788,6 +789,12 @@
                 [self.personProfileImage setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
             });
         }
+    self.personProfileImage.layer.cornerRadius = 6;
+    self.personProfileImage.layer.masksToBounds = YES;
+    self.personProfileImage.layer.shadowOpacity = 0.85f;
+    self.personProfileImage.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.personProfileImage.layer.shadowRadius = 2.f;
+    [self.personProfileImage.layer setShadowOffset:CGSizeMake(1, 1)];
 }
 
 

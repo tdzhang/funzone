@@ -211,6 +211,11 @@
 		46D2BCA515C9D5C900E14FE7 /* texture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA315C9D5C900E14FE7 /* texture@2x.png */; };
 		46D2BCA815C9D5D600E14FE7 /* Category.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA615C9D5D600E14FE7 /* Category.png */; };
 		46D2BCA915C9D5D600E14FE7 /* Category@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCA715C9D5D600E14FE7 /* Category@2x.png */; };
+		46D2BCBF15C9FFE300E14FE7 /* event-dashed-border.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCBA15C9FFE300E14FE7 /* event-dashed-border.png */; };
+		46D2BCC015C9FFE300E14FE7 /* event-imageborder.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCBB15C9FFE300E14FE7 /* event-imageborder.png */; };
+		46D2BCC115C9FFE300E14FE7 /* event-imageholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCBC15C9FFE300E14FE7 /* event-imageholder.png */; };
+		46D2BCC215C9FFE300E14FE7 /* event-profile-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCBD15C9FFE300E14FE7 /* event-profile-back.png */; };
+		46D2BCC315C9FFE300E14FE7 /* event-talkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCBE15C9FFE300E14FE7 /* event-talkbox.png */; };
 		46DBFA8D15BD387A00130749 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFA8C15BD387A00130749 /* 06-magnify.png */; };
 		921D57F115BE1BC800A49422 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 921D57F015BE1BC800A49422 /* header.png */; };
 		9222BF4415C5D63A00489704 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922FF4F115C5D2190096C81A /* Accounts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -516,6 +521,11 @@
 		46D2BCA315C9D5C900E14FE7 /* texture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "texture@2x.png"; sourceTree = "<group>"; };
 		46D2BCA615C9D5D600E14FE7 /* Category.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Category.png; sourceTree = "<group>"; };
 		46D2BCA715C9D5D600E14FE7 /* Category@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Category@2x.png"; sourceTree = "<group>"; };
+		46D2BCBA15C9FFE300E14FE7 /* event-dashed-border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event-dashed-border.png"; sourceTree = "<group>"; };
+		46D2BCBB15C9FFE300E14FE7 /* event-imageborder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event-imageborder.png"; sourceTree = "<group>"; };
+		46D2BCBC15C9FFE300E14FE7 /* event-imageholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event-imageholder.png"; sourceTree = "<group>"; };
+		46D2BCBD15C9FFE300E14FE7 /* event-profile-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event-profile-back.png"; sourceTree = "<group>"; };
+		46D2BCBE15C9FFE300E14FE7 /* event-talkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "event-talkbox.png"; sourceTree = "<group>"; };
 		46DBFA8C15BD387A00130749 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		921D57F015BE1BC800A49422 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		922FF4F115C5D2190096C81A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -1074,6 +1084,11 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				46D2BCBA15C9FFE300E14FE7 /* event-dashed-border.png */,
+				46D2BCBB15C9FFE300E14FE7 /* event-imageborder.png */,
+				46D2BCBC15C9FFE300E14FE7 /* event-imageholder.png */,
+				46D2BCBD15C9FFE300E14FE7 /* event-profile-back.png */,
+				46D2BCBE15C9FFE300E14FE7 /* event-talkbox.png */,
 				46550E9B15A8FD4B008FF360 /* Category-Movie.jpeg */,
 				92B2FF6315BE65F2003E8290 /* weixin_icon.JPEG */,
 				46415B5415C7AA9E000E7787 /* bamboo-huts-thai-restaurant.jpg */,
@@ -1466,6 +1481,11 @@
 				46D2BCA515C9D5C900E14FE7 /* texture@2x.png in Resources */,
 				46D2BCA815C9D5D600E14FE7 /* Category.png in Resources */,
 				46D2BCA915C9D5D600E14FE7 /* Category@2x.png in Resources */,
+				46D2BCBF15C9FFE300E14FE7 /* event-dashed-border.png in Resources */,
+				46D2BCC015C9FFE300E14FE7 /* event-imageborder.png in Resources */,
+				46D2BCC115C9FFE300E14FE7 /* event-imageholder.png in Resources */,
+				46D2BCC215C9FFE300E14FE7 /* event-profile-back.png in Resources */,
+				46D2BCC315C9FFE300E14FE7 /* event-talkbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
