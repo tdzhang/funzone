@@ -75,6 +75,7 @@
 
 //these property used to send back to server when create a event(image, title, location)
 @property (nonatomic,strong) UIImage *createEvent_image;
+@property (nonatomic) BOOL isCreateEvent_imageUsable; //indicate whether the user has choosed a imgae
 @property (nonatomic,strong) NSString *createEvent_title;
 @property (nonatomic,strong) NSString *createEvent_latitude;
 @property (nonatomic,strong) NSString *createEvent_longitude;
@@ -143,6 +144,8 @@
 
 
 @synthesize createEvent_image=_createEvent_image;
+@synthesize isCreateEvent_imageUsable=_isCreateEvent_imageUsable;
+
 @synthesize createEvent_title=_createEvent_title;
 @synthesize createEvent_latitude=_createEvent_latitude;
 @synthesize createEvent_longitude=_createEvent_longitude;
@@ -158,7 +161,12 @@
 
 #pragma mark - self defined synthesize
 -(UIImage *)createEvent_image{
-    _createEvent_image=self.uIImageViewEvent.image;
+    if (_isCreateEvent_imageUsable) {
+        _createEvent_image=self.uIImageViewEvent.image;
+    }
+    else{
+        _createEvent_image=nil;
+    }
     return _createEvent_image;
 }
 
@@ -288,6 +296,8 @@
         [self.uIImageViewEvent clipsToBounds];
     }
     
+    self.isCreateEvent_imageUsable=NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -412,7 +422,7 @@
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
             if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
             }
@@ -446,7 +456,7 @@
                     //if has image url, then no need to upload the image
                     [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
                 }
-                else{
+                else if(self.isCreateEvent_imageUsable){
                     NSString *format=@"png";
                     NSData *data=nil;
                     data=UIImagePNGRepresentation(self.createEvent_image);
@@ -526,7 +536,7 @@
                     //if has image url, then no need to upload the image
                     [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
                 }
-                else{
+                else if(self.isCreateEvent_imageUsable){
                     NSString *format=@"png";
                     NSData *data=nil;
                     data=UIImagePNGRepresentation(self.createEvent_image);
@@ -552,7 +562,7 @@
                 //if has image url, then no need to upload the image
                 [request setPostValue:self.createEvent_imageUrlName forKey:@"image_url"];
             }
-            else{
+            else if(self.isCreateEvent_imageUsable){
                 //add content
                 NSString *format=@"png";
                 NSData *data=nil;
@@ -847,6 +857,7 @@
     [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     [self dismissModalViewControllerAnimated:YES];
+    self.isCreateEvent_imageUsable=YES;
 }
 
 
