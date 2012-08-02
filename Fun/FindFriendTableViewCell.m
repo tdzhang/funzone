@@ -214,7 +214,7 @@
                     self.actionCategory=@"unfollow";
                 }
                 else {
-                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     unsuccess.delegate=self;
                     [unsuccess show];
                 }
@@ -251,7 +251,7 @@
                     self.actionCategory=@"follow";
                 }
                 else {
-                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     unsuccess.delegate=self;
                     [unsuccess show];
                 }

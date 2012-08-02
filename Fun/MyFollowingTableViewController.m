@@ -134,9 +134,9 @@
             NSLog(@"cool");
         }
         else {
-            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not completed." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            unsuccess.delegate=self;
-            [unsuccess show];
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Unfollow Error" message:[NSString stringWithFormat:@"The unfollow is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            error.delegate=self;
+            [error show];
         }
     }];
     [request setFailedBlock:^{

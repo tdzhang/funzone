@@ -103,7 +103,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else{
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:@"Sorry, the comment wasn't completed. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
                 [self.navigationController popViewControllerAnimated:YES];

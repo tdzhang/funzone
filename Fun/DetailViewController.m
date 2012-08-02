@@ -253,7 +253,7 @@
                 [success show];
             }
             else {
-                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
                 unsuccess.delegate=self;
                 [unsuccess show];
             }

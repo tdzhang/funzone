@@ -149,7 +149,7 @@
             [self dismissModalViewControllerAnimated:YES];
         }
         else {
-            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[NSString stringWithFormat:@"The registration is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             error.delegate=self;
             [error show];
         }
@@ -220,7 +220,7 @@
             [self dismissModalViewControllerAnimated:YES];
         }
         else {
-            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The login is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[NSString stringWithFormat:@"The login is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             error.delegate=self;
             [error show];
         }

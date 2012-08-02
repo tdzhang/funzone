@@ -183,6 +183,11 @@
                     success.delegate=self;
                     [success show];
                 }
+                else{
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[NSString stringWithFormat:@"The logout is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    error.delegate=self;
+                    [error show];
+                }
             }];
             [request setFailedBlock:^{
                 NSError *error = [block_request error];
