@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
@@ -300,7 +300,7 @@
                                         <rect key="frame" x="0.0" y="276" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="280" height="44"/>
+                                            <rect key="frame" x="10" y="1" width="280" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Like us on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eAz-gt-u2B">
@@ -1644,8 +1644,8 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="16" y="302" width="290" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Delete" backgroundImage="create_account_button.png">
-                                    <color key="titleColor" red="0.90155220030000005" green="0.38804696830000002" blue="0.035024054999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Delete" backgroundImage="button-red.png">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -3332,10 +3332,10 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="71" y="23" width="178" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <color key="textColor" red="1" green="0.4162711871" blue="0.013455714069999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
@@ -3355,6 +3355,7 @@ Find us @OrangeParc.com</string>
         <image name="Category@2x.png" width="640" height="734"/>
         <image name="administrator_40.png" width="40" height="40"/>
         <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
+        <image name="button-red.png" width="100" height="26"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="cancel_button.png" width="250" height="121"/>
         <image name="create_account_button.png" width="1167" height="200"/>
@@ -3567,9 +3568,9 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="lqc-Cx-NBX"/>
         <segue reference="Yrc-z9-85p"/>
-        <segue reference="eX7-7v-GIv"/>
+        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="maZ-xV-hRy"/>
     </inferredMetricsTieBreakers>
 </document>
