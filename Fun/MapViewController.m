@@ -136,14 +136,6 @@
     //set the feed back annotation
     [self setFeedBackAnnotation:annotationPoint];
     
-//    self.myStepper.minimumValue = 1;
-//    self.myStepper.maximumValue = 9;
-//    self.myStepper.stepValue = 1;
-//    self.myStepper.wraps = NO;
-//    self.myStepper.autorepeat = NO;
-//    self.myStepper.continuous = NO;   
-//    [self.myStepper setValue:5];
-//    self.oldZoom =[NSNumber numberWithDouble:5];
 }
 
 
