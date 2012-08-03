@@ -18,6 +18,7 @@
 
 @property (nonatomic,strong)MKPointAnnotation* feedBackAnnotation; //used to give back the location information of the user choosed location
 
+-(void)startSearchBaseonTheSearchBar;
 @end
 
 @implementation MapViewController
@@ -337,40 +338,12 @@
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSString *formerKeyWord=searchBar.text;
-    [searchBar resignFirstResponder];
-    [self.MySearchDisplayController setActive:NO animated:YES];
-    [searchBar setText:formerKeyWord];
+    //NSString *formerKeyWord=searchBar.text;
+    //[searchBar resignFirstResponder];
+   // [self.MySearchDisplayController setActive:NO animated:YES];
+    //[searchBar setText:formerKeyWord];
     
-    //using apple api
-    /*
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        //Error checking
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"size: %d",[placemarks count]);
-        
-        //set mapview region( where to show the map veiw)
-        MKCoordinateRegion region;
-        region.center.latitude = placemark.region.center.latitude;
-        region.center.longitude = placemark.region.center.longitude;
-        MKCoordinateSpan span;
-        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
-        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE;
-        region.span = span;
-        
-        //add annotation
-        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
-        annotationPoint.coordinate = placemark.region.center;
-        annotationPoint.title = placemark.locality;
-        if(!annotationPoint.title)annotationPoint.title=@"NO name:";
-            annotationPoint.subtitle = placemark.name;
-        if(!annotationPoint.subtitle)annotationPoint.subtitle=@"No subtitle name.";
-        self.annotation=annotationPoint;
-        [self.myMapView addAnnotation:annotationPoint];
-        [self.myMapView setRegion:region animated:YES];
-    }];
-     */
+    [self startSearchBaseonTheSearchBar];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -438,18 +411,9 @@
 #define OAUTH_TOKEN3 @"XK02KZWHY0QUYRAIX4550UJ2FR12ZZGKKX3UXE4HX0LUOKVI"
 #define VERSION_STRING @"20120623"
 #define RESULT_NUMBER_LIMIT 15
-//Start when searchBar text changed,find the user searched result from fousqure, and save them to self.foursquareSearchResults
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
-shouldReloadTableForSearchString:(NSString *)searchString
-{
-    //in case the frequency of searching is too high
-    int searchLength=[searchString length];
-    if (searchLength<4) {
-        return NO;
-    }
-    
-    
+-(void)startSearchBaseonTheSearchBar{
     //只有第二次启动的时候，user location 才会有值, make the view show user location
+    NSString *searchString=self.mySearchBar.text;
     MKMapView *mapView=self.myMapView;
     CLLocation *userLoc = mapView.userLocation.location;
     CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
@@ -459,7 +423,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
             [self.tableViewControllerContainMap SearchTheKeyWords:searchString AtUserLocation:userLoc];
         }
     }
-    
     
     //using google api to do the search
     NSString* oauthToken;
@@ -484,10 +447,23 @@ shouldReloadTableForSearchString:(NSString *)searchString
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        [connection start]; 
+        [connection start];
     }
 
-  
+}
+
+//Start when searchBar text changed,find the user searched result from fousqure, and save them to self.foursquareSearchResults
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    //in case the frequency of searching is too high
+    int searchLength=[searchString length];
+    if (searchLength<5||searchLength%4!=0) {
+        return NO;
+    }
+    
+    [self startSearchBaseonTheSearchBar];
+
     return YES;
     
     /* 
