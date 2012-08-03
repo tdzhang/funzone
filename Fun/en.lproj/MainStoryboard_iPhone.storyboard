@@ -1114,7 +1114,7 @@ Find us @OrangeParc.com</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87244897960000001" green="0.87244897960000001" blue="0.87244897960000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <searchBar contentMode="redraw" placeholder="Search location" showsCancelButton="YES" id="qeT-AW-zzF">
+                            <searchBar contentMode="redraw" text="" placeholder="Search location" showsCancelButton="YES" id="qeT-AW-zzF">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -3404,6 +3404,11 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="MovieButtonClicked:"/>
+                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SelfDefineButtonClicked:"/>
+                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
