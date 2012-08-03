@@ -23,6 +23,7 @@
 @implementation MapViewController
 @synthesize predefinedSeachingWords=_predefinedSeachingWords;
 @synthesize myMapView=_myMapView;
+@synthesize MySearchDisplayController = _MySearchDisplayController;
 @synthesize mySearchBar = _mySearchBar;
 //@synthesize myStepper = _myStepper;
 @synthesize annotation=_annotation;
@@ -241,6 +242,7 @@
     [self setMySearchBar:nil];
 //    [self setMyStepper:nil];
     [self setMyTableView:nil];
+    [self setMySearchDisplayController:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -328,6 +330,10 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+    [self.MySearchDisplayController setActive:NO animated:YES];
+    //using apple api
+    
+    /*
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
         //Error checking
@@ -354,6 +360,7 @@
         [self.myMapView addAnnotation:annotationPoint];
         [self.myMapView setRegion:region animated:YES];
     }];
+     */
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
