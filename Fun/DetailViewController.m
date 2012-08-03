@@ -430,7 +430,12 @@
     
     self.garbageCollection=[NSMutableArray array];
     //comment
-    float height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
+    float height;
+    if (self.isEventOwner) {
+        height=300;
+    } else {
+        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
+    }
     //handle the interest people part
     if ([self.interestedPeople count]>0) {
         UIView *interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
@@ -526,7 +531,7 @@
     [comments_header_view addSubview:comment_header_label];
     
     //button
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(230, 4, 80, 22)];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(220, 4, 80, 22)];
     [button setAlpha:1];
     //add button action
     [button addTarget:self 
