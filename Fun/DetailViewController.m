@@ -198,13 +198,14 @@
     
     //change the button title based on the BOOL isOwner
     if (self.isEventOwner) {
-        [self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setHidden:YES];
+        //[self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
         [self.pickOrEditButton setTitle:@"    Edit" forState:UIControlStateNormal];
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
-        [self.interestOrInviteButton setTitle:@"    Like" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"    Pick" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"    I'm Interested" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"    Collect It" forState:UIControlStateNormal];
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
@@ -532,7 +533,7 @@
     [button addTarget:self 
                action:@selector(addViewCommentButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Comment" forState:UIControlStateNormal];
+    [button setTitle:@"+ Comment" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
