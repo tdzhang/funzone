@@ -21,5 +21,5 @@
 @property(nonatomic,weak)UITableView *myTableView;
 @property (nonatomic,weak)MapViewController *myMapViewController;
 @property (nonatomic,weak)id<FunTableViewContainMapviewTVCDelegate>delegate;
--(void)SearchTheKeyWords:(NSString*)keyWords AtUserLocation:(CLLocation *)userLocation withEventType:(NSString *)eventType;
+-(void)SearchTheKeyWords:(NSString*)keyWords AtUserLocation:(CLLocation *)userLocation;
 @end

@@ -204,10 +204,12 @@
 //make the Page for Edit
 -(void)presetIsEditPageToTrue{
     self.isEditPage=YES;
+    self.isCreateEvent_imageUsable=NO;//preset the image indicator to false
 }
 //make the Page for Create
 -(void)presetIsEditPageToFalse{
     self.isEditPage=NO;
+    self.isCreateEvent_imageUsable=NO;//preset the image indicator
 }
 -(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
@@ -295,8 +297,6 @@
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
     }
-    
-    self.isCreateEvent_imageUsable=NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -973,7 +973,7 @@
     [UIView commitAnimations];
 }
 
-#pragma mark -
+
 #pragma mark Notifications
 - (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
     NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];

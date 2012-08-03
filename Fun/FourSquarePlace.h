@@ -24,5 +24,6 @@
 @property(nonatomic,strong) NSString *categories_shortName;
 +(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue;
++(FourSquarePlace *)initializeWithGoogleTextNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;
 - (NSComparisonResult)compare:(FourSquarePlace *)otherObject;
 @end

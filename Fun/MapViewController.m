@@ -22,7 +22,6 @@
 
 @implementation MapViewController
 @synthesize predefinedSeachingWords=_predefinedSeachingWords;
-@synthesize locationNameTextField = _locationNameTextField;
 @synthesize myMapView=_myMapView;
 @synthesize mySearchBar = _mySearchBar;
 //@synthesize myStepper = _myStepper;
@@ -64,12 +63,8 @@
 }
 
 -(void)setFeedBackAnnotation:(MKPointAnnotation *)feedBackAnnotation{
-    if (![_feedBackAnnotation isEqual:feedBackAnnotation] && ![feedBackAnnotation.title isEqual:@"Current Location"]) {
+    if (![_feedBackAnnotation isEqual:feedBackAnnotation]) {
         _feedBackAnnotation=feedBackAnnotation;
-        //[self.locationNameTextField setText:@""];
-        [self.locationNameTextField setText:feedBackAnnotation.title];
-        [self.locationNameTextField setFont:[UIFont systemFontOfSize:14]];
-        [self.locationNameTextField setTextColor:[UIColor blackColor]];
     }
 }
 
@@ -155,6 +150,7 @@
 {
     [super viewDidLoad];
     
+    //set the style of navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
     
@@ -204,7 +200,8 @@
     //只有第二次启动的时候，user location 才会有值, make the view show user location
     MKMapView *mapView=self.myMapView;
     CLLocation *userLoc = mapView.userLocation.location;
-    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
+    //CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
+    /*
     if (userCoordinate.latitude>0.001) {
         [self showUserCurrentLocation];
         if (self.predefinedSeachingWords) {
@@ -212,6 +209,7 @@
         }
         
     }
+     */
     
     //if the predefined annotation, then show it (instead of current location)
     if(self.predefinedAnnotation){
@@ -243,7 +241,6 @@
     [self setMySearchBar:nil];
 //    [self setMyStepper:nil];
     [self setMyTableView:nil];
-    [self setLocationNameTextField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -431,9 +428,22 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
     //in case the frequency of searching is too high
     int searchLength=[searchString length];
-    if (searchLength<4||((searchLength-4)%2)!=0) {
+    if (searchLength<4) {
         return NO;
     }
+    
+    
+    //只有第二次启动的时候，user location 才会有值, make the view show user location
+    MKMapView *mapView=self.myMapView;
+    CLLocation *userLoc = mapView.userLocation.location;
+    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
+    if (userCoordinate.latitude>0.001) {
+        [self showUserCurrentLocation];
+        if (self.predefinedSeachingWords) {
+            [self.tableViewControllerContainMap SearchTheKeyWords:searchString AtUserLocation:userLoc];
+        }
+    }
+    
     
     //using google api to do the search
     NSString* oauthToken;
@@ -444,8 +454,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
     NSString *keyWords=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     //get User current Location
-    CLLocation *userLoc = self.myMapView.userLocation.location;
-    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
     //NSLog(@"user latitude = %f",userCoordinate.latitude);
     //NSLog(@"user longitude = %f",userCoordinate.longitude);
     if (userCoordinate.latitude<0.001) {
@@ -463,41 +471,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [connection start]; 
     }
 
-    
-    
-    /*
-    if (@"Not Using FourSqure" == @"1") {
-        //random select oauth_token from 2 exist token
-        NSString* oauthToken;
-        switch (arc4random() % 3) {
-            case 0:oauthToken=OAUTH_TOKEN1;break;
-            case 1:oauthToken=OAUTH_TOKEN2;break;
-            case 3:oauthToken=OAUTH_TOKEN3;break;
-            default:oauthToken=OAUTH_TOKEN1;break;
-        }
-        
-        NSString *keyWords=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        //get User current Location
-        CLLocation *userLoc = self.myMapView.userLocation.location;
-        CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
-        //NSLog(@"user latitude = %f",userCoordinate.latitude);
-        //NSLog(@"user longitude = %f",userCoordinate.longitude);
-        if (userCoordinate.latitude<0.001) {
-            UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Location Unavailable" message: @"Cannot Locate Your Location, Please Check The Settings For Details." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [someError show];
-        }
-        else{
-            //Searching the key word
-            double lat=userCoordinate.latitude;
-            double lng=userCoordinate.longitude;
-            NSString *request_string=[NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&intent=checkin&query=%@&limit=%d&oauth_token=%@&v=%@",lat,lng,keyWords,RESULT_NUMBER_LIMIT,oauthToken,VERSION_STRING];
-            NSLog(@"%@",request_string);
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-            NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-            [connection start]; 
-        }
-    }
-    */
+  
     return YES;
     
     /* 
@@ -611,7 +585,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //deal with google part
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"all %@",[json allKeys]);
+    //NSLog(@"all %@",[json allKeys]);
     NSArray *results = [json objectForKey:@"results"];
     CLLocation *userLoc = self.myMapView.userLocation.location;
     CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
@@ -625,30 +599,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         FourSquarePlace *place = [FourSquarePlace initializeWithGoogleNSDictionary:venue withOrigin:userCoordinate];
         [searchResult addObject:place];
     }
-    
-    /*
-    if (@"Not using Square"!=@"1") {
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        NSLog(@"all %@",[json allKeys]);
-        NSDictionary *meta = [json objectForKey:@"meta"];
-        NSNumber *meta_code=[meta objectForKey:@"code"];
-        NSLog(@"%@",meta_code);
-        
-        NSMutableArray *searchResult = [NSMutableArray array];
-        if ([meta_code intValue] == 200) {
-            NSDictionary *response = [json objectForKey:@"response"];
-            NSArray *venues=[response objectForKey:@"venues"];
-            NSNumber *count =[NSNumber numberWithInt:[venues count]];
-            NSLog(@"Have %@ elements",count);
-            //start to put fetched data in to self.foursquareSearchResults
-            for (NSDictionary *venue in venues) {
-                FourSquarePlace *place = [FourSquarePlace initializeWithNSDictionary:venue];
-                [searchResult addObject:place];
-            }
-        }
-    }
-    */
+
     
     self.foursquareSearchResults=[searchResult sortedArrayUsingSelector:@selector(compare:)];//sorting the result using distance from the current location
     //reload data for the search result receiving
@@ -680,11 +631,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [self showUserCurrentLocation];
     }
     
-    
-    //if have predefined seaching words, search it
-    if (self.predefinedSeachingWords) {
-        [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLocation.location withEventType:self.preDefinedEventType];
-    }
+
 }
 
 //create the annnotation view(In mapView)
@@ -696,7 +643,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
         aView.canShowCallout = YES;
         //add left image view 30*30
         //aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        
     }
     aView.annotation=annotation;
     
@@ -756,7 +702,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
 }
 */
-
+//the action of the finish button
 - (IBAction)DoneWithChooseLocation:(id)sender {
     MKPointAnnotation *annotationPoint = self.annotation;
     [self.myMapView deselectAnnotation:annotationPoint animated:NO];

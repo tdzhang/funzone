@@ -27,7 +27,6 @@
 
 
 @interface MapViewController : UIViewController <MKMapViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIGestureRecognizerDelegate,FunTableViewContainMapviewTVCDelegate,UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *locationNameTextField;
 @property (strong, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
 //@property (weak, nonatomic) IBOutlet UIStepper *myStepper;
