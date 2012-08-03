@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (nonatomic,strong) NSMutableData *data;
 
 @property (nonatomic,strong) NSString *event_id;
@@ -62,6 +63,7 @@
 @synthesize eventPriceLabel;
 @synthesize eventIntroLabel;
 @synthesize myScrollView;
+@synthesize profileButton = _profileButton;
 @synthesize data=_data;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
@@ -83,7 +85,7 @@
 @synthesize delegate=_delegate;
 @synthesize interestOrInviteButton = _interestOrInviteButton;
 @synthesize pickOrEditButton = _pickOrEditButton;
-@synthesize shareButton = _shareButton;
+//@synthesize shareButton = _shareButton;
 @synthesize via=_via;
 @synthesize isEventOwner=_isEventOwner;
 @synthesize mysendMessageType=_mysendMessageType;
@@ -159,7 +161,7 @@
     [self setOriginalCreatorIndicator:nil];
     [self setInterestOrInviteButton:nil];
     [self setPickOrEditButton:nil];
-    [self setShareButton:nil];
+    //[self setShareButton:nil];
     
     
     //--------Navigation bar and Back button--------//
@@ -173,6 +175,7 @@
     [self.navigationItem setBackBarButtonItem:backButton];
     
     
+    [self setProfileButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -197,12 +200,12 @@
     if (self.isEventOwner) {
         [self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
         [self.pickOrEditButton setTitle:@"    Edit" forState:UIControlStateNormal];
-        [self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
+        //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
         [self.interestOrInviteButton setTitle:@"    Like" forState:UIControlStateNormal];
         [self.pickOrEditButton setTitle:@"    Pick" forState:UIControlStateNormal];
-        [self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
+        //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
 
@@ -248,6 +251,14 @@
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"WeChat", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
+}
+
+- (IBAction)profileClicked:(UIButton *)sender {
+    if (self.isEventOwner) {
+        [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+    }
 }
 
 //handle the action: interestedButtonClicked
@@ -627,6 +638,10 @@
         }
         peopleController.preDefinedMode=self.preDefinedMode;
     }
+    else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.creator_id;
+    }
 }
 
 
@@ -749,7 +764,11 @@
     //[self.myScrollView addSubview:self.creatorProfileImageView];
     NSString *creator_name=[event objectForKey:@"creator_name"];
     [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@",creator_name]];
-    
+    CGSize contributorNameLabel_expectedWidth = [creator_name sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:150 lineBreakMode:UILineBreakModeClip];
+    CGRect contributor_frame = self.contributorNameLabel.frame;
+    contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
+    contributorNameLabel.frame = contributor_frame;
+    self.profileButton.frame = CGRectMake(self.creatorProfileImageView.frame.origin.x, self.creatorProfileImageView.frame.origin.y, self.creatorProfileImageView.frame.size.width+self.contributorNameLabel.frame.size.width + 10,self.creatorProfileImageView.frame.size.height);
     
 #warning fetch original creator info
     //show original creator
@@ -855,12 +874,12 @@
         [self.pickOrEditButton addSubview:pick_icon];
     }
     
-    newFrame = self.shareButton.frame;
-    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
-    self.shareButton.frame = newFrame;
-    UIImageView *share_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-share-color.png"]];
-    share_icon.frame = CGRectMake(7, 5, 20, 20);
-    [self.shareButton addSubview:share_icon];
+//    newFrame = self.shareButton.frame;
+//    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+//    self.shareButton.frame = newFrame;
+//    UIImageView *share_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-share-color.png"]];
+//    share_icon.frame = CGRectMake(7, 5, 20, 20);
+//    [self.shareButton addSubview:share_icon];
 
     //set event image
     NSURL *url=[NSURL URLWithString:photo];

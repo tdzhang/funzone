@@ -131,6 +131,7 @@
             self.lastReceivedJson_profile=json;
             //only update the content when there is a content different
             [self.creatorNameLabel setText:[json objectForKey:@"name"]];
+            self.navigationController.navigationBar.topItem.title = [json objectForKey:@"name"];
             [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
             [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
             [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
