@@ -200,12 +200,12 @@
     if (self.isEventOwner) {
         [self.interestOrInviteButton setHidden:YES];
         //[self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"    Edit" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"" forState:UIControlStateNormal];
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
-        [self.interestOrInviteButton setTitle:@"    I'm Interested" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"    Collect It" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"       I'm Interested" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"      Collect It" forState:UIControlStateNormal];
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
@@ -431,7 +431,6 @@
     self.garbageCollection=[NSMutableArray array];
     //comment
     float height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
-    
     //handle the interest people part
     if ([self.interestedPeople count]>0) {
         UIView *interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
@@ -527,7 +526,7 @@
     [comments_header_view addSubview:comment_header_label];
     
     //button
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(230, 4, 65, 22)];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(230, 4, 80, 22)];
     [button setAlpha:1];
     //add button action
     [button addTarget:self 
@@ -536,7 +535,7 @@
     [button setTitle:@"+ Comment" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
-    [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
+//    [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
     [comments_header_view addSubview:button];
     [self.garbageCollection addObject:button];
     
@@ -548,7 +547,7 @@
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 0)];
         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
         
-        //        UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        //UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
         UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 0)];
         NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
@@ -868,10 +867,12 @@
     if (self.isEventOwner) {
         UIImageView *edit_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-edit-color.png"]];
         edit_icon.frame = CGRectMake(7, 5, 20, 20);
+        self.pickOrEditButton.frame = CGRectMake(280, 105, 30, 30);
+        [self.pickOrEditButton setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [self.pickOrEditButton addSubview:edit_icon];
     }else {
         UIImageView *pick_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        pick_icon.frame = CGRectMake(7, 5, 20, 20);
+        pick_icon.frame = CGRectMake(12, 5, 20, 20);
         [self.pickOrEditButton addSubview:pick_icon];
     }
     
