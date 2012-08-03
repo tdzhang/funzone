@@ -21,6 +21,25 @@
 @synthesize state=_state;
 @synthesize country=_country;
 @synthesize categories_shortName=_categories_shortName;
+@synthesize selfDefineName=_selfDefineName;
+
+//use google api
++(FourSquarePlace *)initializeWithSelfDefine:(NSString *)venueName{
+    FourSquarePlace *place=[[FourSquarePlace alloc] init];
+    
+    //name
+    NSString *name=[NSString stringWithFormat:@"Tap to add '%@'",venueName];
+    place.name=name;
+    place.selfDefineName=venueName;
+    
+    //location information
+    place.latitude=nil;
+    place.longitude=nil;
+    place.crossStreet=nil;
+    
+    return place;
+}
+
 
 //use google api
 +(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate{

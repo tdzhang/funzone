@@ -200,7 +200,7 @@
     
     //只有第二次启动的时候，user location 才会有值, make the view show user location
     MKMapView *mapView=self.myMapView;
-    CLLocation *userLoc = mapView.userLocation.location;
+    //CLLocation *userLoc = mapView.userLocation.location;
     //CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
     /*
     if (userCoordinate.latitude>0.001) {
@@ -213,20 +213,22 @@
      */
     
     //if the predefined annotation, then show it (instead of current location)
-    if(self.predefinedAnnotation){
+    if(self.predefinedAnnotation&&(self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)){
         MKPointAnnotation *annotation=self.predefinedAnnotation;
         MKCoordinateRegion region;
         MKCoordinateSpan span;
         span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
         span.longitudeDelta = DEFAULT_ZOOMING_SPAN_LONGITUDE;
         self.currentZOOMVALUE=[NSNumber numberWithDouble:DEFAULT_ZOOMING_SPAN_LONGITUDE];
-
         region.span=span;
         region.center=annotation.coordinate;
         [mapView setRegion:region animated:YES];
         // add annotation at the point User pressed
         self.annotation=annotation;
         [self.myMapView addAnnotation:annotation];
+    }
+    else{
+        [self showUserCurrentLocation];
     }
 }
 
@@ -267,7 +269,13 @@
         // add annotation at the point User pressed
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = coordinate;
-        annotationPoint.title=@"Pinned Location";
+        if (!self.feedBackAnnotation.title||[self.feedBackAnnotation.title isEqualToString:@"Current Location"]) {
+            annotationPoint.title=@"You Pressed Here";
+        }
+        else{
+            annotationPoint.title=self.feedBackAnnotation.title;
+        }
+        
         annotationPoint.subtitle=[NSString stringWithFormat:@"Latitude:%f, Longitute:%f",coordinate.latitude,coordinate.longitude];
         self.annotation=annotationPoint;
         [self.myMapView addAnnotation:annotationPoint];
@@ -329,10 +337,12 @@
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSString *formerKeyWord=searchBar.text;
     [searchBar resignFirstResponder];
     [self.MySearchDisplayController setActive:NO animated:YES];
-    //using apple api
+    [searchBar setText:formerKeyWord];
     
+    //using apple api
     /*
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -365,7 +375,6 @@
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    [searchBar setText:@""];
     [searchBar resignFirstResponder];
 }
 
@@ -445,7 +454,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     CLLocation *userLoc = mapView.userLocation.location;
     CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
     if (userCoordinate.latitude>0.001) {
-        [self showUserCurrentLocation];
+        //[self showUserCurrentLocation];
         if (self.predefinedSeachingWords) {
             [self.tableViewControllerContainMap SearchTheKeyWords:searchString AtUserLocation:userLoc];
         }
@@ -507,36 +516,53 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //if the notificaiton is from the user select search results
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
-        NSString *venue_title=(place.name)?place.name:@"No name";
-        if (place.categories_shortName) {
-            venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+        if (place.latitude&&place.longitude) {
+            //if is from google api
+            NSString *venue_title=(place.name)?place.name:@"No name";
+            if (place.categories_shortName) {
+                venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+            }
+            
+            //set mapview region( where to show the map veiw)
+            MKCoordinateRegion region;
+            region.center.latitude = [place.latitude doubleValue];
+            region.center.longitude = [place.longitude doubleValue];
+            MKCoordinateSpan span;
+            span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
+            span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE;
+            region.span = span;
+            
+            //add annotation
+            MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+            annotationPoint.coordinate = region.center;
+            annotationPoint.title = venue_title;
+            if (place.crossStreet) {
+                annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
+            }
+            [self setAnnotation:annotationPoint];
+            [self.myMapView addAnnotation:annotationPoint];
+            [self.myMapView setRegion:region animated:YES];
+            [self.searchDisplayController setActive:NO animated:YES];
+            
+            //set the Search Bar and give up the Firstresponsder
+            [self.mySearchBar setText:venue_title];
+            
+            
+            //set the feedback annotation location information
+            [self setFeedBackAnnotation:annotationPoint];
+        } else {
+            //if there is no lat and long information
+            //add annotation
+            MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+            annotationPoint.title = place.selfDefineName;
+            [self.MySearchDisplayController setActive:NO animated:YES];
+            //set the Search Bar and give up the Firstresponsder
+            [self.mySearchBar setText:place.selfDefineName];
+            
+            //set the feedback annotation location information
+            [self setFeedBackAnnotation:annotationPoint];
         }
-        //set the Search Bar and give up the Firstresponsder
-        [self.mySearchBar setText:venue_title];
         
-        //set mapview region( where to show the map veiw)
-        MKCoordinateRegion region;
-        region.center.latitude = [place.latitude doubleValue];
-        region.center.longitude = [place.longitude doubleValue];
-        MKCoordinateSpan span;
-        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
-        span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE;
-        region.span = span;
-        
-        //add annotation
-        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
-        annotationPoint.coordinate = region.center;
-        annotationPoint.title = venue_title;
-        if (place.crossStreet) {
-            annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
-        }
-        self.annotation=annotationPoint;
-        [self.myMapView addAnnotation:annotationPoint];
-        [self.myMapView setRegion:region animated:YES];
-        [self.searchDisplayController setActive:NO];
-        
-        //set the feedback annotation location information
-        [self setFeedBackAnnotation:annotationPoint];
     }
 }
 
@@ -607,8 +633,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [searchResult addObject:place];
     }
 
-    
-    self.foursquareSearchResults=[searchResult sortedArrayUsingSelector:@selector(compare:)];//sorting the result using distance from the current location
+    //insert a self define place at the begainning 
+    FourSquarePlace *place=[FourSquarePlace initializeWithSelfDefine:self.mySearchBar.text];
+    [searchResult insertObject:place atIndex:0];
+    self.foursquareSearchResults=searchResult;//sorting the result using distance from the current location
     //reload data for the search result receiving
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
@@ -637,8 +665,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
     if (!self.predefinedAnnotation) {
         [self showUserCurrentLocation];
     }
-    
-
 }
 
 //create the annnotation view(In mapView)
@@ -721,8 +747,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
     span.longitudeDelta=DEFAULT_ZOOMING_SPAN_LONGITUDE*1;
     region.span = span;
     [self.myMapView setRegion:region animated:NO];
-    
-    
     
     //do the snapshot of the map view
     UIGraphicsBeginImageContextWithOptions(self.myMapView.frame.size, NO, 0.0);

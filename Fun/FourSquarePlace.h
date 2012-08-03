@@ -11,6 +11,7 @@
 
 @interface FourSquarePlace : NSObject
 @property(nonatomic,strong) NSString *name;
+@property(nonatomic,strong) NSString *selfDefineName;
 @property(nonatomic,strong) NSString *phone;
 @property(nonatomic,strong) NSString *formattedPhone;
 @property(nonatomic,strong) NSString *address;
@@ -22,6 +23,7 @@
 @property(nonatomic,strong) NSString *state;
 @property(nonatomic,strong) NSString *country;
 @property(nonatomic,strong) NSString *categories_shortName;
++(FourSquarePlace *)initializeWithSelfDefine:(NSString *)venueName;
 +(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue;
 +(FourSquarePlace *)initializeWithGoogleTextNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;

@@ -475,8 +475,12 @@
             }
             [request setPostValue:self.detail_event_id forKey:@"event_id"];
             [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
-            [request setPostValue:self.detail_longitude forKey:@"longitude"];
-            [request setPostValue:self.detail_latitude forKey:@"latitude"];
+            if ([self.detail_latitude floatValue]>0.02||[self.detail_latitude floatValue]<-0.02) {
+                [request setPostValue:self.detail_latitude forKey:@"latitude"];
+            }
+            if ([self.detail_longitude floatValue]>0.02||[self.detail_longitude floatValue]<-0.02) {
+                [request setPostValue:self.detail_longitude forKey:@"longitude"];
+            }
             [request setPostValue:self.detail_address forKey:@"address"];
             [request setPostValue:self.detail_location_name forKey:@"location"];
         }
@@ -527,8 +531,14 @@
         [request setPostValue:self.createEvent_address forKey:@"address"];
         NSLog(@"%@",self.createEvent_locationName);
         [request setPostValue:self.createEvent_locationName forKey:@"location"];
-        [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
-        [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
+        
+        if ([self.createEvent_latitude floatValue]>0.02||[self.createEvent_latitude floatValue]<-0.02) {
+            [request setPostValue:self.detail_latitude forKey:@"latitude"];
+        }
+        if ([self.createEvent_longitude floatValue]>0.02||[self.createEvent_longitude floatValue]<-0.02) {
+            [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
+        }
+        
         [request setPostValue:self.createEvent_time forKey:@"start_time"];
         if (self.detail_creator_id) {
             //if it is from repin
@@ -554,8 +564,12 @@
             [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
             [request setPostValue:self.detail_event_id forKey:@"event_id"];
             [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
-            [request setPostValue:self.detail_longitude forKey:@"longitude"];
-            [request setPostValue:self.detail_latitude forKey:@"latitude"];
+            if ([self.detail_latitude floatValue]>0.02||[self.detail_latitude floatValue]<-0.02) {
+                [request setPostValue:self.detail_latitude forKey:@"latitude"];
+            }
+            if ([self.detail_longitude floatValue]>0.02||[self.detail_longitude floatValue]<-0.02) {
+                [request setPostValue:self.detail_longitude forKey:@"longitude"];
+            }
             [request setPostValue:self.detail_address forKey:@"address"];
             [request setPostValue:self.detail_location_name forKey:@"location"];
         }
