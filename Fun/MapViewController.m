@@ -30,6 +30,7 @@
 @synthesize annotation=_annotation;
 @synthesize delegate=_delegate;
 @synthesize myTableView = _myTableView;
+@synthesize similarPlaceToLabel = _similarPlaceToLabel;
 //@synthesize oldZoom=_oldZoom;
 @synthesize currentZOOMVALUE=_currentZOOMVALUE;
 @synthesize foursquareSearchResults=_foursquareSearchResults;
@@ -246,6 +247,7 @@
 //    [self setMyStepper:nil];
     [self setMyTableView:nil];
     [self setMySearchDisplayController:nil];
+    [self setSimilarPlaceToLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -344,6 +346,7 @@
     //[searchBar setText:formerKeyWord];
     
     [self startSearchBaseonTheSearchBar];
+    [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -463,7 +466,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
     
     [self startSearchBaseonTheSearchBar];
-
+    [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
     return YES;
     
     /* 

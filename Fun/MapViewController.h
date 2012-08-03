@@ -33,6 +33,7 @@
 //@property (weak, nonatomic) IBOutlet UIStepper *myStepper;
 @property (weak,nonatomic) id<SelfChooseLocation> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UILabel *similarPlaceToLabel;
 @property (nonatomic,strong) TableViewContainMapviewTVC *tableViewControllerContainMap;
 @property (nonatomic,strong) NSString *predefinedSeachingWords;
 @property (nonatomic,strong) NSString *preDefinedEventType;
