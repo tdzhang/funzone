@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
@@ -221,14 +221,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Find Facebook Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yyi-AI-TkX">
-                                                    <rect key="frame" x="52" y="0.0" width="218" height="44"/>
+                                                    <rect key="frame" x="47" y="0.0" width="223" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.50000000000000011" contentMode="scaleToFill" image="zoom_in_40.png" id="LkN-aD-K3B">
-                                                    <rect key="frame" x="2" y="2" width="40" height="40"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleToFill" image="more-findfriend-color.png" id="LkN-aD-K3B">
+                                                    <rect key="frame" x="7" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -246,14 +246,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Most Popular" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hiG-sq-E6x">
-                                                    <rect key="frame" x="52" y="0.0" width="218" height="44"/>
+                                                    <rect key="frame" x="47" y="0.0" width="223" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.50000000000000011" contentMode="scaleToFill" image="administrator_40.png" id="B7T-U1-hj2">
-                                                    <rect key="frame" x="2" y="2" width="40" height="40"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleToFill" image="more-popular-color.png" id="B7T-U1-hj2">
+                                                    <rect key="frame" x="7" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -275,14 +275,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NFb-Ti-188">
-                                                    <rect key="frame" x="51" y="0.0" width="219" height="43"/>
+                                                    <rect key="frame" x="46" y="0.0" width="224" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.50000000000000011" contentMode="scaleToFill" image="gear_40.png" id="Kq7-fo-qZf">
-                                                    <rect key="frame" x="1" y="1" width="40" height="40"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleToFill" image="more-settings-color.png" id="Kq7-fo-qZf">
+                                                    <rect key="frame" x="6" y="6" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -304,14 +304,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Like us on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eAz-gt-u2B">
-                                                    <rect key="frame" x="54" y="0.0" width="216" height="44"/>
+                                                    <rect key="frame" x="47" y="0.0" width="223" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="share-facebook-off.png" id="q2Y-AH-H7S">
-                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleAspectFill" image="more-facebook-color.png" id="q2Y-AH-H7S">
+                                                    <rect key="frame" x="7" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -326,13 +326,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Rate us in App Store!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yt3-Dp-CaG">
-                                                    <rect key="frame" x="52" y="0.0" width="218" height="44"/>
+                                                    <rect key="frame" x="47" y="0.0" width="223" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.60000000000000009" contentMode="scaleToFill" image="wizard_40.png" id="Ll4-cM-oU3">
-                                                    <rect key="frame" x="2" y="2" width="40" height="40"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleToFill" image="more-rate-color.png" id="Ll4-cM-oU3">
+                                                    <rect key="frame" x="7" y="7" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -353,7 +353,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.50000000000000011" contentMode="scaleToFill" image="info_40.png" id="VOp-YE-HKV">
+                                                <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.70000000000000007" contentMode="scaleToFill" image="more-info-color.png" id="VOp-YE-HKV">
                                                     <rect key="frame" x="1" y="1" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <rect key="contentStretch" x="0.10000000000000001" y="0.10000000000000001" width="1" height="1"/>
@@ -698,12 +698,12 @@
             </objects>
             <point key="canvasLocation" x="305" y="298"/>
         </scene>
-        <!--Navigation Controller - My Colletions-->
+        <!--Navigation Controller - My Collection-->
         <scene sceneID="93z-0B-UvQ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1s-w2-VsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="yO2-58-RfF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="4" title="My Colletions" id="NL6-fp-Lxs"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="My Collection" id="NL6-fp-Lxs"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="hNb-CQ-xsf">
@@ -2926,7 +2926,6 @@ Find us @OrangeParc.com</string>
         <image name="07-map-marker.png" width="28" height="46"/>
         <image name="11-clock.png" width="40" height="40"/>
         <image name="Category@2x.png" width="640" height="734"/>
-        <image name="administrator_40.png" width="40" height="40"/>
         <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
         <image name="button-red.png" width="100" height="26"/>
         <image name="button_comment.png" width="361" height="120"/>
@@ -2945,16 +2944,19 @@ Find us @OrangeParc.com</string>
         <image name="event-profile-back.png" width="96" height="96"/>
         <image name="event-talkbox.png" width="502" height="172"/>
         <image name="facebook_signin_button.png" width="1167" height="200"/>
-        <image name="gear_40.png" width="40" height="40"/>
         <image name="header.png" width="320" height="44"/>
-        <image name="info_40.png" width="40" height="40"/>
         <image name="iphone-icon-orange-114.png" width="114" height="114"/>
         <image name="logo-orange.png" width="607" height="601"/>
         <image name="mask.png" width="1000" height="1000"/>
+        <image name="more-facebook-color.png" width="30" height="30"/>
+        <image name="more-findfriend-color.png" width="30" height="30"/>
+        <image name="more-info-color.png" width="30" height="30"/>
+        <image name="more-popular-color.png" width="30" height="30"/>
+        <image name="more-rate-color.png" width="30" height="30"/>
+        <image name="more-settings-color.png" width="30" height="30"/>
         <image name="profile_pic_4.jpeg" width="16" height="16"/>
         <image name="seperator.png" width="110" height="1"/>
         <image name="share-email.png" width="100" height="100"/>
-        <image name="share-facebook-off.png" width="100" height="100"/>
         <image name="share-facebook-on.png" width="100" height="100"/>
         <image name="share-sms.png" width="101" height="100"/>
         <image name="share-twitter-on.png" width="100" height="100"/>
@@ -2964,8 +2966,6 @@ Find us @OrangeParc.com</string>
         <image name="texture@2x.png" width="640" height="862"/>
         <image name="thumbnail_layer.png" width="60" height="60"/>
         <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
-        <image name="wizard_40.png" width="40" height="40"/>
-        <image name="zoom_in_40.png" width="40" height="40"/>
     </resources>
     <classes>
         <class className="ActivityTabeleViewController" superclassName="UITableViewController">
@@ -3135,4 +3135,10 @@ Find us @OrangeParc.com</string>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="lqc-Cx-NBX"/>
+        <segue reference="5YL-VF-kXv"/>
+        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="Hfw-Db-bjl"/>
+    </inferredMetricsTieBreakers>
 </document>
