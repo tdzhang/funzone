@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (nonatomic,strong) NSMutableData *data;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -65,6 +66,7 @@
 @synthesize myScrollView;
 @synthesize profileButton = _profileButton;
 @synthesize data=_data;
+@synthesize shareButton = _shareButton;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize event_title=_event_title;
@@ -174,8 +176,13 @@
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
+    self.shareButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    
+    
+    
     
     [self setProfileButton:nil];
+    [self setShareButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -204,8 +211,8 @@
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
-        [self.interestOrInviteButton setTitle:@"       I'm Interested" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"      Collect It" forState:UIControlStateNormal];
+        [self.interestOrInviteButton setTitle:@"       I'm interested" forState:UIControlStateNormal];
+        [self.pickOrEditButton setTitle:@"    Collect it" forState:UIControlStateNormal];
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
@@ -246,13 +253,14 @@
 - (IBAction)PickButtonClicked:(id)sender {
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
 }
-
-- (IBAction)shareButton:(UIButton *)sender {
+- (IBAction)shareButtonClicked:(UIBarButtonItem *)sender {
     //give user several way to share
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"WeChat", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
+
+
 
 - (IBAction)profileClicked:(UIButton *)sender {
     if (self.isEventOwner) {
