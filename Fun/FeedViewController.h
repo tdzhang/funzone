@@ -13,5 +13,6 @@
 #import "GlobalConstant.h"
 
 @interface FeedViewController : UIViewController<UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *instructionView;
 
 @end

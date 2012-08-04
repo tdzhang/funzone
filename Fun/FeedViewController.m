@@ -26,6 +26,7 @@
 @end
 
 @implementation FeedViewController
+@synthesize instructionView = _instructionView;
 @synthesize refreshView=_refreshView;
 @synthesize refreshViewdown=_refreshViewdown;
 @synthesize blockViews = _blockViews;
@@ -54,7 +55,34 @@
     if (_blockViews == nil) {
         _blockViews = [[NSMutableArray alloc] init];
     }
+    if ([_blockViews count]<1) {
+        // if no blockviews
+        [self.instructionView setHidden:NO];
+    }
+    else{
+        [self.instructionView setHidden:YES];
+    }
     return _blockViews;
+}
+
+-(void)setBlockViews:(NSMutableArray *)blockViews{
+    if (![_blockViews isEqual:blockViews]) {
+        _blockViews=blockViews;
+    }
+    if ([_blockViews count]<1) {
+        // if no blockviews
+        [self.instructionView setHidden:NO];
+    }
+    else{
+        [self.instructionView setHidden:YES];
+    }
+}
+
+-(NSMutableArray *)garbageCollection{
+    if (!_garbageCollection) {
+        _garbageCollection=[NSMutableArray array];
+    }
+    return _garbageCollection;
 }
 
 
@@ -80,21 +108,23 @@
 
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     #warning need to add instruction to find friends
+    [self.instructionView setHidden:YES];
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //quest the most recent 10 featured events
     if ([self.blockViews count]<3) {
-        self.refresh_page_num=2; //the next page that need to refresh is 2
-        self.freshConnectionType=@"New";
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        self.freshConnectionType=@"New";
-        [connection start];
-        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
-        self.mainScrollView.contentOffset = CGPointMake(0, 0);
+            self.refresh_page_num=2; //the next page that need to refresh is 2
+            self.freshConnectionType=@"New";
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+            NSLog(@"%@",request_string);
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+            NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+            self.freshConnectionType=@"New";
+            [connection start];
+            self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
+            self.mainScrollView.contentOffset = CGPointMake(0, 0);
+        
     }
 }
 
@@ -133,6 +163,7 @@
 - (void)viewDidUnload
 {
     [self setMainScrollView:nil];
+    [self setInstructionView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -159,7 +190,6 @@
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/3) {
         //remove the main views
-        self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
             [view setFrame:CGRectMake(0, view.frame.origin.y+EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2);
@@ -288,6 +318,9 @@
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
         NSLog(@"%@",json);
         //clean the page
+        for (UIView *subView in self.garbageCollection) {
+            [subView removeFromSuperview];
+        }
         for (UIView* subView in self.mainScrollView.subviews) {
             [subView removeFromSuperview];
         }
