@@ -225,12 +225,12 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"I am using OrangeParc,just found an insteresting event \"%@\" at %@?\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name];
+    return [NSString stringWithFormat:@"I am using OrangeParc,just found an interesting event \"%@\" at %@?\nCheck out more details at http://www.orangeparc.com",self.event_title,self.location_name];
 }
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"I just found an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
