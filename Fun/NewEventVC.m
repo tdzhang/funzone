@@ -10,47 +10,21 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Event.h"
 
-
-#pragma mark - Constant Value Declarition
-
-#define ANIMATION_TIME_DURATION 0.5
-#define SHOW_OPTION_BUTTON_LOCATION_X 280
-#define SHOW_OPTION_BUTTON_LOCATION_Y 360
-#define SHOW_OPTION_BUTTON_LOCATION_WIDTH 40
-#define SHOW_OPTION_BUTTON_LOCATION_HEIGHT 40
-#define SHARE_BY_EMAIL_X 270
-#define SHARE_BY_EMAIL_Y 285
-#define SHARE_BY_FACEBOOK_X 220
-#define SHARE_BY_FACEBOOK_Y 285
-#define SHARE_BY_TWITTER_X 170
-#define SHARE_BY_TWITTER_Y 285
-
 #pragma mark - NewEventVC Private Declarition 
 @interface NewEventVC () <UIActionSheetDelegate>
 @property (nonatomic, retain) UIImagePickerController *imgPicker; //using to start a image pick(from camera or album)
-@property (nonatomic,strong) UIButton* buttonEmailShare;
-@property (nonatomic,strong) UIButton* buttonTwitterShare;
-@property (nonatomic,strong) UIButton* buttonFacebookShare;
 @property (weak, nonatomic) IBOutlet UIToolbar *keyboardToolbar;
 @property (nonatomic) BOOL showNewButtonFlag;
 @property (weak, nonatomic) IBOutlet UIImageView *uIImageViewEvent;
-//@property (weak, nonatomic) IBOutlet UITextField *textViewEventDescription;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *buttonChooseEventLocation;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEventTime;
-//@property (weak, nonatomic) IBOutlet UIButton *buttonEventPrice;//---not using
-//@property (weak, nonatomic) IBOutlet UIButton *buttonEventFriends;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEditEventTitle;
-//@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTime;
-//@property (weak, nonatomic) IBOutlet UIButton *buttonEventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *locationIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *timeIcon;
 @property (weak, nonatomic) IBOutlet UITextView *textFieldEventTitle;
-//@property (weak, nonatomic) IBOutlet UITextField *textFieldEventPrice;
-//@property (weak, nonatomic) IBOutlet UILabel *labelChoosePhoto;
-//@property (weak, nonatomic) IBOutlet UITextView *uITextViewPersonalMsg;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTitleHolder;
 
 
@@ -95,34 +69,22 @@
 //////////////////////////////////////
 
 @implementation NewEventVC
-//@synthesize eventPeopleInfo = _eventPeopleInfo;
 @synthesize deleteButton = _deleteButton;
 @synthesize doneButton = _doneButton;
 @synthesize showNewButtonFlag=_showNewButtonFlag;
 @synthesize personProfileImage = _personProfileImage;
 @synthesize imgPicker=_imgPicker;
-@synthesize buttonEmailShare=_buttonEmailShare;
-@synthesize buttonTwitterShare=_buttonTwitterShare;
 @synthesize uIImageViewEvent = _uIImageViewEvent;
-@synthesize buttonFacebookShare=_buttonFacebookShare;
 @synthesize keyboardToolbar = _keyboardToolbar;
-//@synthesize textViewEventDescription = _eventDescriptionTextView;
 @synthesize buttonChooseEventPhoto = _buttonChooseEventPhoto;
 @synthesize buttonChooseEventLocation = _buttonChooseEventLocation;
 @synthesize buttonEventTime = _buttonEventTime;
-//@synthesize buttonEventPrice = _eventPriceButton;
-//@synthesize buttonEventFriends = _eventFriendsButton;
 @synthesize buttonEditEventTitle = _buttonEditEventTitle;
-//@synthesize locationLabel = _locationLabel;
 @synthesize labelEventTime = _labelEventTime;
-//@synthesize buttonEventTitle = _buttonEventTitle;
 @synthesize locationLabel = _locationLabel;
 @synthesize locationIcon = _locationIcon;
 @synthesize timeIcon = _timeIcon;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
-//@synthesize textFieldEventPrice = _textFieldEventPrice;
-//@synthesize labelChoosePhoto = _labelChoosePhoto;
-//@synthesize uITextViewPersonalMsg = _uITextViewPersonalMsg;
 @synthesize labelEventTitleHolder = _labelEventTitleHolder;
 @synthesize eventType=_eventType;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
@@ -160,6 +122,7 @@
 
 
 #pragma mark - self defined synthesize
+//if user have choosed a new image, then createEvent_image return the image on screen
 -(UIImage *)createEvent_image{
     if (_isCreateEvent_imageUsable) {
         _createEvent_image=self.uIImageViewEvent.image;
@@ -183,6 +146,7 @@
     return _createEvent_title;
 }
 
+//init the image Picker Controller
 -(UIImagePickerController *)imgPicker{
     if (_imgPicker==nil) {
         _imgPicker = [[UIImagePickerController alloc] init];
@@ -201,16 +165,17 @@
 
 
 #pragma mark - self defined
-//make the Page for Edit
+//make the Page for Edit before segue here
 -(void)presetIsEditPageToTrue{
     self.isEditPage=YES;
     self.isCreateEvent_imageUsable=NO;//preset the image indicator to false
 }
-//make the Page for Create
+//make the Page for Create before segue here
 -(void)presetIsEditPageToFalse{
     self.isEditPage=NO;
     self.isCreateEvent_imageUsable=NO;//preset the image indicator
 }
+//get the repin infomation before segue here
 -(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
     self.detail_shared_event_id=shared_event_id;
@@ -218,11 +183,11 @@
     self.detail_event_time=event_time;
     self.detail_location_name=location_name;
     self.detail_creator_id=creator_id;
-    NSLog(@"%@",location_name);
+    //NSLog(@"%@",location_name);
     self.detail_longitude=longitude;
-    NSLog(@"%@",longitude);
+    //NSLog(@"%@",longitude);
     self.detail_latitude=latitude;
-    NSLog(@"%@",latitude);
+    //NSLog(@"%@",latitude);
     self.detail_description=description;
     self.detail_image=[event_image copy];
     self.detail_address=address;
@@ -240,9 +205,10 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //chaneg the navigationController titile
     self.navigationController.navigationBar.topItem.title = self.eventType;
     
-    //chaneg the Ui for the edit/create event
+    //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
         [self.deleteButton setHidden:NO];
     }
@@ -254,7 +220,7 @@
     //initial the face book
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
     if (!delegate.facebook) {
-        delegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)delegate];
+        delegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)delegate];
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
@@ -298,6 +264,7 @@
         [self.uIImageViewEvent clipsToBounds];
     }
     
+    //used to add the additional keyboard done toobar 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -305,6 +272,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    //reset the keyboard addititonal "done" tool bar
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
@@ -312,6 +280,7 @@
 - (void)viewDidLoad:(BOOL)animated {
     [super viewDidLoad];
 
+    //change the style of the navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
     
@@ -322,24 +291,13 @@
     [self.navigationItem setBackBarButtonItem:backButton];
 }
 
-
-- (void)viewDidUnload
-{
-    //[self setTextViewEventDescription:nil];
+- (void)viewDidUnload{
     [self setButtonEventTime:nil];
-//    [self setButtonEventPrice:nil];
-    //[self setButtonEventFriends:nil];
     [self setButtonChooseEventPhoto:nil];
     [self setButtonChooseEventLocation:nil];
-    //[self setLocationLabel:nil];
-    //[self setButtonEventTitle:nil];
     [self setTextFieldEventTitle:nil];
-//    [self setTextFieldEventPrice:nil];
-//    [self setLabelChoosePhoto:nil];
     [self setUIImageViewEvent:nil];
     [self setLabelEventTime:nil];
-    //[self setEventPeopleInfo:nil];
-    //[self setUITextViewPersonalMsg:nil];
     [self setLabelEventTitleHolder:nil];
     [self setPersonProfileImage:nil];
         
@@ -404,11 +362,14 @@
 
 
 - (IBAction)CreateEventToSever:(id)sender {
+    //if the user haven't type in any title, pop out a alert
     if ([self.textFieldEventTitle.text isEqualToString:@""]) {
         UIAlertView *noTitleInput = [[UIAlertView alloc] initWithTitle:@"Empty Description" message:@"Please enter what you are up to." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [noTitleInput show];
         return;
     }
+    
+    //for user edit his own event
     if (self.isEditPage) {
     //edit event
         //Adding Create Event
@@ -417,9 +378,8 @@
         ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
         __block ASIFormDataRequest *block_request=request;
         [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
+            //NSString *responseString = [block_request responseString];
+            //NSLog(@"%@",responseString);
             
             NSError *error;
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
@@ -428,9 +388,6 @@
                 notsuccess.delegate=self;
                 [notsuccess show];
             }
-            //        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            //        success.delegate=self;
-            //[success show];
         }];
         [request setFailedBlock:^{
             NSError *error = [block_request error];
@@ -439,19 +396,22 @@
             notsuccess.delegate=self;
             [notsuccess show];
         }];
+        
         //add login auth_token
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
         [request setPostValue:self.createEvent_title forKey:@"title"];
-        NSLog(@"%@",self.createEvent_address);
+        //NSLog(@"%@",self.createEvent_address);
         [request setPostValue:self.createEvent_address forKey:@"address"];
-        NSLog(@"%@",self.createEvent_locationName);
+        //NSLog(@"%@",self.createEvent_locationName);
         [request setPostValue:self.createEvent_locationName forKey:@"location"];
         [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
         [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
+#warning furthur process of "today" "tomorrow"... to actual date
         [request setPostValue:self.createEvent_time forKey:@"start_time"];
+        
+        //if it is for user repin
         if (self.detail_creator_id) {
-            //if it is from repin
             if (![self.createEvent_image isEqual:self.detail_image]) {
                 //add content
                 if (self.createEvent_imageUrlName) {
@@ -491,6 +451,7 @@
         //go to the next page
         [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
     }
+    //for user create/repin a event
     else {
     //create event
         //Adding Create Event
@@ -607,7 +568,7 @@
                 return;
             }
         }
-        //decide the category_id
+        //decide the category_id and send to server
         if (!self.detail_creator_id){
             NSString *category_id=self.eventType;
             if ([category_id isEqualToString:@"movie"]) {
@@ -707,11 +668,7 @@
 
 //pop the action sheet of the choose the event title
 - (IBAction)ChooseEventTitle:(UIButton *)sender {
-    /*
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"What do you want to do?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"getting together",@"eatting",@"movie",@"coffee",@"self enter", nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-    [pop showFromTabBar:self.tabBarController.tabBar];
-    */
+    //if it is movie category, need to segue to another view controller
     if([self.eventType isEqualToString:@"movie"]){
         [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
     }
@@ -721,19 +678,15 @@
         [self.labelEventTitleHolder setHidden:YES];
     }
 }
-/*
-- (IBAction)ChooseEventCost:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Estimate the event cost:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Free",@"less than $10",@"less than $100",@"self enter", nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
-    [pop showFromTabBar:self.tabBarController.tabBar];
-}
-*/
+
+
 - (IBAction)ChoosePhoto:(UIButton *)sender {
     UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from album",@"via Google Image", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
+//deal with the popout action sheet
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     //for the when to go action sheet
     NSLog(@"%@",actionSheet.title);
@@ -817,7 +770,7 @@
                 if ( imageData == nil ){
                     //if the image data is nil, the image url is not reachable. using a default image to replace that
                     //NSLog(@"downloaded %@ error, using a default image",url);
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                     imageData=UIImagePNGRepresentation(image);
                     
                     if(imageData){
@@ -867,7 +820,7 @@
 //implement the MFMailComposeViewControllerDelegate Method
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     if (error) {
-        NSLog(@"Sending Email Error Happened!");
+        NSLog(@"NewEventVC: Sending Email Error Happened!");
     }
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -876,13 +829,14 @@
 ////////////////////////////////////////////////
 //implement the UIImagePickerControllerDelegate Method
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    NSLog(@"NewEventVC: image picker return");
     [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
     [self.uIImageViewEvent clipsToBounds];
     [self.uIImageViewEvent setImage:image];
     [self dismissModalViewControllerAnimated:YES];
+    //indicate that now the image is usable to share
     self.isCreateEvent_imageUsable=YES;
 }
-
 
 ////////////////////////////////////////////////
 //implement the chooseimageFeedBackDelegate method
@@ -892,50 +846,14 @@
     [self.uIImageViewEvent setImage:image];
     self.createEvent_imageUrlName= URLName;
     [self.navigationController popViewControllerAnimated:YES];
+    //indicate that now the image is usable to share
+    self.isCreateEvent_imageUsable=YES;
 }
 
 
 
 
-////////////////////////////////////////////////
-//implement the Protocal UITextViewDelegate
-//- (void)textViewDidBeginEditing:(UITextView *)textView {      
-//    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
-//    [done setStyle:UIBarButtonItemStyleBordered];
-//    self.navigationItem.rightBarButtonItem = done;      
-//    //[self animateTextView:textView up:YES];
-//}  
-//
-//- (void)textViewDidEndEditing:(UITextView *)textView {  
-//    self.navigationItem.rightBarButtonItem = nil; 
-//    //[self animateTextView:textView up:NO];
-//    [self.buttonEditEventTitle setHidden:NO];
-//}  
-//
-////deal with when user pressed the "done" button
-//- (void)leaveEditMode {  
-//    NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-//    if ([enteredText length]==0) {
-//        [self.labelEventTitleHolder setHidden:NO];
-//    }
-//    [self.textFieldEventTitle resignFirstResponder];  
-//}
-//
-////To compensate for the showing up keyboard
-//- (void) animateTextView: (UITextView*) textView up: (BOOL) up
-//{
-//    const int movementDistance = 20; // tweak as needed
-//    const float movementDuration = 0.3f; // tweak as needed
-//    
-//    int movement = (up ? -movementDistance : movementDistance);
-//    
-//    [UIView beginAnimations: @"anim" context: nil];
-//    [UIView setAnimationBeginsFromCurrentState: YES];
-//    [UIView setAnimationDuration: movementDuration];
-//    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
-//    [UIView commitAnimations];
-//}
+
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the textfield
@@ -988,7 +906,7 @@
 }
 
 
-#pragma mark Notifications
+#pragma mark - keyboard additional help bar settings
 - (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
     NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -1040,27 +958,11 @@
             [self.textFieldEventTitle resignFirstResponder];
         }
     }
-    /*
-    //deal with the input empty for the add cost part
-    else if ([alertView.title isEqualToString:@"Cost Input Empty"]){
-        if (buttonIndex == 0) {
-            //Input Again
-            [self.textFieldEventPrice becomeFirstResponder];
-        }
-        else if(buttonIndex == 1){
-            //Cancel
-            [self.textFieldEventPrice resignFirstResponder];
-            [self.buttonEventPrice setTitle:@"Add cost" forState:UIControlStateNormal];
-            [self.textFieldEventPrice setHidden:YES];
-        }
-
-    }
-     */
 }
 
 
 ////////////////////////////////////////////////
-//implement the method for dealing with the return of the alertView
+//implement the method for dealing with the return of the choose location
 -(void)UpdateLocation:(MKPointAnnotation *)fromannotation withLocationName:(NSString *)locationName withSnapShot:(UIImage *)image sendFrom:(MapViewController *)sender{
     MKPointAnnotation *annotation=fromannotation;
     self.predefinedAnnotation=annotation;
@@ -1088,7 +990,7 @@
     self.detail_longitude=[NSNumber numberWithFloat:[self.createEvent_longitude floatValue]];
     self.createEvent_locationName=[locationName copy];
     self.detail_location_name=self.createEvent_locationName;
-    NSLog(@"%@",self.createEvent_locationName);
+    NSLog(@"NewEvent Location return:%@",self.createEvent_locationName);
     if (annotation.subtitle) {
         self.createEvent_address=[NSString stringWithFormat:@"%@",annotation.subtitle];
         self.detail_address=self.createEvent_address;
