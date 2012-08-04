@@ -76,7 +76,15 @@
     
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
-    [self.mainScrollView addSubview:self.refreshView];
+    [self.mainScrollView addSubview:self.refreshView];    
+//    
+//    UILabel *instruction = [[UILabel alloc] initWithFrame:CGRectMake(30, 30, 260, 50)];
+//    [instruction setText:@"See what are popular around you!"];
+//    [instruction setFont:[UIFont boldSystemFontOfSize:14]];
+//    [instruction setTextColor:[UIColor darkGrayColor]];
+//    [instruction setBackgroundColor:[UIColor clearColor]];
+//    [instruction setTextAlignment:UITextAlignmentCenter];
+//    [self.mainScrollView addSubview:instruction];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

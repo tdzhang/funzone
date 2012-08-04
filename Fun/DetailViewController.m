@@ -431,8 +431,10 @@
     self.garbageCollection=[NSMutableArray array];
     //comment
     float height;
+    CGSize maximumLabelSize = CGSizeMake(300,9999);    
+    CGSize expectedLabelSize = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
     if (self.isEventOwner) {
-        height=300;
+        height=280 + expectedLabelSize.height;
     } else {
         height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
     }
