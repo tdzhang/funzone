@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
@@ -1329,10 +1329,6 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="0.0" y="44" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="lnT-2H-pye">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" id="8kQ-9J-BdD">
                                         <rect key="frame" x="0.0" y="139" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1414,7 +1410,6 @@ Find us @OrangeParc.com</string>
                     <connections>
                         <outlet property="contributorNameLabel" destination="cBz-O5-fEj" id="gDh-sQ-rax"/>
                         <outlet property="creatorProfileImageView" destination="xIW-oE-umD" id="SBT-AI-dMV"/>
-                        <outlet property="eventImageView" destination="lnT-2H-pye" id="1vS-aq-XMO"/>
                         <outlet property="interestOrInviteButton" destination="FCz-IF-S0G" id="Jbv-64-fko"/>
                         <outlet property="myScrollView" destination="ODl-hu-66N" id="oS3-2F-YcI"/>
                         <outlet property="pickOrEditButton" destination="wsl-l8-Jjl" id="QmU-S2-u0d"/>
@@ -3065,15 +3060,8 @@ Find us @OrangeParc.com</string>
                 <relationship kind="outlet" name="contributorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorProfileImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="eventImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventIntroLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventPriceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventTitleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="originalCreatorIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="originalCreatorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="profileButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>

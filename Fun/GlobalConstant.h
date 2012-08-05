@@ -84,12 +84,13 @@
 #define EXPLORE_BLOCK_ELEMENT_SEPERATOR_IMAGE @"seperator.png"
 #define TEXTURE_IMAGE @"texture.png"
 
-//the Event Detail Part
 #pragma mark - Event Detail part
-//DetailViewController
+//DetailViewController (abbreviation:DVC)
 #define DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH 320 //initial scrollview content size
 #define DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT 400
 #define DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT 25
+#define DVC_EVENT_IMG_WIDTH 320
+#define DVC_EVENT_IMG_HEIGHT 200
 
 
 

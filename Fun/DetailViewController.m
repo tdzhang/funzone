@@ -13,20 +13,15 @@
 #import <Twitter/TWTweetComposeViewController.h>
 
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *originalCreatorLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *originalCreatorIndicator;
-@property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventIntroLabel;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (weak, nonatomic) UIImageView *eventImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
+@property (weak, nonatomic) UIView *interested_people_label_view;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -55,14 +50,7 @@
 @implementation DetailViewController
 @synthesize eventImageView;
 @synthesize creatorProfileImageView;
-@synthesize originalCreatorLabel;
-@synthesize originalCreatorIndicator = _originalCreatorIndicator;
 @synthesize contributorNameLabel;
-@synthesize eventTitleLabel;
-@synthesize eventLocationLabel;
-@synthesize eventTimeLabel;
-@synthesize eventPriceLabel;
-@synthesize eventIntroLabel;
 @synthesize myScrollView;
 @synthesize profileButton = _profileButton;
 @synthesize data=_data;
@@ -80,6 +68,7 @@
 @synthesize event_address=_event_address;
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
+@synthesize interested_people_label_view = _interested_people_label_view;
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
@@ -153,14 +142,8 @@
 - (void)viewDidUnload
 {
     [self setContributorNameLabel:nil];
-    [self setEventTitleLabel:nil];
-    [self setEventLocationLabel:nil];
-    [self setEventTimeLabel:nil];
-    [self setEventPriceLabel:nil];
-    [self setEventIntroLabel:nil];
     [self setMyScrollView:nil];
     [self setEventImageView:nil];
-    [self setOriginalCreatorIndicator:nil];
     [self setInterestOrInviteButton:nil];
     [self setPickOrEditButton:nil];
     //[self setShareButton:nil];
@@ -425,39 +408,28 @@
     }
 }
 
-#pragma mark - comment handle part
-
-//handle the intereted people part and handle the comment part from self.comments
--(void)handleTheCommentPart{
+//handle interested people section
+-(void)handleTheInterestedPeoplePart{
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
             [view removeFromSuperview];
         }
         [self.garbageCollection removeAllObjects];
     }
-    
     self.garbageCollection=[NSMutableArray array];
-    //comment
-    float height;
-    CGSize maximumLabelSize = CGSizeMake(300,9999);    
-    CGSize expectedLabelSize = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
-    if (self.isEventOwner) {
-        height=280 + expectedLabelSize.height;
-    } else {
-        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
-    }
-    //handle the interest people part
+    
+    int height = 200;
     if ([self.interestedPeople count]>0) {
-        UIView *interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [interested_people_label_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* interestedPeopleLable=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [interestedPeopleLable setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
-        [interestedPeopleLable setFont:[UIFont boldSystemFontOfSize:15]];
-        [interestedPeopleLable setTextColor:[UIColor darkGrayColor]];
-        [interestedPeopleLable setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        [interested_people_label_view addSubview:interestedPeopleLable];
-        [self.myScrollView addSubview:interested_people_label_view];
-        [self.garbageCollection addObject:interestedPeopleLable];
+        self.interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        [self.interested_people_label_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
+        [numOfInterests setFont:[UIFont boldSystemFontOfSize:15]];
+        [numOfInterests setTextColor:[UIColor darkGrayColor]];
+        [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [self.interested_people_label_view addSubview:numOfInterests];
+        [self.myScrollView addSubview:self.interested_people_label_view];
+        [self.garbageCollection addObject:numOfInterests];
         height+=DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT;
         
         UIView *interested_people_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 45)];
@@ -510,7 +482,28 @@
         [self.myScrollView addSubview:interested_people_view];
         height+=60;        
     }
-    
+}
+
+//handle the intereted people part and handle the comment part from self.comments
+-(void)handleTheCommentPart{
+    if (self.garbageCollection) {
+        for (UIView* view in self.garbageCollection) {
+            [view removeFromSuperview];
+        }
+        [self.garbageCollection removeAllObjects];
+    }    
+    self.garbageCollection=[NSMutableArray array];
+    //comment
+    float height;
+    CGSize maximumLabelSize = CGSizeMake(300,9999);    
+    CGSize expectedLabelSize = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
+    if (self.isEventOwner) {
+        height=280 + expectedLabelSize.height;
+    } else {
+        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
+    }
+    //handle the interest people part
+        
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
     [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -621,7 +614,8 @@
         [self.garbageCollection addObject:commentView];        
     }
     //set the scroll view content size
-    [self.myScrollView setContentSize:CGSizeMake(320, height+10)];}
+    [self.myScrollView setContentSize:CGSizeMake(320, height+10)];
+}
 
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -786,8 +780,6 @@
     self.profileButton.frame = CGRectMake(self.creatorProfileImageView.frame.origin.x, self.creatorProfileImageView.frame.origin.y, self.creatorProfileImageView.frame.size.width+self.contributorNameLabel.frame.size.width + 10,self.creatorProfileImageView.frame.size.height);
     
 #warning fetch original creator info
-    //show original creator
-    self.originalCreatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 145, 100, 25)];    
     self.event_title=title;
     self.event_time=time;
     if ([self.event_time isEqualToString:@""]) {
@@ -899,6 +891,8 @@
 //    [self.shareButton addSubview:share_icon];
 
     //set event image
+    self.eventImageView.frame = CGRectMake(0, 0, DVC_EVENT_IMG_WIDTH, DVC_EVENT_IMG_HEIGHT);
+    [self.myScrollView addSubview:self.eventImageView];
     NSURL *url=[NSURL URLWithString:photo];
     if (![Cache isURLCached:url]) {
         //using high priority queue to fetch the image
