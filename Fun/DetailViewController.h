@@ -25,7 +25,6 @@
 @property(nonatomic,weak)id<WEICHATprotocal>delegate;
 @property (weak, nonatomic) IBOutlet UIButton *interestOrInviteButton;
 @property (weak, nonatomic) IBOutlet UIButton *pickOrEditButton;
-//@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner;

@@ -15,18 +15,23 @@
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) UIImageView *eventImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *creatorProfileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *contributorNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *profileButton;
-@property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
-@property (weak, nonatomic) UIView *interested_people_label_view;
+@property (nonatomic,strong) NSMutableData *data;
+
+@property (nonatomic, strong) UIImageView *eventImageView;
+@property (nonatomic, strong) UIImageView *creatorProfileView;
+@property (nonatomic, strong) UILabel *creatorNameLabel;
+@property (nonatomic, strong) UIButton *creatorProfileButton;
+@property (nonatomic, strong) UILabel *eventTitleLabel;
+@property (nonatomic, strong) UIView *timeSectionView;
+@property (nonatomic, strong) UIView *locationSectionView;
+@property (nonatomic, strong) UIView *interestedPeopleLabelView;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
 @property (nonatomic,strong) NSString *event_title;
 @property (nonatomic,strong) NSString *event_time;
+@property (nonatomic,strong) NSURL *event_img_url;
 @property (nonatomic,strong) NSString *location_name;
 @property (nonatomic,strong) NSNumber *longitude;
 @property (nonatomic,strong) NSNumber *latitude;
@@ -35,6 +40,8 @@
 @property (nonatomic,strong) NSMutableArray *interestedPeople;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *creator_id;
+@property (nonatomic,strong) NSURL *creator_img_url;
+@property (nonatomic,strong) NSString *creator_name;
 @property (nonatomic,strong) NSString *event_address;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
@@ -48,17 +55,24 @@
 @end
 
 @implementation DetailViewController
-@synthesize eventImageView;
-@synthesize creatorProfileImageView;
-@synthesize contributorNameLabel;
 @synthesize myScrollView;
-@synthesize profileButton = _profileButton;
 @synthesize data=_data;
-@synthesize shareButton = _shareButton;
+@synthesize eventImageView=_eventImageView;
+@synthesize creatorProfileView=_creatorProfileView;
+@synthesize creator_img_url=_creator_img_url;
+@synthesize creator_name=_creator_name;
+@synthesize creatorNameLabel=_creatorNameLabel;
+@synthesize creatorProfileButton=_creatorProfileButton;
+@synthesize eventTitleLabel=_eventTitleLabel;
+@synthesize timeSectionView=_timeSectionView;
+@synthesize locationSectionView=_locationSectionView;
+
+@synthesize shareButton=_shareButton;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize event_title=_event_title;
 @synthesize event_time=_event_time;
+@synthesize event_img_url=_event_img_url;
 @synthesize location_name=_location_name;
 @synthesize longitude=_longitude;
 @synthesize latitude=_latitude;
@@ -68,7 +82,7 @@
 @synthesize event_address=_event_address;
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
-@synthesize interested_people_label_view = _interested_people_label_view;
+@synthesize interestedPeopleLabelView = _interestedPeopleLabelView;
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
@@ -137,17 +151,44 @@
     //set up the weixin delegate
     FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
     self.delegate=(id)appDelegate;
+    
+    //initiate views
+    self.eventImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DVC_EVENT_IMG_WIDTH, DVC_EVENT_IMG_HEIGHT)];
+    [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.eventImageView setClipsToBounds:YES];
+    [self.myScrollView addSubview:self.eventImageView];
+    
+    self.creatorProfileView = [[UIImageView alloc] initWithFrame:CGRectMake(15, self.eventImageView.frame.origin.y+self.eventImageView.frame.size.height+5, 35, 35)];
+    [self.myScrollView addSubview:self.creatorProfileView];
+    
+    self.creatorNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorProfileView.frame.origin.x+self.creatorProfileView.frame.size.width+5, self.creatorProfileView.frame.origin.y, 150, 35)];
+    [self.creatorNameLabel setTextAlignment:UITextAlignmentCenter];
+    [self.creatorNameLabel setFont:[UIFont boldSystemFontOfSize:13]];
+    [self.myScrollView addSubview:self.creatorNameLabel];
+    
+    self.creatorProfileButton = [[UIButton alloc] init];
+    [self.creatorProfileButton addTarget:self action:@selector(profileClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.myScrollView addSubview:self.creatorProfileButton];
+    
+    self.eventTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.creatorNameLabel.frame.origin.y+self.creatorNameLabel.frame.size.height+15, 300, 40)];
+    [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.eventTitleLabel.numberOfLines = 0;
+    [self.myScrollView addSubview:self.eventTitleLabel];
+    
+    self.timeSectionView = [[UIView alloc] init];
+    [self.myScrollView addSubview:self.timeSectionView];
+    
+    self.locationSectionView = [[UIView alloc] init];
+    [self.myScrollView addSubview:self.locationSectionView];
 }
 
 - (void)viewDidUnload
 {
-    [self setContributorNameLabel:nil];
     [self setMyScrollView:nil];
     [self setEventImageView:nil];
     [self setInterestOrInviteButton:nil];
     [self setPickOrEditButton:nil];
-    //[self setShareButton:nil];
-    
     
     //--------Navigation bar and Back button--------//
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
@@ -160,11 +201,7 @@
     [self.navigationItem setBackBarButtonItem:backButton];
     
     self.shareButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-    
-    
-    
-    
-    [self setProfileButton:nil];
+
     [self setShareButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -175,7 +212,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
+    
     //initial the contentsize of the myScrollView
     [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT)];
     
@@ -245,7 +282,7 @@
 
 
 
-- (IBAction)profileClicked:(UIButton *)sender {
+- (void)profileClicked{
     if (self.isEventOwner) {
         [self performSegueWithIdentifier:@"ViewProfile" sender:self];
     } else {
@@ -418,26 +455,27 @@
     }
     self.garbageCollection=[NSMutableArray array];
     
-    int height = 200;
+    int height;
+    if (self.isEventOwner) {
+        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    } else {
+        height = self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
+    }
     if ([self.interestedPeople count]>0) {
-        self.interested_people_label_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [self.interested_people_label_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 60)];
+        [self.myScrollView addSubview:self.interestedPeopleLabelView];
+        [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [numOfInterests setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:15]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        [self.interested_people_label_view addSubview:numOfInterests];
-        [self.myScrollView addSubview:self.interested_people_label_view];
-        [self.garbageCollection addObject:numOfInterests];
-        height+=DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT;
-        
-        UIView *interested_people_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 45)];
-        [interested_people_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [self.interestedPeopleLabelView addSubview:numOfInterests];
+        //[self.garbageCollection addObject:numOfInterests];
         
         int x_position_photo=5;
         for (int i=0; i<5&&i<([self.interestedPeople count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 3, 35, 35)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 30, 35, 35)];
             ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
@@ -475,12 +513,9 @@
                     userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
                 });
             }
-            [interested_people_view addSubview:userImageView];
-            [self.garbageCollection addObject:userImageView];
+            [self.interestedPeopleLabelView addSubview:userImageView];
             x_position_photo+=38;
         }
-        [self.myScrollView addSubview:interested_people_view];
-        height+=60;        
     }
 }
 
@@ -494,16 +529,12 @@
     }    
     self.garbageCollection=[NSMutableArray array];
     //comment
-    float height;
-    CGSize maximumLabelSize = CGSizeMake(300,9999);    
-    CGSize expectedLabelSize = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
-    if (self.isEventOwner) {
-        height=280 + expectedLabelSize.height;
+    int height;
+    if ([self.interestedPeople count] == 0) {
+        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
     } else {
-        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15; //default 340
+        height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 15;
     }
-    //handle the interest people part
-        
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
     [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -677,18 +708,22 @@
 
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    //renew the 10 newest features!!!!
+    //fetch event info
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    //get the detail information
-    NSString *title=[event objectForKey:@"title"];
+    self.event_title=[event objectForKey:@"title"];
+    self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
+    self.event_time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
+    self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+    self.event_address=[event objectForKey:@"address"];
+    self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+    self.creator_name=[event objectForKey:@"creator_name"];
     //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
-    NSString *photo=[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url";
-    NSString *time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
-    NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+    // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
+    // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
-    NSLog(@"%@",creator_id);
-    self.creator_id=creator_id;
+
     //handle the interest people part
     self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
     
@@ -718,26 +753,48 @@
         DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
     }
     
-    NSString *locationName=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    self.location_name=locationName;
-    NSString *address=[event objectForKey:@"address"];
-    self.event_address=address;
-       // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
-       // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
-
-    if (!title) {return;}
-    
-#warning add link back to his/her parc page using coordinates
-    //add creator's profile image and name. Link back to his/her profile page.
-    //self.creatorProfileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 145, 35, 35)];
-    NSURL *profile_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
-    NSLog(@"%@",profile_url);
-    if (![Cache isURLCached:profile_url]) {
+    //set event image
+    if (![Cache isURLCached:self.event_img_url]) {
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
             //get the image data
             NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: profile_url];
+            imageData = [[NSData alloc] initWithContentsOfURL: self.event_img_url];
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.event_img_url withData:imageData];
+                        [self.eventImageView setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directly put it in the cache, and then reload the table view data.
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.event_img_url withData:imageData];
+                        [self.eventImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.event_img_url]]];
+        });
+    }
+    
+    //set creator's profile image and name. Link back to his/her profile page.
+    if (![Cache isURLCached:self.creator_img_url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: self.creator_img_url];
             
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
@@ -747,8 +804,8 @@
                 
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:profile_url withData:imageData];
-                        [self.creatorProfileImageView setImage:[UIImage imageWithData:imageData]];
+                        [Cache addDataToCache:self.creator_img_url withData:imageData];
+                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
                     });
                 }
             }
@@ -757,8 +814,8 @@
                 //NSLog(@"downloaded %@",profile_url);
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:profile_url withData:imageData];
-                        [self.creatorProfileImageView setImage:[UIImage imageWithData:imageData]];
+                        [Cache addDataToCache:self.creator_img_url withData:imageData];
+                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
                     });
                 }
             }
@@ -766,86 +823,62 @@
     }
     else {
         dispatch_async( dispatch_get_main_queue(),^{
-            [self.creatorProfileImageView setImage:[UIImage imageWithData:[Cache getCachedData:profile_url]]];
+            [self.creatorProfileView setImage:[UIImage imageWithData:[Cache getCachedData:self.creator_img_url]]];
         });
     }
-    
-    //[self.myScrollView addSubview:self.creatorProfileImageView];
-    NSString *creator_name=[event objectForKey:@"creator_name"];
-    [self.contributorNameLabel setText:[NSString stringWithFormat:@"%@",creator_name]];
-    CGSize contributorNameLabel_expectedWidth = [creator_name sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:150 lineBreakMode:UILineBreakModeClip];
-    CGRect contributor_frame = self.contributorNameLabel.frame;
+    [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
+    CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:150 lineBreakMode:UILineBreakModeClip];
+    CGRect contributor_frame = self.creatorNameLabel.frame;
     contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
-    contributorNameLabel.frame = contributor_frame;
-    self.profileButton.frame = CGRectMake(self.creatorProfileImageView.frame.origin.x, self.creatorProfileImageView.frame.origin.y, self.creatorProfileImageView.frame.size.width+self.contributorNameLabel.frame.size.width + 10,self.creatorProfileImageView.frame.size.height);
-    
-#warning fetch original creator info
-    self.event_title=title;
-    self.event_time=time;
-    if ([self.event_time isEqualToString:@""]) {
-        self.event_time = [NSString stringWithFormat:@"TBD"];
-    }
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    if ([self.location_name isEqualToString:@""]) {
-        self.location_name = [NSString stringWithFormat:@"TBD"];
-    }
-    self.longitude=[event objectForKey:@"longitude"];
-    self.latitude=[event objectForKey:@"latitude"];
-    self.description=[event objectForKey:@"description"] !=[NSNull null]?[event objectForKey:@"description"]:@"Description unavailable";;
-    
+    self.creatorNameLabel.frame = contributor_frame;
+    self.creatorProfileButton.frame = CGRectMake(self.creatorProfileView.frame.origin.x, self.creatorProfileView.frame.origin.y, self.creatorProfileView.frame.size.width+self.creatorNameLabel.frame.size.width + 10,self.creatorProfileView.frame.size.height);
+
     //set event title
-    UILabel *eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(18, 200, 300, 40)];
-    [eventTitle setText:self.event_title];
-    [eventTitle setFont:[UIFont boldSystemFontOfSize:16]];
-    eventTitle.lineBreakMode = UILineBreakModeWordWrap;
-    eventTitle.numberOfLines = 0;
+    [self.eventTitleLabel setText:self.event_title];
     CGSize maximumLabelSize1 = CGSizeMake(300,9999);    
     CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect newFrame1 = eventTitle.frame;
+    CGRect newFrame1 = self.eventTitleLabel.frame;
     newFrame1.size.height = expectedLabelSize1.height;
-    eventTitle.frame = newFrame1;
-    [self.myScrollView addSubview:eventTitle];
+    self.eventTitleLabel.frame = newFrame1;
     
     //set seperator
-    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(10, eventTitle.frame.origin.y+eventTitle.frame.size.height + 10, 300, 1)];
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 300, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
     [self.myScrollView addSubview:seperator];
     
     //set time label and clock icon
-    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(10+12+10, seperator.frame.origin.y + 10, 230, 20)];
+    self.timeSectionView.frame = CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height+15, 300, 30);
+    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 9, 12, 12)];
+    [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
+    [timeIcon setAlpha:0.7];
+    [self.timeSectionView addSubview:timeIcon];
+    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 230, 20)];
     [eventTime setText:self.event_time];
     [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
     [eventTime setTextColor:[UIColor darkGrayColor]];
     eventTime.lineBreakMode = UILineBreakModeClip;
     eventTime.numberOfLines = 1;
-    CGSize maximumLabelSize2 = CGSizeMake(230,9999);    
-    CGSize expectedLabelSize2 = [self.event_time sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame2 = eventTime.frame;
-    newFrame2.size.height = expectedLabelSize2.height;
-    eventTime.frame = newFrame2;
-    [self.myScrollView addSubview:eventTime];
-    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(17, eventTime.frame.origin.y + eventTime.frame.size.height/2 - 6, 12, 12)];
-    [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
-    [timeIcon setAlpha:0.7];
-    [self.myScrollView addSubview:timeIcon];
-
+    [self.timeSectionView addSubview:eventTime];
+    
     //set address section
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(10+12+10, eventTime.frame.origin.y + eventTime.frame.size.height +10, 210, 20)];
+    self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, 210, 30)];
     [eventLocation setText:self.location_name];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
     [eventLocation setTextColor:[UIColor darkGrayColor]];
-    eventLocation.lineBreakMode = UILineBreakModeClip;
-    eventLocation.numberOfLines = 1;
-    CGSize maximumLabelSize3 = CGSizeMake(230,9999);    
-    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeClip];
+    eventLocation.lineBreakMode = UILineBreakModeWordWrap;
+    eventLocation.numberOfLines = 0;
+    CGSize maximumLabelSize3 = CGSizeMake(210,9999);    
+    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame3 = eventLocation.frame;
     newFrame3.size.height = expectedLabelSize3.height;
     eventLocation.frame = newFrame3;
-    [self.myScrollView addSubview:eventLocation];
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(18, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 8, 14)];
+    [self.locationSectionView addSubview:eventLocation];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 2, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
     [locationIcon setAlpha:0.7];
-    [self.myScrollView addSubview:locationIcon];
+    [self.locationSectionView addSubview:locationIcon];
+    
     UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(255, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-12, 30,24)];
     [map_indicator_label setText:@"Map"];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
@@ -855,8 +888,18 @@
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
     //[self.myScrollView addSubview:right_Arrow];
 
+#warning fetch original creator info
+
+    if ([self.event_time isEqualToString:@""]) {
+        self.event_time = [NSString stringWithFormat:@"TBD"];
+    }
+    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+    if ([self.location_name isEqualToString:@""]) {
+        self.location_name = [NSString stringWithFormat:@"TBD"];
+    }
+
     CGRect newFrame = self.interestOrInviteButton.frame;
-    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+    newFrame.origin.y = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height +15;
     self.interestOrInviteButton.frame = newFrame;
     if (self.isEventOwner) {
         UIImageView *invite_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
@@ -869,7 +912,7 @@
     }
     
     newFrame = self.pickOrEditButton.frame;
-    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
+    newFrame.origin.y = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height +15;
     self.pickOrEditButton.frame = newFrame;
     if (self.isEventOwner) {
         UIImageView *edit_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-edit-color.png"]];
@@ -882,55 +925,8 @@
         pick_icon.frame = CGRectMake(12, 5, 20, 20);
         [self.pickOrEditButton addSubview:pick_icon];
     }
-    
-//    newFrame = self.shareButton.frame;
-//    newFrame.origin.y = eventLocation.frame.origin.y + eventLocation.frame.size.height +15;
-//    self.shareButton.frame = newFrame;
-//    UIImageView *share_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-share-color.png"]];
-//    share_icon.frame = CGRectMake(7, 5, 20, 20);
-//    [self.shareButton addSubview:share_icon];
 
-    //set event image
-    self.eventImageView.frame = CGRectMake(0, 0, DVC_EVENT_IMG_WIDTH, DVC_EVENT_IMG_HEIGHT);
-    [self.myScrollView addSubview:self.eventImageView];
-    NSURL *url=[NSURL URLWithString:photo];
-    if (![Cache isURLCached:url]) {
-        //using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: url];
-            
-            if ( imageData == nil ){
-            //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                imageData=UIImagePNGRepresentation(image);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        [self.eventImageView setImage:image];
-                    });
-                }
-            }
-            else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        [self.eventImageView setImage:[UIImage imageWithData:imageData]];
-                    });
-                }
-            }
-        });
-    }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
-        });
-    }
-    
+    [self handleTheInterestedPeoplePart];
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];

@@ -236,7 +236,6 @@
 {
     [self setMyMapView:nil];
     [self setMySearchBar:nil];
-//    [self setMyStepper:nil];
     [self setMyTableView:nil];
     [self setMySearchDisplayController:nil];
     [self setSimilarPlaceToLabel:nil];
