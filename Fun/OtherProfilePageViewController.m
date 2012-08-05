@@ -70,8 +70,7 @@
     return _current_location_manager;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -100,6 +99,13 @@
     return _lastReceivedJson_bookmark;
 }
 
+-(NSMutableArray *)garbageCollection{
+    if(!_garbageCollection){
+        _garbageCollection=[NSMutableArray array];
+    }
+    return _garbageCollection;
+}
+
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -116,18 +122,18 @@
     }
     
     //query the user profile information
-    //add login auth_token
+    {
     defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
         // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
+        //NSString *responseString = [block_request responseString];
+        //NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if (![self.lastReceivedJson_profile isEqualToDictionary:json]) {
+        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
             self.lastReceivedJson_profile=json;
             //only update the content when there is a content different
             [self.creatorNameLabel setText:[json objectForKey:@"name"]];
@@ -192,6 +198,7 @@
     }];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
+    }
     
     //quest the most recent 10 events
     self.refresh_page_num=2; //the next page that need to refresh is 2
@@ -223,19 +230,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    //........towards left Gesture recogniser for swiping.....// used to change view
-    /*
-     UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-     leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
-     [self.view addGestureRecognizer:leftRecognizer]; 
-     */
-    
-    //Navigation Bar Style
+	
+    //set the Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
-    
+    //add the navigation back button
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
@@ -341,17 +340,19 @@
 
 #pragma mark - implement the UIScrollViewDelegate
 //when the scrolling over 最上方，need refresh process
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    //if already in a feching process, return
+    if (![self.freshConnectionType isEqualToString:@"not"]) {
+        return;
+    }
+    
     if (scrollView.contentOffset.y<-EVENT_ELEMENT_CONTENT_HEIGHT/3) {
-        //remove the main views
-        self.garbageCollection=[NSMutableArray array];
+        
+        //put all the view down to show the refresh view
         for (UIView *view in [self.mainScrollView subviews]) {
             [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
             //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-            [self.garbageCollection addObject:view];
         }
-        
         
         //set the refresh view ahead & and also the anti touch mask
         //NSLog(@"get most 10 popular pages called");
@@ -377,6 +378,7 @@
         [self.refreshView addSubview:loading];
         
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        
         
         
         //and then do the refresh process
@@ -431,6 +433,8 @@
 
 #pragma mark - get more data and show the more event
 -(void)refreshAllTheMainScrollViewSUbviews{
+
+    
     [self.refreshView removeFromSuperview];
     ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
@@ -477,7 +481,7 @@
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
         //NSLog(@"%@",json);
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-        if ([self.lastReceivedJson_bookmark isEqualToArray: json]) {
+        if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
             //do nothing here, if there is no diff
             self.refresh_page_num=2;
             self.freshConnectionType=@"not";
@@ -485,7 +489,6 @@
                 for (UIView *view in [self.mainScrollView subviews]) {
                     [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
                     //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-                    [self.garbageCollection addObject:view];
                 }
             }
         }
@@ -496,6 +499,7 @@
             for (UIView* subView in self.mainScrollView.subviews) {
                 [subView removeFromSuperview];
             }
+            
             [self.blockViews removeAllObjects];
             //set the freshConnectionType to "not"
             self.freshConnectionType=@"not";

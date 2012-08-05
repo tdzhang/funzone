@@ -97,8 +97,8 @@ static bool init_flag=false;
     //dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{  
         //get the image data
         if (!init_flag) {
-            [MyPermenentCachePart init];
-        }
+            return;
+       }
         
         if ([keyToFindIfExist objectForKey:urlName]) {
             return;

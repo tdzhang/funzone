@@ -168,7 +168,7 @@
         
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        if (![self.lastReceivedJson isEqualToArray:json]) {
+        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
             //not equal, update the last reveived json
             self.lastReceivedJson=json;
             //deal with json

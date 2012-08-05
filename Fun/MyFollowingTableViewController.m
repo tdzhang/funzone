@@ -62,7 +62,7 @@
         NSLog(@"%@",responseString);
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if (![self.lastReceivedJson isEqualToArray:json]) {
+        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
             //if there is a difference, start to fetch data
             self.lastReceivedJson=json;
             self.arrayProfileInfoElements=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:json] mutableCopy];

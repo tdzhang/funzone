@@ -28,7 +28,6 @@
 @property (nonatomic) int refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
-@property (nonatomic,strong) NSMutableArray *garbageCollection;
 
 @property (nonatomic,strong)CLLocationManager *current_location_manager;
 
@@ -54,7 +53,6 @@
 @synthesize refresh_page_num=_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
-@synthesize garbageCollection=_garbageCollection;
 
 @synthesize current_location_manager=_current_location_manager;
 
@@ -127,7 +125,7 @@
         //NSLog(@"%@",responseString);
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if (![self.lastReceivedJson_profile isEqualToDictionary:json]) {
+        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
             self.lastReceivedJson_profile=json;
             //only update the content when there is a content different
             [self.creatorNameLabel setText:[json objectForKey:@"name"]];
@@ -214,13 +212,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //........towards left Gesture recogniser for swiping.....// used to change view
-    /*
-    UISwipeGestureRecognizer* leftRecognizer =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
-    leftRecognizer.direction =UISwipeGestureRecognizerDirectionLeft;[leftRecognizer setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:leftRecognizer]; 
-    */
-    
     //Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
@@ -272,11 +263,9 @@
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-EVENT_ELEMENT_CONTENT_HEIGHT/3) {
         //remove the main views
-        self.garbageCollection=[NSMutableArray array];
+
         for (UIView *view in [self.mainScrollView subviews]) {
             [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-            //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-            [self.garbageCollection addObject:view];
         }
         
         
@@ -353,47 +342,7 @@
         self.freshConnectionType=@"Add";
         [connection start];
     }
-/*
-    //add more
-    NSLog(@"%f,%d",scrollView.contentOffset.y,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]/5)));
-    if(scrollView.contentOffset.y>PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*(([self.blockViews count]/5))){
-        //add the content add refresh indicator
-        for(UIView *subview in [self.refreshViewdown subviews]) {
-            [subview removeFromSuperview];
-        }
-        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,PROFILE_PAGEVC_VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
-        [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,PROFILE_PAGEVC_VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
-        loading.layer.cornerRadius =15;
-        loading.opaque = NO;
-        loading.backgroundColor =[UIColor colorWithWhite:0.0f alpha:0.3f];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,25,80,40)];
-        loadLabel.text =@"Loading more...";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
-        loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:1.0f alpha:1.0f];
-        loadLabel.backgroundColor =[UIColor clearColor];
-        [loading addSubview:loadLabel];
-        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame =CGRectMake(120,80,80,80);
-        [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT*([self.blockViews count]),PROFILE_PAGEVC_VIEW_WIDTH,PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
-        [self.refreshViewdown removeFromSuperview];
-        [self.refreshViewdown addSubview:underloading];
-        [self.refreshViewdown addSubview:loading];
-        [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]+1)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT);
-        
-        //NSLog(@"add more");
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        //set the freshConnectionType To @"Add"
-        self.freshConnectionType=@"Add";
-        [connection start];         
-    }
- */
+
 }
 
 #pragma mark - segue related stuff
@@ -454,9 +403,10 @@
         
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        //NSLog(@"%@",json);
+        NSLog(@"new json:%@",json);
+        NSLog(@"old json:%@",self.lastReceivedJson_bookmark);
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-        if ([self.lastReceivedJson_bookmark isEqualToArray: json]) {
+        if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
             //do nothing here, if there is no diff
             self.refresh_page_num=2;
             self.freshConnectionType=@"not";
@@ -464,12 +414,14 @@
             if (!self.isViewAppearConnection) {
                 for (UIView *view in [self.mainScrollView subviews]) {
                     [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                    //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-                    [self.garbageCollection addObject:view];
                 }
             }
         }
         else{
+            for (UIView *view in [self.mainScrollView subviews]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            }
+            
             self.refresh_page_num=2;
             self.lastReceivedJson_bookmark=json;
             //clean the page
