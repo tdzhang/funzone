@@ -284,18 +284,18 @@
         [self.likeButtonSection addSubview:self.like_label];
         
         self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        self.join_icon.frame = CGRectMake(15, 15, 20, 20);
+        self.join_icon.frame = CGRectMake(10, 15, 20, 20);
         [self.joinButtonSection addSubview:self.join_icon];
-        self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
+        self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
         [self.join_label setBackgroundColor:[UIColor clearColor]];
         [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
         [self.join_label setTextColor:[UIColor whiteColor]];
         [self.joinButtonSection addSubview:self.join_label];
         
         self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        self.doitmyself_icon.frame = CGRectMake(15, 15, 20, 20);
+        self.doitmyself_icon.frame = CGRectMake(5, 15, 20, 20);
         [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
-        self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 95, 50)];
+        self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
         [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
         [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
         [self.doitmyself_label setTextColor:[UIColor whiteColor]];
@@ -837,7 +837,7 @@
     if ([self.isAdded isEqualToString:@"0"]) {
         [self.doitmyself_label setText:@"Do It Myself"];
     } else {
-        [self.doitmyself_label setText:@"Added"];
+        [self.doitmyself_label setText:@"Already Added"];
     }
 
     //handle the interest people part
