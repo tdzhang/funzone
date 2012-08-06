@@ -33,15 +33,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="f3t-7E-fkk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT">
-                                <rect key="frame" x="0.0" y="73" width="320" height="343"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="294"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
@@ -207,7 +207,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSW-Vq-fkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="jag-1w-uml" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KUr-qn-diQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -393,7 +393,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="dKU-YC-n8T">
@@ -432,7 +432,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81h-zi-eyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="E0p-qY-vtY" customClass="FIndTopTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bbQ-YI-143">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -462,7 +462,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="biv-AN-I61" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sIh-4k-1gG" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZQ8-cu-0rI">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -678,12 +678,12 @@
             </objects>
             <point key="canvasLocation" x="1177" y="-726"/>
         </scene>
-        <!--Navigation Controller - Friend Feeds-->
+        <!--Navigation Controller - Feeds-->
         <scene sceneID="lWy-O6-SIi">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZN-Lv-NBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="eqn-h2-xv5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friend Feeds" id="6"/>
+                    <tabBarItem key="tabBarItem" title="Feeds" id="6"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="jSn-Wa-ynD">
@@ -698,12 +698,12 @@
             </objects>
             <point key="canvasLocation" x="305" y="298"/>
         </scene>
-        <!--Navigation Controller - My Collection-->
+        <!--Navigation Controller - Collection-->
         <scene sceneID="93z-0B-UvQ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1s-w2-VsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="yO2-58-RfF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="4" title="My Collection" id="NL6-fp-Lxs"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="Collection" id="NL6-fp-Lxs"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="hNb-CQ-xsf">
@@ -913,7 +913,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-PY-q4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zn8-a6-0kg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Mz-5Q-Y9g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="V1s-0l-w0g">
@@ -960,7 +960,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1078,11 +1078,11 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="17" y="89" width="285" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jdt-je-NAk">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jdt-je-NAk">
                                         <rect key="frame" x="31" y="102" width="223" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Follow Facebook Friends">
+                                        <state key="normal" title="Find Facebook Friends" backgroundImage="create_account_button.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1094,7 +1094,7 @@ Find us @OrangeParc.com</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No events to display. Looking for some people to follow?" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" id="o6a-Tb-idb">
-                                        <rect key="frame" x="38" y="-5" width="216" height="99"/>
+                                        <rect key="frame" x="31" y="-5" width="223" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1104,7 +1104,7 @@ Find us @OrangeParc.com</string>
                                         <rect key="frame" x="31" y="147" width="223" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Follow Popular Users">
+                                        <state key="normal" title="See Popular Users" backgroundImage="create_account_button.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1844,15 +1844,15 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="qEm-9f-Vgt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Php-mD-Smt">
-                                <rect key="frame" x="0.0" y="116" width="320" height="300"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="251"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="ofe-Y1-2Da" id="IqW-7o-Nbk"/>
@@ -2041,7 +2041,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-6h-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="9i7-54-eHW" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="fok-68-c8Y">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="tlx-oq-1sk">
@@ -2848,12 +2848,12 @@ Find us @OrangeParc.com</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category@2x.png" id="uBa-65-dsU">
-                                <rect key="frame" x="0.0" y="23" width="320" height="357"/>
+                                <rect key="frame" x="0.0" y="19" width="320" height="357"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="BdY-zq-7uB">
-                                <rect key="frame" x="227" y="333" width="57" height="21"/>
+                                <rect key="frame" x="224" y="323" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2861,15 +2861,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Shopping" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xo2-t8-bTO">
-                                <rect key="frame" x="134" y="332" width="57" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="-1" height="-1"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Entertain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="s4m-wG-jyb">
-                                <rect key="frame" x="227" y="228" width="57" height="21"/>
+                                <rect key="frame" x="135" y="322" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2877,7 +2869,15 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qqz-Gq-e6A">
-                                <rect key="frame" x="39" y="333" width="57" height="21"/>
+                                <rect key="frame" x="44" y="323" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="-1" height="-1"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Entertain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="s4m-wG-jyb">
+                                <rect key="frame" x="227" y="224" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2885,7 +2885,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Outdoor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="b2C-4d-YpY">
-                                <rect key="frame" x="135" y="228" width="51" height="21"/>
+                                <rect key="frame" x="136" y="224" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2893,7 +2893,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Party" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Y9l-lA-JhH">
-                                <rect key="frame" x="40" y="228" width="51" height="21"/>
+                                <rect key="frame" x="48" y="224" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2901,7 +2901,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Yns-c7-MLh">
-                                <rect key="frame" x="227" y="129" width="51" height="21"/>
+                                <rect key="frame" x="226" y="131" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2909,7 +2909,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="J5S-1k-U6F">
-                                <rect key="frame" x="137" y="129" width="51" height="21"/>
+                                <rect key="frame" x="138" y="131" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2917,7 +2917,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="-1" height="-1"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="PR5-zf-Le5">
-                                <rect key="frame" x="41" y="129" width="51" height="21"/>
+                                <rect key="frame" x="43" y="131" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2926,7 +2926,7 @@ Find us @OrangeParc.com</string>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Yr-l8-opE">
-                                <rect key="frame" x="26" y="57" width="82" height="102"/>
+                                <rect key="frame" x="26" y="53" width="82" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2941,7 +2941,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rRq-3t-HTv">
-                                <rect key="frame" x="116" y="57" width="92" height="102"/>
+                                <rect key="frame" x="116" y="53" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2956,7 +2956,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X9V-n0-FhT">
-                                <rect key="frame" x="206" y="57" width="92" height="102"/>
+                                <rect key="frame" x="206" y="53" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2971,7 +2971,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m6u-kl-3Jc">
-                                <rect key="frame" x="216" y="149" width="92" height="102"/>
+                                <rect key="frame" x="216" y="145" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2986,7 +2986,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8C-Tu-cms">
-                                <rect key="frame" x="116" y="149" width="92" height="102"/>
+                                <rect key="frame" x="116" y="145" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3001,7 +3001,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V2o-Hu-zgA">
-                                <rect key="frame" x="27" y="155" width="92" height="102"/>
+                                <rect key="frame" x="27" y="151" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3016,7 +3016,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KiR-uV-k1p">
-                                <rect key="frame" x="27" y="257" width="92" height="102"/>
+                                <rect key="frame" x="27" y="253" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3031,7 +3031,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H3i-AN-UmI">
-                                <rect key="frame" x="116" y="259" width="92" height="102"/>
+                                <rect key="frame" x="116" y="255" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3046,7 +3046,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p6Z-ki-z5E">
-                                <rect key="frame" x="209" y="259" width="92" height="102"/>
+                                <rect key="frame" x="209" y="255" width="92" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3061,10 +3061,10 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pick a Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="nfr-yz-tMX">
-                                <rect key="frame" x="71" y="23" width="178" height="29"/>
+                                <rect key="frame" x="71" y="22" width="178" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -3158,6 +3158,10 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="PickButtonClicked:"/>
+                <relationship kind="action" name="joinButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="likeButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="shareButtonClicked:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
                 <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
                 <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
@@ -3224,6 +3228,9 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -3296,11 +3303,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="6rH-Lj-bNq"/>
-        <segue reference="eX7-7v-GIv"/>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="2Cw-4j-quL"/>
-        <segue reference="I5V-BE-h5K"/>
+        <segue reference="lqc-Cx-NBX"/>
+        <segue reference="Yrc-z9-85p"/>
+        <segue reference="maZ-xV-hRy"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="jpf-qW-bdW"/>
+        <segue reference="Hfw-Db-bjl"/>
     </inferredMetricsTieBreakers>
 </document>
