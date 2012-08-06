@@ -260,6 +260,7 @@
         [like_label setText:@"Like"];
         [like_label setBackgroundColor:[UIColor clearColor]];
         [like_label setFont:[UIFont boldSystemFontOfSize:15]];
+        [like_label setTextColor:[UIColor whiteColor]];
         [self.likeButtonSection addSubview:like_label];
         
         UIImageView *join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
@@ -269,6 +270,7 @@
         [join_label setText:@"Join"];
         [join_label setBackgroundColor:[UIColor clearColor]];
         [join_label setFont:[UIFont boldSystemFontOfSize:15]];
+        [join_label setTextColor:[UIColor whiteColor]];
         [self.joinButtonSection addSubview:join_label];
         
         UIImageView *doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
@@ -278,6 +280,7 @@
         [doitmyself_label setText:@"Do It Myself"];
         [doitmyself_label setBackgroundColor:[UIColor clearColor]];
         [doitmyself_label setFont:[UIFont boldSystemFontOfSize:15]];
+        [doitmyself_label setTextColor:[UIColor whiteColor]];
         [self.doitmyselfButtonSection addSubview:doitmyself_label];
     }
 }
@@ -330,8 +333,6 @@
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
 
-
-
 - (void)profileClicked{
     if (self.isEventOwner) {
         [self performSegueWithIdentifier:@"ViewProfile" sender:self];
@@ -340,54 +341,69 @@
     }
 }
 
-//handle the action: interestedButtonClicked
-- (IBAction)interestedButtonClicked:(id)sender {
-    if (self.isEventOwner) {
-        //if is event owner, this button is invite people, need action sheet to do this
-        //give user several way to invite friend
-        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Invite Friend:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"via Email",@"via SMS Message",@"WeChat", nil];
-        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-        [pop showFromTabBar:self.tabBarController.tabBar];
-    }
-    else {
-        //send interest information to server
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
-        NSLog(@"request: %@",url);
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
-            NSError *error;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-            if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                success.delegate=self;
-                [success show];
-            }
-            else {
-                UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-                unsuccess.delegate=self;
-                [unsuccess show];
-            }
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            notsuccess.delegate=self;
-            [notsuccess show];
-        }];
-        [request setRequestMethod:@"GET"];
-        [request startAsynchronous];
-    }
+//handle the action: joinButtonClicked
+- (IBAction)joinButtonClicked:(UIButton *)sender {
+    //send join information to server
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            success.delegate=self;
+            [success show];
+        } else {
+            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            unsuccess.delegate=self;
+            [unsuccess show];
+        }
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
+}
+
+- (IBAction)likeButtonClicked:(UIButton *)sender {
+    //send like information to server
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            success.delegate=self;
+            [success show];
+        } else {
+            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            unsuccess.delegate=self;
+            [unsuccess show];
+        }
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
 }
 
 #pragma mark - action sheet related stuff
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{    
     /*
      //give user several way to share
      UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook Wall",@"Twitter",@"Wechat",@"Self enter", nil];
@@ -495,7 +511,7 @@
     }
 }
 
-//handle interested people section
+//handle joined people section
 -(void)handleTheInterestedPeoplePart{
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
@@ -511,7 +527,7 @@
         [self.myScrollView addSubview:self.interestedPeopleLabelView];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d people joined",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
