@@ -122,6 +122,7 @@
 
 //the property used to chaneg the UI between edit and create
 @synthesize isEditPage=_isEditPage;
+
 //used to invite inner friend(following)
 @synthesize invitedFriend=_invitedFriend;
 
@@ -668,13 +669,12 @@
         [nextVC presetEventImage:self.createEvent_image WithTiTle:self.createEvent_title WithLatitude:self.createEvent_latitude WithLongitude:self.createEvent_longitude WithLocationName:self.createEvent_locationName WithTime:self.createEvent_time WithAddress:self.createEvent_time WithImageUrlName:self.createEvent_imageUrlName];
     }
     else if([segue.identifier isEqualToString:@"StartInviteFriend"]){
-            InviteTableViewController *peopleController=nil;
-            peopleController = segue.destinationViewController;
-            peopleController.delegate=self;
-
-            peopleController.alreadySelectedContacts=[self.invitedFriend copy];
-
+        InviteTableViewController *peopleController=nil;
+        peopleController = segue.destinationViewController;
+        peopleController.delegate=self;
+        peopleController.alreadySelectedContacts=[self.invitedFriend copy];
     }
+    NSLog(@"%@",segue.identifier);
 }
 
 #pragma mark - action sheet
@@ -1058,11 +1058,9 @@
     //NSLog(@"input person:%@",person.firstName);
     NSString * key=person.user_name;
     [self.invitedFriend setObject:(id)person forKey:key];
-
 }
 
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
-
     NSString * key=person.user_name;
     [self.invitedFriend removeObjectForKey:key];
 }
