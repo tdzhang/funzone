@@ -100,6 +100,13 @@
 		0FD0BB5815AFAFE400357ADE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */; };
 		0FD0BB5A15AFAFF500357ADE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5915AFAFF500357ADE /* libz.dylib */; };
 		0FD0BB5C15B0E8B000357ADE /* FreshBigArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */; };
+		0FD5B90015CF840900927153 /* InviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B8FE15CF840900927153 /* InviteTableViewController.h */; };
+		0FD5B90115CF840900927153 /* InviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD5B8FF15CF840900927153 /* InviteTableViewController.m */; };
+		0FD5B90415CF87A600927153 /* InviteFriendObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B90215CF87A600927153 /* InviteFriendObject.h */; };
+		0FD5B90515CF87A600927153 /* InviteFriendObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD5B90315CF87A600927153 /* InviteFriendObject.m */; };
+		0FD5B90815CF8E2900927153 /* InviteFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B90615CF8E2800927153 /* InviteFriendTableViewCell.h */; };
+		0FD5B90915CF8E2900927153 /* InviteFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD5B90715CF8E2900927153 /* InviteFriendTableViewCell.m */; };
+		0FD5B90B15CF8E3B00927153 /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD5B90A15CF8E3B00927153 /* InviteTableViewCell.xib */; };
 		0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */; };
 		0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */; };
 		0FF00A3615B49F4D000D68C3 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF00A3515B49F4D000D68C3 /* 86-camera.png */; };
@@ -413,6 +420,13 @@
 		0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0FD0BB5915AFAFF500357ADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrowDown.png; sourceTree = "<group>"; };
+		0FD5B8FE15CF840900927153 /* InviteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteTableViewController.h; sourceTree = "<group>"; };
+		0FD5B8FF15CF840900927153 /* InviteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteTableViewController.m; sourceTree = "<group>"; };
+		0FD5B90215CF87A600927153 /* InviteFriendObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendObject.h; sourceTree = "<group>"; };
+		0FD5B90315CF87A600927153 /* InviteFriendObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendObject.m; sourceTree = "<group>"; };
+		0FD5B90615CF8E2800927153 /* InviteFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendTableViewCell.h; sourceTree = "<group>"; };
+		0FD5B90715CF8E2900927153 /* InviteFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendTableViewCell.m; sourceTree = "<group>"; };
+		0FD5B90A15CF8E3B00927153 /* InviteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
 		0FEC5BED15C0A63600E3C8A3 /* MyPermenentCachePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPermenentCachePart.h; sourceTree = "<group>"; };
 		0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPermenentCachePart.m; sourceTree = "<group>"; };
 		0FEC5BF115C0A6E500E3C8A3 /* URLConnectionCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConnectionCache.h; sourceTree = "<group>"; };
@@ -943,6 +957,20 @@
 			name = asiConnection;
 			sourceTree = "<group>";
 		};
+		0FD5B8FC15CF838500927153 /* InviteTable */ = {
+			isa = PBXGroup;
+			children = (
+				0FD5B8FE15CF840900927153 /* InviteTableViewController.h */,
+				0FD5B8FF15CF840900927153 /* InviteTableViewController.m */,
+				0FD5B90215CF87A600927153 /* InviteFriendObject.h */,
+				0FD5B90315CF87A600927153 /* InviteFriendObject.m */,
+				0FD5B90615CF8E2800927153 /* InviteFriendTableViewCell.h */,
+				0FD5B90715CF8E2900927153 /* InviteFriendTableViewCell.m */,
+				0FD5B90A15CF8E3B00927153 /* InviteTableViewCell.xib */,
+			);
+			name = InviteTable;
+			sourceTree = "<group>";
+		};
 		0FF6040015C7B1FA00AE89CF /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,6 +1316,7 @@
 		4668A7AC15943B1000713A4C /* Add Event */ = {
 			isa = PBXGroup;
 			children = (
+				0FD5B8FC15CF838500927153 /* InviteTable */,
 				0F07F27915AE1BEF00BF41CF /* auto completion part */,
 				0F579A5315A166C60006FCC6 /* choose Image */,
 				0F128565159ECC1000430859 /* choose Friends */,
@@ -1356,6 +1385,9 @@
 				0F6C5B1615C83C9200A95CEE /* ActivityTabeleViewController.h in Headers */,
 				0F00545C15C8FE8D000EBF67 /* ActivityTableViewCell.h in Headers */,
 				0F00546015C90315000EBF67 /* activityElementObject.h in Headers */,
+				0FD5B90015CF840900927153 /* InviteTableViewController.h in Headers */,
+				0FD5B90415CF87A600927153 /* InviteFriendObject.h in Headers */,
+				0FD5B90815CF8E2900927153 /* InviteFriendTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1578,6 +1610,7 @@
 				46349A1515CC77E000455BF8 /* more-rate-color@2x.png in Resources */,
 				46349A1615CC77E000455BF8 /* more-settings-color.png in Resources */,
 				46349A1715CC77E000455BF8 /* more-settings-color@2x.png in Resources */,
+				0FD5B90B15CF8E3B00927153 /* InviteTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1657,6 +1690,9 @@
 				0F6C5B1715C83C9200A95CEE /* ActivityTabeleViewController.m in Sources */,
 				0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */,
 				0F00546115C90315000EBF67 /* activityElementObject.m in Sources */,
+				0FD5B90115CF840900927153 /* InviteTableViewController.m in Sources */,
+				0FD5B90515CF87A600927153 /* InviteFriendObject.m in Sources */,
+				0FD5B90915CF8E2900927153 /* InviteFriendTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
