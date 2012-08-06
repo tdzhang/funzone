@@ -122,9 +122,19 @@
 
 //the property used to chaneg the UI between edit and create
 @synthesize isEditPage=_isEditPage;
+//used to invite inner friend(following)
+@synthesize invitedFriend=_invitedFriend;
 
 
 #pragma mark - self defined synthesize
+//used to invite inner friend(following)
+-(NSMutableDictionary *)invitedFriend{
+    if (!_invitedFriend) {
+        _invitedFriend=[NSMutableDictionary dictionary];
+    }
+    return _invitedFriend;
+}
+
 //if user have choosed a new image, then createEvent_image return the image on screen
 -(UIImage *)createEvent_image{
     if (_isCreateEvent_imageUsable) {
@@ -657,6 +667,14 @@
         ShareAfterNewEventViewController* nextVC=segue.destinationViewController;
         [nextVC presetEventImage:self.createEvent_image WithTiTle:self.createEvent_title WithLatitude:self.createEvent_latitude WithLongitude:self.createEvent_longitude WithLocationName:self.createEvent_locationName WithTime:self.createEvent_time WithAddress:self.createEvent_time WithImageUrlName:self.createEvent_imageUrlName];
     }
+    else if([segue.identifier isEqualToString:@"StartInviteFriend"]){
+            InviteTableViewController *peopleController=nil;
+            peopleController = segue.destinationViewController;
+            peopleController.delegate=self;
+
+            peopleController.alreadySelectedContacts=[self.invitedFriend copy];
+
+    }
 }
 
 #pragma mark - action sheet
@@ -1038,17 +1056,15 @@
 //implement the method for the adding or delete contacts that will be go out with
 -(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person{
     //NSLog(@"input person:%@",person.firstName);
-    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
-    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
-    [people setObject:(id)person forKey:key];
-    self.peopleGoOutWith = [people copy];
+    NSString * key=person.user_name;
+    [self.invitedFriend setObject:(id)person forKey:key];
+
 }
 
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
-    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
-    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
-    [people removeObjectForKey:key];
-    self.peopleGoOutWith = [people copy];
+
+    NSString * key=person.user_name;
+    [self.invitedFriend removeObjectForKey:key];
 }
 
 
