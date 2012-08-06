@@ -267,31 +267,7 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
-<<<<<<< HEAD
-        self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-        self.like_icon.frame = CGRectMake(15, 15, 20, 20);        
-        self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
-        [self.like_label setBackgroundColor:[UIColor clearColor]];
-        [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.like_label setTextColor:[UIColor whiteColor]];
-        
-        
-        self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        self.join_icon.frame = CGRectMake(10, 15, 20, 20);        
-        self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
-        [self.join_label setBackgroundColor:[UIColor clearColor]];
-        [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.join_label setTextColor:[UIColor whiteColor]];
-        
-        
-        self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        self.doitmyself_icon.frame = CGRectMake(5, 15, 20, 20);        
-        self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
-        [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
-        [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.doitmyself_label setTextColor:[UIColor whiteColor]];
-        
-=======
+
         //initial the contentsize of the myScrollView
         [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y + 50)];
         
@@ -344,7 +320,6 @@
             [self.doitmyself_label setTextColor:[UIColor whiteColor]];
             [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
         }
->>>>>>> fixed explore bug
     }
 }
 
