@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
+@property (weak, nonatomic) IBOutlet UIView *actionButtonHolder;
 @property (nonatomic,strong) NSMutableData *data;
 
 @property (nonatomic, strong) UIImageView *eventImageView;
@@ -26,6 +27,10 @@
 @property (nonatomic, strong) UIView *timeSectionView;
 @property (nonatomic, strong) UIView *locationSectionView;
 @property (nonatomic, strong) UIView *interestedPeopleLabelView;
+@property (nonatomic, strong) UIView *commentSectionView;
+@property (weak, nonatomic) IBOutlet UIView *likeButtonSection;
+@property (weak, nonatomic) IBOutlet UIView *joinButtonSection;
+@property (weak, nonatomic) IBOutlet UIView *doitmyselfButtonSection;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -66,8 +71,13 @@
 @synthesize eventTitleLabel=_eventTitleLabel;
 @synthesize timeSectionView=_timeSectionView;
 @synthesize locationSectionView=_locationSectionView;
+@synthesize commentSectionView=_commentSectionView;
+@synthesize likeButtonSection = _likeButtonSection;
+@synthesize joinButtonSection=_joinButtonSection;
+@synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
 
 @synthesize shareButton=_shareButton;
+@synthesize actionButtonHolder = _actionButtonHolder;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize event_title=_event_title;
@@ -193,6 +203,9 @@
     
     self.locationSectionView = [[UIView alloc] init];
     [self.myScrollView addSubview:self.locationSectionView];
+    
+    self.commentSectionView = [[UIView alloc] init];
+    [self.myScrollView addSubview:self.commentSectionView];
 }
 
 - (void)viewDidUnload
@@ -205,6 +218,10 @@
    
 
     [self setShareButton:nil];
+    [self setActionButtonHolder:nil];
+    [self setLikeButtonSection:nil];
+    [self setJoinButtonSection:nil];
+    [self setDoitmyselfButtonSection:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -216,7 +233,7 @@
     [super viewWillAppear:animated];
     
     //initial the contentsize of the myScrollView
-    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT)];
+    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y)];
     
     //start a new connection, to fetch data from the server (about event detail)
     NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via];
@@ -233,9 +250,29 @@
         //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
     else{
+        UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+        like_icon.frame = CGRectMake(5, 15, 20, 20);
+        [self.likeButtonSection addSubview:like_icon];
+        UILabel *like_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 55, 50)];
+        [like_label setText:@"Like"];
+        [self.likeButtonSection addSubview:like_label];
+        
+        UIImageView *join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
+        join_icon.frame = CGRectMake(5, 15, 20, 20);
+        [self.joinButtonSection addSubview:join_icon];
+        UILabel *join_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 55, 50)];
+        [join_label setText:@"Join"];
+        [self.joinButtonSection addSubview:join_label];
+        
+        UIImageView *doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+        doitmyself_icon.frame = CGRectMake(5, 15, 20, 20);
+        [self.doitmyselfButtonSection addSubview:doitmyself_icon];
+        UILabel *doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 120, 50)];
+        [doitmyself_label setText:@"Do It Myself"];
+        [self.doitmyselfButtonSection addSubview:doitmyself_label];
+        
         [self.interestOrInviteButton setTitle:@"       I'm interested" forState:UIControlStateNormal];
         [self.pickOrEditButton setTitle:@"    Collect it" forState:UIControlStateNormal];
-        //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
     }
 }
 
@@ -275,6 +312,7 @@
 - (IBAction)PickButtonClicked:(id)sender {
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
 }
+
 - (IBAction)shareButtonClicked:(UIBarButtonItem *)sender {
     //give user several way to share
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"WeChat", nil];
@@ -464,12 +502,12 @@
         height = self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
     }
     if ([self.interestedPeople count]>0) {
-        self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 60)];
+        self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.interestedPeopleLabelView];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [numOfInterests setText:[NSString stringWithFormat:@"%d liked",[self.interestedPeople count]]];
-        [numOfInterests setFont:[UIFont boldSystemFontOfSize:15]];
+        [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.interestedPeopleLabelView addSubview:numOfInterests];
@@ -477,7 +515,7 @@
         
         int x_position_photo=5;
         for (int i=0; i<5&&i<([self.interestedPeople count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 30, 35, 35)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
             ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
@@ -535,7 +573,7 @@
     if ([self.interestedPeople count] == 0) {
         height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
     } else {
-        height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 15;
+        height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
     }
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
@@ -554,9 +592,9 @@
     UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
     NSString *comment_header;
     if ([self.comments count] != 0) {
-        comment_header = [NSString stringWithFormat:@"%d comments", [self.comments count]];
+        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
     }else {
-        comment_header = [NSString stringWithFormat:@"0 comment"];
+        comment_header = [NSString stringWithFormat:@"0 Comment"];
     }
     [comment_header_label setText:comment_header];
     [comment_header_label setBackgroundColor:[UIColor clearColor]];
@@ -647,7 +685,8 @@
         [self.garbageCollection addObject:commentView];        
     }
     //set the scroll view content size
-    [self.myScrollView setContentSize:CGSizeMake(320, height+10)];
+    self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
+    [self.myScrollView setContentSize:CGSizeMake(320, height+15)];
 }
 
 #pragma mark - segue related stuff
@@ -899,23 +938,6 @@
     if ([self.location_name isEqualToString:@""]) {
         self.location_name = [NSString stringWithFormat:@"TBD"];
     }
-
-    CGRect newFrame = self.interestOrInviteButton.frame;
-    newFrame.origin.y = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height +15;
-    self.interestOrInviteButton.frame = newFrame;
-    if (self.isEventOwner) {
-        UIImageView *invite_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        invite_icon.frame = CGRectMake(7, 5, 20, 20);
-        [self.interestOrInviteButton addSubview:invite_icon];
-    }else {
-        UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-        like_icon.frame = CGRectMake(7, 5, 20, 20);
-        [self.interestOrInviteButton addSubview:like_icon];
-    }
-    
-    newFrame = self.pickOrEditButton.frame;
-    newFrame.origin.y = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height +15;
-    self.pickOrEditButton.frame = newFrame;
     if (self.isEventOwner) {
         UIImageView *edit_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-edit-color.png"]];
         edit_icon.frame = CGRectMake(7, 5, 20, 20);
