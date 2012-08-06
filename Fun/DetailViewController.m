@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak, nonatomic) IBOutlet UIView *joinButtonSection;
 @property (weak, nonatomic) IBOutlet UIView *doitmyselfButtonSection;
+@property (nonatomic, strong) UIButton *editButton;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -75,6 +76,7 @@
 @synthesize likeButtonSection = _likeButtonSection;
 @synthesize joinButtonSection=_joinButtonSection;
 @synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
+@synthesize editButton=_editButton;
 
 @synthesize shareButton=_shareButton;
 @synthesize actionButtonHolder = _actionButtonHolder;
@@ -206,6 +208,9 @@
     
     self.commentSectionView = [[UIView alloc] init];
     [self.myScrollView addSubview:self.commentSectionView];
+    
+    self.editButton = [[UIButton alloc] init];
+    [self.myScrollView addSubview:self.editButton];
 }
 
 - (void)viewDidUnload
@@ -215,8 +220,6 @@
     [self setInterestOrInviteButton:nil];
     [self setPickOrEditButton:nil];
     
-   
-
     [self setShareButton:nil];
     [self setActionButtonHolder:nil];
     [self setLikeButtonSection:nil];
@@ -233,7 +236,7 @@
     [super viewWillAppear:animated];
     
     //initial the contentsize of the myScrollView
-    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y)];
+    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y + 50)];
     
     //start a new connection, to fetch data from the server (about event detail)
     NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via];
@@ -244,35 +247,38 @@
     
     //change the button title based on the BOOL isOwner
     if (self.isEventOwner) {
-        [self.interestOrInviteButton setHidden:YES];
-        //[self.interestOrInviteButton setTitle:@"     Invite" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"" forState:UIControlStateNormal];
-        //[self.shareButton setTitle:@"     Share" forState:UIControlStateNormal];
+        [self.actionButtonHolder setHidden:YES];
+        self.editButton.frame = CGRectMake(290, 150, 20, 20);
+        [self.editButton setBackgroundImage:[UIImage imageNamed:@"detail-edit-color.png"] forState:UIControlStateNormal];
+        [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     }
     else{
         UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-        like_icon.frame = CGRectMake(5, 15, 20, 20);
+        like_icon.frame = CGRectMake(15, 15, 20, 20);
         [self.likeButtonSection addSubview:like_icon];
-        UILabel *like_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 55, 50)];
+        UILabel *like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
         [like_label setText:@"Like"];
+        [like_label setBackgroundColor:[UIColor clearColor]];
+        [like_label setFont:[UIFont boldSystemFontOfSize:15]];
         [self.likeButtonSection addSubview:like_label];
         
         UIImageView *join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        join_icon.frame = CGRectMake(5, 15, 20, 20);
+        join_icon.frame = CGRectMake(15, 15, 20, 20);
         [self.joinButtonSection addSubview:join_icon];
-        UILabel *join_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 55, 50)];
+        UILabel *join_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
         [join_label setText:@"Join"];
+        [join_label setBackgroundColor:[UIColor clearColor]];
+        [join_label setFont:[UIFont boldSystemFontOfSize:15]];
         [self.joinButtonSection addSubview:join_label];
         
         UIImageView *doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        doitmyself_icon.frame = CGRectMake(5, 15, 20, 20);
+        doitmyself_icon.frame = CGRectMake(10, 15, 20, 20);
         [self.doitmyselfButtonSection addSubview:doitmyself_icon];
-        UILabel *doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 120, 50)];
+        UILabel *doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 100, 50)];
         [doitmyself_label setText:@"Do It Myself"];
+        [doitmyself_label setBackgroundColor:[UIColor clearColor]];
+        [doitmyself_label setFont:[UIFont boldSystemFontOfSize:15]];
         [self.doitmyselfButtonSection addSubview:doitmyself_label];
-        
-        [self.interestOrInviteButton setTitle:@"       I'm interested" forState:UIControlStateNormal];
-        [self.pickOrEditButton setTitle:@"    Collect it" forState:UIControlStateNormal];
     }
 }
 
@@ -310,6 +316,10 @@
 }
 
 - (IBAction)PickButtonClicked:(id)sender {
+    [self performSegueWithIdentifier:@"repin to create new event" sender:self];
+}
+
+- (void)editButtonClicked{
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
 }
 
@@ -495,12 +505,7 @@
     }
     self.garbageCollection=[NSMutableArray array];
     
-    int height;
-    if (self.isEventOwner) {
-        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
-    } else {
-        height = self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
-    }
+    int height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
     if ([self.interestedPeople count]>0) {
         self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.interestedPeopleLabelView];
@@ -571,7 +576,7 @@
     //comment
     int height;
     if ([self.interestedPeople count] == 0) {
-        height=self.interestOrInviteButton.frame.origin.y + self.interestOrInviteButton.frame.size.height + 15;
+        height=self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
     } else {
         height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
     }
@@ -686,7 +691,7 @@
     }
     //set the scroll view content size
     self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
-    [self.myScrollView setContentSize:CGSizeMake(320, height+15)];
+    [self.myScrollView setContentSize:CGSizeMake(320, height+5+50)];
 }
 
 #pragma mark - segue related stuff
@@ -888,6 +893,9 @@
     [self.myScrollView addSubview:seperator];
     
     //set time label and clock icon
+    if ([self.event_time isEqualToString:@""]) {
+        self.event_time = [NSString stringWithFormat:@"TBD"];
+    }
     self.timeSectionView.frame = CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height+15, 300, 30);
     UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 9, 12, 12)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
@@ -902,6 +910,9 @@
     [self.timeSectionView addSubview:eventTime];
     
     //set address section
+    if ([self.location_name isEqualToString:@""]) {
+        self.location_name = [NSString stringWithFormat:@"TBD"];
+    }
     self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
     UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, 210, 30)];
     [eventLocation setText:self.location_name];
@@ -930,26 +941,6 @@
     //[self.myScrollView addSubview:right_Arrow];
 
 #warning fetch original creator info
-
-    if ([self.event_time isEqualToString:@""]) {
-        self.event_time = [NSString stringWithFormat:@"TBD"];
-    }
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    if ([self.location_name isEqualToString:@""]) {
-        self.location_name = [NSString stringWithFormat:@"TBD"];
-    }
-    if (self.isEventOwner) {
-        UIImageView *edit_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-edit-color.png"]];
-        edit_icon.frame = CGRectMake(7, 5, 20, 20);
-        self.pickOrEditButton.frame = CGRectMake(280, 105, 30, 30);
-        [self.pickOrEditButton setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.pickOrEditButton addSubview:edit_icon];
-    }else {
-        UIImageView *pick_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        pick_icon.frame = CGRectMake(12, 5, 20, 20);
-        [self.pickOrEditButton addSubview:pick_icon];
-    }
-
     [self handleTheInterestedPeoplePart];
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
