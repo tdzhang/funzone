@@ -208,7 +208,7 @@
     self.creatorNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorProfileView.frame.origin.x+self.creatorProfileView.frame.size.width+5, self.creatorProfileView.frame.origin.y, 150, 35)];
     [self.creatorNameLabel setTextAlignment:UITextAlignmentCenter];
     [self.creatorNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:51/255 blue:102/255 alpha:1]];
+    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0/255 green:51/255 blue:204/255 alpha:1]];
     [self.myScrollView addSubview:self.creatorNameLabel];
     
     self.creatorProfileButton = [[UIButton alloc] init];
@@ -275,7 +275,7 @@
     }
     else{
         self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-        self.like_icon.frame = CGRectMake(15, 15, 20, 20);
+        self.like_icon.frame = CGRectMake(15, 13, 24, 24);
         [self.likeButtonSection addSubview:self.like_icon];
         self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
         [self.like_label setBackgroundColor:[UIColor clearColor]];
@@ -284,7 +284,7 @@
         [self.likeButtonSection addSubview:self.like_label];
         
         self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        self.join_icon.frame = CGRectMake(10, 15, 20, 20);
+        self.join_icon.frame = CGRectMake(10, 13, 24, 24);
         [self.joinButtonSection addSubview:self.join_icon];
         self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
         [self.join_label setBackgroundColor:[UIColor clearColor]];
@@ -293,7 +293,7 @@
         [self.joinButtonSection addSubview:self.join_label];
         
         self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        self.doitmyself_icon.frame = CGRectMake(5, 15, 20, 20);
+        self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);
         [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
         self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
         [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
@@ -357,6 +357,9 @@
 
 //handle the action: doitmyselfButtonClicked
 - (IBAction)PickButtonClicked:(id)sender {
+    if ([self.isAdded isEqualToString:@"1"]) {
+        return;
+    }
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
 }
 
@@ -984,19 +987,19 @@
         self.location_name = [NSString stringWithFormat:@"TBD"];
     }
     self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, 270, 30)];
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 270, 20)];
     [eventLocation setText:self.location_name];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
     [eventLocation setTextColor:[UIColor darkGrayColor]];
-    eventLocation.lineBreakMode = UILineBreakModeWordWrap;
-    eventLocation.numberOfLines = 0;
-    CGSize maximumLabelSize3 = CGSizeMake(210,9999);    
-    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect newFrame3 = eventLocation.frame;
-    newFrame3.size.height = expectedLabelSize3.height;
-    eventLocation.frame = newFrame3;
+    eventLocation.lineBreakMode = UILineBreakModeClip;
+    eventLocation.numberOfLines = 1;
+//    CGSize maximumLabelSize3 = CGSizeMake(270,9999);    
+//    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
+//    CGRect newFrame3 = eventLocation.frame;
+//    newFrame3.size.height = expectedLabelSize3.height;
+//    eventLocation.frame = newFrame3;
     [self.locationSectionView addSubview:eventLocation];
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 2, 8, 14)];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 8, 8, 14)];
     [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
     [locationIcon setAlpha:0.7];
     [self.locationSectionView addSubview:locationIcon];
