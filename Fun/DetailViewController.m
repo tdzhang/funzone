@@ -556,7 +556,7 @@
         [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d People Joined",[self.interestedPeople count]]];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d want to join",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -835,9 +835,9 @@
         [self.join_label setText:@"Joined"];
     }
     if ([self.isAdded isEqualToString:@"0"]) {
-        [self.doitmyself_label setText:@"Do It Myself"];
+        [self.doitmyself_label setText:@"Do it myself"];
     } else {
-        [self.doitmyself_label setText:@"Already Added"];
+        [self.doitmyself_label setText:@"Already added"];
     }
     [self.likeButtonSection addSubview:self.like_icon];
     [self.likeButtonSection addSubview:self.like_label];
