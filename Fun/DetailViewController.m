@@ -930,7 +930,7 @@
         self.location_name = [NSString stringWithFormat:@"TBD"];
     }
     self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, 210, 30)];
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 0, 270, 30)];
     [eventLocation setText:self.location_name];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
     [eventLocation setTextColor:[UIColor darkGrayColor]];
