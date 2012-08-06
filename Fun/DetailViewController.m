@@ -32,6 +32,15 @@
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *doitmyselfButtonSection;
+@property (nonatomic,strong) UIImageView *like_icon;
+@property (nonatomic,strong) UIImageView *join_icon;
+@property (nonatomic,strong) UIImageView *doitmyself_icon;
+@property (nonatomic,strong) UILabel *like_label;
+@property (nonatomic,strong) UILabel *join_label;
+@property (nonatomic,strong) UILabel *doitmyself_label;
+@property (nonatomic,strong) NSString *isLiked;
+@property (nonatomic,strong) NSString *isJoined;
+@property (nonatomic,strong) NSString *isAdded;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -78,6 +87,15 @@
 @synthesize joinButtonSection=_joinButtonSection;
 @synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
 @synthesize editButton=_editButton;
+@synthesize like_icon=_like_icon;
+@synthesize join_icon=_join_icon;
+@synthesize doitmyself_icon=_doitmyself_icon;
+@synthesize like_label=_like_label;
+@synthesize join_label=_join_label;
+@synthesize doitmyself_label=_doitmyself_label;
+@synthesize isLiked=_isLiked;
+@synthesize isJoined=_isJoined;
+@synthesize isAdded=_isAdded;
 
 @synthesize shareButton=_shareButton;
 @synthesize actionButtonHolder = _actionButtonHolder;
@@ -256,35 +274,32 @@
         [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     }
     else{
-        UIImageView *like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-        like_icon.frame = CGRectMake(15, 15, 20, 20);
-        [self.likeButtonSection addSubview:like_icon];
-        UILabel *like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
-        [like_label setText:@"Like"];
-        [like_label setBackgroundColor:[UIColor clearColor]];
-        [like_label setFont:[UIFont boldSystemFontOfSize:15]];
-        [like_label setTextColor:[UIColor whiteColor]];
-        [self.likeButtonSection addSubview:like_label];
+        self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+        self.like_icon.frame = CGRectMake(15, 15, 20, 20);
+        [self.likeButtonSection addSubview:self.like_icon];
+        self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
+        [self.like_label setBackgroundColor:[UIColor clearColor]];
+        [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.like_label setTextColor:[UIColor whiteColor]];
+        [self.likeButtonSection addSubview:self.like_label];
         
-        UIImageView *join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-        join_icon.frame = CGRectMake(15, 15, 20, 20);
-        [self.joinButtonSection addSubview:join_icon];
-        UILabel *join_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
-        [join_label setText:@"Join"];
-        [join_label setBackgroundColor:[UIColor clearColor]];
-        [join_label setFont:[UIFont boldSystemFontOfSize:15]];
-        [join_label setTextColor:[UIColor whiteColor]];
-        [self.joinButtonSection addSubview:join_label];
+        self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
+        self.join_icon.frame = CGRectMake(15, 15, 20, 20);
+        [self.joinButtonSection addSubview:self.join_icon];
+        self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
+        [self.join_label setBackgroundColor:[UIColor clearColor]];
+        [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.join_label setTextColor:[UIColor whiteColor]];
+        [self.joinButtonSection addSubview:self.join_label];
         
-        UIImageView *doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-        doitmyself_icon.frame = CGRectMake(10, 15, 20, 20);
-        [self.doitmyselfButtonSection addSubview:doitmyself_icon];
-        UILabel *doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 100, 50)];
-        [doitmyself_label setText:@"Do It Myself"];
-        [doitmyself_label setBackgroundColor:[UIColor clearColor]];
-        [doitmyself_label setFont:[UIFont boldSystemFontOfSize:15]];
-        [doitmyself_label setTextColor:[UIColor whiteColor]];
-        [self.doitmyselfButtonSection addSubview:doitmyself_label];
+        self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+        self.doitmyself_icon.frame = CGRectMake(15, 15, 20, 20);
+        [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+        self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 95, 50)];
+        [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
+        [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.doitmyself_label setTextColor:[UIColor whiteColor]];
+        [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
     }
 }
 
@@ -321,10 +336,6 @@
     [self performSegueWithIdentifier:@"addAndViewComment" sender:self];
 }
 
-- (IBAction)PickButtonClicked:(id)sender {
-    [self performSegueWithIdentifier:@"repin to create new event" sender:self];
-}
-
 - (void)editButtonClicked{
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
 }
@@ -344,11 +355,25 @@
     }
 }
 
+//handle the action: doitmyselfButtonClicked
+- (IBAction)PickButtonClicked:(id)sender {
+    [self performSegueWithIdentifier:@"repin to create new event" sender:self];
+}
+
 //handle the action: joinButtonClicked
 - (IBAction)joinButtonClicked:(UIButton *)sender {
     //send join information to server
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    NSURL *url;
+    if ([self.isJoined isEqualToString:@"0"]) {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        [self.join_label setText:@"Joined"];
+        self.isJoined = @"1"; 
+    } else {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/uninterest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        [self.join_label setText:@"Join"];
+        self.isJoined = @"0";
+    }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
@@ -356,20 +381,14 @@
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            success.delegate=self;
-            [success show];
+            NSLog(@"%@",[NSString stringWithFormat:@"successfully joined."]);
         } else {
-            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            unsuccess.delegate=self;
-            [unsuccess show];
+            NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
         }
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
+        NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
     }];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
@@ -378,7 +397,16 @@
 - (IBAction)likeButtonClicked:(UIButton *)sender {
     //send like information to server
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    NSURL *url;
+    if ([self.isLiked isEqualToString:@"0"]) {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        [self.like_label setText:@"Unlike"];
+        self.isLiked=@"1";
+    } else {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/unlike?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        [self.like_label setText:@"Like"];
+        self.isLiked=@"0";
+    }
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
@@ -386,20 +414,14 @@
         NSError *error;
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@" " message: [NSString stringWithFormat:@"successfully liked. "] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            success.delegate=self;
-            [success show];
+            NSLog(@"%@",[NSString stringWithFormat:@"successfully liked."]);
         } else {
-            UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Interest not uploaded." message: [NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-            unsuccess.delegate=self;
-            [unsuccess show];
+            NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
         }
     }];
     [request setFailedBlock:^{
         NSError *error = [block_request error];
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Some thing went wrong." message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
+        NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description]);
     }];
     [request setRequestMethod:@"GET"];
     [request startAsynchronous];
@@ -534,7 +556,7 @@
         [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d people joined",[self.interestedPeople count]]];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d People Joined",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -784,6 +806,7 @@
     //fetch event info
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
+    NSLog(@"%@",event);
     self.event_title=[event objectForKey:@"title"];
     self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
     self.event_time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
@@ -792,10 +815,30 @@
     self.event_address=[event objectForKey:@"address"];
     self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
     self.creator_name=[event objectForKey:@"creator_name"];
+    self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
+    self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
+    self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
     //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
     // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+    
+    //handle the action button label part
+    if ([self.isLiked isEqualToString:@"0"]) {
+        [self.like_label setText:@"Like"];
+    } else {
+        [self.like_label setText:@"Unlike"];
+    }
+    if ([self.isJoined isEqualToString:@"0"]) {
+        [self.join_label setText:@"Join"];
+    } else {
+        [self.join_label setText:@"Joined"];
+    }
+    if ([self.isAdded isEqualToString:@"0"]) {
+        [self.doitmyself_label setText:@"Do It Myself"];
+    } else {
+        [self.doitmyself_label setText:@"Added"];
+    }
 
     //handle the interest people part
     self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
