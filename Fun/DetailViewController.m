@@ -256,24 +256,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //initial the contentsize of the myScrollView
-    [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y + 50)];
-    
-    //start a new connection, to fetch data from the server (about event detail)
-    NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via];
-    NSLog(@"%@",request_string);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
-    
-    //change the button title based on the BOOL isOwner
-    if (self.isEventOwner) {
-        [self.actionButtonHolder setHidden:YES];
-        self.editButton.frame = CGRectMake(290, 150, 20, 20);
-        [self.editButton setBackgroundImage:[UIImage imageNamed:@"detail-edit-color.png"] forState:UIControlStateNormal];
-        [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //judge whether the user is login? if not, do the login
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"login_auth_token"]) {
+        //if not login, do it
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
+        loginVC.parentVC=self;
+        loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
+<<<<<<< HEAD
         self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
         self.like_icon.frame = CGRectMake(15, 15, 20, 20);        
         self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
@@ -297,6 +291,60 @@
         [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
         [self.doitmyself_label setTextColor:[UIColor whiteColor]];
         
+=======
+        //initial the contentsize of the myScrollView
+        [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y + 50)];
+        
+        //start a new connection, to fetch data from the server (about event detail)
+        NSString *request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via];//self.via
+        
+        
+        if ([defaults objectForKey:@"login_auth_token"]) {
+            request_string=[NSString stringWithFormat:@"%@/events/view?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"]];
+        }
+        
+        
+        NSLog(@"%@",request_string);
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        [connection start];
+        
+        //change the button title based on the BOOL isOwner
+        if (self.isEventOwner) {
+            [self.actionButtonHolder setHidden:YES];
+            self.editButton.frame = CGRectMake(290, 150, 20, 20);
+            [self.editButton setBackgroundImage:[UIImage imageNamed:@"detail-edit-color.png"] forState:UIControlStateNormal];
+            [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else{
+            self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+            self.like_icon.frame = CGRectMake(15, 13, 24, 24);
+            [self.likeButtonSection addSubview:self.like_icon];
+            self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
+            [self.like_label setBackgroundColor:[UIColor clearColor]];
+            [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.like_label setTextColor:[UIColor whiteColor]];
+            [self.likeButtonSection addSubview:self.like_label];
+            
+            self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
+            self.join_icon.frame = CGRectMake(10, 13, 24, 24);
+            [self.joinButtonSection addSubview:self.join_icon];
+            self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
+            [self.join_label setBackgroundColor:[UIColor clearColor]];
+            [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.join_label setTextColor:[UIColor whiteColor]];
+            [self.joinButtonSection addSubview:self.join_label];
+            
+            self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);
+            [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+            self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
+            [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
+            [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.doitmyself_label setTextColor:[UIColor whiteColor]];
+            [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
+        }
+>>>>>>> fixed explore bug
     }
 }
 
