@@ -95,6 +95,7 @@
             self.lastReceivedJson=json;
             self.contacts=[[InviteFriendObject generateProfileInfoElementArrayFromJson:json] mutableCopy];
             NSLog(@"%d",[self.contacts count]);
+            [self getTheDividedContacts];
             [self.tableView reloadData];
         }
     }];
@@ -111,7 +112,7 @@
 
     //set the contacts and divided contacts
     
-    [self getTheDividedContacts];
+    
     
 }
 
@@ -202,11 +203,11 @@
 {
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
         
-        static NSString *CellIdentifier = @"InviteFriendTableViewCell";
+        static NSString *CellIdentifier = @"InviteTableViewCell";
         
         InviteFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendTableViewCell" owner:nil options:nil];
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"InviteTableViewCell" owner:nil options:nil];
 
             for (UIView *view in views) {
                 if([view isKindOfClass:[UITableViewCell class]])
@@ -262,11 +263,11 @@
     }
     //else: the tabel view is used to show the ordinary address book information
     else{
-        static NSString *CellIdentifier = @"InviteFriendTableViewCell";
+        static NSString *CellIdentifier = @"InviteTableViewCell";
         
         InviteFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendTableViewCell" owner:nil options:nil];
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"InviteTableViewCell" owner:nil options:nil];
             
             for (UIView *view in views) {
                 if([view isKindOfClass:[UITableViewCell class]])
