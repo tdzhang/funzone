@@ -169,10 +169,7 @@
     }
 }
 */
-- (IBAction)startInvite:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate StartInviteToServer];
-}
+
 
 #pragma mark - implement self defined internal class method
 -(void)getTheDividedContacts{

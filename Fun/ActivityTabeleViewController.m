@@ -198,18 +198,21 @@
 {
     activityElementObject* element=[self.activities objectAtIndex:indexPath.row];
     self.tapped_element=element;
-    if ([element.type isEqualToString:@"2"]) {
+    if ([element.type isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event// go to that event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
-    else if([element.type isEqualToString:@"102"]){
+    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
         [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
         
     }
-    else if([element.type isEqualToString:@"4"]){
+    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+    }
+    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
+        [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
     }
     
 }
@@ -225,6 +228,12 @@
     else if([segue.identifier isEqualToString:@"seeOtherProfile"]) {
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tapped_element.user_id;
+    }
+    else if ([segue.identifier isEqualToString:@"seeOtherEvent"]) {
+        //if it's the segue to the view detail part, do this:
+        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+        [detailVC preSetTheEventID:self.tapped_element.event_id andSetTheSharedEventID:self.tapped_element.shared_event_id andSetIsOwner:NO];
+        [detailVC preSetServerLogViaParameter:VIA_ACTIVITY];
     }
 }
 

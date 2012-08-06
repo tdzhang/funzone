@@ -28,7 +28,7 @@
 -(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person;
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person;
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray*)lastReceivedJson;
--(void)StartInviteToServer;
+
 
 @end
 

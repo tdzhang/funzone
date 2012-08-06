@@ -161,6 +161,7 @@
 #define VIA_WECHAT 3
 #define VIA_EMAIL 4
 #define VIA_SMS 5
+#define VIA_APP 6
 
 
 //used to map between the activity type and its int value
@@ -172,11 +173,13 @@
 #define PIN_EVENT 5          // via
 #define VIEW_MAP 6           // separate API, via
 #define VIEW_COMMENTS 7      // separate API, via
+#define LIKE_EVENT 8           //like
 
 #define CREATE_EVENT 11
 #define INVITE_FRIENDS 12    // separate API, channel
 #define EDIT_EVENT 13
 #define DELETE_EVENT 14
+#define INVITED_TO_EVENT 15 //
 
 #define SHOW_EXPLORE 21
 #define SHOW_FEEDS 22

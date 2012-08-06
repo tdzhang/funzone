@@ -337,6 +337,56 @@
 }
 
 #pragma mark - create/delete/edite event to server
+-(void)startInviteFriendWithEventID:(NSString*)event_id withSharedEventID:(NSString*)shared_event_id{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/invite?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,event_id,shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    NSLog(@"request:%@",url);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        //NSString *responseString = [block_request responseString];
+        //NSLog(@"%@",responseString);
+        NSError *error;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }
+        /*
+         UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully deleted." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+         success.delegate=self;
+         [success show];
+         */
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
+    }];
+    
+    NSString *user_ids=@"";
+    for (NSString* key in [self.invitedFriend allKeys]) {
+        InviteFriendObject* person =[self.invitedFriend objectForKey:key];
+        if ([user_ids isEqualToString:@""]) {
+            user_ids=[user_ids stringByAppendingFormat:@"%@",person.user_id];
+        } else {
+            user_ids=[user_ids stringByAppendingFormat:@",%@",person.user_id];
+        }
+    }
+    [request setPostValue:user_ids forKey:@"user_ids"];
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
+    
+    //go to my parc
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+}
+
 - (IBAction)deleteEventButton:(id)sender {
     //after delete, need to return to myparc
     //create event
@@ -410,6 +460,12 @@
                 UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
+            }
+            else{
+                //when success, start invite people;
+                if ([self.invitedFriend count]>0) {
+                    [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
+                }
             }
         }];
         [request setFailedBlock:^{
@@ -495,6 +551,13 @@
                 UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
                 [notsuccess show];
+            }
+            else{
+                //when success, start invite people;
+                //when success, start invite people;
+                if ([self.invitedFriend count]>0) {
+                    [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
+                }
             }
             //        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Congratulations!" message:@"The event has been successfully uploaded to our server." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             //        success.delegate=self;
@@ -1078,12 +1141,6 @@
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{
     self.invitedFriendLastReceivedJson=[lastReceivedJson copy];
     
-}
-
--(void)StartInviteToServer{
-    //start to  invite friend;
-    //self.invitedFriend;
-#warning need connection to server: invite all the friends;
 }
 
 @end
