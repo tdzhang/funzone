@@ -217,7 +217,45 @@
         }
         InviteFriendObject* friend=[self.searchResultContacts objectAtIndex:indexPath.row];
         [cell.user_name_label setText:friend.user_name];
-        //------------------------------->set image here
+        ////////////////////////
+        NSURL *url=[NSURL URLWithString:friend.user_pic];
+        if (![Cache isURLCached:url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"smile_64.png"];
+                    imageData=UIImagePNGRepresentation(image);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [cell.user_profile_imageview setImage:image];
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [cell.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [cell.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+            });
+        }
+        ///////////////////////
         
         //[cell setSelected:YES];
         return cell;
@@ -240,10 +278,47 @@
         // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
         InviteFriendObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
 
-
         [cell.user_name_label setText:contact.user_name];
         
-        
+        ////////////////////////
+        NSURL *url=[NSURL URLWithString:contact.user_pic];
+        if (![Cache isURLCached:url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"smile_64.png"];
+                    imageData=UIImagePNGRepresentation(image);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [cell.user_profile_imageview setImage:image];
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            [cell.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [cell.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+            });
+        }
+        ///////////////////////
         if ([self.alreadySelectedContacts objectForKey:contact.user_name]) {
             //[cell setSelected:YES animated:YES];
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
@@ -297,9 +372,10 @@
 shouldReloadTableForSearchString:(NSString *)searchString
 {
     [self.searchResultContacts removeAllObjects];
+    searchString=[searchString uppercaseString];
     for (InviteFriendObject* contact in self.dividedContacts) {
         NSString *nameText=contact.user_name;
-        
+        nameText=[nameText uppercaseString];
         NSString *keyword=[searchString stringByReplacingOccurrencesOfString:@"," withString:@" "];
         NSArray* keywords=[keyword componentsSeparatedByString:@" "];
         BOOL flag = YES;
@@ -329,34 +405,20 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
+    
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
-        if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-            UserContactObject *person = [self.searchResultContacts objectAtIndex:indexPath.row];
+        if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
+            InviteFriendObject *person = [self.searchResultContacts objectAtIndex:indexPath.row];
             
             NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
             //get the key value from the name of the person
-            NSString *nameText=@"";
-            if (person.firstName) {
-                nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
-                if (person.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
-                }
-            }
-            else if(person.lastName){
-                nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
-            }
+            NSString *nameText=person.user_name;
             //add the object in the alreadySelected Dictionary
             [alreadySelected setObject:person forKey:nameText];
             self.alreadySelectedContacts = alreadySelected;
             //activate the delegate method
-            
-            if ([self.preDefinedMode isEqualToString:@"email"]) {
-                [self.delegate AddContactInformtionToPeopleList:person];
-            } else if([self.preDefinedMode isEqualToString:@"message"]) {
-                [self.delegate AddMessageContactInformtionToPeopleList:person];
-            }
-            
+            [self.delegate AddContactInformtionToPeopleList:person];
+           
             [self.searchDisplayController setActive:NO];
             //after change, update the table view
             [self getTheDividedContacts];
@@ -365,62 +427,38 @@ shouldReloadTableForSearchString:(NSString *)searchString
         
     }
     else {
-        if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-            UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+        if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
+            InviteFriendObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
             
             NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
             //get the key value from the name of the person
-            NSString *nameText=@"";
-            if (person.firstName) {
-                nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
-                if (person.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
-                }
-            }
-            else if(person.lastName){
-                nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
-            }
+            NSString *nameText=person.user_name;
             //add the object in the alreadySelected Dictionary
             [alreadySelected setObject:person forKey:nameText];
             self.alreadySelectedContacts = alreadySelected;
             
             //activate the delegate method
-            if ([self.preDefinedMode isEqualToString:@"email"]) {
-                [self.delegate AddContactInformtionToPeopleList:person];
-            } else if([self.preDefinedMode isEqualToString:@"message"]) {
-                [self.delegate AddMessageContactInformtionToPeopleList:person];
-            }
+            [self.delegate AddContactInformtionToPeopleList:person];
+
         }
     }
-     */
+     
 }
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*
-    if ([self.delegate conformsToProtocol:@protocol(FeedBackToCreateActivityChange)]) {
-        UserContactObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+    
+    if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
+        InviteFriendObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
         
         NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
         //get the key value from the name of the person
-        NSString *nameText=@"";
-        if (person.firstName) {
-            nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
-            if (person.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
-            }
-        }
-        else if(person.lastName){
-            nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
-        }
+        NSString *nameText=person.user_name;
         //add the object in the alreadySelected Dictionary
         [alreadySelected removeObjectForKey:nameText];
         self.alreadySelectedContacts = alreadySelected;
         //activate the delegate method
-        if ([self.preDefinedMode isEqualToString:@"email"]) {
-            [self.delegate DeleteContactInformtionToPeopleList:person];
-        } else if([self.preDefinedMode isEqualToString:@"message"]) {
-            [self.delegate DeleteMessageContactInformtionToPeopleList:person];
-        }
+        [self.delegate DeleteContactInformtionToPeopleList:person];
+
     }
-     */
+     
 }
 @end
