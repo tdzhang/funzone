@@ -182,12 +182,13 @@
     [self.eventImageView setClipsToBounds:YES];
     [self.myScrollView addSubview:self.eventImageView];
     
-    self.creatorProfileView = [[UIImageView alloc] initWithFrame:CGRectMake(15, self.eventImageView.frame.origin.y+self.eventImageView.frame.size.height+5, 35, 35)];
+    self.creatorProfileView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventImageView.frame.origin.y+self.eventImageView.frame.size.height+10, 35, 35)];
     [self.myScrollView addSubview:self.creatorProfileView];
     
     self.creatorNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorProfileView.frame.origin.x+self.creatorProfileView.frame.size.width+5, self.creatorProfileView.frame.origin.y, 150, 35)];
     [self.creatorNameLabel setTextAlignment:UITextAlignmentCenter];
-    [self.creatorNameLabel setFont:[UIFont boldSystemFontOfSize:13]];
+    [self.creatorNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:51/255 blue:102/255 alpha:1]];
     [self.myScrollView addSubview:self.creatorNameLabel];
     
     self.creatorProfileButton = [[UIButton alloc] init];
@@ -889,7 +890,7 @@
         });
     }
     [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
-    CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:150 lineBreakMode:UILineBreakModeClip];
+    CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
     CGRect contributor_frame = self.creatorNameLabel.frame;
     contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
     self.creatorNameLabel.frame = contributor_frame;
