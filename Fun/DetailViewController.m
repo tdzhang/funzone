@@ -152,6 +152,18 @@
     FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
     self.delegate=(id)appDelegate;
     
+    //--------Navigation bar and Back button--------//
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
+    
+    self.shareButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    
     //initiate views
     self.eventImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DVC_EVENT_IMG_WIDTH, DVC_EVENT_IMG_HEIGHT)];
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -190,17 +202,7 @@
     [self setInterestOrInviteButton:nil];
     [self setPickOrEditButton:nil];
     
-    //--------Navigation bar and Back button--------//
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBarHidden = NO;
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
-                                   target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-    [self.navigationItem setBackBarButtonItem:backButton];
-    
-    self.shareButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+   
 
     [self setShareButton:nil];
     [super viewDidUnload];
