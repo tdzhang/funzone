@@ -27,6 +27,7 @@
 
 -(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person;
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person;
+-(void)UpdateLastReceivedInviteFriendJson:(NSArray*)lastReceivedJson;
 
 @end
 
@@ -34,5 +35,5 @@
 
 @property(nonatomic,strong) NSDictionary *alreadySelectedContacts;
 @property(nonatomic,strong) id<FeedBackInviteFriendChange>delegate;
-
+@property(nonatomic,strong)NSArray *lastReceivedJson;
 @end

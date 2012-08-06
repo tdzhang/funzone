@@ -16,7 +16,6 @@
 @property(nonatomic,strong)NSArray *contacts;
 @property(nonatomic,strong)NSArray *dividedContacts;//divided it into select and not select 2 parts
 @property(nonatomic,strong)NSMutableArray *searchResultContacts; //used to contain Search Bar search result
-@property(nonatomic,strong)NSArray *lastReceivedJson;
 -(void)getTheDividedContacts;//using contacts and alreadySelectedContacts to generate this contact
 @end
 
@@ -77,10 +76,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //use the last result first;
+    self.contacts=[[InviteFriendObject generateProfileInfoElementArrayFromJson:self.lastReceivedJson] mutableCopy];
+    [self getTheDividedContacts];
+    [self.tableView reloadData];
+    NSLog(@"%d",[self.contacts count]);
     //query the user profile information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-
+    
     NSLog(@"request following:%@",url);
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
@@ -92,7 +96,8 @@
         NSArray *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
         if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
             //if there is a difference, start to fetch data
-            self.lastReceivedJson=json;
+            self.lastReceivedJson=[json copy];
+            [self.delegate UpdateLastReceivedInviteFriendJson:[json copy]];
             self.contacts=[[InviteFriendObject generateProfileInfoElementArrayFromJson:json] mutableCopy];
             NSLog(@"%d",[self.contacts count]);
             [self getTheDividedContacts];
@@ -323,11 +328,19 @@
         if ([self.alreadySelectedContacts objectForKey:contact.user_name]) {
             //[cell setSelected:YES animated:YES];
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
+        else{
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
         return cell;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -440,6 +453,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             //activate the delegate method
             [self.delegate AddContactInformtionToPeopleList:person];
+            
+            [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
 
         }
     }

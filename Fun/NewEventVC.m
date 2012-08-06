@@ -65,6 +65,7 @@
 
 //used to invite inner friend(following)
 @property (nonatomic,strong) NSMutableDictionary *invitedFriend;
+@property (nonatomic,strong) NSArray* invitedFriendLastReceivedJson;
 
 
 @end
@@ -125,6 +126,7 @@
 
 //used to invite inner friend(following)
 @synthesize invitedFriend=_invitedFriend;
+@synthesize invitedFriendLastReceivedJson=_invitedFriendLastReceivedJson;
 
 
 #pragma mark - self defined synthesize
@@ -134,6 +136,13 @@
         _invitedFriend=[NSMutableDictionary dictionary];
     }
     return _invitedFriend;
+}
+
+-(NSArray *)invitedFriendLastReceivedJson{
+    if (!_invitedFriendLastReceivedJson) {
+        _invitedFriendLastReceivedJson=[NSArray array];
+    }
+    return _invitedFriendLastReceivedJson;
 }
 
 //if user have choosed a new image, then createEvent_image return the image on screen
@@ -673,6 +682,7 @@
         peopleController = segue.destinationViewController;
         peopleController.delegate=self;
         peopleController.alreadySelectedContacts=[self.invitedFriend copy];
+        peopleController.lastReceivedJson=self.invitedFriendLastReceivedJson;
     }
     NSLog(@"%@",segue.identifier);
 }
@@ -1065,7 +1075,10 @@
     [self.invitedFriend removeObjectForKey:key];
 }
 
-
+-(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{
+    self.invitedFriendLastReceivedJson=[lastReceivedJson copy];
+    
+}
 
 
 @end
