@@ -63,6 +63,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
+//used to invite inner friend(following)
+@property (nonatomic,strong) NSMutableDictionary *invitedFriend;
+
 
 @end
 
@@ -1029,6 +1032,26 @@
      NSLog(@"%d:%d:%d weekday%d  =>%d:%d",year,month,day,weekday,hour,minute);
      */
 }
+
+#pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
+////////////////////////////////////////////////
+//implement the method for the adding or delete contacts that will be go out with
+-(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString * key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people setObject:(id)person forKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
+-(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
+    NSMutableDictionary *people=[self.peopleGoOutWith mutableCopy];
+    NSString *key=[NSString stringWithFormat:@"%@, %@",person.firstName,person.lastName];
+    [people removeObjectForKey:key];
+    self.peopleGoOutWith = [people copy];
+}
+
+
 
 
 @end
