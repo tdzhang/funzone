@@ -194,17 +194,16 @@
     
     //只有第二次启动的时候，user location 才会有值, make the view show user location
     MKMapView *mapView=self.myMapView;
-    //CLLocation *userLoc = mapView.userLocation.location;
-    //CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
-    /*
-    if (userCoordinate.latitude>0.001) {
-        [self showUserCurrentLocation];
-        if (self.predefinedSeachingWords) {
-            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc withEventType:self.preDefinedEventType];
-        }
-        
-    }
-     */
+//    CLLocation *userLoc = mapView.userLocation.location;
+//    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
+    
+//    if (userCoordinate.latitude>0.001) {
+//        [self showUserCurrentLocation];
+//        if (self.predefinedSeachingWords) {
+//            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
+//        }
+//    }
+     
     
     //if the predefined annotation, then show it (instead of current location)
     if(self.predefinedAnnotation&&(self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)){

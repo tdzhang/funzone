@@ -723,7 +723,7 @@
             //pass in the event type to the destination(8 types)
             [mapViewC setPreDefinedEventType:self.eventType];
             if (![self.textFieldEventTitle.text isEqualToString:@""]) {
-                [mapViewC setPredefinedSeachingWords:self.textFieldEventTitle.text];
+                [mapViewC setPredefinedSeachingWords:self.eventType];
             }
             else {
                 [mapViewC setPredefinedSeachingWords:@""];
