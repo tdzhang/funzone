@@ -210,7 +210,7 @@
         annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
     }
     [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region];
-    [self.myTableView setContentOffset:CGPointZero animated:YES];
+    //[self.myTableView setContentOffset:CGPointZero animated:YES];
 }
 
 @end

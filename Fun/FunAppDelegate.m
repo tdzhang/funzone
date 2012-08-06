@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
     //push notification register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound |UIRemoteNotificationTypeAlert)];
     
@@ -52,6 +53,9 @@
     [[self.thisTabBarController.tabBar.items objectAtIndex:3] setFinishedSelectedImage: [UIImage imageNamed:@"ParcOrange.png"] withFinishedUnselectedImage: [UIImage imageNamed: @"ParcGrey.png"]];
     self.window.rootViewController = self.thisTabBarController;
     
+    //set the default start page
+    [self.thisTabBarController setSelectedIndex:1];
+    
     return YES;
 }
 							
@@ -71,7 +75,6 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [self.thisTabBarController setSelectedIndex:1];
     [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
 }
 

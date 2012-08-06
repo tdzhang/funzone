@@ -613,10 +613,22 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 #pragma mark - implemetn the FunTableViewContainMapviewTVCDelegate protocal
 -(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region{
-    self.annotation=annotation;
-    [self setFeedBackAnnotation:annotation];
+
+    
+    
+    //add annotation
+
+    [self setAnnotation:annotation];
     [self.myMapView addAnnotation:annotation];
     [self.myMapView setRegion:region animated:YES];
+
+    
+    //set the Search Bar and give up the Firstresponsder
+    //[self.mySearchBar setText:annotation.title];
+    
+    
+    //set the feedback annotation location information
+    [self setFeedBackAnnotation:annotation];
 }
 
 
