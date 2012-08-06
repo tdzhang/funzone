@@ -1325,11 +1325,11 @@ Find us @OrangeParc.com</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" id="ODl-hu-66N">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" id="ODl-hu-66N">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
-                            <view alpha="0.60000000000000009" contentMode="scaleToFill" id="tq2-iD-Cwq">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" id="tq2-iD-Cwq">
                                 <rect key="frame" x="0.0" y="366" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1348,6 +1348,9 @@ Find us @OrangeParc.com</string>
                                                 <state key="highlighted">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="likeButtonClicked:" destination="BPi-pg-2E0" eventType="touchUpInside" id="Kvm-6R-xhn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1368,7 +1371,7 @@ Find us @OrangeParc.com</string>
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="interestedButtonClicked:" destination="BPi-pg-2E0" eventType="touchUpInside" id="qmH-Sg-PG0"/>
+                                                    <action selector="joinButtonClicked:" destination="BPi-pg-2E0" eventType="touchUpInside" id="Qqm-tS-VT7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
