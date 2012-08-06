@@ -1080,5 +1080,10 @@
     
 }
 
+-(void)StartInviteToServer{
+    //start to  invite friend;
+    //self.invitedFriend;
+#warning need connection to server: invite all the friends;
+}
 
 @end
