@@ -116,18 +116,19 @@
 {
     if (indexPath.section == 0) {
     }
-    else if (indexPath.section == 1){
-        if (indexPath.row == 1) {
+    else if (indexPath.section == 2){
+        if (indexPath.row == 0) {
             //like use on face book(start to generate the facebook like  Request)
             [self likeUsOnFaceBook];
         }
     }
     else if (indexPath.section ==2){
-        if (indexPath.row == 2) {
+        /*if (indexPath.row == 2) {
             UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Do you want to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
             inputEmptyError.delegate=self;
             [inputEmptyError show];
         }
+         */
     }
     
 }
