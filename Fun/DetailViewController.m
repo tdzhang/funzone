@@ -14,24 +14,24 @@
 
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
-@property (weak, nonatomic) IBOutlet UIView *actionButtonHolder;
+@property (weak,nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (weak,nonatomic) IBOutlet UIBarButtonItem *shareButton;
+@property (weak,nonatomic) IBOutlet UIView *actionButtonHolder;
 @property (nonatomic,strong) NSMutableData *data;
 
-@property (nonatomic, strong) UIImageView *eventImageView;
-@property (nonatomic, strong) UIImageView *creatorProfileView;
-@property (nonatomic, strong) UILabel *creatorNameLabel;
-@property (nonatomic, strong) UIButton *creatorProfileButton;
-@property (nonatomic, strong) UILabel *eventTitleLabel;
-@property (nonatomic, strong) UIView *timeSectionView;
-@property (nonatomic, strong) UIView *locationSectionView;
-@property (nonatomic, strong) UIView *interestedPeopleLabelView;
-@property (nonatomic, strong) UIView *commentSectionView;
-@property (weak, nonatomic) IBOutlet UIView *likeButtonSection;
-@property (weak, nonatomic) IBOutlet UIView *joinButtonSection;
-@property (weak, nonatomic) IBOutlet UIView *doitmyselfButtonSection;
-@property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic,strong) UIImageView *eventImageView;
+@property (nonatomic,strong) UIImageView *creatorProfileView;
+@property (nonatomic,strong) UILabel *creatorNameLabel;
+@property (nonatomic,strong) UIButton *creatorProfileButton;
+@property (nonatomic,strong) UILabel *eventTitleLabel;
+@property (nonatomic,strong) UIView *timeSectionView;
+@property (nonatomic,strong) UIView *locationSectionView;
+@property (nonatomic,strong) UIView *interestedPeopleLabelView;
+@property (nonatomic,strong) UIView *commentSectionView;
+@property (nonatomic,strong) UIButton *editButton;
+@property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
+@property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
+@property (weak,nonatomic) IBOutlet UIView *doitmyselfButtonSection;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -49,6 +49,7 @@
 @property (nonatomic,strong) NSURL *creator_img_url;
 @property (nonatomic,strong) NSString *creator_name;
 @property (nonatomic,strong) NSString *event_address;
+@property (nonatomic,strong) NSString *tap_user_id;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
@@ -95,6 +96,7 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
 @synthesize interestedPeopleLabelView = _interestedPeopleLabelView;
+@synthesize tap_user_id=_tap_user_id;
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
@@ -526,6 +528,10 @@
     if ([self.interestedPeople count]>0) {
         self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.interestedPeopleLabelView];
+        //add gesture(tap)
+        self.interestedPeopleLabelView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBlock:)];
+        [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         [numOfInterests setText:[NSString stringWithFormat:@"%d people joined",[self.interestedPeople count]]];
@@ -744,6 +750,10 @@
     else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.creator_id;
+    }
+    else if([segue.identifier isEqualToString:@"ViewJoinedPeopleProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tap_user_id;
     }
 }
 
@@ -1137,6 +1147,23 @@
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
     [self dismissModalViewControllerAnimated:YES];
+}
+
+//handle when user tap a certain block view
+-(void)tapBlock:(UITapGestureRecognizer *)tapGR {
+    if ([self.interestedPeople count]==0) {
+        return;
+    }
+    CGPoint touchPoint=[tapGR locationInView:[self interestedPeopleLabelView]];
+    float touchPointY=touchPoint.y;
+    float touchPointX=touchPoint.x;
+    //get the index of the touched block view
+    int index=(touchPointX-5)/40;
+    ProfileInfoElement* tapped_element=[self.interestedPeople objectAtIndex:index];
+    self.tap_user_id=tapped_element.user_id;
+    if(touchPointY>25&&index<7){
+        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+    }
 }
 
 @end
