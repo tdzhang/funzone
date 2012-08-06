@@ -266,7 +266,6 @@
 		9256611115C8FB4B00BED665 /* ActivityOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256610915C8FB4B00BED665 /* ActivityOrange.png */; };
 		9256611815C8FD4A00BED665 /* AddOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256611615C8FD4A00BED665 /* AddOrange.png */; };
 		9256611915C8FD4A00BED665 /* AddGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256611715C8FD4A00BED665 /* AddGrey.png */; };
-		9284699815CA786600556004 /* detail-edit-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9284699715CA786600556004 /* detail-edit-color.png */; };
 		9284699D15CA7A5700556004 /* detail-invite-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9284699C15CA7A5700556004 /* detail-invite-color.png */; };
 		9298265F15A938D6003673CF /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9298265215A938D6003673CF /* FBDialog.bundle */; };
 		9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9298265815A938D6003673CF /* libfacebook_ios_sdk.a */; };
@@ -1587,7 +1586,6 @@
 				46D2BCC815CA33F400E14FE7 /* iphone-icon-orange-57.png in Resources */,
 				9237B1A615CA469300F8D939 /* current_location_icon.png in Resources */,
 				4661DAED15CA75E100E898A7 /* detail-edit-color.png in Resources */,
-				9284699815CA786600556004 /* detail-edit-color.png in Resources */,
 				9284699D15CA7A5700556004 /* detail-invite-color.png in Resources */,
 				462B842D15CB10EB0009F816 /* administrator_40.png in Resources */,
 				462B843015CB111D0009F816 /* administrator_30.png in Resources */,
