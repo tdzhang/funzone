@@ -528,7 +528,10 @@
         [request startAsynchronous];
         
         //go to the next page
-        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        [funAppdelegate.thisTabBarController setSelectedIndex:0];
     }
     //for user create/repin a event
     else {
@@ -690,7 +693,10 @@
         [request setRequestMethod:@"POST"];
         [request startAsynchronous];
         //go to the next page
-        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        [funAppdelegate.thisTabBarController setSelectedIndex:0];
     }
 }
 
