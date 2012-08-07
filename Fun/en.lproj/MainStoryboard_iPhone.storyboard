@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -2047,17 +2047,9 @@ Find us @OrangeParc.com</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="0Fn-J4-Xv2">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="GBr-L9-MMr" id="1tG-RS-kEV"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Tcp-WP-TRr">
-                                <rect key="frame" x="0.0" y="66" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -2072,19 +2064,7 @@ Find us @OrangeParc.com</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nQl-lg-tHN"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="lo5-6s-IKw" id="X92-Zd-4bD"/>
-                    </connections>
                 </tableViewController>
-                <searchDisplayController id="lo5-6s-IKw">
-                    <connections>
-                        <outlet property="delegate" destination="GBr-L9-MMr" id="8X1-73-krW"/>
-                        <outlet property="searchBar" destination="0Fn-J4-Xv2" id="se7-7d-s53"/>
-                        <outlet property="searchContentsController" destination="GBr-L9-MMr" id="1ZD-6J-jI1"/>
-                        <outlet property="searchResultsDataSource" destination="GBr-L9-MMr" id="m8O-nm-DBB"/>
-                        <outlet property="searchResultsDelegate" destination="GBr-L9-MMr" id="PT8-7J-Ogg"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3389" y="568"/>
         </scene>
@@ -2097,17 +2077,9 @@ Find us @OrangeParc.com</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="tlx-oq-1sk">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="9i7-54-eHW" id="JKZ-XU-fum"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="this is not in use" rowHeight="48" id="iL9-lK-K0U">
-                                <rect key="frame" x="0.0" y="66" width="320" height="48"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
@@ -2122,19 +2094,7 @@ Find us @OrangeParc.com</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="LMZ-fV-Z5u"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="660-an-nVb" id="iv3-af-S6F"/>
-                    </connections>
                 </tableViewController>
-                <searchDisplayController id="660-an-nVb">
-                    <connections>
-                        <outlet property="delegate" destination="9i7-54-eHW" id="xQR-mX-acm"/>
-                        <outlet property="searchBar" destination="tlx-oq-1sk" id="tPA-JS-qlj"/>
-                        <outlet property="searchContentsController" destination="9i7-54-eHW" id="ibH-a7-uVF"/>
-                        <outlet property="searchResultsDataSource" destination="9i7-54-eHW" id="WZD-nq-rKe"/>
-                        <outlet property="searchResultsDelegate" destination="9i7-54-eHW" id="Xne-Xy-gCQ"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4504" y="-486"/>
         </scene>
@@ -3141,17 +3101,9 @@ Find us @OrangeParc.com</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="0UQ-HB-AfJ">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="IKj-TI-dFE" id="2Ie-vy-K8j"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="NfN-c4-ddN">
-                                <rect key="frame" x="0.0" y="66" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -3166,19 +3118,7 @@ Find us @OrangeParc.com</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3iG-as-FTI"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="lo5-6s-IKw" id="bRx-Cl-0n9"/>
-                    </connections>
                 </tableViewController>
-                <searchDisplayController id="09t-KF-Sc2">
-                    <connections>
-                        <outlet property="delegate" destination="IKj-TI-dFE" id="X7l-wj-ec6"/>
-                        <outlet property="searchBar" destination="0UQ-HB-AfJ" id="X5s-3E-KoL"/>
-                        <outlet property="searchContentsController" destination="IKj-TI-dFE" id="TAM-yr-vWa"/>
-                        <outlet property="searchResultsDataSource" destination="IKj-TI-dFE" id="Xo8-6b-NgG"/>
-                        <outlet property="searchResultsDelegate" destination="IKj-TI-dFE" id="zBm-rI-weL"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3525" y="4033"/>
         </scene>
@@ -3225,7 +3165,7 @@ Find us @OrangeParc.com</string>
         <image name="detail-interested-gray.png" width="40" height="40"/>
         <image name="detail-pick-color.png" width="40" height="40"/>
         <image name="detail-share-color.png" width="40" height="40"/>
-        <image name="detailButton.png" width="11" height="15"/>
+        <image name="detailButton.png" width="270" height="444"/>
         <image name="event-dashed-border.png" width="288" height="108"/>
         <image name="event-imageborder.png" width="608" height="291"/>
         <image name="event-imageholder.png" width="589" height="271"/>
