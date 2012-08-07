@@ -30,6 +30,7 @@
 @property (nonatomic,strong) UIView *likedPeopleLabelView;
 @property (nonatomic,strong) UIView *commentSectionView;
 @property (nonatomic,strong) UIView *descriptionSectionView;
+@property (nonatomic,strong) UIView *invitedPeopleSectionView;
 @property (nonatomic,strong) UIButton *editButton;
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
@@ -86,6 +87,7 @@
 @synthesize locationSectionView=_locationSectionView;
 @synthesize commentSectionView=_commentSectionView;
 @synthesize descriptionSectionView=_descriptionSectionView;
+@synthesize invitedPeopleSectionView=_invitedPeopleSectionView;
 @synthesize likeButtonSection = _likeButtonSection;
 @synthesize joinButtonSection=_joinButtonSection;
 @synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
@@ -605,9 +607,9 @@
     int height;
     if ([self.likedPeople count]==0) {
         if ([self.description_content.text isEqualToString:@""]) {
-            height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+15;
+            height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+10;
         } else {
-            height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+15;
+            height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+10;
         }
     } else {
         height = self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
@@ -690,9 +692,91 @@
     
     int height;
     if ([self.description_content.text isEqualToString:@""]) {
-        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
     } else {
-        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
+    }
+    
+    if ([self.likedPeople count]>0) {
+        self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
+        [self.myScrollView addSubview:self.likedPeopleLabelView];
+        //add gesture(tap)
+        self.likedPeopleLabelView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLikeBlock:)];
+        [self.likedPeopleLabelView addGestureRecognizer:tapGR];
+        [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        if ([self.likedPeople count] == 1) {
+            [numOflikes setText:[NSString stringWithFormat:@"1 Like"]];
+        } else {
+            [numOflikes setText:[NSString stringWithFormat:@"%d Likes",[self.likedPeople count]]];
+        }
+        [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
+        [numOflikes setTextColor:[UIColor darkGrayColor]];
+        [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [self.likedPeopleLabelView addSubview:numOflikes];
+        //[self.garbageCollection addObject:numOfInterests];
+        
+        int x_position_photo=5;
+        for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
+            NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
+            if (![Cache isURLCached:backGroundImageUrl]) {
+                //using high priority queue to fetch the image
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                    //get the image data
+                    NSData * imageData = nil;
+                    imageData = [[NSData alloc] initWithContentsOfURL: backGroundImageUrl];
+                    if (imageData == nil ){
+                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                        //NSLog(@"downloaded %@ error, using a default image",url);
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                        imageData=UIImagePNGRepresentation(image);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                    else {
+                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                        //NSLog(@"downloaded %@",url);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                dispatch_async( dispatch_get_main_queue(),^{
+                    userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
+                });
+            }
+            [self.likedPeopleLabelView addSubview:userImageView];
+            x_position_photo+=38;
+        }
+    }
+}
+
+//handle invited people section
+-(void)handleInvitedPeoplePart{
+    if (self.garbageCollection) {
+        for (UIView* view in self.garbageCollection) {
+            [view removeFromSuperview];
+        }
+        [self.garbageCollection removeAllObjects];
+    }
+    self.garbageCollection=[NSMutableArray array];
+    int height;
+    if ([self.description_content.text isEqualToString:@""]) {
+        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
+    } else {
+        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
     }
     
     if ([self.likedPeople count]>0) {
@@ -775,12 +859,12 @@
     if ([self.interestedPeople count] == 0) {
         if ([self.likedPeople count] == 0) {
             if ([self.description_content.text isEqualToString:@""]) {
-                height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+                height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
             } else {
-                height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+                height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
             }
         } else {
-            height=self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 15;
+            height=self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
         }        
     } else {
         height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
@@ -996,7 +1080,7 @@
     self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
     self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
     self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-    NSString *description=[NSString stringWithFormat:@"%@",[event objectForKey:@"description"]];
+    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"";
     // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
     // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
@@ -1130,6 +1214,7 @@
         });
     }
     [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
+    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:0/255.0 blue:80/255.0 alpha:1]];
     CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
     CGRect contributor_frame = self.creatorNameLabel.frame;
     contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
@@ -1203,6 +1288,7 @@
     self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 290, 50)];
     [self.description_content setText:description];
     [self.description_content setFont:[UIFont systemFontOfSize:13]];
+    [self.description_content setTextColor:[UIColor colorWithRed:120/255.0 green:120/255.0 blue:120/255.0 alpha:1]];
     self.description_content.lineBreakMode = UILineBreakModeWordWrap;
     self.description_content.numberOfLines = 0;
     CGSize maximumLabelSize_description = CGSizeMake(290,9999);    
@@ -1211,8 +1297,8 @@
     newFrame_description.size.height = expectedLabelSize_description.height;
     self.description_content.frame = newFrame_description;
     UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
-    [description_header setText:@"Description:"];
-    [description_header setFont:[UIFont boldSystemFontOfSize:13]];
+    [description_header setText:@"Description"];
+    [description_header setFont:[UIFont boldSystemFontOfSize:14]];
     [description_header setTextColor:[UIColor darkGrayColor]];
     self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
     [self.descriptionSectionView addSubview:description_header];
