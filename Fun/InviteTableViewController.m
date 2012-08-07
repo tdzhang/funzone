@@ -25,6 +25,7 @@
 @synthesize alreadySelectedContacts=_alreadySelectedContacts;
 @synthesize searchResultContacts=_searchResultContacts;
 @synthesize lastReceivedJson=_lastReceivedJson;
+@synthesize delegate=_delegate;
 
 
 #pragma mark - self defined setter and getter
