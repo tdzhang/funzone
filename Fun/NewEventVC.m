@@ -289,7 +289,6 @@
     else {
         NSLog(@"Face book session invalid~~~");
     }
-    
     //if this view is used to repin a event
     if(self.detail_event_id&&(self.detail_event_id!=self.already_load_detail_event_id)){
         self.already_load_detail_event_id=self.detail_event_id;
@@ -305,9 +304,18 @@
         }
         //this is for the repin of a featured event
         [self.textFieldEventTitle setText:self.detail_event_title];
+        
         [self.labelEventTime setText:self.detail_event_time];
+        [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+        [self.timeIcon setAlpha:0.8];
         [self.labelEventTitleHolder setHidden:YES];
+        
         [self.locationLabel setText:self.detail_location_name];
+        [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+        [self.locationIcon setAlpha:0.8];
+        
         [self.uIImageViewEvent setImage:self.detail_image];
         [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
         [self.uIImageViewEvent clipsToBounds];
@@ -785,7 +793,7 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Anytime",@"Today",@"Tomorrow",@"This weekend",@"Self enter", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"This weekend",@"Anytime",@"Pick a date", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -818,23 +826,24 @@
     NSLog(@"%@",actionSheet.title);
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.labelEventTime setText:@"Anytime"];
-        }else if(buttonIndex == 1){
             [self.labelEventTime setText:@"Today"];
-        }else if(buttonIndex == 2){
+        }else if(buttonIndex == 1){
             [self.labelEventTime setText:@"Tomorrow"];
-        }else if(buttonIndex == 3){
+        }else if(buttonIndex == 2){
             [self.labelEventTime setText:@"This Weekend"];
+        }else if(buttonIndex == 3){
+            [self.labelEventTime setText:@"Anytime"];
         }else if(buttonIndex == 4){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
         if (buttonIndex == 5) {
+            [self.labelEventTime setText:@"Find a time"];
             [self.labelEventTime setFont:[UIFont italicSystemFontOfSize:16]];
             [self.labelEventTime setTextColor:[UIColor lightGrayColor]];
             [self.timeIcon setAlpha:0.4];
         }else {
-            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:16]];
+            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
             [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
             [self.timeIcon setAlpha:0.8];
         }
