@@ -604,7 +604,7 @@
     self.garbageCollection=[NSMutableArray array];
     int height;
     if ([self.likedPeople count]==0) {
-        if ([self.description_content.text isEqualToString:@"No description"]) {
+        if ([self.description_content.text isEqualToString:@""]) {
             height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+15;
         } else {
             height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+15;
@@ -689,7 +689,7 @@
     self.garbageCollection=[NSMutableArray array];
     
     int height;
-    if ([self.description_content.text isEqualToString:@"No description"]) {
+    if ([self.description_content.text isEqualToString:@""]) {
         height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
     } else {
         height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
@@ -774,7 +774,7 @@
     int height;
     if ([self.interestedPeople count] == 0) {
         if ([self.likedPeople count] == 0) {
-            if ([self.description_content.text isEqualToString:@"No description"]) {
+            if ([self.description_content.text isEqualToString:@""]) {
                 height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
             } else {
                 height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
@@ -831,7 +831,7 @@
     height = 32 + height;
     //add every single comment entry
     for (int i = 0; i<[self.comments count]; i++) {
-        if(i==5)break; //in this page, only present a few comments
+        //if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];  
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 0)];
         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
@@ -889,8 +889,8 @@
         commentView.frame = newFrame3;
         
         [self.myScrollView addSubview:commentView];
-        //distance between two comment view is 1px.
-        height = height + commentView.bounds.size.height + 1;
+        //distance between two comment view is 0px.
+        height = height + commentView.bounds.size.height;
         
         [self.garbageCollection addObject:commentView];        
     }
@@ -996,7 +996,7 @@
     self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
     self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
     self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
+    NSString *description=[NSString stringWithFormat:@"%@",[event objectForKey:@"description"]];
     // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
     // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
@@ -1217,7 +1217,7 @@
     self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
     [self.descriptionSectionView addSubview:description_header];
     [self.descriptionSectionView addSubview:self.description_content];
-    if ([self.description_content.text isEqualToString:@"No description"]) {
+    if ([self.description_content.text isEqualToString:@""]) {
         [self.descriptionSectionView setHidden:YES];
     } else {
         [self.myScrollView addSubview:self.descriptionSectionView];

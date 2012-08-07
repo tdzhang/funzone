@@ -989,6 +989,9 @@
             //remove friend
             [self.invitedFriend removeAllObjects];
             [self.inviteFriendsLabel setText:@"Invite Friends"];
+            [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
+            [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];
+            [self.inviteIcon setAlpha:0.4];
         }
         else if(buttonIndex ==1){
             //add friend
