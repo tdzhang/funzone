@@ -804,7 +804,7 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Comming Saturday",@"Comming Sunday",@"Any Time",@"Pick a date", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Coming Saturday",@"Coming Sunday",@"Pick a time",@"Any Time", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -836,7 +836,7 @@
     //for the when to go action sheet
     NSLog(@"%@",actionSheet.title);
     
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Comming Saturday",@"Comming Sunday",@"Pick a date", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Coming Saturday",@"Coming Sunday",@"Pick a time",@"Any Time", nil];
     
     
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
@@ -902,11 +902,11 @@
             NSString *dateInString = [dateFormatter stringFromDate:date];
             [self.labelEventTime setText:dateInString];
         }else if(buttonIndex == 4){
+            [self performSegueWithIdentifier:@"chooseTime" sender:self];
             //self enter the time
-            [self.labelEventTime setText:@"Anytime"];
         }else if(buttonIndex == 5){
             //self enter the time
-            [self performSegueWithIdentifier:@"chooseTime" sender:self];
+            [self.labelEventTime setText:@"Anytime"];
         }
         
     }    

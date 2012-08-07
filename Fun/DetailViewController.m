@@ -29,6 +29,7 @@
 @property (nonatomic,strong) UIView *interestedPeopleLabelView;
 @property (nonatomic,strong) UIView *likedPeopleLabelView;
 @property (nonatomic,strong) UIView *commentSectionView;
+@property (nonatomic,strong) UIView *descriptionSectionView;
 @property (nonatomic,strong) UIButton *editButton;
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
@@ -38,6 +39,7 @@
 @property (nonatomic,strong) UIImageView *doitmyself_icon;
 @property (nonatomic,strong) UILabel *like_label;
 @property (nonatomic,strong) UILabel *join_label;
+@property (nonatomic,strong) UILabel *description_content;
 @property (nonatomic,strong) UILabel *doitmyself_label;
 @property (nonatomic,strong) NSString *isLiked;
 @property (nonatomic,strong) NSString *isJoined;
@@ -83,9 +85,11 @@
 @synthesize timeSectionView=_timeSectionView;
 @synthesize locationSectionView=_locationSectionView;
 @synthesize commentSectionView=_commentSectionView;
+@synthesize descriptionSectionView=_descriptionSectionView;
 @synthesize likeButtonSection = _likeButtonSection;
 @synthesize joinButtonSection=_joinButtonSection;
 @synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
+@synthesize description_content=_description_content;
 @synthesize editButton=_editButton;
 @synthesize like_icon=_like_icon;
 @synthesize join_icon=_join_icon;
@@ -241,6 +245,9 @@
     [self.joinButtonSection addSubview:self.join_label];
     [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
     [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
+    
+    self.descriptionSectionView = [[UIView alloc] init];
+    [self.myScrollView addSubview:self.descriptionSectionView];
 }
 
 - (void)viewDidUnload
@@ -572,8 +579,12 @@
         [self.garbageCollection removeAllObjects];
     }
     self.garbageCollection=[NSMutableArray array];
-    
-    int height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    int height;
+    if ([self.description_content.text isEqualToString:@"No description"]) {
+        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    } else {
+        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+    }
     if ([self.interestedPeople count]>0) {
         self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.interestedPeopleLabelView];
@@ -938,7 +949,7 @@
     self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
     self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
     self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-    //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
+    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
     // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
@@ -1142,6 +1153,29 @@
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.locationSectionView addSubview:showMapButton];
 
+    self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 290, 50)];
+    [self.description_content setText:description];
+    [self.description_content setFont:[UIFont systemFontOfSize:13]];
+    self.description_content.lineBreakMode = UILineBreakModeWordWrap;
+    self.description_content.numberOfLines = 0;
+    CGSize maximumLabelSize_description = CGSizeMake(290,9999);    
+    CGSize expectedLabelSize_description = [description sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize_description lineBreakMode:UILineBreakModeWordWrap];
+    CGRect newFrame_description = self.description_content.frame;
+    newFrame_description.size.height = expectedLabelSize_description.height;
+    self.description_content.frame = newFrame_description;
+    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
+    [description_header setText:@"Event description:"];
+    [description_header setFont:[UIFont boldSystemFontOfSize:13]];
+    [description_header setTextColor:[UIColor darkGrayColor]];
+    self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
+    [self.descriptionSectionView addSubview:description_header];
+    [self.descriptionSectionView addSubview:self.description_content];
+    if ([self.description_content.text isEqualToString:@"No description"]) {
+        [self.descriptionSectionView setHidden:YES];
+    } else {
+        [self.myScrollView addSubview:self.descriptionSectionView];
+    }
+    
 #warning fetch original creator info
     [self handleTheInterestedPeoplePart];
     [self handleLikedPeoplePart];
