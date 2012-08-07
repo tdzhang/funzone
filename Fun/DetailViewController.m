@@ -297,8 +297,7 @@
         //change the button title based on the BOOL isOwner
         if (self.isEventOwner) {
             [self.actionButtonHolder setHidden:YES];
-            self.editButton.frame = CGRectMake(290, 150, 20, 20);
-            [self.editButton setBackgroundImage:[UIImage imageNamed:@"detail-edit-color.png"] forState:UIControlStateNormal];
+            self.editButton.frame = CGRectMake(240, 190, 60, 30);
             [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
@@ -1146,6 +1145,17 @@
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
+    
+    UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
+    [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
+    [self.editButton addSubview:edit_icon];
+    UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 25, 20)];
+    [edit_label setText:@"Edit"];
+    [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
+    [edit_label setBackgroundColor:[UIColor clearColor]];
+    [edit_label setTextColor:[UIColor darkGrayColor]];
+    [self.editButton addSubview:edit_label];
+    [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
 }
 
 
