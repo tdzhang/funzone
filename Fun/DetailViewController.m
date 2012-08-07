@@ -232,6 +232,13 @@
     
     self.editButton = [[UIButton alloc] init];
     [self.myScrollView addSubview:self.editButton];
+    
+    [self.likeButtonSection addSubview:self.like_icon];
+    [self.likeButtonSection addSubview:self.like_label];
+    [self.joinButtonSection addSubview:self.join_icon];
+    [self.joinButtonSection addSubview:self.join_label];
+    [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+    [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
 }
 
 - (void)viewDidUnload
@@ -295,30 +302,26 @@
         else{
             self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
             self.like_icon.frame = CGRectMake(15, 13, 24, 24);
-            [self.likeButtonSection addSubview:self.like_icon];
             self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
             [self.like_label setBackgroundColor:[UIColor clearColor]];
             [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
             [self.like_label setTextColor:[UIColor whiteColor]];
-            [self.likeButtonSection addSubview:self.like_label];
+            
             
             self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-            self.join_icon.frame = CGRectMake(10, 13, 24, 24);
-            [self.joinButtonSection addSubview:self.join_icon];
+            self.join_icon.frame = CGRectMake(10, 13, 24, 24);            
             self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
             [self.join_label setBackgroundColor:[UIColor clearColor]];
             [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
             [self.join_label setTextColor:[UIColor whiteColor]];
-            [self.joinButtonSection addSubview:self.join_label];
+            
             
             self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);
-            [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);            
             self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
             [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
             [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
-            [self.doitmyself_label setTextColor:[UIColor whiteColor]];
-            [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
+            [self.doitmyself_label setTextColor:[UIColor whiteColor]];            
         }
     }
 }
