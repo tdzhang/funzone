@@ -56,24 +56,24 @@
     [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:13]];
     if ([ [NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event/////
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ is interested in your event.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ liked your event.",self.user_name]];
         //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has followed you.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ followed you.",self.user_name]];
         //[self.userNameLabel setText:@"Followed Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has commented on your event.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ commented on your event.",self.user_name]];
         //[self.userNameLabel setText:@"Comment Event:"];
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has invited you to an event.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ invited you to an event.",self.user_name]];
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has just joined OrangeParc.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ just joined OrangeParc.",self.user_name]];
     }
     else{
         //[self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has done something you may be interested.",self.user_name]];
