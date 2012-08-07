@@ -342,7 +342,7 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"I am using OrangeParc,just found an interesting event \"%@\" at %@?\nCheck out more details at http://www.orangeparc.com",self.event_title,self.location_name];
+    return [NSString stringWithFormat:@"Buddy, I found an event \"%@\" that you may be interested(Location:\"%@\"; Time:\"%@\"). Let me know whether you wanna join! -Shared via OrangeParc",self.event_title,self.location_name,self.event_time];
 }
 
 //return the share message
