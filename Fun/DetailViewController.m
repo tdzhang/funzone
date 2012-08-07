@@ -1138,7 +1138,7 @@
         self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
     self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 270, 20)];
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 220, 20)];
     [eventLocation setText:self.location_name];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
     [eventLocation setTextColor:[UIColor darkGrayColor]];
@@ -1155,15 +1155,15 @@
     [locationIcon setAlpha:0.7];
     [self.locationSectionView addSubview:locationIcon];
     
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(255, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-12, 30,24)];
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(255, 5, 35, 20)];
     [map_indicator_label setText:@"Map"];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
-    //[self.myScrollView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(290, 8, 11, 14)];
+    [self.locationSectionView addSubview:map_indicator_label];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 8, 11, 14)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
     [self.locationSectionView addSubview:right_Arrow];
-    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(285, 5, 15, 20)];
+    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 5, 50, 20)];
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.locationSectionView addSubview:showMapButton];
 
