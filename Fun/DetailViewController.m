@@ -620,7 +620,11 @@
         [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d Joins",[self.interestedPeople count]]];
+        if ([self.interestedPeople count] == 1) {
+            [numOfInterests setText:[NSString stringWithFormat:@"1 Join"]];
+        } else {
+            [numOfInterests setText:[NSString stringWithFormat:@"%d Joins",[self.interestedPeople count]]];
+        }
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -699,7 +703,11 @@
         [self.likedPeopleLabelView addGestureRecognizer:tapGR];
         [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOflikes setText:[NSString stringWithFormat:@"%d Likes",[self.likedPeople count]]];
+        if ([self.likedPeople count] == 1) {
+            [numOflikes setText:[NSString stringWithFormat:@"1 Like"]];
+        } else {
+            [numOflikes setText:[NSString stringWithFormat:@"%d Likes",[self.likedPeople count]]];
+        }
         [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
         [numOflikes setTextColor:[UIColor darkGrayColor]];
         [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -792,10 +800,10 @@
     //comment header label
     UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
     NSString *comment_header;
-    if ([self.comments count] != 0) {
-        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
+    if ([self.comments count] == 0 || [self.comments count] == 1) {
+        comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
     }else {
-        comment_header = [NSString stringWithFormat:@"0 Comment"];
+        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
     }
     [comment_header_label setText:comment_header];
     [comment_header_label setBackgroundColor:[UIColor clearColor]];
@@ -1184,7 +1192,7 @@
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 8, 11, 14)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 8, 6, 10)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
     [self.locationSectionView addSubview:right_Arrow];
     UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 5, 50, 20)];
