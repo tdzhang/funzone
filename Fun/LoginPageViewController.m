@@ -44,9 +44,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //ask user to require location
-    CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
-    [current_location_manager startUpdatingLocation];
-    self.myLocationManager=current_location_manager;
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    self.myLocationManager=funAppdelegate.myLocationManager;
     
     //[current_location_manager stopUpdatingLocation];
     //set the password field property
@@ -58,7 +57,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.myLocationManager stopUpdatingLocation];
     //delete notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PushNotificationHandler SendAPNStokenToServer];

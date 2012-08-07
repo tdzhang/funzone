@@ -16,6 +16,7 @@
 @synthesize window = _window;
 @synthesize facebook=_facebook;
 @synthesize thisTabBarController = _thisTabBarController;
+@synthesize myLocationManager=_myLocationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -76,17 +77,27 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
+    
+    //stop updating user's locaiton
+    if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    //set the location manager, start getting user location
+    CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
+    [current_location_manager startUpdatingLocation];
+    self.myLocationManager=current_location_manager;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [MyPermenentCachePart EXITit];//save the permanentcache data
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    //stop updating user's locaiton
+    if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
 }
 /////////////
 // Pre iOS 4.2 support

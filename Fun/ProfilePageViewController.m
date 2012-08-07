@@ -61,7 +61,8 @@
 
 -(CLLocationManager *)current_location_manager{
     if (!_current_location_manager) {
-        _current_location_manager=[[CLLocationManager alloc] init];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        _current_location_manager=funAppdelegate.myLocationManager;
     }
     return _current_location_manager;
 }
@@ -204,7 +205,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.current_location_manager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)viewDidLoad
@@ -443,7 +443,6 @@
                 NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
 
-                [self.current_location_manager startMonitoringSignificantLocationChanges];
                 CLLocation *current_location = self.current_location_manager.location;
                 CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
                 
@@ -535,7 +534,6 @@
             
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
 
-            [self.current_location_manager startMonitoringSignificantLocationChanges];
             CLLocation *current_location = self.current_location_manager.location;
             CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
             

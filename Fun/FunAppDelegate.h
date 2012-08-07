@@ -13,6 +13,10 @@
 #import "WXApi.h"
 #import "ShareAfterNewEventViewController.h"
 #import "PushNotificationHandler.h"
+#import <QuartzCore/QuartzCore.h>
+#import "CategroyChooseViewController.h"
+#import "GlobalConstant.h"
+#import "PushNotificationHandler.h"
 
 @class FunFirstViewController;
 
@@ -21,5 +25,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) Facebook *facebook;
 @property (strong, nonatomic) UITabBarController *thisTabBarController;
+@property (nonatomic,strong) CLLocationManager *myLocationManager;
 
 @end
