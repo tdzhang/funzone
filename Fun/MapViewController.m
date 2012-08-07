@@ -336,9 +336,7 @@
     //[searchBar setText:formerKeyWord];
     
     [self startSearchBaseonTheSearchBar];
-    if (![self.mySearchBar.text isEqualToString:@""]) {
-        [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
-    }
+    [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -458,9 +456,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     }
     
     [self startSearchBaseonTheSearchBar];
-    if (![self.mySearchBar.text isEqualToString:@""]) {
-        [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
-    }
+    [self.similarPlaceToLabel setText:[NSString stringWithFormat:@"\"%@\"",self.mySearchBar.text]];
     return YES;
     
     /* 
