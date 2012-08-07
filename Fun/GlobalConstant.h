@@ -155,6 +155,7 @@
 #define VIA_EXPLORE_DETAIL 9      // profile(external)
 #define VIA_FEEDS_DETAIL 10       // profile(external)
 #define VIA_INSPIRED_BY 11        // profile(external)
+#define VIA_FACEBOOK_FRIENDS 12     
 
 // Share Channel
 #define VIA_FACEBOOK 1
@@ -180,7 +181,7 @@
 #define INVITE_FRIENDS 12    // separate API, channel
 #define EDIT_EVENT 13
 #define DELETE_EVENT 14
-#define INVITED_TO_EVENT 15 //
+#define INVITED_TO_EVENT 15 //some one has invited you to an event
 
 #define SHOW_EXPLORE 21
 #define SHOW_FEEDS 22
@@ -194,6 +195,7 @@
 #define VIEW_BOOKMARKS 105   // via
 #define UNFOLLOW_SOMEONE 106 // via
 #define SHOW_INTERESTS 107
+#define NEW_FRIEND_JOIN 108
 
 //category id mapping information
 #define FOOD  @"1"

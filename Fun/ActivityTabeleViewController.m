@@ -212,7 +212,11 @@
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
+        //show the event
         [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
+    }else if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
+        // your friend has just joined orange parc, go to that page to follow
+        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
     }
     
 }

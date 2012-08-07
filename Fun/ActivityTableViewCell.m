@@ -72,8 +72,12 @@
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has invited you to an event.",self.user_name]];
     }
+    else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has just joined OrangeParc.",self.user_name]];
+    }
     else{
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has did something you may be interested.",self.user_name]];
+        //[self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has done something you may be interested.",self.user_name]];
+        NSLog(@"ActivityTableViewcell:activity type not found.");
     }
     
     NSURL *imageUrl=[NSURL URLWithString:self.user_pic];
