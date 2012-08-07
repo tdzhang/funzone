@@ -336,6 +336,10 @@
         MyFollowingTableViewController* VC=(MyFollowingTableViewController *)segue.destinationViewController;
         [VC setOther_user_id:self.creator_id];
     }
+    else if([segue.identifier isEqualToString:@"viewFollowerUser"]){
+        MyFollowerTableViewController* VC=(MyFollowerTableViewController *)segue.destinationViewController;
+        [VC setOther_user_id:self.creator_id];
+    }
 }
 
 #pragma mark - implement the UIScrollViewDelegate

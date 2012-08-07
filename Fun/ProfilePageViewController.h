@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "ProfileEventElement.h"
 #import "GlobalConstant.h"
+#import "MyFollowerTableViewController.h"
 
 @interface ProfilePageViewController : UIViewController<UIScrollViewDelegate>
 
