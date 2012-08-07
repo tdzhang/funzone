@@ -329,7 +329,7 @@
     //used to add the additional keyboard done toobar 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])) {
+    if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
         self.isnotFirstTime=YES;
         [self.textFieldEventTitle becomeFirstResponder];
     }
