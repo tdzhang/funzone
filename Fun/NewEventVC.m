@@ -229,7 +229,33 @@
     [super viewWillAppear:animated];
     
     //chaneg the navigationController titile
-    self.navigationController.navigationBar.topItem.title = self.eventType;
+    if ([self.eventType isEqualToString:@"movie"]) {
+        self.navigationController.navigationBar.topItem.title = @"Movie";
+    }
+    else if ([self.eventType isEqualToString:@"party"]) {
+        self.navigationController.navigationBar.topItem.title = @"Party";
+    }
+    else if ([self.eventType isEqualToString:@"shopping"]) {
+        self.navigationController.navigationBar.topItem.title = @"Shopping";
+    }
+    else if ([self.eventType isEqualToString:@"sports"]) {
+        self.navigationController.navigationBar.topItem.title = @"Sports";
+    }
+    else if ([self.eventType isEqualToString:@"outdoor"]) {
+        self.navigationController.navigationBar.topItem.title = @"Outdoor";
+    }
+    else if ([self.eventType isEqualToString:@"entertain"]) {
+        self.navigationController.navigationBar.topItem.title = @"Entertainment";
+    }
+    else if ([self.eventType isEqualToString:@"event"]) {
+        self.navigationController.navigationBar.topItem.title = @"Event";
+    }
+    else if ([self.eventType isEqualToString:@"food"]) {            
+        self.navigationController.navigationBar.topItem.title = @"Food";
+    }
+    else {
+        self.navigationController.navigationBar.topItem.title = @"Other";
+    }
     
     //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
