@@ -1178,7 +1178,7 @@
     newFrame_description.size.height = expectedLabelSize_description.height;
     self.description_content.frame = newFrame_description;
     UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
-    [description_header setText:@"Event description:"];
+    [description_header setText:@"Description:"];
     [description_header setFont:[UIFont boldSystemFontOfSize:13]];
     [description_header setTextColor:[UIColor darkGrayColor]];
     self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
