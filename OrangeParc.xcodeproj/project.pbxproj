@@ -852,8 +852,8 @@
 				0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */,
 				0F60F3FC15BC6A0A00053D25 /* ProfilePageViewController.h */,
 				0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */,
-				0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */,
 				0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */,
+				0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */,
 				0F60F40115BC72F100053D25 /* ProfileEventElement.h */,
 				0F60F40215BC72F100053D25 /* ProfileEventElement.m */,
 			);
