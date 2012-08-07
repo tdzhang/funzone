@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -26,7 +27,7 @@
             </objects>
             <point key="canvasLocation" x="305" y="1488"/>
         </scene>
-        <!--Profile Page View Controller - My Collections-->
+        <!--Profile Page View Controller - My Collection-->
         <scene sceneID="8AS-Gi-EOt">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -182,7 +183,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Collections" id="bwz-Es-Kjz">
+                    <navigationItem key="navigationItem" title="My Collection" id="bwz-Es-Kjz">
                         <barButtonItem key="rightBarButtonItem" title="More" id="pzB-Je-pC5">
                             <connections>
                                 <segue destination="jag-1w-uml" kind="push" id="REb-pl-Jed"/>
@@ -1925,7 +1926,7 @@ Find us @OrangeParc.com</string>
                                                 <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8hV-h7-flU">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8hV-h7-flU">
                                                 <rect key="frame" x="85" y="45" width="60" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -2182,7 +2183,7 @@ Find us @OrangeParc.com</string>
                                     <action selector="facebookLoginButtonClickedNew:" destination="LNn-0V-MCE" eventType="touchUpInside" id="OVI-gi-xNw"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign In With Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WMK-PR-ggj">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign in with Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WMK-PR-ggj">
                                 <rect key="frame" x="96" y="109" width="172" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -2359,24 +2360,23 @@ Find us @OrangeParc.com</string>
                                     <action selector="stillWantToSignInWithFaceBook:" destination="zcT-6n-80h" eventType="touchUpInside" id="BDX-nx-UPj"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign In With Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="MMl-L6-jpX">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign in with Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="MMl-L6-jpX">
                                 <rect key="frame" x="96" y="385" width="172" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Name   Last Name" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" id="DUY-JA-qGC">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" id="DUY-JA-qGC">
                                 <rect key="frame" x="29" y="68" width="260" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="zcT-6n-80h" id="DzD-gI-B4K"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" minimumFontSize="17" id="fMU-Iq-4iA">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" id="fMU-Iq-4iA">
                                 <rect key="frame" x="29" y="113" width="260" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3282,7 +3282,6 @@ Find us @OrangeParc.com</string>
         <class className="AddCommentVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
             <relationships>
-                <relationship kind="action" name="addCommentButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
@@ -3302,6 +3301,9 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="InviteButtonClicked:"/>
+            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3350,7 +3352,6 @@ Find us @OrangeParc.com</string>
         <class className="MapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
             <relationships>
-                <relationship kind="action" name="DoneWithChooseLocation:"/>
                 <relationship kind="outlet" name="MySearchDisplayController" candidateClass="UISearchDisplayController"/>
                 <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
@@ -3397,7 +3398,6 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3422,10 +3422,6 @@ Find us @OrangeParc.com</string>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EmailShare:"/>
-                <relationship kind="action" name="FinishedThisSharePage:"/>
-                <relationship kind="action" name="MesssgeShare:"/>
-                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>
@@ -3459,11 +3455,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Yrc-z9-85p"/>
-        <segue reference="lqc-Cx-NBX"/>
         <segue reference="maZ-xV-hRy"/>
         <segue reference="Hfw-Db-bjl"/>
         <segue reference="2Cw-4j-quL"/>
         <segue reference="I5V-BE-h5K"/>
+        <segue reference="hTB-gn-88u"/>
+        <segue reference="lqc-Cx-NBX"/>
     </inferredMetricsTieBreakers>
 </document>
