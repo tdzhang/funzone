@@ -580,10 +580,14 @@
     }
     self.garbageCollection=[NSMutableArray array];
     int height;
-    if ([self.description_content.text isEqualToString:@"No description"]) {
-        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    if ([self.likedPeople count]==0) {
+        if ([self.description_content.text isEqualToString:@"No description"]) {
+            height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+15;
+        } else {
+            height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+15;
+        }
     } else {
-        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+        height = self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
     }
     if ([self.interestedPeople count]>0) {
         self.interestedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
@@ -594,7 +598,7 @@
         [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d people want to join",[self.interestedPeople count]]];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d Joins",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -657,7 +661,13 @@
     }
     self.garbageCollection=[NSMutableArray array];
     
-    int height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
+    int height;
+    if ([self.description_content.text isEqualToString:@"No description"]) {
+        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    } else {
+        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+    }
+    
     if ([self.likedPeople count]>0) {
         self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.likedPeopleLabelView];
@@ -667,7 +677,7 @@
         [self.likedPeopleLabelView addGestureRecognizer:tapGR];
         [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOflikes setText:[NSString stringWithFormat:@"%d likes",[self.likedPeople count]]];
+        [numOflikes setText:[NSString stringWithFormat:@"%d Likes",[self.likedPeople count]]];
         [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
         [numOflikes setTextColor:[UIColor darkGrayColor]];
         [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -731,14 +741,18 @@
     self.garbageCollection=[NSMutableArray array];
     //comment
     int height;
-    if ([self.likedPeople count] == 0) {
-        if ([self.interestedPeople count] == 0) {
-            height=self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    if ([self.interestedPeople count] == 0) {
+        if ([self.likedPeople count] == 0) {
+            if ([self.description_content.text isEqualToString:@"No description"]) {
+                height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+            } else {
+                height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
+            }
         } else {
-            height=self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 15;
+            height=self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 15;
         }        
     } else {
-        height = self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
+        height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
     }
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
@@ -1104,7 +1118,7 @@
     
     //set time label and clock icon
     if ([self.event_time isEqualToString:@""]) {
-        self.event_time = [NSString stringWithFormat:@"TBD"];
+        self.event_time = [NSString stringWithFormat:@"Not Specified"];
     }
     self.timeSectionView.frame = CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height+15, 300, 30);
     UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 9, 12, 12)];
@@ -1121,7 +1135,7 @@
     
     //set address section
     if ([self.location_name isEqualToString:@""]) {
-        self.location_name = [NSString stringWithFormat:@"TBD"];
+        self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
     self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
     UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 270, 20)];
@@ -1177,8 +1191,8 @@
     }
     
 #warning fetch original creator info
-    [self handleTheInterestedPeoplePart];
     [self handleLikedPeoplePart];
+    [self handleTheInterestedPeoplePart];
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
