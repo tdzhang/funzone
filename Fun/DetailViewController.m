@@ -882,6 +882,16 @@
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tap_user_id;
     }
+    else if([segue.identifier isEqualToString:@"ViewLocation"]){
+        detailLocationMapViewController* MVC=(detailLocationMapViewController*)segue.destinationViewController;
+        CLLocationCoordinate2D location;
+        location.latitude=[self.latitude floatValue];
+        location.longitude=[self.longitude floatValue];
+        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+        annotationPoint.coordinate = location;
+        annotationPoint.title=self.title;
+        [MVC setPredefinedAnnotation:annotationPoint];
+    }
 }
 
 
