@@ -1225,7 +1225,7 @@
                 
                 if ([self.mysendMessageType isEqualToString:@"invite"]) {
                     //email subject
-                    [mailCont setSubject:[NSString stringWithFormat:@"I want invite you to %@",self.event_title]];
+                    [mailCont setSubject:[NSString stringWithFormat:@"I want to invite you to %@",self.event_title]];
                     //email list
                     [mailCont setToRecipients:emailList];
                     //email body
@@ -1233,7 +1233,7 @@
                 }
                 else if([self.mysendMessageType isEqualToString:@"share"]){
                     //email subject
-                    [mailCont setSubject:[NSString stringWithFormat:@"You may interest about %@",self.event_title]];
+                    [mailCont setSubject:[NSString stringWithFormat:@"You may be interested about %@",self.event_title]];
                     //email list
                     [mailCont setToRecipients:emailList];
                     //email body
