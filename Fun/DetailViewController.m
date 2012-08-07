@@ -27,6 +27,7 @@
 @property (nonatomic,strong) UIView *timeSectionView;
 @property (nonatomic,strong) UIView *locationSectionView;
 @property (nonatomic,strong) UIView *interestedPeopleLabelView;
+@property (nonatomic,strong) UIView *likedPeopleLabelView;
 @property (nonatomic,strong) UIView *commentSectionView;
 @property (nonatomic,strong) UIButton *editButton;
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
@@ -53,6 +54,7 @@
 @property (nonatomic,strong) NSString *description;
 @property (nonatomic,strong) NSMutableArray *comments;
 @property (nonatomic,strong) NSMutableArray *interestedPeople;
+@property (nonatomic,strong) NSMutableArray *likedPeople;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSURL *creator_img_url;
@@ -66,8 +68,6 @@
 @property (nonatomic) int via;//used to keep track theuser activity , then send to the server
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
-
-
 @end
 
 @implementation DetailViewController
@@ -98,7 +98,7 @@
 @synthesize isAdded=_isAdded;
 
 @synthesize shareButton=_shareButton;
-@synthesize actionButtonHolder = _actionButtonHolder;
+@synthesize actionButtonHolder=_actionButtonHolder;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize event_title=_event_title;
@@ -113,7 +113,9 @@
 @synthesize event_address=_event_address;
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
-@synthesize interestedPeopleLabelView = _interestedPeopleLabelView;
+@synthesize likedPeople=_likedPeople;
+@synthesize interestedPeopleLabelView=_interestedPeopleLabelView;
+@synthesize likedPeopleLabelView=_likedPeopleLabelView;
 @synthesize tap_user_id=_tap_user_id;
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
@@ -582,7 +584,7 @@
         [self.interestedPeopleLabelView addGestureRecognizer:tapGR];
         [self.interestedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         UILabel* numOfInterests=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        [numOfInterests setText:[NSString stringWithFormat:@"%d want to join",[self.interestedPeople count]]];
+        [numOfInterests setText:[NSString stringWithFormat:@"%d people want to join",[self.interestedPeople count]]];
         [numOfInterests setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInterests setTextColor:[UIColor darkGrayColor]];
         [numOfInterests setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -590,7 +592,7 @@
         //[self.garbageCollection addObject:numOfInterests];
         
         int x_position_photo=5;
-        for (int i=0; i<5&&i<([self.interestedPeople count]); i++) {
+        for (int i=0; i<7&&i<([self.interestedPeople count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
             ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
@@ -635,7 +637,80 @@
     }
 }
 
-//handle the intereted people part and handle the comment part from self.comments
+//handle liked people section
+-(void)handleLikedPeoplePart{
+    if (self.garbageCollection) {
+        for (UIView* view in self.garbageCollection) {
+            [view removeFromSuperview];
+        }
+        [self.garbageCollection removeAllObjects];
+    }
+    self.garbageCollection=[NSMutableArray array];
+    
+    int height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
+    if ([self.likedPeople count]>0) {
+        self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
+        [self.myScrollView addSubview:self.likedPeopleLabelView];
+        //add gesture(tap)
+        self.likedPeopleLabelView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLikeBlock:)];
+        [self.likedPeopleLabelView addGestureRecognizer:tapGR];
+        [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        [numOflikes setText:[NSString stringWithFormat:@"%d likes",[self.likedPeople count]]];
+        [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
+        [numOflikes setTextColor:[UIColor darkGrayColor]];
+        [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [self.likedPeopleLabelView addSubview:numOflikes];
+        //[self.garbageCollection addObject:numOfInterests];
+        
+        int x_position_photo=5;
+        for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
+            NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
+            if (![Cache isURLCached:backGroundImageUrl]) {
+                //using high priority queue to fetch the image
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                    //get the image data
+                    NSData * imageData = nil;
+                    imageData = [[NSData alloc] initWithContentsOfURL: backGroundImageUrl];
+                    if (imageData == nil ){
+                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                        //NSLog(@"downloaded %@ error, using a default image",url);
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                        imageData=UIImagePNGRepresentation(image);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                    else {
+                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                        //NSLog(@"downloaded %@",url);
+                        if(imageData){
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [Cache addDataToCache:backGroundImageUrl withData:imageData];
+                                userImageView.image=[UIImage imageWithData:imageData];
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                dispatch_async( dispatch_get_main_queue(),^{
+                    userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
+                });
+            }
+            [self.likedPeopleLabelView addSubview:userImageView];
+            x_position_photo+=38;
+        }
+    }
+}
+
+//handle the comment part from self.comments
 -(void)handleTheCommentPart{
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
@@ -646,10 +721,14 @@
     self.garbageCollection=[NSMutableArray array];
     //comment
     int height;
-    if ([self.interestedPeople count] == 0) {
-        height=self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+    if ([self.likedPeople count] == 0) {
+        if ([self.interestedPeople count] == 0) {
+            height=self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
+        } else {
+            height=self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 15;
+        }        
     } else {
-        height = self.interestedPeopleLabelView.frame.origin.y + self.interestedPeopleLabelView.frame.size.height + 10;
+        height = self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
     }
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 30)];
@@ -875,6 +954,9 @@
     //handle the interest people part
     self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
     
+    //handle the liked people part
+    self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
+    
     NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
     if ([event_category isEqualToString:FOOD]) {
         DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
@@ -1044,6 +1126,7 @@
 
 #warning fetch original creator info
     [self handleTheInterestedPeoplePart];
+    [self handleLikedPeoplePart];
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
@@ -1224,7 +1307,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-//handle when user tap a certain block view
+//handle when user tap interested people block view
 -(void)tapBlock:(UITapGestureRecognizer *)tapGR {
     if ([self.interestedPeople count]==0) {
         return;
@@ -1235,6 +1318,23 @@
     //get the index of the touched block view
     int index=(touchPointX-5)/40;
     ProfileInfoElement* tapped_element=[self.interestedPeople objectAtIndex:index];
+    self.tap_user_id=tapped_element.user_id;
+    if(touchPointY>25&&index<7){
+        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+    }
+}
+
+//handle when user tap liked people block view
+-(void)tapLikeBlock:(UITapGestureRecognizer *)tapGR {
+    if ([self.likedPeople count]==0) {
+        return;
+    }
+    CGPoint touchPoint=[tapGR locationInView:[self likedPeopleLabelView]];
+    float touchPointY=touchPoint.y;
+    float touchPointX=touchPoint.x;
+    //get the index of the touched block view
+    int index=(touchPointX-5)/40;
+    ProfileInfoElement* tapped_element=[self.likedPeople objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
