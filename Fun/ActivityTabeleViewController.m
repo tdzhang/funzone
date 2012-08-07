@@ -198,20 +198,20 @@
 {
     activityElementObject* element=[self.activities objectAtIndex:indexPath.row];
     self.tapped_element=element;
-    if ([element.type isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
+    if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event// go to that event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
-    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
+    else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
         [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
         
     }
-    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
+    else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
-    else if([element.type isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
+    else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
     }
     
