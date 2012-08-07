@@ -580,7 +580,7 @@
     }
     self.garbageCollection=[NSMutableArray array];
     int height;
-    if ([self.description_content.text isEqualToString:@""]) {
+    if ([self.description_content.text isEqualToString:@"No description"]) {
         height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 15;
     } else {
         height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 15;
@@ -1156,19 +1156,21 @@
     self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 290, 50)];
     [self.description_content setText:description];
     [self.description_content setFont:[UIFont systemFontOfSize:13]];
+    self.description_content.lineBreakMode = UILineBreakModeWordWrap;
+    self.description_content.numberOfLines = 0;
     CGSize maximumLabelSize_description = CGSizeMake(290,9999);    
     CGSize expectedLabelSize_description = [description sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize_description lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame_description = self.description_content.frame;
     newFrame_description.size.height = expectedLabelSize_description.height;
     self.description_content.frame = newFrame_description;
-    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 20)];
+    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
     [description_header setText:@"Event description:"];
     [description_header setFont:[UIFont boldSystemFontOfSize:13]];
     [description_header setTextColor:[UIColor darkGrayColor]];
     self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
     [self.descriptionSectionView addSubview:description_header];
     [self.descriptionSectionView addSubview:self.description_content];
-    if ([self.description_content.text isEqualToString:@""]) {
+    if ([self.description_content.text isEqualToString:@"No description"]) {
         [self.descriptionSectionView setHidden:YES];
     } else {
         [self.myScrollView addSubview:self.descriptionSectionView];
