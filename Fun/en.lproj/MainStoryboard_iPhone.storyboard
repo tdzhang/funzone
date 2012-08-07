@@ -1666,7 +1666,7 @@ Find us @OrangeParc.com</string>
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="ORt-hE-mSa" kind="push" identifier="StartInviteFriend" id="HjP-nA-cbV"/>
+                                            <action selector="InviteFriendButtonClicked:" destination="aP0-zW-Vs1" eventType="touchUpInside" id="7ZU-qn-WZA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1769,6 +1769,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="buttonEventTime" destination="8Y1-I1-bf4" id="pdn-9K-iKA"/>
                         <outlet property="deleteButton" destination="xFV-X9-FJO" id="vMC-iR-caR"/>
                         <outlet property="done_Button" destination="DPL-wo-aUV" id="Jea-rX-kgL"/>
+                        <outlet property="inviteFriendsLabel" destination="2yR-HI-h93" id="veV-8g-KuT"/>
                         <outlet property="keyboardToolbar" destination="6YF-WD-7Gl" id="VTH-v2-tZo"/>
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
@@ -1783,10 +1784,11 @@ Find us @OrangeParc.com</string>
                         <segue destination="0Oa-z7-ur9" kind="push" identifier="ChooseImageUsingGoogleImage" id="eux-Wc-ckh"/>
                         <segue destination="jyJ-uT-gZE" kind="push" identifier="moviewAutoCompletion" id="LVt-bk-MFl"/>
                         <segue destination="aqP-Jo-YAA" kind="push" identifier="FinshCreateGoToSharePart" id="pdb-x7-BbF"/>
+                        <segue destination="ORt-hE-mSa" kind="push" identifier="StartInviteFriend" id="uWA-gI-Coc"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="4632" y="1730"/>
+            <point key="canvasLocation" x="4585" y="1864"/>
         </scene>
         <!--Invite Table View Controller-->
         <scene sceneID="ppp-YU-I9v">
@@ -3220,9 +3222,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3296,12 +3295,20 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
+                <relationship kind="action" name="InviteFriendButtonClicked:"/>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
+                <relationship kind="action" name="deleteEventButton:"/>
+                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="done_Button" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="inviteFriendsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>

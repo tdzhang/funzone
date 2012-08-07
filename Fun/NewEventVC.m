@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *timeIcon;
 @property (weak, nonatomic) IBOutlet UITextView *textFieldEventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTitleHolder;
+@property (weak, nonatomic) IBOutlet UILabel *inviteFriendsLabel;
 
 
 //@property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
@@ -92,6 +93,7 @@
 @synthesize timeIcon = _timeIcon;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
 @synthesize labelEventTitleHolder = _labelEventTitleHolder;
+@synthesize inviteFriendsLabel = _inviteFriendsLabel;
 @synthesize eventType=_eventType;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
 @synthesize eventLocationName=_eventLocationName;
@@ -378,6 +380,7 @@
     [self setTimeIcon:nil];
     [self setDeleteButton:nil];
     [self setDone_Button:nil];
+    [self setInviteFriendsLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -802,6 +805,18 @@
 }
 
 #pragma mark - action sheet
+- (IBAction)InviteFriendButtonClicked:(id)sender {
+    if ([self.invitedFriend count]==0) {
+        [self performSegueWithIdentifier:@"StartInviteFriend" sender:self];
+    } else {
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Invite Friends" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Remove Friends",@"Add Friends",nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+}
+
+
+
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Coming Saturday",@"Coming Sunday",@"Pick a time",@"Any Time", nil];
@@ -835,9 +850,6 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     //for the when to go action sheet
     NSLog(@"%@",actionSheet.title);
-    
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Coming Saturday",@"Coming Sunday",@"Pick a time",@"Any Time", nil];
-    
     
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
@@ -942,6 +954,18 @@
             [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
         }
     }
+    else if([actionSheet.title isEqualToString:@"Invite Friends"]){
+        if(buttonIndex == 0){
+            //remove friend
+            [self.invitedFriend removeAllObjects];
+            [self.inviteFriendsLabel setText:@"Invite Friends"];
+        }
+        else if(buttonIndex ==1){
+            //add friend
+            [self performSegueWithIdentifier:@"StartInviteFriend" sender:self];
+        }
+    }
+    
 }
 
 
@@ -1244,11 +1268,31 @@
     //NSLog(@"input person:%@",person.firstName);
     NSString * key=person.user_name;
     [self.invitedFriend setObject:(id)person forKey:key];
+    //update the display label
+    if ([self.invitedFriend count]==0) {
+        [self.inviteFriendsLabel setText:@"Invite friends"];
+    }
+    else if ([self.invitedFriend count]==1){
+        [self.inviteFriendsLabel setText:@"1 friend"];
+    }
+    else{
+        [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+    }
 }
 
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
     NSString * key=person.user_name;
     [self.invitedFriend removeObjectForKey:key];
+
+    if ([self.invitedFriend count]==0) {
+        [self.inviteFriendsLabel setText:@"Invite friends"];
+    }
+    else if ([self.invitedFriend count]==1){
+        [self.inviteFriendsLabel setText:@"1 friend"];
+    }
+    else{
+        [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+    }
 }
 
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{

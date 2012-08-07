@@ -473,6 +473,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
         //add the object in the alreadySelected Dictionary
         [alreadySelected removeObjectForKey:nameText];
         self.alreadySelectedContacts = alreadySelected;
+        
+        [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
         //activate the delegate method
         [self.delegate DeleteContactInformtionToPeopleList:person];
 
