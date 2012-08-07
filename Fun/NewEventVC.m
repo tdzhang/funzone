@@ -67,6 +67,8 @@
 @property (nonatomic,strong) NSMutableDictionary *invitedFriend;
 @property (nonatomic,strong) NSArray* invitedFriendLastReceivedJson;
 
+//used to set the 1st into set teh title part 1st responser
+@property (nonatomic) BOOL isnotFirstTime;
 
 @end
 
@@ -128,8 +130,11 @@
 @synthesize invitedFriend=_invitedFriend;
 @synthesize invitedFriendLastReceivedJson=_invitedFriendLastReceivedJson;
 
+//used to set the 1st into set teh title part 1st responser
+@synthesize isnotFirstTime=_isnotFirstTime;
 
 #pragma mark - self defined synthesize
+
 //used to invite inner friend(following)
 -(NSMutableDictionary *)invitedFriend{
     if (!_invitedFriend) {
@@ -324,6 +329,12 @@
     //used to add the additional keyboard done toobar 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])) {
+        self.isnotFirstTime=YES;
+        [self.textFieldEventTitle becomeFirstResponder];
+    }
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -346,6 +357,7 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+
 }
 
 - (void)viewDidUnload{
@@ -1040,13 +1052,23 @@
     [UIView commitAnimations];
 }
 
+#pragma mark - textview protocal delegate method
+-(void)textViewDidChange:(UITextView *)textView{
+    if ([textView.text length]>0) {
+        [self.labelEventTitleHolder setHidden:YES];
+    }
+    else {
+        [self.labelEventTitleHolder setHidden:NO];
+    }
+}
+
 
 #pragma mark - keyboard additional help bar settings
 - (IBAction)leaveEditMode:(UIBarButtonItem *)sender {
     NSString *enteredText=[self.textFieldEventTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     enteredText=[enteredText stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     if ([enteredText length]==0) {
-        [self.labelEventTitleHolder setHidden:NO];
+        //[self.labelEventTitleHolder setHidden:NO];
     }
     [self.textFieldEventTitle resignFirstResponder];
 }
@@ -1055,7 +1077,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.25];
     
-    [self.labelEventTitleHolder setHidden:YES];
+    //[self.labelEventTitleHolder setHidden:YES];
     CGRect frame = self.keyboardToolbar.frame;
     frame.origin.y = self.view.frame.size.height - 260.0;
     self.keyboardToolbar.frame = frame;
