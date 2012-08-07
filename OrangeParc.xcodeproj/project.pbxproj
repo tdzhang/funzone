@@ -71,6 +71,8 @@
 		0F69256C15D083E20006EAFE /* powered-by-google-on-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F69256B15D083E20006EAFE /* powered-by-google-on-white@2x.png */; };
 		0F6C5B1615C83C9200A95CEE /* ActivityTabeleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F6C5B1415C83C9200A95CEE /* ActivityTabeleViewController.h */; };
 		0F6C5B1715C83C9200A95CEE /* ActivityTabeleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C5B1515C83C9200A95CEE /* ActivityTabeleViewController.m */; };
+		0F8465E615D09B6100D5FC69 /* MyFollowerTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F8465E415D09B6100D5FC69 /* MyFollowerTableViewController.h */; };
+		0F8465E715D09B6100D5FC69 /* MyFollowerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */; };
 		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
 		0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */; };
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
@@ -367,6 +369,8 @@
 		0F69256B15D083E20006EAFE /* powered-by-google-on-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-white@2x.png"; sourceTree = "<group>"; };
 		0F6C5B1415C83C9200A95CEE /* ActivityTabeleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTabeleViewController.h; sourceTree = "<group>"; };
 		0F6C5B1515C83C9200A95CEE /* ActivityTabeleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTabeleViewController.m; sourceTree = "<group>"; };
+		0F8465E415D09B6100D5FC69 /* MyFollowerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowerTableViewController.h; sourceTree = "<group>"; };
+		0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowerTableViewController.m; sourceTree = "<group>"; };
 		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
 		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
 		0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAndViewCommentTVC.h; sourceTree = "<group>"; };
@@ -838,6 +842,8 @@
 				0F0EA75615C0FA930062BA1B /* custom view */,
 				0F0EA75215C0F9C80062BA1B /* MyFollowingTableViewController.h */,
 				0F0EA75315C0F9C80062BA1B /* MyFollowingTableViewController.m */,
+				0F8465E415D09B6100D5FC69 /* MyFollowerTableViewController.h */,
+				0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */,
 				0F60F3FC15BC6A0A00053D25 /* ProfilePageViewController.h */,
 				0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */,
 				0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */,
@@ -1390,6 +1396,7 @@
 				0FD5B90015CF840900927153 /* InviteTableViewController.h in Headers */,
 				0FD5B90415CF87A600927153 /* InviteFriendObject.h in Headers */,
 				0FD5B90815CF8E2900927153 /* InviteFriendTableViewCell.h in Headers */,
+				0F8465E615D09B6100D5FC69 /* MyFollowerTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1695,6 +1702,7 @@
 				0FD5B90115CF840900927153 /* InviteTableViewController.m in Sources */,
 				0FD5B90515CF87A600927153 /* InviteFriendObject.m in Sources */,
 				0FD5B90915CF8E2900927153 /* InviteFriendTableViewCell.m in Sources */,
+				0F8465E715D09B6100D5FC69 /* MyFollowerTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

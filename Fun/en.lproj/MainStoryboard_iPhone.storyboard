@@ -105,6 +105,9 @@
                                                 <state key="highlighted">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="IKj-TI-dFE" kind="push" id="7Gk-mh-Cu5"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Pqi-bq-4QV">
                                                 <rect key="frame" x="164" y="45" width="60" height="21"/>
@@ -1925,6 +1928,9 @@ Find us @OrangeParc.com</string>
                                                 <state key="highlighted">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="GBr-L9-MMr" kind="push" identifier="viewFollowerUser" id="lj9-Kp-Mxk"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ro9-jb-Vwh">
                                                 <rect key="frame" x="182" y="31" width="24" height="24"/>
@@ -2034,6 +2040,56 @@ Find us @OrangeParc.com</string>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2209" y="434"/>
+        </scene>
+        <!--My Follower Table View Controller-->
+        <scene sceneID="ORx-qh-gxk">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aBM-Nv-4TO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="GBr-L9-MMr" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="l3R-0z-I3I">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="0Fn-J4-Xv2">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="GBr-L9-MMr" id="1tG-RS-kEV"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Tcp-WP-TRr">
+                                <rect key="frame" x="0.0" y="66" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GBr-L9-MMr" id="p5q-We-2KF"/>
+                            <outlet property="delegate" destination="GBr-L9-MMr" id="zsc-wR-zZL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nQl-lg-tHN"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="lo5-6s-IKw" id="X92-Zd-4bD"/>
+                    </connections>
+                </tableViewController>
+                <searchDisplayController id="lo5-6s-IKw">
+                    <connections>
+                        <outlet property="delegate" destination="GBr-L9-MMr" id="8X1-73-krW"/>
+                        <outlet property="searchBar" destination="0Fn-J4-Xv2" id="se7-7d-s53"/>
+                        <outlet property="searchContentsController" destination="GBr-L9-MMr" id="1ZD-6J-jI1"/>
+                        <outlet property="searchResultsDataSource" destination="GBr-L9-MMr" id="m8O-nm-DBB"/>
+                        <outlet property="searchResultsDelegate" destination="GBr-L9-MMr" id="PT8-7J-Ogg"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3357" y="488"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="ypc-jh-bEo">
@@ -3080,6 +3136,56 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="1177" y="1488"/>
         </scene>
+        <!--My Follower Table View Controller-->
+        <scene sceneID="Udb-rb-o0v">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="0UQ-HB-AfJ">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="IKj-TI-dFE" id="2Ie-vy-K8j"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="NfN-c4-ddN">
+                                <rect key="frame" x="0.0" y="66" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IKj-TI-dFE" id="OLg-jq-idc"/>
+                            <outlet property="delegate" destination="IKj-TI-dFE" id="3gS-Ol-zHz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="3iG-as-FTI"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="lo5-6s-IKw" id="bRx-Cl-0n9"/>
+                    </connections>
+                </tableViewController>
+                <searchDisplayController id="09t-KF-Sc2">
+                    <connections>
+                        <outlet property="delegate" destination="IKj-TI-dFE" id="X7l-wj-ec6"/>
+                        <outlet property="searchBar" destination="0UQ-HB-AfJ" id="X5s-3E-KoL"/>
+                        <outlet property="searchContentsController" destination="IKj-TI-dFE" id="TAM-yr-vWa"/>
+                        <outlet property="searchResultsDataSource" destination="IKj-TI-dFE" id="Xo8-6b-NgG"/>
+                        <outlet property="searchResultsDelegate" destination="IKj-TI-dFE" id="zBm-rI-weL"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3301" y="1033"/>
+        </scene>
     </scenes>
     <resources>
         <image name="07-map-marker.png" width="28" height="46"/>
@@ -3151,9 +3257,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3218,6 +3321,9 @@ Find us @OrangeParc.com</string>
         <class className="MovieAotoCompletionVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
         </class>
+        <class className="MyFollowerTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowerTableViewController.h"/>
+        </class>
         <class className="MyFollowingTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
         </class>
@@ -3245,6 +3351,7 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3296,11 +3403,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eX7-7v-GIv"/>
-        <segue reference="Yrc-z9-85p"/>
+        <segue reference="nyH-Sx-6aU"/>
         <segue reference="maZ-xV-hRy"/>
-        <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
         <segue reference="Hfw-Db-bjl"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="eX7-7v-GIv"/>
     </inferredMetricsTieBreakers>
 </document>
