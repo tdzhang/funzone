@@ -120,6 +120,7 @@
         if (indexPath.row == 0) {
             //like use on face book(start to generate the facebook like  Request)
             [self likeUsOnFaceBook];
+            
         }
     }
     else if (indexPath.section ==2){
@@ -130,6 +131,7 @@
         }
          */
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
