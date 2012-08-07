@@ -1522,7 +1522,7 @@ Find us @OrangeParc.com</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="3r8-m5-n6x">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -1606,7 +1606,7 @@ Find us @OrangeParc.com</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="UOZ-GP-9Qo">
-                                <rect key="frame" x="162" y="247" width="145" height="50"/>
+                                <rect key="frame" x="163" y="247" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-dashed-border.png" id="mw1-5B-lbQ">
@@ -1656,11 +1656,11 @@ Find us @OrangeParc.com</string>
                                 </accessibility>
                             </view>
                             <view contentMode="scaleToFill" id="731-iH-70Y">
-                                <rect key="frame" x="12" y="247" width="145" height="50"/>
+                                <rect key="frame" x="13" y="247" width="145" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="event-dashed-border.png" id="NEb-c3-dVN">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="49"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" image="11-clock.png" id="qdx-h4-mF5">
@@ -1699,7 +1699,7 @@ Find us @OrangeParc.com</string>
                                 </accessibility>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="odU-a6-oWR">
-                                <rect key="frame" x="15" y="351" width="290" height="45"/>
+                                <rect key="frame" x="15" y="363" width="290" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Done" backgroundImage="create_account_button.png">
@@ -1714,7 +1714,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xFV-X9-FJO">
-                                <rect key="frame" x="15" y="302" width="290" height="45"/>
+                                <rect key="frame" x="15" y="416" width="290" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Delete" backgroundImage="button-red.png">
@@ -1740,6 +1740,30 @@ Find us @OrangeParc.com</string>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <view contentMode="scaleToFill" id="l2V-mj-ird">
+                                <rect key="frame" x="13" y="301" width="295" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dashed-broad.png" id="LbR-b4-C3F">
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.60000000596046443" contentMode="scaleToFill" image="detail-interested-gray.png" id="GgF-ne-2HC">
+                                        <rect key="frame" x="12" y="15" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Invite friends to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="2yR-HI-h93">
+                                        <rect key="frame" x="40" y="0.0" width="244" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1789,7 +1813,7 @@ Find us @OrangeParc.com</string>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="4893" y="1741"/>
+            <point key="canvasLocation" x="4632" y="1730"/>
         </scene>
         <!--Invite Table View Controller-->
         <scene sceneID="ppp-YU-I9v">
@@ -3192,14 +3216,16 @@ Find us @OrangeParc.com</string>
         <image name="11-clock.png" width="40" height="40"/>
         <image name="Category@2x.png" width="640" height="734"/>
         <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
-        <image name="button-red.png" width="663" height="106"/>
+        <image name="button-red.png" width="967" height="153"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="cancel_button.png" width="250" height="121"/>
         <image name="create_account_button.png" width="1167" height="200"/>
         <image name="current_location_icon.png" width="246" height="246"/>
+        <image name="dashed-broad.png" width="2684" height="484"/>
         <image name="dashed-deal.png" width="1199" height="187"/>
         <image name="deal-pink.png" width="66" height="27"/>
         <image name="detail-interested-color.png" width="40" height="40"/>
+        <image name="detail-interested-gray.png" width="40" height="40"/>
         <image name="detail-pick-color.png" width="40" height="40"/>
         <image name="detail-share-color.png" width="40" height="40"/>
         <image name="detailButton.png" width="11" height="15"/>
@@ -3321,9 +3347,6 @@ Find us @OrangeParc.com</string>
         <class className="MovieAotoCompletionVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
         </class>
-        <class className="MyFollowerTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowerTableViewController.h"/>
-        </class>
         <class className="MyFollowingTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
         </class>
@@ -3351,7 +3374,6 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
