@@ -85,7 +85,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Likes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hG1-AF-N4O">
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hG1-AF-N4O">
                                                 <rect key="frame" x="85" y="45" width="60" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -3459,11 +3459,7 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="6rH-Lj-bNq"/>
-        <segue reference="eX7-7v-GIv"/>
+        <segue reference="sin-Qw-UXs"/>
     </inferredMetricsTieBreakers>
 </document>
