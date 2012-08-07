@@ -532,7 +532,6 @@
         [request setPostValue:self.createEvent_locationName forKey:@"location"];
         [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
         [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
-#warning furthur process of "today" "tomorrow"... to actual date
         [request setPostValue:self.createEvent_time forKey:@"start_time"];
         
         //if it is for user repin
@@ -805,7 +804,7 @@
 #pragma mark - action sheet
 //pop the action sheet of the time selection
 - (IBAction)SelectTime:(UIButton *)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"This weekend",@"Anytime",@"Pick a date", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Comming Saturday",@"Comming Sunday",@"Any Time",@"Pick a date", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -836,29 +835,80 @@
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     //for the when to go action sheet
     NSLog(@"%@",actionSheet.title);
+    
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"When do you want to schedule?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Today",@"Tomorrow",@"Comming Saturday",@"Comming Sunday",@"Pick a date", nil];
+    
+    
     if([actionSheet.title isEqualToString:@"When do you want to schedule?"]){
         if(buttonIndex == 0){
-            [self.labelEventTime setText:@"Today"];
+            // Get current datetime
+            NSDate *currentDateTime = [NSDate date];
+            // Instantiate a NSDateFormatter
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            // Set the dateFormatter format
+            //[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            // Get the date time in NSString
+            NSString *dateInString = [dateFormatter stringFromDate:currentDateTime];
+            [self.labelEventTime setText:dateInString];
         }else if(buttonIndex == 1){
-            [self.labelEventTime setText:@"Tomorrow"];
+            // Get current datetime
+            NSDateComponents *comp = [[NSDateComponents alloc] init];
+            [comp setDay:1];   // add some days so it will become sunday
+            
+            NSCalendar *calender=[NSCalendar currentCalendar];
+            NSDate *date=[calender dateByAddingComponents:comp toDate:[NSDate date] options:0];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            // Get the date time in NSString
+            NSString *dateInString = [dateFormatter stringFromDate:date];
+            [self.labelEventTime setText:dateInString];
+
         }else if(buttonIndex == 2){
-            [self.labelEventTime setText:@"This Weekend"];
+            //next saturday
+            NSDateComponents *weekdayComponents = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+            int currentWeekday = [weekdayComponents weekday]; //[1;7] ... 1 is sunday, 7 is saturday in gregorian calendar
+            
+            NSDateComponents *comp = [[NSDateComponents alloc] init];
+            if (7-currentWeekday<0) {
+                [comp setDay:7 - currentWeekday+7];
+            }
+            [comp setDay:7 - currentWeekday];   // add some days so it will become sunday
+            
+            [comp setWeek:0];   // add weeks
+            NSDate *date=[[NSCalendar currentCalendar] dateByAddingComponents:comp toDate:[NSDate date] options:0];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            // Get the date time in NSString
+            NSString *dateInString = [dateFormatter stringFromDate:date];
+            [self.labelEventTime setText:dateInString];
         }else if(buttonIndex == 3){
-            [self.labelEventTime setText:@"Anytime"];
+            //next saturday
+            NSDateComponents *weekdayComponents = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+            int currentWeekday = [weekdayComponents weekday]; //[1;7] ... 1 is sunday, 7 is saturday in gregorian calendar
+            
+            NSDateComponents *comp = [[NSDateComponents alloc] init];
+            if (8-currentWeekday<0) {
+                [comp setDay:8 - currentWeekday+7];
+            }
+            [comp setDay:8 - currentWeekday];   // add some days so it will become sunday
+            
+            [comp setWeek:0];   // add weeks
+            NSDate *date=[[NSCalendar currentCalendar] dateByAddingComponents:comp toDate:[NSDate date] options:0];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            // Get the date time in NSString
+            NSString *dateInString = [dateFormatter stringFromDate:date];
+            [self.labelEventTime setText:dateInString];
         }else if(buttonIndex == 4){
+            //self enter the time
+            [self.labelEventTime setText:@"Anytime"];
+        }else if(buttonIndex == 5){
             //self enter the time
             [self performSegueWithIdentifier:@"chooseTime" sender:self];
         }
-        if (buttonIndex == 5) {
-            [self.labelEventTime setText:@"Find a time"];
-            [self.labelEventTime setFont:[UIFont italicSystemFontOfSize:16]];
-            [self.labelEventTime setTextColor:[UIColor lightGrayColor]];
-            [self.timeIcon setAlpha:0.4];
-        }else {
-            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
-            [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
-            [self.timeIcon setAlpha:0.8];
-        }
+        
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
