@@ -186,7 +186,7 @@
             }
             
             //signout the auth_token
-            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_out.json?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_out.json?auth_token=%@",SECURE_DOMAIN_NAME,[defaults objectForKey:@"login_auth_token"]]];
             ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
             __block ASIFormDataRequest *block_request=request;
             [request setCompletionBlock:^{
@@ -197,9 +197,14 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
                 if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    /*
                     UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log out complete!" message:@"You have successfully logged out." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     success.delegate=self;
                     [success show];
+                     */
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+                    [funAppdelegate.thisTabBarController setSelectedIndex:0];
                 }
                 else{
                     UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[NSString stringWithFormat:@"The logout is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];

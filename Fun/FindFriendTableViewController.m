@@ -56,7 +56,53 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
+    //initial the face book
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    if (!funAppdelegate.facebook) {
+        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        NSLog(@"%@",funAppdelegate.facebook.accessToken);
+        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![funAppdelegate.facebook isSessionValid]) {
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream",
+                                @"read_stream",@"create_event",
+                                @"email",
+                                nil];
+        [funAppdelegate.facebook authorize:permissions];
+    }
+    
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=request;
+    [request setCompletionBlock:^{
+        // Use when fetching text data
+        NSString *responseString = [block_request responseString];
+        NSLog(@"%@",responseString);
+        
+        NSError *error;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
+        self.friends=[SearchedFriend SearchedFriendsWithJson:json];
+        NSLog(@"%d",[self.friends count]);
+        [self.tableView reloadData];
+    }];
+    [request setFailedBlock:^{
+        NSError *error = [block_request error];
+        NSLog(@"%@",error.description);
+    }];
+    
+    //add login auth_token //add content
+    defaults = [NSUserDefaults standardUserDefaults];
+    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+    [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+    [request setRequestMethod:@"POST"];
+    [request startAsynchronous];
 }
 
 - (void)viewDidUnload
@@ -164,25 +210,7 @@
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    //initial the face book
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    if (!funAppdelegate.facebook) {
-        funAppdelegate.facebook = [[Facebook alloc] initWithAppId:@"433716793339720" andDelegate:(id)funAppdelegate];
-    }
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        NSLog(@"%@",funAppdelegate.facebook.accessToken);
-        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    if (![funAppdelegate.facebook isSessionValid]) {
-        NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                @"publish_stream",
-                                @"read_stream",@"create_event",
-                                @"email",
-                                nil];
-        [funAppdelegate.facebook authorize:permissions];
-    }
+    
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/find_friends",CONNECT_DOMIAN_NAME]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -208,6 +236,7 @@
          */
     }];
 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //add login auth_token //add content
     defaults = [NSUserDefaults standardUserDefaults];
     [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];

@@ -129,7 +129,7 @@
         return;
     }
     //login
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in.json",CONNECT_DOMIAN_NAME]];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in.json",SECURE_DOMAIN_NAME]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
@@ -198,7 +198,7 @@
 
 #pragma mark - facebook related process
 -(void)faceBookLoginFinished{
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in",CONNECT_DOMIAN_NAME]];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in",SECURE_DOMAIN_NAME]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     __block ASIFormDataRequest *block_request=request;
     [request setCompletionBlock:^{
