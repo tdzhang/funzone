@@ -1288,9 +1288,14 @@
     }
     else if ([self.invitedFriend count]==1){
         [self.inviteFriendsLabel setText:@"1 friend"];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.timeIcon setAlpha:0.8];
     }
     else{
         [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
     }
 }
 
