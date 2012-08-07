@@ -304,7 +304,11 @@
         //change the button title based on the BOOL isOwner
         if (self.isEventOwner) {
             [self.actionButtonHolder setHidden:YES];
+<<<<<<< HEAD
             self.editButton.frame = CGRectMake(240, 190, 70, 30);
+=======
+            self.editButton.frame = CGRectMake(250, 190, 60, 30);
+>>>>>>> minor changes
             [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         }
         else{

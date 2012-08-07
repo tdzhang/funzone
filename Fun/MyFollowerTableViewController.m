@@ -230,7 +230,7 @@
     [cell.unfollowButton addTarget: self
                             action: @selector(buttonPressed:withEvent:)
                   forControlEvents: UIControlEventTouchUpInside];
-    
+        
     //set the profile image
     NSURL* backGroundImageUrl=[NSURL URLWithString:cell.user_pic];
     if (![Cache isURLCached:backGroundImageUrl]) {

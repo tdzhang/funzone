@@ -61,7 +61,7 @@
 //the property used to chaneg the UI between edit and create
 @property (nonatomic) BOOL isEditPage;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *done_Button;
 
 //used to invite inner friend(following)
 @property (nonatomic,strong) NSMutableDictionary *invitedFriend;
@@ -76,7 +76,7 @@
 
 @implementation NewEventVC
 @synthesize deleteButton = _deleteButton;
-@synthesize doneButton = _doneButton;
+@synthesize done_Button = _done_Button;
 @synthesize showNewButtonFlag=_showNewButtonFlag;
 @synthesize personProfileImage = _personProfileImage;
 @synthesize imgPicker=_imgPicker;
@@ -377,7 +377,7 @@
     [self setLocationIcon:nil];
     [self setTimeIcon:nil];
     [self setDeleteButton:nil];
-    [self setDoneButton:nil];
+    [self setDone_Button:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -1132,9 +1132,9 @@
     frame.origin.y = self.view.frame.size.height - 260.0;
     self.keyboardToolbar.frame = frame;
     [self.keyboardToolbar setHidden:FALSE];
-    UIBarButtonItem *doneButton = [self.keyboardToolbar.items objectAtIndex:0];
-    doneButton.target = self;
-    doneButton.action = @selector(leaveEditMode);
+    UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:0];
+    doneButtonKeyBoard.target = self;
+    doneButtonKeyBoard.action = @selector(leaveEditMode);
     [UIView commitAnimations];
 }
 
