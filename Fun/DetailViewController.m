@@ -1317,6 +1317,9 @@
     float touchPointX=touchPoint.x;
     //get the index of the touched block view
     int index=(touchPointX-5)/40;
+    if (index >= [self.interestedPeople count]) {
+        return;
+    }
     ProfileInfoElement* tapped_element=[self.interestedPeople objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
@@ -1334,6 +1337,9 @@
     float touchPointX=touchPoint.x;
     //get the index of the touched block view
     int index=(touchPointX-5)/40;
+    if (index >= [self.likedPeople count]) {
+        return;
+    }
     ProfileInfoElement* tapped_element=[self.likedPeople objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
