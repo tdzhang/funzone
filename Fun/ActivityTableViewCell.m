@@ -53,6 +53,7 @@
     NSLog(@"%@",[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]);
     NSLog(@"%@",[NSString stringWithFormat:@"%d",COMMENT_EVENT]);
     NSLog(@"%@",[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]);
+    [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:13]];
     if ([ [NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event/////
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ is interested in your event.",self.user_name]];
