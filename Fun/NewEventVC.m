@@ -71,6 +71,8 @@
 //used to set the 1st into set teh title part 1st responser
 @property (nonatomic) BOOL isnotFirstTime;
 
+//used for server log
+@property (nonatomic) int via;
 @end
 
 //////////////////////////////////////
@@ -135,6 +137,9 @@
 //used to set the 1st into set teh title part 1st responser
 @synthesize isnotFirstTime=_isnotFirstTime;
 
+//used for server log
+@synthesize via=_via;
+
 #pragma mark - self defined synthesize
 
 //used to invite inner friend(following)
@@ -195,6 +200,11 @@
 
 
 #pragma mark - self defined
+//used for server log
+-(void)presetVia:(int)via{
+    self.via=via;
+}
+
 //make the Page for Edit before segue here
 -(void)presetIsEditPageToTrue{
     self.isEditPage=YES;
@@ -536,6 +546,8 @@
         [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
         [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
         [request setPostValue:self.createEvent_time forKey:@"start_time"];
+        //used for server log
+        [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
         
         //if it is for user repin
         if (self.detail_creator_id) {
@@ -629,7 +641,8 @@
         [request setPostValue:self.createEvent_address forKey:@"address"];
         NSLog(@"%@",self.createEvent_locationName);
         [request setPostValue:self.createEvent_locationName forKey:@"location"];
-        
+        //used for server log
+        [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
         if ([self.createEvent_latitude floatValue]>0.02||[self.createEvent_latitude floatValue]<-0.02) {
             [request setPostValue:self.detail_latitude forKey:@"latitude"];
         }
@@ -662,6 +675,7 @@
             [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
             [request setPostValue:self.detail_event_id forKey:@"event_id"];
             [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
+            
             if ([self.detail_latitude floatValue]>0.02||[self.detail_latitude floatValue]<-0.02) {
                 [request setPostValue:self.detail_latitude forKey:@"latitude"];
             }

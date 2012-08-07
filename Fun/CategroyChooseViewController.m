@@ -132,6 +132,7 @@
         }
         //make the next page used for create event
         [(NewEventVC *)segue.destinationViewController presetIsEditPageToFalse];
+        [(NewEventVC *)segue.destinationViewController presetVia:CREATE_EVENT];
     }
     //clean up the unprocess UIView up rolling stuff(shadowing keyboard related stuff)
     if (self.uIViewUpFlag) {

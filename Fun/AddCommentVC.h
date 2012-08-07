@@ -17,4 +17,7 @@
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
 @property (nonatomic,strong) NSArray *comments;
+
+//used for server log
+@property (nonatomic)int via;
 @end

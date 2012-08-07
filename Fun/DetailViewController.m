@@ -392,6 +392,7 @@
         return;
     }
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
+    
 }
 
 //handle the action: joinButtonClicked
@@ -400,11 +401,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url;
     if ([self.isJoined isEqualToString:@"0"]) {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/interest?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
         [self.join_label setText:@"Joined"];
         self.isJoined = @"1"; 
     } else {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/uninterest?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/uninterest?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
         [self.join_label setText:@"Join"];
         self.isJoined = @"0";
     }
@@ -433,11 +434,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url;
     if ([self.isLiked isEqualToString:@"0"]) {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
         [self.like_label setText:@"Unlike"];
         self.isLiked=@"1";
     } else {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/unlike?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/unlike?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
         [self.like_label setText:@"Like"];
         self.isLiked=@"0";
     }
@@ -470,17 +471,23 @@
      [pop showFromTabBar:self.tabBarController.tabBar];
      */
     if([actionSheet.title isEqualToString:@"Choose To Share:"]){
+        NSString *channel=nil;
+        
         //this is for share, the message/email is different
         self.mysendMessageType=@"share";
         if (buttonIndex == 0) {
             NSLog(@"email");
             self.preDefinedMode=@"email";
             [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+            
+            channel=[NSString stringWithFormat:@"%d",VIA_EMAIL];
         }
         else if (buttonIndex == 1) {
             NSLog(@"SMS message");
             self.preDefinedMode=@"message";
             [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
+            
+            channel=[NSString stringWithFormat:@"%d",VIA_SMS];
         }
         else if (buttonIndex == 2) {
             NSLog(@"facebook");
@@ -514,6 +521,8 @@
                 [funAppdelegate.facebook authorize:permissions];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
             }
+            
+            channel=[NSString stringWithFormat:@"%d",VIA_FACEBOOK];
         }
         else if (buttonIndex == 3) {
             NSLog(@"twitter");
@@ -528,13 +537,27 @@
                     [self presentViewController:tweetViewController animated:YES completion:nil];
                 }
             }
+            
+            channel=[NSString stringWithFormat:@"%d",VIA_TWITTER];
         }
         else if (buttonIndex == 4) {
             NSLog(@"wechat");
             UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose A WeChat Way" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share On Moment",@"Send Friend Message", nil];
             pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
             [pop showFromTabBar:self.tabBarController.tabBar];
+            channel=[NSString stringWithFormat:@"%d",VIA_WECHAT];
         }
+        
+        //send log to server
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/share?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@&channel=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"],channel]];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        [request setCompletionBlock:^{}];
+        [request setFailedBlock:^{}];
+        [request setRequestMethod:@"GET"];
+        [request startAsynchronous];
+        
+        
     }
     else if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
         if(buttonIndex == 0){
@@ -544,7 +567,6 @@
         else if(buttonIndex == 1){
             //send message to friend
             [self.delegate sendText:[self shareMessagetoSend]];
-            
         }
     }
     else if ([actionSheet.title isEqualToString:@"Invite Friend:"]){
@@ -878,6 +900,7 @@
         } else {
             [newEventVC presetIsEditPageToFalse];
         }
+        [newEventVC presetVia:self.via];
     }
     else if([segue.identifier isEqualToString:@"addAndViewComment"]){
         if ([segue.destinationViewController isKindOfClass:[AddCommentVC class]]) {
@@ -885,6 +908,7 @@
             commentVC.comments=[self.comments copy];
             commentVC.event_id=self.event_id;
             commentVC.shared_event_id=self.shared_event_id;
+            commentVC.via=self.via;
         }
     }
     else if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){

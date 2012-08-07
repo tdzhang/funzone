@@ -22,6 +22,9 @@
 @synthesize shared_event_id=_shared_event_id;
 @synthesize comments=_comments;
 @synthesize data=_data;
+//used for server log
+@synthesize via=_via;
+
 
 #pragma mark - self defined setter and getter
 -(NSArray *)comments{
@@ -44,8 +47,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //judge whether the user is login? if not, do the login
+    //send log to server
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/view_comments?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"]]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setCompletionBlock:^{}];
+    [request setFailedBlock:^{}];
+    [request setRequestMethod:@"GET"];
+    [request startAsynchronous];
+    
+    
+    //judge whether the user is login? if not, do the login
+   defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
@@ -122,6 +135,7 @@
         [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
         [request setPostValue:self.shared_event_id forKey:@"shared_event_id"];
         [request setPostValue:self.addCommentTextView.text forKey:@"comment"];
+        [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
         [request setRequestMethod:@"POST"];
         [request startAsynchronous];
     }

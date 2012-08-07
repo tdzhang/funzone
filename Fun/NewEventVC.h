@@ -27,9 +27,13 @@
 
 @property (nonatomic,strong) NSString *eventType;//used to differentiate the different style for different event category.
 @property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation; //used to store the location infomation that need to show when the location part is segued
+
+
 -(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude  latitude:(NSNumber *)latitude description:(NSString *)description;
 //make the Page for Edit
 -(void)presetIsEditPageToTrue;
 //make the Page for Create
 -(void)presetIsEditPageToFalse;
+//used for server log
+-(void)presetVia:(int)via;
 @end

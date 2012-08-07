@@ -396,7 +396,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="dKU-YC-n8T">
@@ -3203,6 +3203,7 @@ Find us @OrangeParc.com</string>
         <class className="AddCommentVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
             <relationships>
+                <relationship kind="action" name="addCommentButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
@@ -3222,6 +3223,9 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="InviteButtonClicked:"/>
+            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3295,13 +3299,6 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
-                <relationship kind="action" name="CreateEventToSever:"/>
-                <relationship kind="action" name="InviteFriendButtonClicked:"/>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
-                <relationship kind="action" name="deleteEventButton:"/>
-                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -3381,11 +3378,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="Hfw-Db-bjl"/>
-        <segue reference="2Cw-4j-quL"/>
-        <segue reference="I5V-BE-h5K"/>
+        <segue reference="eX7-7v-GIv"/>
         <segue reference="hTB-gn-88u"/>
-        <segue reference="lqc-Cx-NBX"/>
+        <segue reference="6rH-Lj-bNq"/>
+        <segue reference="oxR-j5-unP"/>
+        <segue reference="I5V-BE-h5K"/>
+        <segue reference="2Cw-4j-quL"/>
     </inferredMetricsTieBreakers>
 </document>
