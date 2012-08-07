@@ -29,7 +29,7 @@
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 
-@property (nonatomic,strong)CLLocationManager *current_location_manager;
+@property (nonatomic,weak)CLLocationManager *current_location_manager;
 
 @property(nonatomic,strong)NSDictionary* lastReceivedJson_profile; //used to limite the refresh frequecy
 @property(nonatomic,strong)NSArray* lastReceivedJson_bookmark; //used to limite the refresh frequecy
@@ -118,70 +118,82 @@
     //add login auth_token
     defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        //NSString *responseString = [block_request responseString];
-        //NSLog(@"%@",responseString);
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
-            self.lastReceivedJson_profile=json;
-            //only update the content when there is a content different
-            [self.creatorNameLabel setText:[json objectForKey:@"name"]];
-            [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
-            [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
-            [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-            NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
-            if (![Cache isURLCached:url]) {
-                //using high priority queue to fetch the image
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                    //get the image data
-                    NSData * imageData = nil;
-                    imageData = [[NSData alloc] initWithContentsOfURL: url];
-                    
-                    if ( imageData == nil ){
-                        //if the image data is nil, the image url is not reachable. using a default image to replace that
-                        //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
-                        imageData=UIImagePNGRepresentation(image);
-                        
-                        if(imageData){
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                    if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
+                        self.lastReceivedJson_profile=json;
+                        //only update the content when there is a content different
+                        [self.creatorNameLabel setText:[json objectForKey:@"name"]];
+                        [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
+                        [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
+                        [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
+                        NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
+                        if (![Cache isURLCached:url]) {
+                            //using high priority queue to fetch the image
+                            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                                //get the image data
+                                NSData * imageData = nil;
+                                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                                
+                                if ( imageData == nil ){
+                                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                    //NSLog(@"downloaded %@ error, using a default image",url);
+                                    UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                                    imageData=UIImagePNGRepresentation(image);
+                                    
+                                    if(imageData){
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [Cache addDataToCache:url withData:imageData];
+                                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                        });
+                                    }
+                                }
+                                else {
+                                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                    //NSLog(@"downloaded %@",url);
+                                    if(imageData){
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [Cache addDataToCache:url withData:imageData];
+                                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                        else {
                             dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
                             });
                         }
                     }
-                    else {
-                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                        //NSLog(@"downloaded %@",url);
-                        if(imageData){
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [Cache addDataToCache:url withData:imageData];
-                                [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
-                            });
-                        }
-                    }
-                });
-            }
-            else {
-                dispatch_async( dispatch_get_main_queue(),^{
-                    [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
-                });
-            }
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
-    }];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+                
+            });
+            
+        });
+        
+        
     
     //quest the most recent 10 events
     self.refresh_page_num=2; //the next page that need to refresh is 2

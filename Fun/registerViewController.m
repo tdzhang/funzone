@@ -133,44 +133,55 @@
     //else, start too register
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users.json",SECURE_DOMAIN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        NSLog(@"all %@",[json allKeys]);
-        //get the response and the autu_token
-        if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
-            //if the register is finished, get the auth_token
-            //save the login_auth_token for later use
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSString *login_auth_token=[json objectForKey:@"auth_token"];
-            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
-            [defaults synchronize];
-            //then return to the previouse page, quit login page
-            UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Registration Success" message:@"The registration is finished." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            success.delegate=self;
-            [success show];
-        }
-        else {
-            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            error.delegate=self;
-            [error show];
-        }
-    }];
-    [request setFailedBlock:^{
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        error.delegate=self;
-        [error show];
-    }];
     
-    [request setPostValue:self.firstNameTextField.text forKey:@"user[username]"];
-    [request setPostValue:self.emailTextField.text forKey:@"user[email]"];
-    [request setPostValue:self.passwordTextField.text forKey:@"user[password]"];
-    [request setPostValue:self.rePasswordTextField.text forKey:@"password_confirmation"];
-    [request setRequestMethod:@"POST"];
-    [request startAsynchronous];
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:self.firstNameTextField.text forKey:@"user[username]"];
+        [request setPostValue:self.emailTextField.text forKey:@"user[email]"];
+        [request setPostValue:self.passwordTextField.text forKey:@"user[password]"];
+        [request setPostValue:self.rePasswordTextField.text forKey:@"password_confirmation"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSLog(@"all %@",[json allKeys]);
+                //get the response and the autu_token
+                if ([[json objectForKey:@"response"]isEqualToString:@"ok"]) {
+                    //if the register is finished, get the auth_token
+                    //save the login_auth_token for later use
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    NSString *login_auth_token=[json objectForKey:@"auth_token"];
+                    [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+                    [defaults synchronize];
+                    //then return to the previouse page, quit login page
+                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Registration Success" message:@"The registration is finished." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    success.delegate=self;
+                    [success show];
+                }
+                else {
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    error.delegate=self;
+                    [error show];
+                }
+            }
+            else{
+                //connect error
+                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                error.delegate=self;
+                [error show];
+            }
+            
+        });
+        
+    });
     
 }
 
@@ -199,42 +210,54 @@
 #pragma mark - facebook related process
 -(void)faceBookLoginFinished{
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in",SECURE_DOMAIN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        NSLog(@"all %@",[json allKeys]);
-        //if login success, then return to the page
-        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            //save the login_auth_token for later use
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSString *login_auth_token=[json objectForKey:@"auth_token"];
-            [defaults setValue:login_auth_token forKey:@"login_auth_token"];
-            [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
-            NSLog(@"%@",[json objectForKey:@"user_id"]);
-            [defaults synchronize];
-            //then return to the previouse page, quit login page
-            [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
-        }
-        else {
-            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            error.delegate=self;
-            [error show];
-        }
-    }];
-    [request setFailedBlock:^{
-        UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        error.delegate=self;
-        [error show];
-    }];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"facebook_token"];
-    [request setPostValue:@"true" forKey:@"iphone"];
-    [request setRequestMethod:@"POST"];
-    [request startAsynchronous];
+
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"facebook_token"];
+        [request setPostValue:@"true" forKey:@"iphone"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSLog(@"all %@",[json allKeys]);
+                //if login success, then return to the page
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    //save the login_auth_token for later use
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    NSString *login_auth_token=[json objectForKey:@"auth_token"];
+                    [defaults setValue:login_auth_token forKey:@"login_auth_token"];
+                    [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
+                    NSLog(@"%@",[json objectForKey:@"user_id"]);
+                    [defaults synchronize];
+                    //then return to the previouse page, quit login page
+                    [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                }
+                else {
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    error.delegate=self;
+                    [error show];
+                }
+            }
+            else{
+                //connect error
+                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                error.delegate=self;
+                [error show];
+            }
+            
+        });
+        
+    });
 }
 
 

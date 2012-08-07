@@ -166,43 +166,55 @@
             
             //signout the auth_token
             NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_out.json?auth_token=%@",SECURE_DOMAIN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-            __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-            __unsafe_unretained ASIFormDataRequest *request = block_request;
-            [request setCompletionBlock:^{
-                // Use when fetching text data
-                NSString *responseString = [block_request responseString];
-                NSLog(@"%@",responseString);
-                
-                NSError *error;
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    /*
-                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log out complete!" message:@"You have successfully logged out." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    success.delegate=self;
-                    [success show];
-                     */
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-                    [funAppdelegate.thisTabBarController setSelectedIndex:0];
-                }
-                else{
-                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[NSString stringWithFormat:@"The logout is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    error.delegate=self;
-                    [error show];
-                }
-            }];
-            [request setFailedBlock:^{
-                NSError *error = [block_request error];
-                NSLog(@"%@",error.description);
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Log Out Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                notsuccess.delegate=self;
-                [notsuccess show];
-            }];
             
-            //add login auth_token //add content
-            //[request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-            [request setRequestMethod:@"DELETE"];
-            [request startAsynchronous];
+            ///////////////////////////////////////////////////////////////////////////
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"DELETE"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+                
+                dispatch_async( dispatch_get_main_queue(),^{
+                    if (code==200) {
+                        //success
+                        // Use when fetching text data
+                        NSString *responseString = [request responseString];
+                        NSLog(@"%@",responseString);
+                        
+                        NSError *error;
+                        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                            /*
+                             UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log out complete!" message:@"You have successfully logged out." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                             success.delegate=self;
+                             [success show];
+                             */
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+                            [funAppdelegate.thisTabBarController setSelectedIndex:0];
+                        }
+                        else{
+                            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[NSString stringWithFormat:@"The logout is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                            error.delegate=self;
+                            [error show];
+                        }
+                    }
+                    else{
+                        //connect error
+                        NSError *error = [request error];
+                        NSLog(@"%@",error.description);
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Log Out Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        notsuccess.delegate=self;
+                        [notsuccess show];
+                    }
+                    
+                });
+                
+            });
+            
+            
             
             [defaults setValue:nil forKey:@"login_auth_token"];
             [defaults synchronize];

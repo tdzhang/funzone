@@ -77,35 +77,43 @@
     }
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/top_users",CONNECT_DOMIAN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        
-        NSError *error;
-        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        self.topfriends=[SearchedFriend TopFriendsWithJson:json];
-        //NSLog(@"%d",[self.topfriends count]);
-        [self.tableView reloadData];
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        /*
-         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-         notsuccess.delegate=self;
-         [notsuccess show];
-         */
-    }];
-    
-    //add login auth_token //add content
-    defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
 
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        //add login auth_token //add content
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                self.topfriends=[SearchedFriend TopFriendsWithJson:json];
+                //NSLog(@"%d",[self.topfriends count]);
+                [self.tableView reloadData];
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+            }
+            
+        });
+        
+    });
+    
 }
 
 - (void)viewDidUnload

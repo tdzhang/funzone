@@ -27,7 +27,7 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *tapped_creator_id;
-@property (nonatomic,strong) CLLocationManager *myLocationManager;
+@property (nonatomic,weak) CLLocationManager *myLocationManager;
 @end
 
 @implementation ExploreViewController

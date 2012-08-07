@@ -199,77 +199,99 @@
     if ([self.actionCategory isEqualToString:@"follow"]) {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
         NSLog(@"%@",url);
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
-            NSError *error;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
             
-                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    success.delegate=self;
-                    [success show];
-                    [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-                    self.actionCategory=@"unfollow";
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                    
+                    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        success.delegate=self;
+                        [success show];
+                        [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+                        self.actionCategory=@"unfollow";
+                    }
+                    else {
+                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        unsuccess.delegate=self;
+                        [unsuccess show];
+                    }
+                    [self.actionButton setEnabled:YES];
                 }
-                else {
-                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    unsuccess.delegate=self;
-                    [unsuccess show];
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                    [self.actionButton setEnabled:YES];
                 }
-            [self.actionButton setEnabled:YES];
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            notsuccess.delegate=self;
-            [notsuccess show];
-            [self.actionButton setEnabled:YES];
-        }];
-        //add login auth_token
-        [request setRequestMethod:@"GET"];
-        [request startAsynchronous];
+                
+            });
+            
+        });
     }
     else if ([self.actionCategory isEqualToString:@"unfollow"]) {
         NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
-            NSError *error;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
 
-                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    success.delegate=self;
-                    [success show];
-                    [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
-                    self.actionCategory=@"follow";
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                    
+                    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        success.delegate=self;
+                        [success show];
+                        [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
+                        self.actionCategory=@"follow";
+                    }
+                    else {
+                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        unsuccess.delegate=self;
+                        [unsuccess show];
+                    }
+                    [self.actionButton setEnabled:YES];
                 }
-                else {
-                    UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    unsuccess.delegate=self;
-                    [unsuccess show];
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                    [self.actionButton setEnabled:YES];
                 }
-            [self.actionButton setEnabled:YES];
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            notsuccess.delegate=self;
-            [notsuccess show];
-            [self.actionButton setEnabled:YES];
-        }];
-        //add login auth_token
-        [request setRequestMethod:@"GET"];
-        [request startAsynchronous];
+                
+            });
+            
+        });
     }
     else if ([self.actionCategory isEqualToString:@"invite"]) {
         [self iniviteByPostingOnOtherFacebookWall];

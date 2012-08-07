@@ -79,30 +79,42 @@
     
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        
-        NSError *error;
-        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        self.friends=[SearchedFriend SearchedFriendsWithJson:json];
-        NSLog(@"%d",[self.friends count]);
-        [self.tableView reloadData];
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-    }];
     
-    //add login auth_token //add content
-    defaults = [NSUserDefaults standardUserDefaults];
-    [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-    [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-    [request setRequestMethod:@"POST"];
-    [request startAsynchronous];
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        //add login auth_token //add content
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                self.friends=[SearchedFriend SearchedFriendsWithJson:json];
+                NSLog(@"%d",[self.friends count]);
+                [self.tableView reloadData];
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+            }
+            
+        });
+        
+    });
 }
 
 - (void)viewDidUnload
@@ -212,65 +224,86 @@
 {
     
     if ([searchBar.text length]==0) {
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];       
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            //add login auth_token //add content
+            defaults = [NSUserDefaults standardUserDefaults];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
             
-            NSError *error;
-            NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-            self.friends=[SearchedFriend SearchedFriendsWithJson:json];
-            NSLog(@"%d",[self.friends count]);
-            [self.tableView reloadData];
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-        }];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        //add login auth_token //add content
-        defaults = [NSUserDefaults standardUserDefaults];
-        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-        [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-        [request setRequestMethod:@"POST"];
-        [request startAsynchronous];
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    // Use when fetching text data
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+                    
+                    NSError *error;
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    self.friends=[SearchedFriend SearchedFriendsWithJson:json];
+                    NSLog(@"%d",[self.friends count]);
+                    [self.tableView reloadData];
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                }
+                
+            });
+            
+        });
     }
     else {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/find_friends",CONNECT_DOMIAN_NAME]];
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
-            
-            NSError *error;
-            NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-            self.friends=[SearchedFriend SearchedFriendsWithJson:json];
-            NSLog(@"%d",[self.friends count]);
-            [self.tableView reloadData];
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-            /*
-             UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-             notsuccess.delegate=self;
-             [notsuccess show];
-             */
-        }];
         
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        //add login auth_token //add content
-        defaults = [NSUserDefaults standardUserDefaults];
-        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-        [request setPostValue:searchBar.text forKey:@"query"];
-        [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
-        [request setRequestMethod:@"POST"];
-        [request startAsynchronous];
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            //add login auth_token //add content
+            defaults = [NSUserDefaults standardUserDefaults];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:searchBar.text forKey:@"query"];
+            [request setPostValue:[defaults objectForKey:@"FBAccessTokenKey"] forKey:@"access_token"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    // Use when fetching text data
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+                    
+                    NSError *error;
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    self.friends=[SearchedFriend SearchedFriendsWithJson:json];
+                    NSLog(@"%d",[self.friends count]);
+                    [self.tableView reloadData];
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                }
+            });
+            
+        });
+        
+        
         [searchBar resignFirstResponder];
     }
     

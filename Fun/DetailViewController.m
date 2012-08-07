@@ -411,24 +411,42 @@
         [self.join_label setText:@"Join"];
         self.isJoined = @"0";
     }
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            NSLog(@"%@",[NSString stringWithFormat:@"successfully joined."]);
-        } else {
-            NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
-    }];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    
+
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        
+        
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    NSLog(@"%@",[NSString stringWithFormat:@"successfully joined."]);
+                } else {
+                    NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
+                }
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
+            }
+            
+        });
+        
+    });
+    
 }
 
 - (IBAction)likeButtonClicked:(UIButton *)sender {
@@ -444,24 +462,39 @@
         [self.like_label setText:@"Like"];
         self.isLiked=@"0";
     }
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            NSLog(@"%@",[NSString stringWithFormat:@"successfully liked."]);
-        } else {
-            NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description]);
-    }];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    
+    
+
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    NSLog(@"%@",[NSString stringWithFormat:@"successfully liked."]);
+                } else {
+                    NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
+                }
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description]);
+            }
+            
+        });
+        
+    });
 }
 
 #pragma mark - action sheet related stuff
@@ -553,12 +586,19 @@
         //send log to server
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/share?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@&channel=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"],channel]];
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{}];
-        [request setFailedBlock:^{}];
-        [request setRequestMethod:@"GET"];
-        [request startAsynchronous];
+        
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+
+        });
+        
         
         
     }

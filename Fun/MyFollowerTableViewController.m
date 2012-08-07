@@ -54,32 +54,44 @@
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followers?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.other_user_id]];
     }
     NSLog(@"request following:%@",url);
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        NSError *error;
-        NSArray *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
-            //if there is a difference, start to fetch data
-            self.lastReceivedJson=json;
-            self.arrayProfileInfoElements=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:json] mutableCopy];
-            NSLog(@"%d",[self.arrayProfileInfoElements count]);
-            [self.tableView reloadData];
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
-    }];
-    //add login auth_token
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
+                    //if there is a difference, start to fetch data
+                    self.lastReceivedJson=json;
+                    self.arrayProfileInfoElements=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:json] mutableCopy];
+                    NSLog(@"%d",[self.arrayProfileInfoElements count]);
+                    [self.tableView reloadData];
+                }
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+            }
+            
+        });
+        
+    });
 }
 
 - (void)viewDidLoad
@@ -131,32 +143,51 @@
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],element.user_id]];
     }
     NSLog(@"request: %@",url);
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        NSError *error;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[block_request responseData] options:kNilOptions error:&error];
-        if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-            NSLog(@"cool");
-        }
-        else {
-            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Unfollow Error" message:[NSString stringWithFormat:@"The unfollow is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            error.delegate=self;
-            [error show];
-        }
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting unfollow!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
-    }];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    NSLog(@"cool");
+                }
+                else {
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Unfollow Error" message:[NSString stringWithFormat:@"The unfollow is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    error.delegate=self;
+                    [error show];
+                }
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting unfollow!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+            }
+            
+        });
+        
+    });
+    
+    
+    
     
     if (!self.other_user_id) {
         [self.arrayProfileInfoElements removeObjectAtIndex:indexPath.row];

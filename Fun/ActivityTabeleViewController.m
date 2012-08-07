@@ -157,39 +157,50 @@
 */
 #pragma mark - Start Fetching Data
 -(void)startFetchingActivityData{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-        
-        NSError *error;
-        NSArray *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
-            //not equal, update the last reveived json
-            self.lastReceivedJson=json;
-            //deal with json
-            self.activities=[activityElementObject getActivityElementsArrayByJson:json];
-            NSLog(@"Have fetched %d Activities",[self.activities count]);
-            [self.tableView reloadData];
-        }        
-        //reset the tabbat notification number
-        [PushNotificationHandler clearApplicationPushNotifNumber];
-        [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
-    }];
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
 
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        int code=[request responseStatusCode];
+        NSLog(@"%d",code);
+        dispatch_async( dispatch_get_main_queue(),^{
+        if (code==200) {
+            //success
+            NSString *responseString = [request responseString];
+            NSLog(@"%@",responseString);
+            NSError *error;
+            NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+            if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
+                //not equal, update the last reveived json
+                self.lastReceivedJson=json;
+                //deal with json
+                self.activities=[activityElementObject getActivityElementsArrayByJson:json];
+                NSLog(@"Have fetched %d Activities",[self.activities count]);
+                [self.tableView reloadData];
+            }
+            //reset the tabbat notification number
+            [PushNotificationHandler clearApplicationPushNotifNumber];
+            [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
+        }
+        else{
+            //connect error
+            NSError *error = [request error];
+            NSLog(@"%@",error.description);
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }
+        
+        });
+        
+    });
+    
+    
+    
+    
 }
 
 #pragma mark - Table view delegate

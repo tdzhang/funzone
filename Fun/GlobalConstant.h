@@ -149,13 +149,22 @@
 #define VIA_OTHERS_PROFILE 3      // event
 #define VIA_MY_PROFILE 4          // event
 #define VIA_FACEBOOK_SEARCH 5     // profile, find friend
-#define VIA_TOP_USERS 6           // profile, find friend
+#define VIA_POPULAR_USERS 6           // profile, find friend
 #define VIA_ACTIVITY 7            // event, profile
 #define VIA_MY_INTERESTS 8        // event
 #define VIA_EXPLORE_DETAIL 9      // profile(external)
 #define VIA_FEEDS_DETAIL 10       // profile(external)
 #define VIA_INSPIRED_BY 11        // profile(external)
 #define VIA_FACEBOOK_FRIENDS 12     
+#define VIA_MY_FOLLOWINGS  13          // profile
+#define VIA_MY_FOLLOWERS  14           //profile
+#define VIA_OTHERS_FOLLOWINGS  15      // profile
+#define VIA_OTHERS_FOLLOWERS  16       // profile
+#define VIA_ACTIVITY_FOLLOW  17        // profile
+#define VIA_NEW_FACEBOOK_FRIEND  18    // profile
+#define VIA_ACTIVITY_INTEREST  19      // event
+#define VIA_ACTIVITY_COMMENT  20       // event
+#define VIA_ACTIVITY_INVITE  21        // event
 
 // Share Channel
 #define VIA_FACEBOOK 1

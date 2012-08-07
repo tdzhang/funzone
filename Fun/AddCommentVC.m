@@ -47,19 +47,22 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+   
     //send log to server
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/view_comments?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"]]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{}];
-    [request setFailedBlock:^{}];
-    [request setRequestMethod:@"GET"];
-    [request startAsynchronous];
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/view_comments?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"]]];
+        
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        int code=[request responseStatusCode];
+        NSLog(@"%d",code);
+    });
     
     
     //judge whether the user is login? if not, do the login
-   defaults = [NSUserDefaults standardUserDefaults];
+   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
@@ -100,46 +103,53 @@
 - (IBAction)addCommentButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
     if (self.addCommentTextView.text.length>0) {
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/comment",CONNECT_DOMIAN_NAME]];
-
-        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-        __unsafe_unretained ASIFormDataRequest *request = block_request;
-        [request setCompletionBlock:^{
-            // Use when fetching text data
-            NSString *responseString = [block_request responseString];
-            NSLog(@"%@",responseString);
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/comment",CONNECT_DOMIAN_NAME]];
             
-            NSError *error;
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:block_request.responseData options:kNilOptions error:&error];
-            if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                success.delegate=self;
-                //[success show];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            else{
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                notsuccess.delegate=self;
-                [notsuccess show];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }];
-        [request setFailedBlock:^{
-            NSError *error = [block_request error];
-            NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            notsuccess.delegate=self;
-            [notsuccess show];
-        }];
-        
-        //add login auth_token //add content
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-        [request setPostValue:self.shared_event_id forKey:@"shared_event_id"];
-        [request setPostValue:self.addCommentTextView.text forKey:@"comment"];
-        [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
-        [request setRequestMethod:@"POST"];
-        [request startAsynchronous];
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            
+            //add login auth_token //add content
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:self.shared_event_id forKey:@"shared_event_id"];
+            [request setPostValue:self.addCommentTextView.text forKey:@"comment"];
+            [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        success.delegate=self;
+                        //[success show];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                    else{
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        notsuccess.delegate=self;
+                        [notsuccess show];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+                
+            });
+            
+        });
     }
     else {
         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment too short!" message:@"Sorry, your comment is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];

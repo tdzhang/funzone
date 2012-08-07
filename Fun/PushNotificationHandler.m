@@ -39,25 +39,38 @@
     NSLog(@"send the apns token to the sever");
     //handle the new token
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-    }];
     
     //add login auth_token //add content
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"login_auth_token"]) {
-        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-        [request setPostValue:newToken forKey:@"device_token"];
-        [request setRequestMethod:@"POST"];
-        [request startAsynchronous];
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:newToken forKey:@"device_token"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+
+                }
+                
+            });
+            
+        });
+        
     }
     else{
         [defaults setValue:newToken forKey:@"push_notification_token"];
@@ -69,25 +82,39 @@
     NSLog(@"send old apns token to the sever");
     //handle the new token
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
-    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
-    __unsafe_unretained ASIFormDataRequest *request = block_request;
-    [request setCompletionBlock:^{
-        // Use when fetching text data
-        NSString *responseString = [block_request responseString];
-        NSLog(@"%@",responseString);
-    }];
-    [request setFailedBlock:^{
-        NSError *error = [block_request error];
-        NSLog(@"%@",error.description);
-    }];
     
     //add login auth_token //add content
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"login_auth_token"]&&[defaults objectForKey:@"push_notification_token"]) {
-        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
-        [request setPostValue:[defaults objectForKey:@"push_notification_token"] forKey:@"device_token"];
-        [request setRequestMethod:@"POST"];
-        [request startAsynchronous];
+
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:[defaults objectForKey:@"push_notification_token"] forKey:@"device_token"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    // Use when fetching text data
+                    NSString *responseString = [request responseString];
+                    NSLog(@"%@",responseString);
+
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                }
+                
+            });
+            
+        });
     }
 }
 
