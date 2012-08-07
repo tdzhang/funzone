@@ -1135,9 +1135,12 @@
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
     //[self.myScrollView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(290, eventLocation.frame.origin.y + eventLocation.frame.size.height/2-7, 11, 14)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(290, 8, 11, 14)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
-    //[self.myScrollView addSubview:right_Arrow];
+    [self.locationSectionView addSubview:right_Arrow];
+    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(285, 5, 15, 20)];
+    [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.locationSectionView addSubview:showMapButton];
 
 #warning fetch original creator info
     [self handleTheInterestedPeoplePart];
@@ -1145,19 +1148,23 @@
     //handle the comment part
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
     [self handleTheCommentPart];
-    
-    UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
-    [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
-    [self.editButton addSubview:edit_icon];
-    UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 25, 20)];
-    [edit_label setText:@"Edit"];
-    [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
-    [edit_label setBackgroundColor:[UIColor clearColor]];
-    [edit_label setTextColor:[UIColor darkGrayColor]];
-    [self.editButton addSubview:edit_label];
-    [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
+    if (self.isEventOwner) {
+        UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
+        [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
+        [self.editButton addSubview:edit_icon];
+        UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 25, 20)];
+        [edit_label setText:@"Edit"];
+        [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
+        [edit_label setBackgroundColor:[UIColor clearColor]];
+        [edit_label setTextColor:[UIColor darkGrayColor]];
+        [self.editButton addSubview:edit_label];
+        [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
+    }
 }
 
+-(void)showMapButtonClicked{
+    [self performSegueWithIdentifier:@"ViewLocation" sender:self];
+}
 
 #pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
 ////////////////////////////////////////////////
