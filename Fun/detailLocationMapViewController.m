@@ -36,6 +36,12 @@
     //(self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)
     if(self.predefinedAnnotation){
         MKPointAnnotation *annotation=self.predefinedAnnotation;
+        if (annotation.coordinate.latitude <0.1&&annotation.coordinate.latitude>-0.1) {
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"No Map Information" message: [NSString stringWithFormat:@"This event do not have location information"] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            notsuccess.delegate=self;
+            [notsuccess show];
+        }
+        
         MKCoordinateRegion region;
         MKCoordinateSpan span;
         span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;

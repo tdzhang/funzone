@@ -885,11 +885,15 @@
     else if([segue.identifier isEqualToString:@"ViewLocation"]){
         detailLocationMapViewController* MVC=(detailLocationMapViewController*)segue.destinationViewController;
         CLLocationCoordinate2D location;
+        NSLog(@"%@",self.latitude );
+        NSLog(@"%@",self.longitude);
+        NSLog(@"%@",self.location_name);
+        
         location.latitude=[self.latitude floatValue];
         location.longitude=[self.longitude floatValue];
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = location;
-        annotationPoint.title=self.title;
+        annotationPoint.title=self.location_name;
         [MVC setPredefinedAnnotation:annotationPoint];
     }
 }
@@ -933,6 +937,8 @@
     self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
     self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
     self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
+    self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+    self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
     //NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"No description";
     // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
     // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
