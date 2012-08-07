@@ -262,7 +262,6 @@
 		46D2BCC815CA33F400E14FE7 /* iphone-icon-orange-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 46D2BCC715CA33F400E14FE7 /* iphone-icon-orange-57.png */; };
 		46DBFA8D15BD387A00130749 /* 06-magnify.png in Resources */ = {isa = PBXBuildFile; fileRef = 46DBFA8C15BD387A00130749 /* 06-magnify.png */; };
 		921D57F115BE1BC800A49422 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 921D57F015BE1BC800A49422 /* header.png */; };
-		921DC13815D11DAF007A76F2 /* detailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 921DC13715D11DAF007A76F2 /* detailButton.png */; };
 		9222BF4415C5D63A00489704 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922FF4F115C5D2190096C81A /* Accounts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		92360FB815A94C9B006A559C /* FacebookSSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92360FB715A94C9B006A559C /* FacebookSSOViewController.m */; };
 		9237B1A615CA469300F8D939 /* current_location_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9237B1A515CA469300F8D939 /* current_location_icon.png */; };
@@ -289,6 +288,7 @@
 		9298265F15A938D6003673CF /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9298265215A938D6003673CF /* FBDialog.bundle */; };
 		9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9298265815A938D6003673CF /* libfacebook_ios_sdk.a */; };
 		92B026A215A7BCCA0069B96D /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B026A115A7BCCA0069B96D /* JSON.m */; };
+		92B1E73415D1C4C20041FEBD /* detailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B1E73315D1C4C20041FEBD /* detailButton.png */; };
 		92B2FF6015BE65DA003E8290 /* facebook_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF5F15BE65DA003E8290 /* facebook_icon.png */; };
 		92B2FF6215BE65EA003E8290 /* twitter-bird-white-on-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF6115BE65EA003E8290 /* twitter-bird-white-on-blue.png */; };
 		92B2FF6415BE65F2003E8290 /* weixin_icon.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 92B2FF6315BE65F2003E8290 /* weixin_icon.JPEG */; };
@@ -607,7 +607,6 @@
 		46D2BCC715CA33F400E14FE7 /* iphone-icon-orange-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-icon-orange-57.png"; sourceTree = "<group>"; };
 		46DBFA8C15BD387A00130749 /* 06-magnify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06-magnify.png"; sourceTree = "<group>"; };
 		921D57F015BE1BC800A49422 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
-		921DC13715D11DAF007A76F2 /* detailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailButton.png; sourceTree = "<group>"; };
 		922FF4F115C5D2190096C81A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		92360FB615A94C9B006A559C /* FacebookSSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSSOViewController.h; sourceTree = "<group>"; };
 		92360FB715A94C9B006A559C /* FacebookSSOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookSSOViewController.m; sourceTree = "<group>"; };
@@ -650,6 +649,7 @@
 		9298265E15A938D6003673CF /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		92B026A015A7BCCA0069B96D /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		92B026A115A7BCCA0069B96D /* JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSON.m; sourceTree = "<group>"; };
+		92B1E73315D1C4C20041FEBD /* detailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailButton.png; sourceTree = "<group>"; };
 		92B2FF5F15BE65DA003E8290 /* facebook_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_icon.png; sourceTree = "<group>"; };
 		92B2FF6115BE65EA003E8290 /* twitter-bird-white-on-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-bird-white-on-blue.png"; sourceTree = "<group>"; };
 		92B2FF6315BE65F2003E8290 /* weixin_icon.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = weixin_icon.JPEG; sourceTree = "<group>"; };
@@ -1184,7 +1184,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				921DC13715D11DAF007A76F2 /* detailButton.png */,
+				92B1E73315D1C4C20041FEBD /* detailButton.png */,
 				4699D00715D0A6C6003C5D0E /* dashed-broad.png */,
 				0F69256B15D083E20006EAFE /* powered-by-google-on-white@2x.png */,
 				46349A0415CC77E000455BF8 /* more-facebook-color.png */,
@@ -1656,7 +1656,7 @@
 				0FD5B90B15CF8E3B00927153 /* InviteTableViewCell.xib in Resources */,
 				0F69256C15D083E20006EAFE /* powered-by-google-on-white@2x.png in Resources */,
 				4699D00815D0A6C6003C5D0E /* dashed-broad.png in Resources */,
-				921DC13815D11DAF007A76F2 /* detailButton.png in Resources */,
+				92B1E73415D1C4C20041FEBD /* detailButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

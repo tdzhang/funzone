@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *locationIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *timeIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *inviteIcon;
 @property (weak, nonatomic) IBOutlet UITextView *textFieldEventTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelEventTitleHolder;
 @property (weak, nonatomic) IBOutlet UILabel *inviteFriendsLabel;
@@ -93,6 +94,7 @@
 @synthesize locationLabel = _locationLabel;
 @synthesize locationIcon = _locationIcon;
 @synthesize timeIcon = _timeIcon;
+@synthesize inviteIcon = _inviteIcon;
 @synthesize textFieldEventTitle = _textFieldEventTitle;
 @synthesize labelEventTitleHolder = _labelEventTitleHolder;
 @synthesize inviteFriendsLabel = _inviteFriendsLabel;
@@ -391,6 +393,7 @@
     [self setDeleteButton:nil];
     [self setDone_Button:nil];
     [self setInviteFriendsLabel:nil];
+    [self setInviteIcon:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -934,7 +937,20 @@
             //self enter the time
             [self.labelEventTime setText:@"Anytime"];
         }
-        
+        if (buttonIndex != 6) {
+            if (![self.labelEventTime.text isEqualToString:@"Find a time"]) {
+                [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
+                [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+                [self.timeIcon setAlpha:0.8];
+            }
+        } else {
+            if (!self.detail_event_id&&![self.labelEventTime.text isEqualToString:@"Find a time"]) {
+                [self.labelEventTime setText:@"Find a time"];
+                [self.labelEventTime setFont:[UIFont italicSystemFontOfSize:16]];
+                [self.labelEventTime setTextColor:[UIColor lightGrayColor]];
+                [self.timeIcon setAlpha:0.4];
+            }
+        }
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
@@ -1285,32 +1301,44 @@
     //update the display label
     if ([self.invitedFriend count]==0) {
         [self.inviteFriendsLabel setText:@"Invite friends"];
+        [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
+        [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];
+        [self.inviteIcon setAlpha:0.4];
     }
     else if ([self.invitedFriend count]==1){
         [self.inviteFriendsLabel setText:@"1 friend"];
         [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
-        [self.timeIcon setAlpha:0.8];
+        [self.inviteIcon setAlpha:0.8];
     }
     else{
         [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
         [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.inviteIcon setAlpha:0.8];
     }
 }
 
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
     NSString * key=person.user_name;
     [self.invitedFriend removeObjectForKey:key];
-
     if ([self.invitedFriend count]==0) {
         [self.inviteFriendsLabel setText:@"Invite friends"];
+        [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
+        [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];
+        [self.inviteIcon setAlpha:0.4];
     }
     else if ([self.invitedFriend count]==1){
         [self.inviteFriendsLabel setText:@"1 friend"];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.inviteIcon setAlpha:0.8];
     }
     else{
         [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.inviteIcon setAlpha:0.8];
     }
 }
 

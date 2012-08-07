@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -33,15 +33,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="f3t-7E-fkk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT">
-                                <rect key="frame" x="0.0" y="73" width="320" height="294"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="343"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
@@ -210,7 +210,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSW-Vq-fkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="jag-1w-uml" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KUr-qn-diQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -396,7 +396,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="dKU-YC-n8T">
@@ -465,7 +465,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="biv-AN-I61" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sIh-4k-1gG" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZQ8-cu-0rI">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -916,7 +916,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-PY-q4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zn8-a6-0kg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Mz-5Q-Y9g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="V1s-0l-w0g">
@@ -963,7 +963,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1770,6 +1770,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="deleteButton" destination="xFV-X9-FJO" id="vMC-iR-caR"/>
                         <outlet property="done_Button" destination="DPL-wo-aUV" id="Jea-rX-kgL"/>
                         <outlet property="inviteFriendsLabel" destination="2yR-HI-h93" id="veV-8g-KuT"/>
+                        <outlet property="inviteIcon" destination="GgF-ne-2HC" id="rrv-aV-wsV"/>
                         <outlet property="keyboardToolbar" destination="6YF-WD-7Gl" id="VTH-v2-tZo"/>
                         <outlet property="labelEventTime" destination="HI8-q6-ylp" id="XIa-UA-6GF"/>
                         <outlet property="labelEventTitleHolder" destination="qeP-fy-EsK" id="YVO-CZ-Zj2"/>
@@ -3100,7 +3101,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -3203,7 +3204,6 @@ Find us @OrangeParc.com</string>
         <class className="AddCommentVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
             <relationships>
-                <relationship kind="action" name="addCommentButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
@@ -3223,9 +3223,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3306,6 +3303,7 @@ Find us @OrangeParc.com</string>
                 <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="done_Button" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="inviteFriendsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inviteIcon" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
@@ -3378,11 +3376,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eX7-7v-GIv"/>
-        <segue reference="hTB-gn-88u"/>
-        <segue reference="6rH-Lj-bNq"/>
+        <segue reference="jpf-qW-bdW"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="tkd-Fy-Fbx"/>
         <segue reference="oxR-j5-unP"/>
-        <segue reference="I5V-BE-h5K"/>
-        <segue reference="2Cw-4j-quL"/>
+        <segue reference="lqc-Cx-NBX"/>
     </inferredMetricsTieBreakers>
 </document>
