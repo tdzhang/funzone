@@ -135,32 +135,9 @@
 
 #pragma mark - self defined method
 -(void)likeUsOnFaceBook{
-    NSLog(@"facebook invite friend.");
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        //if already login : start the action sheet
-        funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    NSMutableDictionary* params = [NSMutableDictionary dictionary];
-    [params setObject:@"http://www.orangeparc.com/" forKey:@"object"];
-    if ([funAppdelegate.facebook isSessionValid]) {
-        [funAppdelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/og.likes"]
-                                            andParams:params
-                                        andHttpMethod:@"POST"
-                                          andDelegate:self];
-    }
-    else{
-        //if not login, do it
-        NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                @"publish_stream",
-                                @"read_stream",@"create_event",@"email",
-                                nil];
-        [funAppdelegate.facebook authorize:permissions];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
-    }
+    UIAlertView *likeUsOnFaceBook = [[UIAlertView alloc] initWithTitle:@"Like Us" message:@"You will post a messgae on wall." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
+    likeUsOnFaceBook.delegate=self;
+    [likeUsOnFaceBook show];
 }
 #pragma mark - alertview delegate method implementation
 ////////////////////////////////////////////////
@@ -234,7 +211,36 @@
             NSLog(@"Sign Out Cancelled.");
         }
     }
-
+    else if ([alertView.title isEqualToString:@"Like Us"]){
+        if (buttonIndex == 0){
+            NSLog(@"facebook invite friend.");
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            if (!funAppdelegate.facebook) funAppdelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:(id)funAppdelegate];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+                //if already login : start the action sheet
+                funAppdelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+                funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+            }
+            NSMutableDictionary* params = [NSMutableDictionary dictionary];
+            [params setObject:@"http://www.orangeparc.com/" forKey:@"object"];
+            if ([funAppdelegate.facebook isSessionValid]) {
+                [funAppdelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/og.likes"]
+                                                    andParams:params
+                                                andHttpMethod:@"POST"
+                                                  andDelegate:self];
+            }
+            else{
+                //if not login, do it
+                NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                        @"publish_stream",
+                                        @"read_stream",@"create_event",@"email",
+                                        nil];
+                [funAppdelegate.facebook authorize:permissions];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
+            }
+        }
+    }
 }
 
 #pragma mark - facebook related protocal implement
