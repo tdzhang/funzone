@@ -238,7 +238,7 @@
     else{
         [self.deleteButton setHidden:YES];
     }
-    
+        
     //get the photo of the user
     //initial the face book
     FunAppDelegate *delegate=[[UIApplication sharedApplication] delegate];
@@ -781,7 +781,7 @@
 
 
 - (IBAction)ChoosePhoto:(UIButton *)sender {
-    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from album",@"via Google Image", nil];
+    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
@@ -815,7 +815,7 @@
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
-        if (buttonIndex == 0) {
+        if (buttonIndex == 1) {
             //do sth. about take photo part
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 self.imgPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
@@ -827,7 +827,7 @@
                 [cameraNotSupport show];
             }
         }
-        else if(buttonIndex == 1){
+        else if(buttonIndex == 2){
             //do sth. about choose photo from the album
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
                 
@@ -840,7 +840,7 @@
                 [cameraNotSupport show];
             }
         }
-        else if(buttonIndex ==2){
+        else if(buttonIndex == 0){
             //using google image seach(implement by segue)
             [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
         }
