@@ -54,8 +54,8 @@
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.other_user_id]];
     }
     NSLog(@"request following:%@",url);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];
@@ -131,8 +131,8 @@
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],element.user_id]];
     }
     NSLog(@"request: %@",url);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];

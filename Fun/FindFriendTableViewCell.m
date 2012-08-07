@@ -199,8 +199,8 @@
     if ([self.actionCategory isEqualToString:@"follow"]) {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
         NSLog(@"%@",url);
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];
@@ -236,8 +236,8 @@
     }
     else if ([self.actionCategory isEqualToString:@"unfollow"]) {
         NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];

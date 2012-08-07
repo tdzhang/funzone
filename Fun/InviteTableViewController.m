@@ -87,8 +87,8 @@
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
     
     NSLog(@"request following:%@",url);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];

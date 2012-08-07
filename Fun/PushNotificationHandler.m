@@ -39,8 +39,8 @@
     NSLog(@"send the apns token to the sever");
     //handle the new token
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];
@@ -69,8 +69,8 @@
     NSLog(@"send old apns token to the sever");
     //handle the new token
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_device_token",CONNECT_DOMIAN_NAME]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];

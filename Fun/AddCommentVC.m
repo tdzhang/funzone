@@ -50,7 +50,8 @@
     //send log to server
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/view_comments?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"]]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{}];
     [request setFailedBlock:^{}];
     [request setRequestMethod:@"GET"];
@@ -100,8 +101,9 @@
     [self.addCommentTextView resignFirstResponder];
     if (self.addCommentTextView.text.length>0) {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/comment",CONNECT_DOMIAN_NAME]];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];

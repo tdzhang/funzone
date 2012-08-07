@@ -79,8 +79,8 @@
     
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSString *responseString = [block_request responseString];
@@ -213,8 +213,8 @@
     
     if ([searchBar.text length]==0) {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/facebook_friends",CONNECT_DOMIAN_NAME]];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];
@@ -240,8 +240,8 @@
     }
     else {
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/find_friends",CONNECT_DOMIAN_NAME]];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];

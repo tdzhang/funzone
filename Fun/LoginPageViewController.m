@@ -128,8 +128,8 @@
     }
     //login
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in.json",SECURE_DOMAIN_NAME]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data        
         NSError *error;
@@ -197,8 +197,8 @@
 #pragma mark - facebook related process
 -(void)faceBookLoginFinished{
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/sign_in",SECURE_DOMAIN_NAME]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSError *error;

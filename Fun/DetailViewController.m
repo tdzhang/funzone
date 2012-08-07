@@ -409,8 +409,8 @@
         [self.join_label setText:@"Join"];
         self.isJoined = @"0";
     }
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSError *error;
@@ -442,8 +442,8 @@
         [self.like_label setText:@"Like"];
         self.isLiked=@"0";
     }
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         NSError *error;
@@ -551,7 +551,8 @@
         //send log to server
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/share?event_id=%@&shared_event_id=%@&via=%d&auth_token=%@&channel=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,self.via,[defaults objectForKey:@"login_auth_token"],channel]];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{}];
         [request setFailedBlock:^{}];
         [request setRequestMethod:@"GET"];

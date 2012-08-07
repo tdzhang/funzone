@@ -400,8 +400,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/invite?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,event_id,shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
     NSLog(@"request:%@",url);
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         //NSString *responseString = [block_request responseString];
@@ -452,8 +452,8 @@
     //Adding Create Event
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    __block ASIFormDataRequest *block_request=request;
+    __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+    __unsafe_unretained ASIFormDataRequest *request = block_request;
     [request setCompletionBlock:^{
         // Use when fetching text data
         //NSString *responseString = [block_request responseString];
@@ -507,8 +507,8 @@
         //Adding Create Event
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/edit",CONNECT_DOMIAN_NAME]];
 
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             //NSString *responseString = [block_request responseString];
             //NSLog(@"%@",responseString);
@@ -601,8 +601,8 @@
         if (self.detail_event_id) {
             url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/pin",CONNECT_DOMIAN_NAME]];
         }
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-        __block ASIFormDataRequest *block_request=request;
+        __block ASIFormDataRequest *block_request=[ASIFormDataRequest requestWithURL:url];
+        __unsafe_unretained ASIFormDataRequest *request = block_request;
         [request setCompletionBlock:^{
             // Use when fetching text data
             NSString *responseString = [block_request responseString];
