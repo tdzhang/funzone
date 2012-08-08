@@ -8,7 +8,7 @@
 
 #import "MoreTableViewController.h"
 
-@interface MoreTableViewController ()
+@interface MoreTableViewController ()<MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *signOutButton;
 
 @end
@@ -122,15 +122,25 @@
             [self likeUsOnFaceBook];
             
         }
-    }
-    else if (indexPath.section ==2){
-        /*if (indexPath.row == 2) {
-            UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Do you want to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
-            inputEmptyError.delegate=self;
-            [inputEmptyError show];
+        if (indexPath.row==1) {
+            //start compose email
+            NSMutableArray *emailList=[NSMutableArray array];
+            [emailList addObject:@"contact@orangeparc.com"];
+            //we have the email list, now try to send email invitation
+            if([MFMailComposeViewController canSendMail]) {
+                //if the device allowed sending email
+                MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+                mailCont.mailComposeDelegate = self;
+            
+                //email list
+                [mailCont setToRecipients:emailList];
+                
+                //go!
+                [self presentModalViewController:mailCont animated:YES];
+            }
         }
-         */
     }
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
@@ -273,6 +283,17 @@
     UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Thanks!" message: [NSString stringWithFormat:@"Thank you for liking us =)"] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     success.delegate=self;
     [success show];
+}
+
+
+#pragma mark - implement protocals <MFMessageComposeViewControllerDelegate>
+////////////////////////////////////////////////
+//implement the MFMailComposeViewControllerDelegate Method
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (error) {
+        NSLog(@"Sending Email Error Happended!");
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
