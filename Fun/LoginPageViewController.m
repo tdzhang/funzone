@@ -87,7 +87,7 @@
 #pragma mark - button action
 - (IBAction)cancelLoginNew:(id)sender {
     //if user don't login,return to the featurned page
-    int controllerIndex=0;
+    int controllerIndex=1;
     UIView * fromView = self.parentVC.tabBarController.selectedViewController.view;
     UIView * toView = [[self.parentVC.tabBarController.viewControllers objectAtIndex:controllerIndex] view];
     // Get the size of the view area.
