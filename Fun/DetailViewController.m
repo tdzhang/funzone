@@ -1319,6 +1319,8 @@
     [self.locationSectionView addSubview:map_indicator_label];
     UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 10.75, 6, 8.5)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
+    right_Arrow.alpha = 0.6;
+    
     [self.locationSectionView addSubview:right_Arrow];
     UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 5, 50, 20)];
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
