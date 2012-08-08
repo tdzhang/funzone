@@ -1233,7 +1233,6 @@
     [self.keyboardToolbar setHidden:FALSE];
     UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:0];
     doneButtonKeyBoard.target = self;
-    doneButtonKeyBoard.action = @selector(leaveEditMode);
     [UIView commitAnimations];
 }
 

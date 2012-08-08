@@ -104,13 +104,80 @@
     [self.navigationItem setBackBarButtonItem:backButton];
     
     //quest the most recent 10 featured events
-    self.refresh_page_num=2; //the next page that need to refresh is 2
-    self.freshConnectionType=@"New";
-    NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-    NSLog(@"request %@",request_string);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+//    self.refresh_page_num=2; //the next page that need to refresh is 2
+//    self.freshConnectionType=@"New";
+//    NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
+//    NSLog(@"request %@",request_string);
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+//    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+//    [connection start];
+    
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+        if ([defaults objectForKey:@"login_auth_token"]) {
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        }
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                    NSError *error;
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    NSLog(@"%@",json);
+                    //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+                    self.refresh_page_num=2;
+                    
+                    //clean the page
+                    for (UIView* subView in self.mainScrollView.subviews) {
+                        [subView removeFromSuperview];
+                    }
+                    [self.blockViews removeAllObjects];
+                    for (NSDictionary* event in json) {
+                        NSString *title=[event objectForKey:@"title"];
+                        //NSString *description=[event objectForKey:@"description"];
+                        NSString *photo=[event objectForKey:@"photo_url"];
+                        NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                        //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+                        //NSString *num_interests=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_interests"]];
+                        NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                        NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                        NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                        NSString *locationName=[event objectForKey:@"location"];
+                        NSString *creator_name=[event objectForKey:@"creator_name"];
+                        NSString *creator_pic=[event objectForKey:@"creator_pic"];
+                        NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+                        NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+                        
+                        
+                        if (!title) {continue;}
+                        if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
+                        NSURL *url=[NSURL URLWithString:photo];
+                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                        //refresh the whole view
+                        [self refreshAllTheMainScrollViewSUbviews];
+                        
+                    }
+                    self.freshConnectionType=@"not"; 
+                
+            }
+            else{
+                //connect error
+                
+            }
+            
+        });
+        
+    });
+    
     
     //set mainScrollView layout styles
     self.mainScrollView.contentSize = CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, 0);
@@ -146,12 +213,11 @@
     
     //this is the upper most position that need to reget the most popular 10 events
     if (scrollView.contentOffset.y<-EVENT_ELEMENT_CONTENT_HEIGHT/3) {
+        
         //remove the main views
-        self.garbageCollection=[NSMutableArray array];
         for (UIView *view in [self.mainScrollView subviews]) {
             [view setFrame:CGRectMake(0, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
             //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
-            [self.garbageCollection addObject:view];
         }
         
         
@@ -180,19 +246,93 @@
         
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
-        //and then do the refresh process
-        NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        //if has auth_token, add it in the get url
-        if ([defaults objectForKey:@"login_auth_token"]) {
-            request_string=[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-        }
-        NSLog(@"ExploreViewController request1: %@",request_string);
-        NSURLRequest *request = [NSURLRequest  requestWithURL:[NSURL URLWithString:request_string] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
-        //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        self.freshConnectionType=@"New";
-        [connection start];
+         
+//        //and then do the refresh process
+//        NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        //if has auth_token, add it in the get url
+//        if ([defaults objectForKey:@"login_auth_token"]) {
+//            request_string=[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+//        }
+//        NSLog(@"ExploreViewController request1: %@",request_string);
+//        NSURLRequest *request = [NSURLRequest  requestWithURL:[NSURL URLWithString:request_string] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0];
+//        //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+//        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+//        self.freshConnectionType=@"New";
+//        [connection start];
+        
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
+            //if has auth_token, add it in the get url
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                request_string=[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+            }
+            NSURL *url=[NSURL URLWithString:request_string];
+            ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+            
+            [request setRequestMethod:@"GET"];
+            
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                        //set the freshConnectionType to "not"
+                        
+                        NSError *error;
+                        NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                        NSLog(@"%@",json);
+                        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+                        self.refresh_page_num=2;
+                        
+                        //clean the page
+                        for (UIView* subView in self.mainScrollView.subviews) {
+                            [subView removeFromSuperview];
+                        }
+                        [self.blockViews removeAllObjects];
+                        for (NSDictionary* event in json) {
+                            NSString *title=[event objectForKey:@"title"];
+                            //NSString *description=[event objectForKey:@"description"];
+                            NSString *photo=[event objectForKey:@"photo_url"];
+                            NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                            //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+                            //NSString *num_interests=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_interests"]];
+                            NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                            NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                            NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                            NSString *locationName=[event objectForKey:@"location"];
+                            NSString *creator_name=[event objectForKey:@"creator_name"];
+                            NSString *creator_pic=[event objectForKey:@"creator_pic"];
+                            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+                            NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+                            
+                            
+                            if (!title) {continue;}
+                            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
+                            NSURL *url=[NSURL URLWithString:photo];
+                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                            //refresh the whole view
+                            [self refreshAllTheMainScrollViewSUbviews];
+                            
+                        }
+                        self.freshConnectionType=@"not"; 
+                    
+                }
+                else{
+                    //connect error
+                    
+                }
+                
+            });
+             
+            
+        });
     }
     //add more of the featured event
     else if(scrollView.contentOffset.y>EVENT_ELEMENT_CONTENT_HEIGHT*(([self.blockViews count]-2.5))){
@@ -222,20 +362,92 @@
         [self.mainScrollView addSubview:self.refreshViewdown];
         self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]+0.5)*EVENT_ELEMENT_CONTENT_HEIGHT);
         
-        //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        //if has auth_token, add it in the get url
-        if ([defaults objectForKey:@"login_auth_token"]) {
-            request_string=[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
-        }
-        NSLog(@"ExploreViewController request2:%@",request_string);
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        //set the freshConnectionType To @"Add"
-        self.freshConnectionType=@"Add";
-        [connection start];         
+//        //NSLog(@"add more");
+//        NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        //if has auth_token, add it in the get url
+//        if ([defaults objectForKey:@"login_auth_token"]) {
+//            request_string=[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
+//        }
+//        NSLog(@"ExploreViewController request2:%@",request_string);
+//        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+//        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+//        //set the freshConnectionType To @"Add"
+//        self.freshConnectionType=@"Add";
+//        [connection start];
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            NSString *request_string=[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            //if has auth_token, add it in the get url
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                request_string=[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
+            }
+            NSURL *url=[NSURL URLWithString:request_string];
+            ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+            
+            [request setRequestMethod:@"GET"];
+            
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    
+                    //set the freshConnectionType to "not"
+                    self.freshConnectionType=@"not";
+                    NSError *error;
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    //after receive the new page, add the next request page number
+                    self.refresh_page_num++;
+                    if ([json count]==0) {
+                        //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
+                        self.refresh_page_num--;
+                        [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
+                    }
+                    for (NSDictionary* event in json) {
+                        NSString *title=[event objectForKey:@"title"];
+                        //NSString *description=[event objectForKey:@"description"];
+                        NSString *photo=[event objectForKey:@"photo_url"];
+                        NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                        //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+                        //NSString *num_interests=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_interests"]];
+                        NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                        NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                        NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                        NSString *locationName=[event objectForKey:@"location"];
+                        NSString *creator_name=[event objectForKey:@"creator_name"];
+                        NSString *creator_pic=[event objectForKey:@"creator_pic"];
+                        NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+                        NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+                        
+                        if (!title) {continue;}
+                        if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
+                        
+                        NSURL *url=[NSURL URLWithString:photo];
+                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+                        
+                        //refresh the whole view
+                        [self addMoreDataToTheMainScrollViewSUbviews];
+                        
+                    }        
+                    [self.refreshViewdown removeFromSuperview];
+                    
+                }
+                else{
+                    //connect error
+                    
+                }
+                
+            });
+            
+        });
     }
+  
 }
 
 #pragma mark - already load the new data, refresh the whole view/ or add more on the down side
