@@ -220,9 +220,9 @@
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                     
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        success.delegate=self;
-                        [success show];
+//                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                        success.delegate=self;
+//                        [success show];
                         [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                         self.actionCategory=@"unfollow";
                     }
@@ -268,9 +268,9 @@
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                     
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        success.delegate=self;
-                        [success show];
+//                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                        success.delegate=self;
+//                        [success show];
                         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
                         self.actionCategory=@"follow";
                     }

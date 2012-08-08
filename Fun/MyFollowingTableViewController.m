@@ -140,10 +140,18 @@
     //add login auth_token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?followee_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,element.user_id,[defaults objectForKey:@"login_auth_token"]]];
+    int send_via=0;
+    if (self.other_user_id){
+        send_via=VIA_OTHERS_FOLLOWINGS;
+    }
+    else{
+        send_via=VIA_MY_FOLLOWINGS;
+    }
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?followee_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,element.user_id,[defaults objectForKey:@"login_auth_token"],send_via]];
     if (!element.followed) {
         //if not followed
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],element.user_id]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],element.user_id,send_via]];
     }
     NSLog(@"request: %@",url);
     

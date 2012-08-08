@@ -384,6 +384,8 @@
             //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
         }
         
+        self.lastReceivedJson_bookmark=[NSArray array];
+        
         //set the refresh view ahead & and also the anti touch mask
         //NSLog(@"get most 10 popular pages called");
         [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT/2)];
@@ -473,13 +475,24 @@
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EVENT_ELEMENT_CONTENT_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT)];
     [self.mainScrollView addSubview:self.refreshView];
     
-    [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+    if ([self.blockViews count]<5) {
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
+    }
+    else{
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+    }
 }
 //use to add more (than 10) from down side
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ProfileEventElement *Element=(ProfileEventElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    [self.mainScrollView setContentSize:CGSizeMake(VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+    
+    if ([self.blockViews count]<5) {
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
+    }
+    else{
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+    }
 }
 
 
