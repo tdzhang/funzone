@@ -161,7 +161,7 @@
 #define VIA_OTHERS_FOLLOWINGS  15      // profile
 #define VIA_OTHERS_FOLLOWERS  16       // profile
 #define VIA_ACTIVITY_FOLLOW  17        // profile
-#define VIA_NEW_FACEBOOK_FRIEND  18    // profile
+#define VIA_ACTIVITY_FRIEND_JOIN  18    // profile
 #define VIA_ACTIVITY_INTEREST  19      // event
 #define VIA_ACTIVITY_COMMENT  20       // event
 #define VIA_ACTIVITY_INVITE  21        // event

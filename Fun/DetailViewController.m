@@ -1064,10 +1064,22 @@
     else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.creator_id;
+        if(self.via==VIA_FEEDS){
+            OPPVC.via=VIA_FEEDS_DETAIL;
+        }
+        else if(self.via==VIA_EXPLORE){
+            OPPVC.via=VIA_EXPLORE_DETAIL;
+        }
     }
     else if([segue.identifier isEqualToString:@"ViewJoinedPeopleProfile"]){
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tap_user_id;
+        if(self.via==VIA_FEEDS){
+            OPPVC.via=VIA_FEEDS_DETAIL;
+        }
+        else if(self.via==VIA_EXPLORE){
+            OPPVC.via=VIA_EXPLORE_DETAIL;
+        }
     }
     else if([segue.identifier isEqualToString:@"ViewLocation"]){
         detailLocationMapViewController* MVC=(detailLocationMapViewController*)segue.destinationViewController;
@@ -1082,6 +1094,15 @@
         annotationPoint.coordinate = location;
         annotationPoint.title=self.location_name;
         [MVC setPredefinedAnnotation:annotationPoint];
+    }
+    else if([segue.identifier isEqualToString:@"ViewProfile"]){
+        ProfilePageViewController* PVVC=segue.destinationViewController;
+        if(self.via==VIA_FEEDS){
+            PVVC.via=VIA_FEEDS_DETAIL;
+        }
+        else if(self.via==VIA_EXPLORE){
+            PVVC.via=VIA_EXPLORE_DETAIL;
+        }
     }
 }
 

@@ -584,6 +584,11 @@
     else if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tapped_creator_id;
+        OPPVC.via=VIA_EXPLORE;
+    }
+    else if([segue.identifier isEqualToString:@"ViewProfile"]){
+        ProfilePageViewController* PPVC=segue.destinationViewController;
+        PPVC.via=VIA_EXPLORE;
     }
 }
 

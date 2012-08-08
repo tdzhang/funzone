@@ -22,6 +22,8 @@
 @synthesize user_id=_user_id;
 @synthesize followed=_followed;
 
+@synthesize via=_via;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -197,7 +199,7 @@
     [self.actionButton setEnabled:NO];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([self.actionCategory isEqualToString:@"follow"]) {
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id,self.via]];
         NSLog(@"%@",url);
         
         ///////////////////////////////////////////////////////////////////////////
@@ -246,7 +248,7 @@
         });
     }
     else if ([self.actionCategory isEqualToString:@"unfollow"]) {
-        NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id]];
+        NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.user_id,self.via]];
 
         ///////////////////////////////////////////////////////////////////////////
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{

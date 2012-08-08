@@ -14,4 +14,6 @@
 
 @interface ProfilePageViewController : UIViewController<UIScrollViewDelegate>
 
+//used to keep server log
+@property(nonatomic)int via;
 @end

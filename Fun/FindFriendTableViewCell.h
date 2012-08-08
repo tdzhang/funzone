@@ -26,6 +26,7 @@
 @property(nonatomic) BOOL registerd;
 @property(nonatomic,strong) NSString* user_id; //if the user is not registered, there will be no user_id
 @property(nonatomic) BOOL followed; //the bool indicate the follow status
+@property(nonatomic) int via;
 
 -(void)resetWithSearchedFriend:(SearchedFriend *)friend;
 -(void)resetWithTopFriend:(SearchedFriend *)friend;

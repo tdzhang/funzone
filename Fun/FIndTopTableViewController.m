@@ -162,6 +162,7 @@
     }
     
     [cell resetWithTopFriend:[self.topfriends objectAtIndex:indexPath.row]];
+    cell.via=VIA_POPULAR_USERS;
     
     return cell;
 }

@@ -11,6 +11,7 @@
 #import "Cache.h"
 #import "GlobalConstant.h"
 #import "OtherProfilePageViewController.h"
+#import "ProfilePageViewController.h"
 
 
 @interface ExploreViewController : UIViewController<UIScrollViewDelegate>

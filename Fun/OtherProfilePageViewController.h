@@ -15,5 +15,6 @@
 @interface OtherProfilePageViewController : UIViewController<UIScrollViewDelegate>
 
 @property(nonatomic,strong)NSString *creator_id;
-
+//used to keep server log
+@property(nonatomic)int via;
 @end

@@ -20,6 +20,7 @@
 #import "GlobalConstant.h"
 #import "OtherProfilePageViewController.h"
 #import "detailLocationMapViewController.h"
+#import "ProfilePageViewController.h"
 
 @interface DetailViewController : UIViewController<UIActionSheetDelegate,FeedBackToCreateActivityChange,MFMessageComposeViewControllerDelegate,FBRequestDelegate>
 

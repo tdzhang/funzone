@@ -59,6 +59,9 @@
 @synthesize lastReceivedJson_bookmark=_lastReceivedJson_bookmark;
 @synthesize lastReceivedJson_profile=_lastReceivedJson_profile;
 
+//used to keep server log
+@synthesize via=_via;
+
 -(CLLocationManager *)current_location_manager{
     if (!_current_location_manager) {
         FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
@@ -117,7 +120,7 @@
     //query the user profile information
     //add login auth_token
     defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.via]];
         
         ///////////////////////////////////////////////////////////////////////////
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{

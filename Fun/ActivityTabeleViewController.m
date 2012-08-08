@@ -13,7 +13,7 @@
 @property(nonatomic,strong)NSMutableArray* activities;
 @property(nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequecy
 @property(nonatomic,strong)activityElementObject* tapped_element;
-
+@property(nonatomic)int send_via;
 //start fetching activity data from the sever(and did the badge clean job)
 -(void)startFetchingActivityData;
 @end
@@ -22,6 +22,7 @@
 @synthesize activities=_activities;
 @synthesize lastReceivedJson=_lastReceivedJson;
 @synthesize tapped_element=_tapped_element;
+@synthesize send_via=_send_via;
 
 #pragma mark - self defined setter and getter
 -(NSMutableArray *)activities{
@@ -217,22 +218,26 @@
     if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event// go to that event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+        self.send_via=VIA_ACTIVITY_INTEREST;
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
         [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
-        
+        self.send_via=VIA_ACTIVITY_FOLLOW;
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+        self.send_via=VIA_ACTIVITY_COMMENT;
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         //show the event
         [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
+        self.send_via=VIA_ACTIVITY_INVITE;
     }else if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
         // your friend has just joined orange parc, go to that page to follow
         [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
+        self.send_via=VIA_ACTIVITY_FRIEND_JOIN;
     }
     
 }
@@ -243,17 +248,19 @@
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         [detailVC preSetTheEventID:self.tapped_element.event_id andSetTheSharedEventID:self.tapped_element.shared_event_id andSetIsOwner:YES];
-        [detailVC preSetServerLogViaParameter:VIA_ACTIVITY];
+        [detailVC preSetServerLogViaParameter:self.send_via];
     }
     else if([segue.identifier isEqualToString:@"seeOtherProfile"]) {
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tapped_element.user_id;
+        OPPVC.via=self.send_via;
     }
+    
     else if ([segue.identifier isEqualToString:@"seeOtherEvent"]) {
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         [detailVC preSetTheEventID:self.tapped_element.event_id andSetTheSharedEventID:self.tapped_element.shared_event_id andSetIsOwner:NO];
-        [detailVC preSetServerLogViaParameter:VIA_ACTIVITY];
+        [detailVC preSetServerLogViaParameter:self.send_via];
     }
 }
 

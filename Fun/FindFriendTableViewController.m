@@ -169,6 +169,7 @@
     }
 
     [cell resetWithSearchedFriend:[self.friends objectAtIndex:indexPath.row]];
+    cell.via=VIA_FACEBOOK_SEARCH;
      
     return cell;
 }
