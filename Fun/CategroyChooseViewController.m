@@ -70,6 +70,12 @@
     //Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
         
 }
 
