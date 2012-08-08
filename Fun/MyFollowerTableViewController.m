@@ -251,7 +251,7 @@
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([[defaults objectForKey:@"user_id"] isEqualToString:cell.user_id]) {
-        [cell.unfollowButton setTitle:@"Your Self" forState:UIControlStateNormal];
+        [cell.unfollowButton setTitle:@"Me" forState:UIControlStateNormal];
         [cell.unfollowButton setEnabled:NO];
     }
     else{
