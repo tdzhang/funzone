@@ -97,8 +97,6 @@
     
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBarHidden = NO;
     
     //before the user defined search start, load the predefined seach key words
     if (_predefinedKeyWord) {

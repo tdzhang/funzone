@@ -36,6 +36,7 @@
     
     //preset the search bar to be the first responser
     [self.searchDisplayController.searchBar becomeFirstResponder];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
 }
 
 
