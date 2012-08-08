@@ -58,6 +58,7 @@
 @property (nonatomic,strong) NSMutableArray *comments;
 @property (nonatomic,strong) NSMutableArray *interestedPeople;
 @property (nonatomic,strong) NSMutableArray *likedPeople;
+@property (nonatomic,strong) NSMutableArray *invitee;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSURL *creator_img_url;
@@ -120,6 +121,7 @@
 @synthesize garbageCollection=_garbageCollection;
 @synthesize interestedPeople=_interestedPeople;
 @synthesize likedPeople=_likedPeople;
+@synthesize invitee=_invitee;
 @synthesize interestedPeopleLabelView=_interestedPeopleLabelView;
 @synthesize likedPeopleLabelView=_likedPeopleLabelView;
 @synthesize tap_user_id=_tap_user_id;
@@ -639,10 +641,14 @@
     self.garbageCollection=[NSMutableArray array];
     int height;
     if ([self.likedPeople count]==0) {
-        if ([self.description_content.text isEqualToString:@""]) {
-            height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+10;
+        if ([self.invitee count]==0) {
+            if ([self.description_content.text isEqualToString:@""]) {
+                height = self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height+10;
+            } else {
+                height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+10;
+            }
         } else {
-            height = self.descriptionSectionView.frame.origin.y+self.descriptionSectionView.frame.size.height+10;
+            height = self.invitedPeopleSectionView.frame.origin.y+self.invitedPeopleSectionView.frame.size.height+10;
         }
     } else {
         height = self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
@@ -724,12 +730,15 @@
     self.garbageCollection=[NSMutableArray array];
     
     int height;
-    if ([self.description_content.text isEqualToString:@""]) {
-        height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
+    if ([self.invitee count] == 0) {
+        if ([self.description_content.text isEqualToString:@""]) {
+            height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
+        } else {
+            height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
+        }
     } else {
-        height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
+        height = self.invitedPeopleSectionView.frame.origin.y+self.invitedPeopleSectionView.frame.size.height+10;
     }
-    
     if ([self.likedPeople count]>0) {
         self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
         [self.myScrollView addSubview:self.likedPeopleLabelView];
@@ -812,30 +821,30 @@
         height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
     }
     
-    if ([self.likedPeople count]>0) {
-        self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
-        [self.myScrollView addSubview:self.likedPeopleLabelView];
+    if ([self.invitee count]>0) {
+        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 65)];
+        [self.myScrollView addSubview:self.invitedPeopleSectionView];
         //add gesture(tap)
-        self.likedPeopleLabelView.userInteractionEnabled=YES;
-        UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLikeBlock:)];
-        [self.likedPeopleLabelView addGestureRecognizer:tapGR];
-        [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
-        if ([self.likedPeople count] == 1) {
-            [numOflikes setText:[NSString stringWithFormat:@"1 Like"]];
+        self.invitedPeopleSectionView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
+        [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
+        [self.invitedPeopleSectionView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        if ([self.invitee count] == 1) {
+            [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
-            [numOflikes setText:[NSString stringWithFormat:@"%d Likes",[self.likedPeople count]]];
+            [numOfInvites setText:[NSString stringWithFormat:@"%d friends invited",[self.invitee count]]];
         }
-        [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
-        [numOflikes setTextColor:[UIColor darkGrayColor]];
-        [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        [self.likedPeopleLabelView addSubview:numOflikes];
+        [numOfInvites setFont:[UIFont boldSystemFontOfSize:14]];
+        [numOfInvites setTextColor:[UIColor darkGrayColor]];
+        [numOfInvites setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [self.invitedPeopleSectionView addSubview:numOfInvites];
         //[self.garbageCollection addObject:numOfInterests];
         
         int x_position_photo=5;
-        for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
+        for (int i=0; i<7&&i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
-            ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
+            ProfileInfoElement* element=[self.invitee objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
                 //using high priority queue to fetch the image
@@ -872,7 +881,7 @@
                     userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
                 });
             }
-            [self.likedPeopleLabelView addSubview:userImageView];
+            [self.invitedPeopleSectionView addSubview:userImageView];
             x_position_photo+=38;
         }
     }
@@ -891,11 +900,15 @@
     int height;
     if ([self.interestedPeople count] == 0) {
         if ([self.likedPeople count] == 0) {
-            if ([self.description_content.text isEqualToString:@""]) {
-                height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
+            if ([self.invitee count] == 0) {
+                if ([self.description_content.text isEqualToString:@""]) {
+                    height = self.locationSectionView.frame.origin.y + self.locationSectionView.frame.size.height + 10;
+                } else {
+                    height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
+                }
             } else {
-                height = self.descriptionSectionView.frame.origin.y + self.descriptionSectionView.frame.size.height + 10;
-            }
+                height = self.invitedPeopleSectionView.frame.origin.y+self.invitedPeopleSectionView.frame.size.height+10;
+            }            
         } else {
             height=self.likedPeopleLabelView.frame.origin.y + self.likedPeopleLabelView.frame.size.height + 10;
         }        
@@ -1152,6 +1165,7 @@
     
     //handle the liked people part
     self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
+    self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
     
     NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
     if ([event_category isEqualToString:FOOD]) {
@@ -1351,6 +1365,12 @@
     }
     
 #warning fetch original creator info
+    if (!self.isEventOwner) {
+        CGRect temp = self.invitedPeopleSectionView.frame;
+        temp.size.height=0;
+        self.invitedPeopleSectionView.frame = temp;
+    }
+    [self handleInvitedPeoplePart];
     [self handleLikedPeoplePart];
     [self handleTheInterestedPeoplePart];
     //handle the comment part
@@ -1582,6 +1602,25 @@
         return;
     }
     ProfileInfoElement* tapped_element=[self.likedPeople objectAtIndex:index];
+    self.tap_user_id=tapped_element.user_id;
+    if(touchPointY>25&&index<7){
+        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+    }
+}
+
+-(void)tapInviteBlock:(UITapGestureRecognizer *)tapGR {
+    if ([self.invitee count]==0) {
+        return;
+    }
+    CGPoint touchPoint=[tapGR locationInView:[self invitedPeopleSectionView]];
+    float touchPointY=touchPoint.y;
+    float touchPointX=touchPoint.x;
+    //get the index of the touched block view
+    int index=(touchPointX-5)/40;
+    if (index >= [self.invitee count]) {
+        return;
+    }
+    ProfileInfoElement* tapped_element=[self.invitee objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];

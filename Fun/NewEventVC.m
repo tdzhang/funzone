@@ -422,7 +422,6 @@
             user_ids=[user_ids stringByAppendingFormat:@",%@",person.user_id];
         }
     }
-    NSLog(@"!!!%@",user_ids);
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
@@ -597,7 +596,7 @@
                     else{
                         //when success, start invite people;
                         if ([self.invitedFriend count]>0) {
-                            [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
+                            [self startInviteFriendWithEventID:self.detail_event_id withSharedEventID:self.detail_shared_event_id];
                         }
                     }
                 }
