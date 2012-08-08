@@ -1385,6 +1385,7 @@
         [self.myScrollView addSubview:self.descriptionSectionView];
     }
     
+#warning fetch original creator info
     if (!self.isEventOwner) {
         CGRect temp = self.invitedPeopleSectionView.frame;
         temp.size.height=0;
