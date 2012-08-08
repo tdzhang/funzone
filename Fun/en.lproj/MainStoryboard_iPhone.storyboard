@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -63,7 +62,7 @@
                                                 <rect key="frame" x="8" y="4" width="65" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_pic_4.jpeg" id="yo5-zF-E3a">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="profile_pic_4.jpeg" id="yo5-zF-E3a">
                                                 <rect key="frame" x="11" y="6" width="60" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -1517,7 +1516,7 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="9" y="13" width="47" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="EUZ-07-DTq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="EUZ-07-DTq">
                                 <rect key="frame" x="11" y="15" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -1880,7 +1879,7 @@ Find us @OrangeParc.com</string>
                                                 <rect key="frame" x="8" y="4" width="65" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_pic_4.jpeg" id="K2K-fx-y3B">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="profile_pic_4.jpeg" id="K2K-fx-y3B">
                                                 <rect key="frame" x="11" y="6" width="60" height="60"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -3100,11 +3099,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="eX7-7v-GIv"/>
-        <segue reference="6rH-Lj-bNq"/>
-        <segue reference="I5V-BE-h5K"/>
         <segue reference="2Cw-4j-quL"/>
+        <segue reference="oxR-j5-unP"/>
+        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="6rH-Lj-bNq"/>
+        <segue reference="eX7-7v-GIv"/>
+        <segue reference="I5V-BE-h5K"/>
     </inferredMetricsTieBreakers>
 </document>
