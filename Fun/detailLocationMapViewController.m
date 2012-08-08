@@ -37,7 +37,7 @@
     if(self.predefinedAnnotation){
         MKPointAnnotation *annotation=self.predefinedAnnotation;
         if (annotation.coordinate.latitude <0.1&&annotation.coordinate.latitude>-0.1) {
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"No Map Information" message: [NSString stringWithFormat:@"This event do not have location information"] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"No Map Information" message: [NSString stringWithFormat:@"This event doesn't have location information"] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             notsuccess.delegate=self;
             [notsuccess show];
         }

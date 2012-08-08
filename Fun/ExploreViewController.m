@@ -347,7 +347,7 @@
         loading.opaque = NO;
         loading.backgroundColor =[UIColor clearColor];
         UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
-        loadLabel.text =@"Loading More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        loadLabel.text =@"Loading more";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
         loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
         loadLabel.backgroundColor =[UIColor clearColor];

@@ -97,7 +97,7 @@
 - (IBAction)registerButtonBlicked:(id)sender {
     //input too short
     if (self.firstNameTextField.text.length<1||self.emailTextField.text.length<5||self.passwordTextField.text.length<6||self.rePasswordTextField.text.length<6) {
-        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Name/Email/Password Too Short" message:@"The Name, Email or the password you input is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Name/Email/Password Too Short" message:@"The username, email or password you input was too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
@@ -107,7 +107,7 @@
         return;
     }
     if(![self NSStringIsValidEmail:self.emailTextField.text]){
-        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Email Invalid" message:@"The Email you input is not valid, please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Email Invalid" message:@"The Email you input was not valid, please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
@@ -119,7 +119,7 @@
     }
     //the password not match
     if(![self.passwordTextField.text isEqualToString:self.rePasswordTextField.text]){
-        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Password Not Match" message:@"The password doesn't match. Please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Password Not Match" message:@"Password didn't match. Please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         tooShort.delegate=self;
         [tooShort show];
         [self.firstNameTextField resignFirstResponder];
@@ -167,14 +167,14 @@
                     [success show];
                 }
                 else {
-                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     error.delegate=self;
                     [error show];
                 }
             }
             else{
                 //connect error
-                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 error.delegate=self;
                 [error show];
             }

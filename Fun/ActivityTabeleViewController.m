@@ -194,7 +194,7 @@
             //connect error
             NSError *error = [request error];
             NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
             notsuccess.delegate=self;
             [notsuccess show];
         }

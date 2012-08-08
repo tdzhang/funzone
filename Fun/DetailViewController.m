@@ -339,12 +339,12 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"Hey, I found an event \"%@\" that you may be interested(\"%@\"; \"%@\"). Let me know whether you wanna join! \n\n-Shared via OrangeParc",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"Hey, I found an event \"%@\" that you may be interested in(\"%@\"; \"%@\"). Please let me know whether you wanna join me! \n\n-Shared via OrangeParc",self.event_title,self.location_name,self.event_time];
 }
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". I want to invite you to join me.\nYou can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
@@ -427,9 +427,9 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                 if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    NSLog(@"%@",[NSString stringWithFormat:@"successfully joined."]);
+                    NSLog(@"%@",[NSString stringWithFormat:@"Joined!"]);
                 } else {
-                    NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
+                    NSLog(@"%@",[NSString stringWithFormat:@"Oops, something went wrong:%@",[json objectForKey:@"message"]]);
                 }
             }
             else{
@@ -476,9 +476,9 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                 if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    NSLog(@"%@",[NSString stringWithFormat:@"successfully liked."]);
+                    NSLog(@"%@",[NSString stringWithFormat:@"Liked!"]);
                 } else {
-                    NSLog(@"%@",[NSString stringWithFormat:@"Some thing went wrong:%@",[json objectForKey:@"message"]]);
+                    NSLog(@"%@",[NSString stringWithFormat:@"Something went wrong:%@",[json objectForKey:@"message"]]);
                 }
             }
             else{

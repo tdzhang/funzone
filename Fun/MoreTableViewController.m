@@ -104,7 +104,7 @@
 }
 */
 - (IBAction)signOutButtonClicked:(id)sender {
-    UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Do you want to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
+    UIAlertView *inputEmptyError = [[UIAlertView alloc] initWithTitle:@"Sign Out" message:@"Are you sure that you would like to sign out?" delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"Cancel",nil];
     inputEmptyError.delegate=self;
     [inputEmptyError show];
 }
@@ -270,7 +270,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     NSLog(@"%@",result);
-    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Like Success" message: [NSString stringWithFormat:@"Thank you for liking us."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Thanks!" message: [NSString stringWithFormat:@"Thank you for liking us =)"] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     success.delegate=self;
     [success show];
 }
