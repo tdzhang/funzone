@@ -247,7 +247,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //chaneg the navigationController titile
+    //change the navigationController title
     if ([self.eventType isEqualToString:@"movie"]) {
         self.navigationController.navigationBar.topItem.title = @"Movie";
     }
@@ -375,11 +375,13 @@
     
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     
+    /*
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+     */
 
 }
 
