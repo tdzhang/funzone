@@ -1113,6 +1113,7 @@
 //implement the movieInfoReturn protocal, for movie info return
 -(void)movieInfoReturn:(rottenTomatoMovieModel *)model from:(id) sender{
     [self.textFieldEventTitle setText:model.title];
+    [self.labelEventTitleHolder setHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

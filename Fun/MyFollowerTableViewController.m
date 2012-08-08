@@ -86,7 +86,7 @@
                 NSLog(@"%@",error.description);
                 UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
-                [notsuccess show];
+                //[notsuccess show];
             }
             
         });
@@ -170,7 +170,7 @@
                 else {
                     UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Unfollow Error" message:[NSString stringWithFormat:@"The unfollow is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     error.delegate=self;
-                    [error show];
+                    //[error show];
                 }
             }
             else{
@@ -179,7 +179,7 @@
                 NSLog(@"%@",error.description);
                 UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting unfollow!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 notsuccess.delegate=self;
-                [notsuccess show];
+                //[notsuccess show];
             }
             
         });
