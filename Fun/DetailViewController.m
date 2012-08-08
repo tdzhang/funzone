@@ -339,7 +339,7 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"Buddy, I found an event \"%@\" that you may be interested(Location:\"%@\"; Time:\"%@\"). Let me know whether you wanna join! -Shared via OrangeParc",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"Hey, I found an event \"%@\" that you may be interested(\"%@\"; \"%@\"). Let me know whether you wanna join! \n\n-Shared via OrangeParc",self.event_title,self.location_name,self.event_time];
 }
 
 //return the share message
@@ -370,7 +370,7 @@
 
 - (IBAction)shareButtonClicked:(UIBarButtonItem *)sender {
     //give user several way to share
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"WeChat", nil];
+    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Share with:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"SMS Message",@"Facebook Wall",@"Twitter",@"WeChat", nil];
     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
     [pop showFromTabBar:self.tabBarController.tabBar];
 }
