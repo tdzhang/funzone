@@ -137,7 +137,7 @@
 
 #pragma mark - self defined method
 -(void)likeUsOnFaceBook{
-    UIAlertView *likeUsOnFaceBook = [[UIAlertView alloc] initWithTitle:@"Like Us" message:@"You will post a messgae on wall." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
+    UIAlertView *likeUsOnFaceBook = [[UIAlertView alloc] initWithTitle:nil message:@"Like us on Facebook?" delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:@"Cancel",nil];
     likeUsOnFaceBook.delegate=self;
     [likeUsOnFaceBook show];
 }
