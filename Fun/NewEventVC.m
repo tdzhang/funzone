@@ -248,33 +248,33 @@
     [super viewWillAppear:animated];
     
     //change the navigationController title
-    if ([self.eventType isEqualToString:@"movie"]) {
-        self.navigationController.navigationBar.topItem.title = @"Movie";
-    }
-    else if ([self.eventType isEqualToString:@"party"]) {
-        self.navigationController.navigationBar.topItem.title = @"Party";
-    }
-    else if ([self.eventType isEqualToString:@"shopping"]) {
-        self.navigationController.navigationBar.topItem.title = @"Shopping";
-    }
-    else if ([self.eventType isEqualToString:@"sports"]) {
-        self.navigationController.navigationBar.topItem.title = @"Sports";
-    }
-    else if ([self.eventType isEqualToString:@"outdoor"]) {
-        self.navigationController.navigationBar.topItem.title = @"Outdoor";
-    }
-    else if ([self.eventType isEqualToString:@"entertain"]) {
-        self.navigationController.navigationBar.topItem.title = @"Entertainment";
-    }
-    else if ([self.eventType isEqualToString:@"event"]) {
-        self.navigationController.navigationBar.topItem.title = @"Event";
-    }
-    else if ([self.eventType isEqualToString:@"food"]) {            
-        self.navigationController.navigationBar.topItem.title = @"Food";
-    }
-    else {
-        self.navigationController.navigationBar.topItem.title = @"Other";
-    }
+//    if ([self.eventType isEqualToString:@"movie"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Movie";
+//    }
+//    else if ([self.eventType isEqualToString:@"party"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Party";
+//    }
+//    else if ([self.eventType isEqualToString:@"shopping"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Shopping";
+//    }
+//    else if ([self.eventType isEqualToString:@"sports"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Sports";
+//    }
+//    else if ([self.eventType isEqualToString:@"outdoor"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Outdoor";
+//    }
+//    else if ([self.eventType isEqualToString:@"entertain"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Entertainment";
+//    }
+//    else if ([self.eventType isEqualToString:@"event"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Event";
+//    }
+//    else if ([self.eventType isEqualToString:@"food"]) {            
+//        self.navigationController.navigationBar.topItem.title = @"Food";
+//    }
+//    else {
+//        self.navigationController.navigationBar.topItem.title = @"Other";
+//    }
     
     //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
@@ -468,7 +468,7 @@
     //after delete, need to return to myparc
     //create event
     //Adding Create Event
-    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+//    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
