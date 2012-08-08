@@ -500,7 +500,7 @@
      pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
      [pop showFromTabBar:self.tabBarController.tabBar];
      */
-    if([actionSheet.title isEqualToString:@"Choose To Share:"]){
+    if([actionSheet.title isEqualToString:@"Share with:"]){
         NSString *channel=nil;
         
         //this is for share, the message/email is different
