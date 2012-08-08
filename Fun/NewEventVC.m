@@ -1248,7 +1248,7 @@
     frame.origin.y = self.view.frame.size.height - 260.0;
     self.keyboardToolbar.frame = frame;
     [self.keyboardToolbar setHidden:FALSE];
-    UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:0];
+    UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:3];
     doneButtonKeyBoard.target = self;
     [UIView commitAnimations];
 }
