@@ -518,7 +518,7 @@
 - (IBAction)CreateEventToSever:(id)sender {
     //if the user haven't type in any title, pop out a alert
     if ([self.textFieldEventTitle.text isEqualToString:@""]) {
-        UIAlertView *noTitleInput = [[UIAlertView alloc] initWithTitle:@"Empty Description" message:@"Please enter what you are up to." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *noTitleInput = [[UIAlertView alloc] initWithTitle:@"Empty Title" message:@"What's in your mind?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [noTitleInput show];
         return;
     }
@@ -718,13 +718,13 @@
                         [request setData:data withFileName:[NSString stringWithFormat:@"temp_name.%@",format] andContentType:[NSString stringWithFormat:@"image/%@",format] forKey:@"image"];
                     }
                 }
-                else{
-                    //the user haven't choosen a picture
-                    UIAlertView *notChosenAPic = [[UIAlertView alloc] initWithTitle:@"No Picture Choosen" message:@"Please choose a picture first." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    notChosenAPic.delegate=self;
-                    [notChosenAPic show];
-                    return;
-                }
+//                else{
+//                    //the user haven't choosen a picture
+//                    UIAlertView *notChosenAPic = [[UIAlertView alloc] initWithTitle:@"No Picture Choosen" message:@"Please choose a picture first." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//                    notChosenAPic.delegate=self;
+//                    [notChosenAPic show];
+//                    return;
+//                }
             }
             //decide the category_id and send to server
             if (!self.detail_creator_id){

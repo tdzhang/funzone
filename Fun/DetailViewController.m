@@ -1570,7 +1570,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
         NSLog(@"%@",result);
-    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Posted on wall" message: [NSString stringWithFormat:@"Your event is uploaded to our server."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Facebook" message: [NSString stringWithFormat:@"Your message has been posted on your wall."] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     success.delegate=self;
     [success show];
 }
