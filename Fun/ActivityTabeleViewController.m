@@ -213,37 +213,39 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     activityElementObject* element=[self.activities objectAtIndex:indexPath.row];
     self.tapped_element=element;
     if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event// go to that event
-        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
         self.send_via=VIA_ACTIVITY_INTEREST;
+        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
-        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
         self.send_via=VIA_ACTIVITY_FOLLOW;
+        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
-        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
         self.send_via=VIA_ACTIVITY_COMMENT;
+        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
     else if([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         //show the event
-        [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
         self.send_via=VIA_ACTIVITY_INVITE;
+        [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
     }else if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
         // your friend has just joined orange parc, go to that page to follow
-        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
         self.send_via=VIA_ACTIVITY_FRIEND_JOIN;
+        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
     }
     
 }
 
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSLog(@"%d",self.send_via);
     if ([segue.identifier isEqualToString:@"seeMyEvent"]) {
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;

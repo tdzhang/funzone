@@ -56,7 +56,7 @@
     [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:13]];
     if ([ [NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event/////
-        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ liked your event.",self.user_name]];
+        [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined your event.",self.user_name]];
         //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
