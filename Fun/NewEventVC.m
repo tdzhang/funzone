@@ -246,6 +246,7 @@
 #pragma mark - View lifecycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+<<<<<<< HEAD
     
     //change the navigationController title
     if ([self.eventType isEqualToString:@"movie"]) {
@@ -276,6 +277,8 @@
         self.navigationController.navigationBar.topItem.title = @"Other";
     }
     
+=======
+>>>>>>> cleanup to two warnings
     //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
         [self.deleteButton setHidden:NO];
@@ -306,7 +309,7 @@
                                     andDelegate:self];
     }
     else {
-        NSLog(@"Face book session invalid~~~");
+        NSLog(@"Facebook session invalid~~~");
     }
     //if this view is used to repin a event
     if(self.detail_event_id&&(self.detail_event_id!=self.already_load_detail_event_id)){
@@ -374,6 +377,7 @@
     self.navigationController.navigationBarHidden = NO;
     
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+<<<<<<< HEAD
     
     /*
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -382,7 +386,36 @@
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
      */
+=======
+>>>>>>> cleanup to two warnings
 
+//    if ([self.eventType isEqualToString:@"movie"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Movie";
+//    }
+//    else if ([self.eventType isEqualToString:@"party"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Party";
+//    }
+//    else if ([self.eventType isEqualToString:@"shopping"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Shopping";
+//    }
+//    else if ([self.eventType isEqualToString:@"sports"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Sports";
+//    }
+//    else if ([self.eventType isEqualToString:@"outdoor"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Outdoor";
+//    }
+//    else if ([self.eventType isEqualToString:@"entertain"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Entertainment";
+//    }
+//    else if ([self.eventType isEqualToString:@"event"]) {
+//        self.navigationController.navigationBar.topItem.title = @"Event";
+//    }
+//    else if ([self.eventType isEqualToString:@"food"]) {            
+//        self.navigationController.navigationBar.topItem.title = @"Food";
+//    }
+//    else {
+//        self.navigationController.navigationBar.topItem.title = @"Other";
+//    }
 }
 
 - (void)viewDidUnload{
@@ -468,7 +501,7 @@
     //after delete, need to return to myparc
     //create event
     //Adding Create Event
-    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+//    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];

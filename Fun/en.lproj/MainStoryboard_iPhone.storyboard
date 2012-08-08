@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -782,7 +782,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2x-ng-Mof" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="0Oa-z7-ur9" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="SHD-BC-oU5">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="laD-1r-gbL">
@@ -794,7 +794,7 @@
                             </connections>
                         </searchBar>
                         <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="PsF-q8-vPI">
-                            <rect key="frame" x="0.0" y="425" width="320" height="35"/>
+                            <rect key="frame" x="0.0" y="376" width="320" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <prototypes>
@@ -995,7 +995,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vU6-9S-CK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="i8q-Ty-eGM" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="UmV-2f-1iE">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="xjV-JM-llG">
@@ -1023,7 +1023,7 @@ Find us @OrangeParc.com</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Choose Friends" id="r3f-6O-hOL">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="YHj-Cg-tED">
+                        <barButtonItem key="rightBarButtonItem" id="YHj-Cg-tED">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fsN-B2-vLa">
                                 <rect key="frame" x="244" y="4" width="71" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1148,7 +1148,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gk-rT-Uab" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="smM-VS-7bp" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e3g-De-Baa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Search location" id="qeT-AW-zzF">
@@ -1185,18 +1185,18 @@ Find us @OrangeParc.com</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="47" sectionHeaderHeight="22" sectionFooterHeight="22" id="K79-RN-pul">
-                                <rect key="frame" x="0.0" y="228" width="320" height="188"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="47" sectionHeaderHeight="22" sectionFooterHeight="22" id="K79-RN-pul">
+                                <rect key="frame" x="0.0" y="228" width="320" height="139"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="PHy-uH-i8K">
-                                    <rect key="frame" x="0.0" y="70" width="320" height="35"/>
+                                    <rect key="frame" x="0.0" y="69" width="320" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ChooseLocationOutsideTableCell" textLabel="IQP-Vl-S9U" detailTextLabel="Dzj-Kd-y1R" rowHeight="47" style="IBUITableViewCellStyleSubtitle" id="zco-jr-RM9">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="48"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
@@ -1282,7 +1282,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o60-th-zux" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="jyJ-uT-gZE" customClass="MovieAotoCompletionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="48U-Uz-gbs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Search movie here" id="dLI-Zs-87a">
@@ -1499,13 +1499,13 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="4565" y="413"/>
         </scene>
-        <!--New EventVC-->
+        <!--New EventVC - Create New Event-->
         <scene sceneID="ovw-Dd-Shb">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSf-i0-mFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="createeventpage" hidesBottomBarWhenPushed="YES" id="aP0-zW-Vs1" customClass="NewEventVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2i-ar-FFs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="3r8-m5-n6x">
@@ -1741,7 +1741,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="6YF-WD-7Gl">
-                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="323" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem width="249" style="plain" systemItem="fixedSpace" id="hhG-hJ-7zh"/>
@@ -1756,7 +1756,7 @@ Find us @OrangeParc.com</string>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="9it-sC-7RX">
+                    <navigationItem key="navigationItem" title="Create New Event" id="9it-sC-7RX">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="DPL-wo-aUV">
                             <connections>
                                 <action selector="CreateEventToSever:" destination="aP0-zW-Vs1" id="Suz-GF-n0d"/>
@@ -1800,7 +1800,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egm-1C-jY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="ORt-hE-mSa" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="w3E-Es-mC2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="ot0-cV-Iom">
@@ -2054,7 +2054,7 @@ Find us @OrangeParc.com</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="56" id="Tcp-WP-TRr">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myfollower" rowHeight="56" id="Tcp-WP-TRr">
                                 <rect key="frame" x="0.0" y="22" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2072,7 +2072,7 @@ Find us @OrangeParc.com</string>
                     <navigationItem key="navigationItem" id="nQl-lg-tHN"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3389" y="568"/>
+            <point key="canvasLocation" x="3392" y="569"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="ypc-jh-bEo">
@@ -2368,7 +2368,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nck-Gu-R8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" id="aqP-Jo-YAA" customClass="ShareAfterNewEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xIJ-Pp-cOw">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="header.png" id="Je2-Oc-3hy">
@@ -2582,275 +2582,6 @@ Find us @OrangeParc.com</string>
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="4623" y="1043"/>
-        </scene>
-        <!--View Controller - Detail-->
-        <scene sceneID="5Ay-zU-kZZ">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EMD-Nu-nQB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController hidesBottomBarWhenPushed="YES" id="YZu-J5-q6v" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Yph-M9-vus">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" id="7jS-Bx-r8Q">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="bamboo-huts-thai-restaurant.jpg" id="mzK-EN-xn6">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mask.png" id="ZMe-YR-Wb8">
-                                        <rect key="frame" x="0.0" y="-8" width="325" height="193"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" id="hVm-j9-RjQ">
-                                        <rect key="frame" x="0.0" y="139" width="320" height="91"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Charlwin Mao" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="eGg-X5-RvV">
-                                                <rect key="frame" x="55" y="13" width="135" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Let's Try Out Some Thai Food~" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8Mw-wf-uDN">
-                                                <rect key="frame" x="20" y="47" width="286" height="43"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="thumbnail_layer.png" id="8QN-0M-N9R">
-                                                <rect key="frame" x="11" y="4" width="37" height="37"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="twitter-bird-white-on-blue.png" id="SWd-Wi-eet">
-                                                <rect key="frame" x="12" y="5" width="35" height="35"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="》Junhao Jiang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Jua-hR-Hv2">
-                                                <rect key="frame" x="151" y="13" width="97" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="seperator.png" id="ucX-OE-iRb">
-                                        <rect key="frame" x="15" y="229" width="288" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" id="pXh-tf-W1B">
-                                        <rect key="frame" x="2" y="233" width="320" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This Sunday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="1Zo-XS-Cjm">
-                                                <rect key="frame" x="35" y="3" width="150" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" image="11-clock.png" id="YND-39-Rk8">
-                                                <rect key="frame" x="18" y="9" width="12" height="12"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="xJT-LR-M3M">
-                                        <rect key="frame" x="2" y="262" width="320" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NAk-Q4-eym">
-                                                <rect key="frame" x="253" y="3" width="30" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Thai Food Restaurant" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="fk5-SF-9Ef">
-                                                <rect key="frame" x="35" y="2" width="229" height="26"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" alpha="0.70000000000000007" contentMode="scaleToFill" image="detailButton.png" id="6CP-hn-zho">
-                                                <rect key="frame" x="290" y="8" width="11" height="15"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" image="07-map-marker.png" id="zXd-ut-FdZ">
-                                                <rect key="frame" x="19" y="8" width="9" height="14"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="Ja8-Ec-gRH">
-                                        <rect key="frame" x="18" y="336" width="285" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" image="dashed-deal.png" id="9fG-6g-zjy">
-                                                <rect key="frame" x="0.0" y="0.0" width="285" height="40"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="rUy-d7-omP">
-                                                <rect key="frame" x="46" y="8" width="40" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Expiring on 12/01/2012" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="ffU-SO-YF5">
-                                                <rect key="frame" x="96" y="8" width="175" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="deal-pink.png" id="Epk-Uz-Owj">
-                                                <rect key="frame" x="8" y="12" width="33" height="14"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="FtD-dG-lOq">
-                                        <rect key="frame" x="18" y="296" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tMw-7W-G8h">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <state key="normal" backgroundImage="button_comment.png">
-                                                    <color key="titleColor" red="1" green="0.4162711871" blue="0.013455714069999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(3)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="t7n-sO-43f">
-                                                <rect key="frame" x="67" y="6" width="18" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detail-interested-color.png" id="XOh-hS-8Dk">
-                                                <rect key="frame" x="7" y="5" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Like" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="r9z-RY-eyw">
-                                                <rect key="frame" x="35" y="4" width="28" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="bOS-Dm-Ws5">
-                                        <rect key="frame" x="117" y="296" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OmV-e1-QvH">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <state key="normal" backgroundImage="button_comment.png">
-                                                    <color key="titleColor" red="1" green="0.4162711871" blue="0.013455714069999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="(3)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3uy-We-92M">
-                                                <rect key="frame" x="67" y="4" width="18" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pick" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lKI-cJ-baR">
-                                                <rect key="frame" x="35" y="4" width="30" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detail-pick-color.png" id="08N-Da-Rvo">
-                                                <rect key="frame" x="7" y="5" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="7Df-TD-CEv">
-                                        <rect key="frame" x="215" y="296" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ynT-ZY-oiv">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <state key="normal" backgroundImage="button_comment.png">
-                                                    <color key="titleColor" red="1" green="0.4162711871" blue="0.013455714069999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Share" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="syx-5R-DzB">
-                                                <rect key="frame" x="35" y="4" width="44" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detail-share-color.png" id="Mz0-s5-7RN">
-                                                <rect key="frame" x="7" y="5" width="20" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.19" colorSpace="calibratedRGB"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Detail" id="ygs-4C-c4O"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackTranslucent" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="3900" y="379"/>
         </scene>
         <!--Categroy Choose View Controller - Create an Event-->
         <scene sceneID="K1j-9d-l9H">
@@ -3158,20 +2889,13 @@ Find us @OrangeParc.com</string>
         <image name="07-map-marker.png" width="28" height="46"/>
         <image name="11-clock.png" width="40" height="40"/>
         <image name="Category@2x.png" width="640" height="734"/>
-        <image name="bamboo-huts-thai-restaurant.jpg" width="400" height="299"/>
         <image name="button-red.png" width="967" height="153"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="cancel_button.png" width="250" height="121"/>
         <image name="create_account_button.png" width="1167" height="200"/>
         <image name="current_location_icon.png" width="246" height="246"/>
         <image name="dashed-broad.png" width="2684" height="484"/>
-        <image name="dashed-deal.png" width="1199" height="187"/>
-        <image name="deal-pink.png" width="66" height="27"/>
-        <image name="detail-interested-color.png" width="40" height="40"/>
         <image name="detail-interested-gray.png" width="40" height="40"/>
-        <image name="detail-pick-color.png" width="40" height="40"/>
-        <image name="detail-share-color.png" width="40" height="40"/>
-        <image name="detailButton.png" width="314" height="446"/>
         <image name="event-dashed-border.png" width="288" height="108"/>
         <image name="event-imageborder.png" width="608" height="291"/>
         <image name="event-imageholder.png" width="589" height="271"/>
@@ -3181,7 +2905,6 @@ Find us @OrangeParc.com</string>
         <image name="header.png" width="320" height="44"/>
         <image name="iphone-icon-orange-114.png" width="114" height="114"/>
         <image name="logo-orange.png" width="607" height="601"/>
-        <image name="mask.png" width="1000" height="1000"/>
         <image name="more-facebook-color.png" width="30" height="30"/>
         <image name="more-findfriend-color.png" width="30" height="30"/>
         <image name="more-info-color.png" width="30" height="30"/>
@@ -3197,18 +2920,189 @@ Find us @OrangeParc.com</string>
         <image name="subtle-pattern-1.jpg" width="1000" height="1000"/>
         <image name="texture.png" width="320" height="431"/>
         <image name="texture@2x.png" width="640" height="862"/>
-        <image name="thumbnail_layer.png" width="60" height="60"/>
-        <image name="twitter-bird-white-on-blue.png" width="300" height="300"/>
     </resources>
+    <classes>
+        <class className="ActivityTabeleViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
+        </class>
+        <class className="AddCommentVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CategroyChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+        </class>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
+                <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="joinButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="likeButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="ExploreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="FIndTopTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FIndTopTableViewController.h"/>
+        </class>
+        <class className="FeedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="instructionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="FindFriendTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindFriendTableViewController.h"/>
+        </class>
+        <class className="InviteTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InviteTableViewController.h"/>
+        </class>
+        <class className="LoginPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="MySearchDisplayController" candidateClass="UISearchDisplayController"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="similarPlaceToLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MoreTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signOutButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
+        </class>
+        <class className="MyFollowerTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowerTableViewController.h"/>
+        </class>
+        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
+        </class>
+        <class className="NewEventVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="done_Button" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="inviteFriendsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inviteIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="timeIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="OtherProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="ProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TimeChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="detailLocationMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/detailLocationMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="registerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oxR-j5-unP"/>
+        <segue reference="lqc-Cx-NBX"/>
         <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="eX7-7v-GIv"/>
+        <segue reference="oxR-j5-unP"/>
         <segue reference="6rH-Lj-bNq"/>
         <segue reference="I5V-BE-h5K"/>
         <segue reference="2Cw-4j-quL"/>

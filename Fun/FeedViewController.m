@@ -107,7 +107,6 @@
     [self.mainScrollView addSubview:self.refreshView];
 
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #warning need to add instruction to find friends
     [self.instructionView setHidden:YES];
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
