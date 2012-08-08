@@ -390,9 +390,7 @@
 */
 #pragma mark - Implement the SearchBar and SearchBarDisplay
 //search the result
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
-shouldReloadTableForSearchString:(NSString *)searchString
-{   
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     [self.searchResultContacts removeAllObjects];
     for (UserContactObject* contact in self.dividedContacts) {
         NSString *nameText=@"";
@@ -405,7 +403,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         else if(contact.lastName){
             nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
         }
-    
+        
         NSString *keyword=[searchString stringByReplacingOccurrencesOfString:@"," withString:@" "];
         NSArray* keywords=[keyword componentsSeparatedByString:@" "];
         BOOL flag = YES;
