@@ -27,7 +27,7 @@
 
 
 @interface MapViewController : UIViewController <MKMapViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIGestureRecognizerDelegate,FunTableViewContainMapviewTVCDelegate,UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet MKMapView *myMapView;
+@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) IBOutlet UISearchDisplayController *MySearchDisplayController;
 @property (strong, nonatomic) IBOutlet UISearchBar *mySearchBar;
 //@property (weak, nonatomic) IBOutlet UIStepper *myStepper;
@@ -35,9 +35,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UILabel *similarPlaceToLabel;
 @property (nonatomic,strong) TableViewContainMapviewTVC *tableViewControllerContainMap;
-@property (nonatomic,strong) NSString *predefinedSeachingWords;
+@property (nonatomic,weak) NSString *predefinedSeachingWords;
 @property (nonatomic,strong) NSString *preDefinedEventType;
-@property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation;
+@property (nonatomic,weak) MKPointAnnotation *predefinedAnnotation;
 @end
 
 

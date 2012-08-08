@@ -1292,9 +1292,9 @@
     //[self.mapViewFeedBackImageView setContentMode:UIViewContentModeScaleAspectFill];
     //[self.mapViewFeedBackImageView setHidden:NO];
     self.createEvent_latitude=[NSString stringWithFormat:@"%f",annotation.coordinate.latitude];
-    self.detail_latitude=[NSNumber numberWithFloat:[self.createEvent_latitude floatValue]];
+    self.detail_latitude=[[NSNumber alloc] initWithFloat:[self.createEvent_latitude floatValue]];
     self.createEvent_longitude=[NSString stringWithFormat:@"%f",annotation.coordinate.longitude];
-    self.detail_longitude=[NSNumber numberWithFloat:[self.createEvent_longitude floatValue]];
+    self.detail_longitude=[[NSNumber alloc] initWithFloat:[self.createEvent_longitude floatValue]];
     self.createEvent_locationName=[locationName copy];
     self.detail_location_name=self.createEvent_locationName;
     NSLog(@"NewEvent Location return:%@",self.createEvent_locationName);
