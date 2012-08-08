@@ -193,13 +193,14 @@
 //deal with the selection of the outside table
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
     NSString *venue_title=(place.name)?place.name:@"No name";
     
     if (place.categories_shortName) {
-        venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+        venue_title=[[NSString alloc] initWithFormat:@"%@ (%@)",[venue_title copy],place.categories_shortName];
     }
-        
+       
     //set mapview region( where to show the map veiw)
     MKCoordinateRegion region;
     region.center.latitude = [place.latitude doubleValue];
@@ -212,12 +213,14 @@
     //add annotation
     MKPointAnnotation *annotationPoint =   [[MKPointAnnotation alloc] init];
     annotationPoint.coordinate = region.center;
-    annotationPoint.title = venue_title;
+    annotationPoint.title = [NSString stringWithFormat:@"%@",venue_title];
+
+     
     if (place.crossStreet) {
         annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
     }
     [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region];
-    //[self.myTableView setContentOffset:CGPointZero animated:YES];
+     
 }
 
 @end

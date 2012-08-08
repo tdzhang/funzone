@@ -71,13 +71,20 @@
     }
 }
 
--(void)setAnnotation:(MKPointAnnotation *)annotation
-{    
-    if(![_annotation isEqual:annotation]){
-        _annotation=annotation; 
+-(MKPointAnnotation *)annotation{
+    if (!_annotation) {
+        _annotation=[[MKPointAnnotation alloc] init];
     }
+    return _annotation;
+}
+
+-(void)setAnnotation:(MKPointAnnotation *)annotation
+{
     if (self.myMapView.annotations) {
         [self.myMapView removeAnnotations:self.myMapView.annotations];
+    }
+    if(![_annotation isEqual:annotation]){
+        _annotation=annotation; 
     }
 }
 
@@ -123,7 +130,7 @@
     location.longitude=userCoordinate.longitude;
     region.span=span;
     region.center=location;
-    [mapView setRegion:region animated:YES];    
+    [mapView setRegion:region animated:NO];
     
     // add annotation at the point User pressed
     MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
@@ -204,19 +211,21 @@
      
     
     //if the predefined annotation, then show it (instead of current location)
-    if(self.predefinedAnnotation&&(self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)){
-        MKPointAnnotation *annotation=self.predefinedAnnotation;
-        MKCoordinateRegion region;
-        MKCoordinateSpan span;
-        span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
-        span.longitudeDelta = DEFAULT_ZOOMING_SPAN_LONGITUDE;
-        self.currentZOOMVALUE=[NSNumber numberWithDouble:DEFAULT_ZOOMING_SPAN_LONGITUDE];
-        region.span=span;
-        region.center=annotation.coordinate;
-        [mapView setRegion:region animated:YES];
-        // add annotation at the point User pressed
-        self.annotation=annotation;
-        [self.myMapView addAnnotation:annotation];
+    if(self.predefinedAnnotation){
+        if ((self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)) {
+            MKPointAnnotation *annotation=self.predefinedAnnotation;
+            MKCoordinateRegion region;
+            MKCoordinateSpan span;
+            span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE;
+            span.longitudeDelta = DEFAULT_ZOOMING_SPAN_LONGITUDE;
+            self.currentZOOMVALUE=[NSNumber numberWithDouble:DEFAULT_ZOOMING_SPAN_LONGITUDE];
+            region.span=span;
+            region.center=annotation.coordinate;
+            [mapView setRegion:region animated:NO];
+            // add annotation at the point User pressed
+            self.annotation=annotation;
+            [self.myMapView addAnnotation:annotation];
+        }
     }
     else{
         [self showUserCurrentLocation];
@@ -487,7 +496,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
         if (place.latitude&&place.longitude) {
             //if is from google api
-            NSString *venue_title=(place.name)?place.name:@"No name";
+            NSString *venue_title=(place.name)?[place.name copy ]:@"No name";
             if (place.categories_shortName) {
                 venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
             }
@@ -504,13 +513,13 @@ shouldReloadTableForSearchString:(NSString *)searchString
             //add annotation
             MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
             annotationPoint.coordinate = region.center;
-            annotationPoint.title = venue_title;
+            annotationPoint.title =  [NSString stringWithFormat:@"%@",venue_title ];
             if (place.crossStreet) {
                 annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
             }
             [self setAnnotation:annotationPoint];
             [self.myMapView addAnnotation:annotationPoint];
-            [self.myMapView setRegion:region animated:YES];
+            [self.myMapView setRegion:region animated:NO];
             [self.searchDisplayController setActive:NO animated:YES];
             
             //set the Search Bar and give up the Firstresponsder
@@ -619,7 +628,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
     [self setAnnotation:annotation];
     [self.myMapView addAnnotation:annotation];
-    [self.myMapView setRegion:region animated:YES];
+    [self.myMapView setRegion:region animated:NO];
 
     
     //set the Search Bar and give up the Firstresponsder
@@ -637,7 +646,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //    [mapView removeAnnotation:[mapView.annotations objectAtIndex:1]];
     //}
     //id myAnnotation = [mapView.annotations objectAtIndex:0]; 
-    [mapView selectAnnotation:self.annotation animated:YES];
+    [mapView selectAnnotation:self.annotation animated:NO];
 }
 
 
@@ -718,10 +727,16 @@ shouldReloadTableForSearchString:(NSString *)searchString
 */
 //the action of the finish button
 - (IBAction)DoneWithChooseLocation:(id)sender {
-    MKPointAnnotation *annotationPoint = self.annotation;
-    [self.myMapView deselectAnnotation:annotationPoint animated:NO];
+    
+    MKPointAnnotation *annotationPoint = [MKPointAnnotation new];
+    [annotationPoint setCoordinate:self.annotation.coordinate];
+    [annotationPoint setTitle:self.annotation.title];
+    [annotationPoint setSubtitle:self.annotation.subtitle];
+    
+    //[self.myMapView deselectAnnotation:annotationPoint animated:NO];
     //Move the target into the center of the mapview
     MKCoordinateRegion region;
+
     region.center = annotationPoint.coordinate;
     MKCoordinateSpan span;
     span.latitudeDelta = DEFAULT_ZOOMING_SPAN_LATITUDE*1;
@@ -730,18 +745,24 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [self.myMapView setRegion:region animated:NO];
     
     //do the snapshot of the map view
-    UIGraphicsBeginImageContextWithOptions(self.myMapView.frame.size, NO, 0.0);
+    //UIGraphicsBeginImageContextWithOptions(self.myMapView.frame.size, NO, 0.0);
     //UIGraphicsBeginImageContext(mapView.frame.size);
-    [self.myMapView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    //[self.myMapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //UIGraphicsEndImageContext();
     
     //then crop the snapshot
     //run the delegate method to feedback
+    
     if ([self.delegate conformsToProtocol:@protocol(SelfChooseLocation)]) {
         NSLog(@"%@",self.annotation.title);
-        [self.delegate UpdateLocation:self.feedBackAnnotation  withLocationName:self.feedBackAnnotation.title withSnapShot:image sendFrom:self];
+        MKPointAnnotation* annotation=[[MKPointAnnotation alloc] init];
+        [annotation setCoordinate:self.feedBackAnnotation.coordinate];
+        [annotation setTitle:self.feedBackAnnotation.title];
+        [annotation setSubtitle:self.feedBackAnnotation.subtitle];
+        [self.delegate UpdateLocation:annotation  withLocationName:self.feedBackAnnotation.title withSnapShot:nil sendFrom:self];
     }
+     
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

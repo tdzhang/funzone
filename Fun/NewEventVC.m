@@ -829,19 +829,28 @@
         [TimeChooseVC setDelegate:self];
     }
     else if ([segue.identifier isEqualToString:@"ChooseLocationInMAP"]){
+        
         if ([segue.destinationViewController isKindOfClass:[MapViewController class]]) {
             MapViewController *mapViewC=segue.destinationViewController;
             [mapViewC setDelegate:self];
             //pass in the event type to the destination(8 types)
-            [mapViewC setPreDefinedEventType:self.eventType];
+            [mapViewC setPreDefinedEventType:[NSString stringWithFormat:@"%@",self.eventType]];
             if (![self.textFieldEventTitle.text isEqualToString:@""]) {
                 [mapViewC setPredefinedSeachingWords:self.eventType];
             }
             else {
                 [mapViewC setPredefinedSeachingWords:@""];
             }
-            mapViewC.predefinedAnnotation=self.predefinedAnnotation;
+            
+            if (self.predefinedAnnotation) {
+                mapViewC.predefinedAnnotation=[[MKPointAnnotation alloc] init];
+                [mapViewC.predefinedAnnotation setCoordinate:self.predefinedAnnotation.coordinate];
+                [mapViewC.predefinedAnnotation setTitle:self.predefinedAnnotation.title];
+                [mapViewC.predefinedAnnotation setTitle:self.predefinedAnnotation.subtitle];
+            }
+
         }
+         
     }
     else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){
         if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
