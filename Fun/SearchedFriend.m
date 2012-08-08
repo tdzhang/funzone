@@ -31,7 +31,7 @@
         else{
             friend.registerd=YES;
             friend.user_id=[element objectForKey:@"user_id"];
-            if ([element objectForKey:@"followed"]==0) {
+            if ([[NSString stringWithFormat:@"%@",[element objectForKey:@"followed"]] isEqualToString:@"0"]) {
                 friend.followed = NO;
             } else {
                 friend.followed=YES;
