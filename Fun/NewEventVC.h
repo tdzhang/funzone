@@ -22,6 +22,8 @@
 #import "GlobalConstant.h"
 #import "ShareAfterNewEventViewController.h"
 #import "InviteTableViewController.h"
+#import "SelfChooseLocation.h"
+
 
 @interface NewEventVC : UIViewController<SelfChooseLocation,UIActionSheetDelegate,TimeChooseProtocal,UITextFieldDelegate,ChooseImageFeedBackDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,movieInfoReturn,FBRequestDelegate,FeedBackInviteFriendChange>
 

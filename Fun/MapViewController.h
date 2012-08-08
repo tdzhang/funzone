@@ -13,17 +13,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TableViewContainMapviewTVC.h"
 #import "FunTableViewContainMapviewTVCDelegate.h"
+#import "FunAppDelegate.h"
+#import "SelfChooseLocation.h"
 
 @class MapViewController;
 @class TableViewContainMapviewTVC;
 
 
 
-@protocol SelfChooseLocation <NSObject>
 
--(void)UpdateLocation:(MKPointAnnotation*)annotation withLocationName:(NSString*)locationName withSnapShot:(UIImage*)image sendFrom:(MapViewController*)sender;
-
-@end
 
 
 @interface MapViewController : UIViewController <MKMapViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIGestureRecognizerDelegate,FunTableViewContainMapviewTVCDelegate,UITextFieldDelegate>

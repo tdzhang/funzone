@@ -202,12 +202,16 @@
 //    CLLocation *userLoc = mapView.userLocation.location;
 //    CLLocationCoordinate2D userCoordinate = userLoc.coordinate;
     
-//    if (userCoordinate.latitude>0.001) {
-//        [self showUserCurrentLocation];
-//        if (self.predefinedSeachingWords) {
-//            [self.tableViewControllerContainMap SearchTheKeyWords:self.predefinedSeachingWords AtUserLocation:userLoc];
-//        }
-//    }
+    NSLog(@"%@",self.preDefinedEventType);
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+   ;
+    if ([self.preDefinedEventType isEqualToString:@"movie"]) {
+        [self showUserCurrentLocation];
+        if (self.predefinedSeachingWords) {
+            [self.tableViewControllerContainMap SearchTheKeyWords:@"cinema" AtUserLocation: appDelegate.myLocationManager.location];
+            
+        }
+    }
      
     
     //if the predefined annotation, then show it (instead of current location)
