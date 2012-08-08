@@ -331,8 +331,9 @@
             NSString *title=[event objectForKey:@"title"];
             //NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
+            NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-            NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             NSString *locationName=[event objectForKey:@"location"];
@@ -347,7 +348,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
             
@@ -370,7 +371,8 @@
             //NSString *description=[event objectForKey:@"description"];
             NSString *photo=[event objectForKey:@"photo_url"];
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-            NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+            NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+            //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
             NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
             NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
             NSString *locationName=[event objectForKey:@"location"];
@@ -385,7 +387,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_views withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
         }

@@ -348,7 +348,7 @@
         [self.textFieldEventTitle becomeFirstResponder];
     }
     
-    
+    self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -365,6 +365,8 @@
     //change the style of the navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
+    
+    self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered

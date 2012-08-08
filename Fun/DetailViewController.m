@@ -240,14 +240,7 @@
     
     self.editButton = [[UIButton alloc] init];
     [self.myScrollView addSubview:self.editButton];
-    
-    [self.likeButtonSection addSubview:self.like_icon];
-    [self.likeButtonSection addSubview:self.like_label];
-    [self.joinButtonSection addSubview:self.join_icon];
-    [self.joinButtonSection addSubview:self.join_label];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
-    
+        
     self.descriptionSectionView = [[UIView alloc] init];
     [self.myScrollView addSubview:self.descriptionSectionView];
 }
@@ -1126,6 +1119,12 @@
     NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
     
     //handle the action button label part
+    [self.like_icon removeFromSuperview];
+    [self.like_label removeFromSuperview];
+    [self.join_icon removeFromSuperview];
+    [self.join_label removeFromSuperview];
+    [self.doitmyself_icon removeFromSuperview];
+    [self.doitmyself_label removeFromSuperview];
     if ([self.isLiked isEqualToString:@"0"]) {
         [self.like_label setText:@"Like"];
     } else {

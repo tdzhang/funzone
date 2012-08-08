@@ -227,7 +227,7 @@
     nameLabel.font = [UIFont boldSystemFontOfSize:12.0];
     [blockElement.creator addSubview:nameLabel];
     
-    //Joined number label
+    //Joined number label, do it myself
     blockElement.joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_X, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_Y, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_HEIGHT)];
     blockElement.joinLabel.text = join_label;
     blockElement.joinLabel.backgroundColor = [UIColor clearColor];
@@ -244,7 +244,7 @@
     blockElement.joinImageView.image = [UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_INTEREST_IMAGE];
     [blockElement.creator addSubview:blockElement.joinImageView];
     
-    //Favored Label
+    //Favored Label,likes
     blockElement.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_X, EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_Y , EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_HEIGHT)];
     blockElement.favorLabel.text = favor_label;
     blockElement.favorLabel.backgroundColor = [UIColor clearColor];   
