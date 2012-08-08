@@ -454,9 +454,13 @@
                 NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
                 NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-
                 CLLocation *current_location = self.current_location_manager.location;
-                CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
+                CLLocationDistance distance;
+                if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
+                    distance = -1;
+                } else {
+                    distance = [current_location distanceFromLocation:location]*0.000621371;
+                }
                 
                 if (!title) {
                     continue;
@@ -543,13 +547,15 @@
             NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
             NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
             NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-            
             CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-
-            CLLocation *current_location = self.current_location_manager.location;
-            CLLocationDistance distance = [current_location distanceFromLocation:location]*0.000621371;
             
-            if (!title) {
+            CLLocation *current_location = self.current_location_manager.location;
+            CLLocationDistance distance;
+            if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
+                distance = -1;
+            } else {
+                distance = [current_location distanceFromLocation:location]*0.000621371;
+            }            if (!title) {
                 continue;
             }
             if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {

@@ -422,7 +422,7 @@
             user_ids=[user_ids stringByAppendingFormat:@",%@",person.user_id];
         }
     }
-    
+    NSLog(@"!!!%@",user_ids);
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
@@ -456,9 +456,6 @@
         });
         
     });
-    
-    
-    
     
     //go to my parc
     [self.navigationController popToRootViewControllerAnimated:YES];

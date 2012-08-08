@@ -136,13 +136,16 @@
     
     //add distance label
     blockElement.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 130, 120, 20)];
-    [blockElement.distanceLabel setText:[NSString stringWithFormat:@"%.1f mi", distance]];
+    if (distance == -1) {
+        [blockElement.distanceLabel setText:@" "];
+    } else {
+        [blockElement.distanceLabel setText:[NSString stringWithFormat:@"%.1f mi", distance]];
+    }
     blockElement.distanceLabel.numberOfLines = 1;
     blockElement.distanceLabel.lineBreakMode = UILineBreakModeClip;
     [blockElement.distanceLabel setFont:[UIFont boldSystemFontOfSize:12]];
     [blockElement.distanceLabel setTextColor:[UIColor lightGrayColor]];
     [blockElement.blockHolderView addSubview:blockElement.distanceLabel];
-    
     //add heart image
     blockElement.heartImageView = [[UIImageView alloc] initWithFrame:CGRectMake(115, 130 + blockElement.distanceLabel.frame.size.height/2 - 5, 10, 10)];
     [blockElement.heartImageView setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_REPIN_IMAGE]];
