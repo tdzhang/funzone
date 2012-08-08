@@ -810,7 +810,7 @@
         //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
         [self.navigationController popToRootViewControllerAnimated:YES];
         FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        [funAppdelegate.thisTabBarController setSelectedIndex:0];
+        [funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
 }
 
