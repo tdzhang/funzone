@@ -116,10 +116,19 @@
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+        
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSURL *url=nil;
+        if([CLLocationManager regionMonitoringEnabled]){
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+        }
+        else{
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+        }
         if ([defaults objectForKey:@"login_auth_token"]) {
             url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
         }
+        NSLog(@"%@",url);
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
         [request startSynchronous];
@@ -265,17 +274,23 @@
         ///////////////////////////////////////////////////////////////////////////
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSString *request_string=[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME];
-            //if has auth_token, add it in the get url
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                request_string=[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+            FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+            NSURL *url=nil;
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
             }
-            NSURL *url=[NSURL URLWithString:request_string];
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+            }
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            NSLog(@"%@",url);
             ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
-            
             [request setRequestMethod:@"GET"];
-            
             [request startSynchronous];
+
+            
             
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);

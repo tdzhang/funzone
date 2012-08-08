@@ -423,6 +423,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar

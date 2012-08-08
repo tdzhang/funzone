@@ -71,6 +71,7 @@
     [MyPermenentCachePart EXITit];//save the permanentcache data
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -78,8 +79,25 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController];
     
-    //stop updating user's locaiton
-    if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
+    //upload user's locaiton
+    if(self.myLocationManager){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if([CLLocationManager regionMonitoringEnabled]&&[defaults objectForKey:@"login_auth_token"]){
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+                NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_current_location?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.myLocationManager.location.coordinate.longitude,self.myLocationManager.location.coordinate.latitude]];
+                NSLog(@"upload location:%@",url);
+                ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+            });
+        }
+    }
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

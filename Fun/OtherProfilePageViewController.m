@@ -284,9 +284,9 @@
 - (IBAction)startFollowAction:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/follow?auth_token=%@&followee_id=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id,self.via]];
     if (self.followed) {
-        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&&followee_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id]];
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/users/unfollow?auth_token=%@&followee_id=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id,self.via]];
     }
 
     
