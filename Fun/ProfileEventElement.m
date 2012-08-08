@@ -75,49 +75,50 @@
     [blockElement.blockHolderView addSubview:blockElement.eventImageView];
     ////////////////SET THE IMAGE HERE
     //get the image from cache
-    NSURL *url=[NSURL URLWithString:eventImageURL];
-    if (![Cache isURLCached:url]) {
-        //if not cached, using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: url];
-            
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-                imageData=UIImagePNGRepresentation(image);
+    if (eventImageURL) {
+        NSURL *url=[NSURL URLWithString:eventImageURL];
+        if (![Cache isURLCached:url]) {
+            //if not cached, using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: url];
                 
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        //refresh the whole view
-                        blockElement.eventImageView.image=[UIImage imageWithData:imageData];
-                        [blockElement.blockHolderView addSubview:blockElement.eventImageView];
-                    });
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                    imageData=UIImagePNGRepresentation(image);
+                    
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            //refresh the whole view
+                            blockElement.eventImageView.image=[UIImage imageWithData:imageData];
+                            [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+                        });
+                    }
                 }
-            }
-            else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        blockElement.eventImageView.image=[UIImage imageWithData:imageData];
-                        [blockElement.blockHolderView addSubview:blockElement.eventImageView];
-                    });
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:url withData:imageData];
+                            blockElement.eventImageView.image=[UIImage imageWithData:imageData];
+                            [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                blockElement.eventImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
+                [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+            });
+        }
     }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            blockElement.eventImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
-            [blockElement.blockHolderView addSubview:blockElement.eventImageView];
-        });
-    }
-    
     
     //add event title
     blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(5, 95, 135, 35)];

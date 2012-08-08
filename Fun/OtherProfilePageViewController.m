@@ -572,7 +572,10 @@
                     continue;
                 }
                 if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
-                    continue;
+                    //for the image is null situation
+                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:nil tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
+                    ;
+                    [self refreshAllTheMainScrollViewSUbviews];
                 }
                 NSURL *url=[NSURL URLWithString:event_photo_url];
                 if (![Cache isURLCached:url]) {
