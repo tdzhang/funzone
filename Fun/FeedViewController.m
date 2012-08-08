@@ -23,6 +23,9 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *tapped_creator_id;
+
+-(void)checkForWhetherShowInstruction;
+
 @end
 
 @implementation FeedViewController
@@ -51,10 +54,7 @@
     return self;
 }
 
-- (NSMutableArray *)blockViews {
-    if (_blockViews == nil) {
-        _blockViews = [[NSMutableArray alloc] init];
-    }
+-(void)checkForWhetherShowInstruction{
     if ([_blockViews count]<1) {
         // if no blockviews
         [self.instructionView setHidden:NO];
@@ -62,6 +62,13 @@
     else{
         [self.instructionView setHidden:YES];
     }
+}
+
+- (NSMutableArray *)blockViews {
+    if (_blockViews == nil) {
+        _blockViews = [[NSMutableArray alloc] init];
+    }
+
     return _blockViews;
 }
 
@@ -69,13 +76,7 @@
     if (![_blockViews isEqual:blockViews]) {
         _blockViews=blockViews;
     }
-    if ([_blockViews count]<1) {
-        // if no blockviews
-        [self.instructionView setHidden:NO];
-    }
-    else{
-        [self.instructionView setHidden:YES];
-    }
+
 }
 
 -(NSMutableArray *)garbageCollection{
@@ -89,6 +90,8 @@
 #pragma mark - View Life circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [self.instructionView setHidden:YES];
     
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -107,8 +110,8 @@
     [self.mainScrollView addSubview:self.refreshView];
 
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #warning need to add instruction to find friends
-    [self.instructionView setHidden:YES];
+    //check for whether show the instruction
+    //[self checkForWhetherShowInstruction];
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //quest the most recent 10 featured events
@@ -124,7 +127,6 @@
             [connection start];
             self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
             self.mainScrollView.contentOffset = CGPointMake(0, 0);
-        
     }
 }
 
@@ -349,6 +351,8 @@
             }
             NSURL *url=[NSURL URLWithString:photo];
             [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            //check for whether show the instruction
+            [self checkForWhetherShowInstruction];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
             
@@ -388,13 +392,16 @@
             }
             NSURL *url=[NSURL URLWithString:photo];
             [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            //check for whether show the instruction
+            [self checkForWhetherShowInstruction];
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
         }
         
         [self.refreshViewdown removeFromSuperview];
     }
-    
+    //check for whether show the instruction
+    [self checkForWhetherShowInstruction];
 }
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
