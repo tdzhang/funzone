@@ -577,55 +577,58 @@
                     ;
                     [self refreshAllTheMainScrollViewSUbviews];
                 }
-                NSURL *url=[NSURL URLWithString:event_photo_url];
-                if (![Cache isURLCached:url]) {
-                    //using high priority queue to fetch the image
-                    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                        //get the image data
-                        NSData * imageData = nil;
-                        imageData = [[NSData alloc] initWithContentsOfURL: url];
-                        
-                        if ( imageData == nil ){
-                            //if the image data is nil, the image url is not reachable. using a default image to replace that
-                            //NSLog(@"downloaded %@ error, using a default image",url);
-                            UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                            imageData=UIImagePNGRepresentation(image);
+                else{
+                    NSURL *url=[NSURL URLWithString:event_photo_url];
+                    if (![Cache isURLCached:url]) {
+                        //using high priority queue to fetch the image
+                        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                            //get the image data
+                            NSData * imageData = nil;
+                            imageData = [[NSData alloc] initWithContentsOfURL: url];
                             
-                            if(imageData){
-                                dispatch_async( dispatch_get_main_queue(),^{
-                                    [Cache addDataToCache:url withData:imageData];
-                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
-                                    ;
-                                    //refresh the whole view
-                                    NSLog(@"profile0:%@",event_id);
-                                    [self refreshAllTheMainScrollViewSUbviews];
-                                });
+                            if ( imageData == nil ){
+                                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                //NSLog(@"downloaded %@ error, using a default image",url);
+                                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                                imageData=UIImagePNGRepresentation(image);
+                                
+                                if(imageData){
+                                    dispatch_async( dispatch_get_main_queue(),^{
+                                        [Cache addDataToCache:url withData:imageData];
+                                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
+                                        ;
+                                        //refresh the whole view
+                                        NSLog(@"profile0:%@",event_id);
+                                        [self refreshAllTheMainScrollViewSUbviews];
+                                    });
+                                }
                             }
-                        }
-                        else {
-                            //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                            //NSLog(@"downloaded %@",url);
-                            if(imageData){
-                                dispatch_async( dispatch_get_main_queue(),^{
-                                    [Cache addDataToCache:url withData:imageData];
-                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
-                                    //refresh the whole view
-                                    NSLog(@"profile0:%@",event_id);
-                                    [self refreshAllTheMainScrollViewSUbviews];
-                                });
+                            else {
+                                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                //NSLog(@"downloaded %@",url);
+                                if(imageData){
+                                    dispatch_async( dispatch_get_main_queue(),^{
+                                        [Cache addDataToCache:url withData:imageData];
+                                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                                        //refresh the whole view
+                                        NSLog(@"profile0:%@",event_id);
+                                        [self refreshAllTheMainScrollViewSUbviews];
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    else {
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                            //refresh the whole view
+                            NSLog(@"profile1:%@",shared_event_id);
+                            [self refreshAllTheMainScrollViewSUbviews];
+                        });
+                    }
+                    [self.refreshViewdown removeFromSuperview];
                 }
-                else {
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
-                        //refresh the whole view
-                        NSLog(@"profile1:%@",shared_event_id);
-                        [self refreshAllTheMainScrollViewSUbviews];
-                    });
-                }
-                [self.refreshViewdown removeFromSuperview];
+                
             }
             self.freshConnectionType=@"not";
         }
