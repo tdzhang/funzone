@@ -781,7 +781,6 @@
                     }
                     else{
                         //when success, start invite people;
-                        //when success, start invite people;
                         if ([self.invitedFriend count]>0) {
                             [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
                         }

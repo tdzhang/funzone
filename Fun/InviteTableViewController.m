@@ -243,6 +243,7 @@
         }
         InviteFriendObject* friend=[self.searchResultContacts objectAtIndex:indexPath.row];
         [cell.user_name_label setText:friend.user_name];
+
         ////////////////////////
         NSURL *url=[NSURL URLWithString:friend.user_pic];
         if (![Cache isURLCached:url]) {
@@ -305,7 +306,6 @@
         InviteFriendObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
 
         [cell.user_name_label setText:contact.user_name];
-        
         ////////////////////////
         NSURL *url=[NSURL URLWithString:contact.user_pic];
         if (![Cache isURLCached:url]) {
