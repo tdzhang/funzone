@@ -138,7 +138,6 @@
 
 //used to set the 1st into set teh title part 1st responser
 @synthesize isnotFirstTime=_isnotFirstTime;
-
 //used for server log
 @synthesize via=_via;
 
@@ -217,6 +216,15 @@
     self.isEditPage=NO;
     self.isCreateEvent_imageUsable=NO;//preset the image indicator
 }
+
+-(void)preSetAlreadyInvitedFriend:(NSArray*)friends{
+    for (InviteFriendObject* friend in friends) {
+        NSString * key=friend.user_name;
+        [self.invitedFriend setObject:(id)friend forKey:key];
+    }
+
+}
+
 //get the repin infomation before segue here
 -(void)repinTheEventWithEventID:(NSString *)event_id sharedEventID:(NSString *)shared_event_id creatorID:(NSString*)creator_id eventTitle:(NSString *)event_title eventTime:(NSString *)event_time eventImage:(UIImage *)event_image locationName:(NSString *)location_name address:(NSString*)address longitude:(NSNumber *)longitude latitude:(NSNumber *)latitude description:(NSString *)description{
     self.detail_event_id=event_id;
@@ -356,6 +364,27 @@
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
+    
+    
+    //update the display label
+    if ([self.invitedFriend count]==0) {
+        [self.inviteFriendsLabel setText:@"Invite friends"];
+        [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
+        [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];
+        [self.inviteIcon setAlpha:0.4];
+    }
+    else if ([self.invitedFriend count]==1){
+        [self.inviteFriendsLabel setText:@"1 friend"];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.inviteIcon setAlpha:0.8];
+    }
+    else{
+        [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+        [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
+        [self.inviteIcon setAlpha:0.8];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -1044,7 +1073,15 @@
     else if([actionSheet.title isEqualToString:@"Invite Friends"]){
         if(buttonIndex == 0){
             //remove friend
-            [self.invitedFriend removeAllObjects];
+            //[self.invitedFriend removeAllObjects];
+            for (NSString* key in [self.invitedFriend allKeys]) {
+                InviteFriendObject* friend=[self.invitedFriend objectForKey:key];
+                if (!friend.alreadyInvited) {
+                    [self.invitedFriend removeObjectForKey:key];
+                }
+            }
+            
+            
             [self.inviteFriendsLabel setText:@"Invite Friends"];
             [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
             [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];

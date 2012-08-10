@@ -38,4 +38,6 @@
 -(void)presetIsEditPageToFalse;
 //used for server log
 -(void)presetVia:(int)via;
+//used to set already invited friend for the edit page
+-(void)preSetAlreadyInvitedFriend:(NSArray*)friends;
 @end

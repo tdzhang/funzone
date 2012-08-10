@@ -14,6 +14,7 @@
 @synthesize user_pic=_user_pic;
 @synthesize facebook_id=_facebook_id;
 @synthesize followed=_followed;
+@synthesize alreadyInvited=_alreadyInvited;
 
 +(NSArray*)generateProfileInfoElementArrayFromJson:(NSArray*)json{
     NSMutableArray *profileArray=[NSMutableArray array];
@@ -29,8 +30,23 @@
         } else {
             element.followed=YES;
         }
+        element.alreadyInvited=NO;
         [profileArray addObject:element];
     }
     return profileArray;
 }
+
++(NSArray*)generateAlreadyInvitedInfoElementArrayFromJson:(NSArray*)json{
+    NSMutableArray *profileArray=[NSMutableArray array];
+    for (NSDictionary *user in json) {
+        InviteFriendObject* element=[[InviteFriendObject alloc] init];
+        element.user_id=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_id"]];
+        element.user_name=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_name"]];
+        element.user_pic=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_pic"]];
+        element.alreadyInvited=YES;
+        [profileArray addObject:element];
+    }
+    return profileArray;
+}
+
 @end

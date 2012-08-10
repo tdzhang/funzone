@@ -14,6 +14,9 @@
 @property (nonatomic,strong) NSString *user_pic;
 @property (nonatomic,strong) NSString *facebook_id;
 @property (nonatomic) BOOL followed;
+@property (nonatomic) BOOL alreadyInvited;
 
 +(NSArray*)generateProfileInfoElementArrayFromJson:(NSArray*)json;
+
++(NSArray*)generateAlreadyInvitedInfoElementArrayFromJson:(NSArray*)json;
 @end

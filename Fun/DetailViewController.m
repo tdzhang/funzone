@@ -73,6 +73,7 @@
 @property (nonatomic) int next_page_profile_via; //used to send via information to the next segue (used for show others user profile)
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
+@property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
 
 //@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
 @end
@@ -140,7 +141,7 @@
 @synthesize next_page_profile_via=_next_page_profile_via;
 @synthesize isEventOwner=_isEventOwner;
 @synthesize mysendMessageType=_mysendMessageType;
-
+@synthesize alreadyInvitedFriend=_alreadyInvitedFriend;
 //@synthesize shouldGoBack=_shouldGoBack;
 #pragma mark - self defined getter and setter
 
@@ -1054,7 +1055,10 @@
         NewEventVC *newEventVC = segue.destinationViewController;
         [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name address:self.event_address longitude:self.longitude latitude:self.latitude description:self.description];
         if (self.isEventOwner) {
+            //set the event page to be editable
             [newEventVC presetIsEditPageToTrue];
+            [newEventVC preSetAlreadyInvitedFriend:[InviteFriendObject generateAlreadyInvitedInfoElementArrayFromJson:self.alreadyInvitedFriend]];
+            
         } else {
             [newEventVC presetIsEditPageToFalse];
         }
@@ -1150,6 +1154,11 @@
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"%@",event);
+    
+    if (self.isEventOwner) {
+        //find the invited friend
+        self.alreadyInvitedFriend =[event objectForKey:@"invitees"];
+    }
     
     //if the activity is not exist, pop back to the last page
     if ([[event objectForKey:@"response"] isEqualToString:@"error"]) {

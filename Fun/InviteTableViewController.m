@@ -349,6 +349,10 @@
             //[cell setSelected:YES animated:YES];
             [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            if(contact.alreadyInvited){
+                //this person is already invited last time, you can not edit it
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+            }
         }
         else{
             [cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -443,7 +447,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
             InviteFriendObject *person = [self.searchResultContacts objectAtIndex:indexPath.row];
-            
+            if(person.alreadyInvited){
+                //this person is already invited last time, you can not edit it
+                return;
+            }
             NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
             //get the key value from the name of the person
             NSString *nameText=person.user_name;
@@ -484,6 +491,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
         InviteFriendObject *person = [self.dividedContacts objectAtIndex:indexPath.row];
+        
+        if(person.alreadyInvited){
+            //this person is already invited last time, you can not edit it
+            UIAlertView *alreadyInvited = [[UIAlertView alloc] initWithTitle:@"Already Invited" message: [NSString stringWithFormat:@"Error: You have already invited this friend before."] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alreadyInvited show];
+            
+            [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES];
+            return;
+        }
         
         NSMutableDictionary *alreadySelected=[self.alreadySelectedContacts mutableCopy];
         //get the key value from the name of the person
