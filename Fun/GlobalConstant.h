@@ -165,6 +165,9 @@
 #define VIA_ACTIVITY_INTEREST  19      // event
 #define VIA_ACTIVITY_COMMENT  20       // event
 #define VIA_ACTIVITY_INVITE  21        // event
+#define VIA_PEOPLE_WHO_LIKE_THIS  22   // profile
+#define VIA_JOINED_PEOPLE  23          // profile
+#define VIA_INVITED_PEOPLE   24        // profile
 
 // Share Channel
 #define VIA_FACEBOOK 1
@@ -196,6 +199,7 @@
 #define SHOW_FEEDS 22
 #define SHOW_ACTIVITIES 23
 #define FIND_FRIENDS 24
+
 
 #define VIEW_PROFILE 101     
 #define FOLLOW_SOMEONE 102   // sb follow you/////////////////

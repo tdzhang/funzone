@@ -70,8 +70,11 @@
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSString *preDefinedMode; //change between sms mode and email mode
 @property (nonatomic) int via;//used to keep track theuser activity , then send to the server
+@property (nonatomic) int next_page_profile_via; //used to send via information to the next segue (used for show others user profile)
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
+
+//@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
 @end
 
 @implementation DetailViewController
@@ -134,8 +137,11 @@
 @synthesize pickOrEditButton = _pickOrEditButton;
 //@synthesize shareButton = _shareButton;
 @synthesize via=_via;
+@synthesize next_page_profile_via=_next_page_profile_via;
 @synthesize isEventOwner=_isEventOwner;
 @synthesize mysendMessageType=_mysendMessageType;
+
+//@synthesize shouldGoBack=_shouldGoBack;
 #pragma mark - self defined getter and setter
 
 -(NSMutableArray *)comments{
@@ -269,6 +275,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //set the should back to false
+//    self.shouldGoBack=NO;
+    
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
@@ -329,6 +338,16 @@
             [self.doitmyself_label setTextColor:[UIColor whiteColor]];            
         }
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //if the event not exist, go back
+//    if (self.shouldGoBack) {
+//        [self.navigationController popViewControllerAnimated:NO];
+//    }
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -1074,12 +1093,9 @@
     else if([segue.identifier isEqualToString:@"ViewJoinedPeopleProfile"]){
         OtherProfilePageViewController* OPPVC=segue.destinationViewController;
         OPPVC.creator_id=self.tap_user_id;
-        if(self.via==VIA_FEEDS){
-            OPPVC.via=VIA_FEEDS_DETAIL;
-        }
-        else if(self.via==VIA_EXPLORE){
-            OPPVC.via=VIA_EXPLORE_DETAIL;
-        }
+        //send the next page the via information
+        OPPVC.via=self.next_page_profile_via;
+
     }
     else if([segue.identifier isEqualToString:@"ViewLocation"]){
         detailLocationMapViewController* MVC=(detailLocationMapViewController*)segue.destinationViewController;
@@ -1134,281 +1150,299 @@
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"%@",event);
-    self.event_title=[event objectForKey:@"title"];
-    self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
-    self.event_time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
-    self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
-    self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
-    self.event_address=[event objectForKey:@"address"];
-    self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
-    self.creator_name=[event objectForKey:@"creator_name"];
-    self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
-    self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
-    self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
-    self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-    self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-    NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"";
-    // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
-    // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
-    NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
     
-    //handle the action button label part
-    [self.like_icon removeFromSuperview];
-    [self.like_label removeFromSuperview];
-    [self.join_icon removeFromSuperview];
-    [self.join_label removeFromSuperview];
-    [self.doitmyself_icon removeFromSuperview];
-    [self.doitmyself_label removeFromSuperview];
-    if ([self.isLiked isEqualToString:@"0"]) {
-        [self.like_label setText:@"Like"];
-    } else {
-        [self.like_label setText:@"Unlike"];
+    //if the activity is not exist, pop back to the last page
+    if ([[event objectForKey:@"response"] isEqualToString:@"error"]) {
+        UIAlertView *NotExistAlert = [[UIAlertView alloc] initWithTitle:@"Not Found Error"
+                                                        message:[event objectForKey:@"message"]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [NotExistAlert show];
+        //should go back to the former page
+//        self.shouldGoBack=YES;
     }
-    if ([self.isJoined isEqualToString:@"0"]) {
-        [self.join_label setText:@"Join"];
-    } else {
-        [self.join_label setText:@"Joined"];
-    }
-    if ([self.isAdded isEqualToString:@"0"]) {
-        [self.doitmyself_label setText:@"Do it myself"];
-    } else {
-        [self.doitmyself_label setText:@"Already added"];
-    }
-    [self.likeButtonSection addSubview:self.like_icon];
-    [self.likeButtonSection addSubview:self.like_label];
-    [self.joinButtonSection addSubview:self.join_icon];
-    [self.joinButtonSection addSubview:self.join_label];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
-
-    //handle the interest people part
-    self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
-    
-    //handle the liked people part
-    self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
-    self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
-    
-    NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
-    if ([event_category isEqualToString:FOOD]) {
-        DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:MOVIE]){
-        DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:SPORTS]){
-        DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:NIGHTLIFE]){
-        DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:OUTDOOR]){
-        DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:ENTERTAIN]){
-        DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:SHOPPING]){
-        DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
-    }
-    else if([event_category isEqualToString:OTHERS]){
-        DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
-    }
-    
-    //set event image
-    if (![Cache isURLCached:self.event_img_url]) {
-        //using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: self.event_img_url];
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                imageData=UIImagePNGRepresentation(image);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:self.event_img_url withData:imageData];
-                        [self.eventImageView setImage:image];
-                    });
+    else{
+        //should go back to the former page
+//        self.shouldGoBack=NO;
+        
+        self.event_title=[event objectForKey:@"title"];
+        self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
+        self.event_time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
+        self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+        self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+        self.event_address=[event objectForKey:@"address"];
+        self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+        self.creator_name=[event objectForKey:@"creator_name"];
+        self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
+        self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
+        self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
+        self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+        self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+        NSString *description=[event objectForKey:@"description"]!=[NSNull null]?[event objectForKey:@"description"]:@"";
+        // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
+        // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
+        NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+        
+        //handle the action button label part
+        [self.like_icon removeFromSuperview];
+        [self.like_label removeFromSuperview];
+        [self.join_icon removeFromSuperview];
+        [self.join_label removeFromSuperview];
+        [self.doitmyself_icon removeFromSuperview];
+        [self.doitmyself_label removeFromSuperview];
+        if ([self.isLiked isEqualToString:@"0"]) {
+            [self.like_label setText:@"Like"];
+        } else {
+            [self.like_label setText:@"Unlike"];
+        }
+        if ([self.isJoined isEqualToString:@"0"]) {
+            [self.join_label setText:@"Join"];
+        } else {
+            [self.join_label setText:@"Joined"];
+        }
+        if ([self.isAdded isEqualToString:@"0"]) {
+            [self.doitmyself_label setText:@"Do it myself"];
+        } else {
+            [self.doitmyself_label setText:@"Already added"];
+        }
+        [self.likeButtonSection addSubview:self.like_icon];
+        [self.likeButtonSection addSubview:self.like_label];
+        [self.joinButtonSection addSubview:self.join_icon];
+        [self.joinButtonSection addSubview:self.join_label];
+        [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+        [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
+        
+        //handle the interest people part
+        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
+        
+        //handle the liked people part
+        self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
+        self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
+        
+        NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
+        if ([event_category isEqualToString:FOOD]) {
+            DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:MOVIE]){
+            DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:SPORTS]){
+            DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:NIGHTLIFE]){
+            DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:OUTDOOR]){
+            DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:ENTERTAIN]){
+            DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:SHOPPING]){
+            DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
+        }
+        else if([event_category isEqualToString:OTHERS]){
+            DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
+        }
+        
+        //set event image
+        if (![Cache isURLCached:self.event_img_url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: self.event_img_url];
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                    imageData=UIImagePNGRepresentation(image);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:self.event_img_url withData:imageData];
+                            [self.eventImageView setImage:image];
+                        });
+                    }
                 }
-            }
-            else {
-                //else, the image date getting finished, directly put it in the cache, and then reload the table view data.
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:self.event_img_url withData:imageData];
-                        [self.eventImageView setImage:[UIImage imageWithData:imageData]];
-                    });
+                else {
+                    //else, the image date getting finished, directly put it in the cache, and then reload the table view data.
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:self.event_img_url withData:imageData];
+                            [self.eventImageView setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
                 }
-            }
-        });
-    }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.event_img_url]]];
-        });
-    }
-    
-    //set creator's profile image and name. Link back to his/her profile page.
-    if (![Cache isURLCached:self.creator_img_url]) {
-        //using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: self.creator_img_url];
-            
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",profile_url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-                imageData=UIImagePNGRepresentation(image);
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.event_img_url]]];
+            });
+        }
+        
+        //set creator's profile image and name. Link back to his/her profile page.
+        if (![Cache isURLCached:self.creator_img_url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: self.creator_img_url];
                 
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:self.creator_img_url withData:imageData];
-                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
-                    });
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",profile_url);
+                    UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+                    imageData=UIImagePNGRepresentation(image);
+                    
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:self.creator_img_url withData:imageData];
+                            [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
                 }
-            }
-            else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",profile_url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:self.creator_img_url withData:imageData];
-                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
-                    });
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",profile_url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:self.creator_img_url withData:imageData];
+                            [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
                 }
-            }
-        });
-    }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            [self.creatorProfileView setImage:[UIImage imageWithData:[Cache getCachedData:self.creator_img_url]]];
-        });
-    }
-    [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
-    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:0/255.0 blue:80/255.0 alpha:1]];
-    CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
-    CGRect contributor_frame = self.creatorNameLabel.frame;
-    contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
-    self.creatorNameLabel.frame = contributor_frame;
-    self.creatorProfileButton.frame = CGRectMake(self.creatorProfileView.frame.origin.x, self.creatorProfileView.frame.origin.y, self.creatorProfileView.frame.size.width+self.creatorNameLabel.frame.size.width + 10,self.creatorProfileView.frame.size.height);
-
-    //set event title
-    [self.eventTitleLabel setText:self.event_title];
-    CGSize maximumLabelSize1 = CGSizeMake(300,9999);    
-    CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect newFrame1 = self.eventTitleLabel.frame;
-    newFrame1.size.height = expectedLabelSize1.height;
-    self.eventTitleLabel.frame = newFrame1;
-    
-    //set seperator
-    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 300, 1)];
-    [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
-    [self.myScrollView addSubview:seperator];
-    
-    //set time label and clock icon
-    if ([self.event_time isEqualToString:@""]) {
-        self.event_time = [NSString stringWithFormat:@"Not Specified"];
-    }
-    self.timeSectionView.frame = CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height+15, 300, 30);
-    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 9, 12, 12)];
-    [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
-    [timeIcon setAlpha:0.7];
-    [self.timeSectionView addSubview:timeIcon];
-    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 230, 20)];
-    [eventTime setText:self.event_time];
-    [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
-    [eventTime setTextColor:[UIColor darkGrayColor]];
-    eventTime.lineBreakMode = UILineBreakModeClip;
-    eventTime.numberOfLines = 1;
-    [self.timeSectionView addSubview:eventTime];
-    
-    //set address section
-    if ([self.location_name isEqualToString:@""]) {
-        self.location_name = [NSString stringWithFormat:@"Not Specified"];
-    }
-    self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 220, 20)];
-    [eventLocation setText:self.location_name];
-    [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
-    [eventLocation setTextColor:[UIColor darkGrayColor]];
-    eventLocation.lineBreakMode = UILineBreakModeClip;
-    eventLocation.numberOfLines = 1;
-//    CGSize maximumLabelSize3 = CGSizeMake(270,9999);    
-//    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
-//    CGRect newFrame3 = eventLocation.frame;
-//    newFrame3.size.height = expectedLabelSize3.height;
-//    eventLocation.frame = newFrame3;
-    [self.locationSectionView addSubview:eventLocation];
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 8, 8, 14)];
-    [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
-    [locationIcon setAlpha:0.7];
-    [self.locationSectionView addSubview:locationIcon];
-    
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(255, 5, 35, 20)];
-    [map_indicator_label setText:@"Map"];
-    [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
-    [map_indicator_label setTextColor:[UIColor lightGrayColor]];
-    [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 10.75, 6, 8.5)];
-    [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
-    right_Arrow.alpha = 0.6;
-    
-    [self.locationSectionView addSubview:right_Arrow];
-    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 5, 50, 20)];
-    [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.locationSectionView addSubview:showMapButton];
-
-    self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 290, 50)];
-    [self.description_content setText:description];
-    [self.description_content setFont:[UIFont systemFontOfSize:13]];
-    [self.description_content setTextColor:[UIColor colorWithRed:120/255.0 green:120/255.0 blue:120/255.0 alpha:1]];
-    self.description_content.lineBreakMode = UILineBreakModeWordWrap;
-    self.description_content.numberOfLines = 0;
-    CGSize maximumLabelSize_description = CGSizeMake(290,9999);    
-    CGSize expectedLabelSize_description = [description sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize_description lineBreakMode:UILineBreakModeWordWrap];
-    CGRect newFrame_description = self.description_content.frame;
-    newFrame_description.size.height = expectedLabelSize_description.height;
-    self.description_content.frame = newFrame_description;
-    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
-    [description_header setText:@"Description"];
-    [description_header setFont:[UIFont boldSystemFontOfSize:14]];
-    [description_header setTextColor:[UIColor darkGrayColor]];
-    self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
-    [self.descriptionSectionView addSubview:description_header];
-    [self.descriptionSectionView addSubview:self.description_content];
-    if ([self.description_content.text isEqualToString:@""]) {
-        [self.descriptionSectionView setHidden:YES];
-    } else {
-        [self.myScrollView addSubview:self.descriptionSectionView];
-    }
-    
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [self.creatorProfileView setImage:[UIImage imageWithData:[Cache getCachedData:self.creator_img_url]]];
+            });
+        }
+        [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
+        [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:0/255.0 blue:80/255.0 alpha:1]];
+        CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
+        CGRect contributor_frame = self.creatorNameLabel.frame;
+        contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
+        self.creatorNameLabel.frame = contributor_frame;
+        self.creatorProfileButton.frame = CGRectMake(self.creatorProfileView.frame.origin.x, self.creatorProfileView.frame.origin.y, self.creatorProfileView.frame.size.width+self.creatorNameLabel.frame.size.width + 10,self.creatorProfileView.frame.size.height);
+        
+        //set event title
+        [self.eventTitleLabel setText:self.event_title];
+        CGSize maximumLabelSize1 = CGSizeMake(300,9999);
+        CGSize expectedLabelSize1 = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+        CGRect newFrame1 = self.eventTitleLabel.frame;
+        newFrame1.size.height = expectedLabelSize1.height;
+        self.eventTitleLabel.frame = newFrame1;
+        
+        //set seperator
+        UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 300, 1)];
+        [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
+        [self.myScrollView addSubview:seperator];
+        
+        //set time label and clock icon
+        if ([self.event_time isEqualToString:@""]) {
+            self.event_time = [NSString stringWithFormat:@"Not Specified"];
+        }
+        self.timeSectionView.frame = CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height+15, 300, 30);
+        UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 9, 12, 12)];
+        [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
+        [timeIcon setAlpha:0.7];
+        [self.timeSectionView addSubview:timeIcon];
+        UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 230, 20)];
+        [eventTime setText:self.event_time];
+        [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
+        [eventTime setTextColor:[UIColor darkGrayColor]];
+        eventTime.lineBreakMode = UILineBreakModeClip;
+        eventTime.numberOfLines = 1;
+        [self.timeSectionView addSubview:eventTime];
+        
+        //set address section
+        if ([self.location_name isEqualToString:@""]) {
+            self.location_name = [NSString stringWithFormat:@"Not Specified"];
+        }
+        self.locationSectionView.frame = CGRectMake(10, self.timeSectionView.frame.origin.y+self.timeSectionView.frame.size.height, 300, 30);
+        UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(20, 5, 220, 20)];
+        [eventLocation setText:self.location_name];
+        [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
+        [eventLocation setTextColor:[UIColor darkGrayColor]];
+        eventLocation.lineBreakMode = UILineBreakModeClip;
+        eventLocation.numberOfLines = 1;
+        //    CGSize maximumLabelSize3 = CGSizeMake(270,9999);
+        //    CGSize expectedLabelSize3 = [self.location_name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
+        //    CGRect newFrame3 = eventLocation.frame;
+        //    newFrame3.size.height = expectedLabelSize3.height;
+        //    eventLocation.frame = newFrame3;
+        [self.locationSectionView addSubview:eventLocation];
+        UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 8, 8, 14)];
+        [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
+        [locationIcon setAlpha:0.7];
+        [self.locationSectionView addSubview:locationIcon];
+        
+        UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(255, 5, 35, 20)];
+        [map_indicator_label setText:@"Map"];
+        [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
+        [map_indicator_label setTextColor:[UIColor lightGrayColor]];
+        [self.locationSectionView addSubview:map_indicator_label];
+        UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(285, 10.75, 6, 8.5)];
+        [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
+        right_Arrow.alpha = 0.6;
+        
+        [self.locationSectionView addSubview:right_Arrow];
+        UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 5, 50, 20)];
+        [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.locationSectionView addSubview:showMapButton];
+        
+        self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 290, 50)];
+        [self.description_content setText:description];
+        [self.description_content setFont:[UIFont systemFontOfSize:13]];
+        [self.description_content setTextColor:[UIColor colorWithRed:120/255.0 green:120/255.0 blue:120/255.0 alpha:1]];
+        self.description_content.lineBreakMode = UILineBreakModeWordWrap;
+        self.description_content.numberOfLines = 0;
+        CGSize maximumLabelSize_description = CGSizeMake(290,9999);
+        CGSize expectedLabelSize_description = [description sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize_description lineBreakMode:UILineBreakModeWordWrap];
+        CGRect newFrame_description = self.description_content.frame;
+        newFrame_description.size.height = expectedLabelSize_description.height;
+        self.description_content.frame = newFrame_description;
+        UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
+        [description_header setText:@"Description"];
+        [description_header setFont:[UIFont boldSystemFontOfSize:14]];
+        [description_header setTextColor:[UIColor darkGrayColor]];
+        self.descriptionSectionView.frame=CGRectMake(10, self.locationSectionView.frame.origin.y+self.locationSectionView.frame.size.height, 300, expectedLabelSize_description.height+35);
+        [self.descriptionSectionView addSubview:description_header];
+        [self.descriptionSectionView addSubview:self.description_content];
+        if ([self.description_content.text isEqualToString:@""]) {
+            [self.descriptionSectionView setHidden:YES];
+        } else {
+            [self.myScrollView addSubview:self.descriptionSectionView];
+        }
+        
 #warning fetch original creator info
-    if (!self.isEventOwner) {
-        CGRect temp = self.invitedPeopleSectionView.frame;
-        temp.size.height=0;
-        self.invitedPeopleSectionView.frame = temp;
+        if (!self.isEventOwner) {
+            CGRect temp = self.invitedPeopleSectionView.frame;
+            temp.size.height=0;
+            self.invitedPeopleSectionView.frame = temp;
+        }
+        [self handleInvitedPeoplePart];
+        [self handleLikedPeoplePart];
+        [self handleTheInterestedPeoplePart];
+        //handle the comment part
+        self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
+        [self handleTheCommentPart];
+        if (self.isEventOwner) {
+            UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 5, 20, 20)];
+            [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
+            [self.editButton addSubview:edit_icon];
+            UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 5, 25, 20)];
+            [edit_label setText:@"Edit"];
+            [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
+            [edit_label setBackgroundColor:[UIColor clearColor]];
+            [edit_label setTextColor:[UIColor darkGrayColor]];
+            [self.editButton addSubview:edit_label];
+            [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
+        }
     }
-    [self handleInvitedPeoplePart];
-    [self handleLikedPeoplePart];
-    [self handleTheInterestedPeoplePart];
-    //handle the comment part
-    self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
-    [self handleTheCommentPart];
-    if (self.isEventOwner) {
-        UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 5, 20, 20)];
-        [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
-        [self.editButton addSubview:edit_icon];
-        UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 5, 25, 20)];
-        [edit_label setText:@"Edit"];
-        [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
-        [edit_label setBackgroundColor:[UIColor clearColor]];
-        [edit_label setTextColor:[UIColor darkGrayColor]];
-        [self.editButton addSubview:edit_label];
-        [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
-    }
+    
 }
 
 -(void)showMapButtonClicked{
@@ -1605,6 +1639,7 @@
     ProfileInfoElement* tapped_element=[self.interestedPeople objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
+        self.next_page_profile_via=VIA_JOINED_PEOPLE;
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
     }
 }
@@ -1625,6 +1660,7 @@
     ProfileInfoElement* tapped_element=[self.likedPeople objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
+        self.next_page_profile_via=VIA_PEOPLE_WHO_LIKE_THIS;
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
     }
 }
@@ -1644,8 +1680,20 @@
     ProfileInfoElement* tapped_element=[self.invitee objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>25&&index<7){
+        self.next_page_profile_via=VIA_INVITED_PEOPLE;
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
     }
+}
+
+#pragma mark - aler view delegate method implementation
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if ([alertView.title isEqualToString:@"Not Found Error"]) {
+        if (buttonIndex == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    
+
 }
 
 @end

@@ -21,6 +21,7 @@
 #import "OtherProfilePageViewController.h"
 #import "detailLocationMapViewController.h"
 #import "ProfilePageViewController.h"
+#import "ActivityTabeleViewController.h"
 
 @interface DetailViewController : UIViewController<UIActionSheetDelegate,FeedBackToCreateActivityChange,MFMessageComposeViewControllerDelegate,FBRequestDelegate>
 
