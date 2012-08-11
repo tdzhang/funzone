@@ -10,6 +10,7 @@
 
 
 @interface ActivityTabeleViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic,strong)NSMutableArray* activities;
 @property(nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequecy
 @property(nonatomic,strong)activityElementObject* tapped_element;
@@ -19,6 +20,7 @@
 @end
 
 @implementation ActivityTabeleViewController
+@synthesize refreshButton = _refreshButton;
 @synthesize activities=_activities;
 @synthesize lastReceivedJson=_lastReceivedJson;
 @synthesize tapped_element=_tapped_element;
@@ -64,6 +66,10 @@
 {
     [super viewDidLoad];
     
+    //change the color style of the refresh button
+    self.refreshButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
     
@@ -80,6 +86,7 @@
 
 - (void)viewDidUnload
 {
+    [self setRefreshButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -204,10 +211,65 @@
         
     });
     
-    
-    
-    
 }
+
+
+#pragma mark - refresh button action part
+- (IBAction)refreshButtonClicked:(id)sender {
+    //disable the button before the request is finshed
+    [self.refreshButton setEnabled:NO];
+    
+    [self RefreshAction];
+}
+
+-(void)RefreshAction{
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+        
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        int code=[request responseStatusCode];
+        NSLog(@"%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            //disable the button before the request is finshed
+            [self.refreshButton setEnabled:YES];
+            
+            if (code==200) {
+                //success
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson]]) {
+                    //not equal, update the last reveived json
+                    self.lastReceivedJson=json;
+                    //deal with json
+                    self.activities=[activityElementObject getActivityElementsArrayByJson:json];
+                    NSLog(@"Have fetched %d Activities",[self.activities count]);
+                    [self.tableView reloadData];
+                }
+                //reset the tabbat notification number
+                [PushNotificationHandler clearApplicationPushNotifNumber];
+                [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+            }
+            
+        });
+        
+    });
+}
+
+
 
 #pragma mark - Table view delegate
 
