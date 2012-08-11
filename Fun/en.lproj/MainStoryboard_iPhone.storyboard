@@ -670,9 +670,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Popular" id="XYO-Ff-KHL"/>
+                    <navigationItem key="navigationItem" title="Popular" id="XYO-Ff-KHL">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="gBF-ck-uc5">
+                            <connections>
+                                <action selector="refreshButtonClicked:" destination="3gf-sz-pKR" id="Fue-Hk-SGC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mainScrollView" destination="Wz8-2i-zgi" id="Huc-yj-AOf"/>
+                        <outlet property="refreshButton" destination="gBF-ck-uc5" id="Sra-N8-wJU"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Idn-d1-X1d"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="HUl-1w-jPL"/>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="e9f-Ec-HCG"/>
@@ -1130,10 +1137,17 @@ Find us @OrangeParc.com</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Feeds" id="k0H-05-gmF"/>
+                    <navigationItem key="navigationItem" title="Feeds" id="k0H-05-gmF">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="7lU-Sl-nOu">
+                            <connections>
+                                <action selector="refreshButtonClicked:" destination="3i5-5a-vO5" id="bc4-q6-MK9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="instructionView" destination="Diy-8p-pcv" id="OUe-ns-Eb1"/>
                         <outlet property="mainScrollView" destination="Zlp-hj-00h" id="rWg-p4-8HU"/>
+                        <outlet property="refreshButton" destination="7lU-Sl-nOu" id="s5X-9L-a6A"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Yrc-z9-85p"/>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="maZ-xV-hRy"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="Hfw-Db-bjl"/>
@@ -2927,11 +2941,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="sin-Qw-UXs"/>
-        <segue reference="jpf-qW-bdW"/>
-        <segue reference="6rH-Lj-bNq"/>
         <segue reference="eX7-7v-GIv"/>
+        <segue reference="Yrc-z9-85p"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="maZ-xV-hRy"/>
+        <segue reference="jpf-qW-bdW"/>
     </inferredMetricsTieBreakers>
 </document>
