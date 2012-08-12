@@ -25,6 +25,7 @@
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *tapped_creator_id;
+@property (nonatomic,strong) UIView *loading;
 
 -(void)checkForWhetherShowInstruction;
 
@@ -45,6 +46,7 @@
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
 @synthesize garbageCollection=_garbageCollection;
 @synthesize tapped_creator_id=_tapped_creator_id;
+@synthesize loading=_loading;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -210,20 +212,20 @@
             [subview removeFromSuperview];
         }
         
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2)];
-        loading.layer.cornerRadius =15;
-        loading.opaque = NO;
-        loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
+        self.loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2)];
+        self.loading.layer.cornerRadius =15;
+        self.loading.opaque = NO;
+        self.loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
         UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
         loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
         loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
         loadLabel.backgroundColor =[UIColor clearColor];
-        [loading addSubview:loadLabel];
+        [self.loading addSubview:loadLabel];
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         spinning.frame =CGRectMake(120,20,80,80);
-        [spinning startAnimating];[loading addSubview:spinning];
-        [self.refreshView addSubview:loading];
+        [spinning startAnimating];[self.loading addSubview:spinning];
+        [self.refreshView addSubview:self.loading];
         
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         

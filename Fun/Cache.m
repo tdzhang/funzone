@@ -73,7 +73,13 @@ static NSString* recentViewListPath;
 }
 
 + (NSString*) generateKeyFromURL:(NSURL*)url {
-    NSString* key = [url relativePath];
+    //NSString* key = [url relativePath];
+    NSString* key = [url absoluteString];
+    key=[key stringByReplacingOccurrencesOfString:@"/" withString:@"."];
+    key=[key stringByReplacingOccurrencesOfString:@":" withString:@"."];
+    key=[key stringByReplacingOccurrencesOfString:@"?" withString:@"."];
+    key=[key stringByReplacingOccurrencesOfString:@"=" withString:@"."];
+    key=[key stringByReplacingOccurrencesOfString:@"..." withString:@"."];
     return [key stringByReplacingOccurrencesOfString:@"/" withString:@"."];
 }
 
@@ -123,6 +129,7 @@ static NSString* recentViewListPath;
     if (!cacheInitialized) {
         [Cache init];
     }
+
     if ([[MyPermenentCachePart url2dataDictionary] objectForKey:[Cache generateKeyFromURL:url]]) {
         return YES;
     }

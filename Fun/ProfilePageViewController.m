@@ -245,6 +245,7 @@
     _creatorImageView.layer.cornerRadius = 7;
     _creatorImageView.layer.masksToBounds = YES;
     _creatorImageView.clipsToBounds = YES;
+    [_creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
 
 }
 

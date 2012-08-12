@@ -180,6 +180,7 @@
                                     dispatch_async( dispatch_get_main_queue(),^{
                                         [Cache addDataToCache:url withData:imageData];
                                         [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+
                                     });
                                 }
                             }
@@ -190,6 +191,8 @@
                                     dispatch_async( dispatch_get_main_queue(),^{
                                         [Cache addDataToCache:url withData:imageData];
                                         [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                        
+                                        
                                     });
                                 }
                             }
@@ -256,6 +259,8 @@
     
     _creatorImageView.layer.cornerRadius = 7;
     _creatorImageView.layer.masksToBounds = YES;
+    [_creatorImageView setClipsToBounds:YES];
+    [_creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
     
 
 }

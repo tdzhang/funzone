@@ -220,6 +220,8 @@
     [self.myScrollView addSubview:self.eventImageView];
     
     self.creatorProfileView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventImageView.frame.origin.y+self.eventImageView.frame.size.height+10, 35, 35)];
+    [self.creatorProfileView setClipsToBounds:YES];
+    [self.creatorProfileView setContentMode:UIViewContentModeScaleAspectFill];
     [self.myScrollView addSubview:self.creatorProfileView];
     
     self.creatorNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.creatorProfileView.frame.origin.x+self.creatorProfileView.frame.size.width+5, self.creatorProfileView.frame.origin.y, 150, 35)];
@@ -1182,6 +1184,7 @@
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
         self.event_address=[event objectForKey:@"address"];
         self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+        NSLog(@"%@",self.creator_img_url);
         self.creator_name=[event objectForKey:@"creator_name"];
         self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
         self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
@@ -1254,7 +1257,6 @@
         else if([event_category isEqualToString:OTHERS]){
             DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
         }
-        
         //set event image
         if (![Cache isURLCached:self.event_img_url]) {
             //using high priority queue to fetch the image
@@ -1290,6 +1292,7 @@
             });
         }
         
+        NSLog(@"%@",self.creator_img_url);
         //set creator's profile image and name. Link back to his/her profile page.
         if (![Cache isURLCached:self.creator_img_url]) {
             //using high priority queue to fetch the image
@@ -1308,6 +1311,7 @@
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:self.creator_img_url withData:imageData];
                             [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+
                         });
                     }
                 }
@@ -1318,6 +1322,7 @@
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:self.creator_img_url withData:imageData];
                             [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+ 
                         });
                     }
                 }
