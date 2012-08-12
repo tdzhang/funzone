@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -1869,7 +1868,7 @@ Find us @OrangeParc.com</string>
         <scene sceneID="8WN-mI-a6y">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController hidesBottomBarWhenPushed="YES" id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
+                <viewController id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2948,11 +2947,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="oxR-j5-unP"/>
+        <segue reference="hTB-gn-88u"/>
+        <segue reference="6rH-Lj-bNq"/>
+        <segue reference="eX7-7v-GIv"/>
         <segue reference="jpf-qW-bdW"/>
         <segue reference="sin-Qw-UXs"/>
-        <segue reference="HUl-1w-jPL"/>
-        <segue reference="Idn-d1-X1d"/>
-        <segue reference="eX7-7v-GIv"/>
     </inferredMetricsTieBreakers>
 </document>
