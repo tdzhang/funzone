@@ -622,7 +622,7 @@
     else if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
         if(buttonIndex == 0){
             //shared on moment
-            [self.delegate SendMoment:[self shareMessagetoSend]];
+            [self.delegate SendMoment:[NSString stringWithFormat:@"Event: %@  Location: %@ Time: %@ --Shared via OrangeParc",self.event_title,self.location_name,self.event_time] WithImageURL:self.event_img_url];
         }
         else if(buttonIndex == 1){
             //send message to friend

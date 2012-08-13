@@ -299,7 +299,7 @@
     if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
         if(buttonIndex == 0){
             //shared on moment
-            [self.delegate SendMoment:[self shareMessagetoSend]];
+            //[self.delegate SendMoment:[self shareMessagetoSend]];
         }
         else if(buttonIndex == 1){
             //send message to friend

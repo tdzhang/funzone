@@ -148,6 +148,45 @@
     [PushNotificationHandler synTheBadgeNumberOfActivityAndAllpication:self.thisTabBarController withUserInfo:userInfo];
 }
 
+#pragma mark - image processing
+- (UIImage*)imageByScalingAndCroppingithImage:(UIImage*)sourceImage
+{
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    NSLog(@"-->%f  -->%f",width,height);
+    CGFloat targetFactor=sqrt(width*height/52684.8);
+    if (targetFactor<1) {
+        targetFactor=1;
+    }
+    CGFloat targetHeight = height/targetFactor;
+    CGFloat targetWidth = width/targetFactor;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    CGSize targetSize=imageSize;
+    targetSize.width=targetWidth;
+    targetSize.height=targetHeight;
+    
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil)
+        NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 #pragma mark - weichat related stuff
 -(void)sendText:(NSString*)content{
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
@@ -158,12 +197,46 @@
     [self RespTextContent:content];
 }
 
--(void)SendMoment:(NSString*)content{
+-(void)SendMoment:(NSString*)content WithImageURL:(NSURL*)imgurl{
+
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title =content;
+    message.description=@"This is from OrangeParc.";
+    [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+#warning need a more precise url about the event, not just the image
+    ext.webpageUrl = [NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
+//    WXImageObject *ext = [WXImageObject object];
+//    ext.imageData = [Cache getCachedData:imgurl];
+    message.mediaObject = ext;
+    
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.bText = YES;
-    req.text = content;
-    req.scene=WXSceneTimeline;
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    
     [WXApi sendReq:req];
+}
+
+- (void) RespMoment:(NSString*)content WithImageURL:(NSURL*)imgurl
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title =content;
+    message.description=@"This is from OrangeParc.";
+    [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = [NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
+    //    WXImageObject *ext = [WXImageObject object];
+    //    ext.imageData = [Cache getCachedData:imgurl];
+    message.mediaObject = ext;
+    
+    GetMessageFromWXResp* resp = [[GetMessageFromWXResp alloc] init];
+    resp.bText = NO;
+    resp.message = message;
+    
+    [WXApi sendResp:resp];
 }
 
 -(void) RespTextContent:(NSString*)content
