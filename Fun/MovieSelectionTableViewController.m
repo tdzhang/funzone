@@ -1,31 +1,30 @@
 //
-//  MovieAotoCompletionVC.m
-//  Fun
+//  MovieSelectionTableViewController.m
+//  OrangeParc
 //
-//  Created by Tongda Zhang on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Tongda Zhang on 8/13/12.
+//
 //
 
-#import "MovieAotoCompletionVC.h"
-#import "GlobalConstant.h"
+#import "MovieSelectionTableViewController.h"
 
-@interface MovieAotoCompletionVC ()
-
+@interface MovieSelectionTableViewController ()
 @property(nonatomic,strong) NSArray *searchResult;
 @property(nonatomic,strong) NSMutableData *data;
 @property(nonatomic,strong) NSArray *recommendResult;
 @end
 
-@implementation MovieAotoCompletionVC
+@implementation MovieSelectionTableViewController
 @synthesize delegate=_delegate;
 @synthesize searchResult=_searchResult;
 @synthesize data=_data;
 @synthesize recommendResult=_recommendResult;
 
+
 #pragma mark - View Life Circle
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
@@ -58,7 +57,7 @@
                 //NSError *error;
                 //NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 
-                self.searchResult=[rottenTomatoMovieModel initializeWithJsonData:request.responseData];
+                self.recommendResult=[rottenTomatoMovieModel initializeWithJsonData:request.responseData];
                 
                 for (rottenTomatoMovieModel *model in self.searchResult) {
                     if (model.imageUrl) {
@@ -79,7 +78,7 @@
                                     
                                     if(imageData)[Cache addDataToCache:url withData:imageData];
                                     dispatch_async( dispatch_get_main_queue(),^{
-                                        [self.searchDisplayController.searchResultsTableView reloadData];
+                                        [self.tableView reloadData];
                                     });
                                 }
                                 else {
@@ -87,31 +86,25 @@
                                     //NSLog(@"downloaded %@",url);
                                     if(imageData)[Cache addDataToCache:url withData:imageData];
                                     dispatch_async( dispatch_get_main_queue(),^{
-                                        [self.searchDisplayController.searchResultsTableView reloadData];
+                                        [self.tableView reloadData];
                                     });
                                 }
                             });
                         }
                     }
                 }
-                NSLog(@"%d",[self.searchResult count]);
-                [self.searchDisplayController setActive:YES];
-                [self.searchDisplayController.searchResultsTableView setHidden:NO];
-            
+                NSLog(@"%d",[self.recommendResult count]);
+                [self.tableView reloadData];
             }
             else{
                 //connect error
             }
+            
         });
+        
+        
     });
-    
-    
-    
-    NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?&apikey=%@",ROTTENTOMATOE_APIKEY];
-    NSLog(@"%@",request_string);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
+
 }
 
 
@@ -128,11 +121,11 @@
     [self.navigationItem setBackBarButtonItem:backButton];
 }
 
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 #pragma mark - auto rotation
@@ -141,6 +134,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
 #pragma mark - implement the UISeachBar protocal
 //Showing the location that User Searched, using Apple API
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -148,6 +142,8 @@
     NSString* searchString=self.searchDisplayController.searchBar.text;
     NSString* keyword=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 
+    //Searching the key word
+    //http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=ted&page_limit=5&apikey=fsdtjhkez9txeuj86n9b83ba
     NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=10&apikey=%@",keyword,ROTTENTOMATOE_APIKEY];
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
@@ -163,39 +159,41 @@
 
 //Start when searchBar text changed,find the user searched result from fousqure, and save them to self.foursquareSearchResults
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller 
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString
 {
     //in case the frequency of searching is too high
     //int searchLength=[searchString length];
     NSString* keyword=[searchString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        //Searching the key word
-        //http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=ted&page_limit=5&apikey=fsdtjhkez9txeuj86n9b83ba
-        NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=10&apikey=%@",keyword,ROTTENTOMATOE_APIKEY];
-        NSLog(@"%@",request_string);
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-        NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-        [connection start]; 
 
+    //Searching the key word
+    NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/movies.json?q=%@&page_limit=10&apikey=%@",keyword,ROTTENTOMATOE_APIKEY];
+    NSLog(@"%@",request_string);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection start];
+    //}
     return YES;
 }
 
 
 #pragma mark - implement the search display results
 //return the table row number
-- (NSInteger)tableView:(UITableView *)tableView 
+- (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
     NSInteger rows = 0;
-    if ([tableView 
-         isEqual:self.searchDisplayController.searchResultsTableView]){
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         rows = [self.searchResult count];
+    }
+    else{
+        rows = [self.recommendResult count];
     }
     return rows;
 }
 
 // Customize the appearance of table view cells (of the seach result display)
-- (UITableViewCell *)tableView:(UITableView *)tableView 
+- (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"movieAutoCompleteCell";
@@ -224,9 +222,28 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
     }
     else{
+        if (cell == nil) {
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"movieAutoCompleteCell" owner:nil options:nil];
+            
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]])
+                {
+                    cell = (movieAutoCCell*)view;
+                }
+            }
+        }
+        rottenTomatoMovieModel *model=[self.recommendResult objectAtIndex:indexPath.row];
         
+        //show the place name and location
+        [cell.labelTitle setText:model.title];
+        [cell.labelYear setText:model.year];
+        [cell.labelRating setText:model.mpaa_rating];
+        [cell.labelScore setText:model.score];
+        if ([Cache isURLCached:[NSURL URLWithString:model.imageUrl]]) {
+            [cell.imageView setImage:[UIImage imageWithData:[Cache getCachedData:[NSURL URLWithString:model.imageUrl]]]];
+        }
     }
-    return cell;    
+    return cell;
 }
 //response to user selection of the search result
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -236,6 +253,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [self.searchDisplayController setActive:NO];
         [self.delegate movieInfoReturn:[self.searchResult objectAtIndex:indexPath.row] from:self];
     }
+    else{
+        [self.delegate movieInfoReturn:[self.recommendResult objectAtIndex:indexPath.row] from:self];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -243,7 +263,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 
-#pragma mark - implement NSURLconnection delegate methods 
+#pragma mark - implement NSURLconnection delegate methods
 //to deal with the returned data
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -262,7 +282,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {     
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     self.searchResult=[rottenTomatoMovieModel initializeWithJsonData:self.data];
     
     
@@ -271,7 +291,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             NSURL *url=[NSURL URLWithString:model.imageUrl];
             if (![Cache isURLCached:url]) {
                 //using high priority queue to fetch the image
-                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                     
                     //get the image data
                     NSData * imageData = nil;
@@ -285,7 +305,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                         
                         if(imageData)[Cache addDataToCache:url withData:imageData];
                         dispatch_async( dispatch_get_main_queue(),^{
-                        [self.searchDisplayController.searchResultsTableView reloadData]; 
+                            [self.searchDisplayController.searchResultsTableView reloadData];
                         });
                     }
                     else {
@@ -293,21 +313,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
                         //NSLog(@"downloaded %@",url);
                         if(imageData)[Cache addDataToCache:url withData:imageData];
                         dispatch_async( dispatch_get_main_queue(),^{
-                        [self.searchDisplayController.searchResultsTableView reloadData];  
+                            [self.searchDisplayController.searchResultsTableView reloadData];
                         });
                     }
                 });
             }
         }
-        /*
-        NSLog(@"%@",model.title);
-        NSLog(@"%@",model.imageUrl);
-        NSLog(@"%@",model.year);
-        NSLog(@"%@",model.score);
-        NSLog(@"-=--------------");
-         */
+
     }
-     
+    
     
     [self.searchDisplayController.searchResultsTableView reloadData];
 }

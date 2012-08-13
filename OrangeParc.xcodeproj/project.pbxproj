@@ -45,6 +45,9 @@
 		0F1401E615C487B20080DA38 /* smile_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1401DB15C487B20080DA38 /* smile_64.png */; };
 		0F1401E715C487B20080DA38 /* thumbnail_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1401DC15C487B20080DA38 /* thumbnail_layer.png */; };
 		0F1401EA15C487D40080DA38 /* mail-icon-128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F1401E915C487D40080DA38 /* mail-icon-128x128.png */; };
+		0F16F99B15D983DB002B719E /* movieInfoReturnProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F16F99A15D983DB002B719E /* movieInfoReturnProtocal.h */; };
+		0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F16F99D15D9889D002B719E /* MovieSelectionTableViewController.h */; };
+		0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F16F99E15D9889D002B719E /* MovieSelectionTableViewController.m */; };
 		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
 		0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4315C719540087111B /* FindFriendTableViewController.h */; };
 		0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4415C719540087111B /* FindFriendTableViewController.m */; };
@@ -351,6 +354,9 @@
 		0F1401DB15C487B20080DA38 /* smile_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile_64.png; sourceTree = "<group>"; };
 		0F1401DC15C487B20080DA38 /* thumbnail_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail_layer.png; sourceTree = "<group>"; };
 		0F1401E915C487D40080DA38 /* mail-icon-128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail-icon-128x128.png"; sourceTree = "<group>"; };
+		0F16F99A15D983DB002B719E /* movieInfoReturnProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieInfoReturnProtocal.h; sourceTree = "<group>"; };
+		0F16F99D15D9889D002B719E /* MovieSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieSelectionTableViewController.h; sourceTree = "<group>"; };
+		0F16F99E15D9889D002B719E /* MovieSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieSelectionTableViewController.m; sourceTree = "<group>"; };
 		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
 		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
 		0F2EEB4315C719540087111B /* FindFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewController.h; sourceTree = "<group>"; };
@@ -700,6 +706,9 @@
 		0F07F27915AE1BEF00BF41CF /* auto completion part */ = {
 			isa = PBXGroup;
 			children = (
+				0F16F99D15D9889D002B719E /* MovieSelectionTableViewController.h */,
+				0F16F99E15D9889D002B719E /* MovieSelectionTableViewController.m */,
+				0F16F99A15D983DB002B719E /* movieInfoReturnProtocal.h */,
 				0F07F27A15AE1C2500BF41CF /* MovieAotoCompletionVC.h */,
 				0F07F27B15AE1C2500BF41CF /* MovieAotoCompletionVC.m */,
 				0F07F27D15AE269900BF41CF /* customTableCellView */,
@@ -1435,6 +1444,8 @@
 				0FB5AC1F15D1A88600FE8608 /* ASIDataCompressor.h in Headers */,
 				0FB5AC2315D1A93B00FE8608 /* Reachability.h in Headers */,
 				0FE93B6415D24DDF004F8D01 /* SelfChooseLocation.h in Headers */,
+				0F16F99B15D983DB002B719E /* movieInfoReturnProtocal.h in Headers */,
+				0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1743,6 +1754,7 @@
 				0FB5AC1E15D1A88600FE8608 /* ASIDataDecompressor.m in Sources */,
 				0FB5AC2015D1A88600FE8608 /* ASIDataCompressor.m in Sources */,
 				0FB5AC2415D1A93B00FE8608 /* Reachability.m in Sources */,
+				0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,9 @@
 //
-//  MovieAotoCompletionVC.h
-//  Fun
+//  MovieSelectionTableViewController.h
+//  OrangeParc
 //
-//  Created by Tongda Zhang on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Tongda Zhang on 8/13/12.
+//
 //
 
 #import <UIKit/UIKit.h>
@@ -15,9 +15,6 @@
 
 #define ROTTENTOMATOE_APIKEY @"fsdtjhkez9txeuj86n9b83ba"
 
-
-
-
-@interface MovieAotoCompletionVC : UIViewController<UISearchBarDelegate,UISearchDisplayDelegate>
+@interface MovieSelectionTableViewController : UITableViewController<UISearchBarDelegate,UISearchDisplayDelegate>
 @property(nonatomic,weak)id<movieInfoReturn> delegate;
 @end
