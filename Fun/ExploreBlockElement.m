@@ -26,6 +26,7 @@
 @synthesize locationLabel=_locationLabel;
 @synthesize creator_id=_creator_id;
 @synthesize event_category=_event_category;
+@synthesize categoryLabel=_categoryLabel;
 
 
 //reset the fram of a element's block view
@@ -35,6 +36,28 @@
 
 //generate a explore block element
 +(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category{
+    
+    ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
+
+    if ([event_category isEqualToString:@"0"]) {
+        blockElement.event_category = @"OTHERS";
+    } else if ([event_category isEqualToString:@"1"]) {
+        blockElement.event_category = @"FOOD";
+    } else if ([event_category isEqualToString:@"2"]) {
+        blockElement.event_category = @"MOVIE";
+    } else if ([event_category isEqualToString:@"3"]) {
+        blockElement.event_category = @"SPORTS";
+    } else if ([event_category isEqualToString:@"4"]) {
+        blockElement.event_category = @"NIGHTLIFE";
+    } else if ([event_category isEqualToString:@"5"]) {
+        blockElement.event_category = @"OUTDOOR";
+    } else if ([event_category isEqualToString:@"6"]) {
+        blockElement.event_category = @"ENTERTAINMENT";
+    } else if ([event_category isEqualToString:@"7"]) {
+        blockElement.event_category = @"EVENTS";
+    } else if ([event_category isEqualToString:@"8"]) {
+        blockElement.event_category = @"SHOPPING";
+    }
     
     //choose the default image when facing others
     NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
@@ -63,7 +86,6 @@
         DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
     }
     
-    ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
     //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X, position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
@@ -138,17 +160,27 @@
     blockElement.titleLabel.backgroundColor = [UIColor clearColor];
     blockElement.titleLabel.textColor = [UIColor whiteColor];
     blockElement.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
-    blockElement.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
-    blockElement.titleLabel.numberOfLines = 3;
+    blockElement.titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
+    blockElement.titleLabel.numberOfLines = 2;
     [blockElement.titleLabel setShadowColor:[UIColor blackColor]];
     [blockElement.titleLabel setShadowOffset:CGSizeMake(0, 1)]; 
-    CGSize maximumLabelSize = CGSizeMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_WIDTH,9999);    
-    CGSize expectedLabelSize = [title sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize maximumLabelSize = CGSizeMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_WIDTH,50);    
+    CGSize expectedLabelSize = [title sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeTailTruncation];
     CGRect newFrame = blockElement.titleLabel.frame;
     newFrame.origin.y -= expectedLabelSize.height - EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT;
     newFrame.size.height = expectedLabelSize.height;
     blockElement.titleLabel.frame = newFrame;
     [blockElement.view addSubview:blockElement.titleLabel];
+    
+    //Category Label
+    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+    blockElement.categoryLabel.text = blockElement.event_category;
+    blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
+    blockElement.categoryLabel.textColor = [UIColor colorWithRed:95/255.0 green:210/255.0 blue:181/255.0 alpha:1];
+    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
+    [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
+    [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
+    [blockElement.view addSubview:blockElement.categoryLabel];
     
     //marker image
 //    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];

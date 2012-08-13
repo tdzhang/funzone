@@ -27,8 +27,9 @@
 @property(nonatomic,strong) NSString *event_id;
 @property(nonatomic,strong) NSString *shared_event_id;
 @property (nonatomic,strong) UILabel *locationLabel;
-@property (nonatomic,strong)NSString *creator_id;
-@property (nonatomic,strong)NSString *event_category;
+@property (nonatomic,strong) NSString *creator_id;
+@property (nonatomic,strong) NSString *event_category;
+@property (nonatomic,strong) UILabel *categoryLabel;
 
 //used to reset the fram information
 -(void) resetFramWith:(CGFloat)position_y;
