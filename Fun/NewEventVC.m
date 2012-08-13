@@ -74,6 +74,9 @@
 
 //used for server log
 @property (nonatomic) int via;
+
+//used to filter out unecessary words
+@property (nonatomic,strong) NSArray* filterDict;
 @end
 
 //////////////////////////////////////
@@ -141,7 +144,18 @@
 //used for server log
 @synthesize via=_via;
 
+//used to filter out unecessary words
+@synthesize filterDict=_filterDict;
+
 #pragma mark - self defined synthesize
+//used to filter out unecessary words
+-(NSArray *)filterDict{
+    if (!_filterDict) {
+        //if it is empty, initialize it
+        _filterDict=[NSArray arrayWithObjects:@"I ",@"i ",@"I'm",@" am ",@" going ",@" wanna ",@" want ",@" wants ",@" to ",@" feel ",@" feels ",@" like ",@" would ",@" a ",@" an ",@" grab ",@" some ",@" play ",@" get ",@" do ",@" attend ",@" listen ",@" watch ",@" visit ",@" ride ",@" drive ",@"\n",@"?",@",",@"!",@".",nil];
+    }
+    return _filterDict;
+}
 
 //used to invite inner friend(following)
 -(NSMutableDictionary *)invitedFriend{
@@ -222,7 +236,19 @@
         NSString * key=friend.user_name;
         [self.invitedFriend setObject:(id)friend forKey:key];
     }
+}
 
+//filter out the uncessary word for later search use
+-(NSString*)searchingWordsFilter:(NSString*) words{
+    //filter out the words in the dictionary
+    for (NSString *word in self.filterDict) {
+        words=[words stringByReplacingOccurrencesOfString:word withString:@" "];
+    }
+    //eliminate the successive blank
+    while (![words isEqualToString:[words stringByReplacingOccurrencesOfString:@"  " withString:@" "]]) {
+        words=[words stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+    }
+    return words;
 }
 
 //get the repin infomation before segue here
@@ -885,7 +911,9 @@
     else if ([segue.identifier isEqualToString:@"ChooseImageUsingGoogleImage"]){
         if ([segue.destinationViewController isKindOfClass:[ChooseImageTableViewController class]]) {
             if (![self.textFieldEventTitle.text isEqualToString:@""]) {
-                [segue.destinationViewController setPredefinedKeyWord:self.textFieldEventTitle.text];
+                NSLog(@"original:%@",self.textFieldEventTitle.text);
+                NSLog(@"after:%@",[self searchingWordsFilter:self.textFieldEventTitle.text]);
+                [segue.destinationViewController setPredefinedKeyWord:[self searchingWordsFilter:self.textFieldEventTitle.text]];
             }
             [segue.destinationViewController setDelegate:self];
         }
