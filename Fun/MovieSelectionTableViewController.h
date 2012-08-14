@@ -15,6 +15,10 @@
 
 #define ROTTENTOMATOE_APIKEY @"fsdtjhkez9txeuj86n9b83ba"
 
-@interface MovieSelectionTableViewController : UITableViewController<UISearchBarDelegate,UISearchDisplayDelegate>
+@interface MovieSelectionTableViewController: UITableViewController
 @property(nonatomic,weak)id<movieInfoReturn> delegate;
+@property(nonatomic,weak)UITableView* myTableView;
+
+-(void)startRecommendation;
+
 @end

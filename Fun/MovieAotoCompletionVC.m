@@ -13,14 +13,23 @@
 
 @property(nonatomic,strong) NSArray *searchResult;
 @property(nonatomic,strong) NSMutableData *data;
-@property(nonatomic,strong) NSArray *recommendResult;
+@property(nonatomic,strong) MovieSelectionTableViewController* recommendTableViewController;
 @end
 
 @implementation MovieAotoCompletionVC
 @synthesize delegate=_delegate;
+@synthesize myTableView = _myTableView;
 @synthesize searchResult=_searchResult;
 @synthesize data=_data;
-@synthesize recommendResult=_recommendResult;
+@synthesize recommendTableViewController=_recommendTableViewController;
+
+#pragma mark - self define setter and getter
+-(MovieSelectionTableViewController *)recommendTableViewController{
+    if (!_recommendTableViewController) {
+        _recommendTableViewController=[[MovieSelectionTableViewController alloc] init];
+    }
+    return _recommendTableViewController;
+}
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,83 +44,16 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //config the table view controller
+    self.recommendTableViewController.delegate=self.delegate;
+    self.recommendTableViewController.myTableView=self.myTableView;
+    self.myTableView.delegate=self.recommendTableViewController;
+    self.myTableView.dataSource=self.recommendTableViewController;
+    [self.recommendTableViewController startRecommendation];
+    
     //preset the search bar to be the first responser
     [self.searchDisplayController.searchBar becomeFirstResponder];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-    
-    //start recommend movie
-    ///////////////////////////////////////////////////////////////////////////
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-        //FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?&apikey=%@",ROTTENTOMATOE_APIKEY]];
-        NSLog(@"%@",url);
-        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"GET"];
-        [request startSynchronous];
-        
-        int code=[request responseStatusCode];
-        NSLog(@"code:%d",code);
-        dispatch_async( dispatch_get_main_queue(),^{
-            if (code==200) {
-                //success
-                //set the freshConnectionType to "not"
-                //NSError *error;
-                //NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                
-                self.searchResult=[rottenTomatoMovieModel initializeWithJsonData:request.responseData];
-                
-                for (rottenTomatoMovieModel *model in self.searchResult) {
-                    if (model.imageUrl) {
-                        NSURL *url=[NSURL URLWithString:model.imageUrl];
-                        if (![Cache isURLCached:url]) {
-                            //using high priority queue to fetch the image
-                            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                                
-                                //get the image data
-                                NSData * imageData = nil;
-                                imageData = [[NSData alloc] initWithContentsOfURL: url];
-                                
-                                if ( imageData == nil ){
-                                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                                    //NSLog(@"downloaded %@ error, using a default image",url);
-                                    UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
-                                    imageData=UIImagePNGRepresentation(image);
-                                    
-                                    if(imageData)[Cache addDataToCache:url withData:imageData];
-                                    dispatch_async( dispatch_get_main_queue(),^{
-                                        [self.searchDisplayController.searchResultsTableView reloadData];
-                                    });
-                                }
-                                else {
-                                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                                    //NSLog(@"downloaded %@",url);
-                                    if(imageData)[Cache addDataToCache:url withData:imageData];
-                                    dispatch_async( dispatch_get_main_queue(),^{
-                                        [self.searchDisplayController.searchResultsTableView reloadData];
-                                    });
-                                }
-                            });
-                        }
-                    }
-                }
-                NSLog(@"%d",[self.searchResult count]);
-                [self.searchDisplayController setActive:YES];
-                [self.searchDisplayController.searchResultsTableView setHidden:NO];
-            
-            }
-            else{
-                //connect error
-            }
-        });
-    });
-    
-    
-    
-    NSString *request_string=[NSString stringWithFormat:@"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?&apikey=%@",ROTTENTOMATOE_APIKEY];
-    NSLog(@"%@",request_string);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
-    NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection start];
 }
 
 
@@ -131,6 +73,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMyTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

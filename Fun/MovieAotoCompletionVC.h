@@ -12,12 +12,13 @@
 #import "Cache.h"
 #import "FunAppDelegate.h"
 #import "movieInfoReturnProtocal.h"
+#import "MovieSelectionTableViewController.h"
 
 #define ROTTENTOMATOE_APIKEY @"fsdtjhkez9txeuj86n9b83ba"
 
-
-
-
 @interface MovieAotoCompletionVC : UIViewController<UISearchBarDelegate,UISearchDisplayDelegate>
 @property(nonatomic,weak)id<movieInfoReturn> delegate;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+
+
 @end
