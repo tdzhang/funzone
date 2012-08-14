@@ -301,6 +301,9 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     NSLog(@"all %@",[json allKeys]);
     NSDictionary* responseData = [json objectForKey:@"responseData"];
+    if (!responseData) {
+        return;
+    }
     NSArray *results = [responseData objectForKey:@"results"];
     NSLog(@"get %d results",[results count]);
     
