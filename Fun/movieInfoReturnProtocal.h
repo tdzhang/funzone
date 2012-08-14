@@ -10,4 +10,5 @@
 
 @protocol movieInfoReturn <NSObject>
 -(void)movieInfoReturn:(rottenTomatoMovieModel *)model from:(id) sender;
+
 @end

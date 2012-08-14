@@ -1204,6 +1204,7 @@
     [self.textFieldEventTitle setText:model.title];
     [self.labelEventTitleHolder setHidden:YES];
     [self dismissModalViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
 
 }
 
@@ -1241,7 +1242,14 @@
     self.isCreateEvent_imageUsable=YES;
 }
 
-
+-(void)ChooseUIImage:(UIImage *)image WithUrlName:(NSString*)URLName{
+    [self.uIImageViewEvent setContentMode:UIViewContentModeScaleAspectFill];
+    [self.uIImageViewEvent clipsToBounds];
+    [self.uIImageViewEvent setImage:image];
+    self.createEvent_imageUrlName= URLName;
+    //indicate that now the image is usable to share
+    self.isCreateEvent_imageUsable=YES;
+}
 
 
 
@@ -1483,7 +1491,6 @@
 
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{
     self.invitedFriendLastReceivedJson=[lastReceivedJson copy];
-    
 }
 
 @end

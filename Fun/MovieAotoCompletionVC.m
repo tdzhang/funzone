@@ -30,6 +30,9 @@
     }
     return _recommendTableViewController;
 }
+- (IBAction)BackButtonClicked:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 #pragma mark - View Life Circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -71,8 +74,7 @@
 }
 
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload{
     [self setMyTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
