@@ -12,12 +12,14 @@
 
 @interface ProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *joinedScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *creatorImageView;
 @property (weak, nonatomic) IBOutlet UILabel *creatorNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
 @property (nonatomic, strong) UIButton* showAllFollowingsButton;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -33,10 +35,12 @@
 
 @property(nonatomic,strong)NSDictionary* lastReceivedJson_profile; //used to limite the refresh frequecy
 @property(nonatomic,strong)NSArray* lastReceivedJson_bookmark; //used to limite the refresh frequecy
+@property(nonatomic,strong)NSArray* lastReceivedJson_bookmark_joined; //used to limite the refresh frequecy
 @end
 
 @implementation ProfilePageViewController
 @synthesize mainScrollView;
+@synthesize joinedScrollView = _joinedScrollView;
 @synthesize refreshView=_refreshView;
 @synthesize refreshViewdown=_refreshViewdown;
 @synthesize creatorImageView = _creatorImageView;
@@ -45,6 +49,7 @@
 @synthesize followingNumLabel = _followingNumLabel;
 @synthesize followerNumLabel = _followerNumLabel;
 @synthesize moreButton = _moreButton;
+@synthesize mySegmentControl = _mySegmentControl;
 @synthesize showAllFollowingsButton = _showAllFollowingsButton;
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
@@ -98,6 +103,19 @@
         _lastReceivedJson_bookmark=[NSArray array];
     }
     return _lastReceivedJson_bookmark;
+}
+
+#pragma mark - segment control
+- (IBAction)segmentControlChange:(id)sender {
+    NSLog(@"%d",[self.mySegmentControl selectedSegmentIndex]);
+    if ([self.mySegmentControl selectedSegmentIndex]==0) {
+        [self.mainScrollView setHidden:NO];
+        [self.joinedScrollView setHidden:YES];
+    }
+    else if ([self.mySegmentControl selectedSegmentIndex]==1){
+        [self.mainScrollView setHidden:YES];
+        [self.joinedScrollView setHidden:NO];
+    }
 }
 
 
@@ -258,19 +276,19 @@
     [self setFollowingNumLabel:nil];
     [self setFollowerNumLabel:nil];
     [self setMoreButton:nil];
+    [self setMySegmentControl:nil];
+    [self setJoinedScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - implement the UIScrollViewDelegate
 //when the scrolling over 最上方，need refresh process
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     //NSLog(@"end here x=%f, y=%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
     
     //if there already has a connection, donot create a new one, just return

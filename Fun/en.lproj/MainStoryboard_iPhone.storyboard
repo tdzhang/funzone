@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -39,13 +40,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT">
-                                <rect key="frame" x="0.0" y="73" width="320" height="294"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
-                                </connections>
-                            </scrollView>
                             <view contentMode="scaleToFill" id="ptz-u0-2ef">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -179,6 +173,38 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SQy-2V-Vvf" userLabel="Scroll View - joined event">
+                                <rect key="frame" x="0.0" y="117" width="320" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GYI-Cy-G3E" id="36q-I3-gQR"/>
+                                </connections>
+                            </scrollView>
+                            <view contentMode="scaleToFill" id="jUP-vP-GEU">
+                                <rect key="frame" x="0.0" y="74" width="320" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="SdO-ew-3W9">
+                                        <rect key="frame" x="52" y="0.0" width="207" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentControlChange:" destination="GYI-Cy-G3E" eventType="valueChanged" id="B02-Td-07r"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT" userLabel="Scroll View- My event">
+                                <rect key="frame" x="0.0" y="117" width="320" height="250"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -195,8 +221,10 @@
                         <outlet property="creatorNameLabel" destination="UGh-i6-kdi" id="wRe-N9-f6a"/>
                         <outlet property="followerNumLabel" destination="Z6R-t3-WPC" id="F1d-8k-Mb1"/>
                         <outlet property="followingNumLabel" destination="t6A-VT-R99" id="hjd-2Z-IeA"/>
+                        <outlet property="joinedScrollView" destination="SQy-2V-Vvf" id="LMN-a5-dgh"/>
                         <outlet property="mainScrollView" destination="PYT-Lg-klT" id="NZh-BE-ynV"/>
                         <outlet property="moreButton" destination="pzB-Je-pC5" id="cKM-e2-syI"/>
+                        <outlet property="mySegmentControl" destination="SdO-ew-3W9" id="l2i-E7-9nH"/>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="nyH-Sx-6aU"/>
                     </connections>
                 </viewController>
@@ -2990,6 +3018,7 @@ Find us @OrangeParc.com</string>
         <class className="ActivityTabeleViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refreshButtonClicked:"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -3128,13 +3157,16 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="joinedScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
@@ -3173,11 +3205,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="lqc-Cx-NBX"/>
-        <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
-        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="lqc-Cx-NBX"/>
         <segue reference="1jG-3L-8vd"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="nyH-Sx-6aU"/>
     </inferredMetricsTieBreakers>
 </document>
