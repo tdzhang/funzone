@@ -65,6 +65,7 @@
 @property (nonatomic,strong) NSString *creator_name;
 @property (nonatomic,strong) NSString *event_address;
 @property (nonatomic,strong) NSString *tap_user_id;
+@property (nonatomic) NSInteger *view_height;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
@@ -139,6 +140,7 @@
 //@synthesize shareButton = _shareButton;
 @synthesize via=_via;
 @synthesize next_page_profile_via=_next_page_profile_via;
+@synthesize view_height=_view_height;
 @synthesize isEventOwner=_isEventOwner;
 @synthesize mysendMessageType=_mysendMessageType;
 @synthesize alreadyInvitedFriend=_alreadyInvitedFriend;
@@ -1432,12 +1434,12 @@
         }
         
 #warning fetch original creator info
+        [self handleInvitedPeoplePart];
         if (!self.isEventOwner) {
             CGRect temp = self.invitedPeopleSectionView.frame;
             temp.size.height=0;
             self.invitedPeopleSectionView.frame = temp;
         }
-        [self handleInvitedPeoplePart];
         [self handleLikedPeoplePart];
         [self handleTheInterestedPeoplePart];
         //handle the comment part
