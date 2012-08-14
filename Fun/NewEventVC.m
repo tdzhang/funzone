@@ -139,7 +139,7 @@
 @synthesize invitedFriend=_invitedFriend;
 @synthesize invitedFriendLastReceivedJson=_invitedFriendLastReceivedJson;
 
-//used to set the 1st into set teh title part 1st responser
+//used to set the 1st into set the title part 1st responser
 @synthesize isnotFirstTime=_isnotFirstTime;
 //used for server log
 @synthesize via=_via;
@@ -218,6 +218,7 @@
 //used for server log
 -(void)presetVia:(int)via{
     self.via=via;
+    //self.isnotFirstTime=NO;
 }
 
 //make the Page for Edit before segue here
@@ -309,7 +310,7 @@
 //    else {
 //        self.navigationController.navigationBar.topItem.title = @"Other";
 //    }
-    
+
     //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
         [self.deleteButton setHidden:NO];
@@ -377,20 +378,28 @@
     //used to add the additional keyboard done toobar 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    //set different flow for different event type
     if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
         self.isnotFirstTime=YES;
         [self.textFieldEventTitle becomeFirstResponder];
     }
+    else if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"movie"]&&!self.isEditPage){
+        self.isnotFirstTime=YES;
+        [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
+    }
+
+    
     
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-
+    
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
     backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
-    
     
     //update the display label
     if ([self.invitedFriend count]==0) {
@@ -411,6 +420,8 @@
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
         [self.inviteIcon setAlpha:0.8];
     }
+    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -429,6 +440,8 @@
     self.navigationController.navigationBarHidden = NO;
     
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    
+    
     
     /*
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -1190,7 +1203,8 @@
 -(void)movieInfoReturn:(rottenTomatoMovieModel *)model from:(id) sender{
     [self.textFieldEventTitle setText:model.title];
     [self.labelEventTitleHolder setHidden:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+ //   [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 ////////////////////////////////////////////////

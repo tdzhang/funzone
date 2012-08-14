@@ -33,10 +33,11 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     //preset the search bar to be the first responser
-    [self.searchDisplayController.searchBar becomeFirstResponder];
-    self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    //[self.searchDisplayController.searchBar becomeFirstResponder];
+    //self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    
+
     
     //start recommend movie
     ///////////////////////////////////////////////////////////////////////////
@@ -111,14 +112,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBarHidden = NO;
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
-                                   target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
-    [self.navigationItem setBackBarButtonItem:backButton];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBarHidden = NO;
+//    
+//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+//                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+//                                   target:nil action:nil];
+//    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+//    [self.navigationItem setBackBarButtonItem:backButton];
 }
 
 - (void)viewDidUnload
@@ -256,6 +257,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     else{
         [self.delegate movieInfoReturn:[self.recommendResult objectAtIndex:indexPath.row] from:self];
     }
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
