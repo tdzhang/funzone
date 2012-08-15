@@ -35,6 +35,7 @@
 @property (nonatomic) int joined_refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
 @property (nonatomic,strong) NSString *tapped_shared_event_id;
+@property (nonatomic) BOOL tapped_event_isOwner;
 
 @property (nonatomic,weak)CLLocationManager *current_location_manager;
 
@@ -74,6 +75,7 @@
 @synthesize joined_refresh_page_num=_joined_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
 @synthesize tapped_shared_event_id=_tapped_shared_event_id;
+@synthesize tapped_event_isOwner=_tapped_event_isOwner;
 
 @synthesize current_location_manager=_current_location_manager;
 
@@ -1277,9 +1279,15 @@
         //if it's the segue to the view detail part, do this:
         DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
         NSLog(@"%@ %@",self.tapped_event_id,self.tapped_shared_event_id);
-#warning need to figure out whether the event is owned by the user
-        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:YES];
+        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:self.tapped_event_isOwner];
         [detailVC preSetServerLogViaParameter:VIA_MY_PROFILE];
+        
+        
+        
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        //if it's the segue to the view detail part, do this:
+//        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
+//        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:[[NSString stringWithFormat:@"%@",[defaults objectForKey:@"user_id"]] isEqualToString:self.tapped_creator_id]];
     }
 }
 
@@ -1579,19 +1587,34 @@
 
 //handle when user tap a certain block view
 -(void)tapBlock:(UITapGestureRecognizer *)tapGR {
+    if ([self.mySegmentControl selectedSegmentIndex]==0) {
+        CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
+        //get the index of the touched block view
+        int index_y=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
+        int index_x=touchPoint.x/160;
+        ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index_y*2+index_x];
+        self.tapped_event_id=tapped_element.event_id;
+        self.tapped_shared_event_id=tapped_element.shared_event_id;
+        
+        NSLog(@"%@  %@",self.tapped_event_id,self.tapped_shared_event_id);
+        self.tapped_event_isOwner=YES;
+        //do some pre-segue stuff with event_id and shared_id
+        [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
+    }
+    else if ([self.mySegmentControl selectedSegmentIndex]==1){
+        CGPoint touchPoint=[tapGR locationInView:[self joinedScrollView]];
+        //get the index of the touched block view
+        int index_y=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
+        int index_x=touchPoint.x/160;
+        ProfileEventElement* tapped_element=[self.joined_blockViews objectAtIndex:index_y*2+index_x];
+        self.tapped_event_id=tapped_element.event_id;
+        self.tapped_shared_event_id=tapped_element.shared_event_id;
+        self.tapped_event_isOwner=NO;
+        //do some pre-segue stuff with event_id and shared_id
+        [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
+    }
+        
     
-    CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
-    //get the index of the touched block view
-    int index_y=touchPoint.y/PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT;
-    int index_x=touchPoint.x/160;
-    ProfileEventElement* tapped_element=[self.blockViews objectAtIndex:index_y*2+index_x];
-    self.tapped_event_id=tapped_element.event_id;
-    self.tapped_shared_event_id=tapped_element.shared_event_id;
-    
-    NSLog(@"%@  %@",self.tapped_event_id,self.tapped_shared_event_id);
-    
-    //do some pre-segue stuff with event_id and shared_id
-    [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
  
 }
 
