@@ -31,6 +31,7 @@
 @property (nonatomic,strong) NSString *freshConnectionType;
 @property (nonatomic,strong) NSString *joined_freshConnectionType;
 @property (nonatomic) BOOL isViewAppearConnection;
+@property (nonatomic) BOOL joined_isViewAppearConnection;
 @property (nonatomic) int refresh_page_num;
 @property (nonatomic) int joined_refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
@@ -71,6 +72,7 @@
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize joined_freshConnectionType=_joined_freshConnectionType;
 @synthesize isViewAppearConnection=_isViewAppearConnection;
+@synthesize joined_isViewAppearConnection=_joined_isViewAppearConnection;
 @synthesize refresh_page_num=_refresh_page_num;
 @synthesize joined_refresh_page_num=_joined_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
@@ -402,6 +404,7 @@
     //quest the most recent 10 events
     self.joined_refresh_page_num=2; //the next page that need to refresh is 2
     self.joined_freshConnectionType=@"New";
+    self.joined_isViewAppearConnection=YES;
     
     //main scroll view refresh
     self.joined_freshConnectionType=@"New";
@@ -429,7 +432,7 @@
                     //do nothing here, if there is no diff
                     self.joined_refresh_page_num=2;
                     self.joined_freshConnectionType=@"not";
-                    if (!self.isViewAppearConnection) {
+                    if (!self.joined_isViewAppearConnection) {
                         for (UIView *view in [self.joinedScrollView subviews]) {
                             [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
                         }
@@ -979,7 +982,7 @@
             //and then do the refresh process
             //main scroll view refresh
             self.joined_freshConnectionType=@"New";
-            self.isViewAppearConnection=NO;
+            self.joined_isViewAppearConnection=NO;
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 #warning need to change to other url
@@ -1004,7 +1007,7 @@
                             //do nothing here, if there is no diff
                             self.joined_refresh_page_num=2;
                             self.joined_freshConnectionType=@"not";
-                            if (!self.isViewAppearConnection) {
+                            if (!self.joined_isViewAppearConnection) {
                                 for (UIView *view in [self.joinedScrollView subviews]) {
                                     [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
                                 }
