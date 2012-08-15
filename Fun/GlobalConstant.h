@@ -21,24 +21,25 @@
 #define EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_Y 10 //The content y offset of the scroll view
 #define EVENT_ELEMENT_CONTENT_WIDTH 310 //The width of the event element view
 #define EVENT_ELEMENT_CONTENT_HEIGHT 175 //The height of the event element view
+#define EVENT_ELEMENT_GAP 10 //gap between two event elements
 
 //ExploreBlockElement
-#define EXPLORE_BLOCK_ELEMENT_VIEW_X 0
-#define EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH 320 //The width of the explore block element (block view)
+#define EXPLORE_BLOCK_ELEMENT_VIEW_X 5
+#define EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH 310 //The width of the explore block element (block view)
 #define EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT 175 //The height of the explore block element (block view)
 #define EXPLORE_BLOCK_ELEMENT_HOLDER_VIEW_HEIGHT 175 //The height of the event element holder view
 #define EXPLORE_BLOCK_ELEMENT_SUB_VIEW_X 5 //subview part(contain some view) x
 #define EXPLORE_BLOCK_ELEMENT_SUB_VIEW_Y 5//subview part(contain some view) y
 #define EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH 300//subview part(contain some view) width
-#define EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT 120//subview part(contain some view) height
+#define EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT 165//subview part(contain some view) height
 #define EXPLORE_BLOCK_ELEMENT_MASK_X 5   //block element mask
 #define EXPLORE_BLOCK_ELEMENT_MASK_Y 5
 #define EXPLORE_BLOCK_ELEMENT_MASK_WIDTH 300
-#define EXPLORE_BLOCK_ELEMENT_MASK_HEIGHT 120
+#define EXPLORE_BLOCK_ELEMENT_MASK_HEIGHT 165
 #define EXPLORE_BLOCK_ELEMENT_MASK_ALPHA 0.7
 #define EXPLORE_BLOCK_ELEMENT_MASK_IMAGENAME @"mask.png" 
 #define EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X 15    //title label
-#define EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_Y 92
+#define EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_Y 135
 #define EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_WIDTH 251
 #define EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT 24
 #define EXPLORE_BLOCK_ELEMENT_MARKER_X 7 //marker

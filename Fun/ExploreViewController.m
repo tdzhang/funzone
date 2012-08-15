@@ -166,7 +166,7 @@
                         if (!title) {continue;}
                         if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
                         NSURL *url=[NSURL URLWithString:photo];
-                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
                         //refresh the whole view
                         [self refreshAllTheMainScrollViewSUbviews];
                         
@@ -312,7 +312,7 @@
                             if (!title) {continue;}
                             if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
                             NSURL *url=[NSURL URLWithString:photo];
-                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
                             //refresh the whole view
                             [self refreshAllTheMainScrollViewSUbviews];
                             
@@ -397,7 +397,7 @@
                     if ([json count]==0) {
                         //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
                         self.refresh_page_num--;
-                        [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
+                        [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP))];
                     }
                     for (NSDictionary* event in json) {
                         NSString *title=[event objectForKey:@"title"];
@@ -419,7 +419,7 @@
                         if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
                         
                         NSURL *url=[NSURL URLWithString:photo];
-                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
                         
                         //refresh the whole view
                         [self addMoreDataToTheMainScrollViewSUbviews];
@@ -543,7 +543,7 @@
                     if (!title) {continue;}
                     if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
                     NSURL *url=[NSURL URLWithString:photo];
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                     
@@ -572,13 +572,13 @@
     [self.mainScrollView addSubview:Element.blockView];
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EVENT_ELEMENT_CONTENT_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT)];
     [self.mainScrollView addSubview:self.refreshView];
-    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP))];
 }
 //use to add more (than 10) from down side
 -(void)addMoreDataToTheMainScrollViewSUbviews{
     ExploreBlockElement *Element=(ExploreBlockElement *)[self.blockViews objectAtIndex:([self.blockViews count]-1)];
     [self.mainScrollView addSubview:Element.blockView];
-    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
+    [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP))];
 }
 
 #pragma mark - implement NSURLconnection delegate methods 
@@ -638,7 +638,7 @@
             if (!title) {continue;}
             if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
             //refresh the whole view
             [self refreshAllTheMainScrollViewSUbviews];
         
@@ -655,7 +655,7 @@
         if ([json count]==0) {
             //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
             self.refresh_page_num--;
-            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT)];
+            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, [self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP))];
         }
         for (NSDictionary* event in json) {
             NSString *title=[event objectForKey:@"title"];
@@ -677,7 +677,7 @@
             if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
             
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP) backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
             
             //refresh the whole view
             [self addMoreDataToTheMainScrollViewSUbviews];
@@ -716,35 +716,15 @@
     }
     CGPoint touchPoint=[tapGR locationInView:[self mainScrollView]];
     float tempTouchPointY=touchPoint.y;
-    float tempTouchPointX=touchPoint.x;
     if ([self.freshConnectionType isEqualToString:@"New"]) {
         tempTouchPointY-=EVENT_ELEMENT_CONTENT_HEIGHT/2;
     }
     //get the index of the touched block view
-    int index=tempTouchPointY/EVENT_ELEMENT_CONTENT_HEIGHT;
-    //NSLog(@"%d",index);
-    //NSLog(@"click_position:%f,%f",touchPoint.x,touchPoint.y-index*BlOCK_VIEW_HEIGHT);
-    float x=tempTouchPointX;
-    float y=tempTouchPointY-index*EVENT_ELEMENT_CONTENT_HEIGHT;
+    int index=tempTouchPointY/(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP);
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;
-    self.tapped_creator_id=tapped_element.creator_id;
-    NSLog(@"%f %f",x,y);
-    if((x>=5&&x<=160)&&(y>=105&&y<=175)){
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *myid=[defaults objectForKey:@"user_id"];
-        if ([myid isEqualToString:tapped_element.creator_id]) {
-            [self performSegueWithIdentifier:@"ViewProfile" sender:self];
-        }
-        else {
-            [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
-        }
-    }
-    else if(y<125){
-        [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
-    }
-    
+    [self performSegueWithIdentifier:@"ViewEventDetail" sender:self];
     //do some pre-segue stuff with event_id and shared_id
     /*
      self.detailViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;

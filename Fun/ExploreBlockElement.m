@@ -93,7 +93,6 @@
     blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
     blockElement.blockView.layer.shadowRadius = 1.0f;
     blockElement.blockView.layer.shadowOpacity = 0.6f;
-    blockElement.blockView.layer.cornerRadius = 4;
     
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
@@ -103,16 +102,12 @@
     //set the creator id
     blockElement.creator_id=creator_id;
     
-    //create View
-    blockElement.view=[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SUB_VIEW_X,EXPLORE_BLOCK_ELEMENT_SUB_VIEW_Y, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
-    [blockElement.blockView addSubview:blockElement.view];
-    
     //Backgroud Image
     blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SUB_VIEW_X, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_Y, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
     [blockElement.backGroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [blockElement.backGroundImageView setClipsToBounds:YES];
     [blockElement.backGroundImageView setAlpha:1.0];
-    [blockElement.view addSubview:blockElement.backGroundImageView];
+    [blockElement.blockView addSubview:blockElement.backGroundImageView];
     
     if (![Cache isURLCached:backGroundImageUrl]) {
         //using high priority queue to fetch the image
@@ -153,7 +148,7 @@
     [mask setAlpha:EXPLORE_BLOCK_ELEMENT_MASK_ALPHA];
     [mask setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MASK_IMAGENAME]];
     [mask setContentMode:UIViewContentModeScaleToFill];
-    [blockElement.view addSubview:mask];
+    [blockElement.blockView addSubview:mask];
     
     
     //Title Label
@@ -172,7 +167,7 @@
     newFrame.origin.y -= expectedLabelSize.height - EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT;
     newFrame.size.height = expectedLabelSize.height;
     blockElement.titleLabel.frame = newFrame;
-    [blockElement.view addSubview:blockElement.titleLabel];
+    [blockElement.blockView addSubview:blockElement.titleLabel];
     
     //Category Label
     blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
@@ -182,7 +177,7 @@
     blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
-    [blockElement.view addSubview:blockElement.categoryLabel];
+    [blockElement.blockView addSubview:blockElement.categoryLabel];
     
     //marker image
 //    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
