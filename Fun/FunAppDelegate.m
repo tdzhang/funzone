@@ -206,7 +206,7 @@
     
     WXWebpageObject *ext = [WXWebpageObject object];
 #warning need a more precise url about the event, not just the image
-    ext.webpageUrl = [NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
+    ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
 //    WXImageObject *ext = [WXImageObject object];
 //    ext.imageData = [Cache getCachedData:imgurl];
     message.mediaObject = ext;
