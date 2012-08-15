@@ -351,12 +351,12 @@
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         spinning.frame = CGRectMake(120,20,80,80);
         [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,EVENT_ELEMENT_CONTENT_HEIGHT*([self.blockViews count]),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP)*([self.blockViews count]),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
         [self.refreshViewdown removeFromSuperview];
         [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]+0.5)*EVENT_ELEMENT_CONTENT_HEIGHT);
+        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]+0.5)*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP));
         
 
         
