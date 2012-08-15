@@ -288,6 +288,8 @@
 		9256611115C8FB4B00BED665 /* ActivityOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256610915C8FB4B00BED665 /* ActivityOrange.png */; };
 		9256611815C8FD4A00BED665 /* AddOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256611615C8FD4A00BED665 /* AddOrange.png */; };
 		9256611915C8FD4A00BED665 /* AddGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256611715C8FD4A00BED665 /* AddGrey.png */; };
+		927BB92C15DB6FA6007B1E48 /* FeedBlockElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 927BB92A15DB6FA6007B1E48 /* FeedBlockElement.h */; };
+		927BB92D15DB6FA6007B1E48 /* FeedBlockElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 927BB92B15DB6FA6007B1E48 /* FeedBlockElement.m */; };
 		9284699D15CA7A5700556004 /* detail-invite-color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9284699C15CA7A5700556004 /* detail-invite-color.png */; };
 		9298265F15A938D6003673CF /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9298265215A938D6003673CF /* FBDialog.bundle */; };
 		9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9298265815A938D6003673CF /* libfacebook_ios_sdk.a */; };
@@ -637,6 +639,8 @@
 		9256610915C8FB4B00BED665 /* ActivityOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActivityOrange.png; sourceTree = "<group>"; };
 		9256611615C8FD4A00BED665 /* AddOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddOrange.png; sourceTree = "<group>"; };
 		9256611715C8FD4A00BED665 /* AddGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddGrey.png; sourceTree = "<group>"; };
+		927BB92A15DB6FA6007B1E48 /* FeedBlockElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBlockElement.h; sourceTree = "<group>"; };
+		927BB92B15DB6FA6007B1E48 /* FeedBlockElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBlockElement.m; sourceTree = "<group>"; };
 		9284699715CA786600556004 /* detail-edit-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-edit-color.png"; sourceTree = "<group>"; };
 		9284699C15CA7A5700556004 /* detail-invite-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-invite-color.png"; sourceTree = "<group>"; };
 		9298265015A938D6003673CF /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1375,6 +1379,8 @@
 			children = (
 				4698259115A11E1F00204234 /* FeedViewController.h */,
 				4698259215A11E1F00204234 /* FeedViewController.m */,
+				927BB92A15DB6FA6007B1E48 /* FeedBlockElement.h */,
+				927BB92B15DB6FA6007B1E48 /* FeedBlockElement.m */,
 			);
 			name = "Friend Feed";
 			sourceTree = "<group>";
@@ -1446,6 +1452,7 @@
 				0FE93B6415D24DDF004F8D01 /* SelfChooseLocation.h in Headers */,
 				0F16F99B15D983DB002B719E /* movieInfoReturnProtocal.h in Headers */,
 				0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */,
+				927BB92C15DB6FA6007B1E48 /* FeedBlockElement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,6 +1762,7 @@
 				0FB5AC2015D1A88600FE8608 /* ASIDataCompressor.m in Sources */,
 				0FB5AC2415D1A93B00FE8608 /* Reachability.m in Sources */,
 				0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */,
+				927BB92D15DB6FA6007B1E48 /* FeedBlockElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 #import "FeedViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "DetailViewController.h"
+#import "FeedBlockElement.h"
 
 
 @interface FeedViewController ()
@@ -372,7 +372,7 @@
                     if (!title) {continue;}
                     if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
                     NSURL *url=[NSURL URLWithString:photo];
-                    [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                    [self.blockViews insertObject:[FeedBlockElement initialWithPositionY:[self.blockViews count]*EVENT_ELEMENT_CONTENT_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
                     //refresh the whole view
                     [self refreshAllTheMainScrollViewSUbviews];
                     
@@ -466,7 +466,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[FeedBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
             //check for whether show the instruction
             [self checkForWhetherShowInstruction];
             //refresh the whole view
@@ -507,7 +507,7 @@
                 continue;
             }
             NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+            [self.blockViews insertObject:[FeedBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
             //check for whether show the instruction
             [self checkForWhetherShowInstruction];
             //refresh the whole view

@@ -94,9 +94,52 @@
 #define DVC_EVENT_IMG_HEIGHT 180
 
 
-
 //Feed View Controller
-
+#define FEED_BLOCK_ELEMENT_VIEW_X 0
+#define FEED_BLOCK_ELEMENT_VIEW_WIDTH 320 //The width of the explore block element (block view)
+#define FEED_BLOCK_ELEMENT_VIEW_HEIGHT 175 //The height of the explore block element (block view)
+#define FEED_BLOCK_ELEMENT_HOLDER_VIEW_HEIGHT 175 //The height of the event element holder view
+#define FEED_BLOCK_ELEMENT_SUB_VIEW_X 5 //subview part(contain some view) x
+#define FEED_BLOCK_ELEMENT_SUB_VIEW_Y 5//subview part(contain some view) y
+#define FEED_BLOCK_ELEMENT_SUB_VIEW_WIDTH 300//subview part(contain some view) width
+#define FEED_BLOCK_ELEMENT_SUB_VIEW_HEIGHT 120//subview part(contain some view) height
+#define FEED_BLOCK_ELEMENT_MASK_X 5   //block element mask
+#define FEED_BLOCK_ELEMENT_MASK_Y 5
+#define FEED_BLOCK_ELEMENT_MASK_WIDTH 300
+#define FEED_BLOCK_ELEMENT_MASK_HEIGHT 120
+#define FEED_BLOCK_ELEMENT_MASK_ALPHA 0.7
+#define FEED_BLOCK_ELEMENT_MASK_IMAGENAME @"mask.png"
+#define FEED_BLOCK_ELEMENT_TITLE_TEXT_X 15    //title label
+#define FEED_BLOCK_ELEMENT_TITLE_TEXT_Y 92
+#define FEED_BLOCK_ELEMENT_TITLE_TEXT_WIDTH 251
+#define FEED_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT 24
+#define FEED_BLOCK_ELEMENT_EVENTVIEW_X 10    //event view(contain other subviews)
+#define FEED_BLOCK_ELEMENT_EVENTVIEW_Y 130
+#define FEED_BLOCK_ELEMENT_EVENTVIEW_WIDTH 310
+#define FEED_BLOCK_ELEMENT_EVENTVIEW_HEIGHT 31
+#define FEED_BLOCK_ELEMENT_THUMBNAIL_X 0 //user thumbnail image
+#define FEED_BLOCK_ELEMENT_THUMBNAIL_Y 5
+#define FEED_BLOCK_ELEMENT_THUMBNAIL_SIZE 30
+#define FEED_BLOCK_ELEMENT_NAME_LABEL_X 35 //Name label
+#define FEED_BLOCK_ELEMENT_NAME_LABEL_Y 6
+#define FEED_BLOCK_ELEMENT_NAME_LABEL_WIDTH 100
+#define FEED_BLOCK_ELEMENT_NAME_LABEL_HEIGHT 30
+#define FEED_BLOCK_ELEMENT_INTEREST_LABEL_X 288 //Interest LABEL
+#define FEED_BLOCK_ELEMENT_INTEREST_LABEL_Y 7
+#define FEED_BLOCK_ELEMENT_INTEREST_LABEL_WIDTH 21
+#define FEED_BLOCK_ELEMENT_INTEREST_LABEL_HEIGHT 31
+#define FEED_BLOCK_ELEMENT_INTEREST_X 270 //Interest image view
+#define FEED_BLOCK_ELEMENT_INTEREST_Y 15
+#define FEED_BLOCK_ELEMENT_INTEREST_SIZE 15
+#define FEED_BLOCK_ELEMENT_INTEREST_IMAGE @"detail-interested-gray.png"
+#define FEED_BLOCK_ELEMENT_REPIN_X 232 //repine image view
+#define FEED_BLOCK_ELEMENT_REPIN_Y 15
+#define FEED_BLOCK_ELEMENT_REPIN_SIZE 15
+#define FEED_BLOCK_ELEMENT_REPIN_LABEL_X 250 //repine LABEL
+#define FEED_BLOCK_ELEMENT_REPIN_LABEL_Y 7
+#define FEED_BLOCK_ELEMENT_REPIN_LABEL_WIDTH 21
+#define FEED_BLOCK_ELEMENT_REPIN_LABEL_HEIGHT 31
+#define FEED_BLOCK_ELEMENT_REPIN_IMAGE @"detail-pick-gray.png"
 
 #pragma mark - category part(new event)
 //CategoryCHooseViewController

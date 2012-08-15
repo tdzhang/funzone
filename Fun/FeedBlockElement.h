@@ -1,9 +1,9 @@
 //
-//  ExploreBlockElement.h
-//  Fun
+//  FeedBlockElement.h
+//  OrangeParc
 //
-//  Created by Tongda Zhang on 7/10/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Yizhou Zhu on 8/14/12.
+//  Copyright (c) 2012 Stanford University. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,7 +12,7 @@
 #import "Cache.h"
 #import "GlobalConstant.h"
 
-@interface ExploreBlockElement : NSObject
+@interface FeedBlockElement : NSObject
 @property(nonatomic,strong) UIView *blockView;
 @property (nonatomic,strong) UIView *view;
 @property (nonatomic,strong) UIView *creator;
@@ -35,5 +35,5 @@
 -(void) resetFramWith:(CGFloat)position_y;
 
 //generate a explore block element
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category;
++(FeedBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category;
 @end

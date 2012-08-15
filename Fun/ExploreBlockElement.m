@@ -88,15 +88,17 @@
     
     //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X, position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
+    blockElement.blockView.backgroundColor = [UIColor whiteColor];
+    blockElement.blockView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
+    blockElement.blockView.layer.shadowRadius = 1.0f;
+    blockElement.blockView.layer.shadowOpacity = 0.6f;
+    blockElement.blockView.layer.cornerRadius = 4;
+    
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
     [blockElement.blockView addGestureRecognizer:tapGR];
-    
-    //blockElementHolder View
-    blockElement.blockElementHolderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_HOLDER_VIEW_HEIGHT)];
-    [blockElement.blockElementHolderView setImage:[UIImage imageNamed:@"blockelementholder.png"]];
-    [blockElement.blockView addSubview:blockElement.blockElementHolderView];
     
     //set the creator id
     blockElement.creator_id=creator_id;
@@ -198,66 +200,66 @@
 //    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:12.0];
 //    [blockElement.view addSubview:blockElement.locationLabel];
     
-    //event view
-    blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_EVENTVIEW_X,EXPLORE_BLOCK_ELEMENT_EVENTVIEW_Y, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
-    [blockElement.creator setBackgroundColor:[UIColor clearColor]];
-    [blockElement.blockView addSubview:blockElement.creator];
+    //creator view
+//    blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_EVENTVIEW_X,EXPLORE_BLOCK_ELEMENT_EVENTVIEW_Y, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
+//    [blockElement.creator setBackgroundColor:[UIColor clearColor]];
+//    [blockElement.blockView addSubview:blockElement.creator];
     
     
     //Thumbnail Image
-    blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_THUMBNAIL_X, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_Y, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE)];
+//    blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_THUMBNAIL_X, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_Y, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE)];
     
     //get the Thumbnail image from cache
-    NSURL *url=[NSURL URLWithString:creator_photo];
-    if (![Cache isURLCached:url]) {
-        //if not cached, using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: url];
-            
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-                imageData=UIImagePNGRepresentation(image);
-                
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        //refresh the whole view
-                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
-                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
-                    });
-                }
-            }
-            else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:url withData:imageData];
-                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
-                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
-                    });
-                }
-            }
-        });
-    }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            blockElement.thumbNailImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
-            [blockElement.creator addSubview:blockElement.thumbNailImageView];
-        });
-    }
+//    NSURL *url=[NSURL URLWithString:creator_photo];
+//    if (![Cache isURLCached:url]) {
+//        //if not cached, using high priority queue to fetch the image
+//        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
+//            //get the image data
+//            NSData * imageData = nil;
+//            imageData = [[NSData alloc] initWithContentsOfURL: url];
+//            
+//            if ( imageData == nil ){
+//                //if the image data is nil, the image url is not reachable. using a default image to replace that
+//                //NSLog(@"downloaded %@ error, using a default image",url);
+//                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
+//                imageData=UIImagePNGRepresentation(image);
+//                
+//                if(imageData){
+//                    dispatch_async( dispatch_get_main_queue(),^{
+//                        [Cache addDataToCache:url withData:imageData];
+//                        //refresh the whole view
+//                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
+//                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
+//                    });
+//                }
+//            }
+//            else {
+//                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+//                //NSLog(@"downloaded %@",url);
+//                if(imageData){
+//                    dispatch_async( dispatch_get_main_queue(),^{
+//                        [Cache addDataToCache:url withData:imageData];
+//                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
+//                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
+//                    });
+//                }
+//            }
+//        });
+//    }
+//    else {
+//        dispatch_async( dispatch_get_main_queue(),^{
+//            blockElement.thumbNailImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
+//            [blockElement.creator addSubview:blockElement.thumbNailImageView];
+//        });
+//    }
 
     //name label
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_NAME_LABEL_X, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_Y, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_HEIGHT)];
-    nameLabel.text = creator_name;
-    nameLabel.backgroundColor = [UIColor clearColor];
-    nameLabel.textColor = [UIColor blackColor];
-    nameLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    [blockElement.creator addSubview:nameLabel];
+//    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_NAME_LABEL_X, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_Y, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_HEIGHT)];
+//    nameLabel.text = creator_name;
+//    nameLabel.backgroundColor = [UIColor clearColor];
+//    nameLabel.textColor = [UIColor blackColor];
+//    nameLabel.font = [UIFont boldSystemFontOfSize:12.0];
+//    [blockElement.creator addSubview:nameLabel];
     
     //Joined number label, do it myself
     blockElement.joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_X, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_Y, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_HEIGHT)];
