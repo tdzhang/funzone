@@ -34,18 +34,15 @@
         
         int code=[request responseStatusCode];
         NSLog(@"code:%d",code);
-        dispatch_async( dispatch_get_main_queue(),^{
+        
             if (code==200) {
-                
                 self.recommendResult=[rottenTomatoMovieModel initializeWithJsonData:request.responseData];
                 
-                for (rottenTomatoMovieModel *model in self.searchResult) {
+                for (rottenTomatoMovieModel *model in self.recommendResult) {
                     if (model.imageUrl) {
                         NSURL *url=[NSURL URLWithString:model.imageUrl];
                         if (![Cache isURLCached:url]) {
                             //using high priority queue to fetch the image
-                            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                                
                                 //get the image data
                                 NSData * imageData = nil;
                                 imageData = [[NSData alloc] initWithContentsOfURL: url];
@@ -57,18 +54,25 @@
                                     imageData=UIImagePNGRepresentation(image);
                                     
                                     if(imageData)[Cache addDataToCache:url withData:imageData];
+                                        
                                     dispatch_async( dispatch_get_main_queue(),^{
                                         [self.myTableView reloadData];
                                     });
                                 }
                                 else {
                                     //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                                    //NSLog(@"downloaded %@",url);
+                                    NSLog(@"downloaded %@",url);
                                     if(imageData)[Cache addDataToCache:url withData:imageData];
                                     dispatch_async( dispatch_get_main_queue(),^{
-                                        [self.myTableView reloadData];
+                                       [self.myTableView reloadData]; 
                                     });
+                                
                                 }
+                            
+                        }
+                        else{
+                            dispatch_async( dispatch_get_main_queue(),^{
+                              [self.myTableView reloadData];  
                             });
                         }
                     }
@@ -80,7 +84,8 @@
                 //connect error
             }
             
-        });
+        
+
         
         
     });

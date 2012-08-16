@@ -411,7 +411,6 @@
     self.joined_freshConnectionType=@"New";
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-#warning change to joined url
         NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
         NSLog(@"%@",request_string);
         NSURL *url=[NSURL URLWithString:request_string];
@@ -986,7 +985,6 @@
             self.joined_isViewAppearConnection=NO;
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-#warning need to change to other url
                 NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
                 NSLog(@"%@",request_string);
                 NSURL *url=[NSURL URLWithString:request_string];
