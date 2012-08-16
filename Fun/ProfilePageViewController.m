@@ -83,6 +83,7 @@
 
 @synthesize lastReceivedJson_bookmark=_lastReceivedJson_bookmark;
 @synthesize lastReceivedJson_profile=_lastReceivedJson_profile;
+@synthesize lastReceivedJson_bookmark_joined=_lastReceivedJson_bookmark_joined;
 
 //used to keep server log
 @synthesize via=_via;
