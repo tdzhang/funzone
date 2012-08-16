@@ -36,7 +36,7 @@
 }
 
 //generate a explore block element
-+(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)join_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category{
++(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)DIM_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category{
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
 
@@ -202,41 +202,13 @@
     }
     
     //people want to do this section
-    
-    
-    //Joined number label, do it myself
-    blockElement.joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_X, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_Y, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_HEIGHT)];
-    blockElement.joinLabel.text = join_label;
-    blockElement.joinLabel.backgroundColor = [UIColor clearColor];
-    blockElement.joinLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    CGSize expectedWidth1 = [join_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame1 = blockElement.joinLabel.frame;
-    newFrame1.origin.x = 295 - expectedWidth1.width;
-    newFrame1.size.width = expectedWidth1.width;
-    blockElement.joinLabel.frame = newFrame1;
-    [blockElement.creator addSubview:blockElement.joinLabel];
-    
-    //Joined Image
-    blockElement.joinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(blockElement.joinLabel.frame.origin.x - 5 - EXPLORE_BLOCK_ELEMENT_INTEREST_SIZE, EXPLORE_BLOCK_ELEMENT_INTEREST_Y, EXPLORE_BLOCK_ELEMENT_INTEREST_SIZE, EXPLORE_BLOCK_ELEMENT_INTEREST_SIZE)];
-    blockElement.joinImageView.image = [UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_INTEREST_IMAGE];
-    [blockElement.creator addSubview:blockElement.joinImageView];
-    
-    //Favored Label,likes
-    blockElement.favorLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_X, EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_Y , EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_REPIN_LABEL_HEIGHT)];
-    blockElement.favorLabel.text = favor_label;
-    blockElement.favorLabel.backgroundColor = [UIColor clearColor];   
-    blockElement.favorLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    CGSize expectedWidth2 = [favor_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
-    CGRect newFrame2 = blockElement.favorLabel.frame;
-    newFrame2.origin.x = blockElement.joinImageView.frame.origin.x - 5 - expectedWidth2.width;
-    newFrame2.size.width = expectedWidth2.width;
-    blockElement.favorLabel.frame = newFrame2;
-    [blockElement.creator addSubview:blockElement.favorLabel];
-    
-    //Favored Image
-    blockElement.favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(blockElement.favorLabel.frame.origin.x-5-EXPLORE_BLOCK_ELEMENT_REPIN_SIZE, EXPLORE_BLOCK_ELEMENT_REPIN_Y, EXPLORE_BLOCK_ELEMENT_REPIN_SIZE, EXPLORE_BLOCK_ELEMENT_REPIN_SIZE)];
-    blockElement.favorImageView.image = [UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_REPIN_IMAGE];
-    [blockElement.creator addSubview:blockElement.favorImageView];
+    blockElement.numDoItMyself = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_DIM_X, EXPLORE_BLOCK_ELEMENT_DIM_Y, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    blockElement.numDoItMyself.text = DIM_label;
+    [blockElement.numDoItMyself setFont:[UIFont boldSystemFontOfSize:14]];
+    [blockElement.numDoItMyself setTextColor:[UIColor colorWithRed:100/255.0 green:83/255.0 blue:0 alpha:1]];
+    blockElement.numDoItMyself.shadowColor=[UIColor blackColor];
+    [blockElement.numDoItMyself setShadowOffset:CGSizeMake(0, 1)];
+    [blockElement.blockView addSubview:blockElement.numDoItMyself];
     
     //set the event_id and shared_event_id
     blockElement.event_id=event_id;
