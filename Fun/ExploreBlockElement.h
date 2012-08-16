@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSString *event_category;
 @property (nonatomic,strong) UILabel *categoryLabel;
+@property (nonatomic,strong) UILabel *numDoItMyself;
 
 //used to reset the fram information
 -(void) resetFramWith:(CGFloat)position_y;

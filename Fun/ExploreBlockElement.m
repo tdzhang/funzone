@@ -27,6 +27,7 @@
 @synthesize creator_id=_creator_id;
 @synthesize event_category=_event_category;
 @synthesize categoryLabel=_categoryLabel;
+@synthesize numDoItMyself=_numDoItMyself;
 
 
 //reset the fram of a element's block view
@@ -86,13 +87,15 @@
         DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
     }
     
-    //initial the blockElement frame
+//    //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X, position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
     blockElement.blockView.backgroundColor = [UIColor whiteColor];
     blockElement.blockView.layer.shadowColor = [[UIColor blackColor] CGColor];
     blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
     blockElement.blockView.layer.shadowRadius = 1.0f;
     blockElement.blockView.layer.shadowOpacity = 0.6f;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:blockElement.blockView.bounds];
+    blockElement.blockView.layer.shadowPath = path.CGPath;
     
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
@@ -179,82 +182,27 @@
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
     [blockElement.blockView addSubview:blockElement.categoryLabel];
     
+    if (![locationName isEqualToString:@""]) {
     //marker image
-//    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
-//    [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
-//    [marker setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MARKER_IMAGENAME]];
-//    [marker setContentMode:UIViewContentModeScaleToFill];
-//    [blockElement.view addSubview:marker];
+    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
+    [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
+    [marker setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MARKER_IMAGENAME]];
+    [marker setContentMode:UIViewContentModeScaleToFill];
+    [blockElement.blockView addSubview:marker];
     
     //location Label
-//    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_X, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_Y, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_HEIGHT)];
-//    blockElement.locationLabel.text = locationName;
-//    blockElement.locationLabel.backgroundColor = [UIColor clearColor];
-//    blockElement.locationLabel.textColor = [UIColor whiteColor];
-//    blockElement.locationLabel.shadowColor=[UIColor darkTextColor];
-//    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:12.0];
-//    [blockElement.view addSubview:blockElement.locationLabel];
+    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_X, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_Y, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_HEIGHT)];
+    blockElement.locationLabel.text = locationName;
+    blockElement.locationLabel.backgroundColor = [UIColor clearColor];
+    blockElement.locationLabel.textColor = [UIColor lightGrayColor];
+    blockElement.locationLabel.shadowColor=[UIColor blackColor];
+    [blockElement.locationLabel setShadowOffset:CGSizeMake(0, 1)];
+    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:11.0];
+    [blockElement.blockView addSubview:blockElement.locationLabel];
+    }
     
-    //creator view
-//    blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_EVENTVIEW_X,EXPLORE_BLOCK_ELEMENT_EVENTVIEW_Y, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
-//    [blockElement.creator setBackgroundColor:[UIColor clearColor]];
-//    [blockElement.blockView addSubview:blockElement.creator];
+    //people want to do this section
     
-    
-    //Thumbnail Image
-//    blockElement.thumbNailImageView=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_THUMBNAIL_X, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_Y, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE, EXPLORE_BLOCK_ELEMENT_THUMBNAIL_SIZE)];
-    
-    //get the Thumbnail image from cache
-//    NSURL *url=[NSURL URLWithString:creator_photo];
-//    if (![Cache isURLCached:url]) {
-//        //if not cached, using high priority queue to fetch the image
-//        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{  
-//            //get the image data
-//            NSData * imageData = nil;
-//            imageData = [[NSData alloc] initWithContentsOfURL: url];
-//            
-//            if ( imageData == nil ){
-//                //if the image data is nil, the image url is not reachable. using a default image to replace that
-//                //NSLog(@"downloaded %@ error, using a default image",url);
-//                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-//                imageData=UIImagePNGRepresentation(image);
-//                
-//                if(imageData){
-//                    dispatch_async( dispatch_get_main_queue(),^{
-//                        [Cache addDataToCache:url withData:imageData];
-//                        //refresh the whole view
-//                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
-//                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
-//                    });
-//                }
-//            }
-//            else {
-//                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-//                //NSLog(@"downloaded %@",url);
-//                if(imageData){
-//                    dispatch_async( dispatch_get_main_queue(),^{
-//                        [Cache addDataToCache:url withData:imageData];
-//                        blockElement.thumbNailImageView.image=[UIImage imageWithData:imageData];
-//                        [blockElement.creator addSubview:blockElement.thumbNailImageView];
-//                    });
-//                }
-//            }
-//        });
-//    }
-//    else {
-//        dispatch_async( dispatch_get_main_queue(),^{
-//            blockElement.thumbNailImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
-//            [blockElement.creator addSubview:blockElement.thumbNailImageView];
-//        });
-//    }
-
-    //name label
-//    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_NAME_LABEL_X, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_Y, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_NAME_LABEL_HEIGHT)];
-//    nameLabel.text = creator_name;
-//    nameLabel.backgroundColor = [UIColor clearColor];
-//    nameLabel.textColor = [UIColor blackColor];
-//    nameLabel.font = [UIFont boldSystemFontOfSize:12.0];
-//    [blockElement.creator addSubview:nameLabel];
     
     //Joined number label, do it myself
     blockElement.joinLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_X, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_Y, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_INTEREST_LABEL_HEIGHT)];
@@ -289,15 +237,6 @@
     blockElement.favorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(blockElement.favorLabel.frame.origin.x-5-EXPLORE_BLOCK_ELEMENT_REPIN_SIZE, EXPLORE_BLOCK_ELEMENT_REPIN_Y, EXPLORE_BLOCK_ELEMENT_REPIN_SIZE, EXPLORE_BLOCK_ELEMENT_REPIN_SIZE)];
     blockElement.favorImageView.image = [UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_REPIN_IMAGE];
     [blockElement.creator addSubview:blockElement.favorImageView];
-
-
-    //add seperator
-//    UIImageView* seperator=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_SEPERATOR_X, EXPLORE_BLOCK_ELEMENT_SEPERATOR_Y, EXPLORE_BLOCK_ELEMENT_SEPERATOR_WIDTH, EXPLORE_BLOCK_ELEMENT_SEPERATOR_HEIGHT)];
-//    [seperator setAlpha:1];
-//    [seperator setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_SEPERATOR_IMAGE]];
-//    [seperator setContentMode:UIViewContentModeScaleToFill];
-//    [blockElement.blockView addSubview:seperator];
-
     
     //set the event_id and shared_event_id
     blockElement.event_id=event_id;
