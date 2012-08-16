@@ -412,7 +412,7 @@
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 #warning change to joined url
-        NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+        NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
         NSLog(@"%@",request_string);
         NSURL *url=[NSURL URLWithString:request_string];
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
@@ -987,7 +987,7 @@
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 #warning need to change to other url
-                NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+                NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
                 NSLog(@"%@",request_string);
                 NSURL *url=[NSURL URLWithString:request_string];
                 ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
@@ -1161,7 +1161,7 @@
             self.joined_freshConnectionType=@"Add";
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.joined_refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
+                NSString *request_string=[NSString stringWithFormat:@"%@/invitations?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.joined_refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
                 NSLog(@"%@",request_string);
                 NSURL *url=[NSURL URLWithString:request_string];
                 ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
