@@ -67,6 +67,7 @@
 
 //used to invite inner friend(following)
 @property (nonatomic,strong) NSMutableDictionary *invitedFriend;
+@property (nonatomic,strong) NSMutableDictionary *invitedAddressBookFriend;
 @property (nonatomic,strong) NSArray* invitedFriendLastReceivedJson;
 
 //used to set the 1st into set teh title part 1st responser
@@ -137,6 +138,7 @@
 
 //used to invite inner friend(following)
 @synthesize invitedFriend=_invitedFriend;
+@synthesize invitedAddressBookFriend=_invitedAddressBookFriend;
 @synthesize invitedFriendLastReceivedJson=_invitedFriendLastReceivedJson;
 
 //used to set the 1st into set the title part 1st responser
@@ -163,6 +165,13 @@
         _invitedFriend=[NSMutableDictionary dictionary];
     }
     return _invitedFriend;
+}
+
+-(NSMutableDictionary *)invitedAddressBookFriend{
+    if (!_invitedAddressBookFriend) {
+        _invitedAddressBookFriend=[NSMutableDictionary dictionary];
+    }
+    return _invitedAddressBookFriend;
 }
 
 -(NSArray *)invitedFriendLastReceivedJson{
@@ -951,6 +960,7 @@
         peopleController = segue.destinationViewController;
         peopleController.delegate=self;
         peopleController.alreadySelectedContacts=[self.invitedFriend copy];
+        peopleController.addressbook_alreadySelectedContacts=[self.invitedAddressBookFriend copy];
         peopleController.lastReceivedJson=self.invitedFriendLastReceivedJson;
     }
     NSLog(@"%@",segue.identifier);
@@ -1482,6 +1492,22 @@
     }
 }
 
+-(void)AddAddressBookContactInformtionToPeopleList:(UserContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSString *nameText=@"";
+    if (person.firstName) {
+        nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+        if (person.lastName) {
+            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+        }
+    }
+    else if(person.lastName){
+        nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+    }
+    NSString * key=nameText;
+    [self.invitedAddressBookFriend setObject:(id)person forKey:key];
+}
+
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
     NSString * key=person.user_name;
     [self.invitedFriend removeObjectForKey:key];
@@ -1503,6 +1529,21 @@
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
         [self.inviteIcon setAlpha:0.8];
     }
+}
+
+-(void)DeleteAddressBookContactInformtionToPeopleList:(UserContactObject *)person{
+    NSString *nameText=@"";
+    if (person.firstName) {
+        nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+        if (person.lastName) {
+            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+        }
+    }
+    else if(person.lastName){
+        nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+    }
+    NSString * key=nameText;
+    [self.invitedAddressBookFriend removeObjectForKey:key];
 }
 
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{

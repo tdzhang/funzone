@@ -10,6 +10,9 @@
 #import "InviteFriendObject.h"
 #import "GlobalConstant.h"
 #import "ASIFormDataRequest.h"
+#import <AddressBook/AddressBook.h>
+#import "UserContactObject.h"
+#import "MyContactsTableViewCell.h"
 #import "InviteFriendTableViewCell.h"
 #import "Cache.h"
 
@@ -24,8 +27,9 @@
                    WithPropertyCategory:(NSString*)kind
                             WithContent:(NSString*)content;
 //the methods for choosing people to go out with
-
+-(void)AddAddressBookContactInformtionToPeopleList:(UserContactObject*)person;
 -(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person;
+-(void)DeleteAddressBookContactInformtionToPeopleList:(UserContactObject*)person;
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person;
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray*)lastReceivedJson;
 
@@ -35,6 +39,7 @@
 @interface InviteTableViewController : UITableViewController
 
 @property(nonatomic,strong) NSDictionary *alreadySelectedContacts;
+@property(nonatomic,strong) NSDictionary *addressbook_alreadySelectedContacts;
 @property(nonatomic,strong) id<FeedBackInviteFriendChange>delegate;
 @property(nonatomic,strong)NSArray *lastReceivedJson;
 @end

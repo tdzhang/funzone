@@ -245,110 +245,7 @@
     
 }
 
-//config each cell of the table view(both the search result and the ordinary address book showing)
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
-        static NSString *CellIdentifier = @"MysearchResultDisplay";
-        
-        UITableViewCell *cell = [tableView 
-                                 dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] 
-                    initWithStyle:UITableViewCellStyleSubtitle //the style of the cell
-                    reuseIdentifier:CellIdentifier] ;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        UserContactObject* contact=[self.searchResultContacts objectAtIndex:indexPath.row];
-        NSString *nameText=@"";
-        if (contact.firstName) {
-            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
-            if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
-            }
-        }
-        else if(contact.lastName){
-            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
-        }
-        [cell.textLabel setText:nameText];
-        
-        if ([self.preDefinedMode isEqualToString:@"email"]) {
-            if ([contact.email count]>0) {
-                [cell.detailTextLabel setText:[contact.email objectAtIndex:0]];
-            }
-            else {
-                [cell.detailTextLabel setText:@"No Email Information Found."];
-            }
-        }
-        else if([self.preDefinedMode isEqualToString:@"message"]) {
-            if ([contact.phone count]>0) {
-                NSString *phoneNumber=[NSString stringWithFormat:@"%@",[contact.phone objectAtIndex:0]];
-                [cell.detailTextLabel setText:phoneNumber];
-                //NSLog(@"%@",phoneNumber);
-            }
-            else {
-                [cell.detailTextLabel setText:@"No Phone Information Found."];
-            }
-        }
 
-        //[cell setSelected:YES];
-        return cell;
-    }
-    //else: the tabel view is used to show the ordinary address book information
-    else{
-        static NSString *CellIdentifier = @"CustomContactInfo";
-        
-        
-        MyContactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"CustonContactInfoView" owner:nil options:nil];
-            
-            for (UIView *view in views) {
-                if([view isKindOfClass:[UITableViewCell class]])
-                {
-                    cell = (MyContactsTableViewCell*)view;
-                }
-            }
-        }
-        // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
-        UserContactObject* contact=[self.dividedContacts objectAtIndex:indexPath.row];
-        NSString *nameText=@"";
-        if (contact.firstName) {
-            nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
-            if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
-            }
-        }
-        else if(contact.lastName){
-            nameText=[nameText stringByAppendingFormat:@"%@",contact.lastName];
-        }
-        
-        cell.userName.text= nameText;
-        
-        if ([self.preDefinedMode isEqualToString:@"email"]) {
-            if ([contact.email count]>0) {
-                [cell.userInfo setText:[contact.email objectAtIndex:0]];
-            }
-            else {
-                [cell.userInfo setText:@"No Email Information Found."];
-            }
-        }
-        else if([self.preDefinedMode isEqualToString:@"message"]) {
-            if ([contact.phone count]>0) {
-                [cell.userInfo setText:[contact.phone objectAtIndex:0]];
-            }
-            else {
-                [cell.userInfo setText:@"No Phone Information Found."];
-            }
-        }
-        
-        if ([self.alreadySelectedContacts objectForKey:nameText]) {
-            //[cell setSelected:YES animated:YES];
-            [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-        }
-        return cell;
-    }
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -431,7 +328,6 @@
 
 
 #pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
