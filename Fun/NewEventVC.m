@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Event.h"
 
-#pragma mark - NewEventVC Private Declarition 
+#pragma mark - NewEventVC Private Declarition
 @interface NewEventVC () <UIActionSheetDelegate>
 @property (nonatomic, retain) UIImagePickerController *imgPicker; //using to start a image pick(from camera or album)
 @property (weak, nonatomic) IBOutlet UIToolbar *keyboardToolbar;
@@ -381,15 +381,19 @@
     
     
     //set different flow for different event type
-    if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
+    
+    if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"food"]&&!self.isEditPage){
         self.isnotFirstTime=YES;
-        [self.textFieldEventTitle becomeFirstResponder];
+        [self performSegueWithIdentifier:@"ChooseLocationInMAP" sender:self];
     }
     else if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"movie"]&&!self.isEditPage){
         self.isnotFirstTime=YES;
         [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
     }
-    
+    else if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
+        self.isnotFirstTime=YES;
+        [self.textFieldEventTitle becomeFirstResponder];
+    }
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     
@@ -1203,7 +1207,6 @@
     [self.labelEventTitleHolder setHidden:YES];
     [self dismissModalViewControllerAnimated:YES];
     [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
-
 }
 
 ////////////////////////////////////////////////
@@ -1401,6 +1404,15 @@
         self.createEvent_address=[NSString stringWithFormat:@"%@",annotation.subtitle];
         self.detail_address=self.createEvent_address;
         NSLog(@"%@",self.createEvent_address);
+    }
+    
+    if ([self.eventType isEqualToString:@"food"]) {
+        [self.textFieldEventTitle setText:locationName];
+        [self.labelEventTitleHolder setHidden:YES];
+        [self.textFieldEventTitle becomeFirstResponder];
+//        if (!self.self.isCreateEvent_imageUsable) {
+//            [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+//        }
     }
 }
 
