@@ -513,6 +513,7 @@
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
         [request setPostValue:user_ids forKey:@"user_ids"];
+#warning need to add addressbook_alreadySelectedContacts to the server
         [request setRequestMethod:@"POST"];
         [request startSynchronous];
         
