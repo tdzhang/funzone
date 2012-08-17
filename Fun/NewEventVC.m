@@ -500,6 +500,7 @@
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/invite?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,event_id,shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
     NSLog(@"request:%@",url);
     
+    //organize registered users
     NSString *user_ids=@"";
     for (NSString* key in [self.invitedFriend allKeys]) {
         InviteFriendObject* person =[self.invitedFriend objectForKey:key];
@@ -509,11 +510,24 @@
             user_ids=[user_ids stringByAppendingFormat:@",%@",person.user_id];
         }
     }
+    
+    //organize addressbook users
+    NSString *emails=@"";
+    for (NSString* key in [self.invitedAddressBookFriend allKeys]) {
+        UserContactObject* person=[self.invitedAddressBookFriend objectForKey:key];
+        NSString* name=[key stringByReplacingOccurrencesOfString:@"," withString:@""];
+        if ([emails isEqualToString:@""]) {
+            emails=[emails stringByAppendingFormat:@"%@ <%@>",name,[person.email objectAtIndex:0]];
+        } else {
+            emails=[emails stringByAppendingFormat:@", %@ <%@>",name,[person.email objectAtIndex:0]];
+        }
+    }
+    NSLog(@"%@",emails);
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
         [request setPostValue:user_ids forKey:@"user_ids"];
-#warning need to add addressbook_alreadySelectedContacts to the server
+        [request setPostValue:emails forKey:@"emails"];
         [request setRequestMethod:@"POST"];
         [request startSynchronous];
         
