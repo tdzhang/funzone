@@ -28,6 +28,7 @@
 @synthesize event_category=_event_category;
 @synthesize categoryLabel=_categoryLabel;
 @synthesize numDoItMyself=_numDoItMyself;
+@synthesize numDoItMyselfSection=_numDoItMyselfSection;
 
 
 //reset the fram of a element's block view
@@ -202,13 +203,41 @@
     }
     
     //people want to do this section
-    blockElement.numDoItMyself = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_DIM_X, EXPLORE_BLOCK_ELEMENT_DIM_Y, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    blockElement.numDoItMyselfSection = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_DIM_X, EXPLORE_BLOCK_ELEMENT_DIM_Y, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    blockElement.numDoItMyselfSection.backgroundColor = [UIColor clearColor];
+    [blockElement.blockView addSubview:blockElement.numDoItMyselfSection];
+    
+    UIView *numDoItMyselfBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    numDoItMyselfBackground.backgroundColor = [UIColor blackColor];
+    numDoItMyselfBackground.layer.cornerRadius = 4;
+    [numDoItMyselfBackground setAlpha:0.6];
+    [blockElement.numDoItMyselfSection addSubview:numDoItMyselfBackground];
+    
+    blockElement.numDoItMyself = [[UILabel alloc] initWithFrame:CGRectMake(5, 4, 15, 20)];
     blockElement.numDoItMyself.text = DIM_label;
-    [blockElement.numDoItMyself setFont:[UIFont boldSystemFontOfSize:14]];
-    [blockElement.numDoItMyself setTextColor:[UIColor colorWithRed:100/255.0 green:83/255.0 blue:0 alpha:1]];
+    [blockElement.numDoItMyself setBackgroundColor:[UIColor clearColor]];
+    [blockElement.numDoItMyself setFont:[UIFont boldSystemFontOfSize:20]];
+    [blockElement.numDoItMyself setTextColor:[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1]];
     blockElement.numDoItMyself.shadowColor=[UIColor blackColor];
     [blockElement.numDoItMyself setShadowOffset:CGSizeMake(0, 1)];
-    [blockElement.blockView addSubview:blockElement.numDoItMyself];
+    [blockElement.numDoItMyself setAlpha:1];
+    [blockElement.numDoItMyselfSection addSubview:blockElement.numDoItMyself];
+    
+    UILabel *numDIMLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 45, 15)];
+    numDIMLabel1.text = @"people";
+    [numDIMLabel1 setTextColor:[UIColor whiteColor]];
+    [numDIMLabel1 setFont:[UIFont systemFontOfSize:10]];
+    [numDIMLabel1 setBackgroundColor:[UIColor clearColor]];
+    [numDIMLabel1 setAlpha:1];
+    [blockElement.numDoItMyselfSection addSubview:numDIMLabel1];
+    
+    UILabel *numDIMLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 65, 15)];
+    numDIMLabel2.text = @"want to do it";
+    [numDIMLabel2 setTextColor:[UIColor whiteColor]];
+    [numDIMLabel2 setFont:[UIFont systemFontOfSize:8]];
+    [numDIMLabel2 setBackgroundColor:[UIColor clearColor]];
+    [numDIMLabel2 setAlpha:1];
+    [blockElement.numDoItMyselfSection addSubview:numDIMLabel2];
     
     //set the event_id and shared_event_id
     blockElement.event_id=event_id;
