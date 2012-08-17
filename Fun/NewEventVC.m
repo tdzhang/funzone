@@ -380,20 +380,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     
-    //set different flow for different event type
     
-    if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"food"]&&!self.isEditPage){
-        self.isnotFirstTime=YES;
-        [self performSegueWithIdentifier:@"ChooseLocationInMAP" sender:self];
-    }
-    else if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"movie"]&&!self.isEditPage){
-        self.isnotFirstTime=YES;
-        [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
-    }
-    else if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
-        self.isnotFirstTime=YES;
-        [self.textFieldEventTitle becomeFirstResponder];
-    }
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     
@@ -424,6 +411,25 @@
     }
     
 
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //set different flow for different event type
+    
+    if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"food"]&&!self.isEditPage){
+        self.isnotFirstTime=YES;
+        [self performSegueWithIdentifier:@"ChooseLocationInMAP" sender:self];
+    }
+    else if (!self.isnotFirstTime&&[self.eventType isEqualToString:@"movie"]&&!self.isEditPage){
+        self.isnotFirstTime=YES;
+        [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
+    }
+    else if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
+        self.isnotFirstTime=YES;
+        [self.textFieldEventTitle becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

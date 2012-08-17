@@ -214,6 +214,9 @@
             
         }
     }
+    else if([self.preDefinedEventType isEqualToString:@"food"]){
+        [self.tableViewControllerContainMap SearchTheKeyWords:@"restaurant" AtUserLocation: appDelegate.myLocationManager.location];
+    }
      
     
     //if the predefined annotation, then show it (instead of current location)
