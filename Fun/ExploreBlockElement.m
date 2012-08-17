@@ -232,7 +232,7 @@
     [blockElement.numDoItMyselfSection addSubview:numDIMLabel1];
     
     UILabel *numDIMLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 65, 15)];
-    numDIMLabel2.text = @"want to do it";
+    numDIMLabel2.text = @"want to try it";
     [numDIMLabel2 setTextColor:[UIColor whiteColor]];
     [numDIMLabel2 setFont:[UIFont systemFontOfSize:8]];
     [numDIMLabel2 setBackgroundColor:[UIColor clearColor]];
