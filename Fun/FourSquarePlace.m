@@ -22,6 +22,7 @@
 @synthesize country=_country;
 @synthesize categories_shortName=_categories_shortName;
 @synthesize selfDefineName=_selfDefineName;
+@synthesize google_reference=_google_reference;
 
 //use google api
 +(FourSquarePlace *)initializeWithSelfDefine:(NSString *)venueName{
@@ -48,7 +49,7 @@
     //name
     NSString *name=[venue objectForKey:@"name"];
     place.name=name;
-    
+    place.google_reference=[venue objectForKey:@"reference"];
     //location information
     NSDictionary *location = [[venue objectForKey:@"geometry"] objectForKey:@"location"];
     NSNumber *latitude = [location objectForKey:@"lat"];
@@ -86,7 +87,7 @@
     //name
     NSString *name=[venue objectForKey:@"name"];
     place.name=name;
-    
+    place.google_reference=[venue objectForKey:@"reference"];
     //location information
     NSDictionary *location = [[venue objectForKey:@"geometry"] objectForKey:@"location"];
     NSNumber *latitude = [location objectForKey:@"lat"];

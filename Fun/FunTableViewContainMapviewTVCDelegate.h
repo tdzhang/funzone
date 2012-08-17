@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FourSquarePlace.h"
 
 @protocol FunTableViewContainMapviewTVCDelegate <NSObject>
 
--(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region;
+-(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region WithPlace:(FourSquarePlace*)place;
 
 @end

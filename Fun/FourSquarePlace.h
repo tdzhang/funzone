@@ -23,6 +23,7 @@
 @property(nonatomic,strong) NSString *state;
 @property(nonatomic,strong) NSString *country;
 @property(nonatomic,strong) NSString *categories_shortName;
+@property(nonatomic,strong) NSStream *google_reference;
 +(FourSquarePlace *)initializeWithSelfDefine:(NSString *)venueName;
 +(FourSquarePlace *)initializeWithGoogleNSDictionary:(NSDictionary *)venue withOrigin:(CLLocationCoordinate2D)userCoordinate;
 +(FourSquarePlace *)initializeWithNSDictionary:(NSDictionary *)venue;

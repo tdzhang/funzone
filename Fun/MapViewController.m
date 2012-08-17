@@ -15,6 +15,7 @@
 @property (nonatomic,strong)NSArray *foursquareSearchResults;
 @property(nonatomic,retain) NSMutableData *data;  //using to restore the http connection data
 @property (nonatomic, strong)MKPointAnnotation* annotation;
+@property (nonatomic,weak)FourSquarePlace* current_place;
 
 @property (nonatomic,strong)MKPointAnnotation* feedBackAnnotation; //used to give back the location information of the user choosed location
 
@@ -38,6 +39,7 @@
 @synthesize tableViewControllerContainMap=_tableViewControllerContainMap;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
 @synthesize preDefinedEventType=_preDefinedEventType;
+@synthesize current_place=_current_place;
 
 @synthesize feedBackAnnotation=_feedBackAnnotation;
 
@@ -498,8 +500,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
     //if the notificaiton is from the user select search results
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]){
         FourSquarePlace *place=[self.foursquareSearchResults objectAtIndex:indexPath.row];
+        self.current_place=place;
         if (place.latitude&&place.longitude) {
-            //if is from google api
+            //if it is from google api
             NSString *venue_title=(place.name)?[place.name copy ]:@"No name";
             if (place.categories_shortName) {
                 venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
@@ -521,17 +524,16 @@ shouldReloadTableForSearchString:(NSString *)searchString
             if (place.crossStreet) {
                 annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
             }
+            
             [self setAnnotation:annotationPoint];
             [self.myMapView addAnnotation:annotationPoint];
             [self.myMapView setRegion:region animated:NO];
             [self.searchDisplayController setActive:NO animated:YES];
+            //set the feedback annotation location information
+            [self setFeedBackAnnotation:annotationPoint];
             
             //set the Search Bar and give up the Firstresponsder
             [self.mySearchBar setText:venue_title];
-            
-            
-            //set the feedback annotation location information
-            [self setFeedBackAnnotation:annotationPoint];
         } else {
             //if there is no lat and long information
             //add annotation
@@ -624,17 +626,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 #pragma mark - implemetn the FunTableViewContainMapviewTVCDelegate protocal
--(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region{
-
-    
-    
+-(void)selectWithAnnotation:(MKPointAnnotation*)annotation DrawMapInTheRegion:(MKCoordinateRegion)region WithPlace:(FourSquarePlace *)place{
     //add annotation
 
     [self setAnnotation:annotation];
     [self.myMapView addAnnotation:annotation];
     [self.myMapView setRegion:region animated:NO];
 
-    
+    self.current_place=place;
     //set the Search Bar and give up the Firstresponsder
     //[self.mySearchBar setText:annotation.title];
     
@@ -664,6 +663,53 @@ shouldReloadTableForSearchString:(NSString *)searchString
 //create the annnotation view(In mapView)
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    UIImage *image=nil;
+    //using google api to do the search
+    NSString* oauthToken;
+    switch (arc4random() % 2) {
+           case 0:oauthToken=GOOGLE_API_TOKEN1;break;
+           case 1:oauthToken=GOOGLE_API_TOKEN2;break;
+           default:oauthToken=GOOGLE_API_TOKEN1;break;
+    }
+    NSLog(@"%@",self.current_place.google_reference);
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@",self.current_place.google_reference,oauthToken]];
+    ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+    [request setRequestMethod:@"GET"];
+    [request startSynchronous];
+    int code=[request responseStatusCode];
+    NSLog(@"code:%d",code);
+
+    if (code==200) {
+        NSLog(@"%@",request.responseString);
+        NSError *error;
+        NSDictionary *json_whole = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+        //success
+        NSDictionary *json=[json_whole objectForKey:@"result"];
+        NSString *icon_url=[json objectForKey:@"icon"];
+        NSLog(@"%@",icon_url);
+        //NSString *rating=[NSString stringWithFormat:@"%@",[json objectForKey:@"rating"]];
+        //NSString *website=[json objectForKey:@"website"];
+        
+        NSData * imageData = nil;
+        imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:icon_url]];
+        
+        if ( imageData == nil ){
+            //if the image data is nil, the image url is not reachable. using a default image to replace that
+            //NSLog(@"downloaded %@ error, using a default image",url);
+            image=[UIImage imageNamed:@"smile_64.png"];
+        }
+        else {
+            image=[UIImage imageWithData:imageData];
+        }
+    }
+    else{
+        //connect error
+        
+    }
+            
+    
+    
+    
     MKAnnotationView *aView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapVC"];
     if(!aView){
         aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
@@ -672,8 +718,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
         //aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     }
     aView.annotation=annotation;
+    aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    aView.leftCalloutAccessoryView.layer.cornerRadius=5;
+    [aView.leftCalloutAccessoryView setBackgroundColor:[UIColor colorWithWhite:0.8 alpha:0.7]];
+    if (image) {
+        [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+    }
     
-    //add button on the right of the annotation detail
+//    add button on the right of the annotation detail
 //    UIButton *rightButton=[UIButton buttonWithType:UIButtonTypeContactAdd];
 //    [rightButton setTitle:@"Choose" forState:UIControlStateNormal];
 //    aView.rightCalloutAccessoryView = rightButton;    

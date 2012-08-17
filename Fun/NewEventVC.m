@@ -152,7 +152,7 @@
 -(NSArray *)filterDict{
     if (!_filterDict) {
         //if it is empty, initialize it
-        _filterDict=[NSArray arrayWithObjects:@"I ",@"i ",@"I'm",@" am ",@" going ",@" wanna ",@" want ",@" wants ",@" to ",@" feel ",@" feels ",@" like ",@" would ",@" a ",@" an ",@" grab ",@" some ",@" play ",@" get ",@" do ",@" attend ",@" listen ",@" watch ",@" visit ",@" ride ",@" drive ",@"\n",@"?",@",",@"!",@".",nil];
+        _filterDict=[NSArray arrayWithObjects:@"I ",@"i ",@"I'm",@" am ",@" going ",@" wanna ",@" want ",@" wants ",@" to ",@" feel ",@" feels ",@" like ",@" would ",@" a ",@" an ",@" grab ",@"Grab ",@" eat ",@"Eat ",@" some ",@" play ",@" get ",@" do ",@" attend ",@" listen ",@" watch ",@" visit ",@" ride ",@" drive ",@"\n",@"?",@",",@"!",@".",nil];
     }
     return _filterDict;
 }
@@ -389,8 +389,6 @@
         self.isnotFirstTime=YES;
         [self performSegueWithIdentifier:@"moviewAutoCompletion" sender:self];
     }
-
-    
     
     self.done_Button.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];

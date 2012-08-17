@@ -219,7 +219,7 @@
     if (place.crossStreet) {
         annotationPoint.subtitle = [NSString stringWithFormat:@"%@ (%@ m)",place.crossStreet,place.distance];
     }
-    [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region];
+    [self.delegate selectWithAnnotation:annotationPoint DrawMapInTheRegion:region WithPlace:place];
      
 }
 
