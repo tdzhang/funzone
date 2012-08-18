@@ -65,7 +65,8 @@
 @property (nonatomic,strong) NSString *creator_name;
 @property (nonatomic,strong) NSString *event_address;
 @property (nonatomic,strong) NSString *tap_user_id;
-@property (nonatomic) NSInteger *view_height;
+@property (nonatomic) int view_height;
+@property (nonatomic,strong) NSString *DEFAULT_IMAGE_REPLACEMENT;
 
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
@@ -215,7 +216,6 @@
     
     self.shareButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
     
-    //initiate views
     self.eventImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DVC_EVENT_IMG_WIDTH, DVC_EVENT_IMG_HEIGHT)];
     [self.eventImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.eventImageView setClipsToBounds:YES];
@@ -256,6 +256,8 @@
         
     self.descriptionSectionView = [[UIView alloc] init];
     [self.myScrollView addSubview:self.descriptionSectionView];
+    
+    self.view_height = 0;
 }
 
 - (void)viewDidUnload
@@ -1134,9 +1136,97 @@
     }
 }
 
+- (void)handleEventImg: (NSDictionary *)event {
+    self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
+    if (![Cache isURLCached:self.event_img_url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: self.event_img_url];
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                UIImage *image=[UIImage imageNamed:@"default.jpg"];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.event_img_url withData:imageData];
+                        [self.eventImageView setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directly put it in the cache, and then reload the table view data.
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.event_img_url withData:imageData];
+                        [self.eventImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.event_img_url]]];
+        });
+    }
+    self.view_height += self.eventImageView.frame.size.height;
+}
 
+- (void)handleEventCreator: (NSDictionary *)event {
+    self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
+    self.creator_name=[event objectForKey:@"creator_name"];
+    if (![Cache isURLCached:self.creator_img_url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: self.creator_img_url];
+            
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",profile_url);
+                UIImage *image=[UIImage imageNamed:self.DEFAULT_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.creator_img_url withData:imageData];
+                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+                        
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",profile_url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:self.creator_img_url withData:imageData];
+                        [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+                        
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.creatorProfileView setImage:[UIImage imageWithData:[Cache getCachedData:self.creator_img_url]]];
+        });
+    }
+    
+    [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
+    [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:0/255.0 blue:80/255.0 alpha:1]];
+    CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
+    CGRect contributor_frame = self.creatorNameLabel.frame;
+    contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
+    self.creatorNameLabel.frame = contributor_frame;
+    self.creatorProfileButton.frame = CGRectMake(self.creatorProfileView.frame.origin.x, self.creatorProfileView.frame.origin.y, self.creatorProfileView.frame.size.width+self.creatorNameLabel.frame.size.width + 10,self.creatorProfileView.frame.size.height);
+}
 
-#pragma mark - implement NSURLconnection delegate methods 
+#pragma mark - implement NSURLconnection delegate methods
 //to deal with the returned data
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -1155,13 +1245,12 @@
     //NSLog(@"%@",error);
 }
 
-
 //when the connection get the returned data (json form)
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     //fetch event info
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-    NSLog(@"%@",event);
+    self.view_height = 0;
     
     if (self.isEventOwner) {
         //find the invited friend
@@ -1184,14 +1273,10 @@
 //        self.shouldGoBack=NO;
         
         self.event_title=[event objectForKey:@"title"];
-        self.event_img_url=[NSURL URLWithString:[event objectForKey:@"photo_url"] !=[NSNull null]?[event objectForKey:@"photo_url"]:@"no url"];
         self.event_time=[event objectForKey:@"start_time"] !=[NSNull null]?[event objectForKey:@"start_time"]:@"Anytime";
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
         self.event_address=[event objectForKey:@"address"];
-        self.creator_img_url=[NSURL URLWithString:[event objectForKey:@"creator_pic"]];
-        NSLog(@"%@",self.creator_img_url);
-        self.creator_name=[event objectForKey:@"creator_name"];
         self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
         self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
         self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
@@ -1231,121 +1316,39 @@
         [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
         [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
         
-        //handle the interest people part
-        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
-        
         //handle the liked people part
         self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
         self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
         
-        NSString *DEFAULT_IMAGE_REPLACEMENT=nil;
         if ([event_category isEqualToString:FOOD]) {
-            DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
         }
         else if([event_category isEqualToString:MOVIE]){
-            DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=MOVIE_REPLACEMENT;
         }
         else if([event_category isEqualToString:SPORTS]){
-            DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=SPORTS_REPLACEMENT;
         }
         else if([event_category isEqualToString:NIGHTLIFE]){
-            DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=NIGHTLIFE_REPLACEMENT;
         }
         else if([event_category isEqualToString:OUTDOOR]){
-            DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=OUTDOOR_REPLACEMENT;
         }
         else if([event_category isEqualToString:ENTERTAIN]){
-            DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=ENTERTAIN_REPLACEMENT;
         }
         else if([event_category isEqualToString:SHOPPING]){
-            DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
+            self.DEFAULT_IMAGE_REPLACEMENT=SHOPPING_REPLACEMENT;
         }
         else if([event_category isEqualToString:OTHERS]){
-            DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
-        }
-        //set event image
-        if (![Cache isURLCached:self.event_img_url]) {
-            //using high priority queue to fetch the image
-            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                //get the image data
-                NSData * imageData = nil;
-                imageData = [[NSData alloc] initWithContentsOfURL: self.event_img_url];
-                if ( imageData == nil ){
-                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                    UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                    imageData=UIImagePNGRepresentation(image);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:self.event_img_url withData:imageData];
-                            [self.eventImageView setImage:image];
-                        });
-                    }
-                }
-                else {
-                    //else, the image date getting finished, directly put it in the cache, and then reload the table view data.
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:self.event_img_url withData:imageData];
-                            [self.eventImageView setImage:[UIImage imageWithData:imageData]];
-                        });
-                    }
-                }
-            });
-        }
-        else {
-            dispatch_async( dispatch_get_main_queue(),^{
-                [self.eventImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.event_img_url]]];
-            });
+            self.DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
         }
         
-        NSLog(@"%@",self.creator_img_url);
+        [self handleEventImg:event];
         //set creator's profile image and name. Link back to his/her profile page.
-        if (![Cache isURLCached:self.creator_img_url]) {
-            //using high priority queue to fetch the image
-            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                //get the image data
-                NSData * imageData = nil;
-                imageData = [[NSData alloc] initWithContentsOfURL: self.creator_img_url];
-                
-                if ( imageData == nil ){
-                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                    //NSLog(@"downloaded %@ error, using a default image",profile_url);
-                    UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_REPLACEMENT];
-                    imageData=UIImagePNGRepresentation(image);
-                    
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:self.creator_img_url withData:imageData];
-                            [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
+        
 
-                        });
-                    }
-                }
-                else {
-                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                    //NSLog(@"downloaded %@",profile_url);
-                    if(imageData){
-                        dispatch_async( dispatch_get_main_queue(),^{
-                            [Cache addDataToCache:self.creator_img_url withData:imageData];
-                            [self.creatorProfileView setImage:[UIImage imageWithData:imageData]];
- 
-                        });
-                    }
-                }
-            });
-        }
-        else {
-            dispatch_async( dispatch_get_main_queue(),^{
-                [self.creatorProfileView setImage:[UIImage imageWithData:[Cache getCachedData:self.creator_img_url]]];
-            });
-        }
-        [self.creatorNameLabel setText:[NSString stringWithFormat:@"%@",self.creator_name]];
-        [self.creatorNameLabel setTextColor:[UIColor colorWithRed:0 green:0/255.0 blue:80/255.0 alpha:1]];
-        CGSize contributorNameLabel_expectedWidth = [self.creator_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:150 lineBreakMode:UILineBreakModeClip];
-        CGRect contributor_frame = self.creatorNameLabel.frame;
-        contributor_frame.size.width = contributorNameLabel_expectedWidth.width;
-        self.creatorNameLabel.frame = contributor_frame;
-        self.creatorProfileButton.frame = CGRectMake(self.creatorProfileView.frame.origin.x, self.creatorProfileView.frame.origin.y, self.creatorProfileView.frame.size.width+self.creatorNameLabel.frame.size.width + 10,self.creatorProfileView.frame.size.height);
         
         //set event title
         [self.eventTitleLabel setText:self.event_title];
@@ -1438,12 +1441,9 @@
         }
         
 #warning fetch original creator info
+        //handle the interest people part
+        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
         [self handleInvitedPeoplePart];
-        if (!self.isEventOwner) {
-            CGRect temp = self.invitedPeopleSectionView.frame;
-            temp.size.height=0;
-            self.invitedPeopleSectionView.frame = temp;
-        }
         [self handleLikedPeoplePart];
         [self handleTheInterestedPeoplePart];
         //handle the comment part
