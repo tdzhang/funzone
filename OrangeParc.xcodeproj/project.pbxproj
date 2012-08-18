@@ -85,6 +85,8 @@
 		0F9A532515BE84E5008E6F3B /* facebook_signin_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */; };
 		0F9A532715BE84F6008E6F3B /* create_account_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532615BE84F6008E6F3B /* create_account_button.png */; };
 		0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532815BE8527008E6F3B /* cancel_button.png */; };
+		0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F9E061615DF6101003A9322 /* DiscussionViewController.h */; };
+		0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E061715DF6101003A9322 /* DiscussionViewController.m */; };
 		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
 		0FB5AC0D15D1A88500FE8608 /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FB5ABF915D1A88500FE8608 /* ASIHTTPRequestConfig.h */; };
 		0FB5AC0E15D1A88500FE8608 /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FB5ABFA15D1A88500FE8608 /* ASICacheDelegate.h */; };
@@ -410,6 +412,8 @@
 		0F9A532415BE84E5008E6F3B /* facebook_signin_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_signin_button.png; sourceTree = "<group>"; };
 		0F9A532615BE84F6008E6F3B /* create_account_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_account_button.png; sourceTree = "<group>"; };
 		0F9A532815BE8527008E6F3B /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		0F9E061615DF6101003A9322 /* DiscussionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussionViewController.h; sourceTree = "<group>"; };
+		0F9E061715DF6101003A9322 /* DiscussionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussionViewController.m; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
 		0FB5ABF915D1A88500FE8608 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
@@ -922,6 +926,15 @@
 			name = "custom view";
 			sourceTree = "<group>";
 		};
+		0F9E061015DF6070003A9322 /* discussion */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E061615DF6101003A9322 /* DiscussionViewController.h */,
+				0F9E061715DF6101003A9322 /* DiscussionViewController.m */,
+			);
+			name = discussion;
+			sourceTree = "<group>";
+		};
 		0FB35F5815C6EF24008F872D /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -1176,6 +1189,7 @@
 			isa = PBXGroup;
 			children = (
 				0F91EE4815B9CA5400E7B1D3 /* Add and View all Comment */,
+				0F9E061015DF6070003A9322 /* discussion */,
 				463B9BF215A0F90B0087CDBA /* Detail Page */,
 				0F07F26E15ADEEB200BF41CF /* ExploreBlockElement.h */,
 				0F07F26F15ADEEB200BF41CF /* ExploreBlockElement.m */,
@@ -1453,6 +1467,7 @@
 				0F16F99B15D983DB002B719E /* movieInfoReturnProtocal.h in Headers */,
 				0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */,
 				927BB92C15DB6FA6007B1E48 /* FeedBlockElement.h in Headers */,
+				0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,6 +1778,7 @@
 				0FB5AC2415D1A93B00FE8608 /* Reachability.m in Sources */,
 				0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */,
 				927BB92D15DB6FA6007B1E48 /* FeedBlockElement.m in Sources */,
+				0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

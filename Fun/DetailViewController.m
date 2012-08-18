@@ -1128,6 +1128,10 @@
             PVVC.via=VIA_EXPLORE_DETAIL;
         }
     }
+    else if([segue.identifier isEqualToString:@"startDiscussion"]){
+        DiscussionViewController* DVC=(DiscussionViewController*)segue.destinationViewController;
+        [DVC preSetTheEventID:self.event_id andSetTheSharedEventID:self.shared_event_id withEventTitle:self.event_title withEventTime:self.event_time withLocationName:self.location_name withInvitees:[self.invitee copy] andSetIsOwner:self.isEventOwner];
+    }
 }
 
 

@@ -13,6 +13,7 @@
 @property (nonatomic,strong) NSString *user_name;
 @property (nonatomic,strong) NSString *user_pic;
 @property (nonatomic,strong) NSString *facebook_id;
+@property (nonatomic,strong) NSString *email;
 @property (nonatomic) BOOL followed;
 
 +(NSArray*)generateProfileInfoElementArrayFromJson:(NSArray*)json;

@@ -14,6 +14,8 @@
 @synthesize user_pic=_user_pic;
 @synthesize facebook_id=_facebook_id;
 @synthesize followed=_followed;
+@synthesize email=_email;
+
 
 +(NSArray*)generateProfileInfoElementArrayFromJson:(NSArray*)json{
     NSMutableArray *profileArray=[NSMutableArray array];
@@ -23,6 +25,10 @@
         element.user_name=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_name"]];
         element.user_pic=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_pic"]];
         element.facebook_id=[NSString stringWithFormat:@"%@",[user objectForKey:@"facebook_id"]];
+        if ([user objectForKey:@"email"]) {
+            element.email=[NSString stringWithFormat:@"%@",[user objectForKey:@"email"]];
+        }
+     
         if ([[NSString stringWithFormat:@"%@",[user objectForKey:@"followed"]] isEqualToString:@"0"] ) {
             //not followed
             element.followed=NO;

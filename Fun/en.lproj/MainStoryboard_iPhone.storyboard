@@ -1498,6 +1498,21 @@ Find us @OrangeParc.com</string>
                     </view>
                     <navigationItem key="navigationItem" id="62l-aV-1OU">
                         <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5uM-a6-hnk">
+                            <rect key="frame" x="124" y="4" width="72" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="test">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <segue destination="7ka-bV-aVx" kind="push" identifier="startDiscussion" id="93i-c6-yRP"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="GYg-j6-ubE">
                             <color key="tintColor" red="0.95922673357664223" green="0.63805885036496346" blue="0.32419023722627738" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -1522,11 +1537,10 @@ Find us @OrangeParc.com</string>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="oxR-j5-unP"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewJoinedPeopleProfile" id="27v-Ws-SEN"/>
                         <segue destination="kIy-qt-1wP" kind="push" identifier="ViewLocation" id="zgC-wk-CV0"/>
-                        <segue destination="7ka-bV-aVx" kind="push" identifier="startDIscussion" id="Dxm-Ha-gdA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2190" y="2103"/>
+            <point key="canvasLocation" x="2182" y="2101"/>
         </scene>
         <!--Add CommentVC - Comments-->
         <scene sceneID="FuY-v2-pwr">
@@ -2953,11 +2967,11 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="3525" y="4033"/>
         </scene>
-        <!--View Controller-->
+        <!--Discussion View Controller-->
         <scene sceneID="jCP-Kh-Bl1">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6r2-kJ-M0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="7ka-bV-aVx" sceneMemberID="viewController">
+                <viewController id="7ka-bV-aVx" customClass="DiscussionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LmK-Pk-Wst">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2970,6 +2984,9 @@ Find us @OrangeParc.com</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="c8h-HQ-fQC"/>
+                    <connections>
+                        <outlet property="mainScrollView" destination="qKs-cR-P3L" id="4gQ-Ax-RCO"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2533" y="2700"/>
@@ -3069,6 +3086,7 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="joinButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
                 <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
                 <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
@@ -3077,6 +3095,12 @@ Find us @OrangeParc.com</string>
                 <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="DiscussionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="ExploreViewController" superclassName="UIViewController">
@@ -3106,6 +3130,9 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelLoginNew:"/>
+                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
+                <relationship kind="action" name="normalLoginButtonClickedNew:"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
