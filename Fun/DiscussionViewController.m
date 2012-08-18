@@ -61,6 +61,11 @@
 
 
 #pragma mark - View Life Circle
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self handleInvitedPeoplePart];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -113,33 +118,45 @@
 //    self.garbageCollection=[NSMutableArray array];
     
     int height=0;
-
-    
     if ([self.invitee count]>0) {
         height=50*[self.invitee count]/4;
-        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, 50, 300, height)];
+        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, 300, height)];
         [self.mainScrollView addSubview:self.invitedPeopleSectionView];
-        //add gesture(tap)
+        
+        //---------->>add gesture(tap)
         self.invitedPeopleSectionView.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
+        
+        //---------->>set background color
         [self.invitedPeopleSectionView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 30)];
+        
+        //---------->>set number color
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 40)];
         if ([self.invitee count] == 1) {
             [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
             [numOfInvites setText:[NSString stringWithFormat:@"%d friends invited",[self.invitee count]]];
         }
-        [numOfInvites setFont:[UIFont boldSystemFontOfSize:14]];
+        [numOfInvites setFont:[UIFont boldSystemFontOfSize:19]];
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [numOfInvites setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         //[self.garbageCollection addObject:numOfInterests];
         
+        //---------->>set invited people image
         int x_position_photo=5;
+        int y_position_photo=42;
+#define DISCUSSION_INVITE_IMAGE_SIZE 55
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, y_position_photo, DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE)];
+            UILabel* userName=[[UILabel alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo+DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE+25, 20)];
+            [userName setFont:[UIFont boldSystemFontOfSize:10]];
+            [userName setTextColor:[UIColor darkGrayColor]];
+            [userName setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
+            [userName setText:element.user_name];
+            [self.invitedPeopleSectionView addSubview:userName];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
                 //using high priority queue to fetch the image
@@ -177,7 +194,7 @@
                 });
             }
             [self.invitedPeopleSectionView addSubview:userImageView];
-            x_position_photo+=38;
+            x_position_photo+=DISCUSSION_INVITE_IMAGE_SIZE+25;
         }
     }
 }
