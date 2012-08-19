@@ -11,6 +11,7 @@
 @interface DiscussionViewController ()
 //outlet
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
+@property (weak, nonatomic) IBOutlet UITextView *addCommentTextView;
 
 //the information of the event and the invited people
 @property (nonatomic,strong) NSString *event_id;
@@ -19,6 +20,7 @@
 @property (nonatomic,strong) NSString *event_time;
 @property (nonatomic,strong) NSString *location_name;
 @property (nonatomic,strong) NSMutableArray *invitee;
+@property (nonatomic,strong) NSArray *comments;
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
@@ -31,6 +33,7 @@
 
 @implementation DiscussionViewController
 @synthesize mainScrollView = _mainScrollView;
+@synthesize addCommentTextView = _addCommentTextView;
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize event_title=_event_title;
@@ -38,6 +41,7 @@
 @synthesize location_name=_location_name;
 @synthesize invitee=_invitee;
 @synthesize isEventOwner=_isEventOwner;
+@synthesize comments=_comments;
 
 @synthesize garbageCollection=_garbageCollection;
 
@@ -63,7 +67,7 @@
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self handleInvitedPeoplePart];
+    [self startFetchingInviteAndCommentData];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,6 +88,7 @@
 - (void)viewDidUnload
 {
     [self setMainScrollView:nil];
+    [self setAddCommentTextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -107,7 +112,7 @@
 
 #pragma mark - handle Invited People Part
 //handle invited people section
--(void)handleInvitedPeoplePart{
+-(void)startFetchingInviteAndCommentData{
 //    //clean the garbage view
 //    if (self.garbageCollection) {
 //        for (UIView* view in self.garbageCollection) {
@@ -116,15 +121,18 @@
 //        [self.garbageCollection removeAllObjects];
 //    }
 //    self.garbageCollection=[NSMutableArray array];
-    
+#define DISCUSSION_INVITE_IMAGE_SIZE 55
+#define DISCUSSION_INVITE_BLOCK_HEIGHT 80
+    //-------------------------->invited people part<---------------------------------//
     int height=0;
     if ([self.invitee count]>0) {
-        height=50*[self.invitee count]/4;
+        height=DISCUSSION_INVITE_BLOCK_HEIGHT*[self.invitee count]/4;
         self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, 300, height)];
         [self.mainScrollView addSubview:self.invitedPeopleSectionView];
         
         //---------->>add gesture(tap)
         self.invitedPeopleSectionView.userInteractionEnabled=YES;
+#warning need process the touch event of the discussion invited people
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
         
@@ -147,7 +155,7 @@
         //---------->>set invited people image
         int x_position_photo=5;
         int y_position_photo=42;
-#define DISCUSSION_INVITE_IMAGE_SIZE 55
+
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, y_position_photo, DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE)];
             UILabel* userName=[[UILabel alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo+DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE+25, 20)];
@@ -194,9 +202,246 @@
                 });
             }
             [self.invitedPeopleSectionView addSubview:userImageView];
+           
             x_position_photo+=DISCUSSION_INVITE_IMAGE_SIZE+25;
+            if ((i+1)%4==0) {
+                y_position_photo+=DISCUSSION_INVITE_BLOCK_HEIGHT;
+                x_position_photo=5;
+            }
         }
+    }
+    
+    //-------------------------->comment part<----------------------------------------//
+    int comment_y_start=height+55; // the conment start coordinate
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/view?shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+        NSLog(@"request: %@",url);
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        NSLog(@"code:%@",request.responseString);
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                
+                //success
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSDictionary *jsonDic=[NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if ([[jsonDic objectForKey:@"response"] isEqualToString:@"error"]) {
+                    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error Happend" message:[jsonDic  objectForKey:@"message"] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    errorAlert.delegate=self;
+                    [errorAlert show];
+
+                } else {
+                    self.comments=[DiscussionComment getDiscussionCommentArrayFromArray:json];
+                    
+                    //comment header view
+                    UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, comment_y_start, 300, 30)];
+                    [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+                    [self.mainScrollView addSubview:comments_header_view];
+                    
+                    
+                    //comment header label
+                    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
+                    NSString *comment_header;
+                    if ([self.comments count] == 0 || [self.comments count] == 1) {
+                        comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
+                    }else {
+                        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
+                    }
+                    [comment_header_label setText:comment_header];
+                    [comment_header_label setBackgroundColor:[UIColor clearColor]];
+                    [comment_header_label setFont:[UIFont boldSystemFontOfSize:14]];
+                    [comment_header_label setTextColor:[UIColor darkGrayColor]];
+                    [comment_header_label setShadowColor:[UIColor whiteColor]];
+                    [comment_header_label setShadowOffset: CGSizeMake(0, 1)];
+                    [comments_header_view addSubview:comment_header_label];
+                    
+                    int height = 32 + comment_y_start;
+                    
+                    //add every single comment entry
+                    for (int i = 0; i<[self.comments count]; i++) {
+                        //if(i==5)break; //in this page, only present a few comments
+                        DiscussionComment* comment=[self.comments objectAtIndex:i];
+                        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 0)];
+                        [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+                        
+                        //comment user name label
+                        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 0)];
+                        NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
+                        [comment_user_name_label setText:comment_user_name];
+                        [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
+                        [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
+                        comment_user_name_label.lineBreakMode = UILineBreakModeWordWrap;
+                        comment_user_name_label.numberOfLines = 0;
+                        
+                        CGSize maximumLabelSize1 = CGSizeMake(100,9999);
+                        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+                        CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+                        
+                        CGRect newFrame1 = comment_user_name_label.frame;
+                        newFrame1.size.height = expectedLabelSize1.height;
+                        newFrame1.size.width = expectedWidth.width;
+                        comment_user_name_label.frame = newFrame1;
+                        
+                        //set the indent frame... 这段代码实在是@#%R#$
+                        UILabel *indent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+                        [indent setFont:[UIFont boldSystemFontOfSize:14]];
+                        NSString *indent_string = [NSString stringWithFormat:@" "];
+                        while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
+                            indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
+                            [indent setText:indent_string];
+                            CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+                            CGRect indentNewFrame = indent.frame;
+                            indentNewFrame.size.width = indentExpectedWidth.width;
+                            indent.frame = indentNewFrame;
+                        }
+                        
+                        //content part (also add the time stamp to the comment part)
+                        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 290, 0)];
+                        NSString *comment_content = [NSString stringWithFormat:@"%@ (%@)\n%@",indent_string,comment.timestamp,comment.content];
+                        [comment_content_label setText:comment_content];
+                        [comment_content_label setFont:[UIFont systemFontOfSize:14]];
+                        [comment_content_label setBackgroundColor:[UIColor clearColor]];
+                        comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
+                        comment_content_label.numberOfLines = 0;
+                        
+                        CGSize maximumLabelSize2 = CGSizeMake(290,9999);
+                        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
+                        
+                        CGRect newFrame2 = comment_content_label.frame;
+                        newFrame2.size.height = expectedLabelSize2.height;
+                        comment_content_label.frame = newFrame2;
+                        
+                        [commentView addSubview:comment_content_label];
+                        [commentView addSubview:comment_user_name_label];
+                        
+                        CGRect newFrame3 = commentView.frame;
+                        newFrame3.size.height = comment_content_label.bounds.size.height+10;
+                        commentView.frame = newFrame3;
+                        
+                        [self.mainScrollView addSubview:commentView];
+                        //distance between two comment view is 0px.
+                        height = height + commentView.bounds.size.height;
+                        
+                    }
+                    //set the scroll view content size
+                    //self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
+                    [self.mainScrollView setContentSize:CGSizeMake(320, height+5+50)];
+                }
+
+            }
+            else{
+                //connect error
+#warning handle connection error
+            }
+            
+        });
+        
+    });
+    
+
+    
+}
+
+#pragma mark - button action
+- (IBAction)CommentEnterButtonClicked:(id)sender {
+    [self.addCommentTextView resignFirstResponder];
+    if (self.addCommentTextView.text.length>0) {
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/create",CONNECT_DOMIAN_NAME]];
+            
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            
+            //add login auth_token //add content
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+            [request setPostValue:self.shared_event_id forKey:@"shared_event_id"];
+            [request setPostValue:self.addCommentTextView.text forKey:@"content"];
+            [request setRequestMethod:@"POST"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%@",request.responseString);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        success.delegate=self;
+                        [success show];
+                        [self.addCommentTextView setText:@""];
+                        [self startFetchingInviteAndCommentData];
+                        //[self.navigationController popViewControllerAnimated:YES];
+                    }
+                    else{
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        notsuccess.delegate=self;
+                        [notsuccess show];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                }
+                else{
+                    //connect error
+                    NSError *error = [request error];
+                    NSLog(@"%@",error.description);
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+                
+            });
+            
+        });
+    }
+    else {
+        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment too short!" message:@"Sorry, your comment is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        notsuccess.delegate=self;
+        [notsuccess show];
     }
 }
 
+
+
+#pragma mark - implement UITextViewDelegate method
+////////////////////////////////////////////////
+//implement the Protocal UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
+    
+    self.navigationItem.rightBarButtonItem = done;
+    [self animateTextView:textView up:YES];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    self.navigationItem.rightBarButtonItem = nil;
+    [self animateTextView:textView up:NO];
+}
+
+//deal with when user pressed the "done" button
+- (void)leaveEditMode {
+    [self.addCommentTextView resignFirstResponder];
+}
+//To compensate for the showing up keyboard
+- (void) animateTextView: (UITextView*) textView up: (BOOL) up
+{
+    const int movementDistance = 215; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
 @end

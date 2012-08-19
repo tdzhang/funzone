@@ -10,7 +10,9 @@
 #import "ProfileInfoElement.h"
 #import "Cache.h"
 #import "GlobalConstant.h"
+#import "ASIFormDataRequest.h"
+#import "DiscussionComment.h"
 
-@interface DiscussionViewController : UIViewController
+@interface DiscussionViewController : UIViewController<UITextViewDelegate>
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id withEventTitle:(NSString *)event_title withEventTime:(NSString*)event_time withLocationName:(NSString*)location_name withInvitees:(NSMutableArray*)invitee andSetIsOwner:(BOOL)isOwner;
 @end

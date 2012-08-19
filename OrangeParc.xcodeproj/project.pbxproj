@@ -87,6 +87,8 @@
 		0F9A532915BE8527008E6F3B /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9A532815BE8527008E6F3B /* cancel_button.png */; };
 		0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F9E061615DF6101003A9322 /* DiscussionViewController.h */; };
 		0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E061715DF6101003A9322 /* DiscussionViewController.m */; };
+		0F9E061C15E0121F003A9322 /* DiscussionComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F9E061A15E0121F003A9322 /* DiscussionComment.h */; };
+		0F9E061D15E0121F003A9322 /* DiscussionComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E061B15E0121F003A9322 /* DiscussionComment.m */; };
 		0FA9002C15BA25EF0015E9C9 /* button_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA9002B15BA25EF0015E9C9 /* button_comment.png */; };
 		0FB5AC0D15D1A88500FE8608 /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FB5ABF915D1A88500FE8608 /* ASIHTTPRequestConfig.h */; };
 		0FB5AC0E15D1A88500FE8608 /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FB5ABFA15D1A88500FE8608 /* ASICacheDelegate.h */; };
@@ -414,6 +416,8 @@
 		0F9A532815BE8527008E6F3B /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		0F9E061615DF6101003A9322 /* DiscussionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussionViewController.h; sourceTree = "<group>"; };
 		0F9E061715DF6101003A9322 /* DiscussionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussionViewController.m; sourceTree = "<group>"; };
+		0F9E061A15E0121F003A9322 /* DiscussionComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussionComment.h; sourceTree = "<group>"; };
+		0F9E061B15E0121F003A9322 /* DiscussionComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussionComment.m; sourceTree = "<group>"; };
 		0FA9002B15BA25EF0015E9C9 /* button_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_comment.png; sourceTree = "<group>"; };
 		0FA9003215BB546E0015E9C9 /* GlobalConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstant.h; sourceTree = "<group>"; };
 		0FB5ABF915D1A88500FE8608 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
@@ -931,6 +935,8 @@
 			children = (
 				0F9E061615DF6101003A9322 /* DiscussionViewController.h */,
 				0F9E061715DF6101003A9322 /* DiscussionViewController.m */,
+				0F9E061A15E0121F003A9322 /* DiscussionComment.h */,
+				0F9E061B15E0121F003A9322 /* DiscussionComment.m */,
 			);
 			name = discussion;
 			sourceTree = "<group>";
@@ -1468,6 +1474,7 @@
 				0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */,
 				927BB92C15DB6FA6007B1E48 /* FeedBlockElement.h in Headers */,
 				0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */,
+				0F9E061C15E0121F003A9322 /* DiscussionComment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1779,6 +1786,7 @@
 				0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */,
 				927BB92D15DB6FA6007B1E48 /* FeedBlockElement.m in Sources */,
 				0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */,
+				0F9E061D15E0121F003A9322 /* DiscussionComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

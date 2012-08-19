@@ -2977,14 +2977,53 @@ Find us @OrangeParc.com</string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qKs-cR-P3L">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="-1" width="320" height="366"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" id="QW9-qw-uQ6">
+                                <rect key="frame" x="0.0" y="366" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="CK6-ON-KWG">
+                                        <rect key="frame" x="6" y="10" width="240" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ffu-Cx-TRb">
+                                        <rect key="frame" x="6" y="10" width="240" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="7ka-bV-aVx" id="C7V-hK-mnv"/>
+                                        </connections>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="61X-tb-KsX">
+                                        <rect key="frame" x="249" y="10.5" width="65" height="30.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Enter" backgroundImage="cancel_button.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="CommentEnterButtonClicked:" destination="7ka-bV-aVx" eventType="touchUpInside" id="CPa-2t-o84"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="c8h-HQ-fQC"/>
                     <connections>
+                        <outlet property="addCommentTextView" destination="ffu-Cx-TRb" id="ZV9-M1-itP"/>
                         <outlet property="mainScrollView" destination="qKs-cR-P3L" id="4gQ-Ax-RCO"/>
                     </connections>
                 </viewController>
@@ -3086,7 +3125,9 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="PickButtonClicked:"/>
                 <relationship kind="action" name="joinButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="likeButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
                 <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
                 <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
@@ -3100,6 +3141,8 @@ Find us @OrangeParc.com</string>
         <class className="DiscussionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CommentEnterButtonClicked:"/>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
@@ -3130,9 +3173,6 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelLoginNew:"/>
-                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
-                <relationship kind="action" name="normalLoginButtonClickedNew:"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
@@ -3205,6 +3245,7 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
