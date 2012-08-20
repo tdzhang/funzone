@@ -209,6 +209,11 @@
     return self;
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.delegate startInviteFriendWithEventID];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

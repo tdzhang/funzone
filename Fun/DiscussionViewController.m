@@ -138,7 +138,7 @@
     self.event_title=event_title;
     self.event_time=event_time;
     self.location_name=location_name;
-    self.invitee=invitee;
+    self.invitee=[invitee mutableCopy];
     self.isEventOwner=isOwner;
 }
 
@@ -559,6 +559,70 @@
     [UIView commitAnimations];
 }
 
+-(void)startInviteFriendWithEventID{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/invite?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+    NSLog(@"request:%@",url);
+    
+    //organize registered users
+    NSString *user_ids=@"";
+    for (NSString* key in [self.invitedFriend allKeys]) {
+        InviteFriendObject* person =[self.invitedFriend objectForKey:key];
+        if ([user_ids isEqualToString:@""]) {
+            user_ids=[user_ids stringByAppendingFormat:@"%@",person.user_id];
+        } else {
+            user_ids=[user_ids stringByAppendingFormat:@",%@",person.user_id];
+        }
+    }
+    
+    //organize addressbook users
+    NSString *emails=@"";
+    for (NSString* key in [self.invitedAddressBookFriend allKeys]) {
+        UserContactObject* person=[self.invitedAddressBookFriend objectForKey:key];
+        NSString* name=[key stringByReplacingOccurrencesOfString:@"," withString:@""];
+        if ([emails isEqualToString:@""]) {
+            emails=[emails stringByAppendingFormat:@"%@ <%@>",name,[person.email objectAtIndex:0]];
+        } else {
+            emails=[emails stringByAppendingFormat:@", %@ <%@>",name,[person.email objectAtIndex:0]];
+        }
+    }
+    NSLog(@"%@",emails);
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:user_ids forKey:@"user_ids"];
+        [request setPostValue:emails forKey:@"emails"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+            }
+            else{
+                //connect error
+                NSError *error = [request error];
+                NSLog(@"%@",error.description);
+                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                notsuccess.delegate=self;
+                [notsuccess show];
+            }
+            
+        });
+        
+    });
+}
+
 #pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
 ////////////////////////////////////////////////
 //implement the method for the adding or delete contacts that will be go out with
@@ -566,6 +630,13 @@
     //NSLog(@"input person:%@",person.firstName);
     NSString * key=person.user_name;
     [self.invitedFriend setObject:(id)person forKey:key];
+    ProfileInfoElement* newElement=[[ProfileInfoElement alloc] init];
+    newElement.user_name=person.user_name;
+    newElement.user_id=person.user_id;
+    newElement.user_pic=person.user_pic;
+    newElement.facebook_id=person.facebook_id;
+    newElement.followed=person.followed;
+    [self.invitee addObject:newElement];
 }
 
 -(void)AddAddressBookContactInformtionToPeopleList:(UserContactObject*)person{
@@ -574,7 +645,7 @@
     if (person.firstName) {
         nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
         if (person.lastName) {
-            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+            nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
         }
     }
     else if(person.lastName){
@@ -582,11 +653,24 @@
     }
     NSString * key=nameText;
     [self.invitedAddressBookFriend setObject:(id)person forKey:key];
+    
+    ProfileInfoElement* newElement=[[ProfileInfoElement alloc] init];
+    newElement.user_name=key;
+    newElement.email=[person.email objectAtIndex:1];
+    [self.invitee addObject:newElement];
 }
 
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
     NSString * key=person.user_name;
     [self.invitedFriend removeObjectForKey:key];
+    
+    for (ProfileInfoElement* element in self.invitee) {
+        if ([element.user_id isEqualToString:person.user_id]&&[element.user_name isEqualToString:person.user_name]) {
+            //find matched contact, delete it
+            [self.invitee removeObject:element];
+            break;
+        }
+    }
 }
 
 -(void)DeleteAddressBookContactInformtionToPeopleList:(UserContactObject *)person{
@@ -594,7 +678,7 @@
     if (person.firstName) {
         nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
         if (person.lastName) {
-            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+            nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
         }
     }
     else if(person.lastName){
@@ -602,6 +686,14 @@
     }
     NSString * key=nameText;
     [self.invitedAddressBookFriend removeObjectForKey:key];
+    
+    for (ProfileInfoElement* element in self.invitee) {
+        if ([element.user_name isEqualToString:key]) {
+            //find matched contact, delete it
+            [self.invitee removeObject:element];
+            break;
+        }
+    }
 }
 
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{

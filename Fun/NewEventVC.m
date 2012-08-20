@@ -1565,4 +1565,8 @@
     self.invitedFriendLastReceivedJson=[lastReceivedJson copy];
 }
 
+-(void)startInviteFriendWithEventID{
+    //
+}
+
 @end

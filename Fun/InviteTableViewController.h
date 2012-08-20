@@ -33,7 +33,8 @@
 -(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person;
 -(void)UpdateLastReceivedInviteFriendJson:(NSArray*)lastReceivedJson;
 
-
+//method to invite friend to the sever
+-(void)startInviteFriendWithEventID;
 @end
 
 @interface InviteTableViewController : UITableViewController
