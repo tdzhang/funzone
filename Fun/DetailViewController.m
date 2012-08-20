@@ -74,6 +74,8 @@
 @property (nonatomic) int via;//used to keep track theuser activity , then send to the server
 @property (nonatomic) int next_page_profile_via; //used to send via information to the next segue (used for show others user profile)
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
+@property (nonatomic) BOOL isInvited;  //record if a user is invited to this event
+#warning need to hide/show specific button for isInvited
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 @property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
 
@@ -143,10 +145,26 @@
 @synthesize next_page_profile_via=_next_page_profile_via;
 @synthesize view_height=_view_height;
 @synthesize isEventOwner=_isEventOwner;
+@synthesize isInvited=_isInvited;
 @synthesize mysendMessageType=_mysendMessageType;
 @synthesize alreadyInvitedFriend=_alreadyInvitedFriend;
 //@synthesize shouldGoBack=_shouldGoBack;
 #pragma mark - self defined getter and setter
+-(BOOL)isInvited{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString* user_id = [defaults valueForKey:@"user_id"];
+    BOOL result=NO;
+    if (self.isEventOwner) {
+        result=YES;
+    }
+    for (ProfileInfoElement* element in self.invitee) {
+        if ([element.user_id isEqualToString:user_id]) {
+            result=YES;
+            break;
+        }
+    }
+    return result;
+}
 
 -(NSMutableArray *)comments{
     if (!_comments) {
@@ -349,12 +367,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    //if the event not exist, go back
-//    if (self.shouldGoBack) {
-//        [self.navigationController popViewControllerAnimated:NO];
-//    }
-    
+   
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -433,7 +446,6 @@
         self.isJoined = @"0";
     }
     
-
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         
