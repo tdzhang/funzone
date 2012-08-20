@@ -91,8 +91,12 @@
 #define DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH 320 //initial scrollview content size
 #define DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_HEIGHT 400
 #define DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT 25
-#define DVC_EVENT_IMG_WIDTH 320
 #define DVC_EVENT_IMG_HEIGHT 180
+#define DVC_CREATOR_VIEW_HEIGHT 45
+#define DVC_TIME_VIEW_HEIGHT 30
+#define DVC_ADDR_VIEW_HEIGHT 30
+#define DVC_INVITEE_HEIGHT 65
+#define DVC_LIKED_HEIGHT 65
 
 
 //Feed View Controller
@@ -281,6 +285,7 @@
 
 
 //icon files
-#define LOCATION_ICON @"07-map-marker.png"
-#define TIME_ICON @"11-clock.png"
+#define LOCATION_ICON @"DVC_Addr.png"
+#define TIME_ICON @"DVC_Time.png"
+#define ADDR_ICON @"DVC_Addr.png"
 #define RIGHT_ARROW @"detailButton.png"
