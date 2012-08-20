@@ -29,6 +29,11 @@
 @property(nonatomic,strong) UIView* invitedPeopleSectionView;
 @property (nonatomic,strong) UIView *commentSectionView;
 
+//invited friend
+@property (nonatomic,strong) NSMutableDictionary *invitedFriend;
+@property (nonatomic,strong) NSMutableDictionary *invitedAddressBookFriend;
+@property (nonatomic,strong) NSArray* invitedFriendLastReceivedJson;
+
 @end
 
 @implementation DiscussionViewController
@@ -48,7 +53,34 @@
 @synthesize invitedPeopleSectionView=_invitedPeopleSectionView;
 @synthesize commentSectionView=_commentSectionView;
 
+//used to invite inner friend(following)
+@synthesize invitedFriend=_invitedFriend;
+@synthesize invitedAddressBookFriend=_invitedAddressBookFriend;
+@synthesize invitedFriendLastReceivedJson=_invitedFriendLastReceivedJson;
+
 #pragma mark - self defined setter and getter
+//used to invite inner friend(following)
+-(NSMutableDictionary *)invitedFriend{
+    if (!_invitedFriend) {
+        _invitedFriend=[NSMutableDictionary dictionary];
+    }
+    return _invitedFriend;
+}
+
+-(NSMutableDictionary *)invitedAddressBookFriend{
+    if (!_invitedAddressBookFriend) {
+        _invitedAddressBookFriend=[NSMutableDictionary dictionary];
+    }
+    return _invitedAddressBookFriend;
+}
+
+-(NSArray *)invitedFriendLastReceivedJson{
+    if (!_invitedFriendLastReceivedJson) {
+        _invitedFriendLastReceivedJson=[NSArray array];
+    }
+    return _invitedFriendLastReceivedJson;
+}
+
 -(NSMutableArray *)invitee{
     if (!_invitee) {
         _invitee=[NSMutableArray array];
@@ -110,17 +142,41 @@
     self.isEventOwner=isOwner;
 }
 
+//get the inivtedFriend and Addressbook friend from the profileInfoelemanet array
+-(void)getinvitedFriendAndAddressbookFriendFromProfileInfoElement{
+    [self.invitedFriend removeAllObjects];
+    [self.invitedAddressBookFriend removeAllObjects];
+    for (ProfileInfoElement* person in self.invitee) {
+        NSLog(@"%@",person.email);
+        if (person.email&&([person.email length]>3)) {
+            NSLog(@"%@",person.email);
+            UserContactObject* friend=[[UserContactObject alloc] init];
+            friend.lastName = person.user_name;
+            friend.email=[NSArray arrayWithObjects:person.email, nil];
+            [self.invitedAddressBookFriend  setObject:friend forKey:person.user_name];
+        } else {
+            InviteFriendObject* friend=[[InviteFriendObject alloc] init];
+            friend.user_id=person.user_id;
+            friend.user_name=person.user_name;
+            friend.user_pic=person.user_pic;
+            friend.facebook_id=person.facebook_id;
+            friend.followed=person.followed;
+            friend.alreadyInvited=friend.alreadyInvited;
+            [self.invitedFriend  setObject:friend forKey:person.user_name];
+        }
+    }
+}
+
 #pragma mark - handle Invited People Part
 //handle invited people section
 -(void)startFetchingInviteAndCommentData{
-//    //clean the garbage view
-//    if (self.garbageCollection) {
-//        for (UIView* view in self.garbageCollection) {
-//            [view removeFromSuperview];
-//        }
-//        [self.garbageCollection removeAllObjects];
-//    }
-//    self.garbageCollection=[NSMutableArray array];
+    //clean the garbage view
+    if (self.garbageCollection) {
+        for (UIView* view in self.garbageCollection) {
+            [view removeFromSuperview];
+        }
+        [self.garbageCollection removeAllObjects];
+    }
 #define DISCUSSION_INVITE_IMAGE_SIZE 55
 #define DISCUSSION_INVITE_BLOCK_HEIGHT 80
     //-------------------------->invited people part<---------------------------------//
@@ -130,11 +186,13 @@
         self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, 300, height)];
         [self.mainScrollView addSubview:self.invitedPeopleSectionView];
         
+        [self.garbageCollection addObject:self.invitedPeopleSectionView];
+        
         //---------->>add gesture(tap)
         self.invitedPeopleSectionView.userInteractionEnabled=YES;
-#warning need process the touch event of the discussion invited people
+
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
-        [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
+        //[self.invitedPeopleSectionView addGestureRecognizer:tapGR];
         
         //---------->>set background color
         [self.invitedPeopleSectionView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
@@ -150,7 +208,15 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [numOfInvites setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
-        //[self.garbageCollection addObject:numOfInterests];
+        [self.garbageCollection addObject:numOfInvites];
+        
+        //---------->>set edit button
+         UIButton *editInvitedPeople = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [editInvitedPeople setFrame:CGRectMake(170, 0, 120, 40)];
+        [editInvitedPeople setTitle:@"Edit List" forState:UIControlStateNormal];
+        [editInvitedPeople addTarget:self action:@selector(editInvitedPeopleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.invitedPeopleSectionView addSubview:editInvitedPeople];
+        [self.garbageCollection addObject:editInvitedPeople];
         
         //---------->>set invited people image
         int x_position_photo=5;
@@ -202,6 +268,7 @@
                 });
             }
             [self.invitedPeopleSectionView addSubview:userImageView];
+            [userImageView addGestureRecognizer:tapGR];
            
             x_position_photo+=DISCUSSION_INVITE_IMAGE_SIZE+25;
             if ((i+1)%4==0) {
@@ -212,7 +279,7 @@
     }
     
     //-------------------------->comment part<----------------------------------------//
-    int comment_y_start=height+55; // the conment start coordinate
+    int comment_y_start=height+85; // the conment start coordinate
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/view?shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
@@ -231,7 +298,7 @@
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 NSDictionary *jsonDic=[NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                if ([[jsonDic objectForKey:@"response"] isEqualToString:@"error"]) {
+                if ([jsonDic isKindOfClass:[NSDictionary class]]&&[[jsonDic objectForKey:@"response"] isEqualToString:@"error"]) {
                     UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error Happend" message:[jsonDic  objectForKey:@"message"] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     errorAlert.delegate=self;
                     [errorAlert show];
@@ -244,6 +311,7 @@
                     [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
                     [self.mainScrollView addSubview:comments_header_view];
                     
+                    [self.garbageCollection addObject:comments_header_view];
                     
                     //comment header label
                     UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
@@ -325,6 +393,7 @@
                         commentView.frame = newFrame3;
                         
                         [self.mainScrollView addSubview:commentView];
+                        [self.garbageCollection addObject:commentView];
                         //distance between two comment view is 0px.
                         height = height + commentView.bounds.size.height;
                         
@@ -348,7 +417,49 @@
     
 }
 
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"StartInviteFriend"]){
+        [self getinvitedFriendAndAddressbookFriendFromProfileInfoElement];
+        
+        InviteTableViewController *peopleController=nil;
+        peopleController = segue.destinationViewController;
+        peopleController.delegate=self;
+        peopleController.alreadySelectedContacts=[self.invitedFriend copy];
+        peopleController.addressbook_alreadySelectedContacts=[self.invitedAddressBookFriend copy];
+    }
+
+}
+
 #pragma mark - button action
+-(void)editInvitedPeopleButtonClicked{
+    [self performSegueWithIdentifier:@"StartInviteFriend" sender:self];
+}
+
+-(void)tapInviteBlock:(UITapGestureRecognizer *)tapGR {
+    #warning need process the touch event of the discussion invited people
+    /*
+    if ([self.invitee count]==0) {
+        return;
+    }
+    CGPoint touchPoint=[tapGR locationInView:[self invitedPeopleSectionView]];
+    float touchPointY=touchPoint.y;
+    float touchPointX=touchPoint.x;
+    //get the index of the touched block view
+    int index=(touchPointX-5)/40;
+    if (index >= [self.invitee count]) {
+        return;
+    }
+    ProfileInfoElement* tapped_element=[self.invitee objectAtIndex:index];
+    self.tap_user_id=tapped_element.user_id;
+    if(touchPointY>25&&index<7){
+        self.next_page_profile_via=VIA_INVITED_PEOPLE;
+        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+    }
+     */
+}
+
+
 - (IBAction)CommentEnterButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
     if (self.addCommentTextView.text.length>0) {
@@ -444,4 +555,55 @@
     self.view.frame = CGRectOffset(self.view.frame, 0, movement);
     [UIView commitAnimations];
 }
+
+#pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
+////////////////////////////////////////////////
+//implement the method for the adding or delete contacts that will be go out with
+-(void)AddContactInformtionToPeopleList:(InviteFriendObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSString * key=person.user_name;
+    [self.invitedFriend setObject:(id)person forKey:key];
+}
+
+-(void)AddAddressBookContactInformtionToPeopleList:(UserContactObject*)person{
+    //NSLog(@"input person:%@",person.firstName);
+    NSString *nameText=@"";
+    if (person.firstName) {
+        nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+        if (person.lastName) {
+            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+        }
+    }
+    else if(person.lastName){
+        nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+    }
+    NSString * key=nameText;
+    [self.invitedAddressBookFriend setObject:(id)person forKey:key];
+}
+
+-(void)DeleteContactInformtionToPeopleList:(InviteFriendObject*)person{
+    NSString * key=person.user_name;
+    [self.invitedFriend removeObjectForKey:key];
+}
+
+-(void)DeleteAddressBookContactInformtionToPeopleList:(UserContactObject *)person{
+    NSString *nameText=@"";
+    if (person.firstName) {
+        nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
+        if (person.lastName) {
+            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+        }
+    }
+    else if(person.lastName){
+        nameText=[nameText stringByAppendingFormat:@"%@",person.lastName];
+    }
+    NSString * key=nameText;
+    [self.invitedAddressBookFriend removeObjectForKey:key];
+}
+
+-(void)UpdateLastReceivedInviteFriendJson:(NSArray *)lastReceivedJson{
+    self.invitedFriendLastReceivedJson=[lastReceivedJson copy];
+}
+
+
 @end
