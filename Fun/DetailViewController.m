@@ -871,7 +871,11 @@
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
-            NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
+            NSString *user_pic=element.user_pic;
+            if (!element.user_pic) {
+                user_pic=@"null";
+            }
+            NSURL* backGroundImageUrl=[NSURL URLWithString:user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
                 //using high priority queue to fetch the image
                 dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{

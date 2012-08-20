@@ -211,12 +211,15 @@
         [self.garbageCollection addObject:numOfInvites];
         
         //---------->>set edit button
-         UIButton *editInvitedPeople = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [editInvitedPeople setFrame:CGRectMake(170, 0, 120, 40)];
-        [editInvitedPeople setTitle:@"Edit List" forState:UIControlStateNormal];
-        [editInvitedPeople addTarget:self action:@selector(editInvitedPeopleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.invitedPeopleSectionView addSubview:editInvitedPeople];
-        [self.garbageCollection addObject:editInvitedPeople];
+        if (self.isEventOwner) {
+            UIButton *editInvitedPeople = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [editInvitedPeople setFrame:CGRectMake(170, 0, 120, 40)];
+            [editInvitedPeople setTitle:@"Edit List" forState:UIControlStateNormal];
+            [editInvitedPeople addTarget:self action:@selector(editInvitedPeopleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self.invitedPeopleSectionView addSubview:editInvitedPeople];
+            [self.garbageCollection addObject:editInvitedPeople];
+        }
+        
         
         //---------->>set invited people image
         int x_position_photo=5;
