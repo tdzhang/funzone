@@ -292,6 +292,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
     //set the should back to false
 //    self.shouldGoBack=NO;
     

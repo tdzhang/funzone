@@ -7,6 +7,7 @@
 //
 
 #import "LoginPageViewController.h"
+#import "CheckForInternetConnection.h"
 
 @interface LoginPageViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -43,6 +44,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     self.myLocationManager=funAppdelegate.myLocationManager;

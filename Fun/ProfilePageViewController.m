@@ -8,6 +8,7 @@
 
 #import "ProfilePageViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CheckForInternetConnection.h"
 
 
 @interface ProfilePageViewController ()
@@ -157,6 +158,9 @@
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

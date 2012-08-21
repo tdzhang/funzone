@@ -66,6 +66,9 @@
 {
     [super viewDidLoad];
     
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
 
