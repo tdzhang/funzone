@@ -1768,16 +1768,11 @@
 				5CAD2DC015E2F5170097CF51 /* DVC_Comment.png in Resources */,
 				5CAD2DC115E2F5170097CF51 /* DVC_Invitee.png in Resources */,
 				5CAD2DC215E2F5170097CF51 /* DVC_Time.png in Resources */,
-<<<<<<< HEAD
 				4683BC9915E2F98500DB1A70 /* collection-page-button.png in Resources */,
 				4683BC9A15E2F98500DB1A70 /* tab-not-selected.png in Resources */,
 				4683BC9B15E2F98500DB1A70 /* tab-selected.png in Resources */,
 				4683BCA015E348FA00DB1A70 /* tab-not-selected@2x.png in Resources */,
 				4683BCA115E348FA00DB1A70 /* tab-selected@2x.png in Resources */,
-=======
-				5CAD2DC815E2F9E40097CF51 /* DVC_Desc.png in Resources */,
-				5CAD2DCB15E370A40097CF51 /* DVC_Liked.png in Resources */,
->>>>>>> redesign event detail page
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
