@@ -12,6 +12,7 @@
 #import "CategroyChooseViewController.h"
 #import "GlobalConstant.h"
 #import "PushNotificationHandler.h"
+#import "ASIFormDataRequest.h"
 
 @interface LoginPageViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 @property (weak,nonatomic) UIViewController* parentVC; //the parent view controller

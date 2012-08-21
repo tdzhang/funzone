@@ -27,18 +27,33 @@
         
         [errorView show];
     }
-//    else{
-//        reachability=[Reachability reachabilityWithHostName:@"http://www.google.com"];
-//        internetStatus= [reachability currentReachabilityStatus];
-//        if (internetStatus == NotReachable)
-//        {
-//            
-//            UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Error." message:@"Our server is currently under maintainess. Please try again later."
-//                                                          delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [alert show];
-//        }
-//        
-//    }
+    else{
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/available",CONNECT_DOMIAN_NAME]];
+        
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    // Use when fetching text data
+                }
+                else{
+                    //connect error
+                    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Error." message:@"Our server is currently under maintainess. Please try again later."
+                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show]; 
+                }
+            });
+            
+        });
+        
+    }
 
 }
 

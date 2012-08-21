@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
+#import "ASIFormDataRequest.h"
+#import "GlobalConstant.h"
 
 @interface CheckForInternetConnection : NSObject
 
