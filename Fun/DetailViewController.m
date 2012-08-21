@@ -655,8 +655,8 @@
 - (void)handleEventCreator:(NSDictionary *)event {
     self.creatorView.frame = CGRectMake(0, self.view_height, 320, DVC_CREATOR_VIEW_HEIGHT);
     self.creatorView.backgroundColor = [UIColor whiteColor];
-    self.creatorView.layer.shadowOffset = CGSizeMake(0, 1);
-    self.creatorView.layer.shadowOpacity = 0.6f;
+//    self.creatorView.layer.shadowOffset = CGSizeMake(0, 1);
+//    self.creatorView.layer.shadowOpacity = 0.6f;
     
     self.creatorProfileView.frame = CGRectMake(10, 5, 35, 35);
     [self.creatorProfileView setClipsToBounds:YES];
@@ -733,7 +733,7 @@
     CGSize maximumLabelSize = CGSizeMake(300,9999);
     CGSize expectedLabelSize = [self.event_title sizeWithFont:[UIFont boldSystemFontOfSize:16.0] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame = self.eventTitleLabel.frame;
-    newFrame.size.height = expectedLabelSize.height+20;
+    newFrame.size.height = expectedLabelSize.height+30;
     self.eventTitleLabel.frame = newFrame;
     
     self.view_height += self.eventTitleLabel.frame.size.height;
@@ -742,11 +742,11 @@
 - (void)handleEventTime:(NSDictionary *)event {
     self.timeSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_TIME_VIEW_HEIGHT);
     
-    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 5, 19, 19)];
+    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 19, 19)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
     [timeIcon setAlpha:0.7];
     [self.timeSectionView addSubview:timeIcon];
-    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 230, 20)];
+    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(45, 10, 230, 20)];
     self.event_time=[event objectForKey:@"start_time"];
     if ([self.event_time isEqualToString:@""]) {
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
@@ -764,12 +764,12 @@
 - (void)handleEventAddr:(NSDictionary *)event {
     self.locationSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_ADDR_VIEW_HEIGHT);
     
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(17, 3, 16, 23)];
-    [locationIcon setImage:[UIImage imageNamed:LOCATION_ICON]];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(16, 8, 16, 23)];
+    [locationIcon setImage:[UIImage imageNamed:ADDR_ICON]];
     [locationIcon setAlpha:0.7];
     [self.locationSectionView addSubview:locationIcon];
 
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(40, 5, 220, 20)];
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(45, 10, 220, 20)];
     if ([self.location_name isEqualToString:@""]) {
         self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
@@ -780,17 +780,17 @@
     eventLocation.numberOfLines = 1;
     [self.locationSectionView addSubview:eventLocation];
         
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(265, 5, 35, 20)];
-    [map_indicator_label setText:@"Map"];
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(265, 10, 35, 20)];
+    [map_indicator_label setText:@"MAP"];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor lightGrayColor]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(295, 10.75, 6, 8.5)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(295, 15.75, 6, 8.5)];
     [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
     
-    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 5, 50, 20)];
+    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 5, 50, 30)];
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.locationSectionView addSubview:showMapButton];
     
@@ -802,12 +802,12 @@
     if ([description isEqual:[NSNull null]]) {
         return;
     }
-    UIImageView *descIcon = [[UIImageView alloc] initWithFrame:CGRectMake(17, 3, 16, 23)];
-    [descIcon setImage:[UIImage imageNamed:ADDR_ICON]];
+    UIImageView *descIcon = [[UIImageView alloc] initWithFrame:CGRectMake(16, 7, 18.5, 19)];
+    [descIcon setImage:[UIImage imageNamed:DESC_ICON]];
     [descIcon setAlpha:0.7];
     [self.descriptionSectionView addSubview:descIcon];
     
-    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
+    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(45, 5, 150, 23)];
     [description_header setText:@"Description"];
     [description_header setFont:[UIFont boldSystemFontOfSize:14]];
     [description_header setTextColor:[UIColor darkGrayColor]];
@@ -836,6 +836,7 @@
     if (!self.isEventOwner) {
         return;
     }
+
     self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
@@ -843,7 +844,8 @@
         }
         [self.garbageCollection removeAllObjects];
     }
-    self.garbageCollection=[NSMutableArray array];   
+    self.garbageCollection=[NSMutableArray array];
+    
     if ([self.invitee count]>0) {
         self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, DVC_INVITEE_HEIGHT)];
         [self.myScrollView addSubview:self.invitedPeopleSectionView];
@@ -851,8 +853,13 @@
         self.invitedPeopleSectionView.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
-        [self.invitedPeopleSectionView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        
+        UIImageView *inviteeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 5, 23, 14)];
+        [inviteeIcon setImage:[UIImage imageNamed:INVITEE_ICON]];
+        [inviteeIcon setAlpha:0.7];
+        [self.invitedPeopleSectionView addSubview:inviteeIcon];
+        
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(35, 0, 200, 25)];
         if ([self.invitee count] == 1) {
             [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
@@ -860,12 +867,11 @@
         }
         [numOfInvites setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
-        [numOfInvites setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
-        int x_position_photo=5;
+        int x_position_photo=30;
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 30, 35, 35)];
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
             NSString *user_pic=element.user_pic;
             if (!element.user_pic) {
@@ -931,8 +937,13 @@
         self.likedPeopleLabelView.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLikeBlock:)];
         [self.likedPeopleLabelView addGestureRecognizer:tapGR];
-        [self.likedPeopleLabelView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        
+        UIImageView *likedIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 2, 20, 20)];
+        [likedIcon setImage:[UIImage imageNamed:LIKES_ICON]];
+        [likedIcon setAlpha:0.7];
+        [self.likedPeopleLabelView addSubview:likedIcon];
+        
+        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(35, 0, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
         if ([self.likedPeople count] == 1) {
             [numOflikes setText:[NSString stringWithFormat:@"1 Like"]];
         } else {
@@ -940,13 +951,12 @@
         }
         [numOflikes setFont:[UIFont boldSystemFontOfSize:14]];
         [numOflikes setTextColor:[UIColor darkGrayColor]];
-        [numOflikes setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         [self.likedPeopleLabelView addSubview:numOflikes];
         //[self.garbageCollection addObject:numOfInterests];
         
-        int x_position_photo=5;
+        int x_position_photo=30;
         for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 30, 35, 35)];
             ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
@@ -1003,19 +1013,19 @@
     
     //comment header view
     UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 30)];
-    [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+    //[comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
     [self.myScrollView addSubview:comments_header_view];
     
     //comment icon
-//    UIImageView *comment_icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 1, 12, 30)];
-//    UIImage *image_comment_icon = [UIImage imageNamed:@"comments.png"]; 
-//    [comment_icon setImage:image_comment_icon];
-//    [comment_icon setContentMode:UIViewContentModeScaleAspectFit];
-//    [comment_icon setAlpha:0.4];
-//    [comments_header_view addSubview:comment_icon];
+    UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 19.5, 19.5)];
+    UIImage *image_comment_icon = [UIImage imageNamed:COMMENT_ICON];
+    [commentIcon setImage:image_comment_icon];
+    [commentIcon setContentMode:UIViewContentModeScaleAspectFit];
+    [commentIcon setAlpha:0.7];
+    [comments_header_view addSubview:commentIcon];
     
     //comment header label
-    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
+    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 100, 30)];
     NSString *comment_header;
     if ([self.comments count] == 0 || [self.comments count] == 1) {
         comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
@@ -1050,7 +1060,7 @@
         //if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];  
         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 0)];
-        [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];        
+        //[commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         
         //UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
@@ -1113,6 +1123,39 @@
     //set the comment view content size
     self.commentSectionView.frame = CGRectMake(0, self.view_height+15, 320, 200);
     self.view_height += 15;
+}
+
+- (void)handleActionButtons:(NSDictionary *)event{
+    self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
+    self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
+    self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
+    [self.like_icon removeFromSuperview];
+    [self.like_label removeFromSuperview];
+    [self.join_icon removeFromSuperview];
+    [self.join_label removeFromSuperview];
+    [self.doitmyself_icon removeFromSuperview];
+    [self.doitmyself_label removeFromSuperview];
+    if ([self.isLiked isEqualToString:@"0"]) {
+        [self.like_label setText:@"Like"];
+    } else {
+        [self.like_label setText:@"Unlike"];
+    }
+    if ([self.isJoined isEqualToString:@"0"]) {
+        [self.join_label setText:@"Join"];
+    } else {
+        [self.join_label setText:@"Joined"];
+    }
+    if ([self.isAdded isEqualToString:@"0"]) {
+        [self.doitmyself_label setText:@"Do it myself"];
+    } else {
+        [self.doitmyself_label setText:@"Already added"];
+    }
+    [self.likeButtonSection addSubview:self.like_icon];
+    [self.likeButtonSection addSubview:self.like_label];
+    [self.joinButtonSection addSubview:self.join_icon];
+    [self.joinButtonSection addSubview:self.join_label];
+    [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
+    [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
 }
 
 //action sheet related stuff
@@ -1380,46 +1423,12 @@
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
         self.event_address=[event objectForKey:@"address"];
-        self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
-        self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
-        self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
         self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
         self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
         
         // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
         // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
         NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
-        
-        //handle the action button label part
-        [self.like_icon removeFromSuperview];
-        [self.like_label removeFromSuperview];
-        [self.join_icon removeFromSuperview];
-        [self.join_label removeFromSuperview];
-        [self.doitmyself_icon removeFromSuperview];
-        [self.doitmyself_label removeFromSuperview];
-        if ([self.isLiked isEqualToString:@"0"]) {
-            [self.like_label setText:@"Like"];
-        } else {
-            [self.like_label setText:@"Unlike"];
-        }
-        if ([self.isJoined isEqualToString:@"0"]) {
-            [self.join_label setText:@"Join"];
-        } else {
-            [self.join_label setText:@"Joined"];
-        }
-        if ([self.isAdded isEqualToString:@"0"]) {
-            [self.doitmyself_label setText:@"Do it myself"];
-        } else {
-            [self.doitmyself_label setText:@"Already added"];
-        }
-        [self.likeButtonSection addSubview:self.like_icon];
-        [self.likeButtonSection addSubview:self.like_label];
-        [self.joinButtonSection addSubview:self.join_icon];
-        [self.joinButtonSection addSubview:self.join_label];
-        [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
-        [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
-
-        
         if ([event_category isEqualToString:FOOD]) {
             self.DEFAULT_IMAGE_REPLACEMENT=FOOD_REPLACEMENT;
         }
@@ -1445,6 +1454,7 @@
             self.DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
         }
         
+        [self handleActionButtons:event];
         [self handleEventImg:event];
         [self handleEventCreator:event];
         [self handleEventTitle:event];
@@ -1454,15 +1464,8 @@
         [self handleInvitedPeoplePart:event];
         [self handleLikedPeoplePart:event];
         [self handleTheCommentPart:event];
-        [self.myScrollView setContentSize:CGSizeMake(320, self.view_height+5)];
-        
-        //set seperator
-        UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.eventTitleLabel.frame.origin.y+self.eventTitleLabel.frame.size.height + 10, 300, 1)];
-        [seperator setImage:[UIImage imageNamed:@"seperator.png"]];
-        [self.myScrollView addSubview:seperator];
-        
-        
-                
+        [self.myScrollView setContentSize:CGSizeMake(320, self.view_height+5+30)];
+             
 #warning fetch original creator info
         //handle the interest people part
 //        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];

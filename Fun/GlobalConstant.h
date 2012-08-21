@@ -93,10 +93,10 @@
 #define DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT 25
 #define DVC_EVENT_IMG_HEIGHT 180
 #define DVC_CREATOR_VIEW_HEIGHT 45
-#define DVC_TIME_VIEW_HEIGHT 30
-#define DVC_ADDR_VIEW_HEIGHT 30
-#define DVC_INVITEE_HEIGHT 65
-#define DVC_LIKED_HEIGHT 65
+#define DVC_TIME_VIEW_HEIGHT 40
+#define DVC_ADDR_VIEW_HEIGHT 40
+#define DVC_INVITEE_HEIGHT 70
+#define DVC_LIKED_HEIGHT 70
 
 
 //Feed View Controller
@@ -285,7 +285,10 @@
 
 
 //icon files
-#define LOCATION_ICON @"DVC_Addr.png"
 #define TIME_ICON @"DVC_Time.png"
 #define ADDR_ICON @"DVC_Addr.png"
+#define DESC_ICON @"DVC_Desc.png"
+#define INVITEE_ICON @"DVC_Invitee.png"
+#define LIKES_ICON @"DVC_Liked.png"
+#define COMMENT_ICON @"DVC_Comment.png"
 #define RIGHT_ARROW @"detailButton.png"
