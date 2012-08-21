@@ -12,6 +12,7 @@
 #import "GlobalConstant.h"
 #import "OtherProfilePageViewController.h"
 #import "ProfilePageViewController.h"
+#import "CheckForInternetConnection.h"
 
 
 @interface ExploreViewController : UIViewController<UIScrollViewDelegate>

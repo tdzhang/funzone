@@ -47,6 +47,8 @@
 		0F16F99B15D983DB002B719E /* movieInfoReturnProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F16F99A15D983DB002B719E /* movieInfoReturnProtocal.h */; };
 		0F16F99F15D9889D002B719E /* MovieSelectionTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F16F99D15D9889D002B719E /* MovieSelectionTableViewController.h */; };
 		0F16F9A015D9889D002B719E /* MovieSelectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F16F99E15D9889D002B719E /* MovieSelectionTableViewController.m */; };
+		0F27BB8F15E33B6500335D42 /* CheckForInternetConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F27BB8D15E33B6500335D42 /* CheckForInternetConnection.h */; };
+		0F27BB9015E33B6500335D42 /* CheckForInternetConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F27BB8E15E33B6500335D42 /* CheckForInternetConnection.m */; };
 		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
 		0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4315C719540087111B /* FindFriendTableViewController.h */; };
 		0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4415C719540087111B /* FindFriendTableViewController.m */; };
@@ -365,6 +367,8 @@
 		0F16F99A15D983DB002B719E /* movieInfoReturnProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieInfoReturnProtocal.h; sourceTree = "<group>"; };
 		0F16F99D15D9889D002B719E /* MovieSelectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieSelectionTableViewController.h; sourceTree = "<group>"; };
 		0F16F99E15D9889D002B719E /* MovieSelectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieSelectionTableViewController.m; sourceTree = "<group>"; };
+		0F27BB8D15E33B6500335D42 /* CheckForInternetConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckForInternetConnection.h; sourceTree = "<group>"; };
+		0F27BB8E15E33B6500335D42 /* CheckForInternetConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckForInternetConnection.m; sourceTree = "<group>"; };
 		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
 		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
 		0F2EEB4315C719540087111B /* FindFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewController.h; sourceTree = "<group>"; };
@@ -831,6 +835,15 @@
 			name = WechatApi;
 			sourceTree = "<group>";
 		};
+		0F27BB8B15E33B4200335D42 /* Function Class */ = {
+			isa = PBXGroup;
+			children = (
+				0F27BB8D15E33B6500335D42 /* CheckForInternetConnection.h */,
+				0F27BB8E15E33B6500335D42 /* CheckForInternetConnection.m */,
+			);
+			name = "Function Class";
+			sourceTree = "<group>";
+		};
 		0F2EEB4115C719200087111B /* Find Friend */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,6 +1137,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F27BB8B15E33B4200335D42 /* Function Class */,
 				0FF6040A15C7B6D000AE89CF /* PushNotificationHandler */,
 				0FF6040015C7B1FA00AE89CF /* Activity */,
 				0F14023F15C516CE0080DA38 /* WechatApi */,
@@ -1524,6 +1538,7 @@
 				927BB92C15DB6FA6007B1E48 /* FeedBlockElement.h in Headers */,
 				0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */,
 				0F9E061C15E0121F003A9322 /* DiscussionComment.h in Headers */,
+				0F27BB8F15E33B6500335D42 /* CheckForInternetConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1839,6 +1854,7 @@
 				927BB92D15DB6FA6007B1E48 /* FeedBlockElement.m in Sources */,
 				0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */,
 				0F9E061D15E0121F003A9322 /* DiscussionComment.m in Sources */,
+				0F27BB9015E33B6500335D42 /* CheckForInternetConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

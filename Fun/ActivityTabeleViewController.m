@@ -66,6 +66,9 @@
 {
     [super viewDidLoad];
     
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
 
@@ -200,11 +203,11 @@
         }
         else{
             //connect error
-            NSError *error = [request error];
-            NSLog(@"%@",error.description);
-            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
-            notsuccess.delegate=self;
-            [notsuccess show];
+//            NSError *error = [request error];
+//            NSLog(@"%@",error.description);
+//            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
+//            notsuccess.delegate=self;
+//            [notsuccess show];
         }
         
         });
@@ -257,11 +260,11 @@
             }
             else{
                 //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",error.description);
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
-                notsuccess.delegate=self;
-                [notsuccess show];
+//                NSError *error = [request error];
+//                NSLog(@"%@",error.description);
+//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
+//                notsuccess.delegate=self;
+//                [notsuccess show];
             }
             
         });

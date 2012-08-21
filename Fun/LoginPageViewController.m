@@ -7,6 +7,7 @@
 //
 
 #import "LoginPageViewController.h"
+#import "CheckForInternetConnection.h"
 
 @interface LoginPageViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -43,6 +44,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     self.myLocationManager=funAppdelegate.myLocationManager;
@@ -167,9 +172,9 @@
             }
             else{
                 //connect error
-                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The registration process is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                error.delegate=self;
-                [error show];
+//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The registration process is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                error.delegate=self;
+//                [error show];
             }
             
         });
@@ -250,9 +255,9 @@
             }
             else{
                 //connect error
-                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The login is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                error.delegate=self;
-                [error show];
+//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The login is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                error.delegate=self;
+//                [error show];
             }
             
         });

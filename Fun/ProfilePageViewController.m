@@ -8,6 +8,7 @@
 
 #import "ProfilePageViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CheckForInternetConnection.h"
 
 
 @interface ProfilePageViewController ()
@@ -158,6 +159,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //check for internet connection, if no connection, showing alert
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
@@ -238,11 +242,11 @@
                 }
                 else{
                     //connect error
-                    NSError *error = [request error];
-                    NSLog(@"%@",error.description);
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    notsuccess.delegate=self;
-                    [notsuccess show];
+//                    NSError *error = [request error];
+//                    NSLog(@"%@",error.description);
+//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                    notsuccess.delegate=self;
+//                    [notsuccess show];
                 }
                 
             });

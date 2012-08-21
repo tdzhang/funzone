@@ -23,6 +23,7 @@
 #import "ProfilePageViewController.h"
 #import "ActivityTabeleViewController.h"
 #import "DiscussionViewController.h"
+#import "CheckForInternetConnection.h"
 
 @interface DetailViewController : UIViewController<UIActionSheetDelegate,FeedBackToCreateActivityChange,MFMessageComposeViewControllerDelegate,FBRequestDelegate>
 

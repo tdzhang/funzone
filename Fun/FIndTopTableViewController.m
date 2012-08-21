@@ -109,8 +109,8 @@
             }
             else{
                 //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",error.description);
+//                NSError *error = [request error];
+//                NSLog(@"%@",error.description);
             }
             
         });
