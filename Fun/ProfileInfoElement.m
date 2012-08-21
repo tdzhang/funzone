@@ -39,5 +39,17 @@
     }
     return profileArray;
 }
+
++(NSArray*)generateProfileInfoElementArrayFromAddressBookInfo:(NSArray*)json{
+    NSMutableArray *profileArray=[NSMutableArray array];
+    for (NSDictionary *user in json) {
+        ProfileInfoElement* element=[[ProfileInfoElement alloc] init];
+        element.user_name=[NSString stringWithFormat:@"%@",[user objectForKey:@"user_name"]];
+        element.email = [NSString stringWithFormat:@"%@",[user objectForKey:@"user_email"]];
+
+        [profileArray addObject:element];
+    }
+    return profileArray;
+}
 @end
 

@@ -17,4 +17,5 @@
 @property (nonatomic) BOOL followed;
 
 +(NSArray*)generateProfileInfoElementArrayFromJson:(NSArray*)json;
++(NSArray*)generateProfileInfoElementArrayFromAddressBookInfo:(NSArray*)json;
 @end

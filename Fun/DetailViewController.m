@@ -838,6 +838,8 @@
     }
 
     self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
+    [self.invitee addObjectsFromArray:[ProfileInfoElement generateProfileInfoElementArrayFromAddressBookInfo:[event objectForKey:@"invitee_emails"]]];
+    
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
             [view removeFromSuperview];
@@ -1399,7 +1401,7 @@
     NSError *error;
     NSDictionary *event = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     self.view_height = 0;
-    
+    NSLog(@"%@",event);
     if (self.isEventOwner) {
         //find the invited friend
         self.alreadyInvitedFriend =[event objectForKey:@"invitees"];

@@ -283,7 +283,7 @@
         if (contact.firstName) {
             nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
             if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
             }
         }
         else if(contact.lastName){
