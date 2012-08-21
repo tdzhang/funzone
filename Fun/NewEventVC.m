@@ -547,11 +547,11 @@
             }
             else{
                 //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",error.description);
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                notsuccess.delegate=self;
-                [notsuccess show];
+//                NSError *error = [request error];
+//                NSLog(@"%@",error.description);
+//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                notsuccess.delegate=self;
+//                [notsuccess show];
             }
             
         });
@@ -594,12 +594,12 @@
                 }
             }
             else{
-                //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",error.description);
-                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                notsuccess.delegate=self;
-                [notsuccess show];
+//                //connect error
+//                NSError *error = [request error];
+//                NSLog(@"%@",error.description);
+//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                notsuccess.delegate=self;
+//                [notsuccess show];
             }
             
         });
@@ -706,11 +706,11 @@
                 }
                 else{
                     //connect error
-                    NSError *error = [request error];
-                    NSLog(@"%@",error.description);
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    notsuccess.delegate=self;
-                    [notsuccess show];
+//                    NSError *error = [request error];
+//                    NSLog(@"%@",error.description);
+//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                    notsuccess.delegate=self;
+//                    [notsuccess show];
                 }
                 
             });
@@ -888,11 +888,11 @@
                 }
                 else{
                     //connect error
-                    NSError *error = [request error];
-                    NSLog(@"%@",error.description);
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                    notsuccess.delegate=self;
-                    [notsuccess show];
+//                    NSError *error = [request error];
+//                    NSLog(@"%@",error.description);
+//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                    notsuccess.delegate=self;
+//                    [notsuccess show];
                 }
                 
             });

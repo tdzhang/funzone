@@ -174,9 +174,9 @@
             }
             else{
                 //connect error
-                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                error.delegate=self;
-                [error show];
+//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                error.delegate=self;
+//                [error show];
             }
             
         });
@@ -250,9 +250,9 @@
             }
             else{
                 //connect error
-                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                error.delegate=self;
-                [error show];
+//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+//                error.delegate=self;
+//                [error show];
             }
             
         });

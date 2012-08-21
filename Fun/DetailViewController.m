@@ -466,8 +466,8 @@
             }
             else{
                 //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
+//                NSError *error = [request error];
+//                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
             }
             
         });
@@ -511,8 +511,8 @@
             }
             else{
                 //connect error
-                NSError *error = [request error];
-                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description]);
+//                NSError *error = [request error];
+//                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description]);
             }
             
         });
