@@ -106,11 +106,11 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
     //change the color style of the refresh button
-    self.refreshButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:0];
+    self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{

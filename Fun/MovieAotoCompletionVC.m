@@ -56,7 +56,7 @@
     
     //preset the search bar to be the first responser
     [self.searchDisplayController.searchBar becomeFirstResponder];
-    self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 }
 
 
@@ -69,7 +69,7 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
+    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
 }
 
