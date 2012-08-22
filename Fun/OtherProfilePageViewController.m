@@ -23,6 +23,7 @@
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *freshConnectionType;
+@property (weak, nonatomic) IBOutlet UIView *profileHeaderView;
 @property (nonatomic) BOOL isViewAppearConnection;
 @property (nonatomic) int refresh_page_num;
 @property (nonatomic,strong) NSString *tapped_event_id;
@@ -49,6 +50,7 @@
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
+@synthesize profileHeaderView = _profileHeaderView;
 @synthesize isViewAppearConnection=_isViewAppearConnection;
 @synthesize refresh_page_num=_refresh_page_num;
 @synthesize tapped_event_id=_tapped_event_id;
@@ -257,12 +259,25 @@
     backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
-    _creatorImageView.layer.cornerRadius = 7;
-    _creatorImageView.layer.masksToBounds = YES;
-    [_creatorImageView setClipsToBounds:YES];
-    [_creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.creatorImageView.layer.cornerRadius = 7;
+    self.creatorImageView.layer.masksToBounds = YES;
+    [self.creatorImageView setClipsToBounds:YES];
+    [self.creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
     
-
+    //set view background
+    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    
+    self.profileHeaderView.layer.cornerRadius = 2;
+    self.profileHeaderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.profileHeaderView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.profileHeaderView.layer.shadowRadius = 1.0f;
+    self.profileHeaderView.layer.shadowOpacity = 0.6f;
+    
+    self.creatorImageView.layer.cornerRadius = 4;
+    self.creatorImageView.clipsToBounds = YES;
+    [self.creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.creatorImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.creatorImageView.layer.borderWidth = 1;
 }
 
 - (void)viewDidUnload
@@ -274,6 +289,7 @@
     [self setFollowingNumLabel:nil];
     [self setFollowerNumLabel:nil];
     [self setFollowButton:nil];
+    [self setProfileHeaderView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

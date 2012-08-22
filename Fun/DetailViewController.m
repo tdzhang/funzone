@@ -876,13 +876,11 @@
     for (UIView *subview in [self.invitedPeopleSectionView subviews]) {
         [subview removeFromSuperview];
     }
-    NSLog(@"!!!!!%c", self.isInvited);
+    self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
+    [self.invitee addObjectsFromArray:[ProfileInfoElement generateProfileInfoElementArrayFromAddressBookInfo:[event objectForKey:@"invitee_emails"]]];
     if (!self.isEventOwner && !self.isInvited) {
         return;
     }
-    self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
-    [self.invitee addObjectsFromArray:[ProfileInfoElement generateProfileInfoElementArrayFromAddressBookInfo:[event objectForKey:@"invitee_emails"]]];
-    
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
             [view removeFromSuperview];
