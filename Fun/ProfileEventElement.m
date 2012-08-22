@@ -14,6 +14,7 @@
 @synthesize eventTitleLabel=_eventTitleLabel;
 @synthesize distanceLabel=_distanceLabel;
 @synthesize eventImageView=_eventImageView;
+@synthesize eventMaskView=_eventMaskView;
 @synthesize heartImageView=_heartImageView;
 @synthesize heartNumberLabel=_heartNumberLabel;
 
@@ -120,14 +121,24 @@
         }
     }
     
+    //add event mask
+    blockElement.eventMaskView=[[UIImageView alloc] initWithFrame:CGRectMake(PROFILE_ELEMENT_EVENT_IMAGE_X, PROFILE_ELEMENT_EVENT_IMAGE_Y, PROFILE_ELEMENT_EVENT_IMAGE_WIDTH, PROFILE_ELEMENT_EVENT_IMAGE_HEIGHT)];
+    [blockElement.eventMaskView setAlpha:EXPLORE_BLOCK_ELEMENT_MASK_ALPHA];
+    [blockElement.eventMaskView setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MASK_IMAGENAME]];
+    [blockElement.eventMaskView setContentMode:UIViewContentModeScaleToFill];
+    [blockElement.blockHolderView addSubview:blockElement.eventMaskView];
+    
     //add event title
-    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(5, 90, 135, 35)];
+    blockElement.eventTitleLabel=[[UILabel alloc] initWithFrame:CGRectMake(5, 90, 130, 35)];
+    [blockElement.eventTitleLabel setBackgroundColor:[UIColor clearColor]];
     blockElement.eventTitleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     blockElement.eventTitleLabel.numberOfLines = 2;
     [blockElement.eventTitleLabel setText:title];
+    [blockElement.eventTitleLabel setTextColor:[UIColor whiteColor]];
+    [blockElement.eventTitleLabel setShadowColor:[UIColor blackColor]];
+    [blockElement.eventTitleLabel setShadowOffset:CGSizeMake(0, 1)];
     [blockElement.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [blockElement.blockHolderView addSubview:blockElement.eventTitleLabel];
-    [blockElement.blockHolderView bringSubviewToFront:blockElement.eventTitleLabel];
     
     //add distance label
     blockElement.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 130, 120, 20)];

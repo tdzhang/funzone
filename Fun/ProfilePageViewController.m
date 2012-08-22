@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
+@property (weak, nonatomic) IBOutlet UIView *profileHeaderView;
 @property (nonatomic, strong) UIButton* showAllFollowingsButton;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) NSMutableArray *joined_blockViews;
@@ -66,6 +67,7 @@
 @synthesize followerNumLabel = _followerNumLabel;
 @synthesize moreButton = _moreButton;
 @synthesize mySegmentControl = _mySegmentControl;
+@synthesize profileHeaderView = _profileHeaderView;
 @synthesize showAllFollowingsButton = _showAllFollowingsButton;
 @synthesize blockViews = _blockViews;
 @synthesize joined_blockViews=_joined_blockViews;
@@ -582,23 +584,46 @@
 
     self.moreButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
    
-    UIImage *segmentSelected = [[UIImage imageNamed:@"tab-selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab-not-selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    self.mySegmentControl.frame = CGRectMake(0, 70, 310, 40);
+    UIImage *segmentSelected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"tab-seperator.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"tab-seperator.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:0];
-    [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:1];
-    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor,
-      [UIFont boldSystemFontOfSize:14], UITextAttributeFont, nil] forState:UIControlStateSelected];
     
-    _creatorImageView.layer.cornerRadius = 7;
-    _creatorImageView.layer.masksToBounds = YES;
-    _creatorImageView.clipsToBounds = YES;
-    [_creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
-
+    // — Dividers
+    UIImage *imgSelectedUnSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *imgUnSelectedUnSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *imgUnSelectedSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.mySegmentControl setDividerImage:imgSelectedUnSelected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:imgUnSelectedUnSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:imgUnSelectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    [self.mySegmentControl setTitle:@"COLLECTION" forSegmentAtIndex:0];
+    [self.mySegmentControl setTitle:@"INVITATION" forSegmentAtIndex:1];
+    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor colorWithRed:255.0/255.0 green:139/255.0 blue:41/255.0 alpha:1.0], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                    [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateSelected];
+    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor grayColor], UITextAttributeTextColor,
+                                                    [UIColor whiteColor], UITextAttributeTextShadowColor,
+                                                    [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:0];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:1];
+    //set view background
+    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    
+    self.profileHeaderView.layer.cornerRadius = 2;
+    self.profileHeaderView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.profileHeaderView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.profileHeaderView.layer.shadowRadius = 1.0f;
+    self.profileHeaderView.layer.shadowOpacity = 0.6f;
+    
+    self.creatorImageView.layer.cornerRadius = 4;
+    self.creatorImageView.clipsToBounds = YES;
+    [self.creatorImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.creatorImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.creatorImageView.layer.borderWidth = 1;
 }
 
 - (void)viewDidUnload{
@@ -611,6 +636,7 @@
     [self setMoreButton:nil];
     [self setMySegmentControl:nil];
     [self setJoinedScrollView:nil];
+    [self setProfileHeaderView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

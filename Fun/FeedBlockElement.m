@@ -94,7 +94,7 @@
     [blockElement.blockView addGestureRecognizer:tapGR];
     blockElement.blockView.layer.shadowColor = [[UIColor blackColor] CGColor];
     blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
-    blockElement.blockView.layer.shadowRadius = 1.0f;
+    blockElement.blockView.layer.shadowRadius = 2.0f;
     blockElement.blockView.layer.shadowOpacity = 0.6f;
     blockElement.blockView.layer.cornerRadius = 2;
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:blockElement.blockView.bounds];

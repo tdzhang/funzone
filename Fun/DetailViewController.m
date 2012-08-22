@@ -242,6 +242,9 @@
     
     self.shareButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
+    //set view background
+    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    
     self.eventImageView = [[UIImageView alloc] init];
     [self.myScrollView addSubview:self.eventImageView];
     
