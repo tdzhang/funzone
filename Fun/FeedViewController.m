@@ -120,7 +120,7 @@
     //if no friends feeds, need to do some instruction, now it's just set the view, make it possible to be refreshed if no friends at first
     //--------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //quest the most recent 10 featured events
-    if ([self.blockViews count]<3) {
+    if ([self.blockViews count]<3&&[self.freshConnectionType isEqualToString:@"not"]) {
             self.refresh_page_num=2; //the next page that need to refresh is 2
             self.freshConnectionType=@"New";
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -489,34 +489,37 @@
             self.refresh_page_num--;
             [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, [self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
         }
-        for (NSDictionary* event in json) {
-            NSString *title=[event objectForKey:@"title"];
-            //NSString *description=[event objectForKey:@"description"];
-            NSString *photo=[event objectForKey:@"photo_url"];
-            NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-            NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
-            //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
-            NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
-            NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
-            NSString *locationName=[event objectForKey:@"location"];
-            NSString *creator_name=[event objectForKey:@"creator_name"];
-            NSString *creator_pic=[event objectForKey:@"creator_pic"];
-            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
-            NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
-            if (!title) {
-                continue;
+        else{
+            for (NSDictionary* event in json) {
+                NSString *title=[event objectForKey:@"title"];
+                //NSString *description=[event objectForKey:@"description"];
+                NSString *photo=[event objectForKey:@"photo_url"];
+                NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+                NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                NSString *locationName=[event objectForKey:@"location"];
+                NSString *creator_name=[event objectForKey:@"creator_name"];
+                NSString *creator_pic=[event objectForKey:@"creator_pic"];
+                NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+                NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+                if (!title) {
+                    continue;
+                }
+                if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
+                    continue;
+                }
+                NSURL *url=[NSURL URLWithString:photo];
+                [self.blockViews insertObject:[FeedBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT+CONTENT_OFFSET_Y backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
+                //check for whether show the instruction
+                [self checkForWhetherShowInstruction];
+                //refresh the whole view
+                [self addMoreDataToTheMainScrollViewSUbviews];
             }
-            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {
-                continue;
-            }
-            NSURL *url=[NSURL URLWithString:photo];
-            [self.blockViews insertObject:[FeedBlockElement initialWithPositionY:[self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT+CONTENT_OFFSET_Y backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id  withLocationName:locationName  withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id withEventCategory:event_category] atIndex:[self.blockViews count]];
-            //check for whether show the instruction
-            [self checkForWhetherShowInstruction];
-            //refresh the whole view
-            [self addMoreDataToTheMainScrollViewSUbviews];
+
         }
-        
+                
         [self.refreshViewdown removeFromSuperview];
     }
     //check for whether show the instruction
