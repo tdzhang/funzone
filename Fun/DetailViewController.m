@@ -81,6 +81,7 @@
 #warning need to hide/show specific button for isInvited
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 @property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
+@property (nonatomic,strong)NSMutableArray* alreadyInvitedAddressBookFriends;  //the json data of already invited addressbook friend
 
 //@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
 @end
@@ -1295,6 +1296,7 @@
 
 //segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSLog(@"%@",segue.identifier);
     if ([segue.identifier isEqualToString:@"repin to create new event"]) {
         NewEventVC *newEventVC = segue.destinationViewController;
         [newEventVC repinTheEventWithEventID:self.event_id sharedEventID:self.shared_event_id creatorID:self.creator_id eventTitle:self.event_title eventTime:self.event_time eventImage:self.eventImageView.image locationName:self.location_name address:self.event_address longitude:self.longitude latitude:self.latitude description:self.description];
@@ -1302,7 +1304,7 @@
             //set the event page to be editable
             [newEventVC presetIsEditPageToTrue];
             [newEventVC preSetAlreadyInvitedFriend:[InviteFriendObject generateAlreadyInvitedInfoElementArrayFromJson:self.alreadyInvitedFriend]];
-            
+            [newEventVC preSetAlreadyInvitedAddressBookFriend:self.alreadyInvitedAddressBookFriends];
         } else {
             [newEventVC presetIsEditPageToFalse];
         }
@@ -1400,6 +1402,7 @@
     if (self.isEventOwner) {
         //find the invited friend
         self.alreadyInvitedFriend =[event objectForKey:@"invitees"];
+        self.alreadyInvitedAddressBookFriends=[event objectForKey:@"invitee_emails"];
     }
     
     //if the activity is not exist, pop back to the last page

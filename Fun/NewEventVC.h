@@ -41,4 +41,5 @@
 -(void)presetVia:(int)via;
 //used to set already invited friend for the edit page
 -(void)preSetAlreadyInvitedFriend:(NSArray*)friends;
+-(void)preSetAlreadyInvitedAddressBookFriend:(NSArray*)friends;
 @end

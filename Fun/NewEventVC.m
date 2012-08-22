@@ -248,6 +248,16 @@
     }
 }
 
+-(void)preSetAlreadyInvitedAddressBookFriend:(NSArray*)friends{
+    for (NSDictionary* friend in friends) {
+        
+        UserContactObject* contact=[[UserContactObject alloc] init];
+        contact.firstName=[friend objectForKey:@"user_name"];
+        contact.email=[NSArray arrayWithObject:[friend objectForKey:@"user_email"]];
+        [self.invitedAddressBookFriend setObject:contact forKey:[friend objectForKey:@"user_name"]];
+    }
+}
+
 //filter out the uncessary word for later search use
 -(NSString*)searchingWordsFilter:(NSString*) words{
     //filter out the words in the dictionary
