@@ -610,6 +610,7 @@
                                                     [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateNormal];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:0];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:1];
+    
     //set view background
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
     
