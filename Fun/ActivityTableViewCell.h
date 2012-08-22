@@ -19,8 +19,12 @@
 @property (nonatomic,strong) NSString* event_id;
 @property (nonatomic,strong) NSString* shared_event_id;
 
+@property (nonatomic,strong) NSString* event_name;
+@property (nonatomic,strong) NSString* message;
+
 @property (weak, nonatomic) IBOutlet UIImageView *userPicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
 
+-(void)resetWithConversationActivityObject:(activityElementObject*)element;
 -(void)resetWithActivityObject:(activityElementObject*)element;
 @end

@@ -18,6 +18,9 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 
+@synthesize event_name=_event_name;
+@synthesize message=_message;
+
 @synthesize userPicImageView;
 @synthesize activityDescriptionLabel;
 
@@ -129,6 +132,26 @@
         });
     }
      */
+}
+
+-(void)resetWithConversationActivityObject:(activityElementObject*)element{
+    self.type=element.type;
+    self.user_id=element.user_id;
+    self.user_name=element.user_name;
+    self.user_pic=element.user_pic;
+    self.event_id=element.event_id;
+    self.shared_event_id=element.shared_event_id;
+    
+    self.event_name=element.event_name;
+    self.message=element.message;
+    
+    [self.userPicImageView clipsToBounds];
+    [self.userPicImageView setContentMode:UIViewContentModeScaleToFill];
+
+    [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:13]];
+
+    [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"Message from %@ of event \"%@\": %@.",self.user_name,self.event_name,self.message]];
+    [self.userPicImageView setImage:[UIImage imageNamed:@"comment.png"]];
 }
 
 @end

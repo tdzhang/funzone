@@ -15,6 +15,9 @@
 @property (nonatomic,strong) NSString* user_pic;
 @property (nonatomic,strong) NSString* event_id;
 @property (nonatomic,strong) NSString* shared_event_id;
+@property (nonatomic,strong) NSString* event_name;
+@property (nonatomic,strong) NSString* message;
 
 +(NSMutableArray*)getActivityElementsArrayByJson:(NSArray*)json;
++(NSMutableArray*)getConversationActivityElementsArrayByJson:(NSArray*)json;
 @end

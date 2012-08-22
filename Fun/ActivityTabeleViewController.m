@@ -203,8 +203,7 @@
                 }
             }
         }
-#warning need other operation for the conversation activities part
-        [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
+        [cell resetWithConversationActivityObject:[self.activities objectAtIndex:indexPath.row]];
         return cell;
     }
 }
@@ -286,16 +285,16 @@
     });
     
     //fetching the conversation activity data
-#warning need further change of the url&cell of the conversation activities
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/conversations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         
         [request setRequestMethod:@"GET"];
         [request startSynchronous];
         int code=[request responseStatusCode];
         NSLog(@"%d",code);
+        NSLog(@"%@",request.responseString);
         dispatch_async( dispatch_get_main_queue(),^{
             if (code==200) {
                 //success
@@ -307,7 +306,7 @@
                     //not equal, update the last reveived json
                     self.lastReceivedJson_conversation=json;
                     //deal with json
-                    self.activities_conversation=[activityElementObject getActivityElementsArrayByJson:json];
+                    self.activities_conversation=[activityElementObject getConversationActivityElementsArrayByJson:json];
                     NSLog(@"Have fetched %d Activities",[self.activities_conversation count]);
                     [self reloadDataConsiderSegmentControl];
                 }
@@ -370,11 +369,9 @@
     });
     
     //fetching the conversation activity data
-#warning need further change of the url&cell of the conversation activities
-    //fetching the normal activity data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/conversations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         
         [request setRequestMethod:@"GET"];
@@ -396,7 +393,7 @@
                     //not equal, update the last reveived json
                     self.lastReceivedJson_conversation=json;
                     //deal with json
-                    self.activities_conversation=[activityElementObject getActivityElementsArrayByJson:json];
+                    self.activities_conversation=[activityElementObject getConversationActivityElementsArrayByJson:json];
                     NSLog(@"Have fetched %d Activities",[self.activities_conversation count]);
                     [self reloadDataConsiderSegmentControl];
                 }
@@ -443,6 +440,13 @@
         self.send_via=VIA_ACTIVITY_FRIEND_JOIN;
         [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
     }
+    else if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:@"conversation"]){
+        // your friend has just joined orange parc, go to that page to follow
+        self.send_via=VIA_ACTIVITY_CONVERSATION;
+        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+    }
+    
+#warning need to add the support for the conversation
     
 }
 

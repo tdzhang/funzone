@@ -16,6 +16,9 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 
+@synthesize event_name=_event_name;
+@synthesize message=_message;
+
 +(NSMutableArray*)getActivityElementsArrayByJson:(NSArray*)json{
     NSMutableArray* temp_array=[NSMutableArray array];
     for (NSDictionary *element in json) {
@@ -36,6 +39,29 @@
     }
     return temp_array;
 }
+
++(NSMutableArray*)getConversationActivityElementsArrayByJson:(NSArray*)json{
+    NSMutableArray* temp_array=[NSMutableArray array];
+    for (NSDictionary *element in json) {
+        activityElementObject *activity=[activityElementObject new];
+        NSString* type=@"conversation";
+        NSString* event_name=[NSString stringWithFormat:@"%@",[element objectForKey:@"title"]];
+        NSString* user_name=[element objectForKey:@"user_name"];
+        NSString* message=[element objectForKey:@"message_content"];
+        NSString* event_id=[element objectForKey:@"event_id"];
+        NSString* shared_event_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"shared_event_id"]];
+        activity.type=type;
+        activity.user_name=user_name;
+        activity.event_name=event_name;
+        activity.message=message;
+        activity.event_id=event_id;
+        activity.shared_event_id=shared_event_id;
+        [temp_array addObject:activity];
+    }
+    return temp_array;
+}
+
+
 @end
 
 

@@ -212,6 +212,7 @@
 #define VIA_PEOPLE_WHO_LIKE_THIS  22   // profile
 #define VIA_JOINED_PEOPLE  23          // profile
 #define VIA_INVITED_PEOPLE   24        // profile
+#define VIA_ACTIVITY_CONVERSATION 25   //conversation
 
 // Share Channel
 #define VIA_FACEBOOK 1

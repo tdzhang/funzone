@@ -82,7 +82,7 @@
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 @property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
 @property (nonatomic,strong)NSMutableArray* alreadyInvitedAddressBookFriends;  //the json data of already invited addressbook friend
-
+@property (nonatomic) BOOL isEnteredDiscussion;
 //@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
 @end
 
@@ -157,6 +157,7 @@
 @synthesize mysendMessageType=_mysendMessageType;
 @synthesize alreadyInvitedFriend=_alreadyInvitedFriend;
 //@synthesize shouldGoBack=_shouldGoBack;
+@synthesize isEnteredDiscussion=_isEnteredDiscussion;
 #pragma mark - self defined getter and setter
 -(BOOL)isInvited{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -306,7 +307,6 @@
     [CheckForInternetConnection CheckForConnectionToBackEndServer];
     //set the should back to false
 //    self.shouldGoBack=NO;
-    
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
@@ -343,35 +343,18 @@
             [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
-            
-//            self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-//            self.like_icon.frame = CGRectMake(15, 13, 24, 24);
-//            self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
-//            [self.like_label setBackgroundColor:[UIColor clearColor]];
-//            [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
-//            [self.like_label setTextColor:[UIColor whiteColor]];
-//            
-//            
-//            self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-//            self.join_icon.frame = CGRectMake(10, 13, 24, 24);            
-//            self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
-//            [self.join_label setBackgroundColor:[UIColor clearColor]];
-//            [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
-//            [self.join_label setTextColor:[UIColor whiteColor]];
-//            
-//            
-//            self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-//            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);            
-//            self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
-//            [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
-//            [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
-//            [self.doitmyself_label setTextColor:[UIColor whiteColor]];            
+          
         }
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    if (!self.isEnteredDiscussion) {
+        self.isEnteredDiscussion=YES;
+        [self performSegueWithIdentifier:@"startDiscussion" sender:self];
+    }
    
 }
 
@@ -401,6 +384,10 @@
 //server log need method
 -(void)preSetServerLogViaParameter:(int)via{
     self.via=via;
+    self.isEnteredDiscussion=YES;
+    if (self.via == VIA_ACTIVITY_CONVERSATION) {
+        self.isEnteredDiscussion=NO;
+    }
 }
 
 //handle the action: addViewCommentButtonClicked (the TableViewControlelr that used to show all the comment and add the comment)
