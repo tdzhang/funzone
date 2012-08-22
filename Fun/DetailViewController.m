@@ -24,7 +24,7 @@
 @property (nonatomic,strong) UIImageView *creatorProfileView;
 @property (nonatomic,strong) UILabel *creatorNameLabel;
 @property (nonatomic,strong) UIButton *creatorProfileButton;
-@property (nonatomic,weak) UILabel *eventTitleLabel;
+@property (nonatomic,strong) UILabel *eventTitleLabel;
 @property (nonatomic,strong) UIView *timeSectionView;
 @property (nonatomic,strong) UIView *locationSectionView;
 @property (nonatomic,strong) UIView *interestedPeopleLabelView;
@@ -658,10 +658,9 @@
 }
 
 - (void)handleEventCreator:(NSDictionary *)event {
-    for (UIView *subview in [self.creatorView subviews]) {
-        [subview removeFromSuperview];
-    }
-    [self.myScrollView addSubview:self.creatorView];
+//    for (UIView *subview in [self.creatorView subviews]) {
+//        [subview removeFromSuperview];
+//    }
     self.creatorView.frame = CGRectMake(0, self.view_height, 320, DVC_CREATOR_VIEW_HEIGHT);
     self.creatorView.backgroundColor = [UIColor whiteColor];
 //    self.creatorView.layer.shadowOffset = CGSizeMake(0, 1);
@@ -733,7 +732,6 @@
 
 - (void)handleEventTitle:(NSDictionary *)event {
     self.eventTitleLabel.frame = CGRectMake(15, self.view_height, 290, 40);
-    self.eventTitleLabel.backgroundColor = [UIColor grayColor];
     [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.eventTitleLabel.numberOfLines = 0;
@@ -744,7 +742,6 @@
     CGRect newFrame = self.eventTitleLabel.frame;
     newFrame.size.height = expectedLabelSize.height+30;
     self.eventTitleLabel.frame = newFrame;
-    [self.myScrollView addSubview:self.eventTitleLabel];
     
     self.view_height += self.eventTitleLabel.frame.size.height;
     
@@ -809,14 +806,14 @@
     eventLocation.numberOfLines = 1;
     [self.locationSectionView addSubview:eventLocation];
         
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(265, 10, 35, 20)];
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(270, 10, 35, 20)];
     [map_indicator_label setText:@"MAP"];
     [map_indicator_label setBackgroundColor:[UIColor clearColor]];
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
-    [map_indicator_label setTextColor:[UIColor lightGrayColor]];
+    [map_indicator_label setTextColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(295, 15.75, 6, 8.5)];
-    [right_Arrow setImage:[UIImage imageNamed:@"detailButton.png"]];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, 16.5, 4, 7)];
+    [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
     
@@ -879,7 +876,8 @@
     for (UIView *subview in [self.invitedPeopleSectionView subviews]) {
         [subview removeFromSuperview];
     }
-    if (!self.isEventOwner) {
+    NSLog(@"!!!!!%c", self.isInvited);
+    if (!self.isEventOwner && !self.isInvited) {
         return;
     }
     self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
