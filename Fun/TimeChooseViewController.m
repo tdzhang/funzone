@@ -70,6 +70,7 @@
     [super viewDidLoad];
     NSDate *now=[NSDate date];
     self.datePicker.minimumDate=now;
+    self.datePicker.minuteInterval=15;
 }
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
