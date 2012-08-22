@@ -653,6 +653,8 @@
             [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
             [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            NSLog(@"%@",self.createEvent_time);
+
             //used for server log
             [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
             
@@ -978,7 +980,7 @@
     }
     else if ([segue.identifier isEqualToString:@"FinshCreateGoToSharePart"]){
         ShareAfterNewEventViewController* nextVC=segue.destinationViewController;
-        [nextVC presetEventImage:self.createEvent_image WithTiTle:self.createEvent_title WithLatitude:self.createEvent_latitude WithLongitude:self.createEvent_longitude WithLocationName:self.createEvent_locationName WithTime:self.createEvent_time WithAddress:self.createEvent_time WithImageUrlName:self.createEvent_imageUrlName];
+        [nextVC presetEventImage:self.createEvent_image WithTiTle:self.createEvent_title WithLatitude:self.createEvent_latitude WithLongitude:self.createEvent_longitude WithLocationName:self.createEvent_locationName WithTime:self.createEvent_time WithAddress:self.createEvent_locationName WithImageUrlName:self.createEvent_imageUrlName];
     }
     else if([segue.identifier isEqualToString:@"StartInviteFriend"]){
         InviteTableViewController *peopleController=nil;
@@ -1465,12 +1467,40 @@
     NSDateComponents *weekdayComponents =
     [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit | NSMonthCalendarUnit |NSYearCalendarUnit | NSHourCalendarUnit|NSMinuteCalendarUnit) fromDate:date];
     NSInteger day = [weekdayComponents day];
+    NSString *day_string=nil;
+    if (day<10){
+        day_string=[NSString stringWithFormat:@"0%d",day];
+    }
+    else{
+        day_string=[NSString stringWithFormat:@"%d",day];
+    }
     //NSInteger weekday = [weekdayComponents weekday];
     NSInteger year= [weekdayComponents year];
     NSInteger month=[weekdayComponents month];
+    NSString *month_string=nil;
+    if (month<10){
+        month_string=[NSString stringWithFormat:@"0%d",month];
+    }
+    else{
+        month_string=[NSString stringWithFormat:@"%d",month];
+    }
     NSInteger hour = [weekdayComponents hour];
+    NSString *hour_string=nil;
+    if (hour<10){
+        hour_string=[NSString stringWithFormat:@"0%d",hour];
+    }
+    else{
+        hour_string=[NSString stringWithFormat:@"%d",hour];
+    }
     NSInteger minute = [weekdayComponents minute];
-    NSString* showDateString= [NSString stringWithFormat:@"%d/%d/%d %d:%d",month,day,year,hour,minute];
+    NSString *minute_string=nil;
+    if (minute<10){
+        minute_string=[NSString stringWithFormat:@"0%d",minute];
+    }
+    else{
+        minute_string=[NSString stringWithFormat:@"%d",minute];
+    }
+    NSString* showDateString= [NSString stringWithFormat:@"%d-%@-%@ %@:%@:00",year,month_string,day_string,hour_string,minute_string];
     [self.labelEventTime setText:showDateString];
     self.detail_event_time=showDateString;
     
