@@ -1765,6 +1765,12 @@
     }
     ProfileInfoElement* tapped_element=[self.invitee objectAtIndex:index];
     self.tap_user_id=tapped_element.user_id;
+    if (tapped_element.user_id) {
+        NSLog(@"%@",tapped_element.user_id);
+    }
+    else{
+        NSLog(@"123");
+    }
     if(touchPointY>35&&index<7&&touchPointX>35){
         self.next_page_profile_via=VIA_INVITED_PEOPLE;
         [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
