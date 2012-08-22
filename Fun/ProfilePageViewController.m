@@ -586,8 +586,8 @@
     UIImage *segmentUnselected = [[UIImage imageNamed:@"tab-not-selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"seperator_vertical.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"seperator_vertical.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"tab-seperator.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"tab-seperator.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:0];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:1];
     [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
