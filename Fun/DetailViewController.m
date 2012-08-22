@@ -39,6 +39,8 @@
 @property (nonatomic,strong) UIImageView *like_icon;
 @property (nonatomic,strong) UIImageView *join_icon;
 @property (nonatomic,strong) UIImageView *doitmyself_icon;
+@property (weak, nonatomic) IBOutlet UIButton *DIMButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (nonatomic,strong) UILabel *like_label;
 @property (nonatomic,strong) UILabel *join_label;
 @property (nonatomic,strong) UILabel *description_content;
@@ -108,6 +110,8 @@
 @synthesize like_icon=_like_icon;
 @synthesize join_icon=_join_icon;
 @synthesize doitmyself_icon=_doitmyself_icon;
+@synthesize DIMButton = _DIMButton;
+@synthesize likeButton = _likeButton;
 @synthesize like_label=_like_label;
 @synthesize join_label=_join_label;
 @synthesize doitmyself_label=_doitmyself_label;
@@ -282,6 +286,8 @@
     [self setLikeButtonSection:nil];
     [self setJoinButtonSection:nil];
     [self setDoitmyselfButtonSection:nil];
+    [self setDIMButton:nil];
+    [self setLikeButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -333,28 +339,29 @@
             [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
-            self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
-            self.like_icon.frame = CGRectMake(15, 13, 24, 24);
-            self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
-            [self.like_label setBackgroundColor:[UIColor clearColor]];
-            [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
-            [self.like_label setTextColor:[UIColor whiteColor]];
             
-            
-            self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
-            self.join_icon.frame = CGRectMake(10, 13, 24, 24);            
-            self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
-            [self.join_label setBackgroundColor:[UIColor clearColor]];
-            [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
-            [self.join_label setTextColor:[UIColor whiteColor]];
-            
-            
-            self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
-            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);            
-            self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
-            [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
-            [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
-            [self.doitmyself_label setTextColor:[UIColor whiteColor]];            
+//            self.like_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-interested-color.png"]];
+//            self.like_icon.frame = CGRectMake(15, 13, 24, 24);
+//            self.like_label = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, 45, 50)];
+//            [self.like_label setBackgroundColor:[UIColor clearColor]];
+//            [self.like_label setFont:[UIFont boldSystemFontOfSize:14]];
+//            [self.like_label setTextColor:[UIColor whiteColor]];
+//            
+//            
+//            self.join_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-invite-color.png"]];
+//            self.join_icon.frame = CGRectMake(10, 13, 24, 24);            
+//            self.join_label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 50, 50)];
+//            [self.join_label setBackgroundColor:[UIColor clearColor]];
+//            [self.join_label setFont:[UIFont boldSystemFontOfSize:14]];
+//            [self.join_label setTextColor:[UIColor whiteColor]];
+//            
+//            
+//            self.doitmyself_icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail-pick-color.png"]];
+//            self.doitmyself_icon.frame = CGRectMake(5, 13, 24, 24);            
+//            self.doitmyself_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 105, 50)];
+//            [self.doitmyself_label setBackgroundColor:[UIColor clearColor]];
+//            [self.doitmyself_label setFont:[UIFont boldSystemFontOfSize:14]];
+//            [self.doitmyself_label setTextColor:[UIColor whiteColor]];            
         }
     }
 }
@@ -482,11 +489,11 @@
     NSURL *url;
     if ([self.isLiked isEqualToString:@"0"]) {
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/like?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
-        [self.like_label setText:@"Unlike"];
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"liked_button.jpg"] forState:UIControlStateNormal];
         self.isLiked=@"1";
     } else {
         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/unlike?event_id=%@&shared_event_id=%@&auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],self.via]];
-        [self.like_label setText:@"Like"];
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"like_button.jpg"] forState:UIControlStateNormal];
         self.isLiked=@"0";
     }
    ///////////////////////////////////////////////////////////////////////////
@@ -1131,33 +1138,21 @@
     self.isLiked=[NSString stringWithFormat:@"%@",[event objectForKey:@"liked"]];
     self.isJoined=[NSString stringWithFormat:@"%@",[event objectForKey:@"joined"]];
     self.isAdded=[NSString stringWithFormat:@"%@",[event objectForKey:@"pinned"]];
-    [self.like_icon removeFromSuperview];
-    [self.like_label removeFromSuperview];
-    [self.join_icon removeFromSuperview];
-    [self.join_label removeFromSuperview];
-    [self.doitmyself_icon removeFromSuperview];
-    [self.doitmyself_label removeFromSuperview];
+//    [self.like_icon removeFromSuperview];
+//    [self.like_label removeFromSuperview];
+//    [self.join_icon removeFromSuperview];
+//    [self.join_label removeFromSuperview];
+//    [self.doitmyself_icon removeFromSuperview];
+//    [self.doitmyself_label removeFromSuperview];
     if ([self.isLiked isEqualToString:@"0"]) {
-        [self.like_label setText:@"Like"];
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"like_button.jpg"] forState:UIControlStateNormal];
     } else {
-        [self.like_label setText:@"Unlike"];
-    }
-    if ([self.isJoined isEqualToString:@"0"]) {
-        [self.join_label setText:@"Join"];
-    } else {
-        [self.join_label setText:@"Joined"];
-    }
+        [self.likeButton setBackgroundImage:[UIImage imageNamed:@"liked_button.jpg"] forState:UIControlStateNormal];    }
     if ([self.isAdded isEqualToString:@"0"]) {
-        [self.doitmyself_label setText:@"Do it myself"];
+        [self.DIMButton setBackgroundImage:[UIImage imageNamed:@"collect_button.jpg"] forState:UIControlStateNormal];
     } else {
-        [self.doitmyself_label setText:@"Already added"];
+        [self.DIMButton setBackgroundImage:[UIImage imageNamed:@"collected_button.jpg"] forState:UIControlStateNormal];
     }
-    [self.likeButtonSection addSubview:self.like_icon];
-    [self.likeButtonSection addSubview:self.like_label];
-    [self.joinButtonSection addSubview:self.join_icon];
-    [self.joinButtonSection addSubview:self.join_label];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_icon];
-    [self.doitmyselfButtonSection addSubview:self.doitmyself_label];
 }
 
 //action sheet related stuff

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -163,19 +163,19 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="f3t-7E-fkk">
-                                <rect key="frame" x="0.0" y="117" width="320" height="250"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="collection-background.jpg" id="f3t-7E-fkk">
+                                <rect key="frame" x="3" y="117" width="314" height="250"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT" userLabel="Scroll View- My event">
-                                <rect key="frame" x="0.0" y="117" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="118" width="320" height="250"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
                                 </connections>
                             </scrollView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SQy-2V-Vvf" userLabel="Scroll View - joined event">
-                                <rect key="frame" x="0.0" y="119" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="118" width="320" height="250"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="36q-I3-gQR"/>
@@ -1396,16 +1396,16 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
-                            <view alpha="0.90000000000000002" contentMode="scaleToFill" id="tq2-iD-Cwq">
+                            <view contentMode="scaleToFill" id="tq2-iD-Cwq">
                                 <rect key="frame" x="0.0" y="366" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="5MT-dk-DlV" userLabel="likeButtonSection">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="144" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fzQ-0i-xBz">
-                                                <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="144" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal">
@@ -1426,7 +1426,7 @@ Find us @OrangeParc.com</string>
                                         <rect key="frame" x="90" y="0.0" width="90" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FCz-IF-S0G">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FCz-IF-S0G">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1445,11 +1445,11 @@ Find us @OrangeParc.com</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="o52-QF-cV7" userLabel="doitmyselfButtonSection">
-                                        <rect key="frame" x="180" y="0.0" width="140" height="50"/>
+                                        <rect key="frame" x="144" y="0.0" width="176" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wsl-l8-Jjl">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal">
@@ -1468,7 +1468,7 @@ Find us @OrangeParc.com</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1499,13 +1499,14 @@ Find us @OrangeParc.com</string>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="DIMButton" destination="wsl-l8-Jjl" id="QSN-ty-aqZ"/>
                         <outlet property="actionButtonHolder" destination="tq2-iD-Cwq" id="AVI-0J-xzg"/>
                         <outlet property="doitmyselfButtonSection" destination="o52-QF-cV7" id="d3Q-cp-SEh"/>
                         <outlet property="interestOrInviteButton" destination="FCz-IF-S0G" id="Jbv-64-fko"/>
                         <outlet property="joinButtonSection" destination="txZ-ed-1EO" id="x18-JI-DXU"/>
+                        <outlet property="likeButton" destination="fzQ-0i-xBz" id="PPB-sR-z35"/>
                         <outlet property="likeButtonSection" destination="5MT-dk-DlV" id="EUH-qx-JVo"/>
                         <outlet property="myScrollView" destination="ODl-hu-66N" id="oS3-2F-YcI"/>
-                        <outlet property="pickOrEditButton" destination="wsl-l8-Jjl" id="QmU-S2-u0d"/>
                         <outlet property="shareButton" destination="GYg-j6-ubE" id="cmf-bn-a0e"/>
                         <segue destination="bGQ-ML-0nM" kind="push" identifier="addAndViewComment" id="25d-mw-vo9"/>
                         <segue destination="ogA-6E-Slr" kind="push" identifier="ChooseFriends" id="TRO-F3-acd"/>
@@ -3141,6 +3142,7 @@ Find us @OrangeParc.com</string>
         <image name="button-red.png" width="967" height="153"/>
         <image name="button_comment.png" width="361" height="120"/>
         <image name="cancel_button.png" width="250" height="121"/>
+        <image name="collection-background.jpg" width="628" height="606"/>
         <image name="collection-page-button.png" width="235" height="59"/>
         <image name="create_account_button.png" width="1167" height="200"/>
         <image name="current_location_icon.png" width="246" height="246"/>
@@ -3208,10 +3210,12 @@ Find us @OrangeParc.com</string>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="DIMButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
                 <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
                 <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="joinButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="likeButtonSection" candidateClass="UIView"/>
                 <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
@@ -3324,7 +3328,6 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3373,10 +3376,10 @@ Find us @OrangeParc.com</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="nyH-Sx-6aU"/>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="jpf-qW-bdW"/>
-        <segue reference="Hfw-Db-bjl"/>
-        <segue reference="sin-Qw-UXs"/>
+        <segue reference="oxR-j5-unP"/>
+        <segue reference="27v-Ws-SEN"/>
         <segue reference="eX7-7v-GIv"/>
+        <segue reference="sin-Qw-UXs"/>
+        <segue reference="jpf-qW-bdW"/>
     </inferredMetricsTieBreakers>
 </document>
