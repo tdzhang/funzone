@@ -95,7 +95,7 @@
                             [Cache addDataToCache:url withData:imageData];
                             //refresh the whole view
                             blockElement.eventImageView.image=[UIImage imageWithData:imageData];
-                            [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+                            //[blockElement.blockHolderView addSubview:blockElement.eventImageView];
                         });
                     }
                 }
@@ -106,7 +106,7 @@
                         dispatch_async( dispatch_get_main_queue(),^{
                             [Cache addDataToCache:url withData:imageData];
                             blockElement.eventImageView.image=[UIImage imageWithData:imageData];
-                            [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+                            //[blockElement.blockHolderView addSubview:blockElement.eventImageView];
                         });
                     }
                 }
@@ -115,7 +115,7 @@
         else {
             dispatch_async( dispatch_get_main_queue(),^{
                 blockElement.eventImageView.image=[UIImage imageWithData:[Cache getCachedData:url]];
-                [blockElement.blockHolderView addSubview:blockElement.eventImageView];
+                //[blockElement.blockHolderView addSubview:blockElement.eventImageView];
             });
         }
     }
