@@ -305,7 +305,7 @@
 {
     if(section == 0)
     {
-        return @"Regitered User";
+        return @"Registered User";
     }
     else if(section == 1)
     {
