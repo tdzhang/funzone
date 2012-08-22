@@ -204,11 +204,11 @@
     }
     
     //people want to do this section
-    blockElement.numDoItMyselfSection = [[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_DIM_X, EXPLORE_BLOCK_ELEMENT_DIM_Y, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    blockElement.numDoItMyselfSection = [[UIView alloc] init];
     blockElement.numDoItMyselfSection.backgroundColor = [UIColor clearColor];
     [blockElement.blockView addSubview:blockElement.numDoItMyselfSection];
     
-    UIView *numDoItMyselfBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_DIM_WIDTH, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT)];
+    UIView *numDoItMyselfBackground = [[UIView alloc] init];
     numDoItMyselfBackground.backgroundColor = [UIColor blackColor];
     numDoItMyselfBackground.layer.cornerRadius = 4;
     [numDoItMyselfBackground setAlpha:0.6];
@@ -223,8 +223,10 @@
     [blockElement.numDoItMyself setShadowOffset:CGSizeMake(0, 1)];
     [blockElement.numDoItMyself setAlpha:1];
     [blockElement.numDoItMyselfSection addSubview:blockElement.numDoItMyself];
+    CGSize expectedWidth = [blockElement.numDoItMyself.text sizeWithFont:[UIFont boldSystemFontOfSize:20] forWidth:100 lineBreakMode:UILineBreakModeClip];
+    blockElement.numDoItMyself.frame = CGRectMake(5, 4, expectedWidth.width, 20);
     
-    UILabel *numDIMLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 45, 15)];
+    UILabel *numDIMLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(blockElement.numDoItMyself.frame.origin.x+blockElement.numDoItMyself.frame.size.width+5, 2, 45, 15)];
     numDIMLabel1.text = @"people";
     [numDIMLabel1 setTextColor:[UIColor whiteColor]];
     [numDIMLabel1 setFont:[UIFont systemFontOfSize:10]];
@@ -232,13 +234,21 @@
     [numDIMLabel1 setAlpha:1];
     [blockElement.numDoItMyselfSection addSubview:numDIMLabel1];
     
-    UILabel *numDIMLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 65, 15)];
-    numDIMLabel2.text = @"want to try it";
+    UILabel *numDIMLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(blockElement.numDoItMyself.frame.origin.x+blockElement.numDoItMyself.frame.size.width+5, 12, 50, 15)];
+    if ([DIM_label isEqualToString:@"0"] || [DIM_label isEqualToString:@"1"]) {
+        numDIMLabel2.text = @"wants to try it";
+    } else {
+        numDIMLabel2.text = @"want to try it";
+    }
     [numDIMLabel2 setTextColor:[UIColor whiteColor]];
     [numDIMLabel2 setFont:[UIFont systemFontOfSize:8]];
     [numDIMLabel2 setBackgroundColor:[UIColor clearColor]];
     [numDIMLabel2 setAlpha:1];
     [blockElement.numDoItMyselfSection addSubview:numDIMLabel2];
+    
+    int total_width = blockElement.numDoItMyself.frame.size.width+10+50+5+10;
+    blockElement.numDoItMyselfSection.frame = CGRectMake(310-total_width, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
+    numDoItMyselfBackground.frame = CGRectMake(0, 0, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     
     //set the event_id and shared_event_id
     blockElement.event_id=event_id;
