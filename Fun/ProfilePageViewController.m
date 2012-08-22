@@ -582,7 +582,14 @@
 
     self.moreButton.tintColor = [UIColor colorWithRed:0.94111 green:0.6373 blue:0.3 alpha:1];
    
-    
+    UIImage *segmentSelected = [[UIImage imageNamed:@"tab-selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab-not-selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"seperator_vertical.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"seperator_vertical.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:0];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:1];
     
     _creatorImageView.layer.cornerRadius = 7;
     _creatorImageView.layer.masksToBounds = YES;
@@ -828,7 +835,7 @@
             [self.refreshViewdown addSubview:underloading];
             [self.refreshViewdown addSubview:loading];
             [self.mainScrollView addSubview:self.refreshViewdown];
-            self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2+0.5)*PROFILE_ELEMENT_VIEW_HEIGHT);
+            self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5);
             
             
             //set the freshConnectionType To @"Add"
@@ -856,7 +863,7 @@
                     if ([json count]==0) {
                         //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
                         self.refresh_page_num--;
-                        [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT)];
+                        [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT+5)];
                     }
                     
                     //set the freshConnectionType to "not"
@@ -1308,7 +1315,7 @@
         [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
     }
     else{
-        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5)];
     }
     
 }
@@ -1322,7 +1329,7 @@
         [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
     }
     else{
-        [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.joined_blockViews count]/2 + [self.joined_blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+        [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.joined_blockViews count]/2 + [self.joined_blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5)];
     }
     
 }
@@ -1336,7 +1343,7 @@
         [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
     }
     else{
-        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+        [self.mainScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.blockViews count]/2 + [self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5)];
     }
 }
 
@@ -1348,7 +1355,7 @@
         [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
     }
     else{
-        [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.joined_blockViews count]/2 + [self.joined_blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT)];
+        [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, ([self.joined_blockViews count]/2 + [self.joined_blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5)];
     }
 }
 

@@ -53,7 +53,7 @@
 
     ProfileEventElement* blockElement=[[ProfileEventElement alloc] init];
     //initial the blockElement frame
-    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(5 + 155*(index%2),(index/2)*PROFILE_ELEMENT_VIEW_HEIGHT, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];
+    blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(3 + 158*(index%2),(index/2)*PROFILE_ELEMENT_VIEW_HEIGHT+5, PROFILE_ELEMENT_VIEW_WIDTH, PROFILE_ELEMENT_VIEW_HEIGHT)];
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
@@ -121,18 +121,11 @@
     }
     
     //add event title
-    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(5, 95, 135, 35)];
+    blockElement.eventTitleLabel =[[UILabel alloc] initWithFrame:CGRectMake(5, 90, 135, 35)];
     blockElement.eventTitleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     blockElement.eventTitleLabel.numberOfLines = 2;
     [blockElement.eventTitleLabel setText:title];
     [blockElement.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-//    CGSize maximumLabelSize1 = CGSizeMake(135,9999);
-//    CGSize expectedLabelSize1 = [title sizeWithFont:[UIFont boldSystemFontOfSize:12] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-//    CGSize expectedWidth1 = [title sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:135 lineBreakMode:UILineBreakModeWordWrap];
-//    CGRect newFrame1 = blockElement.eventTitleLabel.frame;
-//    newFrame1.size.height = (expectedLabelSize1.height > 35)?35:expectedLabelSize1.height;
-//    newFrame1.size.width = expectedWidth1.width;
-//    blockElement.eventTitleLabel.frame = newFrame1;
     [blockElement.blockHolderView addSubview:blockElement.eventTitleLabel];
     
     //add distance label
