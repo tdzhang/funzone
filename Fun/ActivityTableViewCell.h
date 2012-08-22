@@ -20,7 +20,6 @@
 @property (nonatomic,strong) NSString* shared_event_id;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userPicImageView;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
 
 -(void)resetWithActivityObject:(activityElementObject*)element;

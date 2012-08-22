@@ -11,8 +11,12 @@
 
 @interface ActivityTabeleViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,strong)NSMutableArray* activities;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
+@property(nonatomic,strong)NSMutableArray* activities; //which is used to hold the array that hold the results to show
+@property(nonatomic,strong)NSMutableArray* activities_conversation; //used to hold conversation activities
+@property(nonatomic,strong)NSMutableArray* activities_normal; // used to hold other normal activitise
 @property(nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequecy
+@property(nonatomic,strong)NSArray* lastReceivedJson_conversation; //used to limite the refresh frequecy
 @property(nonatomic,strong)activityElementObject* tapped_element;
 @property(nonatomic)int send_via;
 //start fetching activity data from the sever(and did the badge clean job)
@@ -21,8 +25,12 @@
 
 @implementation ActivityTabeleViewController
 @synthesize refreshButton = _refreshButton;
+@synthesize mySegmentControl = _mySegmentControl;
 @synthesize activities=_activities;
+@synthesize activities_conversation=_activities_conversation;
+@synthesize activities_normal=_activities_normal;
 @synthesize lastReceivedJson=_lastReceivedJson;
+@synthesize lastReceivedJson_conversation=_lastReceivedJson_conversation;
 @synthesize tapped_element=_tapped_element;
 @synthesize send_via=_send_via;
 
@@ -39,6 +47,51 @@
     }
     return _lastReceivedJson;
 }
+-(NSMutableArray *)activities_conversation{
+    if (!_activities_conversation) {
+        _activities_conversation=[NSMutableArray array];
+    }
+    return _activities_conversation;
+}
+
+-(NSMutableArray *)activities_normal{
+    if (!_activities_normal) {
+        _activities_normal=[NSMutableArray array];
+    }
+    return _activities_normal;
+}
+
+-(NSArray *)lastReceivedJson_conversation{
+    if (!_lastReceivedJson_conversation) {
+        _lastReceivedJson_conversation=[NSArray array];
+    }
+    return _lastReceivedJson_conversation;
+}
+
+#pragma mark - segment control action
+- (IBAction)segmentControlValuechanged:(id)sender {
+    NSLog(@"%d",[self.mySegmentControl selectedSegmentIndex]);
+    if ([self.mySegmentControl selectedSegmentIndex]==0) {
+        self.activities=self.activities_normal;
+        [self.tableView reloadData];
+    }
+    else if ([self.mySegmentControl selectedSegmentIndex]==1){
+        self.activities=self.activities_conversation;
+        [self.tableView reloadData];
+    }
+}
+
+-(void)reloadDataConsiderSegmentControl{
+    if ([self.mySegmentControl selectedSegmentIndex]==0) {
+        self.activities=self.activities_normal;
+        [self.tableView reloadData];
+    }
+    else if ([self.mySegmentControl selectedSegmentIndex]==1){
+        self.activities=self.activities_conversation;
+        [self.tableView reloadData];
+    }
+}
+
 
 #pragma mark - View Life Cycle
 - (id)initWithStyle:(UITableViewStyle)style
@@ -90,6 +143,7 @@
 - (void)viewDidUnload
 {
     [self setRefreshButton:nil];
+    [self setMySegmentControl:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -116,23 +170,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ActivityTableViewCell";
-    
-    ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+    if ([self.mySegmentControl selectedSegmentIndex]==0) {
+        //for the normal activities
+        static NSString *CellIdentifier = @"ActivityTableViewCell";
         
-        for (UIView *view in views) {
-            if([view isKindOfClass:[UITableViewCell class]])
-            {
-                cell = (ActivityTableViewCell*)view;
+        ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+            
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]])
+                {
+                    cell = (ActivityTableViewCell*)view;
+                }
             }
         }
+        [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
+        return cell;
     }
-    [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
-    return cell;
+    else{
+        //for the conversation activities
+        static NSString *CellIdentifier = @"ActivityTableViewCell";
+        
+        ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+            
+            for (UIView *view in views) {
+                if([view isKindOfClass:[UITableViewCell class]])
+                {
+                    cell = (ActivityTableViewCell*)view;
+                }
+            }
+        }
+#warning need other operation for the conversation activities part
+        [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
+        return cell;
+    }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,6 +252,7 @@
 */
 #pragma mark - Start Fetching Data
 -(void)startFetchingActivityData{
+    //fetching the normal activity data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
@@ -193,25 +273,50 @@
                 //not equal, update the last reveived json
                 self.lastReceivedJson=json;
                 //deal with json
-                self.activities=[activityElementObject getActivityElementsArrayByJson:json];
-                NSLog(@"Have fetched %d Activities",[self.activities count]);
-                [self.tableView reloadData];
+                self.activities_normal=[activityElementObject getActivityElementsArrayByJson:json];
+                NSLog(@"Have fetched %d Activities",[self.activities_normal count]);
+                [self reloadDataConsiderSegmentControl];
             }
             //reset the tabbat notification number
             [PushNotificationHandler clearApplicationPushNotifNumber];
             [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
         }
-        else{
-            //connect error
-//            NSError *error = [request error];
-//            NSLog(@"%@",error.description);
-//            UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
-//            notsuccess.delegate=self;
-//            [notsuccess show];
-        }
-        
+        else{}
         });
+    });
+    
+    //fetching the conversation activity data
+#warning need further change of the url&cell of the conversation activities
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        int code=[request responseStatusCode];
+        NSLog(@"%d",code);
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_conversation]]) {
+                    //not equal, update the last reveived json
+                    self.lastReceivedJson_conversation=json;
+                    //deal with json
+                    self.activities_conversation=[activityElementObject getActivityElementsArrayByJson:json];
+                    NSLog(@"Have fetched %d Activities",[self.activities_conversation count]);
+                    [self reloadDataConsiderSegmentControl];
+                }
+                //reset the tabbat notification number
+                [PushNotificationHandler clearApplicationPushNotifNumber];
+                [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
+            }
+            else{}
+        });
     });
     
 }
@@ -226,6 +331,7 @@
 }
 
 -(void)RefreshAction{
+    //fetching the normal activity data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
@@ -250,23 +356,55 @@
                     //not equal, update the last reveived json
                     self.lastReceivedJson=json;
                     //deal with json
-                    self.activities=[activityElementObject getActivityElementsArrayByJson:json];
-                    NSLog(@"Have fetched %d Activities",[self.activities count]);
-                    [self.tableView reloadData];
+                    self.activities_normal=[activityElementObject getActivityElementsArrayByJson:json];
+                    NSLog(@"Have fetched %d Activities",[self.activities_normal count]);
+                    [self reloadDataConsiderSegmentControl];
                 }
                 //reset the tabbat notification number
                 [PushNotificationHandler clearApplicationPushNotifNumber];
                 [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
             }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Connection Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Connect later" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-//                [notsuccess show];
-            }
+            else{}
+        });
+        
+    });
+    
+    //fetching the conversation activity data
+#warning need further change of the url&cell of the conversation activities
+    //fetching the normal activity data
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/activities?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+        
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        int code=[request responseStatusCode];
+        NSLog(@"%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            //disable the button before the request is finshed
+            [self.refreshButton setEnabled:YES];
             
+            if (code==200) {
+                //success
+                NSString *responseString = [request responseString];
+                NSLog(@"%@",responseString);
+                NSError *error;
+                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_conversation]]) {
+                    //not equal, update the last reveived json
+                    self.lastReceivedJson_conversation=json;
+                    //deal with json
+                    self.activities_conversation=[activityElementObject getActivityElementsArrayByJson:json];
+                    NSLog(@"Have fetched %d Activities",[self.activities_conversation count]);
+                    [self reloadDataConsiderSegmentControl];
+                }
+                //reset the tabbat notification number
+                [PushNotificationHandler clearApplicationPushNotifNumber];
+                [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];
+            }
+            else{}
         });
         
     });

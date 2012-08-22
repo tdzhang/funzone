@@ -11,7 +11,6 @@
 
 @implementation FeedBlockElement
 @synthesize blockView=_blockView;
-@synthesize blockElementHolderView = _blockElementHolderView;
 @synthesize view=_view;
 @synthesize creator=_creator;
 @synthesize backGroundImageView=_backGroundImageView;
@@ -91,26 +90,24 @@
     //add gesture(tap) to the blockView
     blockElement.blockView.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:tap_target action:@selector(tapBlock:)];
+    [blockElement.blockView setBackgroundColor:[UIColor whiteColor]];
     [blockElement.blockView addGestureRecognizer:tapGR];
-    
-    //blockElementHolder View
-    blockElement.blockElementHolderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, FEED_BLOCK_ELEMENT_VIEW_WIDTH, FEED_BLOCK_ELEMENT_HOLDER_VIEW_HEIGHT)];
-    [blockElement.blockElementHolderView setImage:[UIImage imageNamed:@"blockelementholder.png"]];
-    [blockElement.blockView addSubview:blockElement.blockElementHolderView];
+    blockElement.blockView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
+    blockElement.blockView.layer.shadowRadius = 1.0f;
+    blockElement.blockView.layer.shadowOpacity = 0.6f;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:blockElement.blockView.bounds];
+    blockElement.blockView.layer.shadowPath = path.CGPath;
     
     //set the creator id
     blockElement.creator_id=creator_id;
-    
-    //create View
-    blockElement.view=[[UIView alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_SUB_VIEW_X,FEED_BLOCK_ELEMENT_SUB_VIEW_Y, FEED_BLOCK_ELEMENT_SUB_VIEW_WIDTH, FEED_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
-    [blockElement.blockView addSubview:blockElement.view];
-    
+
     //Backgroud Image
-    blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_SUB_VIEW_X, FEED_BLOCK_ELEMENT_SUB_VIEW_Y, FEED_BLOCK_ELEMENT_SUB_VIEW_WIDTH, FEED_BLOCK_ELEMENT_SUB_VIEW_HEIGHT)];
+    blockElement.backGroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 300, 120)];
     [blockElement.backGroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [blockElement.backGroundImageView setClipsToBounds:YES];
     [blockElement.backGroundImageView setAlpha:1.0];
-    [blockElement.view addSubview:blockElement.backGroundImageView];
+    [blockElement.blockView addSubview:blockElement.backGroundImageView];
     
     if (![Cache isURLCached:backGroundImageUrl]) {
         //using high priority queue to fetch the image
@@ -151,7 +148,7 @@
     [mask setAlpha:FEED_BLOCK_ELEMENT_MASK_ALPHA];
     [mask setImage:[UIImage imageNamed:FEED_BLOCK_ELEMENT_MASK_IMAGENAME]];
     [mask setContentMode:UIViewContentModeScaleToFill];
-    [blockElement.view addSubview:mask];
+    [blockElement.blockView addSubview:mask];
     
     
     //Title Label
@@ -170,7 +167,7 @@
     newFrame.origin.y -= expectedLabelSize.height - FEED_BLOCK_ELEMENT_TITLE_TEXT_HEIGHT;
     newFrame.size.height = expectedLabelSize.height;
     blockElement.titleLabel.frame = newFrame;
-    [blockElement.view addSubview:blockElement.titleLabel];
+    [blockElement.blockView addSubview:blockElement.titleLabel];
     
     //Category Label
     blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
@@ -180,25 +177,9 @@
     blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
-    [blockElement.view addSubview:blockElement.categoryLabel];
+    [blockElement.blockView addSubview:blockElement.categoryLabel];
     
-    //marker image
-    //    UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
-    //    [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
-    //    [marker setImage:[UIImage imageNamed:EXPLORE_BLOCK_ELEMENT_MARKER_IMAGENAME]];
-    //    [marker setContentMode:UIViewContentModeScaleToFill];
-    //    [blockElement.view addSubview:marker];
-    
-    //location Label
-    //    blockElement.locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_X, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_Y, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_WIDTH, EXPLORE_BLOCK_ELEMENT_LOCATION_LABEL_HEIGHT)];
-    //    blockElement.locationLabel.text = locationName;
-    //    blockElement.locationLabel.backgroundColor = [UIColor clearColor];
-    //    blockElement.locationLabel.textColor = [UIColor whiteColor];
-    //    blockElement.locationLabel.shadowColor=[UIColor darkTextColor];
-    //    blockElement.locationLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    //    [blockElement.view addSubview:blockElement.locationLabel];
-    
-    //event view
+    //creator view
     blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_EVENTVIEW_X,FEED_BLOCK_ELEMENT_EVENTVIEW_Y, FEED_BLOCK_ELEMENT_EVENTVIEW_WIDTH, FEED_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
     [blockElement.creator setBackgroundColor:[UIColor clearColor]];
     [blockElement.blockView addSubview:blockElement.creator];

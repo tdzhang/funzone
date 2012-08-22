@@ -132,6 +132,10 @@
 		0FD5B90815CF8E2900927153 /* InviteFriendTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B90615CF8E2800927153 /* InviteFriendTableViewCell.h */; };
 		0FD5B90915CF8E2900927153 /* InviteFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD5B90715CF8E2900927153 /* InviteFriendTableViewCell.m */; };
 		0FD5B90B15CF8E3B00927153 /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD5B90A15CF8E3B00927153 /* InviteTableViewCell.xib */; };
+		0FE834A615E4C067008384BD /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE834A215E4C067008384BD /* comment.png */; };
+		0FE834A715E4C067008384BD /* follow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE834A315E4C067008384BD /* follow.png */; };
+		0FE834A815E4C067008384BD /* invite.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE834A415E4C067008384BD /* invite.png */; };
+		0FE834A915E4C067008384BD /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE834A515E4C067008384BD /* like.png */; };
 		0FE93B6415D24DDF004F8D01 /* SelfChooseLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FE93B6315D24DDF004F8D01 /* SelfChooseLocation.h */; };
 		0FEC5BEF15C0A63600E3C8A3 /* MyPermenentCachePart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */; };
 		0FEC5BF315C0A6E500E3C8A3 /* URLConnectionCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEC5BF215C0A6E500E3C8A3 /* URLConnectionCache.m */; };
@@ -486,6 +490,10 @@
 		0FD5B90615CF8E2800927153 /* InviteFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendTableViewCell.h; sourceTree = "<group>"; };
 		0FD5B90715CF8E2900927153 /* InviteFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendTableViewCell.m; sourceTree = "<group>"; };
 		0FD5B90A15CF8E3B00927153 /* InviteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
+		0FE834A215E4C067008384BD /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		0FE834A315E4C067008384BD /* follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow.png; sourceTree = "<group>"; };
+		0FE834A415E4C067008384BD /* invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite.png; sourceTree = "<group>"; };
+		0FE834A515E4C067008384BD /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		0FE93B6315D24DDF004F8D01 /* SelfChooseLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfChooseLocation.h; sourceTree = "<group>"; };
 		0FEC5BED15C0A63600E3C8A3 /* MyPermenentCachePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPermenentCachePart.h; sourceTree = "<group>"; };
 		0FEC5BEE15C0A63600E3C8A3 /* MyPermenentCachePart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPermenentCachePart.m; sourceTree = "<group>"; };
@@ -1078,6 +1086,17 @@
 			name = InviteTable;
 			sourceTree = "<group>";
 		};
+		0FE834A015E4C05C008384BD /* activity */ = {
+			isa = PBXGroup;
+			children = (
+				0FE834A215E4C067008384BD /* comment.png */,
+				0FE834A315E4C067008384BD /* follow.png */,
+				0FE834A415E4C067008384BD /* invite.png */,
+				0FE834A515E4C067008384BD /* like.png */,
+			);
+			name = activity;
+			sourceTree = "<group>";
+		};
 		0FF6040015C7B1FA00AE89CF /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,6 +1284,7 @@
 		4668A7A01593F98600713A4C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0FE834A015E4C05C008384BD /* activity */,
 				46822D8C15E4059A00E3EC2C /* refresh.png */,
 				46822D8D15E4059A00E3EC2C /* refresh@2x.png */,
 				4683BC9D15E2F9F200DB1A70 /* Header and Tab */,
@@ -1823,6 +1843,10 @@
 				46822DA115E49B1200E3EC2C /* DVC_edit_button.png in Resources */,
 				46822DA415E4A00B00E3EC2C /* DVC_disclosure.png in Resources */,
 				46822DA615E4ACAC00E3EC2C /* collection-shadow.png in Resources */,
+				0FE834A615E4C067008384BD /* comment.png in Resources */,
+				0FE834A715E4C067008384BD /* follow.png in Resources */,
+				0FE834A815E4C067008384BD /* invite.png in Resources */,
+				0FE834A915E4C067008384BD /* like.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
