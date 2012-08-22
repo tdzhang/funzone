@@ -138,6 +138,42 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //-----------------------> segment control part<<---------------------------------------\\
+    self.mySegmentControl.frame = CGRectMake(0, 0, 310, 40);
+    UIImage *segmentSelected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    // — Dividers
+    UIImage *imgSelectedUnSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *imgUnSelectedUnSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *imgUnSelectedSelected = [[UIImage imageNamed:@"button_seperator.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.mySegmentControl setDividerImage:imgSelectedUnSelected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:imgUnSelectedUnSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.mySegmentControl setDividerImage:imgUnSelectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    [self.mySegmentControl setTitle:@"Normal" forSegmentAtIndex:0];
+    [self.mySegmentControl setTitle:@"Dicussion" forSegmentAtIndex:1];
+    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor colorWithRed:255.0/255.0 green:139/255.0 blue:41/255.0 alpha:1.0], UITextAttributeTextColor,
+                                                    [UIColor clearColor], UITextAttributeTextShadowColor,
+                                                    [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateSelected];
+    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor grayColor], UITextAttributeTextColor,
+                                                    [UIColor whiteColor], UITextAttributeTextShadowColor,
+                                                    [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateNormal];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:0];
+    [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:1];
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    
+    self.mySegmentControl.layer.cornerRadius = 2;
+    self.mySegmentControl.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.mySegmentControl.layer.shadowOffset = CGSizeMake(0, 1);
+    self.mySegmentControl.layer.shadowRadius = 1.0f;
+    self.mySegmentControl.layer.shadowOpacity = 0.6f;
 }
 
 - (void)viewDidUnload
