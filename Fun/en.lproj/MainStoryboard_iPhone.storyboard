@@ -3125,17 +3125,10 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="eX7-7v-GIv"/>
         <segue reference="nyH-Sx-6aU"/>
         <segue reference="oxR-j5-unP"/>
         <segue reference="6rH-Lj-bNq"/>
-=======
-        <segue reference="nyH-Sx-6aU"/>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="6rH-Lj-bNq"/>
-        <segue reference="eX7-7v-GIv"/>
->>>>>>> redesign detail page
         <segue reference="jpf-qW-bdW"/>
         <segue reference="sin-Qw-UXs"/>
     </inferredMetricsTieBreakers>
