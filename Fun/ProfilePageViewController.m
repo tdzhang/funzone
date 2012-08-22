@@ -1325,7 +1325,7 @@
     [self.joinedScrollView addSubview:Element.blockView];
     self.joined_refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EVENT_ELEMENT_CONTENT_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT)];
     [self.joinedScrollView addSubview:self.joined_refreshView];
-    if ([self.blockViews count]<5) {
+    if ([self.joined_blockViews count]<5) {
         [self.joinedScrollView setContentSize:CGSizeMake(PROFILE_PAGEVC_VIEW_WIDTH, 2.2*PROFILE_ELEMENT_VIEW_HEIGHT)];
     }
     else{
