@@ -838,8 +838,7 @@
             [self.refreshViewdown addSubview:underloading];
             [self.refreshViewdown addSubview:loading];
             [self.mainScrollView addSubview:self.refreshViewdown];
-            self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2)*PROFILE_ELEMENT_VIEW_HEIGHT+5);
-            
+            self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2+0.5)*PROFILE_ELEMENT_VIEW_HEIGHT+5);
             
             //set the freshConnectionType To @"Add"
             self.freshConnectionType=@"Add";
