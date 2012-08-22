@@ -127,6 +127,7 @@
     [blockElement.eventTitleLabel setText:title];
     [blockElement.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [blockElement.blockHolderView addSubview:blockElement.eventTitleLabel];
+    [blockElement.blockHolderView bringSubviewToFront:blockElement.eventTitleLabel];
     
     //add distance label
     blockElement.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 130, 120, 20)];
