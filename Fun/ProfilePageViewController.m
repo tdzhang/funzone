@@ -590,6 +590,9 @@
     [self.mySegmentControl setDividerImage:[UIImage imageNamed:@"seperator_vertical.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:0];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, -5) forSegmentAtIndex:1];
+    [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor,
+      [UIFont boldSystemFontOfSize:14], UITextAttributeFont, nil] forState:UIControlStateSelected];
     
     _creatorImageView.layer.cornerRadius = 7;
     _creatorImageView.layer.masksToBounds = YES;
