@@ -96,6 +96,7 @@
     blockElement.blockView.layer.shadowOffset = CGSizeMake(0, 1);
     blockElement.blockView.layer.shadowRadius = 1.0f;
     blockElement.blockView.layer.shadowOpacity = 0.6f;
+    blockElement.blockView.layer.cornerRadius = 2;
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:blockElement.blockView.bounds];
     blockElement.blockView.layer.shadowPath = path.CGPath;
     
