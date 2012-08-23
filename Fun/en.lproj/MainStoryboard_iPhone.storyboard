@@ -33,22 +33,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT" userLabel="Scroll View- My event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="256"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="255"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
                                 </connections>
                             </scrollView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SQy-2V-Vvf" userLabel="Scroll View - joined event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="256"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="255"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="36q-I3-gQR"/>
@@ -181,11 +177,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSW-Vq-fkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="jag-1w-uml" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KUr-qn-diQ">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -440,11 +432,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="biv-AN-I61" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sIh-4k-1gG" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZQ8-cu-0rI">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -946,11 +934,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-PY-q4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zn8-a6-0kg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Mz-5Q-Y9g">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="V1s-0l-w0g">
@@ -997,11 +981,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2881,11 +2861,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2915,15 +2891,11 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6r2-kJ-M0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="7ka-bV-aVx" customClass="DiscussionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LmK-Pk-Wst">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qKs-cR-P3L">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="408"/>
+                                <rect key="frame" x="0.0" y="-1" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="QW9-qw-uQ6">
@@ -3058,11 +3030,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzE-nc-ta7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="3aH-6z-7wk" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="Z3B-HS-ers">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="HSV-vh-S5O">
@@ -3179,6 +3147,7 @@ Find us @OrangeParc.com</string>
         <class className="ChooseImageTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseOtherPhotoSourceButtonClicked:"/>
                 <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
                 <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
@@ -3363,11 +3332,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lqc-Cx-NBX"/>
-        <segue reference="1jG-3L-8vd"/>
-        <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
-        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="sin-Qw-UXs"/>
         <segue reference="oxR-j5-unP"/>
+        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="eX7-7v-GIv"/>
+        <segue reference="6rH-Lj-bNq"/>
     </inferredMetricsTieBreakers>
 </document>
