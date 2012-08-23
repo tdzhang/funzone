@@ -199,7 +199,8 @@
     NSString *venue_title=(place.name)?place.name:@"No name";
     
     if (place.categories_shortName) {
-        venue_title=[[NSString alloc] initWithFormat:@"%@ (%@)",[venue_title copy],place.categories_shortName];
+       // venue_title=[[NSString alloc] initWithFormat:@"%@ (%@)",[venue_title copy],place.categories_shortName];
+        venue_title=[[NSString alloc] initWithFormat:@"%@",[venue_title copy]];
     }
        
     //set mapview region( where to show the map veiw)
