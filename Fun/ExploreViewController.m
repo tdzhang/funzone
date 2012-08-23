@@ -16,7 +16,8 @@
 @property CGFloat currentY;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-@property (weak, nonatomic) IBOutlet UIButton *CategoryFilterButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *CategoryFilterButton;
+
 
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
@@ -47,6 +48,7 @@
 @synthesize mainScrollView = _mainScrollView;
 @synthesize refreshButton = _refreshButton;
 @synthesize CategoryFilterButton = _CategoryFilterButton;
+
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize refresh_page_num=_refresh_page_num;
@@ -225,6 +227,7 @@
 {
     [self setMainScrollView:nil];
     [self setRefreshButton:nil];
+
     [self setCategoryFilterButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -545,7 +548,6 @@
         [self.actionSheet setBounds:CGRectMake(0,0,320, 464)];
     
 }
-
 - (IBAction)CategoryFilterClicked:(id)sender {
     [self createActionSheet];
     self.pickerType = @"picker";
@@ -554,7 +556,7 @@
     chPicker.delegate = self;
     chPicker.showsSelectionIndicator = YES;
     [self.actionSheet addSubview:chPicker];
-    //sessoTxt.text = [sessoArray objectAtIndex:0];
+
 }
 
 
@@ -603,43 +605,44 @@
     NSLog(@"%@",self.categoryFilter);
     if ([self.categoryFilter isEqualToString:@"All Event"]||!self.categoryFilter) {
         self.categoryFilter_id=nil;
-        [self.CategoryFilterButton setTitle:@"All" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"All"];
+
     }
     else if([self.categoryFilter isEqualToString:@"Food"]){
         self.categoryFilter_id=FOOD;
-        [self.CategoryFilterButton setTitle:@"Food" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Food"];
     }
     else if([self.categoryFilter isEqualToString:@"Movie"]){
         self.categoryFilter_id=MOVIE;
-        [self.CategoryFilterButton setTitle:@"Movie" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Movie"];
     }
     else if([self.categoryFilter isEqualToString:@"Sports"]){
         self.categoryFilter_id=SPORTS;
-        [self.CategoryFilterButton setTitle:@"Sports" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Sports"];
     }
     else if([self.categoryFilter isEqualToString:@"Party"]){
         self.categoryFilter_id=NIGHTLIFE;
-        [self.CategoryFilterButton setTitle:@"Party" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Party"];
     }
     else if([self.categoryFilter isEqualToString:@"Outdoor"]){
         self.categoryFilter_id=OUTDOOR;
-        [self.CategoryFilterButton setTitle:@"Outdoor" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Outdoor"];
     }
     else if([self.categoryFilter isEqualToString:@"Entertain"]){
         self.categoryFilter_id=ENTERTAIN;
-        [self.CategoryFilterButton setTitle:@"Entertain" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Entertain"];
     }
     else if([self.categoryFilter isEqualToString:@"Event"]){
         self.categoryFilter_id=EVENTS;
-        [self.CategoryFilterButton setTitle:@"Event" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Event"];
     }
     else if([self.categoryFilter isEqualToString:@"Shopping"]){
         self.categoryFilter_id=SHOPPING;
-        [self.CategoryFilterButton setTitle:@"Shopping" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Shopping"];
     }
     else if([self.categoryFilter isEqualToString:@"Other"]){
         self.categoryFilter_id=OTHERS;
-        [self.CategoryFilterButton setTitle:@"Other" forState:UIControlStateNormal];
+        [self.CategoryFilterButton setTitle:@"Other"];
     }
     [self RefreshAction];
 }
