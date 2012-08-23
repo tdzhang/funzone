@@ -3140,7 +3140,6 @@ Find us @OrangeParc.com</string>
         <image name="texture.png" width="320" height="431"/>
         <image name="texture@2x.png" width="640" height="862"/>
     </resources>
-<<<<<<< HEAD
     <classes>
         <class className="ActivityTabeleViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
@@ -3342,8 +3341,6 @@ Find us @OrangeParc.com</string>
             </relationships>
         </class>
     </classes>
-=======
->>>>>>> add category filter wahahahahahahwelijfakwfhalehawlhf
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
