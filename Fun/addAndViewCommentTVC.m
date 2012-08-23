@@ -125,7 +125,7 @@
     
     cell.userNameLabel.text=[NSString stringWithFormat:@"%@",comment.user_name];
     cell.userNameLabel.frame = CGRectMake(55, 5, 100, 30);
-    [cell.userNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    //[cell.userNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
     CGSize maximumLabelSize1 = CGSizeMake(100,9999);
     CGSize expectedLabelSize1 = [comment.user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
     CGSize expectedWidth1 = [comment.user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
@@ -136,10 +136,10 @@
     
     cell.commentTimeLabel.text=comment.timestamp;
     CGSize maximumLabelSize2 = CGSizeMake(100,9999);
-    CGSize expectedLabelSize2 = [comment.timestamp sizeWithFont:[UIFont boldSystemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
-    CGSize expectedWidth2 = [comment.timestamp sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
-    cell.commentTimeLabel.frame = CGRectMake(310-expectedWidth2.width, 5, 100, 30);
-    [cell.commentTimeLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    CGSize expectedLabelSize2 = [comment.timestamp sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
+    CGSize expectedWidth2 = [comment.timestamp sizeWithFont:[UIFont systemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+    cell.commentTimeLabel.frame = CGRectMake(310-expectedWidth2.width, 7, 100, 30);
+    [cell.commentTimeLabel setFont:[UIFont systemFontOfSize:12]];
     [cell.commentTimeLabel  setTextColor:[UIColor lightGrayColor]];
     CGRect newFrame2 = cell.commentTimeLabel.frame;
     newFrame2.size.height = expectedLabelSize2.height;
@@ -148,12 +148,12 @@
     
     cell.commentContentLabel.text=comment.content;
     cell.commentContentLabel.frame = CGRectMake(55, cell.userNameLabel.frame.size.height+5, 260, 30);
-    [cell.commentContentLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [cell.commentContentLabel setFont:[UIFont systemFontOfSize:13]];
     [cell.commentContentLabel setTextColor:[UIColor darkGrayColor]];
     cell.commentContentLabel.lineBreakMode = UILineBreakModeWordWrap;
     cell.commentContentLabel.numberOfLines = 0;
     CGSize maximumLabelSize3 = CGSizeMake(260,9999);
-    CGSize expectedLabelSize3 = [comment.content sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
+    CGSize expectedLabelSize3 = [comment.content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
     CGRect newFrame3 = cell.commentContentLabel.frame;
     newFrame3.size.height = expectedLabelSize3.height;
     cell.commentContentLabel.frame = newFrame3;

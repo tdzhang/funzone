@@ -42,9 +42,8 @@
 							<object class="IBUILabel" id="632262114">
 								<reference key="NSNextResponder" ref="670622435"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{30, 7}, {214, 21}}</string>
+								<string key="NSFrame">{{30, 10}, {214, 21}}</string>
 								<reference key="NSSuperview" ref="670622435"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="869523368"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -73,9 +72,8 @@
 							<object class="IBUILabel" id="869523368">
 								<reference key="NSNextResponder" ref="670622435"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{30, 26}, {214, 21}}</string>
+								<string key="NSFrame">{{30, 29}, {214, 21}}</string>
 								<reference key="NSSuperview" ref="670622435"/>
-								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -103,7 +101,6 @@
 						</array>
 						<string key="NSFrameSize">{304, 60}</string>
 						<reference key="NSSuperview" ref="723056360"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="632262114"/>
 						<string key="NSReuseIdentifierKey">_NS:395</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -119,7 +116,6 @@
 				</array>
 				<string key="NSFrameSize">{324, 61}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="670622435"/>
 				<string key="NSReuseIdentifierKey">_NS:384</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -205,32 +201,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">12</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">MyContactsTableViewCell</string>
-					<string key="superclassName">UITableViewCell</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="userInfo">UILabel</string>
-						<string key="userName">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="userInfo">
-							<string key="name">userInfo</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="userName">
-							<string key="name">userName</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MyContactsTableViewCell.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
