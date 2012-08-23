@@ -429,7 +429,7 @@
         [self.inviteIcon setAlpha:0.8];
     }
     
-
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -447,7 +447,17 @@
     }
     else if (!self.isnotFirstTime&&(![self.eventType isEqualToString:@"movie"])&&!self.isEditPage) {
         self.isnotFirstTime=YES;
-        [self.textFieldEventTitle becomeFirstResponder];
+        if (self.via == CREATE_EVENT) {
+            [self.textFieldEventTitle becomeFirstResponder];
+        }
+    }
+    
+    
+    if (self.via == CREATE_EVENT) {
+        [self.navigationController.navigationBar.topItem setTitle:@"Create new event"];
+    }
+    else{
+        [self.navigationController.navigationBar.topItem setTitle:@"Do it myself"];
     }
 }
 
