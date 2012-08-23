@@ -59,7 +59,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="UGh-i6-kdi">
-                                        <rect key="frame" x="79" y="7" width="236" height="23"/>
+                                        <rect key="frame" x="74" y="7" width="236" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="highlightedColor"/>
@@ -80,7 +80,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Pqi-bq-4QV">
-                                        <rect key="frame" x="122" y="40" width="60" height="21"/>
+                                        <rect key="frame" x="120" y="40" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -89,7 +89,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6fz-GF-hE9">
-                                        <rect key="frame" x="190" y="35" width="116" height="30"/>
+                                        <rect key="frame" x="191" y="35" width="114" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="collection-page-button.png">
@@ -104,7 +104,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="mSa-Eg-g3F">
-                                        <rect key="frame" x="240" y="40" width="60" height="21"/>
+                                        <rect key="frame" x="239" y="40" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,7 +113,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="t6A-VT-R99">
-                                        <rect key="frame" x="207" y="37" width="25" height="25"/>
+                                        <rect key="frame" x="208" y="37" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1947,7 +1947,7 @@ Find us @OrangeParc.com</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1wH-pe-pa0">
-                                        <rect key="frame" x="72" y="36" width="116" height="30"/>
+                                        <rect key="frame" x="73" y="35" width="114" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="collection-page-button.png">
@@ -1962,7 +1962,7 @@ Find us @OrangeParc.com</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ro9-jb-Vwh">
-                                        <rect key="frame" x="85" y="37" width="25" height="25"/>
+                                        <rect key="frame" x="90" y="37" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1971,7 +1971,7 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4iO-1l-sCA">
-                                        <rect key="frame" x="115" y="40" width="60" height="21"/>
+                                        <rect key="frame" x="120" y="40" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1980,7 +1980,7 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mlA-eT-SfK">
-                                        <rect key="frame" x="193" y="36" width="116" height="30"/>
+                                        <rect key="frame" x="191" y="35" width="114" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="collection-page-button.png">
@@ -1995,7 +1995,7 @@ Find us @OrangeParc.com</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="H4i-h2-XbF">
-                                        <rect key="frame" x="204" y="37" width="25" height="25"/>
+                                        <rect key="frame" x="208" y="37" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2004,7 +2004,7 @@ Find us @OrangeParc.com</string>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="QeR-1e-73Z">
-                                        <rect key="frame" x="235" y="40" width="60" height="21"/>
+                                        <rect key="frame" x="239" y="40" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2020,7 +2020,7 @@ Find us @OrangeParc.com</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S4f-Qf-n1a">
-                                        <rect key="frame" x="212" y="74" width="86" height="30"/>
+                                        <rect key="frame" x="208" y="74" width="97" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="button_comment.png">
@@ -3116,6 +3116,15 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="MovieButtonClicked:"/>
+                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SelfDefineButtonClicked:"/>
+                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
+                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -3147,6 +3156,7 @@ Find us @OrangeParc.com</string>
         <class className="DiscussionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CommentEnterButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
             </relationships>
@@ -3216,13 +3226,6 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
-                <relationship kind="action" name="CreateEventToSever:"/>
-                <relationship kind="action" name="InviteFriendButtonClicked:"/>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
-                <relationship kind="action" name="deleteEventButton:"/>
-                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -3259,7 +3262,6 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
-                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3275,6 +3277,10 @@ Find us @OrangeParc.com</string>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
+                <relationship kind="action" name="EmailShare:"/>
+                <relationship kind="action" name="FinishedThisSharePage:"/>
+                <relationship kind="action" name="MesssgeShare:"/>
+                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>
@@ -3282,6 +3288,9 @@ Find us @OrangeParc.com</string>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="DecideToCancel:"/>
+                <relationship kind="action" name="DecideToChoose:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
@@ -3308,11 +3317,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="hTB-gn-88u"/>
         <segue reference="1jG-3L-8vd"/>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
+        <segue reference="sin-Qw-UXs"/>
         <segue reference="lqc-Cx-NBX"/>
+        <segue reference="oxR-j5-unP"/>
     </inferredMetricsTieBreakers>
 </document>
