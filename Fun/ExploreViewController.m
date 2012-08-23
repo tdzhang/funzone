@@ -123,6 +123,7 @@
     backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
+    self.CategoryFilterButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
@@ -577,7 +578,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *string;
-    NSArray *category=[NSArray arrayWithObjects:@"All Event",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    NSArray *category=[NSArray arrayWithObjects:@"All events",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
     if ([self.pickerType isEqualToString:@"picker"])
         string = [category objectAtIndex:row];
     return string;
@@ -589,7 +590,7 @@
 
 // Item picked
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSArray *category=[NSArray arrayWithObjects:@"All Event",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    NSArray *category=[NSArray arrayWithObjects:@"All events",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
     if ([self.pickerType isEqualToString:@"picker"])
     {
         self.categoryFilter=[category objectAtIndex:row];
@@ -603,7 +604,7 @@
     [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
     self.actionSheet = nil;
     NSLog(@"%@",self.categoryFilter);
-    if ([self.categoryFilter isEqualToString:@"All Event"]||!self.categoryFilter) {
+    if ([self.categoryFilter isEqualToString:@"All events"]||!self.categoryFilter) {
         self.categoryFilter_id=nil;
         [self.CategoryFilterButton setTitle:@"All"];
 
