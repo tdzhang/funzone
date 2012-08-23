@@ -747,7 +747,7 @@
     newframe.size.width = expectedWidth1.width;
     categoryLabel.frame = newframe;
     [self.categoryView addSubview:categoryLabel];
-    self.categoryView.frame = CGRectMake(10, 135, expectedWidth1.width+33, 30);
+    self.categoryView.frame = CGRectMake(320-expectedWidth1.width-33-10, 20, expectedWidth1.width+33, 30);
     categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33, 30);
     self.categoryView.backgroundColor = [UIColor clearColor];
     [self.myScrollView addSubview:self.categoryView];
@@ -998,12 +998,12 @@
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
         
-        UIImageView *inviteeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 15, 23, 14)];
+        UIImageView *inviteeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 10, 23, 14)];
         [inviteeIcon setImage:[UIImage imageNamed:INVITEE_ICON]];
         [inviteeIcon setAlpha:0.7];
         [self.invitedPeopleSectionView addSubview:inviteeIcon];
         
-        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(35, 10, 200, 25)];
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(35, 5, 200, 25)];
         if ([self.invitee count] == 1) {
             [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
@@ -1014,10 +1014,16 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
+<<<<<<< HEAD
         self.privateMessageButton.frame = CGRectMake(200, 40, 100, 40);
         //self.privateMessageButton.titleLabel.text = @"+ Message";
+=======
+        self.privateMessageButton.frame = CGRectMake(210, 0, 100, 40);
+        self.privateMessageButton.titleLabel.text = @"+ Message";
+>>>>>>> minor changes
         [self.privateMessageButton setTitle:@"+ Message" forState:UIControlStateNormal];
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
+        [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateHighlighted];
         [self.invitedPeopleSectionView addSubview:self.privateMessageButton];
         
         int x_position_photo=30;

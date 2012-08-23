@@ -184,7 +184,7 @@
     //-------------------------->invited people part<---------------------------------//
     int height=0;
     if ([self.invitee count]>0) {
-        height=DISCUSSION_INVITE_BLOCK_HEIGHT*(([self.invitee count]-1)/5+1)+30;
+        height=DISCUSSION_INVITE_BLOCK_HEIGHT*(([self.invitee count])/5+1)+30;
         self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, height)];
         self.invitedPeopleSectionView.backgroundColor = [UIColor whiteColor];
         self.invitedPeopleSectionView.layer.shadowColor = [[UIColor blackColor] CGColor];
