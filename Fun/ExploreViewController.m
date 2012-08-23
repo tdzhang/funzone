@@ -16,6 +16,7 @@
 @property CGFloat currentY;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
+@property (weak, nonatomic) IBOutlet UIButton *CategoryFilterButton;
 
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
@@ -33,6 +34,7 @@
 @property (nonatomic,strong) UIActionSheet *actionSheet;
 @property (nonatomic,strong) NSString *pickerType;
 @property (nonatomic,strong) NSString *categoryFilter;
+@property (nonatomic,strong) NSString *categoryFilter_id;
 
 @end
 
@@ -44,6 +46,7 @@
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
 @synthesize refreshButton = _refreshButton;
+@synthesize CategoryFilterButton = _CategoryFilterButton;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize refresh_page_num=_refresh_page_num;
@@ -57,7 +60,7 @@
 @synthesize actionSheet=_actionSheet;
 @synthesize pickerType=_pickerType;
 @synthesize categoryFilter=_categoryFilter;
-
+@synthesize categoryFilter_id=_categoryFilter_id;
 
 
 
@@ -127,15 +130,29 @@
         
         FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
         NSURL *url=nil;
-        if([CLLocationManager regionMonitoringEnabled]){
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+        if (self.categoryFilter_id) {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+            }
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+            }
+        } else {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+            }
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            }
         }
-        else{
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-        }
-        if ([defaults objectForKey:@"login_auth_token"]) {
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-        }
+        
+        
         NSLog(@"%@",url);
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
@@ -208,6 +225,7 @@
 {
     [self setMainScrollView:nil];
     [self setRefreshButton:nil];
+    [self setCategoryFilterButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -273,22 +291,35 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
             NSURL *url=nil;
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            
+            
+            if (self.categoryFilter_id) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+                }
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                }
+            } else {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+                }
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                }
             }
-            else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-            }
+            
             NSLog(@"%@",url);
             ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
             [request setRequestMethod:@"GET"];
             [request startSynchronous];
 
-            
-            
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
             
@@ -379,15 +410,32 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
             NSURL *url=nil;
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            
+            
+            if (self.categoryFilter_id) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,self.categoryFilter_id]];
+                }
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                }
+            } else {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
+                }
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
+                }
             }
-            else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
-            }
+            
+            
+            
             NSLog(@"%@",url);
             ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
             
@@ -462,8 +510,7 @@
 #pragma mark - choose category filter button
 #pragma mark UIPickerViewDelegate Methods
 
-UIActionSheet *actionSheet;
-NSString *pickerType;
+
 
 - (void)createActionSheet {
 
@@ -491,11 +538,11 @@ NSString *pickerType;
         [pickerToolbar setItems:barItems animated:YES];
 
         
-        [actionSheet addSubview:pickerToolbar];
+        [self.actionSheet addSubview:pickerToolbar];
 
         
-        [actionSheet showInView:self.view];
-        [actionSheet setBounds:CGRectMake(0,0,320, 464)];
+        [self.actionSheet showInView:self.view];
+        [self.actionSheet setBounds:CGRectMake(0,0,320, 464)];
     
 }
 
@@ -506,7 +553,7 @@ NSString *pickerType;
     chPicker.dataSource = self;
     chPicker.delegate = self;
     chPicker.showsSelectionIndicator = YES;
-    [actionSheet addSubview:chPicker];
+    [self.actionSheet addSubview:chPicker];
     //sessoTxt.text = [sessoArray objectAtIndex:0];
 }
 
@@ -522,13 +569,13 @@ NSString *pickerType;
 {
     int count;
     if ([self.pickerType isEqualToString:@"picker"])
-        count = 9;
+        count = 10;
     return count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *string;
-    NSArray *category=[NSArray arrayWithObjects:@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    NSArray *category=[NSArray arrayWithObjects:@"All Event",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
     if ([self.pickerType isEqualToString:@"picker"])
         string = [category objectAtIndex:row];
     return string;
@@ -540,8 +587,8 @@ NSString *pickerType;
 
 // Item picked
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSArray *category=[NSArray arrayWithObjects:@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
-    if ([pickerType isEqualToString:@"picker"])
+    NSArray *category=[NSArray arrayWithObjects:@"All Event",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    if ([self.pickerType isEqualToString:@"picker"])
     {
         self.categoryFilter=[category objectAtIndex:row];
        // Txt.text = [array objectAtIndex:row];
@@ -551,16 +598,50 @@ NSString *pickerType;
 
 - (void)pickerDone:(id)sender
 {
-    if(select == NO)
-    {
-        if ([pickerType isEqualToString:@"picker"])
-        {
-            //Txt.text = [array objectAtIndex:0];
-        }
+    [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    self.actionSheet = nil;
+    NSLog(@"%@",self.categoryFilter);
+    if ([self.categoryFilter isEqualToString:@"All Event"]||!self.categoryFilter) {
+        self.categoryFilter_id=nil;
+        [self.CategoryFilterButton setTitle:@"All" forState:UIControlStateNormal];
     }
-    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
-    actionSheet = nil;
-    
+    else if([self.categoryFilter isEqualToString:@"Food"]){
+        self.categoryFilter_id=FOOD;
+        [self.CategoryFilterButton setTitle:@"Food" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Movie"]){
+        self.categoryFilter_id=MOVIE;
+        [self.CategoryFilterButton setTitle:@"Movie" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Sports"]){
+        self.categoryFilter_id=SPORTS;
+        [self.CategoryFilterButton setTitle:@"Sports" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Party"]){
+        self.categoryFilter_id=NIGHTLIFE;
+        [self.CategoryFilterButton setTitle:@"Party" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Outdoor"]){
+        self.categoryFilter_id=OUTDOOR;
+        [self.CategoryFilterButton setTitle:@"Outdoor" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Entertain"]){
+        self.categoryFilter_id=ENTERTAIN;
+        [self.CategoryFilterButton setTitle:@"Entertain" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Event"]){
+        self.categoryFilter_id=EVENTS;
+        [self.CategoryFilterButton setTitle:@"Event" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Shopping"]){
+        self.categoryFilter_id=SHOPPING;
+        [self.CategoryFilterButton setTitle:@"Shopping" forState:UIControlStateNormal];
+    }
+    else if([self.categoryFilter isEqualToString:@"Other"]){
+        self.categoryFilter_id=OTHERS;
+        [self.CategoryFilterButton setTitle:@"Other" forState:UIControlStateNormal];
+    }
+    [self RefreshAction];
 }
 
 
@@ -613,15 +694,29 @@ NSString *pickerType;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
         NSURL *url=nil;
-        if([CLLocationManager regionMonitoringEnabled]){
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+        if (self.categoryFilter_id) {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+            }
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+            }
+        } else {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+            }
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            }
         }
-        else{
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-        }
-        if ([defaults objectForKey:@"login_auth_token"]) {
-            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-        }
+        
+        
         NSLog(@"%@",url);
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
         [request setRequestMethod:@"GET"];
