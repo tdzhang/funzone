@@ -35,7 +35,7 @@
 @property (nonatomic,strong) TableViewContainMapviewTVC *tableViewControllerContainMap;
 @property (nonatomic,weak) NSString *predefinedSeachingWords;
 @property (nonatomic,strong) NSString *preDefinedEventType;
-@property (nonatomic,weak) MKPointAnnotation *predefinedAnnotation;
+@property (nonatomic,strong) MKPointAnnotation *predefinedAnnotation;
 @end
 
 

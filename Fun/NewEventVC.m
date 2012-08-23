@@ -959,7 +959,9 @@
                 mapViewC.predefinedAnnotation=[[MKPointAnnotation alloc] init];
                 [mapViewC.predefinedAnnotation setCoordinate:self.predefinedAnnotation.coordinate];
                 [mapViewC.predefinedAnnotation setTitle:self.predefinedAnnotation.title];
+                NSLog(@"%@",self.predefinedAnnotation.title);
                 [mapViewC.predefinedAnnotation setTitle:self.predefinedAnnotation.subtitle];
+                NSLog(@"%@",self.predefinedAnnotation.subtitle);
             }
 
         }

@@ -221,6 +221,7 @@
     
     //if the predefined annotation, then show it (instead of current location)
     if(self.predefinedAnnotation){
+        NSLog(@"wahaha");
         if ((self.predefinedAnnotation.coordinate.latitude>0.02||self.predefinedAnnotation.coordinate.latitude<-0.02)) {
             MKPointAnnotation *annotation=self.predefinedAnnotation;
             MKCoordinateRegion region;
@@ -455,11 +456,12 @@
         //Searching the key word
         double lat=userCoordinate.latitude;
         double lng=userCoordinate.longitude;
-        NSString *request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=50000&keyword=%@&sensor=false&key=%@",lat,lng,keyWords,oauthToken];
+        NSString *request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?location=%f,%f&radius=50000&query=%@&sensor=false&key=%@",lat,lng,keyWords,oauthToken];
         NSLog(@"%@",request_string);
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection start];
+
     }
 
 }
@@ -618,7 +620,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
     NSLog(@"Have %@ elements",count);
         //start to put fetched data in to self.foursquareSearchResults
     for (NSDictionary *venue in results) {
-        FourSquarePlace *place = [FourSquarePlace initializeWithGoogleNSDictionary:venue withOrigin:userCoordinate];
+        //FourSquarePlace *place = [FourSquarePlace initializeWithGoogleNSDictionary:venue withOrigin:userCoordinate];
+        FourSquarePlace *place = [FourSquarePlace initializeWithGoogleTextNSDictionary:venue withOrigin:userCoordinate];
         [searchResult addObject:place];
     }
 
