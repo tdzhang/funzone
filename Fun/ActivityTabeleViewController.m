@@ -146,6 +146,7 @@
     self.mySegmentControl.frame = CGRectMake(0, 0, 310, 40);
     UIImage *segmentSelected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    self.mySegmentControl.frame = CGRectMake(0, 0, 320, 40);
     [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
@@ -169,13 +170,14 @@
                                                     [UIFont boldSystemFontOfSize:12], UITextAttributeFont, nil] forState:UIControlStateNormal];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:0];
     [self.mySegmentControl setContentOffset:CGSizeMake(0, 5) forSegmentAtIndex:1];
-    
+
+    //set view background
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
     
     self.segmentationView.layer.cornerRadius = 2;
     self.segmentationView.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.segmentationView.layer.shadowOffset = CGSizeMake(0, 1);
-    self.segmentationView.layer.shadowRadius = 1.0f;
+    self.segmentationView.layer.shadowRadius = 1.5f;
     self.segmentationView.layer.shadowOpacity = 0.6f;
 }
 
