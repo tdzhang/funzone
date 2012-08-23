@@ -222,7 +222,7 @@
     blockElement.categoryLabel.text = blockElement.event_category;
     blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
     blockElement.categoryLabel.textColor = [UIColor whiteColor];
-    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
+    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:10];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
     CGSize expectedWidth1 = [blockElement.event_category sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:150 lineBreakMode:UILineBreakModeTailTruncation];
@@ -230,8 +230,8 @@
     newFrame.size.width = expectedWidth1.width;
     blockElement.categoryLabel.frame = newframe;
     [blockElement.categorySection addSubview:blockElement.categoryLabel];
-    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33-10, 10, expectedWidth1.width+33+10, 30);
-    categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33+10, 30);
+    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33, 10, expectedWidth1.width+33, 30);
+    categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33, 30);
     blockElement.categorySection.backgroundColor = [UIColor clearColor];
     blockElement.categorySection.alpha = 1;
     [blockElement.blockView addSubview:blockElement.categorySection];

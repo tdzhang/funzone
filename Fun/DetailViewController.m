@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableData *data;
 
 @property (nonatomic,strong) UIImageView *eventImageView;
+@property (nonatomic,strong) UIView *categoryView;
 @property (nonatomic,strong) UIView *creatorView;
 @property (nonatomic,strong) UIImageView *creatorProfileView;
 @property (nonatomic,strong) UILabel *creatorNameLabel;
@@ -91,6 +92,7 @@
 @synthesize data=_data;
 
 @synthesize eventImageView=_eventImageView;
+@synthesize categoryView=_categoryView;
 @synthesize creatorView=_creatorView;
 @synthesize creatorProfileView=_creatorProfileView;
 @synthesize creator_img_url=_creator_img_url;
@@ -655,6 +657,85 @@
     }
     [self.myScrollView addSubview:self.eventImageView];
     self.view_height += self.eventImageView.frame.size.height;
+}
+
+- (void)handleEventCategory:(NSDictionary *)event {
+    
+    NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+    
+    NSString *category_icon_file;
+    UIColor *category_color;
+    NSString *category_name;
+    
+    if ([event_category isEqualToString:@"0"]) {
+        category_name = @"OTHERS";
+        category_icon_file = @"other.png";
+        category_color = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"1"]) {
+        category_name = @"FOOD";
+        category_icon_file = @"food.png";
+        category_color = [UIColor colorWithRed:134/255.0 green:156/255.0 blue:224/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"2"]) {
+        category_name = @"MOVIE";
+        category_icon_file = @"movie.png";
+        category_color = [UIColor colorWithRed:248/255.0 green:110/255.0 blue:116/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"3"]) {
+        category_name = @"SPORTS";
+        category_icon_file = @"sports.png";
+        category_color = [UIColor colorWithRed:110/255.0 green:199/255.0 blue:243/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"4"]) {
+        category_name = @"NIGHTLIFE";
+        category_icon_file = @"party.png";
+        category_color = [UIColor colorWithRed:241/255.0 green:144/255.0 blue:76/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"5"]) {
+        category_name = @"OUTDOOR";
+        category_icon_file = @"outdoor.png";
+        category_color = [UIColor colorWithRed:154/255.0 green:225/255.0 blue:100/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"6"]) {
+        category_name = @"ENTERTAIN";
+        category_icon_file = @"music.png";
+        category_color = [UIColor colorWithRed:223/255.0 green:188/255.0 blue:78/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"7"]) {
+        category_name = @"EVENTS";
+        category_icon_file = @"event.png";
+        category_color = [UIColor colorWithRed:160/255.0 green:114/255.0 blue:186/255.0 alpha:1];
+    } else if ([event_category isEqualToString:@"8"]) {
+        category_name = @"SHOPPING";
+        category_icon_file = @"shopping.png";
+        category_color = [UIColor colorWithRed:220/255.0 green:92/255.0 blue:171/255.0 alpha:1];
+    }
+
+    //Category section
+    self.categoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
+    
+    UIView *categorySectionBackground = [[UIView alloc] init];
+    categorySectionBackground.backgroundColor = [UIColor blackColor];
+    categorySectionBackground.layer.cornerRadius = 4;
+    [categorySectionBackground setAlpha:0.6];
+    [self.categoryView addSubview:categorySectionBackground];
+    
+    UIImageView *categoryIcon = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, 33, 30)];
+    categoryIcon.contentMode = UIViewContentModeScaleToFill;
+    [categoryIcon setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", category_icon_file]]];
+    [self.categoryView addSubview:categoryIcon];
+    
+    //blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+    UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 8, 150, 15)];
+    categoryLabel.text = category_name;
+    categoryLabel.backgroundColor = [UIColor clearColor];
+    categoryLabel.textColor = [UIColor whiteColor];
+    categoryLabel.font = [UIFont boldSystemFontOfSize:10];
+    [categoryLabel setShadowColor:[UIColor blackColor]];
+    [categoryLabel setShadowOffset:CGSizeMake(0, 1)];
+    CGSize expectedWidth1 = [category_name sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:150 lineBreakMode:UILineBreakModeTailTruncation];
+    CGRect newframe = categoryLabel.frame;
+    newframe.size.width = expectedWidth1.width;
+    categoryLabel.frame = newframe;
+    [self.categoryView addSubview:categoryLabel];
+    self.categoryView.frame = CGRectMake(10, 135, expectedWidth1.width+33, 30);
+    categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33, 30);
+    self.categoryView.backgroundColor = [UIColor clearColor];
+    [self.myScrollView addSubview:self.categoryView];
 }
 
 - (void)handleEventCreator:(NSDictionary *)event {
@@ -1500,6 +1581,7 @@
         
         [self handleActionButtons:event];
         [self handleEventImg:event];
+        [self handleEventCategory:event];
         [self handleEventCreator:event];
         [self handleEventTitle:event];
         [self handleEventTime:event];
