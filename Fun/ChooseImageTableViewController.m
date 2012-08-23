@@ -10,6 +10,7 @@
 
 @interface ChooseImageTableViewController ()
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarImage;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSMutableArray *imageUrls;
 @property (nonatomic,strong) NSMutableArray *imageTitles;
@@ -22,6 +23,7 @@
 @implementation ChooseImageTableViewController
 @synthesize mySearchBar = _mySearchBar;
 @synthesize searchBarImage = _searchBarImage;
+@synthesize moreButton = _moreButton;
 @synthesize data=_data;
 @synthesize imageUrls=_imageUrls;
 @synthesize imageTitles=_imageTitles;
@@ -135,7 +137,11 @@
 {
     [self setSearchBarImage:nil];
     [self setMySearchBar:nil];
+    [self setMoreButton:nil];
     [super viewDidUnload];
+    
+    self.moreButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+
 
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

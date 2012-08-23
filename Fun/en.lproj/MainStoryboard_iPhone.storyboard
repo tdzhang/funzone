@@ -833,6 +833,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
+                        <outlet property="moreButton" destination="GN0-lS-400" id="Ui8-XB-vFE"/>
                         <outlet property="mySearchBar" destination="laD-1r-gbL" id="4h3-pm-62W"/>
                         <outlet property="searchBarImage" destination="laD-1r-gbL" id="mmB-ck-xbC"/>
                     </connections>
@@ -3160,6 +3161,8 @@ Find us @OrangeParc.com</string>
         <class className="ChooseImageTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseOtherPhotoSourceButtonClicked:"/>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
                 <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
             </relationships>
