@@ -3058,11 +3058,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzE-nc-ta7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="3aH-6z-7wk" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="Z3B-HS-ers">
-<<<<<<< HEAD
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
->>>>>>> comit
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="HSV-vh-S5O">
