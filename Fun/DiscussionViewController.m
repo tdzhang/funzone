@@ -7,6 +7,7 @@
 //
 
 #import "DiscussionViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DiscussionViewController ()
 //outlet
@@ -26,7 +27,7 @@
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 
 //the structure of the view of the Scroll View
-@property(nonatomic,strong) UIView* invitedPeopleSectionView;
+@property(nonatomic,strong) UIView *invitedPeopleSectionView;
 @property (nonatomic,strong) UIView *commentSectionView;
 
 //invited friend
@@ -115,6 +116,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self.mainScrollView setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
 }
 
 - (void)viewDidUnload
@@ -177,13 +179,22 @@
         }
         [self.garbageCollection removeAllObjects];
     }
-#define DISCUSSION_INVITE_IMAGE_SIZE 55
-#define DISCUSSION_INVITE_BLOCK_HEIGHT 80
+#define DISCUSSION_INVITE_IMAGE_SIZE 50
+#define DISCUSSION_INVITE_BLOCK_HEIGHT 75
     //-------------------------->invited people part<---------------------------------//
     int height=0;
     if ([self.invitee count]>0) {
-        height=DISCUSSION_INVITE_BLOCK_HEIGHT*[self.invitee count]/4;
-        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, 300, height)];
+        height=DISCUSSION_INVITE_BLOCK_HEIGHT*(([self.invitee count]-1)/5+1)+30;
+        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, height)];
+        self.invitedPeopleSectionView.backgroundColor = [UIColor whiteColor];
+        self.invitedPeopleSectionView.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.invitedPeopleSectionView.layer.shadowOffset = CGSizeMake(0, 1);
+        self.invitedPeopleSectionView.layer.shadowRadius = 1.0f;
+        self.invitedPeopleSectionView.layer.shadowOpacity = 0.6f;
+        self.invitedPeopleSectionView.layer.cornerRadius = 2;
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.invitedPeopleSectionView.bounds];
+        self.invitedPeopleSectionView.layer.shadowPath = path.CGPath;
+        
         [self.mainScrollView addSubview:self.invitedPeopleSectionView];
         
         [self.garbageCollection addObject:self.invitedPeopleSectionView];
@@ -194,19 +205,16 @@
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         //[self.invitedPeopleSectionView addGestureRecognizer:tapGR];
         
-        //---------->>set background color
-        [self.invitedPeopleSectionView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-        
         //---------->>set number color
-        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 40)];
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
+        [numOfInvites setFont:[UIFont boldSystemFontOfSize:14]];
         if ([self.invitee count] == 1) {
             [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
             [numOfInvites setText:[NSString stringWithFormat:@"%d friends invited",[self.invitee count]]];
         }
-        [numOfInvites setFont:[UIFont boldSystemFontOfSize:19]];
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
-        [numOfInvites setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+        [numOfInvites setBackgroundColor:[UIColor clearColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         [self.garbageCollection addObject:numOfInvites];
         
@@ -222,15 +230,17 @@
         
         
         //---------->>set invited people image
-        int x_position_photo=5;
-        int y_position_photo=42;
+        int x_position_photo=10;
+        int y_position_photo=32;
 
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
-            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, y_position_photo, DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE)];
-            UILabel* userName=[[UILabel alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo+DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE+25, 20)];
+            UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo, DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE)];
+            UILabel* userName=[[UILabel alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo+DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE, 20)];
+            userName.lineBreakMode = UILineBreakModeTailTruncation;
+            userName.numberOfLines = 1;
             [userName setFont:[UIFont boldSystemFontOfSize:10]];
-            [userName setTextColor:[UIColor darkGrayColor]];
-            [userName setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+            [userName setTextColor:[UIColor blackColor]];
+            [userName setBackgroundColor:[UIColor clearColor]];
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
             [userName setText:element.user_name];
             [self.invitedPeopleSectionView addSubview:userName];
@@ -270,19 +280,22 @@
                     userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
                 });
             }
+            userImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+            userImageView.layer.shadowRadius = 2;
+            userImageView.layer.cornerRadius = 4;
             [self.invitedPeopleSectionView addSubview:userImageView];
             [userImageView addGestureRecognizer:tapGR];
            
-            x_position_photo+=DISCUSSION_INVITE_IMAGE_SIZE+25;
-            if ((i+1)%4==0) {
+            x_position_photo+=DISCUSSION_INVITE_IMAGE_SIZE+10;
+            if ((i+1)%5==0) {
                 y_position_photo+=DISCUSSION_INVITE_BLOCK_HEIGHT;
-                x_position_photo=5;
+                x_position_photo=10;
             }
         }
     }
     
     //-------------------------->comment part<----------------------------------------//
-    int comment_y_start=height+85; // the conment start coordinate
+    int comment_y_start=height+20; // the conment start coordinate
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/view?shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
@@ -310,71 +323,57 @@
                     self.comments=[DiscussionComment getDiscussionCommentArrayFromArray:json];
                     
                     //comment header view
-                    UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, comment_y_start, 300, 30)];
-                    [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-                    [self.mainScrollView addSubview:comments_header_view];
-                    
-                    [self.garbageCollection addObject:comments_header_view];
+//                    UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(5, comment_y_start, 310, 30)];
+//                    [comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+//                    [self.mainScrollView addSubview:comments_header_view];
+//                    
+//                    [self.garbageCollection addObject:comments_header_view];
                     
                     //comment header label
-                    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
-                    NSString *comment_header;
-                    if ([self.comments count] == 0 || [self.comments count] == 1) {
-                        comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
-                    }else {
-                        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
-                    }
-                    [comment_header_label setText:comment_header];
-                    [comment_header_label setBackgroundColor:[UIColor clearColor]];
-                    [comment_header_label setFont:[UIFont boldSystemFontOfSize:14]];
-                    [comment_header_label setTextColor:[UIColor darkGrayColor]];
-                    [comment_header_label setShadowColor:[UIColor whiteColor]];
-                    [comment_header_label setShadowOffset: CGSizeMake(0, 1)];
-                    [comments_header_view addSubview:comment_header_label];
+//                    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 30)];
+//                    NSString *comment_header;
+//                    if ([self.comments count] == 0 || [self.comments count] == 1) {
+//                        comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
+//                    }else {
+//                        comment_header = [NSString stringWithFormat:@"%d Comments", [self.comments count]];
+//                    }
+//                    [comment_header_label setText:comment_header];
+//                    [comment_header_label setBackgroundColor:[UIColor clearColor]];
+//                    [comment_header_label setFont:[UIFont boldSystemFontOfSize:14]];
+//                    [comment_header_label setTextColor:[UIColor darkGrayColor]];
+//                    [comment_header_label setShadowColor:[UIColor whiteColor]];
+//                    [comment_header_label setShadowOffset: CGSizeMake(0, 1)];
+//                    [comments_header_view addSubview:comment_header_label];
                     
-                    int height = 32 + comment_y_start;
+                    int height = comment_y_start;
                     
                     //add every single comment entry
                     for (int i = 0; i<[self.comments count]; i++) {
                         //if(i==5)break; //in this page, only present a few comments
                         DiscussionComment* comment=[self.comments objectAtIndex:i];
-                        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, height, 300, 0)];
+                        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(5, height, 310, 0)];
                         [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
                         
                         //comment user name label
-                        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 0)];
+                        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 20)];
                         NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
                         [comment_user_name_label setText:comment_user_name];
                         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
                         [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
-                        comment_user_name_label.lineBreakMode = UILineBreakModeWordWrap;
-                        comment_user_name_label.numberOfLines = 0;
+                        comment_user_name_label.lineBreakMode = UILineBreakModeTailTruncation;
+                        comment_user_name_label.numberOfLines = 1;
                         
-                        CGSize maximumLabelSize1 = CGSizeMake(100,9999);
-                        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-                        CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
-                        
-                        CGRect newFrame1 = comment_user_name_label.frame;
-                        newFrame1.size.height = expectedLabelSize1.height;
-                        newFrame1.size.width = expectedWidth.width;
-                        comment_user_name_label.frame = newFrame1;
-                        
-                        //set the indent frame... 这段代码实在是@#%R#$
-                        UILabel *indent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-                        [indent setFont:[UIFont boldSystemFontOfSize:14]];
-                        NSString *indent_string = [NSString stringWithFormat:@" "];
-                        while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
-                            indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
-                            [indent setText:indent_string];
-                            CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
-                            CGRect indentNewFrame = indent.frame;
-                            indentNewFrame.size.width = indentExpectedWidth.width;
-                            indent.frame = indentNewFrame;
-                        }
+                        //comment timestamp
+                        UILabel *comment_time = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 100, 20)];
+                        comment_time.text = [NSString stringWithFormat:@"%@",comment.timestamp];
+                        [comment_time setTextColor:[UIColor lightGrayColor]];
+                        [comment_time setFont:[UIFont systemFontOfSize:12]];
+                        [comment_time setBackgroundColor:[UIColor clearColor]];
+                        comment_time.numberOfLines = 1;
                         
                         //content part (also add the time stamp to the comment part)
-                        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 290, 0)];
-                        NSString *comment_content = [NSString stringWithFormat:@"%@ (%@)\n%@",indent_string,comment.timestamp,comment.content];
+                        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 290, 0)];
+                        NSString *comment_content = [NSString stringWithFormat:@"%@",comment.content];
                         [comment_content_label setText:comment_content];
                         [comment_content_label setFont:[UIFont systemFontOfSize:14]];
                         [comment_content_label setBackgroundColor:[UIColor clearColor]];
@@ -390,22 +389,21 @@
                         
                         [commentView addSubview:comment_content_label];
                         [commentView addSubview:comment_user_name_label];
+                        [commentView addSubview:comment_time];
                         
                         CGRect newFrame3 = commentView.frame;
-                        newFrame3.size.height = comment_content_label.bounds.size.height+10;
+                        newFrame3.size.height = comment_content_label.bounds.size.height+35;
                         commentView.frame = newFrame3;
                         
                         [self.mainScrollView addSubview:commentView];
                         [self.garbageCollection addObject:commentView];
                         //distance between two comment view is 0px.
                         height = height + commentView.bounds.size.height;
-                        
                     }
                     //set the scroll view content size
                     //self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
-                    [self.mainScrollView setContentSize:CGSizeMake(320, height+5+50)];
+                    [self.mainScrollView setContentSize:CGSizeMake(320, height+5)];
                 }
-
             }
             else{
                 //connect error
