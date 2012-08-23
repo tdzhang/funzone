@@ -355,6 +355,11 @@
     }
 }
 
+#pragma mark - choose other source
+- (IBAction)chooseOtherSourceButtonClicked:(id)sender {
+}
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

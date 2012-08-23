@@ -1019,9 +1019,10 @@
 
 
 - (IBAction)ChoosePhoto:(UIButton *)sender {
-    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
-    [pop showFromTabBar:self.tabBarController.tabBar];
+//    UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
+//    pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
+//    [pop showFromTabBar:self.tabBarController.tabBar];
+    [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
 }
 
 //deal with the popout action sheet
