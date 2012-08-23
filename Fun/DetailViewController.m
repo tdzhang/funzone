@@ -1014,7 +1014,8 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
-        self.privateMessageButton.frame = CGRectMake(200, 40, 100, 40);
+        self.privateMessageButton.frame = CGRectMake(210, 25, 100, 40);
+        [self.privateMessageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
         //self.privateMessageButton.titleLabel.text = @"+ Message";
         [self.privateMessageButton setTitle:@"+ Message" forState:UIControlStateNormal];
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
