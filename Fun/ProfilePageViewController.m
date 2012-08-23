@@ -156,6 +156,30 @@
     }
 }
 
+#pragma mark - compare two json array
+-(BOOL)isTwoJasonEventArrayTheSameOne:(NSArray*)one withOther:(NSArray*)two{
+    BOOL result=YES;
+     if([one count]!=[two count]){
+         result=NO;
+     }
+     else{
+         for (int i=0;i<[one count];i++) {
+             NSDictionary* elementOne=[one objectAtIndex:i];
+             NSDictionary* elementTwo=[two objectAtIndex:i];
+             if ([[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"event_id"]]]) {
+                 result=NO;
+                 break;
+             }
+             if ([[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"shared_event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"shared_event_id"]]]) {
+                 result=NO;
+                 break;
+             }
+         }
+     }
+     
+     
+    return result;
+}
 
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
@@ -282,6 +306,8 @@
                 //set the freshConnectionType to "not"
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
+                NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                 if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
                     //do nothing here, if there is no diff
@@ -1414,8 +1440,6 @@
         
         NSError *error;
         NSArray *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
-        NSLog(@"new json:%@",json);
-        NSLog(@"old json:%@",self.lastReceivedJson_bookmark);
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
             //do nothing here, if there is no diff

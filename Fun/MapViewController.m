@@ -408,7 +408,8 @@
         //show the place name and location
         NSString *venue_title=(place.name)?place.name:@"No name";
         if (place.categories_shortName) {
-            venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+            //venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+            venue_title=[NSString stringWithFormat:@"%@",venue_title];
         }
         [cell.textLabel setText:venue_title];
         [cell.textLabel setFont:[UIFont boldSystemFontOfSize:DEFAULT_TABLE_CELL_FONT_SIZE]];
@@ -508,7 +509,8 @@ shouldReloadTableForSearchString:(NSString *)searchString
             //if it is from google api
             NSString *venue_title=(place.name)?[place.name copy ]:@"No name";
             if (place.categories_shortName) {
-                venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+                //venue_title=[NSString stringWithFormat:@"%@ (%@)",venue_title,place.categories_shortName];
+                venue_title=[NSString stringWithFormat:@"%@",venue_title];
             }
             
             //set mapview region( where to show the map veiw)

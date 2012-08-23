@@ -244,13 +244,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 });
             }
         }
-        /*
-        NSLog(@"%@",model.title);
-        NSLog(@"%@",model.imageUrl);
-        NSLog(@"%@",model.year);
-        NSLog(@"%@",model.score);
-        NSLog(@"-=--------------");
-         */
     }
      
     
