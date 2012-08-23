@@ -1324,6 +1324,8 @@
 			isa = PBXGroup;
 			children = (
 				4633956C15E6168300277327 /* Category */,
+				5C1790B415E60AA40097DA44 /* Category Icon */,
+				46A68E0415E5DED700CF3C63 /* Category.jpg */,
 				0FE834A015E4C05C008384BD /* activity */,
 				4683BC9D15E2F9F200DB1A70 /* Header and Tab */,
 				4683BC9C15E2F9B000DB1A70 /* Create Event */,
@@ -1897,6 +1899,16 @@
 				4633957015E6195F00277327 /* Category-outdoor.jpg in Resources */,
 				4633957315E619BC00277327 /* Category-event.jpg in Resources */,
 				4633957415E619BC00277327 /* Category-movie.jpg in Resources */,
+				5C1790BF15E60ABE0097DA44 /* event.png in Resources */,
+				5C1790C015E60ABE0097DA44 /* food.png in Resources */,
+				5C1790C115E60ABE0097DA44 /* movie.png in Resources */,
+				5C1790C215E60ABE0097DA44 /* music.png in Resources */,
+				5C1790C315E60ABE0097DA44 /* other.png in Resources */,
+				5C1790C415E60ABE0097DA44 /* outdoor.png in Resources */,
+				5C1790C515E60ABE0097DA44 /* party.png in Resources */,
+				5C1790C615E60ABE0097DA44 /* shopping.png in Resources */,
+				5C1790C715E60ABE0097DA44 /* sports.png in Resources */,
+				5C1790C915E60D320097DA44 /* DVC_Add.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
