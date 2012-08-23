@@ -220,7 +220,7 @@
     blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33-10, 50, expectedWidth1.width+33+10, 30);
     blockElement.categorySection.backgroundColor = [UIColor blackColor];
     blockElement.categorySection.alpha = 1;
-    [blockElement.blockView addSubview:blockElement.categorySection];
+    //[blockElement.blockView addSubview:blockElement.categorySection];
     
     if (![locationName isEqualToString:@""]) {
     //marker image

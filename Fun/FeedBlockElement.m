@@ -25,6 +25,8 @@
 @synthesize locationLabel=_locationLabel;
 @synthesize creator_id=_creator_id;
 @synthesize event_category=_event_category;
+@synthesize categorySection=_categorySection;
+@synthesize categoryIcon=_categoryIcon;
 @synthesize categoryLabel=_categoryLabel;
 
 
@@ -38,24 +40,45 @@
     
     FeedBlockElement* blockElement=[[FeedBlockElement alloc] init];
     
+    NSString *category_icon_file;
+    UIColor *category_color;
+    
     if ([event_category isEqualToString:@"0"]) {
         blockElement.event_category = @"OTHERS";
+        category_icon_file = @"other.png";
+        category_color = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"1"]) {
         blockElement.event_category = @"FOOD";
+        category_icon_file = @"food.png";
+        category_color = [UIColor colorWithRed:134/255.0 green:156/255.0 blue:224/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"2"]) {
         blockElement.event_category = @"MOVIE";
+        category_icon_file = @"movie.png";
+        category_color = [UIColor colorWithRed:248/255.0 green:110/255.0 blue:116/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"3"]) {
         blockElement.event_category = @"SPORTS";
+        category_icon_file = @"sports.png";
+        category_color = [UIColor colorWithRed:110/255.0 green:199/255.0 blue:243/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"4"]) {
         blockElement.event_category = @"NIGHTLIFE";
+        category_icon_file = @"party.png";
+        category_color = [UIColor colorWithRed:241/255.0 green:144/255.0 blue:76/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"5"]) {
         blockElement.event_category = @"OUTDOOR";
+        category_icon_file = @"outdoor.png";
+        category_color = [UIColor colorWithRed:154/255.0 green:225/255.0 blue:100/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"6"]) {
-        blockElement.event_category = @"ENTERTAINMENT";
+        blockElement.event_category = @"ENTERTAIN";
+        category_icon_file = @"music.png";
+        category_color = [UIColor colorWithRed:223/255.0 green:188/255.0 blue:78/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"7"]) {
         blockElement.event_category = @"EVENTS";
+        category_icon_file = @"event.png";
+        category_color = [UIColor colorWithRed:160/255.0 green:114/255.0 blue:186/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"8"]) {
         blockElement.event_category = @"SHOPPING";
+        category_icon_file = @"shopping.png";
+        category_color = [UIColor colorWithRed:220/255.0 green:92/255.0 blue:171/255.0 alpha:1];
     }
     
     //choose the default image when facing others
@@ -171,14 +194,47 @@
     [blockElement.blockView addSubview:blockElement.titleLabel];
     
     //Category Label
-    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+//    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+//    blockElement.categoryLabel.text = blockElement.event_category;
+//    blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
+//    blockElement.categoryLabel.textColor = [UIColor colorWithRed:95/255.0 green:210/255.0 blue:181/255.0 alpha:1];
+//    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
+//    [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
+//    [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
+//    [blockElement.blockView addSubview:blockElement.categoryLabel];
+    
+    //Category section
+    blockElement.categorySection = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
+    
+    UIView *categorySectionBackground = [[UIView alloc] init];
+    categorySectionBackground.backgroundColor = [UIColor blackColor];
+    categorySectionBackground.layer.cornerRadius = 4;
+    [categorySectionBackground setAlpha:0.6];
+    [blockElement.categorySection addSubview:categorySectionBackground];
+    
+    blockElement.categoryIcon = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, 33, 30)];
+    blockElement.categoryIcon.contentMode = UIViewContentModeScaleToFill;
+    [blockElement.categoryIcon setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", category_icon_file]]];
+    [blockElement.categorySection addSubview:blockElement.categoryIcon];
+
+    //blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 8, 150, 15)];
     blockElement.categoryLabel.text = blockElement.event_category;
     blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
-    blockElement.categoryLabel.textColor = [UIColor colorWithRed:95/255.0 green:210/255.0 blue:181/255.0 alpha:1];
+    blockElement.categoryLabel.textColor = [UIColor whiteColor];
     blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
-    [blockElement.blockView addSubview:blockElement.categoryLabel];
+    CGSize expectedWidth1 = [blockElement.event_category sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:150 lineBreakMode:UILineBreakModeTailTruncation];
+    CGRect newframe = blockElement.categoryLabel.frame;
+    newFrame.size.width = expectedWidth1.width;
+    blockElement.categoryLabel.frame = newframe;
+    [blockElement.categorySection addSubview:blockElement.categoryLabel];
+    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33-10, 10, expectedWidth1.width+33+10, 30);
+    categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33+10, 30);
+    blockElement.categorySection.backgroundColor = [UIColor clearColor];
+    blockElement.categorySection.alpha = 1;
+    [blockElement.blockView addSubview:blockElement.categorySection];
     
     //creator view
     blockElement.creator = [[UIView alloc] initWithFrame:CGRectMake(FEED_BLOCK_ELEMENT_EVENTVIEW_X,FEED_BLOCK_ELEMENT_EVENTVIEW_Y, FEED_BLOCK_ELEMENT_EVENTVIEW_WIDTH, FEED_BLOCK_ELEMENT_EVENTVIEW_HEIGHT)];
@@ -246,10 +302,10 @@
     blockElement.joinLabel.text = join_label;
     blockElement.joinLabel.backgroundColor = [UIColor clearColor];
     blockElement.joinLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    CGSize expectedWidth1 = [join_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
+    CGSize expectedWidth2 = [join_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
     CGRect newFrame1 = blockElement.joinLabel.frame;
-    newFrame1.origin.x = 295 - expectedWidth1.width;
-    newFrame1.size.width = expectedWidth1.width;
+    newFrame1.origin.x = 295 - expectedWidth2.width;
+    newFrame1.size.width = expectedWidth2.width;
     blockElement.joinLabel.frame = newFrame1;
     [blockElement.creator addSubview:blockElement.joinLabel];
     
@@ -263,10 +319,10 @@
     blockElement.favorLabel.text = favor_label;
     blockElement.favorLabel.backgroundColor = [UIColor clearColor];   
     blockElement.favorLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    CGSize expectedWidth2 = [favor_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
+    CGSize expectedWidth3 = [favor_label sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeClip];
     CGRect newFrame2 = blockElement.favorLabel.frame;
-    newFrame2.origin.x = blockElement.joinImageView.frame.origin.x - 5 - expectedWidth2.width;
-    newFrame2.size.width = expectedWidth2.width;
+    newFrame2.origin.x = blockElement.joinImageView.frame.origin.x - 5 - expectedWidth3.width;
+    newFrame2.size.width = expectedWidth3.width;
     blockElement.favorLabel.frame = newFrame2;
     [blockElement.creator addSubview:blockElement.favorLabel];
     
