@@ -826,7 +826,5 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [annotation setSubtitle:self.feedBackAnnotation.subtitle];
         [self.delegate UpdateLocation:annotation  withLocationName:self.feedBackAnnotation.title withSnapShot:nil sendFrom:self];
     }
-     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

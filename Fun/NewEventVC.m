@@ -72,6 +72,7 @@
 
 //used to set the 1st into set teh title part 1st responser
 @property (nonatomic) BOOL isnotFirstTime;
+@property (nonatomic) BOOL isNeedChoosePhoto;
 
 //used for server log
 @property (nonatomic) int via;
@@ -143,6 +144,8 @@
 
 //used to set the 1st into set the title part 1st responser
 @synthesize isnotFirstTime=_isnotFirstTime;
+@synthesize isNeedChoosePhoto=_isNeedChoosePhoto;
+
 //used for server log
 @synthesize via=_via;
 
@@ -452,6 +455,11 @@
         }
     }
     
+    //enter the food choose image session
+    if (self.isNeedChoosePhoto) {
+        self.isNeedChoosePhoto=NO;
+        [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+    }
     
     if (self.via == CREATE_EVENT) {
         [self.navigationController.navigationBar.topItem setTitle:@"Create new event"];
@@ -1461,14 +1469,22 @@
         NSLog(@"%@",self.createEvent_address);
     }
     
+
     if ([self.eventType isEqualToString:@"food"]) {
         [self.textFieldEventTitle setText:locationName];
         [self.labelEventTitleHolder setHidden:YES];
         [self.textFieldEventTitle becomeFirstResponder];
         if (!self.self.isCreateEvent_imageUsable) {
-            [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+            [self.navigationController popViewControllerAnimated:NO];
+            self.isNeedChoosePhoto=YES;
+            //[self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+        }
+        else{
+            [self.navigationController popViewControllerAnimated:YES];
+            self.isNeedChoosePhoto=NO;
         }
     }
+    
 }
 
 ////////////////////////////////////////////////
