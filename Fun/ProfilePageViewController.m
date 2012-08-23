@@ -166,18 +166,16 @@
          for (int i=0;i<[one count];i++) {
              NSDictionary* elementOne=[one objectAtIndex:i];
              NSDictionary* elementTwo=[two objectAtIndex:i];
-             if ([[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"event_id"]]]) {
+             if (![[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"event_id"]]]) {
                  result=NO;
                  break;
              }
-             if ([[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"shared_event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"shared_event_id"]]]) {
+             if (![[NSString stringWithFormat:@"%@",[elementOne objectForKey:@"shared_event_id"]] isEqualToString:[NSString stringWithFormat:@"%@",[elementTwo objectForKey:@"shared_event_id"]]]) {
                  result=NO;
                  break;
              }
          }
      }
-     
-     
     return result;
 }
 
@@ -309,7 +307,8 @@
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
+                //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]
+                if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark]) {
                     //do nothing here, if there is no diff
                     self.refresh_page_num=2;
                     self.freshConnectionType=@"not";
@@ -460,7 +459,8 @@
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]) {
+                //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
+                if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
                     //do nothing here, if there is no diff
                     self.joined_refresh_page_num=2;
                     self.joined_freshConnectionType=@"not";
@@ -741,7 +741,8 @@
                         NSError *error;
                         NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                        if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
+                        //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]
+                        if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark]) {
                             //do nothing here, if there is no diff
                             self.refresh_page_num=2;
                             self.freshConnectionType=@"not";
@@ -1068,7 +1069,8 @@
                         NSError *error;
                         NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                        if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]) {
+                        //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
+                        if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
                             //do nothing here, if there is no diff
                             self.joined_refresh_page_num=2;
                             self.joined_freshConnectionType=@"not";
