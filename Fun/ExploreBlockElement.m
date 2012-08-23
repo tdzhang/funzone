@@ -27,6 +27,8 @@
 @synthesize creator_id=_creator_id;
 @synthesize event_category=_event_category;
 @synthesize categoryLabel=_categoryLabel;
+@synthesize categoryIcon=_categoryIcon;
+@synthesize categorySection=_categorySection;
 @synthesize numDoItMyself=_numDoItMyself;
 @synthesize numDoItMyselfSection=_numDoItMyselfSection;
 
@@ -40,25 +42,46 @@
 +(ExploreBlockElement *)initialWithPositionY:(CGFloat)position_y backGroundImageUrl:(NSURL *)backGroundImageUrl tabActionTarget:(id)tap_target withTitle:(NSString *)title withFavorLabelString:(NSString *)favor_label withJoinLabelString:(NSString *)DIM_label withEventID:(NSString *)event_id withShared_Event_ID:(NSString *)shared_event_id  withLocationName:(NSString *)locationName withCreatorName:(NSString*)creator_name withCreatorPhoto:(NSString*)creator_photo withCreatorId:(NSString*)creator_id withEventCategory:(NSString *)event_category{
     
     ExploreBlockElement* blockElement=[[ExploreBlockElement alloc] init];
+    
+    NSString *category_icon_file;
+    UIColor *category_color;
 
     if ([event_category isEqualToString:@"0"]) {
         blockElement.event_category = @"OTHERS";
+        category_icon_file = @"other.png";
+        category_color = [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"1"]) {
         blockElement.event_category = @"FOOD";
+        category_icon_file = @"food.png";
+        category_color = [UIColor colorWithRed:134/255.0 green:156/255.0 blue:224/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"2"]) {
         blockElement.event_category = @"MOVIE";
+        category_icon_file = @"movie.png";
+        category_color = [UIColor colorWithRed:248/255.0 green:110/255.0 blue:116/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"3"]) {
         blockElement.event_category = @"SPORTS";
+        category_icon_file = @"sports.png";
+        category_color = [UIColor colorWithRed:110/255.0 green:199/255.0 blue:243/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"4"]) {
         blockElement.event_category = @"NIGHTLIFE";
+        category_icon_file = @"party.png";
+        category_color = [UIColor colorWithRed:241/255.0 green:144/255.0 blue:76/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"5"]) {
         blockElement.event_category = @"OUTDOOR";
+        category_icon_file = @"outdoor.png";
+        category_color = [UIColor colorWithRed:154/255.0 green:225/255.0 blue:100/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"6"]) {
-        blockElement.event_category = @"ENTERTAINMENT";
+        blockElement.event_category = @"ENTERTAIN";
+        category_icon_file = @"music.png";
+        category_color = [UIColor colorWithRed:223/255.0 green:188/255.0 blue:78/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"7"]) {
         blockElement.event_category = @"EVENTS";
+        category_icon_file = @"event.png";
+        category_color = [UIColor colorWithRed:160/255.0 green:114/255.0 blue:186/255.0 alpha:1];
     } else if ([event_category isEqualToString:@"8"]) {
         blockElement.event_category = @"SHOPPING";
+        category_icon_file = @"shopping.png";
+        category_color = [UIColor colorWithRed:220/255.0 green:92/255.0 blue:171/255.0 alpha:1];
     }
     
     //choose the default image when facing others
@@ -88,7 +111,7 @@
         DEFAULT_IMAGE_REPLACEMENT=OTHERS_REPLACEMENT;
     }
     
-//    //initial the blockElement frame
+    //initial the blockElement frame
     blockElement.blockView =[[UIView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_VIEW_X, position_y, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
     blockElement.blockView.backgroundColor = [UIColor whiteColor];
     blockElement.blockView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -174,15 +197,30 @@
     blockElement.titleLabel.frame = newFrame;
     [blockElement.blockView addSubview:blockElement.titleLabel];
     
-    //Category Label
-    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+    //Category section
+    blockElement.categorySection = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
+    blockElement.categoryIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 33, 30)];
+    blockElement.categoryIcon.contentMode = UIViewContentModeScaleToFill;
+    [blockElement.categoryIcon setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", category_icon_file]]];
+    [blockElement.categorySection addSubview:blockElement.categoryIcon];
+    
+    //blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_TITLE_TEXT_X, blockElement.titleLabel.frame.origin.y-15, 150, 15)];
+    blockElement.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 8, 150, 15)];
     blockElement.categoryLabel.text = blockElement.event_category;
     blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
-    blockElement.categoryLabel.textColor = [UIColor colorWithRed:95/255.0 green:210/255.0 blue:181/255.0 alpha:1];
+    blockElement.categoryLabel.textColor = [UIColor whiteColor];
     blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
-    [blockElement.blockView addSubview:blockElement.categoryLabel];
+    CGSize expectedWidth1 = [blockElement.event_category sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:150 lineBreakMode:UILineBreakModeTailTruncation];
+    CGRect newframe = blockElement.categoryLabel.frame;
+    newFrame.size.width = expectedWidth1.width;
+    blockElement.categoryLabel.frame = newframe;
+    [blockElement.categorySection addSubview:blockElement.categoryLabel];
+    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33-10, 50, expectedWidth1.width+33+10, 30);
+    blockElement.categorySection.backgroundColor = [UIColor blackColor];
+    blockElement.categorySection.alpha = 1;
+    [blockElement.blockView addSubview:blockElement.categorySection];
     
     if (![locationName isEqualToString:@""]) {
     //marker image

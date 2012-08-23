@@ -29,7 +29,9 @@
 @property (nonatomic,strong) UILabel *locationLabel;
 @property (nonatomic,strong) NSString *creator_id;
 @property (nonatomic,strong) NSString *event_category;
+@property (nonatomic,strong) UIView *categorySection;
 @property (nonatomic,strong) UILabel *categoryLabel;
+@property (nonatomic,strong) UIImageView *categoryIcon;
 @property (nonatomic,strong) UILabel *numDoItMyself;
 @property (nonatomic,strong) UIView *numDoItMyselfSection;
 
