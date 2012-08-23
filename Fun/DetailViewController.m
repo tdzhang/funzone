@@ -37,6 +37,7 @@
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *doitmyselfButtonSection;
+@property (nonatomic,strong) UIView *comments_header_view;
 @property (nonatomic,strong) UIImageView *like_icon;
 @property (nonatomic,strong) UIImageView *join_icon;
 @property (nonatomic,strong) UIImageView *doitmyself_icon;
@@ -105,6 +106,7 @@
 @synthesize commentSectionView=_commentSectionView;
 @synthesize descriptionSectionView=_descriptionSectionView;
 @synthesize invitedPeopleSectionView=_invitedPeopleSectionView;
+@synthesize comments_header_view=_comments_header_view;
 @synthesize likeButtonSection = _likeButtonSection;
 @synthesize joinButtonSection=_joinButtonSection;
 @synthesize doitmyselfButtonSection=_doitmyselfButtonSection;
@@ -246,7 +248,7 @@
     self.shareButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     //set view background
-    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:2450/255.0 alpha:1]];
     
     self.eventImageView = [[UIImageView alloc] init];
     [self.myScrollView addSubview:self.eventImageView];
@@ -743,9 +745,13 @@
 //        [subview removeFromSuperview];
 //    }
     self.creatorView.frame = CGRectMake(0, self.view_height, 320, DVC_CREATOR_VIEW_HEIGHT);
+    //very hacky way to add shadow
     self.creatorView.backgroundColor = [UIColor whiteColor];
-//    self.creatorView.layer.shadowOffset = CGSizeMake(0, 1);
-//    self.creatorView.layer.shadowOpacity = 0.6f;
+    self.creatorView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.creatorView.layer.shadowColor = [[UIColor blackColor]CGColor];
+    self.creatorView.layer.shadowOpacity = 0.6f;
+    [self.myScrollView bringSubviewToFront:self.eventImageView];
+    [self.myScrollView bringSubviewToFront:self.categoryView];
     
     self.creatorProfileView.frame = CGRectMake(10, 5, 35, 35);
     [self.creatorProfileView setClipsToBounds:YES];
@@ -894,7 +900,7 @@
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
     [map_indicator_label setTextColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(300, 16.5, 4, 7)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(305, 18, 4, 7)];
     [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
@@ -960,7 +966,7 @@
     }
     self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
     [self.invitee addObjectsFromArray:[ProfileInfoElement generateProfileInfoElementArrayFromAddressBookInfo:[event objectForKey:@"invitee_emails"]]];
-    if (!self.isEventOwner && !self.isInvited) {
+    if ((!self.isEventOwner && !self.isInvited) || [self.invitee count] != 0) {
         return;
     }
     if (self.garbageCollection) {
@@ -1055,6 +1061,9 @@
         [subview removeFromSuperview];
     }
     self.likedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"likes"]] mutableCopy];
+    if ([self.likedPeople count]==0) {
+        return;
+    }
     if (self.garbageCollection) {
         for (UIView* view in self.garbageCollection) {
             [view removeFromSuperview];
@@ -1140,7 +1149,7 @@
 }
 
 - (void)handleTheCommentPart:(NSDictionary *)event{
-    for (UIView *subview in [self.commentSectionView subviews]) {
+    for (UIView *subview in [self.comments_header_view subviews]) {
         [subview removeFromSuperview];
     }
     self.comments= [[eventComment getEventComentArrayFromArray:[event objectForKey:@"comments"]] mutableCopy];
@@ -1153,9 +1162,9 @@
     self.garbageCollection=[NSMutableArray array];
     
     //comment header view
-    UIView *comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 30)];
+    self.comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 30)];
     //[comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
-    [self.myScrollView addSubview:comments_header_view];
+    [self.myScrollView addSubview:self.comments_header_view];
     
     //comment icon
     UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 19.5, 19.5)];
@@ -1163,7 +1172,7 @@
     [commentIcon setImage:image_comment_icon];
     [commentIcon setContentMode:UIViewContentModeScaleAspectFit];
     [commentIcon setAlpha:0.7];
-    [comments_header_view addSubview:commentIcon];
+    [self.comments_header_view addSubview:commentIcon];
     
     //comment header label
     UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 100, 30)];
@@ -1179,7 +1188,7 @@
     [comment_header_label setTextColor:[UIColor darkGrayColor]];
     [comment_header_label setShadowColor:[UIColor whiteColor]];
     [comment_header_label setShadowOffset: CGSizeMake(0, 1)];
-    [comments_header_view addSubview:comment_header_label];
+    [self.comments_header_view addSubview:comment_header_label];
     
     //button
     UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(220, 4, 80, 22)];
@@ -1190,9 +1199,9 @@
      forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"+ Comment" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
 //    [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
-    [comments_header_view addSubview:button];
+    [self.comments_header_view addSubview:button];
     [self.garbageCollection addObject:button];
     
     self.view_height += 32;
@@ -1200,13 +1209,13 @@
     for (int i = 0; i<[self.comments count]; i++) {
         //if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];  
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 0)];
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(7, self.view_height, 300, 0)];
         //[commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         
         //UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 100, 0)];
-        NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
+        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(7, 5, 100, 0)];
+        NSString *comment_user_name =[NSString stringWithFormat:@"%@ :",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
         [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
@@ -1233,7 +1242,7 @@
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 290, 0)];
+        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(7, 5, 290, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];
         [comment_content_label setFont:[UIFont systemFontOfSize:14]];
