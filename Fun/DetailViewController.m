@@ -918,7 +918,7 @@
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
     
-    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 5, 50, 30)];
+    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 0, 80, 40)];
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.locationSectionView addSubview:showMapButton];
     
