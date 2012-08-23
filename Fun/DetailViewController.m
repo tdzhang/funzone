@@ -244,7 +244,7 @@
     self.shareButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     //set view background
-    //[self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
     
     self.eventImageView = [[UIImageView alloc] init];
     [self.myScrollView addSubview:self.eventImageView];
@@ -732,6 +732,7 @@
 
 - (void)handleEventTitle:(NSDictionary *)event {
     self.eventTitleLabel.frame = CGRectMake(15, self.view_height, 290, 40);
+    [self.eventTitleLabel setBackgroundColor:[UIColor clearColor]];
     [self.eventTitleLabel setFont:[UIFont boldSystemFontOfSize:16]];
     self.eventTitleLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.eventTitleLabel.numberOfLines = 0;

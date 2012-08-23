@@ -110,7 +110,7 @@
     }
      
     //refresh part
-    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -50, 320, 50)];
     //[self.refreshView setImage:[UIImage imageNamed:@"FreshBigArrow.png"]];
     [self.mainScrollView addSubview:self.refreshView];
 
@@ -200,33 +200,34 @@
     }
     
     //this is the upper most position that need to reget the most popular 10 events
-    if (scrollView.contentOffset.y<-EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/3) {
+    if (scrollView.contentOffset.y < -15) {
         //remove the main views
         for (UIView *view in [self.mainScrollView subviews]) {
-            [view setFrame:CGRectMake(0, view.frame.origin.y+EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+            [view setFrame:CGRectMake(5, view.frame.origin.y+40, view.frame.size.width, view.frame.size.height)];
             NSLog(@"put %f",view.frame.origin.y+EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2);
             [self.garbageCollection addObject:view];
         }
         
         //set the refresh view ahead
         //NSLog(@"get most 10 popular pages called");
-        [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2)];
+        [self.refreshView setFrame:CGRectMake(0, 0, 320, 50)];
         for(UIView *subview in [self.refreshView subviews]) {
             [subview removeFromSuperview];
         }
         
-        self.loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2)];
-        self.loading.layer.cornerRadius =15;
-        self.loading.opaque = NO;
-        self.loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
-        loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
-        loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
+        self.loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+        self.loading.backgroundColor =[UIColor clearColor];
+        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(135,15,80,20)];
+        loadLabel.text =@"LOADING...";
+        loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
+        loadLabel.textAlignment = UITextAlignmentCenter;
+        loadLabel.textColor =[UIColor darkGrayColor];
+        [loadLabel setShadowColor:[UIColor whiteColor]];
+        [loadLabel setShadowOffset:CGSizeMake(0, 1)];
         loadLabel.backgroundColor =[UIColor clearColor];
         [self.loading addSubview:loadLabel];
         UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        spinning.frame =CGRectMake(120,20,80,80);
+        spinning.frame =CGRectMake(115,15,20,20);
         [spinning startAnimating];[self.loading addSubview:spinning];
         [self.refreshView addSubview:self.loading];
         
@@ -248,28 +249,26 @@
         for(UIView *subview in [self.refreshViewdown subviews]) {
             [subview removeFromSuperview];
         }
-        UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(10,0,EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
-        [underloading setBackgroundColor:[UIColor whiteColor]];
-        UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
-        loading.layer.cornerRadius =15;
-        loading.opaque = NO;
+        UIView *loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
         loading.backgroundColor =[UIColor clearColor];
-        UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
-        loadLabel.text =@"Loading More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+        UILabel *loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
+        loadLabel.backgroundColor = [UIColor clearColor];
+        loadLabel.text =@"LOADING...";
+        loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
         loadLabel.textAlignment =UITextAlignmentCenter;
-        loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
-        loadLabel.backgroundColor =[UIColor clearColor];
+        loadLabel.textColor =[UIColor darkGrayColor];
+        [loadLabel setShadowColor:[UIColor whiteColor]];
+        [loadLabel setShadowOffset:CGSizeMake(0, 1)];
         [loading addSubview:loadLabel];
-        UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        spinning.frame =CGRectMake(120,20,80,80);
-        [spinning startAnimating];[loading addSubview:spinning];
-        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT*([self.blockViews count]),EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH,EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT/2)];
+        UIActivityIndicatorView *spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinning.frame = CGRectMake(115,15,20,20);
+        [spinning startAnimating];
+        [loading addSubview:spinning];
+        self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,(FEED_BLOCK_ELEMENT_VIEW_HEIGHT+10)*([self.blockViews count]),320,50)];
         [self.refreshViewdown removeFromSuperview];
-        [self.refreshViewdown addSubview:underloading];
         [self.refreshViewdown addSubview:loading];
         [self.mainScrollView addSubview:self.refreshViewdown];
-        self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, ([self.blockViews count]+0.5)*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
-        
+        self.mainScrollView.contentSize = CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, [self.blockViews count]*(FEED_BLOCK_ELEMENT_VIEW_HEIGHT+10)+50);
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
        //NSLog(@"add more");
@@ -295,31 +294,31 @@
 -(void)RefreshAction{
     //remove the main views
     for (UIView *view in [self.mainScrollView subviews]) {
-        [view setFrame:CGRectMake(0, view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-        //NSLog(@"put %f",view.frame.origin.y+EVENT_ELEMENT_CONTENT_HEIGHT/2);
+        [view setFrame:CGRectMake(5, view.frame.origin.y+40, view.frame.size.width, view.frame.size.height)];
     }
     
     //set the refresh view ahead & and also the anti touch mask
     //NSLog(@"get most 10 popular pages called");
-    [self.refreshView setFrame:CGRectMake(0, 0, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+    [self.refreshView setFrame:CGRectMake(0, 0, 320, 50)];
     
     for(UIView *subview in [self.refreshView subviews]) {
         [subview removeFromSuperview];
     }
-    
-    UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
-    loading.layer.cornerRadius =15;
-    loading.opaque = NO;
-    loading.backgroundColor =[UIColor colorWithWhite:1.0f alpha:0.3f];
-    UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(120,10,80,40)];
-    loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+    UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+    loading.backgroundColor =[UIColor clearColor];
+    UILabel *loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
+    loadLabel.backgroundColor = [UIColor clearColor];
+    loadLabel.text =@"LOADING...";
+    loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
     loadLabel.textAlignment =UITextAlignmentCenter;
-    loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
-    loadLabel.backgroundColor =[UIColor clearColor];
+    loadLabel.textColor =[UIColor darkGrayColor];
+    [loadLabel setShadowColor:[UIColor whiteColor]];
+    [loadLabel setShadowOffset:CGSizeMake(0, 1)];
     [loading addSubview:loadLabel];
     UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    spinning.frame =CGRectMake(120,20,80,80);
-    [spinning startAnimating];[loading addSubview:spinning];
+    spinning.frame =CGRectMake(115,15,20,20);
+    [spinning startAnimating];
+    [loading addSubview:spinning];
     [self.refreshView addSubview:loading];
     
     [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -487,7 +486,21 @@
         if ([json count]==0) {
             //if the new received data is null, we know that this page is empty, no more data, so no need to add the next request page data.
             self.refresh_page_num--;
-            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, [self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT)];
+            [self.mainScrollView setContentSize:CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, [self.blockViews count]*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT+50)];
+            //[spinning removeFromSuperview];
+            for (UIView *subview in [self.refreshViewdown subviews]) {
+                [subview removeFromSuperview];
+            }
+            UILabel *loadLabel = [[UILabel alloc] init];
+            loadLabel.frame = CGRectMake(120, 15, 80, 20);
+            loadLabel.text = @"ALL LOADED";
+            loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
+            loadLabel.backgroundColor = [UIColor clearColor];
+            loadLabel.textAlignment =UITextAlignmentCenter;
+            loadLabel.textColor =[UIColor darkGrayColor];
+            [loadLabel setShadowColor:[UIColor whiteColor]];
+            [loadLabel setShadowOffset:CGSizeMake(0, 1)];
+            [self.refreshViewdown addSubview:loadLabel];
         }
         else{
             for (NSDictionary* event in json) {
@@ -517,10 +530,8 @@
                 //refresh the whole view
                 [self addMoreDataToTheMainScrollViewSUbviews];
             }
-
-        }
-                
-        [self.refreshViewdown removeFromSuperview];
+            [self.refreshViewdown removeFromSuperview];
+        }   
     }
     //check for whether show the instruction
     [self checkForWhetherShowInstruction];
