@@ -1511,10 +1511,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
-    //NSLog(@"%@",connection.originalRequest.URL);
-    //NSLog(@"%@",error);
 }
 
 //when the connection get the returned data (json form)
@@ -1532,7 +1528,7 @@
     
     //if the activity is not exist, pop back to the last page
     if ([[event objectForKey:@"response"] isEqualToString:@"error"]) {
-        UIAlertView *NotExistAlert = [[UIAlertView alloc] initWithTitle:@"Not Found Error"
+        UIAlertView *NotExistAlert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:[event objectForKey:@"message"]
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
@@ -1735,25 +1731,6 @@
             }
         }
     }
-    
-    
-    /*
-     if ([MFMessageComposeViewController canSendText]) {
-     MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
-     
-     NSString *messageText = [[NSString stringWithFormat:@"Hi, your friend just shared recipe of %@ with you. Check it out here: ",_dish.name] stringByAppendingFormat:_dish.dishURL];
-     
-     [messageSender setBody:messageText];
-     [self presentModalViewController:messageSender animated:YES];
-     } else {
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failed to sent SMS"
-     message:@"Your device cannot send SMS for now. Please check."
-     delegate:nil
-     cancelButtonTitle:@"Cancel"
-     otherButtonTitles: nil];
-     [alert show];
-     }
-     */
     
 }
 

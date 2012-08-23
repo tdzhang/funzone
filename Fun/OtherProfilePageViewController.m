@@ -207,14 +207,6 @@
                     }
                 }
             }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Errow getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-                //[notsuccess show];
-            }
             
         });
         
@@ -330,42 +322,17 @@
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                 if (self.followed) {
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        success.delegate=self;
-                        //[success show];
                         [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
                         self.followed=NO;
-                    }
-                    else {
-                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        unsuccess.delegate=self;
-                        //[unsuccess show];
                     }
                 }
                 else if (!self.followed){
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        success.delegate=self;
-                        //[success show];
                         [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                         self.followed=YES;
                     }
-                    else {
-                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        unsuccess.delegate=self;
-                        //[unsuccess show];
-                    }
                 }
             }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-                //[notsuccess show];
-            }
-            
         });
         
     });
@@ -530,10 +497,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
-    //NSLog(@"%@",connection.originalRequest.URL);
-    //NSLog(@"%@",error);
+
 }
 
 

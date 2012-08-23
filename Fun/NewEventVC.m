@@ -569,18 +569,10 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     notsuccess.delegate=self;
                     [notsuccess show];
                 }
-            }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-//                [notsuccess show];
             }
             
         });
@@ -596,6 +588,7 @@
 - (IBAction)deleteEventButton:(id)sender {
     //after delete, need to return to myparc
     //create event
+#warning Check this
     //Adding Create Event
 //    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     
@@ -617,20 +610,11 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Delete error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     notsuccess.delegate=self;
                     [notsuccess show];
                 }
             }
-            else{
-//                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-//                [notsuccess show];
-            }
-            
         });
         
     });
@@ -724,7 +708,7 @@
                     NSError *error;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                     if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error" message: [NSString stringWithFormat:@"%@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         notsuccess.delegate=self;
                         [notsuccess show];
                     }
@@ -734,14 +718,6 @@
                             [self startInviteFriendWithEventID:self.detail_event_id withSharedEventID:self.detail_shared_event_id];
                         }
                     }
-                }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
                 }
                 
             });
@@ -906,7 +882,7 @@
                     NSError *error;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                     if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error" message: [NSString stringWithFormat:@"%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                         notsuccess.delegate=self;
                         [notsuccess show];
                     }
@@ -916,14 +892,6 @@
                             [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
                         }
                     }
-                }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
                 }
                 
             });
@@ -1154,7 +1122,7 @@
                 [self presentModalViewController:self.imgPicker animated:YES];
             }
             else {
-                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Camera Not Exist" message:@"Your device does not support camera." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:nil message:@"Your device does not support camera." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }
@@ -1167,7 +1135,7 @@
                 [self presentModalViewController:self.imgPicker animated:YES];
             }
             else {
-                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Album doesn't exist" message:@"Your device does not support photo album." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:nil" message:@"Your device does not support photo album." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }

@@ -182,14 +182,6 @@
                     [self.tableView reloadData];
                 }
             }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-//                [notsuccess show];
-            }
             
         });
         
@@ -831,7 +823,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             if(person.alreadyInvited){
                 //this person is already invited last time, you can not edit it
-                UIAlertView *alreadyInvited = [[UIAlertView alloc] initWithTitle:@"Already Invited" message: [NSString stringWithFormat:@"Error: You have already invited this friend before."] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alreadyInvited = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"You have already invited him/her before."] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alreadyInvited show];
                 
                 [[tableView cellForRowAtIndexPath:indexPath] setSelected:YES];

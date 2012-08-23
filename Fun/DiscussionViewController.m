@@ -313,7 +313,7 @@
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 NSDictionary *jsonDic=[NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 if ([jsonDic isKindOfClass:[NSDictionary class]]&&[[jsonDic objectForKey:@"response"] isEqualToString:@"error"]) {
-                    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error Happend" message:[jsonDic  objectForKey:@"message"] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:nil message:[jsonDic  objectForKey:@"message"] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     errorAlert.delegate=self;
                     [errorAlert show];
 
@@ -462,6 +462,7 @@
 
 - (IBAction)CommentEnterButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
+#warning strip white spaces
     if (self.addCommentTextView.text.length>0) {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/create",CONNECT_DOMIAN_NAME]];
@@ -485,37 +486,21 @@
                     NSError *error;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                        success.delegate=self;
-                        //[success show];
                         [self.addCommentTextView setText:@""];
                         [self startFetchingInviteAndCommentData];
                         //[self.navigationController popViewControllerAnimated:YES];
                     }
                     else{
-                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message:[NSString     stringWithFormat:@"We are sorry. Your message was not received by the server. Please try again."] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         notsuccess.delegate=self;
                         //[notsuccess show];
                         [self.navigationController popViewControllerAnimated:YES];
                     }
                 }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
-                }
                 
             });
             
         });
-    }
-    else {
-        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment too short!" message:@"Sorry, your comment is too short. Please try again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        notsuccess.delegate=self;
-        [notsuccess show];
     }
 }
 
@@ -601,18 +586,10 @@
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     notsuccess.delegate=self;
                     [notsuccess show];
                 }
-            }
-            else{
-                //connect error
-//                NSError *error = [request error];
-//                NSLog(@"%@",error.description);
-//                UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Invite error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                notsuccess.delegate=self;
-//                [notsuccess show];
             }
             
         });

@@ -18,12 +18,12 @@
     
     if(internetStatus == NotReachable) {
         UIAlertView *errorView;
-        
+# warning Change this to industry standard
         errorView = [[UIAlertView alloc]
                      initWithTitle: NSLocalizedString(@"Network error", @"Network error")
-                     message: NSLocalizedString(@"No internet connection found, this application requires an internet connection to gather the data required.", @"Network error")
+                     message: NSLocalizedString(@"No internet connection found. Please change your network settings.", @"Network error")
                      delegate: self
-                     cancelButtonTitle: NSLocalizedString(@"Close", @"Network error") otherButtonTitles: nil];
+                     cancelButtonTitle: NSLocalizedString(@"OK", @"Network error") otherButtonTitles: nil];
         
         [errorView show];
     }
@@ -45,7 +45,7 @@
                 }
                 else{
                     //connect error
-                    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Error." message:@"Our server is currently under maintainess. Please try again later."
+                    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Error." message:@"Our server is currently under maintenance. Please try again later."
                                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show]; 
                 }

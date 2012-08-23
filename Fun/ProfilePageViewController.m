@@ -264,14 +264,6 @@
                         }
                     }
                 }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error getting user profile!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
-                }
                 
             });
             
@@ -1427,10 +1419,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
-    //NSLog(@"%@",connection.originalRequest.URL);
-    //NSLog(@"%@",error);
+
 }
 
 //when the connection get the returned data (json form)

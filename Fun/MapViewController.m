@@ -449,7 +449,7 @@
     //NSLog(@"user latitude = %f",userCoordinate.latitude);
     //NSLog(@"user longitude = %f",userCoordinate.longitude);
     if (userCoordinate.latitude<0.001) {
-        UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Location Unavailable" message: @"Cannot Locate Your Location, Please Check The Settings For Details." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Location Not Available" message: @"Cannot determine your location. Please check your Settings." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [someError show];
     }
     else{
@@ -599,8 +599,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    [someError show];*/
+
 }
 
 

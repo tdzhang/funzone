@@ -109,8 +109,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
+
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {     

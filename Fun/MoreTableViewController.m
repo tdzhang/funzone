@@ -196,28 +196,15 @@
                         NSError *error;
                         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                         if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                            /*
-                             UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Log out complete!" message:@"You have successfully logged out." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                             success.delegate=self;
-                             [success show];
-                             */
                             [self.navigationController popToRootViewControllerAnimated:YES];
                             FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
                             [funAppdelegate.thisTabBarController setSelectedIndex:0];
                         }
                         else{
-                            UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Logout Error" message:[NSString stringWithFormat:@"The logout is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                            UIAlertView *error = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Logout did not succeed. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                             error.delegate=self;
                             [error show];
                         }
-                    }
-                    else{
-                        //connect error
-//                        NSError *error = [request error];
-//                        NSLog(@"%@",error.description);
-//                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Log Out Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                        notsuccess.delegate=self;
-//                        [notsuccess show];
                     }
                     
                 });
@@ -280,9 +267,6 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     NSLog(@"%@",result);
-    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Thanks!" message: [NSString stringWithFormat:@"Thank you for liking us =)"] delegate:self  cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    success.delegate=self;
-    [success show];
 }
 
 

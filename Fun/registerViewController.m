@@ -172,12 +172,6 @@
                     [error show];
                 }
             }
-            else{
-                //connect error
-//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                error.delegate=self;
-//                [error show];
-            }
             
         });
         
@@ -248,12 +242,6 @@
                     [error show];
                 }
             }
-            else{
-                //connect error
-//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                error.delegate=self;
-//                [error show];
-            }
             
         });
         
@@ -272,10 +260,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
-    //NSLog(@"%@",connection.originalRequest.URL);
-    //NSLog(@"%@",error);
+
 }
 
 

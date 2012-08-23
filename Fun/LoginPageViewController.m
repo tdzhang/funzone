@@ -127,7 +127,7 @@
     
     //if the name/password is too short, alert user
     if ([self.userName.text length]<4||[self.userPassword.text length]<5) {
-        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:@"Username / Password Error" message:@"Your name/password is wrong, please input again." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        UIAlertView *tooShort = [[UIAlertView alloc] initWithTitle:nil message:@"Your username or password is not correct. Please try again." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [tooShort show];
         return;
     }
@@ -165,16 +165,10 @@
                     [self dismissModalViewControllerAnimated:YES];
                 }
                 else {
-                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[NSString stringWithFormat:@"The registration is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"The registration was not completed. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     error.delegate=self;
                 }
                 
-            }
-            else{
-                //connect error
-//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The registration process is not finished. Some error occurred." delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                error.delegate=self;
-//                [error show];
             }
             
         });
@@ -248,16 +242,10 @@
                     [self dismissModalViewControllerAnimated:YES];
                 }
                 else {
-                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[NSString stringWithFormat:@"The login is not finished. Some error happened:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *error = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Login did not succeed. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     error.delegate=self;
                     [error show];
                 }
-            }
-            else{
-                //connect error
-//                UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Login Error" message:@"The login is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                error.delegate=self;
-//                [error show];
             }
             
         });
@@ -278,10 +266,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    /*UIAlertView *someError = [[UIAlertView alloc] initWithTitle:@"Connection Error" message: @"Unable to connect to searching server" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-     [someError show];*/
-    //NSLog(@"%@",connection.originalRequest.URL);
-    //NSLog(@"%@",error);
+
 }
 
 

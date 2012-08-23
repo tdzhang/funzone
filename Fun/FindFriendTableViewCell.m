@@ -220,27 +220,15 @@
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                     
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-//                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Follow succeeded." message: [NSString stringWithFormat:@"You have successfully followed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                        success.delegate=self;
-//                        [success show];
                         [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                         self.actionCategory=@"unfollow";
                     }
                     else {
-                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Follow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         unsuccess.delegate=self;
                         [unsuccess show];
                     }
                     [self.actionButton setEnabled:YES];
-                }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
-//                    [self.actionButton setEnabled:YES];
                 }
                 
             });
@@ -268,27 +256,15 @@
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
                     
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-//                        UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Unfollow succeeded." message: [NSString stringWithFormat:@"You have successfully unfollowed the user you chose."] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                        success.delegate=self;
-//                        [success show];
                         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
                         self.actionCategory=@"follow";
                     }
                     else {
-                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:@"Unfollow not successful." message: [NSString stringWithFormat:@"Oops, something went wrong. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                        UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         unsuccess.delegate=self;
                         [unsuccess show];
                     }
                     [self.actionButton setEnabled:YES];
-                }
-                else{
-                    //connect error
-//                    NSError *error = [request error];
-//                    NSLog(@"%@",error.description);
-//                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Error!" message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                    notsuccess.delegate=self;
-//                    [notsuccess show];
-//                    [self.actionButton setEnabled:YES];
                 }
                 
             });
@@ -314,7 +290,7 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
     NSLog(@"%@",result);
-    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Invite Success" message: [NSString stringWithFormat:@"You have post the invitation on your friends wall."] delegate:self  cancelButtonTitle:@"Ok, Got it." otherButtonTitles:nil];
+    UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Facebook" message: [NSString stringWithFormat:@"You have successfully sent the invitation to your friend."] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
     success.delegate=self;
     [success show];
 }
