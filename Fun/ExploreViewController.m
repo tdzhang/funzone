@@ -36,6 +36,7 @@
 @property (nonatomic,strong) NSString *pickerType;
 @property (nonatomic,strong) NSString *categoryFilter;
 @property (nonatomic,strong) NSString *categoryFilter_id;
+@property (nonatomic)BOOL isCategoryPickerSelected;
 
 @end
 
@@ -63,6 +64,8 @@
 @synthesize pickerType=_pickerType;
 @synthesize categoryFilter=_categoryFilter;
 @synthesize categoryFilter_id=_categoryFilter_id;
+@synthesize isCategoryPickerSelected=_isCategoryPickerSelected;
+
 
 
 
@@ -544,8 +547,8 @@
         
         [self.actionSheet addSubview:pickerToolbar];
 
-        
-        [self.actionSheet showInView:self.view];
+        [self.actionSheet showFromTabBar:self.tabBarController.tabBar];
+       // [self.actionSheet showInView:self.view];
         [self.actionSheet setBounds:CGRectMake(0,0,320, 464)];
     
 }
@@ -565,6 +568,9 @@
 
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    self.categoryFilter_id=nil;
+   [self.CategoryFilterButton setTitle:@"All"];
+    self.isCategoryPickerSelected=NO;
     return 1;
 }
 
@@ -596,11 +602,19 @@
         self.categoryFilter=[category objectAtIndex:row];
        // Txt.text = [array objectAtIndex:row];
     }
+    self.isCategoryPickerSelected=YES;
     NSLog(@"%@",self.categoryFilter);
 }
 
 - (void)pickerDone:(id)sender
 {
+    if (!self.isCategoryPickerSelected) {
+        self.categoryFilter_id=nil;
+        [self.CategoryFilterButton setTitle:@"All"];
+        [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+        [self RefreshAction];
+        return;
+    }
     [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
     self.actionSheet = nil;
     //self.actionSheet
