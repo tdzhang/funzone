@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSString* event_id;
 @property (nonatomic,strong) NSString* shared_event_id;
 @property (nonatomic,strong) NSString* event_name;
+@property (nonatomic,strong) NSString *event_pic;
 @property (nonatomic,strong) NSString* message;
 
 +(NSMutableArray*)getActivityElementsArrayByJson:(NSArray*)json;

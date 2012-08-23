@@ -155,7 +155,7 @@
     
     self.event_name=element.event_name;
     self.message=element.message;
-    NSURL *imageUrl=[NSURL URLWithString:self.user_pic];
+    NSURL *imageUrl=[NSURL URLWithString:element.event_pic];
     //deal with the profile image
     if (![Cache isURLCached:imageUrl]) {
         //using high priority queue to fetch the image
@@ -195,15 +195,15 @@
 
     [self.userPicImageView clipsToBounds];
     [self.userPicImageView setContentMode:UIViewContentModeScaleToFill];
-    self.userPicImageView.frame = CGRectMake(10, 10, 20, 20);
+    self.userPicImageView.frame = CGRectMake(5, 5, 45, 45);
 
-    self.user_name_label.frame = CGRectMake(45, 3, 100, 15);
+    self.user_name_label.frame = CGRectMake(60, 3, 100, 15);
     self.user_name_label.text = [NSString stringWithFormat:@"%@",self.user_name];
     [self.user_name_label setFont:[UIFont boldSystemFontOfSize:12]];
     self.user_name_label.lineBreakMode = UILineBreakModeTailTruncation;
     self.user_name_label.numberOfLines = 1;
     
-    self.event_name_label.frame = CGRectMake(45, 18, 230, 15);
+    self.event_name_label.frame = CGRectMake(60, 18, 230, 15);
     self.event_name_label.text = [NSString stringWithFormat:@"in event \"%@\"",self.event_name];
     [self.event_name_label setFont:[UIFont systemFontOfSize:12]];
     [self.event_name_label setTextColor:[UIColor darkGrayColor]];
@@ -214,7 +214,7 @@
     [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@.",self.message]];
     self.activityDescriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
     self.activityDescriptionLabel.numberOfLines = 1;
-    self.activityDescriptionLabel.frame = CGRectMake(45, 32, 250, 20);
+    self.activityDescriptionLabel.frame = CGRectMake(60, 32, 250, 20);
 }
 
 @end
