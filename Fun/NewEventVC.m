@@ -475,7 +475,8 @@
     
     if (self.isNeedToUseOtherSource) {
         if ([self.isNeedToUseOtherSource isEqualToString:@"need"]) {
-                UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
+                //UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
+                UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from album",nil];
                 pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
                 [pop showFromTabBar:self.tabBarController.tabBar];
         }
@@ -1128,7 +1129,7 @@
     }    
     //for the event photo choose action sheet
     else if([actionSheet.title isEqualToString:@"Choose photo source"]){
-        if (buttonIndex == 1) {
+        if (buttonIndex == 0) {
             //do sth. about take photo part
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 self.imgPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
@@ -1140,7 +1141,7 @@
                 [cameraNotSupport show];
             }
         }
-        else if(buttonIndex == 2){
+        else if(buttonIndex == 1){
             //do sth. about choose photo from the album
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
                 
@@ -1153,10 +1154,12 @@
                 [cameraNotSupport show];
             }
         }
+        /*
         else if(buttonIndex == 0){
             //using google image seach(implement by segue)
             [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
         }
+         */
     }
     else if([actionSheet.title isEqualToString:@"Invite Friends"]){
         if(buttonIndex == 0){

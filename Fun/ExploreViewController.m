@@ -603,6 +603,7 @@
 {
     [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
     self.actionSheet = nil;
+    //self.actionSheet
     NSLog(@"%@",self.categoryFilter);
     if ([self.categoryFilter isEqualToString:@"All events"]||!self.categoryFilter) {
         self.categoryFilter_id=nil;

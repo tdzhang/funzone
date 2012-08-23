@@ -127,10 +127,16 @@
     [self.navigationItem setBackBarButtonItem:backButton];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.moreButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
     [self.navigationController.navigationBar.topItem setTitle:@"Recommended Photos"];
+    
 }
 
 - (void)viewDidUnload
@@ -139,8 +145,6 @@
     [self setMySearchBar:nil];
     [self setMoreButton:nil];
     [super viewDidUnload];
-    
-    self.moreButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 
 
     // Release any retained subviews of the main view.
