@@ -455,8 +455,9 @@
         }
     }
     
+    
     //enter the food choose image session
-    if (self.isNeedChoosePhoto) {
+    if ([self.eventType isEqualToString:@"food"]&&self.isNeedChoosePhoto) {
         self.isNeedChoosePhoto=NO;
         [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
     }
@@ -1483,6 +1484,9 @@
             [self.navigationController popViewControllerAnimated:YES];
             self.isNeedChoosePhoto=NO;
         }
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
 }

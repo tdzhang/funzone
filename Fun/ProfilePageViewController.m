@@ -280,7 +280,7 @@
         
     //---------->mainScrollView
     //quest the most recent 10 events
-    self.refresh_page_num=2; //the next page that need to refresh is 2
+ //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
     self.isViewAppearConnection=YES;
     
@@ -310,7 +310,7 @@
                 //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]
                 if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark]) {
                     //do nothing here, if there is no diff
-                    self.refresh_page_num=2;
+                    //self.refresh_page_num=2;
                     self.freshConnectionType=@"not";
                     if (!self.isViewAppearConnection) {
                         for (UIView *view in [self.mainScrollView subviews]) {
@@ -433,7 +433,7 @@
     
     //---------->joined ScrollView
     //quest the most recent 10 events
-    self.joined_refresh_page_num=2; //the next page that need to refresh is 2
+    //self.joined_refresh_page_num=2; //the next page that need to refresh is 2
     self.joined_freshConnectionType=@"New";
     self.joined_isViewAppearConnection=YES;
     
@@ -461,7 +461,7 @@
                 //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
                 if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
                     //do nothing here, if there is no diff
-                    self.joined_refresh_page_num=2;
+                    //self.joined_refresh_page_num=2;
                     self.joined_freshConnectionType=@"not";
                     if (!self.joined_isViewAppearConnection) {
                         for (UIView *view in [self.joinedScrollView subviews]) {
