@@ -222,7 +222,7 @@
         
 
     //quest the most recent 10 events
-    self.refresh_page_num=2; //the next page that need to refresh is 2
+    //self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
     self.isViewAppearConnection=YES;
     NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@&user_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.creator_id];
@@ -549,7 +549,7 @@
         //after reget the newest 10 popular event, the next page that need to be retrait is page 2
         if ([[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]) {
             //do nothing here, if there is no diff
-            self.refresh_page_num=2;
+            //self.refresh_page_num=2;
             self.freshConnectionType=@"not";
             if (!self.isViewAppearConnection) {
                 for (UIView *view in [self.mainScrollView subviews]) {
