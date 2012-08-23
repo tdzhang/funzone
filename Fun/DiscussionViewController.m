@@ -218,17 +218,6 @@
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         [self.garbageCollection addObject:numOfInvites];
         
-        //---------->>set edit button
-        if (self.isEventOwner) {
-            UIButton *editInvitedPeople = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            [editInvitedPeople setFrame:CGRectMake(170, 0, 120, 40)];
-            [editInvitedPeople setTitle:@"Edit List" forState:UIControlStateNormal];
-            [editInvitedPeople addTarget:self action:@selector(editInvitedPeopleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-            [self.invitedPeopleSectionView addSubview:editInvitedPeople];
-            [self.garbageCollection addObject:editInvitedPeople];
-        }
-        
-        
         //---------->>set invited people image
         int x_position_photo=10;
         int y_position_photo=32;
@@ -280,9 +269,8 @@
                     userImageView.image=[UIImage imageWithData:[Cache getCachedData:backGroundImageUrl]];
                 });
             }
-            userImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-            userImageView.layer.shadowRadius = 2;
-            userImageView.layer.cornerRadius = 4;
+            userImageView.layer.cornerRadius = 4.0;
+            userImageView.layer.masksToBounds = YES;
             [self.invitedPeopleSectionView addSubview:userImageView];
             [userImageView addGestureRecognizer:tapGR];
            
@@ -291,6 +279,16 @@
                 y_position_photo+=DISCUSSION_INVITE_BLOCK_HEIGHT;
                 x_position_photo=10;
             }
+        }
+        
+        //---------->>set edit button
+        if (self.isEventOwner) {
+            UIButton *editInvitedPeople = [UIButton buttonWithType:UIButtonTypeCustom];
+            [editInvitedPeople setFrame:CGRectMake(([self.invitee count]%5)*(DISCUSSION_INVITE_IMAGE_SIZE+10)+10, 32+[self.invitee count]/5*DISCUSSION_INVITE_BLOCK_HEIGHT, 50, 50)];
+            [editInvitedPeople setBackgroundImage:[UIImage imageNamed:@"DVC_Add.png"] forState:UIControlStateNormal];
+            [editInvitedPeople addTarget:self action:@selector(editInvitedPeopleButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self.invitedPeopleSectionView addSubview:editInvitedPeople];
+            [self.garbageCollection addObject:editInvitedPeople];
         }
     }
     
@@ -364,9 +362,10 @@
                         comment_user_name_label.numberOfLines = 1;
                         
                         //comment timestamp
-                        UILabel *comment_time = [[UILabel alloc] initWithFrame:CGRectMake(210, 5, 100, 20)];
+                        UILabel *comment_time = [[UILabel alloc] initWithFrame:CGRectMake(200, 5, 100, 20)];
                         comment_time.text = [NSString stringWithFormat:@"%@",comment.timestamp];
                         [comment_time setTextColor:[UIColor lightGrayColor]];
+                        comment_time.textAlignment = UITextAlignmentRight;
                         [comment_time setFont:[UIFont systemFontOfSize:12]];
                         [comment_time setBackgroundColor:[UIColor clearColor]];
                         comment_time.numberOfLines = 1;
@@ -488,7 +487,7 @@
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                         UIAlertView *success = [[UIAlertView alloc] initWithTitle:@"Comment completed!" message:@"Thanks for commenting!" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                         success.delegate=self;
-                        [success show];
+                        //[success show];
                         [self.addCommentTextView setText:@""];
                         [self startFetchingInviteAndCommentData];
                         //[self.navigationController popViewControllerAnimated:YES];
@@ -496,7 +495,7 @@
                     else{
                         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Comment not completed" message:[NSString     stringWithFormat:@"Sorry, the comment wasn't completed. Please try again:%@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                         notsuccess.delegate=self;
-                        [notsuccess show];
+                        //[notsuccess show];
                         [self.navigationController popViewControllerAnimated:YES];
                     }
                 }
