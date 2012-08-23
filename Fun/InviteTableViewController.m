@@ -305,11 +305,11 @@
 {
     if(section == 0)
     {
-        return @"Registered User";
+        return @"Friends";
     }
     else if(section == 1)
     {
-        return @"AddressBook User";
+        return @"Contacts";
     }
     return @"Other";
 }
@@ -383,6 +383,12 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 [cell.user_profile_imageview setImage:image];
+                                
+                                cell.user_profile_imageview .layer.cornerRadius = 4;
+                                cell.user_profile_imageview .clipsToBounds = YES;
+                                [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                                cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                                cell.user_profile_imageview .layer.borderWidth = 1;
                             });
                         }
                     }
@@ -393,6 +399,12 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 [cell.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                                
+                                cell.user_profile_imageview .layer.cornerRadius = 4;
+                                cell.user_profile_imageview .clipsToBounds = YES;
+                                [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                                cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                                cell.user_profile_imageview .layer.borderWidth = 1;
                             });
                         }
                     }
@@ -401,6 +413,12 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     [cell.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+                    
+                    cell.user_profile_imageview .layer.cornerRadius = 4;
+                    cell.user_profile_imageview .clipsToBounds = YES;
+                    [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                    cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                    cell.user_profile_imageview .layer.borderWidth = 1;
                 });
             }
             ///////////////////////
@@ -445,6 +463,11 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 [cell.user_profile_imageview setImage:image];
+                                cell.user_profile_imageview .layer.cornerRadius = 4;
+                                cell.user_profile_imageview .clipsToBounds = YES;
+                                [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                                cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                                cell.user_profile_imageview .layer.borderWidth = 1;
                             });
                         }
                     }
@@ -455,6 +478,11 @@
                             dispatch_async( dispatch_get_main_queue(),^{
                                 [Cache addDataToCache:url withData:imageData];
                                 [cell.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                                cell.user_profile_imageview .layer.cornerRadius = 4;
+                                cell.user_profile_imageview .clipsToBounds = YES;
+                                [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                                cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                                cell.user_profile_imageview .layer.borderWidth = 1;
                             });
                         }
                     }
@@ -463,6 +491,11 @@
             else {
                 dispatch_async( dispatch_get_main_queue(),^{
                     [cell.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+                    cell.user_profile_imageview .layer.cornerRadius = 4;
+                    cell.user_profile_imageview .clipsToBounds = YES;
+                    [cell.user_profile_imageview setContentMode:UIViewContentModeScaleAspectFill];
+                    cell.user_profile_imageview .layer.borderColor = [[UIColor darkGrayColor] CGColor];
+                    cell.user_profile_imageview .layer.borderWidth = 1;
                 });
             }
             ///////////////////////
@@ -493,6 +526,10 @@
                         reuseIdentifier:CellIdentifier] ;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
+            
+            cell.textLabel.font=  [UIFont fontWithName: @"Arial" size: 14.0 ];
+            cell.detailTextLabel.font=  [UIFont fontWithName: @"Arial" size: 14.0 ];
+            
             UserContactObject* contact=[self.addressbook_searchResultContacts objectAtIndex:indexPath.row];
             NSString *nameText=@"";
             if (contact.firstName) {
@@ -532,13 +569,17 @@
                     }
                 }
             }
+            
+            cell.textLabel.font=  [UIFont fontWithName: @"Arial" size: 10.0 ];
+            cell.detailTextLabel.font=  [UIFont fontWithName: @"Arial" size: 10.0 ];
+            
             // Configure the cell...here already deal with the situation that user lacking information (like phone number or email)
             UserContactObject* contact=[self.addressbook_dividedContacts objectAtIndex:indexPath.row];
             NSString *nameText=@"";
             if (contact.firstName) {
                 nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
                 if (contact.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                    nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
                 }
             }
             else if(contact.lastName){

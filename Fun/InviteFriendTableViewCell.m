@@ -8,6 +8,7 @@
 
 #import "InviteFriendTableViewCell.h"
 
+
 @implementation InviteFriendTableViewCell
 @synthesize user_profile_imageview;
 @synthesize user_name_label;

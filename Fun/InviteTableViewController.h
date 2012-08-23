@@ -15,6 +15,7 @@
 #import "MyContactsTableViewCell.h"
 #import "InviteFriendTableViewCell.h"
 #import "Cache.h"
+#import "QuartzCore/QuartzCore.h"
 
 @protocol FeedBackInviteFriendChange <NSObject>
 @optional
