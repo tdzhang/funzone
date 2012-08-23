@@ -79,6 +79,8 @@
 
 //used to filter out unecessary words
 @property (nonatomic,strong) NSArray* filterDict;
+
+@property (nonatomic,strong) NSString* isNeedToUseOtherSource;
 @end
 
 //////////////////////////////////////
@@ -151,6 +153,8 @@
 
 //used to filter out unecessary words
 @synthesize filterDict=_filterDict;
+
+@synthesize isNeedToUseOtherSource=_isNeedToUseOtherSource;
 
 #pragma mark - self defined synthesize
 //used to filter out unecessary words
@@ -467,6 +471,14 @@
     }
     else{
         [self.navigationController.navigationBar.topItem setTitle:@"Do it myself"];
+    }
+    
+    if (self.isNeedToUseOtherSource) {
+        if ([self.isNeedToUseOtherSource isEqualToString:@"need"]) {
+                UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
+                pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
+                [pop showFromTabBar:self.tabBarController.tabBar];
+        }
     }
 }
 
@@ -1286,7 +1298,8 @@
 }
 
 -(void)ChooseOtherSource{
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    self.isNeedToUseOtherSource=@"need";
 }
 
 
