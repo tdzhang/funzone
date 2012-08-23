@@ -1465,9 +1465,9 @@
         [self.textFieldEventTitle setText:locationName];
         [self.labelEventTitleHolder setHidden:YES];
         [self.textFieldEventTitle becomeFirstResponder];
-//        if (!self.self.isCreateEvent_imageUsable) {
-//            [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
-//        }
+        if (!self.self.isCreateEvent_imageUsable) {
+            [self performSegueWithIdentifier:@"ChooseImageUsingGoogleImage" sender:self];
+        }
     }
 }
 
