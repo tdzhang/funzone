@@ -1632,6 +1632,13 @@
     [self performSegueWithIdentifier:@"ViewLocation" sender:self];
 }
 
+#pragma mark - start private conversation
+
+- (IBAction)startPrivateConversationButtonClicked:(id)sender {
+    NSLog(@"123");
+}
+
+
 #pragma mark - self defined protocal <FeedBackToCreateActivityChange> method implementation
 ////////////////////////////////////////////////
 //implement the method for the adding or delete contacts that will be go out with
