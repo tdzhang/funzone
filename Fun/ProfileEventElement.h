@@ -17,6 +17,7 @@
 @property(nonatomic,strong)UILabel *distanceLabel;
 @property(nonatomic,strong)UIImageView *eventImageView;
 @property(nonatomic,strong)UIImageView *eventMaskView;
+@property(nonatomic,strong)UIImageView *shadow;
 @property(nonatomic,strong)UIImageView *heartImageView;
 @property(nonatomic,strong)UILabel *heartNumberLabel;
 

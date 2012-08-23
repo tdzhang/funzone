@@ -10,6 +10,7 @@
 
 @implementation ProfileEventElement
 @synthesize blockView=_blockView;
+@synthesize shadow=_shadow;
 @synthesize blockHolderView=_blockHolderView;
 @synthesize eventTitleLabel=_eventTitleLabel;
 @synthesize distanceLabel=_distanceLabel;
@@ -68,6 +69,10 @@
     blockElement.blockHolderView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"form.png"]];
     [blockElement.blockHolderView setFrame:CGRectInset(blockElement.blockView.bounds, 5, 5)];
     [blockElement.blockView addSubview:blockElement.blockHolderView];
+    
+    blockElement.shadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"collection-shadow.png"]];
+    [blockElement.shadow setFrame:CGRectMake(5, 158, 142, 7)];
+    [blockElement.blockView addSubview:blockElement.shadow];
     
     //Event Image
     blockElement.eventImageView=[[UIImageView alloc] initWithFrame:CGRectMake(PROFILE_ELEMENT_EVENT_IMAGE_X, PROFILE_ELEMENT_EVENT_IMAGE_Y, PROFILE_ELEMENT_EVENT_IMAGE_WIDTH, PROFILE_ELEMENT_EVENT_IMAGE_HEIGHT)];
