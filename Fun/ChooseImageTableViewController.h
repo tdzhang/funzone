@@ -18,6 +18,8 @@
 
 -(void)ChooseUIImage:(UIImage*)image  WithUrlName:(NSString*)URLName From:(ChooseImageTableViewController*) sender;
 
+-(void)ChooseOtherSource;
+
 @end
 
 

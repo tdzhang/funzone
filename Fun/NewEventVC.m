@@ -1285,6 +1285,10 @@
     self.isCreateEvent_imageUsable=YES;
 }
 
+-(void)ChooseOtherSource{
+    
+}
+
 
 
 

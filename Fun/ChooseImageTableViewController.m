@@ -358,7 +358,7 @@
 #pragma mark - choose other source
 
 - (IBAction)ChooseOtherPhotoSourceButtonClicked:(id)sender {
-    
+  //  self.delegate
 }
 
 
