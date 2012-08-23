@@ -88,7 +88,11 @@
     self.userCoordinate=userCoordinate;
     double lat=userCoordinate.latitude;
     double lng=userCoordinate.longitude;
+    
     NSString *request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?location=%f,%f&radius=50000&query=%@&sensor=false&key=%@",lat,lng,keyWords,oauthToken];
+    if ([searchString isEqualToString:@"cinema"]) {
+        request_string=[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/textsearch/json?location=%f,%f&radius=50000&query=%@&sensor=false&key=%@&types=movie_theater",lat,lng,keyWords,oauthToken];
+    }
     NSLog(@"%@",request_string);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
