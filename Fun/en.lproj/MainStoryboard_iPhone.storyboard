@@ -2687,7 +2687,7 @@ Find us @OrangeParc.com</string>
                                 <color key="backgroundColor" red="0.19897959183673475" green="0.19897959183673475" blue="0.19897959183673475" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2Yr-l8-opE">
-                                <rect key="frame" x="26" y="53" width="82" height="102"/>
+                                <rect key="frame" x="0.0" y="38" width="109" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2702,7 +2702,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rRq-3t-HTv">
-                                <rect key="frame" x="116" y="53" width="92" height="102"/>
+                                <rect key="frame" x="110" y="35" width="108" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2717,7 +2717,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X9V-n0-FhT">
-                                <rect key="frame" x="206" y="53" width="92" height="102"/>
+                                <rect key="frame" x="216" y="38" width="104" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2732,7 +2732,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m6u-kl-3Jc">
-                                <rect key="frame" x="216" y="145" width="92" height="102"/>
+                                <rect key="frame" x="216" y="145" width="104" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2747,7 +2747,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N8C-Tu-cms">
-                                <rect key="frame" x="116" y="145" width="92" height="102"/>
+                                <rect key="frame" x="107" y="143" width="111" height="113"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2762,7 +2762,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V2o-Hu-zgA">
-                                <rect key="frame" x="27" y="151" width="92" height="102"/>
+                                <rect key="frame" x="0.0" y="145" width="108" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2777,7 +2777,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KiR-uV-k1p">
-                                <rect key="frame" x="27" y="253" width="92" height="102"/>
+                                <rect key="frame" x="0.0" y="255" width="108" height="113"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2792,7 +2792,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H3i-AN-UmI">
-                                <rect key="frame" x="116" y="255" width="92" height="102"/>
+                                <rect key="frame" x="106" y="256" width="110" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -2807,7 +2807,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p6Z-ki-z5E">
-                                <rect key="frame" x="209" y="255" width="92" height="102"/>
+                                <rect key="frame" x="216" y="255" width="104" height="112"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3116,15 +3116,6 @@ Find us @OrangeParc.com</string>
         <class className="CategroyChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EntertainButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="EventButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="FoodButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="MovieButtonClicked:"/>
-                <relationship kind="action" name="OutdoorButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="PartyButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SelfDefineButtonClicked:"/>
-                <relationship kind="action" name="ShoppingButtonClicked:" candidateClass="UIButton"/>
-                <relationship kind="action" name="SportsButtonClicked:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -3156,7 +3147,6 @@ Find us @OrangeParc.com</string>
         <class className="DiscussionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="CommentEnterButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
             </relationships>
@@ -3197,7 +3187,6 @@ Find us @OrangeParc.com</string>
         <class className="MapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
             <relationships>
-                <relationship kind="action" name="DoneWithChooseLocation:"/>
                 <relationship kind="outlet" name="MySearchDisplayController" candidateClass="UISearchDisplayController"/>
                 <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
@@ -3277,10 +3266,6 @@ Find us @OrangeParc.com</string>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
-                <relationship kind="action" name="EmailShare:"/>
-                <relationship kind="action" name="FinishedThisSharePage:"/>
-                <relationship kind="action" name="MesssgeShare:"/>
-                <relationship kind="action" name="WechatShare:"/>
                 <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
             </relationships>
@@ -3288,9 +3273,6 @@ Find us @OrangeParc.com</string>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
-                <relationship kind="action" name="DecideToCancel:"/>
-                <relationship kind="action" name="DecideToChoose:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
