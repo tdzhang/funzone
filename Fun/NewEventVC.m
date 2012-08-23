@@ -1298,7 +1298,7 @@
 }
 
 -(void)ChooseOtherSource{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     self.isNeedToUseOtherSource=@"need";
 }
 
