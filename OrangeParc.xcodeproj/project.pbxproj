@@ -1889,7 +1889,6 @@
 				5C1790A615E595B30097DA44 /* tab_unselected.png in Resources */,
 				5C1790A815E597180097DA44 /* button_seperator.png in Resources */,
 				46A68E0515E5DED700CF3C63 /* Category.jpg in Resources */,
-				5C1790AE15E602FF0097DA44 /* DVC_Add.png in Resources */,
 				4633956715E6167D00277327 /* Category-food.jpg in Resources */,
 				4633956815E6167D00277327 /* Category-other.jpg in Resources */,
 				4633956915E6167D00277327 /* Category-Party.jpg in Resources */,
