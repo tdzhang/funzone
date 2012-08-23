@@ -907,13 +907,13 @@
     eventLocation.numberOfLines = 1;
     [self.locationSectionView addSubview:eventLocation];
         
-    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(270, 10, 35, 20)];
+    UILabel *map_indicator_label = [[UILabel alloc] initWithFrame:CGRectMake(272, 11, 35, 20)];
     [map_indicator_label setText:@"MAP"];
     [map_indicator_label setBackgroundColor:[UIColor clearColor]];
-    [map_indicator_label setFont:[UIFont boldSystemFontOfSize:13]];
+    [map_indicator_label setFont:[UIFont boldSystemFontOfSize:11]];
     [map_indicator_label setTextColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(305, 18, 4, 7)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(303, 18, 4, 7)];
     [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
@@ -1014,10 +1014,10 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
-        self.privateMessageButton.frame = CGRectMake(210, 25, 100, 40);
-        [self.privateMessageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+        self.privateMessageButton.frame = CGRectMake(212, 7, 100, 25);
+        [self.privateMessageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
         //self.privateMessageButton.titleLabel.text = @"+ Message";
-        [self.privateMessageButton setTitle:@"+ Message" forState:UIControlStateNormal];
+        [self.privateMessageButton setTitle:@"+ MESSAGE" forState:UIControlStateNormal];
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateHighlighted];
         [self.invitedPeopleSectionView addSubview:self.privateMessageButton];
@@ -1212,15 +1212,15 @@
     [self.comments_header_view addSubview:comment_header_label];
     
     //button
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(220, 4, 80, 22)];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(222, 5, 80, 22)];
     [button setAlpha:1];
     //add button action
     [button addTarget:self 
                action:@selector(addViewCommentButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"+ Comment" forState:UIControlStateNormal];
+    [button setTitle:@"+ COMMENT" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
 //    [button setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
     [self.comments_header_view addSubview:button];
     [self.garbageCollection addObject:button];
