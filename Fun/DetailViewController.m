@@ -43,7 +43,7 @@
 @property (nonatomic,strong) UIImageView *doitmyself_icon;
 @property (weak, nonatomic) IBOutlet UIButton *DIMButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UIButton *privateMessageButton;
+@property (strong, nonatomic)  UIButton *privateMessageButton;
 @property (nonatomic,strong) UILabel *like_label;
 @property (nonatomic,strong) UILabel *join_label;
 @property (nonatomic,strong) UILabel *description_content;
@@ -87,6 +87,9 @@
 @property (nonatomic,strong)NSMutableArray* alreadyInvitedAddressBookFriends;  //the json data of already invited addressbook friend
 @property (nonatomic) BOOL isEnteredDiscussion;
 //@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
+
+
+- (void)startPrivateConversationButtonClicked;
 @end
 
 @implementation DetailViewController
@@ -165,6 +168,14 @@
 //@synthesize shouldGoBack=_shouldGoBack;
 @synthesize isEnteredDiscussion=_isEnteredDiscussion;
 #pragma mark - self defined getter and setter
+-(UIButton *)privateMessageButton{
+    if (!_privateMessageButton) {
+        _privateMessageButton=[[UIButton alloc] init];
+        [_privateMessageButton addTarget:self action:@selector(startPrivateConversationButtonClicked) forControlEvents:UIControlEventTouchDown];
+    }
+    return _privateMessageButton;
+}
+
 -(BOOL)isInvited{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString* user_id = [defaults valueForKey:@"user_id"];
@@ -304,7 +315,6 @@
     [self setDoitmyselfButtonSection:nil];
     [self setDIMButton:nil];
     [self setLikeButton:nil];
-    [self setPrivateMessageButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -1004,8 +1014,8 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
-        self.privateMessageButton.frame = CGRectMake(270, 40, 100, 40);
-        self.privateMessageButton.titleLabel.text = @"+ Message";
+        self.privateMessageButton.frame = CGRectMake(200, 40, 100, 40);
+        //self.privateMessageButton.titleLabel.text = @"+ Message";
         [self.privateMessageButton setTitle:@"+ Message" forState:UIControlStateNormal];
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
         [self.invitedPeopleSectionView addSubview:self.privateMessageButton];
@@ -1634,8 +1644,8 @@
 
 #pragma mark - start private conversation
 
-- (IBAction)startPrivateConversationButtonClicked:(id)sender {
-    NSLog(@"123");
+- (void)startPrivateConversationButtonClicked {
+    [self performSegueWithIdentifier:@"startDiscussion" sender:self];
 }
 
 

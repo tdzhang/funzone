@@ -1468,21 +1468,6 @@ Find us @OrangeParc.com</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5uM-a6-hnk">
-                                <rect key="frame" x="124" y="190" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startPrivateConversationButtonClicked:" destination="BPi-pg-2E0" eventType="touchUpInside" id="Ewp-Ba-iZs"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1505,7 +1490,6 @@ Find us @OrangeParc.com</string>
                         <outlet property="likeButton" destination="fzQ-0i-xBz" id="PPB-sR-z35"/>
                         <outlet property="likeButtonSection" destination="5MT-dk-DlV" id="EUH-qx-JVo"/>
                         <outlet property="myScrollView" destination="ODl-hu-66N" id="oS3-2F-YcI"/>
-                        <outlet property="privateMessageButton" destination="5uM-a6-hnk" id="lhC-z2-w3Q"/>
                         <outlet property="shareButton" destination="GYg-j6-ubE" id="cmf-bn-a0e"/>
                         <segue destination="bGQ-ML-0nM" kind="push" identifier="addAndViewComment" id="25d-mw-vo9"/>
                         <segue destination="ogA-6E-Slr" kind="push" identifier="ChooseFriends" id="TRO-F3-acd"/>
@@ -3137,6 +3121,7 @@ Find us @OrangeParc.com</string>
         <image name="texture.png" width="320" height="431"/>
         <image name="texture@2x.png" width="640" height="862"/>
     </resources>
+<<<<<<< HEAD
     <classes>
         <class className="ActivityTabeleViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
@@ -3337,6 +3322,8 @@ Find us @OrangeParc.com</string>
             </relationships>
         </class>
     </classes>
+=======
+>>>>>>> make the private discussion working!!!!!!!!!
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
