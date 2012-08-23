@@ -43,6 +43,7 @@
 @property (nonatomic,strong) UIImageView *doitmyself_icon;
 @property (weak, nonatomic) IBOutlet UIButton *DIMButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *privateMessageButton;
 @property (nonatomic,strong) UILabel *like_label;
 @property (nonatomic,strong) UILabel *join_label;
 @property (nonatomic,strong) UILabel *description_content;
@@ -117,6 +118,7 @@
 @synthesize doitmyself_icon=_doitmyself_icon;
 @synthesize DIMButton = _DIMButton;
 @synthesize likeButton = _likeButton;
+@synthesize privateMessageButton = _privateMessageButton;
 @synthesize like_label=_like_label;
 @synthesize join_label=_join_label;
 @synthesize doitmyself_label=_doitmyself_label;
@@ -302,6 +304,7 @@
     [self setDoitmyselfButtonSection:nil];
     [self setDIMButton:nil];
     [self setLikeButton:nil];
+    [self setPrivateMessageButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -966,7 +969,7 @@
     }
     self.invitee = [[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"invitees"]] mutableCopy];
     [self.invitee addObjectsFromArray:[ProfileInfoElement generateProfileInfoElementArrayFromAddressBookInfo:[event objectForKey:@"invitee_emails"]]];
-    if ((!self.isEventOwner && !self.isInvited) || [self.invitee count] != 0) {
+    if ((!self.isEventOwner && !self.isInvited) || [self.invitee count] == 0) {
         return;
     }
     if (self.garbageCollection) {
@@ -1000,6 +1003,12 @@
         [numOfInvites setFont:[UIFont boldSystemFontOfSize:14]];
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
+        
+        self.privateMessageButton.frame = CGRectMake(270, 40, 100, 40);
+        self.privateMessageButton.titleLabel.text = @"+ Message";
+        [self.privateMessageButton setTitle:@"+ Message" forState:UIControlStateNormal];
+        [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
+        [self.invitedPeopleSectionView addSubview:self.privateMessageButton];
         
         int x_position_photo=30;
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
