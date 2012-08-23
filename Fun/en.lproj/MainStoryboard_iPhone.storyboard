@@ -1336,10 +1336,10 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a movie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="9ME-1X-vuH">
-                                <rect key="frame" x="95" y="8" width="130" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="9ME-1X-vuH">
+                                <rect key="frame" x="74" y="8" width="179" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.4962363139" alpha="1" colorSpace="calibratedWhite"/>
@@ -1349,6 +1349,7 @@ Find us @OrangeParc.com</string>
                                 <rect key="frame" x="9" y="8" width="57" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="tintColor" red="0.90155220030000005" green="0.38804696830000002" blue="0.035024054999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="-0.29999999999999999"/>
                                 <state key="normal" title="Back" backgroundImage="cancel_button.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3147,6 +3148,7 @@ Find us @OrangeParc.com</string>
         <class className="ChooseImageTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseOtherPhotoSourceButtonClicked:"/>
                 <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
                 <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
@@ -3230,6 +3232,7 @@ Find us @OrangeParc.com</string>
         <class className="MovieAotoCompletionVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
             <relationships>
+                <relationship kind="action" name="BackButtonClicked:"/>
                 <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -3242,6 +3245,13 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
+                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
+                <relationship kind="action" name="CreateEventToSever:"/>
+                <relationship kind="action" name="InviteFriendButtonClicked:"/>
+                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
+                <relationship kind="action" name="deleteEventButton:"/>
+                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -3313,6 +3323,9 @@ Find us @OrangeParc.com</string>
         <class className="registerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelRegisterNew:"/>
+                <relationship kind="action" name="registerButtonBlicked:"/>
+                <relationship kind="action" name="stillWantToSignInWithFaceBook:"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
