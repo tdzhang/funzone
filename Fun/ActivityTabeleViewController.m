@@ -12,6 +12,8 @@
 @interface ActivityTabeleViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
+@property (weak, nonatomic) IBOutlet UIView *segmentationView;
+
 @property(nonatomic,strong)NSMutableArray* activities; //which is used to hold the array that hold the results to show
 @property(nonatomic,strong)NSMutableArray* activities_conversation; //used to hold conversation activities
 @property(nonatomic,strong)NSMutableArray* activities_normal; // used to hold other normal activitise
@@ -26,6 +28,7 @@
 @implementation ActivityTabeleViewController
 @synthesize refreshButton = _refreshButton;
 @synthesize mySegmentControl = _mySegmentControl;
+@synthesize segmentationView = _segmentationView;
 @synthesize activities=_activities;
 @synthesize activities_conversation=_activities_conversation;
 @synthesize activities_normal=_activities_normal;
@@ -154,8 +157,8 @@
     [self.mySegmentControl setDividerImage:imgUnSelectedUnSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setDividerImage:imgUnSelectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     
-    [self.mySegmentControl setTitle:@"Normal" forSegmentAtIndex:0];
-    [self.mySegmentControl setTitle:@"Dicussion" forSegmentAtIndex:1];
+    [self.mySegmentControl setTitle:@"NOTIFICATIONS" forSegmentAtIndex:0];
+    [self.mySegmentControl setTitle:@"MESSAGES" forSegmentAtIndex:1];
     [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                     [UIColor colorWithRed:255.0/255.0 green:139/255.0 blue:41/255.0 alpha:1.0], UITextAttributeTextColor,
                                                     [UIColor clearColor], UITextAttributeTextShadowColor,
@@ -169,17 +172,18 @@
     
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
     
-    self.mySegmentControl.layer.cornerRadius = 2;
-    self.mySegmentControl.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.mySegmentControl.layer.shadowOffset = CGSizeMake(0, 1);
-    self.mySegmentControl.layer.shadowRadius = 1.0f;
-    self.mySegmentControl.layer.shadowOpacity = 0.6f;
+    self.segmentationView.layer.cornerRadius = 2;
+    self.segmentationView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.segmentationView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.segmentationView.layer.shadowRadius = 1.0f;
+    self.segmentationView.layer.shadowOpacity = 0.6f;
 }
 
 - (void)viewDidUnload
 {
     [self setRefreshButton:nil];
     [self setMySegmentControl:nil];
+    [self setSegmentationView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -481,8 +485,6 @@
         self.send_via=VIA_ACTIVITY_CONVERSATION;
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
-    
-#warning need to add the support for the conversation
     
 }
 
