@@ -330,6 +330,11 @@
     //set the should back to false
 //    self.shouldGoBack=NO;
     //judge whether the user is login? if not, do the login
+ 
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
@@ -340,7 +345,7 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
-
+        
         //initial the contentsize of the myScrollView
         [self.myScrollView setContentSize:CGSizeMake(DETAIL_VIEW_CONTROLLER_SCROLLVIEW_INITIAL_CONTENTSIZE_WIDTH, self.commentSectionView.frame.origin.y + 50)];
         
@@ -365,18 +370,13 @@
             [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
-          
+            
         }
     }
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    if (!self.isEnteredDiscussion) {
-        self.isEnteredDiscussion=YES;
-        [self performSegueWithIdentifier:@"startDiscussion" sender:self];
-    }
+//    if (!self.isEnteredDiscussion) {
+//        self.isEnteredDiscussion=YES;
+//        [self performSegueWithIdentifier:@"startDiscussion" sender:self];
+//    }
    
 }
 
@@ -1568,8 +1568,14 @@
 //        self.shouldGoBack=YES;
     }
     else{
+        // if need go to discussion, go to it
+        if (!self.isEnteredDiscussion) {
+            self.isEnteredDiscussion=YES;
+            [self performSegueWithIdentifier:@"startDiscussion" sender:self];
+        }
         //should go back to the former page
         //self.shouldGoBack=NO;
+        
         
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
