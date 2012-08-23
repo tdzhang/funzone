@@ -356,7 +356,9 @@
 }
 
 #pragma mark - choose other source
-- (IBAction)chooseOtherSourceButtonClicked:(id)sender {
+
+- (IBAction)ChooseOtherPhotoSourceButtonClicked:(id)sender {
+    
 }
 
 
