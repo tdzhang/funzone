@@ -29,6 +29,11 @@
 @property (nonatomic,strong) NSMutableArray *garbageCollection;
 @property (nonatomic,strong) NSString *tapped_creator_id;
 @property (nonatomic,weak) CLLocationManager *myLocationManager;
+
+@property (nonatomic,strong) UIActionSheet *actionSheet;
+@property (nonatomic,strong) NSString *pickerType;
+@property (nonatomic,strong) NSString *categoryFilter;
+
 @end
 
 @implementation ExploreViewController
@@ -48,6 +53,10 @@
 @synthesize tapped_creator_id=_tapped_creator_id;
 @synthesize antiTouchMaskView=_antiTouchMaskView;
 @synthesize myLocationManager=_myLocationManager;
+
+@synthesize actionSheet=_actionSheet;
+@synthesize pickerType=_pickerType;
+@synthesize categoryFilter=_categoryFilter;
 
 
 
@@ -449,6 +458,112 @@
     }
   
 }
+
+#pragma mark - choose category filter button
+#pragma mark UIPickerViewDelegate Methods
+
+UIActionSheet *actionSheet;
+NSString *pickerType;
+
+- (void)createActionSheet {
+
+        // setup actionsheet to contain the UIPicker
+        self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select"
+                                                  delegate:self
+                                         cancelButtonTitle:nil
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:nil];
+        
+        UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        pickerToolbar.barStyle = UIBarStyleBlackOpaque;
+        [pickerToolbar sizeToFit];
+        
+        NSMutableArray *barItems = [[NSMutableArray alloc] init];
+        
+        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        [barItems addObject:flexSpace];
+
+        
+        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDone:)];
+        [barItems addObject:doneBtn];
+
+        
+        [pickerToolbar setItems:barItems animated:YES];
+
+        
+        [actionSheet addSubview:pickerToolbar];
+
+        
+        [actionSheet showInView:self.view];
+        [actionSheet setBounds:CGRectMake(0,0,320, 464)];
+    
+}
+
+- (IBAction)CategoryFilterClicked:(id)sender {
+    [self createActionSheet];
+    self.pickerType = @"picker";
+    UIPickerView *chPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, 0.0, 0.0)];
+    chPicker.dataSource = self;
+    chPicker.delegate = self;
+    chPicker.showsSelectionIndicator = YES;
+    [actionSheet addSubview:chPicker];
+    //sessoTxt.text = [sessoArray objectAtIndex:0];
+}
+
+
+
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    int count;
+    if ([self.pickerType isEqualToString:@"picker"])
+        count = 9;
+    return count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSString *string;
+    NSArray *category=[NSArray arrayWithObjects:@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    if ([self.pickerType isEqualToString:@"picker"])
+        string = [category objectAtIndex:row];
+    return string;
+}
+// Set the width of the component inside the picker
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component             {
+    return 200;
+}
+
+// Item picked
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSArray *category=[NSArray arrayWithObjects:@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    if ([pickerType isEqualToString:@"picker"])
+    {
+        self.categoryFilter=[category objectAtIndex:row];
+       // Txt.text = [array objectAtIndex:row];
+    }
+    NSLog(@"%@",self.categoryFilter);
+}
+
+- (void)pickerDone:(id)sender
+{
+    if(select == NO)
+    {
+        if ([pickerType isEqualToString:@"picker"])
+        {
+            //Txt.text = [array objectAtIndex:0];
+        }
+    }
+    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    actionSheet = nil;
+    
+}
+
+
 
 #pragma mark - refresh button action part
 - (IBAction)refreshButtonClicked:(id)sender {

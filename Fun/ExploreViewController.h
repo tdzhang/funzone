@@ -15,6 +15,6 @@
 #import "CheckForInternetConnection.h"
 
 
-@interface ExploreViewController : UIViewController<UIScrollViewDelegate>
+@interface ExploreViewController : UIViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @end
