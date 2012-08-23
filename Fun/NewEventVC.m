@@ -1135,7 +1135,7 @@
                 [self presentModalViewController:self.imgPicker animated:YES];
             }
             else {
-                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:nil" message:@"Your device does not support photo album." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:nil message:@"Your device does not support photo album." delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 cameraNotSupport.delegate=self;
                 [cameraNotSupport show];
             }
