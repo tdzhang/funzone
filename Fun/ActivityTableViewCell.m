@@ -311,6 +311,7 @@
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.activityPicImageView.layer.borderWidth = 1;
+    [self.activityPicImageView setHidden:YES];
 
     self.user_name_label.frame = CGRectMake(64, 6, 246, 17);
     self.user_name_label.text = [NSString stringWithFormat:@"%@:",self.user_name];
