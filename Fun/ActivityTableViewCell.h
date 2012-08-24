@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString* event_id;
 @property (nonatomic,strong) NSString* shared_event_id;
 @property (weak, nonatomic) IBOutlet UILabel *user_name_label;
+@property (weak, nonatomic) IBOutlet UIImageView *activityPicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *event_name_label;
 
 @property (nonatomic,strong) NSString* event_name;

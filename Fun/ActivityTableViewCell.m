@@ -7,6 +7,8 @@
 //
 
 #import "ActivityTableViewCell.h"
+#import "QuartzCore/QuartzCore.h"
+
 
 
 @implementation ActivityTableViewCell
@@ -18,6 +20,7 @@
 @synthesize event_id=_event_id;
 @synthesize shared_event_id=_shared_event_id;
 
+@synthesize activityPicImageView = _activityPicImageView;
 @synthesize event_name_label = _event_name_label;
 @synthesize event_name=_event_name;
 @synthesize message=_message;
@@ -61,40 +64,57 @@
     NSLog(@"%@",[NSString stringWithFormat:@"%d",COMMENT_EVENT]);
     NSLog(@"%@",[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]);
     
-    self.activityDescriptionLabel.frame = CGRectMake(45, 8, 265, 40);
-    [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
+    self.activityPicImageView.layer.cornerRadius = 10;
+    self.activityPicImageView.clipsToBounds = YES;
+    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:250/255.0 green:150/255.0 blue:20/255.0 alpha:1] CGColor];
+    //self.activityPicImageView.layer.borderWidth = 1;
+    
+    self.userPicImageView.layer.cornerRadius = 4;
+    self.userPicImageView.clipsToBounds = YES;
+    [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.userPicImageView.layer.borderWidth = 1;
+    
+    //[self.userPicImageView initWithImage:[UIImage imageNamed:@""]];
+    
+    
+    
+    //self.activityDescriptionLabel.frame = CGRectMake(65, 11, 210, 37);
+    self.activityDescriptionLabel.numberOfLines = 2;
+    
+    [self.activityDescriptionLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    self.activityDescriptionLabel.textColor = [UIColor darkGrayColor];
+    
     if ([ [NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INTEREST_EVENT]]) {
         // some one show interest on your event/////
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined your event.",self.user_name]];
-        [self.userPicImageView setImage:[UIImage imageNamed:@"like.png"]];
-        self.userPicImageView.frame = CGRectMake(8, 18, 30, 21);
+        [self.activityPicImageView setImage:[UIImage imageNamed:@"like.png"]];
         //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ followed you.",self.user_name]];
-        [self.userPicImageView setImage:[UIImage imageNamed:@"follow.png"]];
-        self.userPicImageView.frame = CGRectMake(7, 17, 31, 21);
+        [self.activityPicImageView setImage:[UIImage imageNamed:@"follow.png"]];
         //[self.userNameLabel setText:@"Followed Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ commented on your event.",self.user_name]];
         
-        [self.userPicImageView setImage:[UIImage imageNamed:@"comment.png"]];
-        self.userPicImageView.frame = CGRectMake(8, 18, 25, 25);
+        [self.activityPicImageView setImage:[UIImage imageNamed:@"comment.png"]];
         //[self.userNameLabel setText:@"Comment Event:"];
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ invited you to an event.",self.user_name]];
-        [self.userPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
-        self.userPicImageView.frame = CGRectMake(5, 19, 30, 18);
+        [self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ just joined OrangeParc.",self.user_name]];
 #warning need further other image
-        [self.userPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
-        self.userPicImageView.frame = CGRectMake(7, 19, 30, 18);
+        self.activityPicImageView.hidden = YES;
+        //[self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
     }
     else{
         //[self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has done something you may be interested.",self.user_name]];
