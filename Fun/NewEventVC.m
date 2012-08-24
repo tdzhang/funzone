@@ -308,6 +308,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //hide the keyboard toolbar
+    [self.keyboardToolbar setHidden:YES];
     //change the navigationController title
 //    if ([self.eventType isEqualToString:@"movie"]) {
 //        self.navigationController.navigationBar.topItem.title = @"Movie";
@@ -1382,8 +1384,8 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.25];
-    
     //[self.labelEventTitleHolder setHidden:YES];
+    [self.keyboardToolbar setHidden:NO];
     CGRect frame = self.keyboardToolbar.frame;
     frame.origin.y = self.view.frame.size.height - 260.0;
     self.keyboardToolbar.frame = frame;
@@ -1396,7 +1398,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.25];
-	
+	[self.keyboardToolbar setHidden:YES];
 	CGRect frame = self.keyboardToolbar.frame;
 	frame.origin.y = self.view.frame.size.height;
 	self.keyboardToolbar.frame = frame;
