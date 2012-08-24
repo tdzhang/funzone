@@ -472,7 +472,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
     //in case the frequency of searching is too high
     int searchLength=[searchString length];
-    if (searchLength<5||searchLength%4!=0) {
+    if (searchLength<5||searchLength%2!=0) {
         return NO;
     }
     
@@ -703,7 +703,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         if ( imageData == nil ){
             //if the image data is nil, the image url is not reachable. using a default image to replace that
             //NSLog(@"downloaded %@ error, using a default image",url);
-            image=[UIImage imageNamed:@"smile_64.png"];
+            image=[UIImage imageNamed:@"07-map-marker.png"];
         }
         else {
             image=[UIImage imageWithData:imageData];
