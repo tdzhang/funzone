@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
 @property (weak, nonatomic) IBOutlet UIView *segmentationView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 
 @property(nonatomic,strong)NSMutableArray* activities; //which is used to hold the array that hold the results to show
 @property(nonatomic,strong)NSMutableArray* activities_conversation; //used to hold conversation activities
@@ -29,6 +30,7 @@
 @synthesize refreshButton = _refreshButton;
 @synthesize mySegmentControl = _mySegmentControl;
 @synthesize segmentationView = _segmentationView;
+@synthesize moreButton = _moreButton;
 @synthesize activities=_activities;
 @synthesize activities_conversation=_activities_conversation;
 @synthesize activities_normal=_activities_normal;
@@ -128,6 +130,7 @@
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 
+    self.moreButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
@@ -186,6 +189,7 @@
     [self setRefreshButton:nil];
     [self setMySegmentControl:nil];
     [self setSegmentationView:nil];
+    [self setMoreButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
