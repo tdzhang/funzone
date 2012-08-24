@@ -243,9 +243,13 @@
             }
             else{
                 //if not login, do it
+//                NSArray *permissions = [[NSArray alloc] initWithObjects:
+//                                        @"publish_stream",
+//                                        @"read_stream",@"create_event",@"email",
+//                                        nil];
                 NSArray *permissions = [[NSArray alloc] initWithObjects:
                                         @"publish_stream",
-                                        @"read_stream",@"create_event",@"email",
+                                        @"email",
                                         nil];
                 [funAppdelegate.facebook authorize:permissions];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];

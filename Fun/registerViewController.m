@@ -192,9 +192,13 @@
         funAppdelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     if (![funAppdelegate.facebook isSessionValid]) {
+//        NSArray *permissions = [[NSArray alloc] initWithObjects:
+//                                @"publish_stream", 
+//                                @"read_stream",@"create_event",
+//                                @"email",
+//                                nil];
         NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                @"publish_stream", 
-                                @"read_stream",@"create_event",
+                                @"publish_stream",
                                 @"email",
                                 nil];
         [funAppdelegate.facebook authorize:permissions];
