@@ -296,6 +296,7 @@
                 //set the freshConnectionType to "not"
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d COLLECTED",[json count]] forSegmentAtIndex:0];
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
@@ -414,11 +415,7 @@
             }
             
         });
-
-        ////////////////
-
     });
-    
     //refresh part
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
         [self.mainScrollView addSubview:self.refreshView];
@@ -449,6 +446,7 @@
                 //set the freshConnectionType to "not"
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d INVITED",[json count]] forSegmentAtIndex:1];
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                 //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
                 if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
@@ -615,8 +613,6 @@
     [self.mySegmentControl setDividerImage:imgUnSelectedUnSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setDividerImage:imgUnSelectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     
-    [self.mySegmentControl setTitle:@"COLLECTION" forSegmentAtIndex:0];
-    [self.mySegmentControl setTitle:@"INVITATION" forSegmentAtIndex:1];
     [self.mySegmentControl setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                     [UIColor colorWithRed:255.0/255.0 green:139/255.0 blue:41/255.0 alpha:1.0], UITextAttributeTextColor,
                                                     [UIColor clearColor], UITextAttributeTextShadowColor,
