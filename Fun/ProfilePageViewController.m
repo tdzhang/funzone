@@ -1442,13 +1442,12 @@
             
             [request setRequestMethod:@"GET"];
             [request startSynchronous];
-            //enable the button after the request is finshed
-            [self.refreshButton setEnabled:YES];
-            
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
             ///////////////
             dispatch_async( dispatch_get_main_queue(),^{
+                //enable the button after the request is finshed
+                [self.refreshButton setEnabled:YES];
                 if (code==200) {
                     //set the freshConnectionType to "not"
                     NSError *error;
@@ -1584,8 +1583,7 @@
             
             [request setRequestMethod:@"GET"];
             [request startSynchronous];
-            //enable the button after the request is finshed
-            [self.refreshButton setEnabled:YES];
+
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
             ///////////////
