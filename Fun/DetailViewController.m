@@ -863,7 +863,7 @@
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
     [timeIcon setAlpha:0.7];
     [self.timeSectionView addSubview:timeIcon];
-    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(45, 10, 230, 20)];
+    UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     self.event_time=[event objectForKey:@"start_time"];
     if ([self.event_time isEqualToString:@""]) {
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
@@ -895,7 +895,7 @@
     [locationIcon setAlpha:0.7];
     [self.locationSectionView addSubview:locationIcon];
 
-    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(45, 10, 200, 20)];
+    UILabel *eventLocation = [[UILabel alloc] initWithFrame: CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     if ([self.location_name isEqualToString:@""]) {
         self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
@@ -937,19 +937,19 @@
     if ([description isEqual:[NSNull null]]) {
         return;
     }
-    UIImageView *descIcon = [[UIImageView alloc] initWithFrame:CGRectMake(16, 7, 18.5, 19)];
+    UIImageView *descIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
     [descIcon setImage:[UIImage imageNamed:DESC_ICON]];
     [descIcon setAlpha:0.7];
     [self.descriptionSectionView addSubview:descIcon];
     
-    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(45, 5, 150, 23)];
+    UILabel *description_header=[[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     [description_header setText:@"Description"];
     [description_header setBackgroundColor:[UIColor clearColor]];
     [description_header setFont:[UIFont boldSystemFontOfSize:14]];
     [description_header setTextColor:[UIColor darkGrayColor]];
     [self.descriptionSectionView addSubview:description_header];
     
-    self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(15, 30, 290, 50)];
+    self.description_content = [[UILabel alloc] initWithFrame:CGRectMake(18, 40, 290, 50)];
     [self.description_content setText:description];
     [self.description_content setBackgroundColor:[UIColor clearColor]];
     [self.description_content setFont:[UIFont systemFontOfSize:13]];
@@ -966,7 +966,7 @@
     [self.descriptionSectionView addSubview:self.description_content];
     [self.myScrollView addSubview:self.descriptionSectionView];
     
-    self.view_height += self.descriptionSectionView.frame.size.height;
+    self.view_height += self.descriptionSectionView.frame.size.height+5;
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
     [self.myScrollView addSubview:seperator];
@@ -991,19 +991,19 @@
     self.garbageCollection=[NSMutableArray array];
     
     if ([self.invitee count]>0) {
-        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, DVC_INVITEE_HEIGHT)];
+        self.invitedPeopleSectionView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, DVC_INVITEE_HEIGHT)];
         [self.myScrollView addSubview:self.invitedPeopleSectionView];
         //add gesture(tap)
         self.invitedPeopleSectionView.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapInviteBlock:)];
         [self.invitedPeopleSectionView addGestureRecognizer:tapGR];
         
-        UIImageView *inviteeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 10, 23, 14)];
+        UIImageView *inviteeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
         [inviteeIcon setImage:[UIImage imageNamed:INVITEE_ICON]];
         [inviteeIcon setAlpha:0.7];
         [self.invitedPeopleSectionView addSubview:inviteeIcon];
         
-        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(35, 5, 200, 25)];
+        UILabel* numOfInvites=[[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
         if ([self.invitee count] == 1) {
             [numOfInvites setText:[NSString stringWithFormat:@"1 friend invited"]];
         } else {
@@ -1014,7 +1014,7 @@
         [numOfInvites setTextColor:[UIColor darkGrayColor]];
         [self.invitedPeopleSectionView addSubview:numOfInvites];
         
-        self.privateMessageButton.frame = CGRectMake(212, 7, 100, 25);
+        self.privateMessageButton.frame = CGRectMake(230, DVC_LABEL_Y, 80, DVC_LABEL_HEIGHT);
         [self.privateMessageButton.titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
         //self.privateMessageButton.titleLabel.text = @"+ Message";
         [self.privateMessageButton setTitle:@"+ MESSAGE" forState:UIControlStateNormal];
@@ -1022,7 +1022,7 @@
         [self.privateMessageButton setTitleColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1] forState:UIControlStateHighlighted];
         [self.invitedPeopleSectionView addSubview:self.privateMessageButton];
         
-        int x_position_photo=30;
+        int x_position_photo=DVC_LABEL_X-5;
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 40, 35, 35)];
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
@@ -1094,19 +1094,19 @@
     self.garbageCollection=[NSMutableArray array];
     
     if ([self.likedPeople count]>0) {
-        self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, DVC_LIKED_HEIGHT)];
+        self.likedPeopleLabelView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, DVC_LIKED_HEIGHT)];
         [self.myScrollView addSubview:self.likedPeopleLabelView];
         //add gesture(tap)
         self.likedPeopleLabelView.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLikeBlock:)];
         [self.likedPeopleLabelView addGestureRecognizer:tapGR];
         
-        UIImageView *likedIcon = [[UIImageView alloc] initWithFrame:CGRectMake(4.5, 12, 20, 20)];
+        UIImageView *likedIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
         [likedIcon setImage:[UIImage imageNamed:LIKES_ICON]];
         [likedIcon setAlpha:0.7];
         [self.likedPeopleLabelView addSubview:likedIcon];
         
-        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(35, 10, 200, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
+        UILabel* numOflikes=[[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
         if ([self.likedPeople count] == 1) {
             [numOflikes setText:[NSString stringWithFormat:@"1 Like"]];
         } else {
@@ -1118,7 +1118,7 @@
         [self.likedPeopleLabelView addSubview:numOflikes];
         //[self.garbageCollection addObject:numOfInterests];
         
-        int x_position_photo=30;
+        int x_position_photo=DVC_LABEL_X-5;
         for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 40, 35, 35)];
             ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
@@ -1183,12 +1183,12 @@
     self.garbageCollection=[NSMutableArray array];
     
     //comment header view
-    self.comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(10, self.view_height, 300, 30)];
+    self.comments_header_view = [[UIView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 30)];
     //[comments_header_view setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
     [self.myScrollView addSubview:self.comments_header_view];
     
     //comment icon
-    UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 19.5, 19.5)];
+    UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
     UIImage *image_comment_icon = [UIImage imageNamed:COMMENT_ICON];
     [commentIcon setImage:image_comment_icon];
     [commentIcon setContentMode:UIViewContentModeScaleAspectFit];
@@ -1196,7 +1196,7 @@
     [self.comments_header_view addSubview:commentIcon];
     
     //comment header label
-    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, 100, 30)];
+    UILabel *comment_header_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     NSString *comment_header;
     if ([self.comments count] == 0 || [self.comments count] == 1) {
         comment_header = [NSString stringWithFormat:@"%d Comment", [self.comments count]];
@@ -1212,7 +1212,7 @@
     [self.comments_header_view addSubview:comment_header_label];
     
     //button
-    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(222, 5, 80, 22)];
+    UIButton *button=[[UIButton alloc] initWithFrame:CGRectMake(230, DVC_LABEL_Y, 80, DVC_LABEL_HEIGHT)];
     [button setAlpha:1];
     //add button action
     [button addTarget:self 
@@ -1230,22 +1230,23 @@
     for (int i = 0; i<[self.comments count]; i++) {
         //if(i==5)break; //in this page, only present a few comments
         eventComment* comment=[self.comments objectAtIndex:i];  
-        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(7, self.view_height, 300, 0)];
+        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view_height+3, 300, 0)];
         //[commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
         
         //UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(7, 5, 100, 0)];
+        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 100, 0)];
         NSString *comment_user_name =[NSString stringWithFormat:@"%@ :",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
-        [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
+        [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:12]];
         [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
+        [comment_user_name_label setTextColor:[UIColor darkGrayColor]];
         comment_user_name_label.lineBreakMode = UILineBreakModeWordWrap;
         comment_user_name_label.numberOfLines = 0;
         
         CGSize maximumLabelSize1 = CGSizeMake(100,9999);
-        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-        CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:12] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+        CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
         
         CGRect newFrame1 = comment_user_name_label.frame;
         newFrame1.size.height = expectedLabelSize1.height;
@@ -1253,26 +1254,27 @@
         comment_user_name_label.frame = newFrame1;
         
         UILabel *indent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [indent setFont:[UIFont boldSystemFontOfSize:14]];
+        [indent setFont:[UIFont boldSystemFontOfSize:13]];
         NSString *indent_string = [NSString stringWithFormat:@" "];
         while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
             indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
             [indent setText:indent_string];
-            CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:14] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
+            CGSize indentExpectedWidth = [indent_string sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
             CGRect indentNewFrame = indent.frame;
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(7, 5, 290, 0)];
+        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 290, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];
-        [comment_content_label setFont:[UIFont systemFontOfSize:14]];
+        [comment_content_label setFont:[UIFont systemFontOfSize:12]];
         [comment_content_label setBackgroundColor:[UIColor clearColor]];
+        [comment_content_label setTextColor:[UIColor darkGrayColor]];
         comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
         comment_content_label.numberOfLines = 0;
         
         CGSize maximumLabelSize2 = CGSizeMake(290,9999);
-        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];   
+        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
         
         CGRect newFrame2 = comment_content_label.frame;
         newFrame2.size.height = expectedLabelSize2.height;

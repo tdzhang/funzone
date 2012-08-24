@@ -98,8 +98,13 @@
 #define DVC_INVITEE_HEIGHT 90
 #define DVC_LIKED_HEIGHT 90
 #define DVC_ICON_SIZE 25
-#define DVC_ICON_X 9
-#define DVC_ICON_Y 4
+#define DVC_ICON_X 12
+#define DVC_ICON_Y 8
+
+#define DVC_LABEL_X 45
+#define DVC_LABEL_Y 10
+#define DVC_LABEL_WIDTH 200
+#define DVC_LABEL_HEIGHT 20
 
 
 //Feed View Controller
