@@ -1460,6 +1460,7 @@
             [newEventVC presetIsEditPageToTrue];
             [newEventVC preSetAlreadyInvitedFriend:[InviteFriendObject generateAlreadyInvitedInfoElementArrayFromJson:self.alreadyInvitedFriend]];
             [newEventVC preSetAlreadyInvitedAddressBookFriend:self.alreadyInvitedAddressBookFriends];
+            NSLog(@"%d",[self.alreadyInvitedAddressBookFriends count]);
         } else {
             [newEventVC presetIsEditPageToFalse];
         }
