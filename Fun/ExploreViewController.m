@@ -103,6 +103,12 @@
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
+    
+//---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+   // [defaults setValue:nil forKey:@"notTheFirstTime"];
+   // [defaults synchronize];
+//---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    
     if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
         NSLog(@"start introducing");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

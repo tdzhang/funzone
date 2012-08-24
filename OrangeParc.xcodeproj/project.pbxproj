@@ -125,6 +125,12 @@
 		0FD0BB5815AFAFE400357ADE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */; };
 		0FD0BB5A15AFAFF500357ADE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD0BB5915AFAFF500357ADE /* libz.dylib */; };
 		0FD0BB5C15B0E8B000357ADE /* FreshBigArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */; };
+		0FD0BE3715E7E7EF0068F76D /* IntroductionVCPage1.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD0BE3515E7E7EF0068F76D /* IntroductionVCPage1.h */; };
+		0FD0BE3815E7E7EF0068F76D /* IntroductionVCPage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0BE3615E7E7EF0068F76D /* IntroductionVCPage1.m */; };
+		0FD0BE3B15E7EB3B0068F76D /* IntroductionVCPage2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD0BE3915E7EB3B0068F76D /* IntroductionVCPage2.h */; };
+		0FD0BE3C15E7EB3B0068F76D /* IntroductionVCPage2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0BE3A15E7EB3B0068F76D /* IntroductionVCPage2.m */; };
+		0FD0BE3F15E7EBF20068F76D /* IntroductionVCPage3.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD0BE3D15E7EBF20068F76D /* IntroductionVCPage3.h */; };
+		0FD0BE4015E7EBF20068F76D /* IntroductionVCPage3.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0BE3E15E7EBF20068F76D /* IntroductionVCPage3.m */; };
 		0FD5B90015CF840900927153 /* InviteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B8FE15CF840900927153 /* InviteTableViewController.h */; };
 		0FD5B90115CF840900927153 /* InviteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD5B8FF15CF840900927153 /* InviteTableViewController.m */; };
 		0FD5B90415CF87A600927153 /* InviteFriendObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FD5B90215CF87A600927153 /* InviteFriendObject.h */; };
@@ -496,6 +502,12 @@
 		0FD0BB5715AFAFE400357ADE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0FD0BB5915AFAFF500357ADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0FD0BB5B15B0E8B000357ADE /* FreshBigArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshBigArrowDown.png; sourceTree = "<group>"; };
+		0FD0BE3515E7E7EF0068F76D /* IntroductionVCPage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage1.h; sourceTree = "<group>"; };
+		0FD0BE3615E7E7EF0068F76D /* IntroductionVCPage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVCPage1.m; sourceTree = "<group>"; };
+		0FD0BE3915E7EB3B0068F76D /* IntroductionVCPage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage2.h; sourceTree = "<group>"; };
+		0FD0BE3A15E7EB3B0068F76D /* IntroductionVCPage2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVCPage2.m; sourceTree = "<group>"; };
+		0FD0BE3D15E7EBF20068F76D /* IntroductionVCPage3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage3.h; sourceTree = "<group>"; };
+		0FD0BE3E15E7EBF20068F76D /* IntroductionVCPage3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVCPage3.m; sourceTree = "<group>"; };
 		0FD5B8FE15CF840900927153 /* InviteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteTableViewController.h; sourceTree = "<group>"; };
 		0FD5B8FF15CF840900927153 /* InviteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteTableViewController.m; sourceTree = "<group>"; };
 		0FD5B90215CF87A600927153 /* InviteFriendObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendObject.h; sourceTree = "<group>"; };
@@ -1101,6 +1113,12 @@
 		0FD0BE3315E7E7700068F76D /* Introduce to the app */ = {
 			isa = PBXGroup;
 			children = (
+				0FD0BE3515E7E7EF0068F76D /* IntroductionVCPage1.h */,
+				0FD0BE3615E7E7EF0068F76D /* IntroductionVCPage1.m */,
+				0FD0BE3915E7EB3B0068F76D /* IntroductionVCPage2.h */,
+				0FD0BE3A15E7EB3B0068F76D /* IntroductionVCPage2.m */,
+				0FD0BE3D15E7EBF20068F76D /* IntroductionVCPage3.h */,
+				0FD0BE3E15E7EBF20068F76D /* IntroductionVCPage3.m */,
 			);
 			name = "Introduce to the app";
 			sourceTree = "<group>";
@@ -1665,6 +1683,9 @@
 				0F9E061815DF6101003A9322 /* DiscussionViewController.h in Headers */,
 				0F9E061C15E0121F003A9322 /* DiscussionComment.h in Headers */,
 				0F27BB8F15E33B6500335D42 /* CheckForInternetConnection.h in Headers */,
+				0FD0BE3715E7E7EF0068F76D /* IntroductionVCPage1.h in Headers */,
+				0FD0BE3B15E7EB3B0068F76D /* IntroductionVCPage2.h in Headers */,
+				0FD0BE3F15E7EBF20068F76D /* IntroductionVCPage3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2012,6 +2033,9 @@
 				0F9E061915DF6101003A9322 /* DiscussionViewController.m in Sources */,
 				0F9E061D15E0121F003A9322 /* DiscussionComment.m in Sources */,
 				0F27BB9015E33B6500335D42 /* CheckForInternetConnection.m in Sources */,
+				0FD0BE3815E7E7EF0068F76D /* IntroductionVCPage1.m in Sources */,
+				0FD0BE3C15E7EB3B0068F76D /* IntroductionVCPage2.m in Sources */,
+				0FD0BE4015E7EBF20068F76D /* IntroductionVCPage3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
