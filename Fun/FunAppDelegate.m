@@ -197,6 +197,48 @@
     [self RespTextContent:content];
 }
 
+-(void)sendText:(NSString*)content WithImageURL:(NSURL*)imgurl{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title =content;
+    message.description=@"This is from OrangeParc.";
+    [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    #warning need a more precise url about the event, not just the image
+    ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
+    //    WXImageObject *ext = [WXImageObject object];
+    //    ext.imageData = [Cache getCachedData:imgurl];
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;
+    
+    [WXApi sendReq:req];
+}
+
+
+- (void) RespText:(NSString*)content WithImageURL:(NSURL*)imgurl
+{
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title =content;
+    message.description=@"This is from OrangeParc.";
+    [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
+    
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = [NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
+    //    WXImageObject *ext = [WXImageObject object];
+    //    ext.imageData = [Cache getCachedData:imgurl];
+    message.mediaObject = ext;
+    
+    GetMessageFromWXResp* resp = [[GetMessageFromWXResp alloc] init];
+    resp.bText = NO;
+    resp.message = message;
+    
+    [WXApi sendResp:resp];
+}
+
 -(void)SendMoment:(NSString*)content WithImageURL:(NSURL*)imgurl{
 
     WXMediaMessage *message = [WXMediaMessage message];

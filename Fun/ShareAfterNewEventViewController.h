@@ -23,6 +23,7 @@
 @protocol WEICHATprotocal <NSObject>
 -(void)sendText:(NSString*)content;
 -(void)SendMoment:(NSString*)content WithImageURL:(NSURL*)imgurl;
+-(void)sendText:(NSString*)content WithImageURL:(NSURL*)imgurl;
 @end
 
 

@@ -1425,7 +1425,8 @@
         }
         else if(buttonIndex == 1){
             //send message to friend
-            [self.delegate sendText:[self shareMessagetoSend]];
+            [self.delegate sendText:[self shareMessagetoSend] WithImageURL:self.event_img_url];
+            //[self.delegate sendText:[self shareMessagetoSend]];
         }
     }
     else if ([actionSheet.title isEqualToString:@"Invite Friend:"]){
