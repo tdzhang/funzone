@@ -859,7 +859,7 @@
     [self.myScrollView addSubview:self.timeSectionView];
     self.timeSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_TIME_VIEW_HEIGHT);
     
-    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, 19, 19)];
+    UIImageView *timeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
     [timeIcon setImage:[UIImage imageNamed:TIME_ICON]];
     [timeIcon setAlpha:0.7];
     [self.timeSectionView addSubview:timeIcon];
@@ -890,7 +890,7 @@
     [self.myScrollView addSubview:self.locationSectionView];
     self.locationSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_ADDR_VIEW_HEIGHT);
     
-    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(16, 8, 16, 23)];
+    UIImageView *locationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
     [locationIcon setImage:[UIImage imageNamed:ADDR_ICON]];
     [locationIcon setAlpha:0.7];
     [self.locationSectionView addSubview:locationIcon];
