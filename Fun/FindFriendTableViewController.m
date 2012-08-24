@@ -7,6 +7,8 @@
 //
 
 #import "FindFriendTableViewController.h"
+#import "QuartzCore/QuartzCore.h"
+
 
 
 @interface FindFriendTableViewController ()
@@ -112,6 +114,7 @@
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
                 self.friends=[SearchedFriend SearchedFriendsWithJson:json];
                 NSLog(@"%d",[self.friends count]);
+                
                 [self.tableView reloadData];
             }
             else{
@@ -124,6 +127,7 @@
         
     });
 }
+
 
 - (void)viewDidUnload
 {
@@ -169,6 +173,12 @@
     }
 
     [cell resetWithSearchedFriend:[self.friends objectAtIndex:indexPath.row]];
+    cell.friendImageView.layer.cornerRadius = 4;
+    cell.friendImageView.clipsToBounds = YES;
+    [cell.friendImageView setContentMode:UIViewContentModeScaleAspectFill];
+    cell.friendImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    cell.friendImageView.layer.borderWidth = 1;
+    
     cell.via=VIA_FACEBOOK_SEARCH;
      
     return cell;

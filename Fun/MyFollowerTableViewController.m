@@ -7,6 +7,8 @@
 //
 
 #import "MyFollowerTableViewController.h"
+#import "QuartzCore/QuartzCore.h"
+
 
 @interface MyFollowerTableViewController ()
 @property (nonatomic,strong)NSMutableArray *arrayProfileInfoElements;
@@ -252,6 +254,13 @@
     [cell.unfollowButton addTarget: self
                             action: @selector(buttonPressed:withEvent:)
                   forControlEvents: UIControlEventTouchUpInside];
+    
+    
+    cell.profileImageView.layer.cornerRadius = 4;
+    cell.profileImageView.clipsToBounds = YES;
+    [cell.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
+    cell.profileImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    cell.profileImageView.layer.borderWidth = 1;
         
     //set the profile image
     NSURL* backGroundImageUrl=[NSURL URLWithString:cell.user_pic];
@@ -270,6 +279,7 @@
                     dispatch_async( dispatch_get_main_queue(),^{
                         [Cache addDataToCache:backGroundImageUrl withData:imageData];
                         [cell.profileImageView setImage:[UIImage imageWithData:imageData]];
+                       
                     });
                 }
             }
@@ -280,6 +290,7 @@
                     dispatch_async( dispatch_get_main_queue(),^{
                         [Cache addDataToCache:backGroundImageUrl withData:imageData];
                         [cell.profileImageView setImage:[UIImage imageWithData:imageData]];
+                        
                     });
                 }
             }
@@ -293,6 +304,9 @@
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 55;
+}
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
