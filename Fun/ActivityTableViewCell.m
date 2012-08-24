@@ -27,6 +27,7 @@
 
 @synthesize userPicImageView;
 @synthesize activityDescriptionLabel;
+@synthesize eventPicImageView = _eventPicImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -64,6 +65,7 @@
     NSLog(@"%@",[NSString stringWithFormat:@"%d",COMMENT_EVENT]);
     NSLog(@"%@",[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]);
     
+
     self.activityPicImageView.layer.cornerRadius = 10;
     self.activityPicImageView.clipsToBounds = YES;
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -77,6 +79,13 @@
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
     
+    self.eventPicImageView.layer.cornerRadius = 2;
+    self.eventPicImageView.clipsToBounds = YES;
+    [self.eventPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.eventPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.eventPicImageView.layer.borderWidth = 1;
+    
+    self.eventPicImageView.layer.hidden = YES;
     //[self.userPicImageView initWithImage:[UIImage imageNamed:@""]];
     
     
@@ -91,27 +100,37 @@
         // some one show interest on your event/////
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined your event.",self.user_name]];
         [self.activityPicImageView setImage:[UIImage imageNamed:@"like.png"]];
+        self.eventPicImageView.hidden = NO;
+        self.activityDescriptionLabel.frame = CGRectMake(65, 8, 193, 37);
         //[self.userNameLabel setText:@"Interested Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",FOLLOW_SOMEONE]]){
         //some one followed you
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ followed you.",self.user_name]];
         [self.activityPicImageView setImage:[UIImage imageNamed:@"follow.png"]];
+        self.activityDescriptionLabel.frame = CGRectMake(65, 8, 246, 37);
+
         //[self.userNameLabel setText:@"Followed Event:"];
     }
     else if([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",COMMENT_EVENT]]){
         //some one comment on you event
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ commented on your event.",self.user_name]];
         
+        self.eventPicImageView.hidden = NO;
+        self.activityDescriptionLabel.frame = CGRectMake(65, 8, 193, 37);
         [self.activityPicImageView setImage:[UIImage imageNamed:@"comment.png"]];
         //[self.userNameLabel setText:@"Comment Event:"];
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",INVITED_TO_EVENT]]){
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ invited you to an event.",self.user_name]];
         [self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
+        self.eventPicImageView.hidden = NO;
+        self.activityDescriptionLabel.frame = CGRectMake(65, 8, 193, 37);
     }
     else if ([[NSString stringWithFormat:@"%@",self.type] isEqualToString:[NSString stringWithFormat:@"%d",NEW_FRIEND_JOIN]]){
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ just joined OrangeParc.",self.user_name]];
+        self.activityDescriptionLabel.frame = CGRectMake(65, 8, 246, 37);
+
 #warning need further other image
         self.activityPicImageView.hidden = YES;
         //[self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
@@ -213,28 +232,43 @@
         });
     }
 
-    [self.userPicImageView clipsToBounds];
-    [self.userPicImageView setContentMode:UIViewContentModeScaleToFill];
-    self.userPicImageView.frame = CGRectMake(5, 5, 45, 45);
+    self.activityPicImageView.layer.cornerRadius = 2;
+    self.activityPicImageView.clipsToBounds = YES;
+    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.activityPicImageView.layer.borderWidth = 1;
+    
+    self.userPicImageView.layer.cornerRadius = 4;
+    self.userPicImageView.clipsToBounds = YES;
+    [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.userPicImageView.layer.borderWidth = 1;
+   
+    
 
-    self.user_name_label.frame = CGRectMake(60, 3, 100, 15);
-    self.user_name_label.text = [NSString stringWithFormat:@"%@",self.user_name];
+    self.user_name_label.frame = CGRectMake(64, 6, 246, 17);
+    self.user_name_label.text = [NSString stringWithFormat:@"%@:",self.user_name];
     [self.user_name_label setFont:[UIFont boldSystemFontOfSize:12]];
+    self.user_name_label.textColor = [UIColor darkGrayColor];
     self.user_name_label.lineBreakMode = UILineBreakModeTailTruncation;
     self.user_name_label.numberOfLines = 1;
     
-    self.event_name_label.frame = CGRectMake(60, 18, 230, 15);
-    self.event_name_label.text = [NSString stringWithFormat:@"in event \"%@\"",self.event_name];
-    [self.event_name_label setFont:[UIFont systemFontOfSize:12]];
-    [self.event_name_label setTextColor:[UIColor darkGrayColor]];
+        
+    [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:12]];
+    [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"\"%@\"",self.message]];
+    self.activityDescriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
+    self.activityDescriptionLabel.textColor = [UIColor darkGrayColor];
+    self.activityDescriptionLabel.numberOfLines = 1;
+    self.activityDescriptionLabel.frame = CGRectMake(64, 23, 246, 15);
+    
+    self.event_name_label.frame = CGRectMake(64, 39, 246, 15);
+    self.event_name_label.text = [NSString stringWithFormat:@"via %@",self.event_name];
+    self.event_name_label.textAlignment = UITextAlignmentRight;
+    [self.event_name_label setFont:[UIFont italicSystemFontOfSize:10]];
+    [self.event_name_label setTextColor:[UIColor lightGrayColor]];
     self.event_name_label.lineBreakMode = UILineBreakModeTailTruncation;
     self.event_name_label.numberOfLines = 1;
-    
-    [self.activityDescriptionLabel setFont:[UIFont systemFontOfSize:13]];
-    [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@.",self.message]];
-    self.activityDescriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    self.activityDescriptionLabel.numberOfLines = 1;
-    self.activityDescriptionLabel.frame = CGRectMake(60, 32, 250, 20);
+
 }
 
 @end

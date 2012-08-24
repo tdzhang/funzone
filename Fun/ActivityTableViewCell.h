@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userPicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *activityDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *eventPicImageView;
 
 -(void)resetWithConversationActivityObject:(activityElementObject*)element;
 -(void)resetWithActivityObject:(activityElementObject*)element;
