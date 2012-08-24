@@ -199,7 +199,14 @@
     
     //Category section
     blockElement.categorySection = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
-    blockElement.categoryIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 33, 30)];
+    
+    UIView *categorySectionBackground = [[UIView alloc] init];
+    categorySectionBackground.backgroundColor = [UIColor blackColor];
+    categorySectionBackground.layer.cornerRadius = 4;
+    [categorySectionBackground setAlpha:0.6];
+    [blockElement.categorySection addSubview:categorySectionBackground];
+    
+    blockElement.categoryIcon = [[UIImageView alloc] initWithFrame:CGRectMake(2, 0, 33, 30)];
     blockElement.categoryIcon.contentMode = UIViewContentModeScaleToFill;
     [blockElement.categoryIcon setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", category_icon_file]]];
     [blockElement.categorySection addSubview:blockElement.categoryIcon];
@@ -209,7 +216,7 @@
     blockElement.categoryLabel.text = blockElement.event_category;
     blockElement.categoryLabel.backgroundColor = [UIColor clearColor];
     blockElement.categoryLabel.textColor = [UIColor whiteColor];
-    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:12];
+    blockElement.categoryLabel.font = [UIFont boldSystemFontOfSize:10];
     [blockElement.categoryLabel setShadowColor:[UIColor blackColor]];
     [blockElement.categoryLabel setShadowOffset:CGSizeMake(0, 1)];
     CGSize expectedWidth1 = [blockElement.event_category sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:150 lineBreakMode:UILineBreakModeTailTruncation];
@@ -217,10 +224,11 @@
     newFrame.size.width = expectedWidth1.width;
     blockElement.categoryLabel.frame = newframe;
     [blockElement.categorySection addSubview:blockElement.categoryLabel];
-    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33-10, 50, expectedWidth1.width+33+10, 30);
-    blockElement.categorySection.backgroundColor = [UIColor blackColor];
+    blockElement.categorySection.frame = CGRectMake(300-expectedWidth1.width-33, 10, expectedWidth1.width+33, 30);
+    categorySectionBackground.frame = CGRectMake(0, 0, expectedWidth1.width+33, 30);
+    blockElement.categorySection.backgroundColor = [UIColor clearColor];
     blockElement.categorySection.alpha = 1;
-    //[blockElement.blockView addSubview:blockElement.categorySection];
+    [blockElement.blockView addSubview:blockElement.categorySection];
     
     if (![locationName isEqualToString:@""]) {
     //marker image
@@ -285,7 +293,8 @@
     [blockElement.numDoItMyselfSection addSubview:numDIMLabel2];
     
     int total_width = blockElement.numDoItMyself.frame.size.width+10+50+5+10;
-    blockElement.numDoItMyselfSection.frame = CGRectMake(310-total_width, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
+//    blockElement.numDoItMyselfSection.frame = CGRectMake(310-total_width, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
+    blockElement.numDoItMyselfSection.frame = CGRectMake(10, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     numDoItMyselfBackground.frame = CGRectMake(0, 0, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     
     //set the event_id and shared_event_id
