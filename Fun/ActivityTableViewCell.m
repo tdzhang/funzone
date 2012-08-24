@@ -73,6 +73,44 @@
     self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:250/255.0 green:150/255.0 blue:20/255.0 alpha:1] CGColor];
     //self.activityPicImageView.layer.borderWidth = 1;
     
+    NSURL *imageUrl=[NSURL URLWithString:element.user_pic];
+    //deal with the profile image
+    if (![Cache isURLCached:imageUrl]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: imageUrl];
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:imageUrl withData:imageData];
+                        [self.userPicImageView setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:imageUrl withData:imageData];
+                        [self.userPicImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.userPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:imageUrl]]];
+        });
+    }
+    
     self.userPicImageView.layer.cornerRadius = 4;
     self.userPicImageView.clipsToBounds = YES;
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -85,11 +123,45 @@
     self.eventPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.eventPicImageView.layer.borderWidth = 1;
     
+    NSURL *eventUrl=[NSURL URLWithString:element.event_pic];
+    //deal with the profile image
+    if (![Cache isURLCached:eventUrl]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: eventUrl];
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:eventUrl withData:imageData];
+                        [self.eventPicImageView setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:eventUrl withData:imageData];
+                        [self.eventPicImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.eventPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:eventUrl]]];
+        });
+    }
     self.eventPicImageView.layer.hidden = YES;
-    //[self.userPicImageView initWithImage:[UIImage imageNamed:@""]];
-    
-    
-    
+        
     //self.activityDescriptionLabel.frame = CGRectMake(65, 11, 210, 37);
     self.activityDescriptionLabel.numberOfLines = 2;
     
@@ -139,49 +211,6 @@
         //[self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ has done something you may be interested.",self.user_name]];
         NSLog(@"ActivityTableViewcell:activity type not found.");
     }
-    
-    
-    
-    
-    /*
-    NSURL *imageUrl=[NSURL URLWithString:self.user_pic];
-    //deal with the profile image
-    if (![Cache isURLCached:imageUrl]) {
-        //using high priority queue to fetch the image
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-            //get the image data
-            NSData * imageData = nil;
-            imageData = [[NSData alloc] initWithContentsOfURL: imageUrl];
-            if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
-                imageData=UIImagePNGRepresentation(image);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:imageUrl withData:imageData];
-                        [self.userPicImageView setImage:image];
-                    });
-                }
-            }
-            else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
-                if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
-                        [Cache addDataToCache:imageUrl withData:imageData];
-                        [self.userPicImageView setImage:[UIImage imageWithData:imageData]];
-                    });
-                }
-            }
-        });
-    }
-    else {
-        dispatch_async( dispatch_get_main_queue(),^{
-            [self.userPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:imageUrl]]];
-        });
-    }
-     */
 }
 
 -(void)resetWithConversationActivityObject:(activityElementObject*)element{
@@ -231,20 +260,57 @@
             [self.userPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:imageUrl]]];
         });
     }
-
-    self.activityPicImageView.layer.cornerRadius = 2;
-    self.activityPicImageView.clipsToBounds = YES;
-    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-    self.activityPicImageView.layer.borderWidth = 1;
     
     self.userPicImageView.layer.cornerRadius = 4;
     self.userPicImageView.clipsToBounds = YES;
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
-   
     
+    NSURL *userPicUrl=[NSURL URLWithString:element.user_pic];
+    NSLog(@"%@",userPicUrl);
+    //deal with the profile image
+    if (![Cache isURLCached:userPicUrl]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: userPicUrl];
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:userPicUrl withData:imageData];
+                        [self.activityPicImageView setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:userPicUrl withData:imageData];
+                        [self.activityPicImageView setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.activityPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:userPicUrl]]];
+        });
+    }
+    
+    self.activityPicImageView.layer.cornerRadius = 2;
+    self.activityPicImageView.clipsToBounds = YES;
+    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.activityPicImageView.layer.borderWidth = 1;
 
     self.user_name_label.frame = CGRectMake(64, 6, 246, 17);
     self.user_name_label.text = [NSString stringWithFormat:@"%@:",self.user_name];
