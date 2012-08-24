@@ -116,7 +116,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.mainScrollView setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
+    [self.mainScrollView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]];
 }
 
 - (void)viewDidUnload
@@ -350,7 +350,7 @@
                         //if(i==5)break; //in this page, only present a few comments
                         DiscussionComment* comment=[self.comments objectAtIndex:i];
                         UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(5, height, 310, 0)];
-                        [commentView setBackgroundColor:[UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]];
+                        [commentView setBackgroundColor:[UIColor clearColor]];
                         
                         //comment user name label
                         UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 20)];

@@ -261,7 +261,7 @@
     self.shareButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     //set view background
-    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:2450/255.0 alpha:1]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]];
     
     self.eventImageView = [[UIImageView alloc] init];
     [self.myScrollView addSubview:self.eventImageView];
@@ -981,7 +981,7 @@
     [self.descriptionSectionView addSubview:self.description_content];
     [self.myScrollView addSubview:self.descriptionSectionView];
     
-    self.view_height += self.descriptionSectionView.frame.size.height+5;
+    self.view_height += self.descriptionSectionView.frame.size.height+15;
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
     [self.myScrollView addSubview:seperator];
