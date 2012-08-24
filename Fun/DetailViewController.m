@@ -917,6 +917,13 @@
     [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
+    self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+    self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+    if (self.latitude.doubleValue < 0.1 && self.longitude.doubleValue < 0.1) {
+        [map_indicator_label setHidden:YES];
+        [right_Arrow setHidden:YES];
+    }
+
     
     UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 0, 80, 40)];
     [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -1590,8 +1597,6 @@
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
         self.event_address=[event objectForKey:@"address"];
-        self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-        self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
         
         // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
         // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
