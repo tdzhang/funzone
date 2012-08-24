@@ -1121,6 +1121,13 @@
         int x_position_photo=DVC_LABEL_X-5;
         for (int i=0; i<7&&i<([self.likedPeople count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 40, 35, 35)];
+            userImageView.layer.cornerRadius = 3;
+            userImageView.clipsToBounds = YES;
+            [userImageView setContentMode:UIViewContentModeScaleAspectFill];
+            userImageView.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+
+            userImageView.layer.borderWidth = 0.8;
+            
             ProfileInfoElement* element=[self.likedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
