@@ -92,6 +92,18 @@
     //check for internet connection, if no connection, showing alert
     [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
+    
+    //judge whether the user is login? if not, do the login
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"login_auth_token"]) {
+        //if not login, do it
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
+        loginVC.parentVC=self;
+        loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:loginVC animated:YES completion:^{}];
+    }
+    
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     
