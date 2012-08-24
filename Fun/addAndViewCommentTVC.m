@@ -8,6 +8,8 @@
 
 #import "addAndViewCommentTVC.h"
 #import "Cache.h"
+#import "QuartzCore/QuartzCore.h"
+
 
 @interface addAndViewCommentTVC ()
 
@@ -95,9 +97,9 @@
     CGSize maximumLabelSize1 = CGSizeMake(100,9999);
     CGSize expectedLabelSize1 = [user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeClip];
     CGSize maximumLabelSize2 = CGSizeMake(260,9999);
-    CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
+    CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
     NSInteger height = expectedLabelSize1.height + expectedLabelSize2.height + 5*2;
-    height = (height > 56)? height:56;
+    height = (height > 55)? height:55;
     return height;
 }
 
@@ -124,7 +126,7 @@
     eventComment *comment=[self.comments objectAtIndex:indexPath.row];
     
     cell.userNameLabel.text=[NSString stringWithFormat:@"%@",comment.user_name];
-    cell.userNameLabel.frame = CGRectMake(55, 5, 100, 30);
+    cell.userNameLabel.frame = CGRectMake(60, 8, 100, 30);
     //[cell.userNameLabel setFont:[UIFont boldSystemFontOfSize:14]];
     CGSize maximumLabelSize1 = CGSizeMake(100,9999);
     CGSize expectedLabelSize1 = [comment.user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
@@ -138,7 +140,7 @@
     CGSize maximumLabelSize2 = CGSizeMake(100,9999);
     CGSize expectedLabelSize2 = [comment.timestamp sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
     CGSize expectedWidth2 = [comment.timestamp sizeWithFont:[UIFont systemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
-    cell.commentTimeLabel.frame = CGRectMake(310-expectedWidth2.width, 7, 100, 30);
+    cell.commentTimeLabel.frame = CGRectMake(310-expectedWidth2.width, 9, 100, 30);
     [cell.commentTimeLabel setFont:[UIFont systemFontOfSize:12]];
     [cell.commentTimeLabel  setTextColor:[UIColor lightGrayColor]];
     CGRect newFrame2 = cell.commentTimeLabel.frame;
@@ -147,7 +149,7 @@
     cell.commentTimeLabel.frame = newFrame2;
     
     cell.commentContentLabel.text=comment.content;
-    cell.commentContentLabel.frame = CGRectMake(55, cell.userNameLabel.frame.size.height+5, 260, 30);
+    cell.commentContentLabel.frame = CGRectMake(60, cell.userNameLabel.frame.size.height+8, 260, 30);
     [cell.commentContentLabel setFont:[UIFont systemFontOfSize:13]];
     [cell.commentContentLabel setTextColor:[UIColor darkGrayColor]];
     cell.commentContentLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -159,7 +161,14 @@
     cell.commentContentLabel.frame = newFrame3;
     
     //cell.userPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
-    cell.userPhotoImageView.frame = CGRectMake(8, 8, 40, 40);
+    cell.userPhotoImageView.frame = CGRectMake(10, 5, 44, 44);
+    
+    cell.userPhotoImageView.layer.cornerRadius = 4;
+     cell.userPhotoImageView.clipsToBounds = YES;
+    [ cell.userPhotoImageView setContentMode:UIViewContentModeScaleAspectFill];
+     cell.userPhotoImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    cell.userPhotoImageView.layer.borderWidth = 1;
+    
     NSLog(@"!!!!!%@", comment.user_picture_url);
     if (![Cache isURLCached:comment.user_picture_url]) {
         //using high priority queue to fetch the image

@@ -586,6 +586,14 @@
         int x_position_photo=5;
         for (int i=0; i<7&&i<([self.interestedPeople count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 25, 35, 35)];
+            userImageView.layer.cornerRadius = 3;
+            userImageView.clipsToBounds = YES;
+            [userImageView setContentMode:UIViewContentModeScaleAspectFill];
+            userImageView.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+            
+            userImageView.layer.borderWidth = 0.8;
+
+            
             ProfileInfoElement* element=[self.interestedPeople objectAtIndex:i];
             NSURL* backGroundImageUrl=[NSURL URLWithString:element.user_pic];
             if (![Cache isURLCached:backGroundImageUrl]) {
@@ -1025,6 +1033,13 @@
         int x_position_photo=DVC_LABEL_X-5;
         for (int i=0; i<7&&i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo+5, 40, 35, 35)];
+            userImageView.layer.cornerRadius = 3;
+            userImageView.clipsToBounds = YES;
+            [userImageView setContentMode:UIViewContentModeScaleAspectFill];
+            userImageView.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+            
+            userImageView.layer.borderWidth = 0.8;
+            
             ProfileInfoElement* element=[self.invitee objectAtIndex:i];
             NSString *user_pic=element.user_pic;
             if (!element.user_pic) {
@@ -1242,8 +1257,61 @@
         
         //UILabel *comment_user_name=[[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, DETAIL_VIEW_CONTROLLER_COMMENT_HEIGHT)];
     
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 100, 0)];
-        NSString *comment_user_name =[NSString stringWithFormat:@"%@ :",comment.user_name];
+        //--------------Comment User Image--------------//
+        
+        UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 3, 20, 20)];
+        userImageView.layer.cornerRadius = 2;
+        userImageView.clipsToBounds = YES;
+        [userImageView setContentMode:UIViewContentModeScaleAspectFill];
+        userImageView.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+        userImageView.layer.borderWidth = 0.6;
+        
+        
+    
+        if (![Cache isURLCached:comment.user_picture_url]) {
+            //using high priority queue to fetch the image
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                //get the image data
+                NSData * imageData = nil;
+                imageData = [[NSData alloc] initWithContentsOfURL: comment.user_picture_url];
+                
+                if ( imageData == nil ){
+                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                    //NSLog(@"downloaded %@ error, using a default image",url);
+                    UIImage *image=[UIImage imageNamed:@"smile_64.png"];
+                    imageData=UIImagePNGRepresentation(image);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:comment.user_picture_url withData:imageData];
+                            [userImageView setImage:image];
+                        });
+                    }
+                }
+                else {
+                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                    //NSLog(@"downloaded %@",url);
+                    if(imageData){
+                        dispatch_async( dispatch_get_main_queue(),^{
+                            [Cache addDataToCache:comment.user_picture_url withData:imageData];
+                            [userImageView setImage:[UIImage imageWithData:imageData]];
+                        });
+                    }
+                }
+            });
+        }
+        else {
+            dispatch_async( dispatch_get_main_queue(),^{
+                [userImageView setImage:[UIImage imageWithData:[Cache getCachedData:comment.user_picture_url]]];
+            });
+        }
+        
+        
+        
+        
+        //
+        
+        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X+24, 5, 100, 0)];
+        NSString *comment_user_name =[NSString stringWithFormat:@"%@:",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:12]];
         [comment_user_name_label setBackgroundColor:[UIColor clearColor]];
@@ -1271,7 +1339,7 @@
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 290, 0)];
+        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X+24, 5, 266, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];
         [comment_content_label setFont:[UIFont systemFontOfSize:12]];
@@ -1280,13 +1348,14 @@
         comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
         comment_content_label.numberOfLines = 0;
         
-        CGSize maximumLabelSize2 = CGSizeMake(290,9999);
+        CGSize maximumLabelSize2 = CGSizeMake(266,9999);
         CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
         
         CGRect newFrame2 = comment_content_label.frame;
         newFrame2.size.height = expectedLabelSize2.height;
         comment_content_label.frame = newFrame2;
         
+        [commentView addSubview:userImageView];
         [commentView addSubview:comment_content_label];
         [commentView addSubview:comment_user_name_label];
         
@@ -1301,7 +1370,7 @@
         [self.garbageCollection addObject:commentView];        
     }
     //set the comment view content size
-    self.commentSectionView.frame = CGRectMake(0, self.view_height+15, 320, 200);
+    self.commentSectionView.frame = CGRectMake(0, self.view_height+15, 300, 200);
     self.view_height += 15;
 }
 
