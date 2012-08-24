@@ -14,6 +14,7 @@
 @property CGFloat currentY;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *CategoryFilterButton;
 
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) UIImageView *refreshView;
@@ -27,6 +28,13 @@
 @property (nonatomic,strong) NSString *tapped_creator_id;
 @property (nonatomic,strong) UIView *loading;
 
+//for the category filter picker
+@property (nonatomic,strong) UIActionSheet *actionSheet;
+@property (nonatomic,strong) NSString *pickerType;
+@property (nonatomic,strong) NSString *categoryFilter;
+@property (nonatomic,strong) NSString *categoryFilter_id;
+@property (nonatomic)BOOL isCategoryPickerSelected;
+
 -(void)checkForWhetherShowInstruction;
 
 @end
@@ -39,6 +47,7 @@
 @synthesize currentY = _currentY;
 @synthesize mainScrollView = _mainScrollView;
 @synthesize refreshButton = _refreshButton;
+@synthesize CategoryFilterButton = _CategoryFilterButton;
 @synthesize data=_data;
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize refresh_page_num=_refresh_page_num;
@@ -48,6 +57,11 @@
 @synthesize tapped_creator_id=_tapped_creator_id;
 @synthesize loading=_loading;
 
+@synthesize actionSheet=_actionSheet;
+@synthesize pickerType=_pickerType;
+@synthesize categoryFilter=_categoryFilter;
+@synthesize categoryFilter_id=_categoryFilter_id;
+@synthesize isCategoryPickerSelected=_isCategoryPickerSelected;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -148,6 +162,7 @@
     backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     [self.navigationItem setBackBarButtonItem:backButton];
     
+    self.CategoryFilterButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
@@ -156,9 +171,29 @@
     self.refresh_page_num=2; //the next page that need to refresh is 2
     self.freshConnectionType=@"New";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-    NSLog(@"%@",request_string);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+    
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSURL *url=nil;
+    if (self.categoryFilter_id) {
+        if([CLLocationManager regionMonitoringEnabled]){
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&category_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id,[defaults objectForKey:@"login_auth_token"]]];
+        }
+        else {
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+        }
+    } else {
+        if([CLLocationManager regionMonitoringEnabled]){
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,[defaults objectForKey:@"login_auth_token"]]];
+        }
+        else{
+            url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        }
+    }
+    
+    
+    
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     [connection start];
     if ([self.blockViews count]<3) {
@@ -176,6 +211,7 @@
     [self setMainScrollView:nil];
     [self setInstructionView:nil];
     [self setRefreshButton:nil];
+    [self setCategoryFilterButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -234,11 +270,30 @@
         [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         
         //and then do the refresh process
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
         
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSURL *url=nil;
+        
+        
+        if (self.categoryFilter_id) {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&category_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+            }
+        } else {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            }
+        }
+
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         self.freshConnectionType=@"New";
         [connection start];
@@ -271,10 +326,30 @@
         self.mainScrollView.contentSize = CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, [self.blockViews count]*(FEED_BLOCK_ELEMENT_VIEW_HEIGHT+10)+50);
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSURL *url=nil;
+        
+        if (self.categoryFilter_id) {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?page=%d&current_longitude=%f&current_latitude=%f&category_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?page=%d&auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+            }
+        } else {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?page=%d&current_longitude=%f&current_latitude=%f&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
+            }
+        }
+
+        
+        
        //NSLog(@"add more");
-        NSString *request_string=[NSString stringWithFormat:@"%@/feeds?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:request_string]];
+        NSLog(@"%@",url);
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         //set the freshConnectionType To @"Add"
         self.freshConnectionType=@"Add";
@@ -326,7 +401,26 @@
     ///////////////////////////////////////////////////////////////////////////
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSURL *url= [NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSURL *url=nil;
+        
+        
+        if (self.categoryFilter_id) {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&category_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else {
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+            }
+        } else {
+            if([CLLocationManager regionMonitoringEnabled]){
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?current_longitude=%f&current_latitude=%f&auth_token=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,[defaults objectForKey:@"login_auth_token"]]];
+            }
+            else{
+                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/feeds?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+            }
+        }
+
 
         NSLog(@"request:%@",url);
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
@@ -552,6 +646,155 @@
         ProfilePageViewController* PVVC=segue.destinationViewController;
         PVVC.via=VIA_FEEDS;
     }
+}
+
+#pragma mark - choose category filter button
+#pragma mark UIPickerViewDelegate Methods
+
+
+
+- (void)createActionSheet {
+    
+    // setup actionsheet to contain the UIPicker
+    self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select"
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                     destructiveButtonTitle:nil
+                                          otherButtonTitles:nil];
+    
+    UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    pickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [pickerToolbar sizeToFit];
+    
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [barItems addObject:flexSpace];
+    
+    
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDone:)];
+    [barItems addObject:doneBtn];
+    
+    
+    [pickerToolbar setItems:barItems animated:YES];
+    
+    
+    [self.actionSheet addSubview:pickerToolbar];
+    
+    [self.actionSheet showFromTabBar:self.tabBarController.tabBar];
+    // [self.actionSheet showInView:self.view];
+    [self.actionSheet setBounds:CGRectMake(0,0,320, 464)];
+    
+}
+- (IBAction)CategoryFilterClicked:(id)sender {
+    [self createActionSheet];
+    self.pickerType = @"picker";
+    UIPickerView *chPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, 0.0, 0.0)];
+    chPicker.dataSource = self;
+    chPicker.delegate = self;
+    chPicker.showsSelectionIndicator = YES;
+    [self.actionSheet addSubview:chPicker];
+    
+}
+
+
+
+
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    self.categoryFilter_id=nil;
+    [self.CategoryFilterButton setTitle:@"All"];
+    self.isCategoryPickerSelected=NO;
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    int count;
+    if ([self.pickerType isEqualToString:@"picker"])
+        count = 10;
+    return count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSString *string;
+    NSArray *category=[NSArray arrayWithObjects:@"All events",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    if ([self.pickerType isEqualToString:@"picker"])
+        string = [category objectAtIndex:row];
+    return string;
+}
+// Set the width of the component inside the picker
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component             {
+    return 200;
+}
+
+// Item picked
+- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSArray *category=[NSArray arrayWithObjects:@"All events",@"Food",@"Movie",@"Sports",@"Party",@"Outdoor",@"Entertain",@"Event",@"Shopping",@"Other", nil];
+    if ([self.pickerType isEqualToString:@"picker"])
+    {
+        self.categoryFilter=[category objectAtIndex:row];
+        // Txt.text = [array objectAtIndex:row];
+    }
+    self.isCategoryPickerSelected=YES;
+    NSLog(@"%@",self.categoryFilter);
+}
+
+- (void)pickerDone:(id)sender
+{
+    if (!self.isCategoryPickerSelected) {
+        self.categoryFilter_id=nil;
+        [self.CategoryFilterButton setTitle:@"All"];
+        [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+        [self RefreshAction];
+        return;
+    }
+    [self.actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    self.actionSheet = nil;
+    //self.actionSheet
+    NSLog(@"%@",self.categoryFilter);
+    if ([self.categoryFilter isEqualToString:@"All events"]||!self.categoryFilter) {
+        self.categoryFilter_id=nil;
+        [self.CategoryFilterButton setTitle:@"All"];
+        
+    }
+    else if([self.categoryFilter isEqualToString:@"Food"]){
+        self.categoryFilter_id=FOOD;
+        [self.CategoryFilterButton setTitle:@"Food"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Movie"]){
+        self.categoryFilter_id=MOVIE;
+        [self.CategoryFilterButton setTitle:@"Movie"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Sports"]){
+        self.categoryFilter_id=SPORTS;
+        [self.CategoryFilterButton setTitle:@"Sports"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Party"]){
+        self.categoryFilter_id=NIGHTLIFE;
+        [self.CategoryFilterButton setTitle:@"Party"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Outdoor"]){
+        self.categoryFilter_id=OUTDOOR;
+        [self.CategoryFilterButton setTitle:@"Outdoor"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Entertain"]){
+        self.categoryFilter_id=ENTERTAIN;
+        [self.CategoryFilterButton setTitle:@"Entertain"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Event"]){
+        self.categoryFilter_id=EVENTS;
+        [self.CategoryFilterButton setTitle:@"Event"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Shopping"]){
+        self.categoryFilter_id=SHOPPING;
+        [self.CategoryFilterButton setTitle:@"Shopping"];
+    }
+    else if([self.categoryFilter isEqualToString:@"Other"]){
+        self.categoryFilter_id=OTHERS;
+        [self.CategoryFilterButton setTitle:@"Other"];
+    }
+    [self RefreshAction];
 }
 
 #pragma mark - Gesture handler

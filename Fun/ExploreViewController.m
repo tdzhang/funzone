@@ -149,24 +149,38 @@
         FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
         NSURL *url=nil;
         if (self.categoryFilter_id) {
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                }
             }
             else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+                }
             }
         } else {
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                }
             }
             else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+                }
             }
         }
         
@@ -313,24 +327,38 @@
             
             
             if (self.categoryFilter_id) {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                    }
                 }
                 else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
-                }
-                if ([defaults objectForKey:@"login_auth_token"]) {
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+                    }
                 }
             } else {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                    }
                 }
                 else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-                }
-                if ([defaults objectForKey:@"login_auth_token"]) {
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+                    }
                 }
             }
             
@@ -429,32 +457,42 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
             NSURL *url=nil;
-            
-            
             if (self.categoryFilter_id) {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                    }
                 }
                 else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,self.categoryFilter_id]];
-                }
-                if ([defaults objectForKey:@"login_auth_token"]) {
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&category_id=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,self.categoryFilter_id]];
+                    }
                 }
             } else {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore?auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
+                    }
                 }
                 else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
-                }
-                if ([defaults objectForKey:@"login_auth_token"]) {
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
+                    }
                 }
             }
-            
-            
-            
+
             NSLog(@"%@",url);
             ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
             
@@ -726,27 +764,40 @@
         FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
         NSURL *url=nil;
         if (self.categoryFilter_id) {
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                }
             }
             else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+                }
             }
         } else {
-            if([CLLocationManager regionMonitoringEnabled]){
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+            if ([defaults objectForKey:@"login_auth_token"]) {
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                }
             }
             else{
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-            }
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                if([CLLocationManager regionMonitoringEnabled]){
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                }
+                else{
+                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+                }
             }
         }
-        
         
         NSLog(@"%@",url);
         ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];

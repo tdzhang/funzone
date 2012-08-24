@@ -13,7 +13,7 @@
 #import "GlobalConstant.h"
 #import "ProfilePageViewController.h"
 
-@interface FeedViewController : UIViewController<UIScrollViewDelegate>
+@interface FeedViewController : UIViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *instructionView;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -1176,6 +1176,11 @@ Find us @OrangeParc.com</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Feeds" id="k0H-05-gmF">
+                        <barButtonItem key="leftBarButtonItem" title="All" id="VAs-G8-OA2">
+                            <connections>
+                                <action selector="CategoryFilterClicked:" destination="3i5-5a-vO5" id="Gjv-dw-p7H"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="refresh.png" id="7lU-Sl-nOu">
                             <connections>
                                 <action selector="refreshButtonClicked:" destination="3i5-5a-vO5" id="bc4-q6-MK9"/>
@@ -1183,6 +1188,7 @@ Find us @OrangeParc.com</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="CategoryFilterButton" destination="VAs-G8-OA2" id="CRh-ZA-Fta"/>
                         <outlet property="instructionView" destination="Diy-8p-pcv" id="OUe-ns-Eb1"/>
                         <outlet property="mainScrollView" destination="Zlp-hj-00h" id="rWg-p4-8HU"/>
                         <outlet property="refreshButton" destination="7lU-Sl-nOu" id="s5X-9L-a6A"/>
@@ -1956,11 +1962,11 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Php-mD-Smt">
-                                <rect key="frame" x="0.0" y="120" width="320" height="300"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="251"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="ofe-Y1-2Da" id="IqW-7o-Nbk"/>
@@ -2095,7 +2101,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBM-Nv-4TO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="GBr-L9-MMr" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="l3R-0z-I3I">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2125,7 +2131,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-6h-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="9i7-54-eHW" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="fok-68-c8Y">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -3216,6 +3222,8 @@ Find us @OrangeParc.com</string>
         <class className="ExploreViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CategoryFilterClicked:"/>
+                <relationship kind="action" name="refreshButtonClicked:"/>
                 <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
@@ -3227,6 +3235,9 @@ Find us @OrangeParc.com</string>
         <class className="FeedViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CategoryFilterClicked:"/>
+                <relationship kind="action" name="refreshButtonClicked:"/>
+                <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="instructionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
@@ -3363,11 +3374,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sin-Qw-UXs"/>
-        <segue reference="5YL-VF-kXv"/>
-        <segue reference="nyH-Sx-6aU"/>
-        <segue reference="6rH-Lj-bNq"/>
         <segue reference="lqc-Cx-NBX"/>
+        <segue reference="Hfw-Db-bjl"/>
+        <segue reference="Yrc-z9-85p"/>
+        <segue reference="maZ-xV-hRy"/>
         <segue reference="jpf-qW-bdW"/>
+        <segue reference="sin-Qw-UXs"/>
     </inferredMetricsTieBreakers>
 </document>
