@@ -105,8 +105,8 @@
     }
     
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
-   // [defaults setValue:nil forKey:@"notTheFirstTime"];
-   // [defaults synchronize];
+    [defaults setValue:nil forKey:@"notTheFirstTime"];
+    [defaults synchronize];
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
     
     if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
