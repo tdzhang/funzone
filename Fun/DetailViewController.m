@@ -1571,11 +1571,6 @@
 //        self.shouldGoBack=YES;
     }
     else{
-        // if need go to discussion, go to it
-        if (!self.isEnteredDiscussion) {
-            self.isEnteredDiscussion=YES;
-            [self performSegueWithIdentifier:@"startDiscussion" sender:self];
-        }
         //should go back to the former page
         //self.shouldGoBack=NO;
         
@@ -1626,7 +1621,13 @@
         [self handleLikedPeoplePart:event];
         [self handleTheCommentPart:event];
         [self.myScrollView setContentSize:CGSizeMake(320, self.view_height+5+30)];
-             
+        
+        
+        // if need go to discussion, go to it
+        if (!self.isEnteredDiscussion) {
+            self.isEnteredDiscussion=YES;
+            [self performSegueWithIdentifier:@"startDiscussion" sender:self];
+        }
 #warning fetch original creator info
         //handle the interest people part
 //        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
