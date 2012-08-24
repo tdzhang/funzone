@@ -135,7 +135,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
-    [self.navigationController.navigationBar.topItem setTitle:@"Recommended Photos"];
+    [self.navigationController.navigationBar.topItem setTitle:@"Choose a Photo"];
     
 }
 
