@@ -9,10 +9,12 @@
 #import "detailLocationMapViewController.h"
 
 @interface detailLocationMapViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *GetDirectionButton;
 
 @end
 
 @implementation detailLocationMapViewController
+@synthesize GetDirectionButton;
 @synthesize myMapView;
 @synthesize predefinedAnnotation=_predefinedAnnotation;
 
@@ -53,6 +55,7 @@
         [self.myMapView addAnnotation:annotation];
     }
 
+    self.GetDirectionButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 }
 
 
@@ -79,6 +82,7 @@
 - (void)viewDidUnload
 {
     [self setMyMapView:nil];
+    [self setGetDirectionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -87,6 +91,16 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+#pragma mark - open Google Map app
+- (IBAction)openMapApp:(id)sender {
+    UIApplication *app = [UIApplication sharedApplication];
+    NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"http://maps.google.com/maps?q=%@&ll=%f,%f",[self.predefinedAnnotation.title stringByReplacingOccurrencesOfString:@" " withString:@"%20"] ,self.predefinedAnnotation.coordinate.latitude, self.predefinedAnnotation.coordinate.longitude]];
+    NSLog(@"%@",url);
+    [app openURL:url];
+
+}
+
 
 #pragma mark - implement the map view protocal
 -(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views{

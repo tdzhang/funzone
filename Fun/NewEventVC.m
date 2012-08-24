@@ -417,20 +417,20 @@
     [self.navigationItem setBackBarButtonItem:backButton];
     
     //update the display label
-    if ([self.invitedFriend count]==0) {
+    if ([self.invitedFriend count]+[self.invitedAddressBookFriend count]==0) {
         [self.inviteFriendsLabel setText:@"Invite friends"];
         [self.inviteFriendsLabel setFont:[UIFont italicSystemFontOfSize:16]];
         [self.inviteFriendsLabel setTextColor:[UIColor lightGrayColor]];
         [self.inviteIcon setAlpha:0.4];
     }
-    else if ([self.invitedFriend count]==1){
+    else if ([self.invitedFriend count]+[self.invitedAddressBookFriend count]==1){
         [self.inviteFriendsLabel setText:@"1 friend"];
         [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
         [self.inviteIcon setAlpha:0.8];
     }
     else{
-        [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]]];
+        [self.inviteFriendsLabel setText:[NSString stringWithFormat:@"%d friends",[self.invitedFriend count]+[self.invitedAddressBookFriend count]]];
         [self.inviteFriendsLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [self.inviteFriendsLabel setTextColor:[UIColor darkGrayColor]];
         [self.inviteIcon setAlpha:0.8];
@@ -1574,7 +1574,7 @@
     if (person.firstName) {
         nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
         if (person.lastName) {
-            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+            nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
         }
     }
     else if(person.lastName){
@@ -1612,7 +1612,7 @@
     if (person.firstName) {
         nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
         if (person.lastName) {
-            nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+            nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
         }
     }
     else if(person.lastName){

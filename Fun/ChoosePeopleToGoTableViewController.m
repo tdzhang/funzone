@@ -202,7 +202,7 @@
         if (contact.firstName) {
             nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
             if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
             }
         }
         else if(contact.lastName){
@@ -265,7 +265,7 @@
         if (contact.firstName) {
             nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
             if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
             }
         }
         else if(contact.lastName){
@@ -317,7 +317,7 @@
         if (contact.firstName) {
             nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
             if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
             }
         }
         else if(contact.lastName){
@@ -398,7 +398,7 @@
         if (contact.firstName) {
             nameText=[nameText stringByAppendingFormat:@"%@",contact.firstName];
             if (contact.lastName) {
-                nameText=[nameText stringByAppendingFormat:@", %@",contact.lastName];
+                nameText=[nameText stringByAppendingFormat:@" %@",contact.lastName];
             }
         }
         else if(contact.lastName){
@@ -445,7 +445,7 @@
             if (person.firstName) {
                 nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
                 if (person.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                    nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
                 }
             }
             else if(person.lastName){
@@ -479,7 +479,7 @@
             if (person.firstName) {
                 nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
                 if (person.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                    nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
                 }
             }
             else if(person.lastName){
@@ -508,7 +508,7 @@
             if (person.firstName) {
                 nameText=[nameText stringByAppendingFormat:@"%@",person.firstName];
                 if (person.lastName) {
-                    nameText=[nameText stringByAppendingFormat:@", %@",person.lastName];
+                    nameText=[nameText stringByAppendingFormat:@" %@",person.lastName];
                 }
             }
             else if(person.lastName){
