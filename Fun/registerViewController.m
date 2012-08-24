@@ -239,6 +239,8 @@
                     [defaults synchronize];
                     //then return to the previouse page, quit login page
                     [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+                    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+                    [funAppdelegate.thisTabBarController setSelectedIndex:1];
                 }
                 else {
                     UIAlertView *error = [[UIAlertView alloc] initWithTitle:@"Registration Error" message:@"The registration is not finished. Some error happened" delegate:self  cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
@@ -287,6 +289,8 @@
             [defaults synchronize];
             //then return to the previouse page, quit login page
             [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            [funAppdelegate.thisTabBarController setSelectedIndex:1];
         }
     }
     else {
@@ -323,6 +327,8 @@
     if ([alertView.title isEqualToString:@"Registration Success"]) {
         NSLog(@"register success called");
         [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        [funAppdelegate.thisTabBarController setSelectedIndex:1];
     }
     if ([alertView.title isEqualToString:@"Register Error"]) {
         NSLog(@"register error called");

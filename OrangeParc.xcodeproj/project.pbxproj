@@ -1098,6 +1098,13 @@
 			name = asiConnection;
 			sourceTree = "<group>";
 		};
+		0FD0BE3315E7E7700068F76D /* Introduce to the app */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Introduce to the app";
+			sourceTree = "<group>";
+		};
 		0FD5B8FC15CF838500927153 /* InviteTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -1227,6 +1234,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0FD0BE3315E7E7700068F76D /* Introduce to the app */,
 				4668A7A01593F98600713A4C /* Images */,
 				0F27BB8B15E33B4200335D42 /* Function Class */,
 				0FF6040A15C7B6D000AE89CF /* PushNotificationHandler */,

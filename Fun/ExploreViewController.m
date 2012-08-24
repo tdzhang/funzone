@@ -103,7 +103,13 @@
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
-    
+    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
+        NSLog(@"start introducing");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
+        [defaults synchronize];
+        [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
+    }
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     

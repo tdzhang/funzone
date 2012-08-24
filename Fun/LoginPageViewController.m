@@ -163,6 +163,8 @@
                     [defaults synchronize];
                     //then return to the previouse page, quit login page
                     [self dismissModalViewControllerAnimated:YES];
+                    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+                    [funAppdelegate.thisTabBarController setSelectedIndex:1];
                 }
                 else {
                     UIAlertView *error = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"The registration was not completed. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -244,6 +246,8 @@
                     [defaults synchronize];
                     //then return to the previouse page, quit login page
                     [self dismissModalViewControllerAnimated:YES];
+                    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+                    [funAppdelegate.thisTabBarController setSelectedIndex:1];
                 }
                 else {
                     UIAlertView *error = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"Login did not succeed. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -292,6 +296,8 @@
             [defaults synchronize];
             //then return to the previouse page, quit login page
             [self dismissModalViewControllerAnimated:YES];
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            [funAppdelegate.thisTabBarController setSelectedIndex:1];
         }
     }
     else if([self.currentConnection isEqualToString:@"normalEmailLogin_register"]){
@@ -309,6 +315,8 @@
             [defaults synchronize];
             //then return to the previouse page, quit login page
             [self dismissModalViewControllerAnimated:YES];
+            FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+            [funAppdelegate.thisTabBarController setSelectedIndex:1];
         }
     }
 }

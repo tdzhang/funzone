@@ -384,7 +384,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="4122" y="5216"/>
+            <point key="canvasLocation" x="4722" y="4512"/>
         </scene>
         <!--Find Friend Table View Controller - Facebook Friends-->
         <scene sceneID="ykS-s4-dcL">
@@ -423,7 +423,7 @@
                     <navigationItem key="navigationItem" title="Facebook Friends" id="FKP-TG-z0x"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="5637" y="4496"/>
+            <point key="canvasLocation" x="6237" y="3792"/>
         </scene>
         <!--Ind Top Table View Controller - Popular Users-->
         <scene sceneID="9tX-NJ-k1z">
@@ -453,7 +453,7 @@
                     <navigationItem key="navigationItem" title="Popular Users" id="1wE-oF-Xji"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="5877" y="5096"/>
+            <point key="canvasLocation" x="6477" y="4392"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Lep-eO-1kU">
@@ -590,7 +590,7 @@
                     <navigationItem key="navigationItem" id="vCV-sm-Tml"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="5832" y="5788"/>
+            <point key="canvasLocation" x="6432" y="5084"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
@@ -687,6 +687,7 @@
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Idn-d1-X1d"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="HUl-1w-jPL"/>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="e9f-Ec-HCG"/>
+                        <segue destination="IET-7d-acR" kind="push" identifier="StartIntroduceToTheApp" id="90H-uf-Dm6"/>
                     </connections>
                 </viewController>
             </objects>
@@ -820,6 +821,49 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1164" y="3979"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="LZG-V7-rWf">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8CD-Ds-Cjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="IET-7d-acR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s38-Dc-hxj">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bTu-DR-uFr"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1822" y="5722"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ycI-mY-CO5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecv-Tt-SI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="soq-Kv-9zt" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UXJ-AK-ygQ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2350" y="5714"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hkq-Mj-xCp">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z3p-Fj-Cky" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="qOT-v4-nxP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pk8-vp-JjM">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2966" y="5714"/>
         </scene>
         <!--Choose Image Table View Controller - Recommended Photos-->
         <scene sceneID="Cnv-qM-cUF">
@@ -1008,7 +1052,7 @@ Find us @OrangeParc.com</string>
                     <navigationItem key="navigationItem" title="About Us" id="S3H-x3-7dO"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="5820" y="6390"/>
+            <point key="canvasLocation" x="6420" y="5686"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="Cmv-xU-vgk">
@@ -3176,11 +3220,11 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Hfw-Db-bjl"/>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="jpf-qW-bdW"/>
-        <segue reference="sin-Qw-UXs"/>
-        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="2Cw-4j-quL"/>
+        <segue reference="I5V-BE-h5K"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="Idn-d1-X1d"/>
+        <segue reference="HUl-1w-jPL"/>
         <segue reference="eX7-7v-GIv"/>
     </inferredMetricsTieBreakers>
 </document>
