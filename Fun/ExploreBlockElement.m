@@ -284,7 +284,7 @@
         numDIMLabel1.text = @"person";
         numDIMLabel2.text = @"wants to try it";
     } else {
-        numDIMLabel1.text = @"person";
+        numDIMLabel1.text = @"people";
         numDIMLabel2.text = @"want to try it";
     }
     [numDIMLabel2 setTextColor:[UIColor whiteColor]];
