@@ -63,6 +63,8 @@
 //    ExploreViewController *magicVC = [[ExploreViewController alloc] init];
 //    magicVC.modalTransitionStyle  = UIModalTransitionStyleFlipHorizontal;
 //    [self presentModalViewController:magicVC animated:true];
+    [self performSegueWithIdentifier:@"Magic" sender:self];
+    
     
     NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
     UIViewController * rootViewController = [viewControllers objectAtIndex:0];
@@ -70,7 +72,8 @@
     [viewControllers addObject:rootViewController];
     [self.navigationController setViewControllers:viewControllers animated:NO];
     
-    //[self dismissModalViewControllerAnimated:true];
+    
+    
 }
 
 @end
