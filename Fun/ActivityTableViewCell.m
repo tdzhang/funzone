@@ -134,7 +134,10 @@
     self.eventPicImageView.layer.borderWidth = 1;
     UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
     self.eventPicImageView.layer.shadowPath = path2.CGPath;
-    
+    if ([[NSString stringWithFormat:@"%@",element.event_pic] isEqualToString:@"<null>"]) {
+        element.event_pic=DEFAULT_IMAGE_PLACEHOLDER;
+    }
+    NSLog(@"-->%@",element.event_pic);
     NSURL *eventUrl=[NSURL URLWithString:element.event_pic];
     //deal with the profile image
     if (![Cache isURLCached:eventUrl]) {
