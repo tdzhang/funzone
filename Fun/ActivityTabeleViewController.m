@@ -490,10 +490,8 @@
         // your friend has just joined orange parc, go to that page to follow
         self.send_via=VIA_ACTIVITY_CONVERSATION;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
-    
 }
 
 #pragma mark - segue related stuff
