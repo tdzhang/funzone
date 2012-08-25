@@ -640,12 +640,7 @@
     chPicker.delegate = self;
     chPicker.showsSelectionIndicator = YES;
     [self.actionSheet addSubview:chPicker];
-
 }
-
-
-
-
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     self.categoryFilter_id=nil;
@@ -1051,7 +1046,7 @@
         tempTouchPointY-=EVENT_ELEMENT_CONTENT_HEIGHT/2;
     }
     //get the index of the touched block view
-    int index=tempTouchPointY/(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP);
+    int index=(tempTouchPointY-CONTENT_OFFSET_Y)/(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP);
     ExploreBlockElement* tapped_element=[self.blockViews objectAtIndex:index];
     self.tapped_event_id=tapped_element.event_id;
     self.tapped_shared_event_id=tapped_element.shared_event_id;

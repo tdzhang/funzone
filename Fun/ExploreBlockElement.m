@@ -294,7 +294,7 @@
     [blockElement.numDoItMyselfSection addSubview:numDIMLabel2];
     
     int total_width = blockElement.numDoItMyself.frame.size.width+10+50+5+10;
-//    blockElement.numDoItMyselfSection.frame = CGRectMake(310-total_width, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
+//  blockElement.numDoItMyselfSection.frame = CGRectMake(310-total_width, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     blockElement.numDoItMyselfSection.frame = CGRectMake(10, EXPLORE_BLOCK_ELEMENT_DIM_Y, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     numDoItMyselfBackground.frame = CGRectMake(0, 0, blockElement.numDoItMyself.frame.size.width+10+55, EXPLORE_BLOCK_ELEMENT_DIM_HEIGHT);
     
