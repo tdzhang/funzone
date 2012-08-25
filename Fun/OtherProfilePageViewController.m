@@ -545,6 +545,7 @@
             self.freshConnectionType=@"not";
             for (NSDictionary *event in json) {
                 //after receive the new page, add the next request page number
+            
                 NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
                 NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
                 NSString *title=[event objectForKey:@"title"];

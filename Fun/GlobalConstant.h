@@ -221,6 +221,8 @@
 #define VIA_JOINED_PEOPLE  23          // profile
 #define VIA_INVITED_PEOPLE   24        // profile
 #define VIA_ACTIVITY_CONVERSATION 25   //conversation
+#define VIA_FIND_FRIEND 26
+#define VIA_FIND_TOPFRIEND 27
 
 // Share Channel
 #define VIA_FACEBOOK 1

@@ -10,10 +10,12 @@
 
 @interface FIndTopTableViewController ()
 @property(nonatomic,strong)NSArray* topfriends;
+@property(nonatomic,strong)NSString* tapped_creator_id;
 @end
 
 @implementation FIndTopTableViewController
 @synthesize topfriends=_topfriends;
+@synthesize tapped_creator_id=_tapped_creator_id;
 
 #pragma mark - self defined setter and getter
 -(NSArray *)topfriends{
@@ -56,7 +58,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    backButton.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
     
     self.navigationItem.backBarButtonItem.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
@@ -190,6 +193,31 @@
     }
 }
 
+-(void)UsersProfilePhotoTouchedWithUserID:(NSString*)user_id{
+    self.tapped_creator_id=user_id;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *myid=[defaults objectForKey:@"user_id"];
+    if ([myid isEqualToString:user_id]) {
+        [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+    }
+}
+
+
+#pragma mark - segue related 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tapped_creator_id;
+        OPPVC.via=VIA_FIND_TOPFRIEND;
+    }
+    else if([segue.identifier isEqualToString:@"ViewProfile"]){
+        ProfilePageViewController* PVVC=segue.destinationViewController;
+        PVVC.via=VIA_FIND_TOPFRIEND;
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

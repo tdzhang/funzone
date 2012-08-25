@@ -12,4 +12,6 @@
 
 -(void)changeTheFollowStateAtIndex:(NSIndexPath*)index;
 
+-(void)UsersProfilePhotoTouchedWithUserID:(NSString*)user_id;
+
 @end

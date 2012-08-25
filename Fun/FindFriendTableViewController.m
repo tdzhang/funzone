@@ -14,12 +14,14 @@
 @interface FindFriendTableViewController ()
 
 @property(nonatomic,strong)NSArray* friends;
+@property(nonatomic,strong)NSString* tapped_creator_id;
 
 @end
 
 @implementation FindFriendTableViewController
 
 @synthesize friends=_friends;
+@synthesize tapped_creator_id=_tapped_creator_id;
 
 #pragma mark - self defined setter and getter
 -(NSArray *)friends{
@@ -57,7 +59,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    backButton.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
     
    self.navigationItem.leftBarButtonItem.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     // Uncomment the following line to preserve selection between presentations.
@@ -201,6 +204,35 @@
         friend.followed=NO;
     } else {
         friend.followed=YES;
+    }
+}
+
+-(void)UsersProfilePhotoTouchedWithUserID:(NSString*)user_id{
+    self.tapped_creator_id=user_id;
+    if (!user_id) {
+        //if the user is not register yet, can not be touched
+        return;
+    } 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *myid=[defaults objectForKey:@"user_id"];
+    if ([myid isEqualToString:user_id]) {
+        [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"ViewOthersProfile" sender:self];
+    }
+}
+
+#pragma mark - segue related
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ViewOthersProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tapped_creator_id;
+        OPPVC.via=VIA_FIND_TOPFRIEND;
+    }
+    else if([segue.identifier isEqualToString:@"ViewProfile"]){
+        ProfilePageViewController* PVVC=segue.destinationViewController;
+        PVVC.via=VIA_FIND_TOPFRIEND;
     }
 }
 

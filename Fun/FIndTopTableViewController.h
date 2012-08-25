@@ -11,6 +11,7 @@
 #import "FindFriendTableViewCell.h"
 #import "FunAppDelegate.h"
 #import "FindFriendTVCDelegate.h"
+#import "OtherProfilePageViewController.h"
 
 @interface FIndTopTableViewController : UITableViewController<FindFriendTVCDelegate>
 

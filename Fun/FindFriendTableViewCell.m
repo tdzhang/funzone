@@ -288,6 +288,9 @@
     }
 }
 
+- (IBAction)UsersPhotoTouched:(id)sender {
+    [self.delegate UsersProfilePhotoTouchedWithUserID:self.user_id];
+}
 
 #pragma mark - facebook related protocal implement
 -(void)faceBookLoginFinished{
