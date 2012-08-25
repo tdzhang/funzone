@@ -477,7 +477,6 @@
     
     if (self.isNeedToUseOtherSource) {
         if ([self.isNeedToUseOtherSource isEqualToString:@"need"]) {
-                //UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Recommended Photos",@"Take Photo",@"Choose from album",nil];
                 UIActionSheet *pop =[[UIActionSheet alloc] initWithTitle:@"Choose photo source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from album",nil];
                 pop.actionSheetStyle=UIActionSheetStyleBlackOpaque;
                 [pop showFromTabBar:self.tabBarController.tabBar];
@@ -604,41 +603,8 @@
     //after delete, need to return to myparc
     //create event
     //Adding Create Event
-    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Deletion" message:@"Delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
-    
-    ///////////////////////////////////////////////////////////////////////////
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"POST"];
-        [request startSynchronous];
-        
-        int code=[request responseStatusCode];
-        NSLog(@"code:%d",code);
-        
-        dispatch_async( dispatch_get_main_queue(),^{
-            if (code==200) {
-                //success
-                NSError *error;
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    notsuccess.delegate=self;
-                    [notsuccess show];
-                }
-            }
-        });
-        
-    });
-    
-    
-    
-    //go to my parc
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Deletion" message:@"Delete this event?" delegate:self cancelButtonTitle:@"Don't delete" otherButtonTitles:@"Delete", nil];
+    [deleteAlert show];
 }
 
 
@@ -650,6 +616,12 @@
         return;
     }
     
+    if (self.createEvent_imageUrlName == NULL) {
+        UIAlertView *noPhotoInput = [[UIAlertView alloc] initWithTitle:@"No Photo Selected" message:@"Please select a photo" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [noPhotoInput show];
+        return;
+    }
+
     //for user edit his own event
     if (self.isEditPage) {
     //edit event
@@ -1421,8 +1393,43 @@
             [self.textFieldEventTitle resignFirstResponder];
         }
     }
+    
+    if ([alertView.title isEqualToString:@"Confirm Deletion"]) {
+        if (buttonIndex == 0) {
+            return;
+        }
+        else if (buttonIndex == 1) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
+        
+            ///////////////////////////////////////////////////////////////////////////
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                    ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"POST"];
+                [request startSynchronous];
+            
+                int code=[request responseStatusCode];                
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSError *error;
+                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                        UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        notsuccess.delegate=self;
+                        [notsuccess show];
+                    }
+                }
+            });
+            
+        });  
+        //go to my parc
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        [funAppdelegate.thisTabBarController setSelectedIndex:3];
+        }
+    }
 }
-
 
 ////////////////////////////////////////////////
 //implement the method for dealing with the return of the choose location

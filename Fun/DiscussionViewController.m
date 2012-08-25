@@ -222,7 +222,7 @@
         int x_position_photo=10;
         int y_position_photo=32;
 
-        for (int i=0; i<7&&i<([self.invitee count]); i++) {
+        for (int i=0; i<([self.invitee count]); i++) {
             UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo, DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE)];
             UILabel* userName=[[UILabel alloc] initWithFrame:CGRectMake(x_position_photo, y_position_photo+DISCUSSION_INVITE_IMAGE_SIZE, DISCUSSION_INVITE_IMAGE_SIZE, 20)];
             userName.lineBreakMode = UILineBreakModeTailTruncation;

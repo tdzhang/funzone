@@ -223,6 +223,8 @@
                         [self.creatorNameLabel setText:[json objectForKey:@"name"]];
                         [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
                         [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
+                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
+                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
                         NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
                         NSLog(@"%@",url);
@@ -297,7 +299,6 @@
                 //set the freshConnectionType to "not"
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d COLLECTED",[json count]] forSegmentAtIndex:0];
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
                 NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
@@ -447,7 +448,6 @@
                 //set the freshConnectionType to "not"
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d INVITED",[json count]] forSegmentAtIndex:1];
                 //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                 //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
                 if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
