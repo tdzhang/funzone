@@ -50,6 +50,14 @@
 }
 
 #pragma mark - self defined function
+-(void)returnAction{
+    NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
+    UIViewController * rootViewController = [viewControllers objectAtIndex:0];
+    [viewControllers removeObjectAtIndex:0]; // try using with and without this line?
+    [viewControllers addObject:rootViewController];
+    [self.navigationController setViewControllers:viewControllers animated:NO];
+
+}
 
 - (IBAction)finishedTheIntroductionPart:(id)sender {
 //    [UIView beginAnimations:@"animation" context:nil];
@@ -65,15 +73,8 @@
 //    [self presentModalViewController:magicVC animated:true];
     [self performSegueWithIdentifier:@"Magic" sender:self];
     
-    
-    NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
-    UIViewController * rootViewController = [viewControllers objectAtIndex:0];
-    [viewControllers removeObjectAtIndex:0]; // try using with and without this line?
-    [viewControllers addObject:rootViewController];
-    [self.navigationController setViewControllers:viewControllers animated:NO];
-    
-    
-    
+    [self performSelector:@selector(returnAction) withObject:sender afterDelay:0.6];
+
 }
 
 @end
