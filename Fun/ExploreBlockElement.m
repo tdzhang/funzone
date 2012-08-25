@@ -273,7 +273,6 @@
     blockElement.numDoItMyself.frame = CGRectMake(5, 4, expectedWidth.width, 20);
     
     UILabel *numDIMLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(blockElement.numDoItMyself.frame.origin.x+blockElement.numDoItMyself.frame.size.width+5, 2, 45, 15)];
-    numDIMLabel1.text = @"people";
     [numDIMLabel1 setTextColor:[UIColor whiteColor]];
     [numDIMLabel1 setFont:[UIFont systemFontOfSize:10]];
     [numDIMLabel1 setBackgroundColor:[UIColor clearColor]];
@@ -282,8 +281,10 @@
     
     UILabel *numDIMLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(blockElement.numDoItMyself.frame.origin.x+blockElement.numDoItMyself.frame.size.width+5, 12, 50, 15)];
     if ([DIM_label isEqualToString:@"0"] || [DIM_label isEqualToString:@"1"]) {
+        numDIMLabel1.text = @"person";
         numDIMLabel2.text = @"wants to try it";
     } else {
+        numDIMLabel1.text = @"person";
         numDIMLabel2.text = @"want to try it";
     }
     [numDIMLabel2 setTextColor:[UIColor whiteColor]];
