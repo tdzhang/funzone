@@ -799,6 +799,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
             if ([self.delegate conformsToProtocol:@protocol(FeedBackInviteFriendChange)]) {
                 UserContactObject *person = [self.addressbook_dividedContacts objectAtIndex:indexPath.row];
                 
+                
+                NSLog(@"%@",person.firstName);
+                NSLog(@"%@",person.lastName);
+                NSLog(@"%@",[person.email objectAtIndex:0]);
+
                 NSMutableDictionary *alreadySelected=[self.addressbook_alreadySelectedContacts mutableCopy];
                 //get the key value from the name of the person
                 NSString *nameText=@"";

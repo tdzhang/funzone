@@ -688,7 +688,7 @@
     
     ProfileInfoElement* newElement=[[ProfileInfoElement alloc] init];
     newElement.user_name=key;
-    newElement.email=[person.email objectAtIndex:1];
+    newElement.email=[person.email objectAtIndex:0];
     [self.invitee addObject:newElement];
 }
 
