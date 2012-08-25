@@ -12,12 +12,15 @@
 @interface MyFollowingTableViewController ()
 @property (nonatomic,strong)NSMutableArray *arrayProfileInfoElements;
 @property (nonatomic,strong)NSArray* lastReceivedJson; //used to limite the refresh frequency
+@property (nonatomic,strong) NSString* tapped_user_id;
 @end
 
 @implementation MyFollowingTableViewController
 @synthesize arrayProfileInfoElements=_arrayProfileInfoElements;
 @synthesize lastReceivedJson=_lastReceivedJson;
 @synthesize other_user_id=_other_user_id;
+@synthesize tapped_user_id=_tapped_user_id;
+
 
 #pragma mark - self defined setter getter
 -(NSArray *)arrayProfileInfoElements{
@@ -99,7 +102,8 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
                                    target:nil action:nil];
-    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    backButton.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
 
 
     // Uncomment the following line to preserve selection between presentations.
@@ -236,6 +240,7 @@
     cell.user_name=element.user_name;
     cell.user_pic=element.user_pic;
     cell.facebook_id=element.facebook_id;
+    cell.delegate=self;
     if (element.followed) {
         [cell.unfollowButton setTitle:@"Unfollow" forState:UIControlStateNormal];
     }
@@ -306,6 +311,34 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 55;
+}
+
+#pragma mark - FollowingOrErlookprofileDelegate method
+-(void)startSeeProfileWithUserId:(NSString*)user_id{
+    self.tapped_user_id=user_id;
+    NSLog(@"%@",self.tapped_user_id);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *myid=[defaults objectForKey:@"user_id"];
+    if ([myid isEqualToString:user_id]) {
+        [self performSegueWithIdentifier:@"SeeProfile" sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:@"seeOtherProfile" sender:self];
+    }
+}
+
+#pragma mark - segue related stuff
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"seeOtherProfile"]){
+        OtherProfilePageViewController* OPPVC=segue.destinationViewController;
+        OPPVC.creator_id=self.tapped_user_id;
+
+        OPPVC.via=VIA_MY_FOLLOWINGS;
+    }
+    else if([segue.identifier isEqualToString:@"SeeProfile"]){
+        ProfilePageViewController* PVVC=segue.destinationViewController;
+        PVVC.via=VIA_MY_FOLLOWINGS;
+    }
 }
 
 /*

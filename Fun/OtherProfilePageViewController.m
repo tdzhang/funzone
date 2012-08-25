@@ -543,6 +543,7 @@
             [self.blockViews removeAllObjects];
             //set the freshConnectionType to "not"
             self.freshConnectionType=@"not";
+            NSLog(@"%@",json);
             for (NSDictionary *event in json) {
                 //after receive the new page, add the next request page number
             

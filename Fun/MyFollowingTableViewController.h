@@ -12,6 +12,11 @@
 #import "ASIFormDataRequest.h"
 #import "GlobalConstant.h"
 #import "Cache.h"
-@interface MyFollowingTableViewController : UITableViewController
+#import "FollowingOrErLookProfileDelegate.h"
+#import "ProfilePageViewController.h"
+#import "OtherProfilePageViewController.h"
+
+
+@interface MyFollowingTableViewController : UITableViewController<FollowingOrErLookProfileDelegate>
 @property(nonatomic,strong)NSString* other_user_id; //if the request is to check other user's following, this would be the indicator
 @end

@@ -18,7 +18,7 @@
 @synthesize user_pic=_user_pic;
 @synthesize facebook_id=_facebook_id;
 
-
+@synthesize delegate=_delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -32,11 +32,13 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
 
+- (IBAction)ProfileImageClicked:(id)sender {
+    [self.delegate startSeeProfileWithUserId:self.user_id];
+}
 
 
 
