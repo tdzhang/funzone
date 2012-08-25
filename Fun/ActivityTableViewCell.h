@@ -24,6 +24,7 @@
 
 @property (nonatomic,strong) NSString* event_name;
 @property (nonatomic,strong) NSString* message;
+@property BOOL isViewed;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userPicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *activityDescriptionLabel;

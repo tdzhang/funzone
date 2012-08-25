@@ -250,6 +250,10 @@
             }
         }
         [cell resetWithConversationActivityObject:[self.activities objectAtIndex:indexPath.row]];
+        NSLog(@"!!!!%d",cell.isViewed);
+        if (cell.isViewed == 0) {
+            cell.backgroundColor = [UIColor lightGrayColor];
+        }
         return cell;
     }
 }

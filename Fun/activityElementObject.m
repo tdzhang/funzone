@@ -16,6 +16,7 @@
 @synthesize event_id=_event_id;
 @synthesize event_pic=_event_pic;
 @synthesize shared_event_id=_shared_event_id;
+@synthesize isViewed=_isViewed;
 
 @synthesize event_name=_event_name;
 @synthesize message=_message;
@@ -54,6 +55,7 @@
         NSString* event_id=[element objectForKey:@"event_id"];
         NSString* photo_url=[element objectForKey:@"photo_url"];
         NSString* shared_event_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"shared_event_id"]];
+        
         activity.type=type;
         activity.user_name=user_name;
         activity.event_name=event_name;
@@ -61,6 +63,7 @@
         activity.event_id=event_id;
         activity.event_pic=photo_url;
         activity.shared_event_id=shared_event_id;
+        activity.isViewed=[[element objectForKey:@"viewed"] integerValue];
         [temp_array addObject:activity];
     }
     return temp_array;

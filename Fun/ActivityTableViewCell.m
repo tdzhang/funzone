@@ -239,6 +239,7 @@
     self.user_pic=element.user_pic;
     self.event_id=element.event_id;
     self.shared_event_id=element.shared_event_id;
+    self.isViewed=element.isViewed;
     
     self.event_name=element.event_name;
     self.message=element.message;
