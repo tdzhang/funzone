@@ -224,7 +224,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                     if ( imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_PLACEHOLDER];
                         imageData=UIImagePNGRepresentation(image);
                         
                         if(imageData)[Cache addDataToCache:url withData:imageData];
