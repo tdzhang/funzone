@@ -7,6 +7,7 @@
 //
 
 #import "ChooseImageTableViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ChooseImageTableViewController ()
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarImage;
@@ -190,7 +191,7 @@
     
     //clear the loading indicator of all the cell
     for (UIView *view in cell.subviews) {
-        if (view.frame.size.height == 80) {
+        if (view.frame.size.height == 50) {
             [view removeFromSuperview];
         }
     }
@@ -208,21 +209,23 @@
     else{
         //NSLog(@"lack url :%@",urlString);
         //NSLog(@"%d",indexPath.row);
-        UIView *loading = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 80)]; 
-        loading.opaque = NO;
-        loading.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
-        UILabel *loadLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 81, 22)];
-        loadLabel.text = @"Loading";
-        loadLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-        loadLabel.textAlignment = UITextAlignmentCenter;
+        UIView *loading = [[UIView alloc] initWithFrame:CGRectMake(100, 40, 120, 50)];
+        loading.backgroundColor = [UIColor clearColor];
+        UIView *loadingBackground = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 50)];
+        loadingBackground.backgroundColor = [UIColor blackColor];
+        loadingBackground.alpha = 0.6;
+        loadingBackground.layer.cornerRadius = 4;
+        [loading addSubview:loadingBackground];
+        UILabel *loadLabel = [[UILabel alloc] initWithFrame:CGRectMake(33, 0, 80, 50)];
+        loadLabel.text = @"LOADING...";
+        loadLabel.font = [UIFont boldSystemFontOfSize:14.0f];
         loadLabel.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
         loadLabel.backgroundColor = [UIColor clearColor];
         [loading addSubview:loadLabel];
-        UIActivityIndicatorView *spinning = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        spinning.frame = CGRectMake(30, 30, 37, 37);
+        UIActivityIndicatorView *spinning = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        spinning.frame = CGRectMake(13, 20, 10, 10);
         [spinning startAnimating];
         [loading addSubview:spinning];
-        
         [cell addSubview:loading];
         //after adding the indicator, it need to be saved to indicatorDictionary, to make the image fetching block can delete the indicator for the table cell view when it finished.
         
