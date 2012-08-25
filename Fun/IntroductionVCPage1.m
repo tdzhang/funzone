@@ -13,7 +13,6 @@
 @end
 
 @implementation IntroductionVCPage1
-@synthesize parentVC=_parentVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,9 +27,9 @@
     [super viewWillAppear:animated];
     
     //config the navigation bar button
-//    self.navigationItem.hidesBackButton=YES;
-//    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(GoToNextPage)];
-//    self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    self.navigationItem.hidesBackButton=YES;
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(GoToNextPage)];
+    self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
 }
 
@@ -54,12 +53,9 @@
 
 
 #pragma mark - self defined button
-//- (IBAction)NextButtonClicked:(id)sender {
-//    [self GoToNextPage];
-//}
-//
-//
-//-(void)GoToNextPage{
-//    [self performSegueWithIdentifier:@"GotoNextPage" sender:self];
-//}
+
+
+-(void)GoToNextPage{
+    [self performSegueWithIdentifier:@"GotoNextPage" sender:self];
+}
 @end

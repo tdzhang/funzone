@@ -25,6 +25,19 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    //config the navigation bar button
+    self.navigationItem.hidesBackButton=YES;
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(GoToNextPage)];
+    self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    self.navigationItem.leftBarButtonItem.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Back" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
 }
 
 - (void)viewDidLoad
@@ -45,13 +58,8 @@
 }
 
 #pragma mark - self defined button
-//- (IBAction)NextButtonClicked:(id)sender {
-//    [self GoToNextPage];
-//}
-//
-//
-//-(void)GoToNextPage{
-//    [self performSegueWithIdentifier:@"GotoNextPage" sender:self];
-//}
+-(void)GoToNextPage{
+    [self performSegueWithIdentifier:@"GotoNextPage" sender:self];
+}
 
 @end

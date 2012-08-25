@@ -101,29 +101,22 @@
         LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"loginPage"];
         loginVC.parentVC=self;
         loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:loginVC animated:NO completion:^{}];
+        [self presentViewController:loginVC animated:YES completion:^{}];
     }
-    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
-    //    [defaults setValue:nil forKey:@"notTheFirstTime"];
-    //    [defaults synchronize];
-    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
-
+    
+//---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    //[defaults setValue:nil forKey:@"notTheFirstTime"];
+    //[defaults synchronize];
+//---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    
     if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-        IntroductionVCPage1* introduce=[storyboard instantiateViewControllerWithIdentifier:@"IntroductionPage"];
-        introduce.parentVC=self;
-        introduce.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentViewController:introduce animated:NO completion:^{}];
-        
+        //if not login, do it
+        NSLog(@"start introducing");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
         [defaults synchronize];
+        [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
     }
-
-    
-
-    
-    
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     
@@ -141,28 +134,9 @@
 //    [self.mainScrollView addSubview:instruction];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
-//        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-//        IntroductionVCPage1* introduce=[storyboard instantiateViewControllerWithIdentifier:@"IntroductionPage"];
-//        introduce.parentVC=self;
-//        introduce.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//        [self presentViewController:introduce animated:NO completion:^{}];
-//        
-//        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
-//        [defaults synchronize];
-//    }
-}
-
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
