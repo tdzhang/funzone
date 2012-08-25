@@ -13,6 +13,7 @@
 #import "OtherProfilePageViewController.h"
 #import "ProfilePageViewController.h"
 #import "CheckForInternetConnection.h"
+#import "IntroductionVCPage1.h"
 
 
 @interface ExploreViewController : UIViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource>

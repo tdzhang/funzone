@@ -105,6 +105,23 @@
     }
     
 
+    //startInstruction
+    
+    //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    //[defaults setValue:nil forKey:@"notTheFirstTime"];
+    //[defaults synchronize];
+    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    
+    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        IntroductionVCPage1 * loginVC=[storyboard instantiateViewControllerWithIdentifier:@"startInstruction"];
+        [self.navigationController pushViewController:loginVC animated:NO];
+        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
+        [defaults synchronize];
+    }
+    
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     
@@ -139,20 +156,20 @@
     }
     
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
-    //[defaults setValue:nil forKey:@"notTheFirstTime"];
-    //[defaults synchronize];
-    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
-    
-    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
-        //if not login, do it
-        NSLog(@"start introducing");
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
-        [defaults synchronize];
-        [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
-    }
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+//    [defaults setValue:nil forKey:@"notTheFirstTime"];
+//    [defaults synchronize];
+//    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+//    
+//    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
+//        //if not login, do it
+//        NSLog(@"start introducing");
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
+//        [defaults synchronize];
+//        [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
+//    }
 }
 
 - (void)viewDidLoad {
