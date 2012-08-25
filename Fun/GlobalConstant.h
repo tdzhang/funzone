@@ -275,7 +275,7 @@
 #define OTHERS @"0"
 
 //default image part
-#define DEFAULT_PROFILE_IMAGE_REPLACEMENT @"HomeOrange.png" //to replace the image which cannot get the data from the internet
+#define DEFAULT_PROFILE_IMAGE_REPLACEMENT @"default-profile-image.png" //to replace the image which cannot get the data from the internet
 #define FOOD_REPLACEMENT  @"1"
 #define MOVIE_REPLACEMENT  @"2"
 #define SPORTS_REPLACEMENT  @"3"
