@@ -51,7 +51,7 @@
 #pragma mark - self defined function
 
 - (IBAction)finishedTheIntroductionPart:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.presentingViewController.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 @end

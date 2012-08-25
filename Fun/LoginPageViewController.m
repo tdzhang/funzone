@@ -114,7 +114,7 @@
                          }
                      }];
     self.parentVC.tabBarController.selectedIndex = controllerIndex; 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 
@@ -162,7 +162,7 @@
                     [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
                     [defaults synchronize];
                     //then return to the previouse page, quit login page
-                    [self dismissModalViewControllerAnimated:YES];
+                    [self dismissModalViewControllerAnimated:NO];
                     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
                     [funAppdelegate.thisTabBarController setSelectedIndex:1];
                 }
@@ -245,7 +245,7 @@
                     NSLog(@"%@",[json objectForKey:@"user_id"]);
                     [defaults synchronize];
                     //then return to the previouse page, quit login page
-                    [self dismissModalViewControllerAnimated:YES];
+                    [self dismissModalViewControllerAnimated:NO];
                     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
                     [funAppdelegate.thisTabBarController setSelectedIndex:1];
                 }
@@ -295,7 +295,7 @@
             NSLog(@"%@",[json objectForKey:@"user_id"]);
             [defaults synchronize];
             //then return to the previouse page, quit login page
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:NO];
             FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
             [funAppdelegate.thisTabBarController setSelectedIndex:1];
         }
@@ -314,7 +314,7 @@
             [defaults setValue:[NSString stringWithFormat:@"%@",[json objectForKey:@"user_id"]] forKey:@"user_id"];
             [defaults synchronize];
             //then return to the previouse page, quit login page
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:NO];
             FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
             [funAppdelegate.thisTabBarController setSelectedIndex:1];
         }
