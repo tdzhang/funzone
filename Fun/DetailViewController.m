@@ -1650,8 +1650,8 @@
     
     //if the activity is not exist, pop back to the last page
     if ([[event objectForKey:@"response"] isEqualToString:@"error"]) {
-        UIAlertView *NotExistAlert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:[event objectForKey:@"message"]
+        UIAlertView *NotExistAlert = [[UIAlertView alloc] initWithTitle:@"This event does not exist."
+                                                        message:[event objectForKey:nil]
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles: nil];
@@ -1971,7 +1971,7 @@
 
 #pragma mark - aler view delegate method implementation
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if ([alertView.title isEqualToString:@"Not Found Error"]) {
+    if ([alertView.title isEqualToString:@"This event does not exist."]) {
         if (buttonIndex == 0) {
             [self.navigationController popViewControllerAnimated:YES];
         }

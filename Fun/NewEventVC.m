@@ -33,6 +33,8 @@
 //@property (weak, nonatomic) IBOutlet UILabel *eventPeopleInfo;
 @property (weak, nonatomic) IBOutlet UIImageView *personProfileImage;
 @property (weak, nonatomic) IBOutlet UIImageView *mapViewFeedBackImageView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+
 @property (nonatomic,strong) NSString* eventLocationName;
  
 //from detail View controller
@@ -135,6 +137,7 @@
 @synthesize createEvent_address=_createEvent_address;
 @synthesize createEvent_imageUrlName=_createEvent_imageUrlName;
 @synthesize mapViewFeedBackImageView=_mapViewFeedBackImageView;
+@synthesize cancelButton = _cancelButton;
 
 //the property used to chaneg the UI between edit and create
 @synthesize isEditPage=_isEditPage;
@@ -408,7 +411,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     
-    
+    self.cancelButton.tintColor=[UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     self.done_Button.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
@@ -533,11 +536,19 @@
     [self setDone_Button:nil];
     [self setInviteFriendsLabel:nil];
     [self setInviteIcon:nil];
+    [self setCancelButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-#pragma mark - create/delete/edite event to server
+#pragma mark - cancel/create/delete/edite event to server
+- (IBAction)cancelButtonClicked:(id)sender {
+    UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave the page? all the data will be lost." message:nil delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
+    cameraNotSupport.delegate=self;
+    [cameraNotSupport show];
+}
+
+
 -(void)startInviteFriendWithEventID:(NSString*)event_id withSharedEventID:(NSString*)shared_event_id{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/invite?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,event_id,shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
@@ -1427,6 +1438,14 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
         FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
         [funAppdelegate.thisTabBarController setSelectedIndex:3];
+        }
+    }
+    
+    if ([alertView.title isEqualToString:@"Are you sure you want to leave the page? all the data will be lost."]) {
+        if (buttonIndex == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else{
         }
     }
 }
