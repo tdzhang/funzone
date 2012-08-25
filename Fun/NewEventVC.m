@@ -616,7 +616,7 @@
         return;
     }
     
-    if (self.createEvent_imageUrlName == NULL) {
+    if (self.createEvent_imageUrlName == NULL && !self.detail_event_id) {
         UIAlertView *noPhotoInput = [[UIAlertView alloc] initWithTitle:@"No Photo Selected" message:@"Please select a photo" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [noPhotoInput show];
         return;
