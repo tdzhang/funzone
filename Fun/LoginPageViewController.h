@@ -13,7 +13,6 @@
 #import "GlobalConstant.h"
 #import "PushNotificationHandler.h"
 #import "ASIFormDataRequest.h"
-#import "IntroductionVCPage1.h"
 
 @interface LoginPageViewController : UIViewController<UIAlertViewDelegate,UITextFieldDelegate>
 @property (weak,nonatomic) UIViewController* parentVC; //the parent view controller

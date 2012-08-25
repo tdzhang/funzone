@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -392,7 +392,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="dKU-YC-n8T">
@@ -431,7 +431,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81h-zi-eyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="E0p-qY-vtY" customClass="FIndTopTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bbQ-YI-143">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -687,6 +687,7 @@
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="Idn-d1-X1d"/>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="HUl-1w-jPL"/>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="e9f-Ec-HCG"/>
+                        <segue destination="PMu-dg-bi4" kind="push" identifier="StartIntroduceToTheApp" id="mm8-h8-atC"/>
                     </connections>
                 </viewController>
             </objects>
@@ -821,42 +822,6 @@
             </objects>
             <point key="canvasLocation" x="1164" y="3979"/>
         </scene>
-        <!--IntroductionVC Page1-->
-        <scene sceneID="LZG-V7-rWf">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8CD-Ds-Cjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="IntroductionPage" hidesBottomBarWhenPushed="YES" id="IET-7d-acR" customClass="IntroductionVCPage1" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="s38-Dc-hxj">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="welcome-1-bg.jpg" id="ca6-GT-1no">
-                                <rect key="frame" x="0.0" y="-62" width="320" height="583"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WJu-a3-TsZ">
-                                <rect key="frame" x="62" y="219" width="197" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="next">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="soq-Kv-9zt" kind="modal" id="x3N-fS-e8Q"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bTu-DR-uFr"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1813" y="5722"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="qSF-7W-rHG">
             <objects>
@@ -963,190 +928,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2454" y="5156"/>
-        </scene>
-        <!--IntroductionVC Page2-->
-        <scene sceneID="ycI-mY-CO5">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ecv-Tt-SI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController hidesBottomBarWhenPushed="YES" id="soq-Kv-9zt" customClass="IntroductionVCPage2" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UXJ-AK-ygQ">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcome-2-bg.jpg" id="1pM-Sx-65f">
-                                <rect key="frame" x="0.0" y="-18" width="320" height="434"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="mgH-sI-iTu" userLabel="Button-background">
-                                <rect key="frame" x="20" y="155" width="280" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="PBY-Ja-Tcv" userLabel="Button-background2">
-                                <rect key="frame" x="20" y="200" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Top users" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Utf-gE-wsw">
-                                <rect key="frame" x="80" y="200" width="209" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Top contributors in OrangeParc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="qlc-Cn-MAg">
-                                <rect key="frame" x="80" y="218" width="224" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="See who's already here!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Cib-NS-Chk">
-                                <rect key="frame" x="80" y="178" width="224" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find Facebook friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="svX-ZL-3tz">
-                                <rect key="frame" x="80" y="159" width="209" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="facebook_icon.png" id="N7E-oR-CHD">
-                                <rect key="frame" x="32" y="159" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="OrangeParc is more fun with friends! Now find some friends to follow." textAlignment="center" id="ijC-4w-tOy">
-                                <rect key="frame" x="20" y="91" width="264" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Be-Ht-qan" userLabel="Button-Find Facebook">
-                                <rect key="frame" x="20" y="157" width="280" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="1g0-Yu-0Mu" kind="push" id="mp5-Zq-ise"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cuV-cI-PHg" userLabel="Button-Find Top">
-                                <rect key="frame" x="20" y="202" width="280" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="E0p-qY-vtY" kind="push" id="ZMN-lr-Wit"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=">" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8ir-H4-IrH">
-                                <rect key="frame" x="279" y="166" width="15" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=">" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bek-Od-V5T">
-                                <rect key="frame" x="280" y="209" width="15" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aHK-aw-Xt4">
-                                <rect key="frame" x="32" y="270" width="252" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="next page">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="qOT-v4-nxP" kind="modal" id="sca-1Z-vf1"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="oSP-Ds-qDH"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="2454" y="5722"/>
-        </scene>
-        <!--IntroductionVC Page3-->
-        <scene sceneID="hkq-Mj-xCp">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z3p-Fj-Cky" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="qOT-v4-nxP" customClass="IntroductionVCPage3" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pk8-vp-JjM">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Now You Are Ready To Go" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="FSq-n5-drC">
-                                <rect key="frame" x="57" y="68" width="206" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uEI-Bt-HUT">
-                                <rect key="frame" x="57" y="111" width="211" height="160"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="GO">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="finishedTheIntroductionPart:" destination="qOT-v4-nxP" eventType="touchUpInside" id="Rt9-9y-23b"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Bgj-mp-7oz"/>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="3043" y="5722"/>
         </scene>
         <!--Choose Image Table View Controller - Choose a Photo-->
         <scene sceneID="Cnv-qM-cUF">
@@ -3350,6 +3131,214 @@ Find us @OrangeParc.com</string>
             </objects>
             <point key="canvasLocation" x="2914" y="2327"/>
         </scene>
+        <!--IntroductionVC Page1-->
+        <scene sceneID="IlI-6f-XDx">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q1v-4e-iet" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="PMu-dg-bi4" customClass="IntroductionVCPage1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sWk-Kq-U8A">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="welcome-1-bg.jpg" id="jsw-gS-Q3V">
+                                <rect key="frame" x="0.0" y="-101" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mnJ-sf-Dw9">
+                                <rect key="frame" x="28" y="144" width="264" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" backgroundImage="welcome-1-fb.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uMA-Z8-KZP"/>
+                    <connections>
+                        <segue destination="HBN-ju-E0g" kind="push" identifier="GotoNextPage" id="neo-S5-H6g"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1910" y="5746"/>
+        </scene>
+        <!--IntroductionVC Page2-->
+        <scene sceneID="jCX-RI-EHI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gfe-Oh-Q53" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController hidesBottomBarWhenPushed="YES" id="HBN-ju-E0g" customClass="IntroductionVCPage2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FRf-5F-xPX">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcome-2-bg.jpg" id="Dyk-Jd-j5d">
+                                <rect key="frame" x="0.0" y="-18" width="320" height="434"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Efv-r2-2nJ" userLabel="Button-background">
+                                <rect key="frame" x="20" y="155" width="280" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="zeS-oa-5Au" userLabel="Button-background2">
+                                <rect key="frame" x="20" y="200" width="280" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Top users" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bgi-TK-kyp">
+                                <rect key="frame" x="80" y="200" width="209" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Top contributors in OrangeParc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="wjd-9s-Vmh">
+                                <rect key="frame" x="80" y="218" width="224" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="See who's already here!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dUc-TI-11N">
+                                <rect key="frame" x="80" y="178" width="224" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find Facebook friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7OI-S3-Ddw">
+                                <rect key="frame" x="80" y="159" width="209" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="facebook_icon.png" id="2Vk-LP-K8G">
+                                <rect key="frame" x="32" y="159" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="OrangeParc is more fun with friends! Now find some friends to follow." textAlignment="center" id="wqb-o6-JAj">
+                                <rect key="frame" x="20" y="91" width="264" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hfo-6c-YrP" userLabel="Button-Find Facebook">
+                                <rect key="frame" x="20" y="157" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1g0-Yu-0Mu" kind="push" id="CCE-Bo-yKv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sv3-3S-QqK" userLabel="Button-Find Top">
+                                <rect key="frame" x="20" y="202" width="280" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="E0p-qY-vtY" kind="push" id="EMN-UC-MwH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=">" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gtf-cA-Gg8">
+                                <rect key="frame" x="279" y="166" width="15" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text=">" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="1OU-em-3Jh">
+                                <rect key="frame" x="280" y="209" width="15" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="g2w-P0-Zde"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="Arf-E1-nRY" kind="push" identifier="GotoNextPage" id="9YU-Hl-fIH"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2798" y="5762"/>
+        </scene>
+        <!--IntroductionVC Page3-->
+        <scene sceneID="L5C-Vb-Po8">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w9J-sI-hWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Arf-E1-nRY" customClass="IntroductionVCPage3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p8C-S1-4ud">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Now You Are Ready To Go" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="JrS-VM-VlK">
+                                <rect key="frame" x="57" y="68" width="206" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yvq-lx-cnh">
+                                <rect key="frame" x="57" y="111" width="211" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="GO">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishedTheIntroductionPart:" destination="Arf-E1-nRY" eventType="touchUpInside" id="Uu2-dC-TX1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gZK-ij-jGj"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3939" y="5866"/>
+        </scene>
     </scenes>
     <resources>
         <image name="07-map-marker.png" width="28" height="46"/>
@@ -3399,20 +3388,231 @@ Find us @OrangeParc.com</string>
         <image name="texture.png" width="320" height="431"/>
         <image name="texture@2x.png" width="640" height="862"/>
         <image name="welcome-1-bg.jpg" width="640" height="960"/>
+        <image name="welcome-1-fb.png" width="529" height="94"/>
         <image name="welcome-2-bg.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="ActivityTabeleViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="segmentationView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AddCommentVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CategroyChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+        </class>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="DIMButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
+                <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="joinButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="DiscussionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="ExploreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FIndTopTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FIndTopTableViewController.h"/>
+        </class>
+        <class className="FeedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="instructionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FindFriendTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindFriendTableViewController.h"/>
+        </class>
+        <class className="IntroductionVCPage1" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroductionVCPage1.h"/>
+        </class>
+        <class className="IntroductionVCPage2" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroductionVCPage2.h"/>
+        </class>
+        <class className="IntroductionVCPage3" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroductionVCPage3.h"/>
+        </class>
+        <class className="InviteTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InviteTableViewController.h"/>
+        </class>
+        <class className="LoginPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="MySearchDisplayController" candidateClass="UISearchDisplayController"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="similarPlaceToLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MoreTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signOutButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MyFollowerTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowerTableViewController.h"/>
+        </class>
+        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
+        </class>
+        <class className="NewEventVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="done_Button" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="inviteFriendsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inviteIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="timeIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="OtherProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="profileHeaderView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="ProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="joinedScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="profileHeaderView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TimeChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="detailLocationMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/detailLocationMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="GetDirectionButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="registerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="nyH-Sx-6aU"/>
-        <segue reference="6rH-Lj-bNq"/>
-        <segue reference="eX7-7v-GIv"/>
         <segue reference="uWA-gI-Coc"/>
-        <segue reference="mp5-Zq-ise"/>
-        <segue reference="ZMN-lr-Wit"/>
+        <segue reference="eX7-7v-GIv"/>
+        <segue reference="Idn-d1-X1d"/>
+        <segue reference="HUl-1w-jPL"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="EMN-UC-MwH"/>
+        <segue reference="CCE-Bo-yKv"/>
     </inferredMetricsTieBreakers>
 </document>
