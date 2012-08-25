@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *friendImageView;
 @property (weak, nonatomic) IBOutlet UILabel *friendName;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
+@property(weak,nonatomic)SearchedFriend *relatedFriend;
 
 @property(nonatomic,strong) NSString * actionCategory;
 

@@ -12,6 +12,7 @@
 @synthesize friendImageView;
 @synthesize friendName;
 @synthesize actionButton;
+@synthesize relatedFriend=_relatedFriend;
 
 @synthesize actionCategory=_actionCategory;
 
@@ -50,6 +51,8 @@
     self.fb_id=friend.fb_id;
     self.registerd=friend.registerd;
     self.followed=friend.followed;
+    
+    self.relatedFriend=friend;
     
     [self.friendName setText:friend.user_name];
     
@@ -112,6 +115,8 @@
     self.fb_id=friend.fb_id;
     self.registerd=friend.registerd;
     self.followed=friend.followed;
+    
+    self.relatedFriend=friend;
     
     [self.friendName setText:friend.user_name];
     
@@ -226,6 +231,8 @@
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                         [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                         self.actionCategory=@"unfollow";
+                        self.followed=YES;
+                        self.relatedFriend.followed=YES;
                     }
                     else {
                         UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -262,6 +269,8 @@
                     if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
                         self.actionCategory=@"follow";
+                        self.followed=NO;
+                        self.relatedFriend.followed=NO;
                     }
                     else {
                         UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -269,6 +278,7 @@
                         [unsuccess show];
                     }
                     [self.actionButton setEnabled:YES];
+                    self.relatedFriend.followed=YES;
                 }
                 
             });

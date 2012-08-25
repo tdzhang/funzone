@@ -12,5 +12,4 @@
 #import "FunAppDelegate.h"
 
 @interface FindFriendTableViewController : UITableViewController<UISearchBarDelegate>
-
 @end
