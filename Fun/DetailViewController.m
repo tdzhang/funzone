@@ -1063,7 +1063,7 @@
                     if (imageData == nil ){
                         //if the image data is nil, the image url is not reachable. using a default image to replace that
                         //NSLog(@"downloaded %@ error, using a default image",url);
-                        UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_PLACEHOLDER];
+                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                         imageData=UIImagePNGRepresentation(image);
                         if(imageData){
                             dispatch_async( dispatch_get_main_queue(),^{

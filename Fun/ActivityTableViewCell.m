@@ -117,6 +117,9 @@
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
     
+    
+    
+    //-----------------------event picture display-----------------------//
     self.eventPicImageView.layer.cornerRadius = 2;
     self.eventPicImageView.clipsToBounds = YES;
     [self.eventPicImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -132,9 +135,7 @@
             NSData * imageData = nil;
             imageData = [[NSData alloc] initWithContentsOfURL: eventUrl];
             if ( imageData == nil ){
-                //if the image data is nil, the image url is not reachable. using a default image to replace that
-                //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_PLACEHOLDER];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
@@ -144,8 +145,7 @@
                 }
             }
             else {
-                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                //NSLog(@"downloaded %@",url);
+
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
                         [Cache addDataToCache:eventUrl withData:imageData];
@@ -224,7 +224,17 @@
     self.event_name=element.event_name;
     self.message=element.message;
     NSURL *imageUrl=[NSURL URLWithString:element.event_pic];
-    //deal with the profile image
+    
+    
+    
+    
+    //------------deal with the event image; REUSE user image frame here.
+    self.userPicImageView.layer.cornerRadius = 4;
+    self.userPicImageView.clipsToBounds = YES;
+    [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.userPicImageView.layer.borderWidth = 1;
+    
     if (![Cache isURLCached:imageUrl]) {
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
@@ -234,7 +244,7 @@
             if ( imageData == nil ){
                 //if the image data is nil, the image url is not reachable. using a default image to replace that
                 //NSLog(@"downloaded %@ error, using a default image",url);
-                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                UIImage *image=[UIImage imageNamed:DEFAULT_IMAGE_PLACEHOLDER];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData){
                     dispatch_async( dispatch_get_main_queue(),^{
@@ -261,11 +271,14 @@
         });
     }
     
-    self.userPicImageView.layer.cornerRadius = 4;
-    self.userPicImageView.clipsToBounds = YES;
-    [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-    self.userPicImageView.layer.borderWidth = 1;
+    
+    //--------user profile image display
+    self.activityPicImageView.layer.cornerRadius = 2;
+    self.activityPicImageView.clipsToBounds = YES;
+    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.activityPicImageView.layer.borderWidth = 1;
+    [self.activityPicImageView setHidden:YES];
     
     NSURL *userPicUrl=[NSURL URLWithString:element.user_pic];
     NSLog(@"%@",userPicUrl);
@@ -306,12 +319,9 @@
         });
     }
     
-    self.activityPicImageView.layer.cornerRadius = 2;
-    self.activityPicImageView.clipsToBounds = YES;
-    [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-    self.activityPicImageView.layer.borderWidth = 1;
-    [self.activityPicImageView setHidden:YES];
+    
+
+    //--------display username--------//
 
     self.user_name_label.frame = CGRectMake(64, 6, 246, 17);
     self.user_name_label.text = [NSString stringWithFormat:@"%@:",self.user_name];
