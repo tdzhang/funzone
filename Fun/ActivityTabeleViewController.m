@@ -489,6 +489,8 @@
     else if ([[NSString stringWithFormat:@"%@",element.type] isEqualToString:@"conversation"]){
         // your friend has just joined orange parc, go to that page to follow
         self.send_via=VIA_ACTIVITY_CONVERSATION;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
         [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
     }
     

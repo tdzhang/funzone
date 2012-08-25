@@ -29,6 +29,7 @@
         NSString* user_name=[element objectForKey:@"user_name"];
         NSString* user_pic=[element objectForKey:@"user_pic"];
         NSString* event_id=[element objectForKey:@"event_id"];
+        NSString* photo_url=[element objectForKey:@"photo_url"];
         NSString* shared_event_id=[NSString stringWithFormat:@"%@",[element objectForKey:@"shared_event_id"]];
         activity.type=type;
         activity.user_id=user_id;
@@ -36,6 +37,7 @@
         activity.user_pic=user_pic;
         activity.event_id=event_id;
         activity.shared_event_id=shared_event_id;
+        activity.event_pic=photo_url;
         [temp_array addObject:activity];
     }
     return temp_array;
@@ -63,8 +65,6 @@
     }
     return temp_array;
 }
-
-
 @end
 
 

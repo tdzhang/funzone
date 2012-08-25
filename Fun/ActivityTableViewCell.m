@@ -73,7 +73,7 @@
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:250/255.0 green:150/255.0 blue:20/255.0 alpha:1] CGColor];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.activityPicImageView.bounds];
     self.activityPicImageView.layer.shadowPath = path.CGPath;
     
     
@@ -84,7 +84,7 @@
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
-    UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:self.userPicImageView.bounds];
     self.userPicImageView.layer.shadowPath = path1.CGPath;
     
     NSURL *imageUrl=[NSURL URLWithString:element.user_pic];
@@ -173,7 +173,6 @@
         
     //self.activityDescriptionLabel.frame = CGRectMake(65, 11, 210, 37);
     self.activityDescriptionLabel.numberOfLines = 2;
-    
     [self.activityDescriptionLabel setFont:[UIFont boldSystemFontOfSize:12]];
     self.activityDescriptionLabel.textColor = [UIColor darkGrayColor];
     
