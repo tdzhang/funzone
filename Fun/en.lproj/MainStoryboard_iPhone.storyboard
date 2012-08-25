@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -27,16 +27,41 @@
             </objects>
             <point key="canvasLocation" x="305" y="1488"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile Pic View Controller-->
         <scene sceneID="bnU-rb-qUP">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-wR-iYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="9K5-6S-mAV" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WnS-bL-hv5" customClass="profile">
+                <viewController id="9K5-6S-mAV" customClass="ProfilePicViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WnS-bL-hv5">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Ww4-mJ-f0G">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kPi-0b-b2l">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="9K5-6S-mAV" eventType="touchUpInside" id="qs4-OZ-Lyo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="kPi-0b-b2l" id="jPR-8z-7XS"/>
+                        <outlet property="largeProfilePic" destination="Ww4-mJ-f0G" id="iTk-Wl-BPo"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="3180" y="678"/>
@@ -168,7 +193,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="9K5-6S-mAV" kind="modal" identifier="showLargeEmail" id="nM9-CM-7r4"/>
+                                            <segue destination="9K5-6S-mAV" kind="modal" identifier="showLargeProfile" id="nM9-CM-7r4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2189,6 +2214,21 @@ Find us @OrangeParc.com</string>
                                             <action selector="startFollowAction:" destination="ofe-Y1-2Da" eventType="touchUpInside" id="zQi-yL-AuG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dxE-Qg-Lpw">
+                                        <rect key="frame" x="5" y="5" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="9K5-6S-mAV" kind="modal" identifier="showLargeProfile" id="dBi-XW-FfW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -3461,6 +3501,7 @@ Find us @OrangeParc.com</string>
         <class className="FeedViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CategoryFilterClicked:"/>
                 <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="instructionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
@@ -3485,6 +3526,8 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
+                <relationship kind="action" name="normalLoginButtonClickedNew:"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
@@ -3545,6 +3588,7 @@ Find us @OrangeParc.com</string>
         <class className="OtherProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="startFollowAction:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3570,6 +3614,13 @@ Find us @OrangeParc.com</string>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
+        <class className="ProfilePicViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePicViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="largeProfilePic" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
         <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
             <relationships>
@@ -3580,6 +3631,9 @@ Find us @OrangeParc.com</string>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="DecideToCancel:"/>
+                <relationship kind="action" name="DecideToChoose:" candidateClass="UIButton"/>
+                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
@@ -3607,12 +3661,13 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uWA-gI-Coc"/>
         <segue reference="eX7-7v-GIv"/>
-        <segue reference="Idn-d1-X1d"/>
+        <segue reference="hTB-gn-88u"/>
         <segue reference="HUl-1w-jPL"/>
         <segue reference="e9f-Ec-HCG"/>
-        <segue reference="EMN-UC-MwH"/>
         <segue reference="CCE-Bo-yKv"/>
+        <segue reference="EMN-UC-MwH"/>
+        <segue reference="dBi-XW-FfW"/>
+        <segue reference="uWA-gI-Coc"/>
     </inferredMetricsTieBreakers>
 </document>

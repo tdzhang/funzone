@@ -105,8 +105,13 @@
     }
     
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+<<<<<<< HEAD
     //[defaults setValue:nil forKey:@"notTheFirstTime"];
     //[defaults synchronize];
+=======
+ //   [defaults setValue:nil forKey:@"notTheFirstTime"];
+   // [defaults synchronize];
+>>>>>>> add large profile viewer finished
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
     
     if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {

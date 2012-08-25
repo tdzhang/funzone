@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) UIButton* showAllFollowingsButton;
 @property (nonatomic, strong) NSURL* url;
+@property (nonatomic,strong) NSURL* url_large;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) NSMutableArray *joined_blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -59,6 +60,7 @@
 @implementation ProfilePageViewController
 @synthesize mainScrollView;
 @synthesize url=_url;
+@synthesize url_large=_url_large;
 @synthesize joinedScrollView = _joinedScrollView;
 @synthesize refreshView=_refreshView;
 @synthesize joined_refreshView=_joined_refreshView;
@@ -229,7 +231,8 @@
                         [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
                         [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-                        self.url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
+                        self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
+                        self.url_large=[NSURL URLWithString:[[json objectForKey:@"profile_url"]stringByAppendingString:@"?type=large"]];
                         if (![Cache isURLCached:self.url]) {
                             //using high priority queue to fetch the image
                             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
@@ -1382,7 +1385,8 @@
                         [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
                         [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-                        self.url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
+                        self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
+                        self.url_large=[NSURL URLWithString:[[json objectForKey:@"profile_url"]stringByAppendingString:@"?type=large"]];
                         if (![Cache isURLCached:self.url]) {
                             //using high priority queue to fetch the image
                             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
@@ -1731,13 +1735,10 @@
 //        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
 //        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:[[NSString stringWithFormat:@"%@",[defaults objectForKey:@"user_id"]] isEqualToString:self.tapped_creator_id]];
     }
-    if ([segue.identifier isEqualToString:@"showLargeEmail"]) {
+    if ([segue.identifier isEqualToString:@"showLargeProfile"]) {
         ProfilePicViewController *profilePic = segue.destinationViewController;
-        if([segue.destinationViewController isKindOfClass:[ProfilePicViewController class]]){
-            [profilePic preSetImgUrl:self.url];
-
-        }
-        }
+        [profilePic preSetImgUrl:self.url_large];
+    }
 }
 
 #pragma mark - get more data and show the more event

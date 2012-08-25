@@ -7,6 +7,7 @@
 //
 
 #import "OtherProfilePageViewController.h"
+#import "ProfilePicViewController.h"
 #define VIEW_WIDTH 320
 #define VIEW_HEIGHT 55 
 #define PROFILE_PAGEVC_BlOCK_VIEW_HEIGHT 165
@@ -19,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *followingNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
 @property (nonatomic,retain) NSMutableArray *blockViews;
+@property (nonatomic,strong) NSURL *url;
+@property (nonatomic,strong) NSURL *url_large;
 @property (nonatomic,retain) UIView *refreshViewdown;
 @property (nonatomic,retain) UIImageView *refreshView;
 @property (nonatomic,strong) NSMutableData *data;
@@ -49,6 +52,8 @@
 @synthesize followerNumLabel = _followerNumLabel;
 @synthesize blockViews = _blockViews;
 @synthesize data=_data;
+@synthesize url=_url;
+@synthesize url_large=_url_large;
 @synthesize freshConnectionType=_freshConnectionType;
 @synthesize profileHeaderView = _profileHeaderView;
 @synthesize isViewAppearConnection=_isViewAppearConnection;
@@ -164,13 +169,14 @@
                         self.followed=YES;
                     }
                     
-                    NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
-                    if (![Cache isURLCached:url]) {
+                    self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
+                    self.url_large=[NSURL URLWithString:[[json objectForKey:@"profile_url"]stringByAppendingString:@"?type=large"]];
+                    if (![Cache isURLCached:self.url]) {
                         //using high priority queue to fetch the image
                         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                             //get the image data
                             NSData * imageData = nil;
-                            imageData = [[NSData alloc] initWithContentsOfURL: url];
+                            imageData = [[NSData alloc] initWithContentsOfURL: self.url];
                             
                             if ( imageData == nil ){
                                 //if the image data is nil, the image url is not reachable. using a default image to replace that
@@ -353,6 +359,10 @@
     else if([segue.identifier isEqualToString:@"viewFollowerUser"]){
         MyFollowerTableViewController* VC=(MyFollowerTableViewController *)segue.destinationViewController;
         [VC setOther_user_id:self.creator_id];
+    }
+    else if ([segue.identifier isEqualToString:@"showLargeProfile"]) {
+        ProfilePicViewController *profilePic = segue.destinationViewController;
+        [profilePic preSetImgUrl:self.url_large];
     }
 }
 
