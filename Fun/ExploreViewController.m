@@ -110,6 +110,15 @@
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
     
     if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
+        //if not login, do it
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        LoginPageViewController* loginVC=[storyboard instantiateViewControllerWithIdentifier:@"IntroductionVCPage1"];
+        loginVC.parentVC=self;
+        loginVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:loginVC animated:YES completion:^{}];
+        
+        
+        
         NSLog(@"start introducing");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
