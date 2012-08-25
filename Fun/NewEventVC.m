@@ -603,9 +603,8 @@
 - (IBAction)deleteEventButton:(id)sender {
     //after delete, need to return to myparc
     //create event
-#warning Check this
     //Adding Create Event
-//    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:nil message:@"Are you sure to delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Deletion" message:@"Delete this event?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/delete?event_id=%@&shared_event_id=%@&auth_token=%@",CONNECT_DOMIAN_NAME,self.detail_event_id,self.detail_shared_event_id,[defaults objectForKey:@"login_auth_token"]]];
