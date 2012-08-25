@@ -104,6 +104,7 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     
+<<<<<<< HEAD
 //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
     //[defaults setValue:nil forKey:@"notTheFirstTime"];
     //[defaults synchronize];
@@ -117,6 +118,9 @@
         [defaults synchronize];
         [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
     }
+=======
+
+>>>>>>> nothing changed
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     
@@ -138,9 +142,38 @@
     [super viewDidDisappear:animated];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [super viewDidAppear:animated];
+    NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
+    if ([viewControllers count] > 1)
+    {
+        [viewControllers removeAllObjects];
+        [viewControllers addObject:self];
+        [self.navigationController setViewControllers:viewControllers animated:NO];
+    }
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    [defaults setValue:nil forKey:@"notTheFirstTime"];
+    [defaults synchronize];
+    //---------------------------------------->>>>>>>>>>>>>>>for test only<<<<<<<<<<<<<<<
+    
+    if ([defaults objectForKey:@"login_auth_token"]&&![defaults objectForKey:@"notTheFirstTime"]) {
+        //if not login, do it
+        NSLog(@"start introducing");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:@"yes" forKey:@"notTheFirstTime"];
+        [defaults synchronize];
+        [self performSegueWithIdentifier:@"StartIntroduceToTheApp" sender:self];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;

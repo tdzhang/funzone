@@ -35,6 +35,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
 }
 
 - (void)viewDidUnload
@@ -51,7 +52,25 @@
 #pragma mark - self defined function
 
 - (IBAction)finishedTheIntroductionPart:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [UIView beginAnimations:@"animation" context:nil];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+//    [UIView setAnimationDuration:0.5];
+//    [UIView commitAnimations];
+    
+   
+    
+//    ExploreViewController *magicVC = [[ExploreViewController alloc] init];
+//    magicVC.modalTransitionStyle  = UIModalTransitionStyleFlipHorizontal;
+//    [self presentModalViewController:magicVC animated:true];
+    
+    NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
+    UIViewController * rootViewController = [viewControllers objectAtIndex:0];
+    [viewControllers removeObjectAtIndex:0]; // try using with and without this line?
+    [viewControllers addObject:rootViewController];
+    [self.navigationController setViewControllers:viewControllers animated:NO];
+    
+    //[self dismissModalViewControllerAnimated:true];
 }
 
 @end
