@@ -151,7 +151,7 @@
     NSLog(@"%d",[self.contacts count]);
     //query the user profile information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/followings?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/friends?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
     
     NSLog(@"request following:%@",url);
 

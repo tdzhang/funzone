@@ -64,8 +64,8 @@
 
 //the property used to chaneg the UI between edit and create
 @property (nonatomic) BOOL isEditPage;
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *done_Button;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 //used to invite inner friend(following)
 @property (nonatomic,strong) NSMutableDictionary *invitedFriend;
@@ -88,8 +88,8 @@
 //////////////////////////////////////
 
 @implementation NewEventVC
+@synthesize doneButton = _doneButton;
 @synthesize deleteButton = _deleteButton;
-@synthesize done_Button = _done_Button;
 @synthesize showNewButtonFlag=_showNewButtonFlag;
 @synthesize personProfileImage = _personProfileImage;
 @synthesize imgPicker=_imgPicker;
@@ -344,10 +344,12 @@
 
     //chaneg the Ui for the edit/create event baseon on where user can edit this page
     if (self.isEditPage) {
-        [self.deleteButton setHidden:NO];
+        //self.navigationItem.rightBarButtonItem=nil;
+        [self.doneButton setHidden:NO];
     }
     else{
-        [self.deleteButton setHidden:YES];
+        self.navigationItem.rightBarButtonItem=nil;
+        [self.doneButton setHidden:NO];
     }
         
     //get the photo of the user
@@ -412,7 +414,7 @@
     
     
     self.cancelButton.tintColor=[UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
-    self.done_Button.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    self.deleteButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -502,7 +504,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
     
-    self.done_Button.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    self.deleteButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     
     
@@ -532,8 +534,8 @@
     [self setLocationLabel:nil];
     [self setLocationIcon:nil];
     [self setTimeIcon:nil];
+    [self setDoneButton:nil];
     [self setDeleteButton:nil];
-    [self setDone_Button:nil];
     [self setInviteFriendsLabel:nil];
     [self setInviteIcon:nil];
     [self setCancelButton:nil];
