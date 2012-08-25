@@ -349,11 +349,66 @@
                     for (int i = 0; i<[self.comments count]; i++) {
                         //if(i==5)break; //in this page, only present a few comments
                         DiscussionComment* comment=[self.comments objectAtIndex:i];
-                        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(5, height, 310, 0)];
+                        UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+                        [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
+                        
+                        UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, height, 320, 0)];
+                        
+                        
                         [commentView setBackgroundColor:[UIColor clearColor]];
+                        [commentView addSubview:seperator];
+                        
+                        UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
+                        userImageView.layer.cornerRadius = 4;
+                        userImageView.clipsToBounds = YES;
+                        [userImageView setContentMode:UIViewContentModeScaleAspectFill];
+                        userImageView.layer.borderColor = [[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5] CGColor];
+                        userImageView.layer.borderWidth = 0.6;
+                        
+                        
+                        
+                        if (![Cache isURLCached:comment.user_picture_url]) {
+                            //using high priority queue to fetch the image
+                            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                                //get the image data
+                                NSData * imageData = nil;
+                                imageData = [[NSData alloc] initWithContentsOfURL: comment.user_picture_url];
+                                
+                                if ( imageData == nil ){
+                                    //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                    //NSLog(@"downloaded %@ error, using a default image",url);
+                                    UIImage *image=[UIImage imageNamed:@"smile_64.png"];
+                                    imageData=UIImagePNGRepresentation(image);
+                                    if(imageData){
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [Cache addDataToCache:comment.user_picture_url withData:imageData];
+                                            [userImageView setImage:image];
+                                        });
+                                    }
+                                }
+                                else {
+                                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                    //NSLog(@"downloaded %@",url);
+                                    if(imageData){
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [Cache addDataToCache:comment.user_picture_url withData:imageData];
+                                            [userImageView setImage:[UIImage imageWithData:imageData]];
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            dispatch_async( dispatch_get_main_queue(),^{
+                                [userImageView setImage:[UIImage imageWithData:[Cache getCachedData:comment.user_picture_url]]];
+                            });
+                        }
+                       
+                        [commentView addSubview:userImageView];
                         
                         //comment user name label
-                        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 20)];
+                        //UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 20)];
+                        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(60, 1, 100, 30)];
                         NSString *comment_user_name =[NSString stringWithFormat:@"%@",comment.user_name];
                         [comment_user_name_label setText:comment_user_name];
                         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:14]];
@@ -362,7 +417,7 @@
                         comment_user_name_label.numberOfLines = 1;
                         
                         //comment timestamp
-                        UILabel *comment_time = [[UILabel alloc] initWithFrame:CGRectMake(200, 5, 100, 20)];
+                        UILabel *comment_time = [[UILabel alloc] initWithFrame:CGRectMake(200, 1, 100, 30)];
                         comment_time.text = [NSString stringWithFormat:@"%@",comment.timestamp];
                         [comment_time setTextColor:[UIColor lightGrayColor]];
                         comment_time.textAlignment = UITextAlignmentRight;
@@ -371,16 +426,18 @@
                         comment_time.numberOfLines = 1;
                         
                         //content part (also add the time stamp to the comment part)
-                        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 290, 0)];
+                        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(60, 28, 260, 0)];
                         NSString *comment_content = [NSString stringWithFormat:@"%@",comment.content];
                         [comment_content_label setText:comment_content];
-                        [comment_content_label setFont:[UIFont systemFontOfSize:14]];
+                        [comment_content_label setFont:[UIFont systemFontOfSize:13]];
                         [comment_content_label setBackgroundColor:[UIColor clearColor]];
                         comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
                         comment_content_label.numberOfLines = 0;
+                        [comment_content_label setTextColor:[UIColor darkGrayColor]];
+            
                         
-                        CGSize maximumLabelSize2 = CGSizeMake(290,9999);
-                        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
+                        CGSize maximumLabelSize2 = CGSizeMake(260,9999);
+                        CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
                         
                         CGRect newFrame2 = comment_content_label.frame;
                         newFrame2.size.height = expectedLabelSize2.height;

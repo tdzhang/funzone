@@ -99,7 +99,7 @@
     CGSize expectedLabelSize1 = [user_name sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeClip];
     CGSize maximumLabelSize2 = CGSizeMake(260,9999);
     CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
-    NSInteger height = expectedLabelSize1.height + expectedLabelSize2.height + 5*2;
+    NSInteger height = expectedLabelSize1.height + expectedLabelSize2.height + 13;
     height = (height > 55)? height:55;
     return height;
 }

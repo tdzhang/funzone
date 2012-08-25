@@ -1266,7 +1266,7 @@
     
         //--------------Comment User Image--------------//
         
-        UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 3, 20, 20)];
+        UIImageView* userImageView=[[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X+3, 2, 20, 20)];
         userImageView.layer.cornerRadius = 2;
         userImageView.clipsToBounds = YES;
         [userImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -1317,7 +1317,7 @@
         
         //
         
-        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X+24, 5, 100, 0)];
+        UILabel *comment_user_name_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 100, 0)];
         NSString *comment_user_name =[NSString stringWithFormat:@"%@:",comment.user_name];
         [comment_user_name_label setText:comment_user_name];
         [comment_user_name_label setFont:[UIFont boldSystemFontOfSize:12]];
@@ -1336,7 +1336,7 @@
         comment_user_name_label.frame = newFrame1;
         
         UILabel *indent = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [indent setFont:[UIFont boldSystemFontOfSize:13]];
+        [indent setFont:[UIFont boldSystemFontOfSize:12]];
         NSString *indent_string = [NSString stringWithFormat:@" "];
         while (indent.frame.size.width < comment_user_name_label.frame.size.width) {
             indent_string = [NSString stringWithFormat:@"%@ ", indent_string];
@@ -1346,7 +1346,7 @@
             indentNewFrame.size.width = indentExpectedWidth.width;
             indent.frame = indentNewFrame;
         }
-        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X+24, 5, 266, 0)];
+        UILabel *comment_content_label = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X, 5, 250, 0)];
         NSString *comment_content = [NSString stringWithFormat:@"%@ %@", indent_string,comment.content];
         [comment_content_label setText:comment_content];
         [comment_content_label setFont:[UIFont systemFontOfSize:12]];
@@ -1355,7 +1355,7 @@
         comment_content_label.lineBreakMode = UILineBreakModeWordWrap;
         comment_content_label.numberOfLines = 0;
         
-        CGSize maximumLabelSize2 = CGSizeMake(266,9999);
+        CGSize maximumLabelSize2 = CGSizeMake(250,9999);
         CGSize expectedLabelSize2 = [comment_content sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize2 lineBreakMode: UILineBreakModeWordWrap];
         
         CGRect newFrame2 = comment_content_label.frame;
