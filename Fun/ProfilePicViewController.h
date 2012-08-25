@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfilePicViewController : UIViewController
-
+- (void)preSetImgUrl:(NSURL *)imgUrl;
 @end

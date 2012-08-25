@@ -9,6 +9,7 @@
 #import "ProfilePageViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CheckForInternetConnection.h"
+#import "ProfilePicViewController.h"
 
 
 @interface ProfilePageViewController ()
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 
 @property (nonatomic, strong) UIButton* showAllFollowingsButton;
+@property (nonatomic, strong) NSURL* url;
 @property (nonatomic,retain) NSMutableArray *blockViews;
 @property (nonatomic,retain) NSMutableArray *joined_blockViews;
 @property (nonatomic,retain) UIView *refreshViewdown;
@@ -56,6 +58,7 @@
 
 @implementation ProfilePageViewController
 @synthesize mainScrollView;
+@synthesize url=_url;
 @synthesize joinedScrollView = _joinedScrollView;
 @synthesize refreshView=_refreshView;
 @synthesize joined_refreshView=_joined_refreshView;
@@ -226,14 +229,13 @@
                         [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
                         [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-                        NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
-                        NSLog(@"%@",url);
-                        if (![Cache isURLCached:url]) {
+                        self.url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
+                        if (![Cache isURLCached:self.url]) {
                             //using high priority queue to fetch the image
                             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                                 //get the image data
                                 NSData * imageData = nil;
-                                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                                imageData = [[NSData alloc] initWithContentsOfURL: self.url];
                                 
                                 if ( imageData == nil ){
                                     //if the image data is nil, the image url is not reachable. using a default image to replace that
@@ -253,7 +255,7 @@
                                     //NSLog(@"downloaded %@",url);
                                     if(imageData){
                                         dispatch_async( dispatch_get_main_queue(),^{
-                                            [Cache addDataToCache:url withData:imageData];
+                                            [Cache addDataToCache:self.url withData:imageData];
                                             [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
                                         });
                                     }
@@ -262,7 +264,7 @@
                         }
                         else {
                             dispatch_async( dispatch_get_main_queue(),^{
-                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.url]]];
                             });
                         }
                     }
@@ -1380,14 +1382,13 @@
                         [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
                         [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-                        NSURL *url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
-                        NSLog(@"%@",url);
-                        if (![Cache isURLCached:url]) {
+                        self.url=[NSURL URLWithString:[json objectForKey:@"profile_url"]];
+                        if (![Cache isURLCached:self.url]) {
                             //using high priority queue to fetch the image
                             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                                 //get the image data
                                 NSData * imageData = nil;
-                                imageData = [[NSData alloc] initWithContentsOfURL: url];
+                                imageData = [[NSData alloc] initWithContentsOfURL: self.url];
                                 
                                 if ( imageData == nil ){
                                     //if the image data is nil, the image url is not reachable. using a default image to replace that
@@ -1397,7 +1398,7 @@
                                     
                                     if(imageData){
                                         dispatch_async( dispatch_get_main_queue(),^{
-                                            [Cache addDataToCache:url withData:imageData];
+                                            [Cache addDataToCache:self.url withData:imageData];
                                             [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
                                         });
                                     }
@@ -1407,7 +1408,7 @@
                                     //NSLog(@"downloaded %@",url);
                                     if(imageData){
                                         dispatch_async( dispatch_get_main_queue(),^{
-                                            [Cache addDataToCache:url withData:imageData];
+                                            [Cache addDataToCache:self.url withData:imageData];
                                             [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
                                         });
                                     }
@@ -1416,7 +1417,7 @@
                         }
                         else {
                             dispatch_async( dispatch_get_main_queue(),^{
-                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.url]]];
                             });
                         }
                     
@@ -1730,9 +1731,13 @@
 //        DetailViewController *detailVC = (DetailViewController *)segue.destinationViewController;
 //        [detailVC preSetTheEventID:self.tapped_event_id andSetTheSharedEventID:self.tapped_shared_event_id andSetIsOwner:[[NSString stringWithFormat:@"%@",[defaults objectForKey:@"user_id"]] isEqualToString:self.tapped_creator_id]];
     }
-if ([segue.identifier isEqualToString:@"showLargeEmail"]) {
-    
-    }
+    if ([segue.identifier isEqualToString:@"showLargeEmail"]) {
+        ProfilePicViewController *profilePic = segue.destinationViewController;
+        if([segue.destinationViewController isKindOfClass:[ProfilePicViewController class]]){
+            [profilePic preSetImgUrl:self.url];
+
+        }
+        }
 }
 
 #pragma mark - get more data and show the more event

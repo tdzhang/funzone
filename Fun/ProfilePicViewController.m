@@ -9,10 +9,11 @@
 #import "ProfilePicViewController.h"
 
 @interface ProfilePicViewController ()
-
+@property (nonatomic,strong) NSURL *imgUrl;
 @end
 
 @implementation ProfilePicViewController
+@synthesize imgUrl=_imgUrl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@",self.imgUrl);
 	// Do any additional setup after loading the view.
 }
 
@@ -41,6 +43,7 @@
 }
 
 - (void)preSetImgUrl:(NSURL *)imgUrl {
-    
+    self.imgUrl = imgUrl;
+    return;
 }
 @end
