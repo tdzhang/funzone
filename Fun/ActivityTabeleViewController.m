@@ -490,7 +490,12 @@
         // your friend has just joined orange parc, go to that page to follow
         self.send_via=VIA_ACTIVITY_CONVERSATION;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+        if ([element.user_id isEqualToString:[defaults objectForKey:@"user_id"]]) {
+            [self performSegueWithIdentifier:@"seeMyEvent" sender:self];
+        }
+        else{
+            [self performSegueWithIdentifier:@"seeOtherEvent" sender:self];
+        }
     }
 }
 
