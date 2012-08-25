@@ -56,6 +56,11 @@
         [self.flash removeFromSuperview];
     }
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered
+                                   target:nil action:nil];
+    backButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    [self.navigationItem setBackBarButtonItem:backButton];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

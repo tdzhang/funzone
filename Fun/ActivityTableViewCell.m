@@ -73,8 +73,8 @@
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:250/255.0 green:150/255.0 blue:20/255.0 alpha:1] CGColor];
-    //self.activityPicImageView.layer.borderWidth = 1;
-    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    self.activityPicImageView.layer.shadowPath = path.CGPath;
     
     
     //-------------------User Profile Image View------------------//
@@ -84,6 +84,8 @@
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    self.userPicImageView.layer.shadowPath = path1.CGPath;
     
     NSURL *imageUrl=[NSURL URLWithString:element.user_pic];
     //deal with the profile image
@@ -122,11 +124,7 @@
             [self.userPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:imageUrl]]];
         });
     }
-    
-    
-    
-    
-    
+
     //-----------------------event picture display-----------------------//
     [self.eventPicImageView setFrame:CGRectMake(271, 7, 40, 40)];
     self.eventPicImageView.layer.cornerRadius = 2;
@@ -134,6 +132,8 @@
     [self.eventPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.eventPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.eventPicImageView.layer.borderWidth = 1;
+    UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    self.eventPicImageView.layer.shadowPath = path2.CGPath;
     
     NSURL *eventUrl=[NSURL URLWithString:element.event_pic];
     //deal with the profile image
@@ -241,10 +241,7 @@
     self.event_name=element.event_name;
     self.message=element.message;
     NSURL *imageUrl=[NSURL URLWithString:element.event_pic];
-    
-    
-    
-    
+
     //------------deal with the event image; REUSE user image frame here.
     [self.eventPicImageView setFrame:CGRectMake(10, 7, 40, 40)];
     self.eventPicImageView.layer.cornerRadius = 4;
@@ -252,6 +249,8 @@
     [self.eventPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.eventPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.eventPicImageView.layer.borderWidth = 1;
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    self.eventPicImageView.layer.shadowPath = path1.CGPath;
     
     if (![Cache isURLCached:imageUrl]) {
         //using high priority queue to fetch the image
@@ -297,6 +296,8 @@
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
+    UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
+    self.userPicImageView.layer.shadowPath = path2.CGPath;
     [self.userPicImageView setHidden:YES];
     
     NSURL *userPicUrl=[NSURL URLWithString:element.user_pic];
