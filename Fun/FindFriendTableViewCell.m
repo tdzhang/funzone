@@ -12,7 +12,7 @@
 @synthesize friendImageView;
 @synthesize friendName;
 @synthesize actionButton;
-@synthesize relatedFriend=_relatedFriend;
+@synthesize delegate=_delegate;
 
 @synthesize actionCategory=_actionCategory;
 
@@ -24,6 +24,7 @@
 @synthesize followed=_followed;
 
 @synthesize via=_via;
+@synthesize indexPath=_indexPath;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -43,7 +44,7 @@
     // Configure the view for the selected state
 }
 
--(void)resetWithSearchedFriend:(SearchedFriend *)friend{
+-(void)resetWithSearchedFriend:(SearchedFriend *)friend AtIndexPath:(NSIndexPath *)indexPath{
     //get the user information in to the cell, used for the "followed/unfollow/invite button"
     self.user_id=friend.user_id;
     self.user_name=friend.user_name;
@@ -51,8 +52,7 @@
     self.fb_id=friend.fb_id;
     self.registerd=friend.registerd;
     self.followed=friend.followed;
-    
-    self.relatedFriend=friend;
+    self.indexPath=indexPath;
     
     [self.friendName setText:friend.user_name];
     
@@ -108,15 +108,14 @@
     }
 }
 
--(void)resetWithTopFriend:(SearchedFriend *)friend{
+-(void)resetWithTopFriend:(SearchedFriend *)friend AtIndexPath:(NSIndexPath *)indexPath{
     self.user_id=friend.user_id;
     self.user_name=friend.user_name;
     self.user_pic=friend.user_pic;
     self.fb_id=friend.fb_id;
     self.registerd=friend.registerd;
     self.followed=friend.followed;
-    
-    self.relatedFriend=friend;
+    self.indexPath=indexPath;
     
     [self.friendName setText:friend.user_name];
     
@@ -232,7 +231,7 @@
                         [self.actionButton setTitle:@"Unfollow" forState:UIControlStateNormal];
                         self.actionCategory=@"unfollow";
                         self.followed=YES;
-                        self.relatedFriend.followed=YES;
+                        [self.delegate changeTheFollowStateAtIndex:self.indexPath];
                     }
                     else {
                         UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -270,7 +269,7 @@
                         [self.actionButton setTitle:@"Follow" forState:UIControlStateNormal];
                         self.actionCategory=@"follow";
                         self.followed=NO;
-                        self.relatedFriend.followed=NO;
+                        [self.delegate changeTheFollowStateAtIndex:self.indexPath];
                     }
                     else {
                         UIAlertView *unsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"We are sorry. Something went wrong. %@",[json objectForKey:@"message"]] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -278,7 +277,6 @@
                         [unsuccess show];
                     }
                     [self.actionButton setEnabled:YES];
-                    self.relatedFriend.followed=YES;
                 }
                 
             });

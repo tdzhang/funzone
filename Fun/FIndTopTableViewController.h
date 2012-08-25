@@ -10,7 +10,8 @@
 #import "SearchedFriend.h"
 #import "FindFriendTableViewCell.h"
 #import "FunAppDelegate.h"
+#import "FindFriendTVCDelegate.h"
 
-@interface FIndTopTableViewController : UITableViewController
+@interface FIndTopTableViewController : UITableViewController<FindFriendTVCDelegate>
 
 @end

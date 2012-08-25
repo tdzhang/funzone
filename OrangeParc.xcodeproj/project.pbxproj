@@ -92,6 +92,7 @@
 		0F70E02F15D0B1FB00381D7D /* detailLocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F70E02D15D0B1FB00381D7D /* detailLocationMapViewController.m */; };
 		0F8465E615D09B6100D5FC69 /* MyFollowerTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F8465E415D09B6100D5FC69 /* MyFollowerTableViewController.h */; };
 		0F8465E715D09B6100D5FC69 /* MyFollowerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */; };
+		0F8B1E8C15E9372100CBD517 /* FindFriendTVCDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F8B1E8B15E9372100CBD517 /* FindFriendTVCDelegate.h */; };
 		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
 		0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */; };
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
@@ -470,6 +471,7 @@
 		0F70E02D15D0B1FB00381D7D /* detailLocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailLocationMapViewController.m; sourceTree = "<group>"; };
 		0F8465E415D09B6100D5FC69 /* MyFollowerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowerTableViewController.h; sourceTree = "<group>"; };
 		0F8465E515D09B6100D5FC69 /* MyFollowerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowerTableViewController.m; sourceTree = "<group>"; };
+		0F8B1E8B15E9372100CBD517 /* FindFriendTVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTVCDelegate.h; sourceTree = "<group>"; };
 		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
 		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
 		0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAndViewCommentTVC.h; sourceTree = "<group>"; };
@@ -951,6 +953,7 @@
 				0F2EEB4415C719540087111B /* FindFriendTableViewController.m */,
 				0F2EEB4715C71A470087111B /* SearchedFriend.h */,
 				0F2EEB4815C71A470087111B /* SearchedFriend.m */,
+				0F8B1E8B15E9372100CBD517 /* FindFriendTVCDelegate.h */,
 			);
 			name = "Find Friend";
 			sourceTree = "<group>";
@@ -1736,6 +1739,7 @@
 				0F06148E15E8970A00A04591 /* ExploreViewController.h in Headers */,
 				0F06149E15E8ABE200A04591 /* MagicViewController.h in Headers */,
 				0F0614A715E8B78B00A04591 /* NONEANIMATIONSegue.h in Headers */,
+				0F8B1E8C15E9372100CBD517 /* FindFriendTVCDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

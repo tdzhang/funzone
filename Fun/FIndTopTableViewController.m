@@ -173,10 +173,21 @@
         }
     }
     
-    [cell resetWithTopFriend:[self.topfriends objectAtIndex:indexPath.row]];
+    [cell resetWithTopFriend:[self.topfriends objectAtIndex:indexPath.row] AtIndexPath:indexPath];
+    cell.delegate=self;
     cell.via=VIA_POPULAR_USERS;
     
     return cell;
+}
+
+#pragma mark - findFriendTVCDelegate method
+-(void)changeTheFollowStateAtIndex:(NSIndexPath *)indexPath{
+    SearchedFriend* friend=[self.topfriends objectAtIndex:indexPath.row];
+    if (friend.followed) {
+        friend.followed=NO;
+    } else {
+        friend.followed=YES;
+    }
 }
 
 /*

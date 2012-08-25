@@ -182,7 +182,7 @@
         }
     }
 
-    [cell resetWithSearchedFriend:[self.friends objectAtIndex:indexPath.row]];
+    [cell resetWithSearchedFriend:[self.friends objectAtIndex:indexPath.row] AtIndexPath:indexPath];
     cell.friendImageView.layer.cornerRadius = 4;
     cell.friendImageView.clipsToBounds = YES;
     [cell.friendImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -190,8 +190,18 @@
     cell.friendImageView.layer.borderWidth = 1;
     
     cell.via=VIA_FACEBOOK_SEARCH;
-     
+    cell.delegate=self;
     return cell;
+}
+
+#pragma mark - findFriendTVCDelegate method
+-(void)changeTheFollowStateAtIndex:(NSIndexPath *)indexPath{
+    SearchedFriend* friend=[self.friends objectAtIndex:indexPath.row];
+    if (friend.followed) {
+        friend.followed=NO;
+    } else {
+        friend.followed=YES;
+    }
 }
 
 /*
