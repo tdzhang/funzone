@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -3410,6 +3409,8 @@ Find us @OrangeParc.com</string>
         <class className="ActivityTabeleViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refreshButtonClicked:"/>
+                <relationship kind="action" name="segmentControlValuechanged:"/>
                 <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
@@ -3439,9 +3440,6 @@ Find us @OrangeParc.com</string>
         </class>
         <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="InviteButtonClicked:"/>
-            </relationships>
         </class>
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
@@ -3503,6 +3501,9 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelLoginNew:"/>
+                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
+                <relationship kind="action" name="normalLoginButtonClickedNew:"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
@@ -3546,14 +3547,6 @@ Find us @OrangeParc.com</string>
         <class className="NewEventVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
             <relationships>
-                <relationship kind="action" name="ChooseEventTitle:" candidateClass="UIButton"/>
-                <relationship kind="action" name="ChoosePhoto:" candidateClass="UIButton"/>
-                <relationship kind="action" name="CreateEventToSever:"/>
-                <relationship kind="action" name="InviteFriendButtonClicked:"/>
-                <relationship kind="action" name="SelectTime:" candidateClass="UIButton"/>
-                <relationship kind="action" name="cancelButtonClicked:"/>
-                <relationship kind="action" name="deleteEventButton:"/>
-                <relationship kind="action" name="leaveEditMode:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
@@ -3591,6 +3584,8 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refreshButtonClicked:"/>
+                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3648,13 +3643,13 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dBi-XW-FfW"/>
         <segue reference="Hfw-Db-bjl"/>
+        <segue reference="maZ-xV-hRy"/>
+        <segue reference="nyH-Sx-6aU"/>
+        <segue reference="nM9-CM-7r4"/>
         <segue reference="CCE-Bo-yKv"/>
         <segue reference="EMN-UC-MwH"/>
         <segue reference="lqc-Cx-NBX"/>
         <segue reference="uWA-gI-Coc"/>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="Yrc-z9-85p"/>
     </inferredMetricsTieBreakers>
 </document>
