@@ -302,3 +302,12 @@
 #define LIKES_ICON @"DVC_Liked.png"
 #define COMMENT_ICON @"DVC_Comment.png"
 #define RIGHT_ARROW @"detailButton.png"
+
+
+//tutorial page
+#define TUTORIAL_DETAIL_PAGE @"tut-detail.png"
+#define TUTORIAL_POPULAR_PAGE @"tut-popular.png"
+#define TUTORIAL_FEEDS_PAGE @"tut-feeds.png"
+#define TUTORIAL_PROFILE_PAGE @"tut-collection.png"
+
+

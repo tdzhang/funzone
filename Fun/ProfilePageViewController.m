@@ -2054,14 +2054,20 @@
 }
 
 -(void)startTheTutorialPage{
+    
+    
     //adding the tutorial cover page
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"ProfilePageTutorial"]) {
         
+        //changed the default state
+        [defaults setObject:@"setted" forKey:@"ProfilePageTutorial"];
+        [defaults synchronize];
+        
         UIImageView *tutorial=[UIImageView new];
         self.tutorial=tutorial;
         [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
-        [tutorial setImage:[UIImage imageNamed:@"tut-collection.png"]];
+        [tutorial setImage:[UIImage imageNamed:TUTORIAL_PROFILE_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
         UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
@@ -2069,9 +2075,7 @@
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];
         
-        //changed the default state
-        [defaults setObject:@"setted" forKey:@"ProfilePageTutorial"];
-        [defaults synchronize];
+        
     }
 }
 

@@ -821,11 +821,14 @@
     //adding the tutorial cover page
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"FeedsPageTutorial"]) {
+        //changed the default state
+        [defaults setObject:@"setted" forKey:@"FeedsPageTutorial"];
+        [defaults synchronize];
         
         UIImageView *tutorial=[UIImageView new];
         self.tutorial=tutorial;
         [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
-        [tutorial setImage:[UIImage imageNamed:@"tut-feeds.png"]];
+        [tutorial setImage:[UIImage imageNamed:TUTORIAL_FEEDS_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
         UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
@@ -833,9 +836,7 @@
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];
         
-        //changed the default state
-        [defaults setObject:@"setted" forKey:@"FeedsPageTutorial"];
-        [defaults synchronize];
+        
     }
 }
 
