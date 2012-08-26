@@ -72,6 +72,7 @@
     self.activityPicImageView.clipsToBounds = YES;
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:240/255.0 green:150/255.0 blue:0/255.0 alpha:1] CGColor];
     
     
     //-------------------User Profile Image View------------------//
