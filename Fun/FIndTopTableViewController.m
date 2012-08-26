@@ -178,7 +178,11 @@
             }
         }
     }
-    
+    cell.friendImageView.layer.cornerRadius = 4;
+    cell.friendImageView.clipsToBounds = YES;
+    [cell.friendImageView setContentMode:UIViewContentModeScaleAspectFill];
+    cell.friendImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    cell.friendImageView.layer.borderWidth = 1;
     [cell resetWithTopFriend:[self.topfriends objectAtIndex:indexPath.row] AtIndexPath:indexPath];
     cell.delegate=self;
     cell.via=VIA_POPULAR_USERS;
