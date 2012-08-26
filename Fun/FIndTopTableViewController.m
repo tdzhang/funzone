@@ -46,6 +46,9 @@
     self.navigationItem.backBarButtonItem.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 55;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -47,6 +47,10 @@
     return self;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 55;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
