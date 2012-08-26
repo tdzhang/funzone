@@ -287,16 +287,6 @@
             [self.cellsForSeg2 setObject:cell forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
             return cell;
         }
-<<<<<<< HEAD
-        [cell resetWithConversationActivityObject:[self.activities objectAtIndex:indexPath.row]];
-        NSLog(@"!!!!%d",cell.isViewed);
-        if (cell.isViewed == 0) {
-            cell.backgroundColor = [UIColor lightGrayColor];
-        }
-        return cell;
-=======
-        
->>>>>>> expand the link edit extent
     }
 }
 
