@@ -1266,7 +1266,7 @@ Find us @OrangeParc.com</string>
                                 <action selector="CategoryFilterClicked:" destination="3i5-5a-vO5" id="Gjv-dw-p7H"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="refresh.png" id="7lU-Sl-nOu">
+                        <barButtonItem key="rightBarButtonItem" image="refresh.png" id="7lU-Sl-nOu">
                             <connections>
                                 <action selector="refreshButtonClicked:" destination="3i5-5a-vO5" id="bc4-q6-MK9"/>
                             </connections>
@@ -3627,6 +3627,8 @@ Find us @OrangeParc.com</string>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="DecideToCancel:"/>
+                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
@@ -3655,11 +3657,11 @@ Find us @OrangeParc.com</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="lqc-Cx-NBX"/>
-        <segue reference="Hfw-Db-bjl"/>
         <segue reference="jpf-qW-bdW"/>
         <segue reference="sin-Qw-UXs"/>
-        <segue reference="maZ-xV-hRy"/>
-        <segue reference="Yrc-z9-85p"/>
+        <segue reference="Idn-d1-X1d"/>
+        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="HUl-1w-jPL"/>
         <segue reference="dBi-XW-FfW"/>
         <segue reference="uWA-gI-Coc"/>
     </inferredMetricsTieBreakers>
