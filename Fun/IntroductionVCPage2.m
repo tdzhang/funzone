@@ -60,8 +60,19 @@
 }
 
 #pragma mark - self defined button
+-(void)returnAction{
+    NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
+    UIViewController * rootViewController = [viewControllers objectAtIndex:0];
+    [viewControllers removeObjectAtIndex:0]; // try using with and without this line?
+    [viewControllers addObject:rootViewController];
+    [self.navigationController setViewControllers:viewControllers animated:NO];
+    
+}
+
 -(void)GoToNextPage{
-    [self performSegueWithIdentifier:@"GotoNextPage" sender:self];
+    [self performSegueWithIdentifier:@"Magic" sender:self];
+    
+    [self performSelector:@selector(returnAction) withObject:self afterDelay:0.6];
 }
 
 @end
