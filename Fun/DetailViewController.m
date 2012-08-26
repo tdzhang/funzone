@@ -402,6 +402,8 @@
     self.event_id = event_id;
     self.shared_event_id = shared_event_id;
     self.isEventOwner=isOwner;
+    
+    //NSLog(@"%@,%@,%@",self.event_id,self.shared_event_id,(self.isEventOwner)?@"YES":@"NO");
 }
 
 //server log need method
@@ -1668,6 +1670,7 @@
         self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
         self.event_address=[event objectForKey:@"address"];
         
+        NSLog(@"---->%@,%@,%@",self.creator_id,self.location_name,self.event_address);
         // NSString *longitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"longitude"]];
         // NSString *latitude=[NSString stringWithFormat:@"%f",[event objectForKey:@"latitude"]];
         NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];

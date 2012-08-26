@@ -188,7 +188,6 @@
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     //check for internet connection, if no connection, showing alert
     [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
@@ -583,6 +582,18 @@
         self.joined_refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
         [self.joinedScrollView addSubview:self.joined_refreshView];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+//---------------------------------------------->
+//    UIImageView *tutorial=[UIImageView new];
+//    [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
+//    [tutorial setImage:[UIImage imageNamed:@"tut-collection.png"]];
+//    [tutorial setUserInteractionEnabled:YES];
+//    [self.view addSubview:tutorial];
+//----------------------------------------------->
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
