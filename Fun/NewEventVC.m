@@ -616,7 +616,7 @@
     //after delete, need to return to myparc
     //create event
     //Adding Create Event
-    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Confirm Deletion" message:@"Delete this event?" delegate:self cancelButtonTitle:@"Don't delete" otherButtonTitles:@"Delete", nil];
+    UIAlertView *deleteAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to delete this event?" message:nil delegate:self cancelButtonTitle:@"Don't delete" otherButtonTitles:@"Delete", nil];
     [deleteAlert show];
 }
 
@@ -1407,7 +1407,7 @@
         }
     }
     
-    if ([alertView.title isEqualToString:@"Confirm Deletion"]) {
+    if ([alertView.title isEqualToString:@"Are you sure you want to delete this event?"]) {
         if (buttonIndex == 0) {
             return;
         }
