@@ -945,9 +945,9 @@
     [map_indicator_label setFont:[UIFont boldSystemFontOfSize:11]];
     [map_indicator_label setTextColor:[UIColor colorWithRed:254/255.0 green:139/255.0 blue:41/255.0 alpha:1]];
     [self.locationSectionView addSubview:map_indicator_label];
-    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(303, 18, 4, 7)];
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(301, 16, 6, 10)];
     [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
-    right_Arrow.alpha = 0.6;
+    right_Arrow.alpha = 1;
     [self.locationSectionView addSubview:right_Arrow];
     
     UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 0, 80, 40)];
