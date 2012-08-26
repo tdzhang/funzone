@@ -66,6 +66,10 @@
 		0F27BB8F15E33B6500335D42 /* CheckForInternetConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F27BB8D15E33B6500335D42 /* CheckForInternetConnection.h */; };
 		0F27BB9015E33B6500335D42 /* CheckForInternetConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F27BB8E15E33B6500335D42 /* CheckForInternetConnection.m */; };
 		0F29549115BDCD00007FB813 /* OtherProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */; };
+		0F2E46AD15EA7D8D00421601 /* tut-collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E46A915EA7D8D00421601 /* tut-collection.png */; };
+		0F2E46AE15EA7D8D00421601 /* tut-detail.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E46AA15EA7D8D00421601 /* tut-detail.png */; };
+		0F2E46AF15EA7D8D00421601 /* tut-feeds.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E46AB15EA7D8D00421601 /* tut-feeds.png */; };
+		0F2E46B015EA7D8D00421601 /* tut-popular.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E46AC15EA7D8D00421601 /* tut-popular.png */; };
 		0F2EEB4515C719540087111B /* FindFriendTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4315C719540087111B /* FindFriendTableViewController.h */; };
 		0F2EEB4615C719540087111B /* FindFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2EEB4415C719540087111B /* FindFriendTableViewController.m */; };
 		0F2EEB4915C71A470087111B /* SearchedFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2EEB4715C71A470087111B /* SearchedFriend.h */; };
@@ -96,8 +100,6 @@
 		0F8B1E8E15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F8B1E8D15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h */; };
 		0F8B1E9515E9DBE900CBD517 /* TutorialPageConstant.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F8B1E9315E9DBE900CBD517 /* TutorialPageConstant.h */; };
 		0F8B1E9615E9DBE900CBD517 /* TutorialPageConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8B1E9415E9DBE900CBD517 /* TutorialPageConstant.m */; };
-		0F8B1E9B15E9DD2B00CBD517 /* tut-collection.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B1E9915E9DD2B00CBD517 /* tut-collection.png */; };
-		0F8B1E9C15E9DD2B00CBD517 /* tut-feeds.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8B1E9A15E9DD2B00CBD517 /* tut-feeds.png */; };
 		0F8D008915B67CBC009A21E6 /* eventComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D008815B67CBC009A21E6 /* eventComment.m */; };
 		0F91EE4615B9CA4E00E7B1D3 /* addAndViewCommentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91EE4515B9CA4E00E7B1D3 /* addAndViewCommentTVC.m */; };
 		0F91EE4B15B9CBAE00E7B1D3 /* commentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F91EE4A15B9CBAE00E7B1D3 /* commentTableViewCell.xib */; };
@@ -450,6 +452,10 @@
 		0F27BB8E15E33B6500335D42 /* CheckForInternetConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckForInternetConnection.m; sourceTree = "<group>"; };
 		0F29548F15BDCD00007FB813 /* OtherProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherProfilePageViewController.h; sourceTree = "<group>"; };
 		0F29549015BDCD00007FB813 /* OtherProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherProfilePageViewController.m; sourceTree = "<group>"; };
+		0F2E46A915EA7D8D00421601 /* tut-collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-collection.png"; sourceTree = "<group>"; };
+		0F2E46AA15EA7D8D00421601 /* tut-detail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-detail.png"; sourceTree = "<group>"; };
+		0F2E46AB15EA7D8D00421601 /* tut-feeds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-feeds.png"; sourceTree = "<group>"; };
+		0F2E46AC15EA7D8D00421601 /* tut-popular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-popular.png"; sourceTree = "<group>"; };
 		0F2EEB4315C719540087111B /* FindFriendTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendTableViewController.h; sourceTree = "<group>"; };
 		0F2EEB4415C719540087111B /* FindFriendTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendTableViewController.m; sourceTree = "<group>"; };
 		0F2EEB4715C71A470087111B /* SearchedFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchedFriend.h; sourceTree = "<group>"; };
@@ -486,8 +492,6 @@
 		0F8B1E8D15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingOrErLookProfileDelegate.h; sourceTree = "<group>"; };
 		0F8B1E9315E9DBE900CBD517 /* TutorialPageConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPageConstant.h; sourceTree = "<group>"; };
 		0F8B1E9415E9DBE900CBD517 /* TutorialPageConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPageConstant.m; sourceTree = "<group>"; };
-		0F8B1E9915E9DD2B00CBD517 /* tut-collection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-collection.png"; sourceTree = "<group>"; };
-		0F8B1E9A15E9DD2B00CBD517 /* tut-feeds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tut-feeds.png"; sourceTree = "<group>"; };
 		0F8D008715B67CBC009A21E6 /* eventComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventComment.h; sourceTree = "<group>"; };
 		0F8D008815B67CBC009A21E6 /* eventComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventComment.m; sourceTree = "<group>"; };
 		0F91EE4415B9CA4E00E7B1D3 /* addAndViewCommentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAndViewCommentTVC.h; sourceTree = "<group>"; };
@@ -1058,8 +1062,10 @@
 		0F8B1E9815E9DD1C00CBD517 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				0F8B1E9915E9DD2B00CBD517 /* tut-collection.png */,
-				0F8B1E9A15E9DD2B00CBD517 /* tut-feeds.png */,
+				0F2E46A915EA7D8D00421601 /* tut-collection.png */,
+				0F2E46AA15EA7D8D00421601 /* tut-detail.png */,
+				0F2E46AB15EA7D8D00421601 /* tut-feeds.png */,
+				0F2E46AC15EA7D8D00421601 /* tut-popular.png */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -2048,12 +2054,14 @@
 				466943BA15E894C3007DE625 /* default-profile-image.png in Resources */,
 				466943C015E89756007DE625 /* default-image-placeholder.jpg in Resources */,
 				5C17910415E97ACB0097DA44 /* collection-page-button.png in Resources */,
-				0F8B1E9B15E9DD2B00CBD517 /* tut-collection.png in Resources */,
-				0F8B1E9C15E9DD2B00CBD517 /* tut-feeds.png in Resources */,
 				5C17911D15EA0DC90097DA44 /* tab_unselected.png in Resources */,
 				5C17911E15EA0DC90097DA44 /* tab_selected.png in Resources */,
 				462719F115EA14AC00A5A8E4 /* form2.png in Resources */,
 				5C271FF115EA298100E2D76D /* DVC_Link.png in Resources */,
+				0F2E46AD15EA7D8D00421601 /* tut-collection.png in Resources */,
+				0F2E46AE15EA7D8D00421601 /* tut-detail.png in Resources */,
+				0F2E46AF15EA7D8D00421601 /* tut-feeds.png in Resources */,
+				0F2E46B015EA7D8D00421601 /* tut-popular.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

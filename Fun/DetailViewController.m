@@ -92,6 +92,10 @@
 @property (nonatomic) BOOL isEnteredDiscussion;
 //@property (nonatomic)BOOL shouldGoBack; //if the event not exist, go back to the former page
 
+//for the tutorial page
+@property (nonatomic,strong) UIImageView* tutorial;
+@property (nonatomic,strong) UIButton* cancelTutorailButton;
+
 
 - (void)startPrivateConversationButtonClicked;
 @end
@@ -173,6 +177,11 @@
 @synthesize alreadyInvitedFriend=_alreadyInvitedFriend;
 //@synthesize shouldGoBack=_shouldGoBack;
 @synthesize isEnteredDiscussion=_isEnteredDiscussion;
+
+//for the tutorial page
+@synthesize tutorial=_tutorial;
+@synthesize cancelTutorailButton=_cancelTutorailButton;
+
 #pragma mark - self defined getter and setter
 -(UIButton *)privateMessageButton{
     if (!_privateMessageButton) {
@@ -344,6 +353,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    //start the tutorial
+    [self startTheTutorialPage];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
@@ -2019,6 +2032,34 @@
 
 -(void)tapLink:(UITapGestureRecognizer *)tapGR {
     [self performSegueWithIdentifier:@"webView" sender:self];
+}
+
+#pragma mark - Tutorial Page related
+-(void)cancelTheTutorailPage{
+    [self.cancelTutorailButton removeFromSuperview];
+    [self.tutorial removeFromSuperview];
+}
+
+-(void)startTheTutorialPage{
+    //adding the tutorial cover page
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"DetailPageTutorial"]) {
+        
+        UIImageView *tutorial=[UIImageView new];
+        self.tutorial=tutorial;
+        [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
+        [tutorial setImage:[UIImage imageNamed:@"tut-detail.png"]];
+        [tutorial setUserInteractionEnabled:YES];
+        [self.view addSubview:tutorial];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        self.cancelTutorailButton=cancelTutorialButton;
+        [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:cancelTutorialButton];
+        
+        //changed the default state
+        [defaults setObject:@"setted" forKey:@"DetailPageTutorial"];
+        [defaults synchronize];
+    }
 }
 
 #pragma mark - aler view delegate method implementation

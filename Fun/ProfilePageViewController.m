@@ -51,6 +51,10 @@
 @property(nonatomic,strong)NSArray* lastReceivedJson_bookmark_joined; //used to limite the refresh frequecy
 
 
+//for the tutorial page
+@property (nonatomic,strong) UIImageView* tutorial;
+@property (nonatomic,strong) UIButton* cancelTutorailButton;
+
 -(void)refreshAllTheMainScrollViewSUbviews;
 -(void)addMoreDataToTheMainScrollViewSUbviews;
 -(void)joined_refreshAllTheMainScrollViewSUbviews;
@@ -93,6 +97,10 @@
 @synthesize lastReceivedJson_bookmark=_lastReceivedJson_bookmark;
 @synthesize lastReceivedJson_profile=_lastReceivedJson_profile;
 @synthesize lastReceivedJson_bookmark_joined=_lastReceivedJson_bookmark_joined;
+
+//for the tutorial page
+@synthesize tutorial=_tutorial;
+@synthesize cancelTutorailButton=_cancelTutorailButton;
 
 //used to keep server log
 @synthesize via=_via;
@@ -202,6 +210,9 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
+        
+        
+        
     
     //query the user profile information
     //add login auth_token
@@ -584,16 +595,13 @@
     }
 }
 
+
+
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-//---------------------------------------------->
-//    UIImageView *tutorial=[UIImageView new];
-//    [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
-//    [tutorial setImage:[UIImage imageNamed:@"tut-collection.png"]];
-//    [tutorial setUserInteractionEnabled:YES];
-//    [self.view addSubview:tutorial];
-//----------------------------------------------->
+    [self startTheTutorialPage];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -2037,6 +2045,34 @@
         [self.refreshViewdown removeFromSuperview];
     }
     
+}
+
+#pragma mark - Tutorial Page related
+-(void)cancelTheTutorailPage{
+    [self.cancelTutorailButton removeFromSuperview];
+    [self.tutorial removeFromSuperview];
+}
+
+-(void)startTheTutorialPage{
+    //adding the tutorial cover page
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"ProfilePageTutorial"]) {
+        
+        UIImageView *tutorial=[UIImageView new];
+        self.tutorial=tutorial;
+        [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
+        [tutorial setImage:[UIImage imageNamed:@"tut-collection.png"]];
+        [tutorial setUserInteractionEnabled:YES];
+        [self.view addSubview:tutorial];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        self.cancelTutorailButton=cancelTutorialButton;
+        [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:cancelTutorialButton];
+        
+        //changed the default state
+        [defaults setObject:@"setted" forKey:@"ProfilePageTutorial"];
+        [defaults synchronize];
+    }
 }
 
 #pragma mark - Gesture handler
