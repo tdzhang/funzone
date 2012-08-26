@@ -3076,9 +3076,16 @@ Find us @OrangeParc.com</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="jqM-XX-hpF"/>
+                    <navigationItem key="navigationItem" title="Map" id="jqM-XX-hpF">
+                        <barButtonItem key="rightBarButtonItem" title="Get Direction" id="q7j-HU-6in">
+                            <connections>
+                                <action selector="openMapApp:" destination="kIy-qt-1wP" id="NFp-1f-8v1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="GetDirectionButton" destination="q7j-HU-6in" id="S7M-n8-Ome"/>
                         <outlet property="myMapView" destination="wyu-sn-djS" id="ke6-WM-2eR"/>
                     </connections>
                 </viewController>
@@ -3360,6 +3367,8 @@ Find us @OrangeParc.com</string>
         <class className="ExploreViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
             <relationships>
+                <relationship kind="action" name="CategoryFilterClicked:"/>
+                <relationship kind="action" name="refreshButtonClicked:"/>
                 <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
@@ -3469,6 +3478,8 @@ Find us @OrangeParc.com</string>
         <class className="ProfilePageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="refreshButtonClicked:"/>
+                <relationship kind="action" name="segmentControlChange:"/>
                 <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
@@ -3511,6 +3522,7 @@ Find us @OrangeParc.com</string>
         <class className="detailLocationMapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/detailLocationMapViewController.h"/>
             <relationships>
+                <relationship kind="action" name="openMapApp:"/>
                 <relationship kind="outlet" name="GetDirectionButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
             </relationships>
