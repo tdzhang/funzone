@@ -1941,7 +1941,13 @@
     self.tap_user_id=tapped_element.user_id;
     if(touchPointY>35&&index<7&&touchPointX>35){
         self.next_page_profile_via=VIA_PEOPLE_WHO_LIKE_THIS;
-        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString* user_id = [defaults valueForKey:@"user_id"];
+        if ([tapped_element.user_id isEqualToString:user_id]) {
+            [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+        }
     }
 }
 
@@ -1962,10 +1968,15 @@
     if (!tapped_element.user_id) {
         return;
     }
-
     if(touchPointY>35&&index<7&&touchPointX>35){
         self.next_page_profile_via=VIA_INVITED_PEOPLE;
-        [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString* user_id = [defaults valueForKey:@"user_id"];
+        if ([tapped_element.user_id isEqualToString:user_id]) {
+            [self performSegueWithIdentifier:@"ViewProfile" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
+        }
     }
 }
 
