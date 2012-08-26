@@ -35,6 +35,10 @@
 @property (nonatomic,strong) NSString *categoryFilter_id;
 @property (nonatomic)BOOL isCategoryPickerSelected;
 
+//for the tutorial page
+@property (nonatomic,strong) UIImageView* tutorial;
+@property (nonatomic,strong) UIButton* cancelTutorailButton;
+
 -(void)checkForWhetherShowInstruction;
 
 @end
@@ -62,6 +66,10 @@
 @synthesize categoryFilter=_categoryFilter;
 @synthesize categoryFilter_id=_categoryFilter_id;
 @synthesize isCategoryPickerSelected=_isCategoryPickerSelected;
+
+//for the tutorial page
+@synthesize tutorial=_tutorial;
+@synthesize cancelTutorailButton=_cancelTutorailButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -147,6 +155,12 @@
             self.mainScrollView.contentSize =CGSizeMake(EXPLORE_BLOCK_ELEMENT_VIEW_WIDTH, 5*EXPLORE_BLOCK_ELEMENT_VIEW_HEIGHT);
             self.mainScrollView.contentOffset = CGPointMake(0, 0);
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self startTheTutorialPage];
 }
 
 - (void)viewDidLoad {
@@ -795,6 +809,34 @@
         [self.CategoryFilterButton setTitle:@"Other"];
     }
     [self RefreshAction];
+}
+
+#pragma mark - Tutorial Page related
+-(void)cancelTheTutorailPage{
+    [self.cancelTutorailButton removeFromSuperview];
+    [self.tutorial removeFromSuperview];
+}
+
+-(void)startTheTutorialPage{
+    //adding the tutorial cover page
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"FeedsPageTutorial"]) {
+        
+        UIImageView *tutorial=[UIImageView new];
+        self.tutorial=tutorial;
+        [tutorial setFrame:CGRectMake(0, 0, 320, 375)];
+        [tutorial setImage:[UIImage imageNamed:@"tut-feeds.png"]];
+        [tutorial setUserInteractionEnabled:YES];
+        [self.view addSubview:tutorial];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        self.cancelTutorailButton=cancelTutorialButton;
+        [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:cancelTutorialButton];
+        
+        //changed the default state
+        [defaults setObject:@"setted" forKey:@"FeedsPageTutorial"];
+        [defaults synchronize];
+    }
 }
 
 #pragma mark - Gesture handler
