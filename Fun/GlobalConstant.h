@@ -95,6 +95,7 @@
 #define DVC_CREATOR_VIEW_HEIGHT 45
 #define DVC_TIME_VIEW_HEIGHT 40
 #define DVC_ADDR_VIEW_HEIGHT 40
+#define DVC_LINK_VIEW_HEIGHT 40
 #define DVC_INVITEE_HEIGHT 90
 #define DVC_LIKED_HEIGHT 90
 #define DVC_ICON_SIZE 25
@@ -294,6 +295,7 @@
 
 //icon files
 #define TIME_ICON @"DVC_Time.png"
+#define LINK_ICON @"DVC_Link.png"
 #define ADDR_ICON @"DVC_Addr.png"
 #define DESC_ICON @"DVC_Desc.png"
 #define INVITEE_ICON @"DVC_Invitee.png"

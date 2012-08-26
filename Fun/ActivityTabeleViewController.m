@@ -168,7 +168,7 @@
     //-----------------------> segment control part<<---------------------------------------\\
     self.mySegmentControl.frame = CGRectMake(0, 0, 310, 40);
     UIImage *segmentSelected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     self.mySegmentControl.frame = CGRectMake(0, 0, 320, 40);
     [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];

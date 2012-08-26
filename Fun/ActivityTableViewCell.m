@@ -98,7 +98,7 @@
                 UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
                 imageData=UIImagePNGRepresentation(image);
                 if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
+                    dispatch_async(dispatch_get_main_queue(),^{
                         [Cache addDataToCache:imageUrl withData:imageData];
                         [self.userPicImageView setImage:image];
                     });
@@ -108,7 +108,7 @@
                 //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
                 //NSLog(@"downloaded %@",url);
                 if(imageData){
-                    dispatch_async( dispatch_get_main_queue(),^{
+                    dispatch_async(dispatch_get_main_queue(),^{
                         [Cache addDataToCache:imageUrl withData:imageData];
                         [self.userPicImageView setImage:[UIImage imageWithData:imageData]];
                     });
@@ -117,7 +117,7 @@
         });
     }
     else {
-        dispatch_async( dispatch_get_main_queue(),^{
+        dispatch_async(dispatch_get_main_queue(),^{
             [self.userPicImageView setImage:[UIImage imageWithData:[Cache getCachedData:imageUrl]]];
         });
     }

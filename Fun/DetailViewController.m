@@ -28,6 +28,7 @@
 @property (nonatomic,strong) UIButton *creatorProfileButton;
 @property (nonatomic,strong) UILabel *eventTitleLabel;
 @property (nonatomic,strong) UIView *timeSectionView;
+@property (nonatomic,strong) UIView *linkSectionView;
 @property (nonatomic,strong) UIView *locationSectionView;
 @property (nonatomic,strong) UIView *interestedPeopleLabelView;
 @property (nonatomic,strong) UIView *likedPeopleLabelView;
@@ -57,6 +58,7 @@
 @property (nonatomic,strong) NSString *shared_event_id;
 @property (nonatomic,strong) NSString *event_title;
 @property (nonatomic,strong) NSString *event_time;
+@property (nonatomic,strong) NSString *event_link;
 @property (nonatomic,strong) NSURL *event_img_url;
 @property (nonatomic,strong) NSString *location_name;
 @property (nonatomic,strong) NSNumber *longitude;
@@ -107,6 +109,7 @@
 @synthesize creatorProfileButton=_creatorProfileButton;
 @synthesize eventTitleLabel=_eventTitleLabel;
 @synthesize timeSectionView=_timeSectionView;
+@synthesize linkSectionView=_linkSectionView;
 @synthesize locationSectionView=_locationSectionView;
 @synthesize commentSectionView=_commentSectionView;
 @synthesize descriptionSectionView=_descriptionSectionView;
@@ -142,6 +145,7 @@
 @synthesize latitude=_latitude;
 @synthesize description=_description;
 @synthesize comments=_comments;
+@synthesize event_link=_event_link;
 @synthesize creator_id=_creator_id;
 @synthesize event_address=_event_address;
 @synthesize garbageCollection=_garbageCollection;
@@ -293,6 +297,9 @@
         
     self.descriptionSectionView = [[UIView alloc] init];
     [self.myScrollView addSubview:self.descriptionSectionView];
+    
+    self.linkSectionView = [[UIView alloc] init];
+    [self.myScrollView addSubview:self.linkSectionView];
     
     self.view_height = 0;
 }
@@ -952,7 +959,7 @@
         [subview removeFromSuperview];
     }
     NSString *description=[event objectForKey:@"description"];
-    if ([description isEqual:[NSNull null]]) {
+    if ([description isEqual:[NSNull null]]||[description isEqual:@""]) {
         return;
     }
     UIImageView *descIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X,DVC_ICON_Y,DVC_ICON_SIZE,DVC_ICON_SIZE)];
@@ -985,6 +992,37 @@
     [self.myScrollView addSubview:self.descriptionSectionView];
     
     self.view_height += self.descriptionSectionView.frame.size.height+15;
+    UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
+    [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
+    [self.myScrollView addSubview:seperator];
+    self.view_height += 1;
+}
+
+- (void)handleEventLink:(NSDictionary *)event {
+    self.event_link = [event objectForKey:@"source_url"];
+    if ([self.event_link isEqual:[NSNull null]]||[self.event_link isEqual:@""]) {
+        return;
+    }
+    for (UIView *subview in [self.linkSectionView subviews]) {
+        [subview removeFromSuperview];
+    }
+    self.linkSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_LINK_VIEW_HEIGHT);
+    
+    UIImageView *linkIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X, DVC_ICON_Y, DVC_ICON_SIZE, DVC_ICON_SIZE)];
+    [linkIcon setImage:[UIImage imageNamed:LINK_ICON]];
+    [linkIcon setAlpha:0.7];
+    [self.linkSectionView addSubview:linkIcon];
+    
+    UILabel *website = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
+    [website setText:@"Website"];
+    [website setBackgroundColor:[UIColor clearColor]];
+    [website setFont:[UIFont boldSystemFontOfSize:14]];
+    [website setTextColor:[UIColor darkGrayColor]];
+    website.lineBreakMode = UILineBreakModeClip;
+    website.numberOfLines = 1;
+    [self.linkSectionView addSubview:website];
+    
+    self.view_height += self.linkSectionView.frame.size.height;
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
     [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
     [self.myScrollView addSubview:seperator];
@@ -1690,6 +1728,7 @@
         [self handleEventTime:event];
         [self handleEventAddr:event];
         [self handleEventDesc:event];
+        [self handleEventLink:event];
         [self handleInvitedPeoplePart:event];
         [self handleLikedPeoplePart:event];
         [self handleTheCommentPart:event];
@@ -1964,6 +2003,9 @@
             [self performSegueWithIdentifier:@"ViewJoinedPeopleProfile" sender:self];
         }
     }
+}
+
+-(void)tapLink:(UITapGestureRecognizer *)tapGR {
 }
 
 #pragma mark - aler view delegate method implementation
