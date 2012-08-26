@@ -618,8 +618,8 @@
     [self.navigationItem setBackBarButtonItem:backButton];
    
     self.mySegmentControl.frame = CGRectMake(0, 70, 310, 40);
-    UIImage *segmentSelected = [[UIImage imageNamed:@"tab_selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentSelected = [[UIImage imageNamed:@"tab_unselected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIImage *segmentUnselected = [[UIImage imageNamed:@"tab_selected.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.mySegmentControl setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     [self.mySegmentControl setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
