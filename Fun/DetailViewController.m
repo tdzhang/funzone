@@ -11,6 +11,7 @@
 #import "eventComment.h"
 #import <Accounts/Accounts.h>
 #import <Twitter/TWTweetComposeViewController.h>
+#import "detailLinkViewController.h"
 #import "GlobalConstant.h"
 
 @interface DetailViewController ()<MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
@@ -935,17 +936,17 @@
     [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
     right_Arrow.alpha = 0.6;
     [self.locationSectionView addSubview:right_Arrow];
+    
+    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 0, 80, 40)];
+    [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.locationSectionView addSubview:showMapButton];
     self.latitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
     self.longitude=[NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
     if (self.latitude.doubleValue < 0.1 && self.longitude.doubleValue < 0.1) {
         [map_indicator_label setHidden:YES];
         [right_Arrow setHidden:YES];
+        [showMapButton setHidden:YES];
     }
-
-    
-    UIButton *showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(230, 0, 80, 40)];
-    [showMapButton addTarget:self action:@selector(showMapButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.locationSectionView addSubview:showMapButton];
     
     self.view_height += self.locationSectionView.frame.size.height;
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
@@ -1007,6 +1008,8 @@
         [subview removeFromSuperview];
     }
     self.linkSectionView.frame = CGRectMake(0, self.view_height, 320, DVC_LINK_VIEW_HEIGHT);
+    UITapGestureRecognizer *tapGR=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLink:)];
+    [self.linkSectionView addGestureRecognizer:tapGR];
     
     UIImageView *linkIcon = [[UIImageView alloc] initWithFrame:CGRectMake(DVC_ICON_X, DVC_ICON_Y, DVC_ICON_SIZE, DVC_ICON_SIZE)];
     [linkIcon setImage:[UIImage imageNamed:LINK_ICON]];
@@ -1021,6 +1024,11 @@
     website.lineBreakMode = UILineBreakModeClip;
     website.numberOfLines = 1;
     [self.linkSectionView addSubview:website];
+    
+    UIImageView *right_Arrow = [[UIImageView alloc] initWithFrame:CGRectMake(303, 18, 4, 7)];
+    [right_Arrow setImage:[UIImage imageNamed:@"DVC_disclosure.png"]];
+    right_Arrow.alpha = 0.6;
+    [self.linkSectionView addSubview:right_Arrow];
     
     self.view_height += self.linkSectionView.frame.size.height;
     UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view_height, 320, 1)];
@@ -1644,6 +1652,10 @@
         DiscussionViewController* DVC=(DiscussionViewController*)segue.destinationViewController;
         [DVC preSetTheEventID:self.event_id andSetTheSharedEventID:self.shared_event_id withEventTitle:self.event_title withEventTime:self.event_time withLocationName:self.location_name withInvitees:[self.invitee copy] andSetIsOwner:self.isEventOwner];
     }
+    else if([segue.identifier isEqualToString:@"webView"]){
+        detailLinkViewController *DVC = (detailLinkViewController*)segue.destinationViewController;
+        [DVC preSetLinkUrl:[NSURL URLWithString:self.event_link]];
+    }
 }
 
 //implement NSURLconnection delegate methods to deal with the returned data
@@ -2006,6 +2018,7 @@
 }
 
 -(void)tapLink:(UITapGestureRecognizer *)tapGR {
+    [self performSegueWithIdentifier:@"webView" sender:self];
 }
 
 #pragma mark - aler view delegate method implementation

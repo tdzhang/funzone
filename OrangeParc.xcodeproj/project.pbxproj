@@ -331,6 +331,8 @@
 		5C17911D15EA0DC90097DA44 /* tab_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C17911B15EA0DC80097DA44 /* tab_unselected.png */; };
 		5C17911E15EA0DC90097DA44 /* tab_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C17911C15EA0DC80097DA44 /* tab_selected.png */; };
 		5C271FF115EA298100E2D76D /* DVC_Link.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C271FF015EA298100E2D76D /* DVC_Link.png */; };
+		5C271FF915EA397500E2D76D /* detailLinkViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C271FF715EA397500E2D76D /* detailLinkViewController.h */; };
+		5C271FFA15EA397500E2D76D /* detailLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C271FF815EA397500E2D76D /* detailLinkViewController.m */; };
 		5CAD2DBF15E2F5170097CF51 /* DVC_Addr.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD2DBB15E2F5170097CF51 /* DVC_Addr.png */; };
 		5CAD2DC015E2F5170097CF51 /* DVC_Comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD2DBC15E2F5170097CF51 /* DVC_Comment.png */; };
 		5CAD2DC115E2F5170097CF51 /* DVC_Invitee.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD2DBD15E2F5170097CF51 /* DVC_Invitee.png */; };
@@ -748,6 +750,8 @@
 		5C17911B15EA0DC80097DA44 /* tab_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_unselected.png; sourceTree = "<group>"; };
 		5C17911C15EA0DC80097DA44 /* tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_selected.png; sourceTree = "<group>"; };
 		5C271FF015EA298100E2D76D /* DVC_Link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DVC_Link.png; sourceTree = "<group>"; };
+		5C271FF715EA397500E2D76D /* detailLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailLinkViewController.h; sourceTree = "<group>"; };
+		5C271FF815EA397500E2D76D /* detailLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailLinkViewController.m; sourceTree = "<group>"; };
 		5CAD2DBB15E2F5170097CF51 /* DVC_Addr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DVC_Addr.png; sourceTree = "<group>"; };
 		5CAD2DBC15E2F5170097CF51 /* DVC_Comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DVC_Comment.png; sourceTree = "<group>"; };
 		5CAD2DBD15E2F5170097CF51 /* DVC_Invitee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DVC_Invitee.png; sourceTree = "<group>"; };
@@ -1260,6 +1264,8 @@
 				463B9BF515A0F9210087CDBA /* DetailViewController.m */,
 				0F8D008715B67CBC009A21E6 /* eventComment.h */,
 				0F8D008815B67CBC009A21E6 /* eventComment.m */,
+				5C271FF715EA397500E2D76D /* detailLinkViewController.h */,
+				5C271FF815EA397500E2D76D /* detailLinkViewController.m */,
 			);
 			name = "Detail Page";
 			sourceTree = "<group>";
@@ -1777,6 +1783,7 @@
 				0F8B1E8C15E9372100CBD517 /* FindFriendTVCDelegate.h in Headers */,
 				0F8B1E8E15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h in Headers */,
 				0F8B1E9515E9DBE900CBD517 /* TutorialPageConstant.h in Headers */,
+				5C271FF915EA397500E2D76D /* detailLinkViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2142,6 +2149,7 @@
 				0F06149F15E8ABE200A04591 /* MagicViewController.m in Sources */,
 				0F0614A815E8B78B00A04591 /* NONEANIMATIONSegue.m in Sources */,
 				0F8B1E9615E9DBE900CBD517 /* TutorialPageConstant.m in Sources */,
+				5C271FFA15EA397500E2D76D /* detailLinkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
