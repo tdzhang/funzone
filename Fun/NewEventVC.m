@@ -545,7 +545,7 @@
 
 #pragma mark - cancel/create/delete/edite event to server
 - (IBAction)cancelButtonClicked:(id)sender {
-    UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave the page? all the data will be lost." message:nil delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
+    UIAlertView *cameraNotSupport = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to leave this page? All the information you entered will be lost." message:nil delegate:self  cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
     cameraNotSupport.delegate=self;
     [cameraNotSupport show];
 }
@@ -1443,7 +1443,7 @@
         }
     }
     
-    if ([alertView.title isEqualToString:@"Are you sure you want to leave the page? all the data will be lost."]) {
+    if ([alertView.title isEqualToString:@"Are you sure you want to leave this page? All the information you entered will be lost."]) {
         if (buttonIndex == 0) {
             [self.navigationController popViewControllerAnimated:YES];
         }
