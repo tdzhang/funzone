@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIView *segmentationView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 
+@property(strong,nonatomic) NSMutableDictionary *cellsForSeg1;
+@property(strong,nonatomic) NSMutableDictionary *cellsForSeg2;
+
 @property(nonatomic,strong)NSMutableArray* activities; //which is used to hold the array that hold the results to show
 @property(nonatomic,strong)NSMutableArray* activities_conversation; //used to hold conversation activities
 @property(nonatomic,strong)NSMutableArray* activities_normal; // used to hold other normal activitise
@@ -39,7 +42,24 @@
 @synthesize tapped_element=_tapped_element;
 @synthesize send_via=_send_via;
 
+@synthesize cellsForSeg1=_cellsForSeg1;
+@synthesize cellsForSeg2=_cellsForSeg2;
+
 #pragma mark - self defined setter and getter
+-(NSMutableDictionary *)cellsForSeg1{
+    if (!_cellsForSeg1) {
+        _cellsForSeg1=[NSMutableDictionary dictionary];
+    }
+    return _cellsForSeg1;
+}
+
+-(NSMutableDictionary *)cellsForSeg2{
+    if (!_cellsForSeg2) {
+        _cellsForSeg2=[NSMutableDictionary dictionary];
+    }
+    return _cellsForSeg2;
+}
+
 -(NSMutableArray *)activities{
     if (!_activities) {
         _activities=[NSMutableArray array];
@@ -217,44 +237,66 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.mySegmentControl selectedSegmentIndex]==0) {
-        //for the normal activities
-        static NSString *CellIdentifier = @"ActivityTableViewCell";
-        
-        ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+        if ([self.cellsForSeg1 objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]]) {
+            return [self.cellsForSeg1 objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        }
+        else{
+            //for the normal activities
+            static NSString *CellIdentifier = @"ActivityTableViewCell";
             
-            for (UIView *view in views) {
-                if([view isKindOfClass:[UITableViewCell class]])
-                {
-                    cell = (ActivityTableViewCell*)view;
+            ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+                
+                for (UIView *view in views) {
+                    if([view isKindOfClass:[UITableViewCell class]])
+                    {
+                        cell = (ActivityTableViewCell*)view;
+                    }
                 }
             }
+            [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
+            
+            [self.cellsForSeg1 setObject:cell forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+             return cell;
         }
-        [cell resetWithActivityObject:[self.activities objectAtIndex:indexPath.row]];
-        return cell;
+        
+       
     }
     else{
-        //for the conversation activities
-        static NSString *CellIdentifier = @"ActivityTableViewCell";
-        
-        ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+        if ([self.cellsForSeg2 objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]]) {
+            return [self.cellsForSeg2 objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+        }
+        else{
+            //for the conversation activities
+            static NSString *CellIdentifier = @"ActivityTableViewCell";
             
-            for (UIView *view in views) {
-                if([view isKindOfClass:[UITableViewCell class]])
-                {
-                    cell = (ActivityTableViewCell*)view;
+            ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"ActivityTableViewCell" owner:nil options:nil];
+                
+                for (UIView *view in views) {
+                    if([view isKindOfClass:[UITableViewCell class]])
+                    {
+                        cell = (ActivityTableViewCell*)view;
+                    }
                 }
             }
+            [cell resetWithConversationActivityObject:[self.activities objectAtIndex:indexPath.row]];
+            
+            [self.cellsForSeg2 setObject:cell forKey:[NSString stringWithFormat:@"%d",indexPath.row]];
+            return cell;
         }
+<<<<<<< HEAD
         [cell resetWithConversationActivityObject:[self.activities objectAtIndex:indexPath.row]];
         NSLog(@"!!!!%d",cell.isViewed);
         if (cell.isViewed == 0) {
             cell.backgroundColor = [UIColor lightGrayColor];
         }
         return cell;
+=======
+        
+>>>>>>> expand the link edit extent
     }
 }
 
@@ -301,6 +343,8 @@
 */
 #pragma mark - Start Fetching Data
 -(void)startFetchingActivityData{
+    [self.cellsForSeg1 removeAllObjects];
+    [self.cellsForSeg2 removeAllObjects];
     //fetching the normal activity data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -380,6 +424,9 @@
 }
 
 -(void)RefreshAction{
+    [self.cellsForSeg1 removeAllObjects];
+    [self.cellsForSeg2 removeAllObjects];
+    
     //fetching the normal activity data
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
