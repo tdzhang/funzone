@@ -72,9 +72,6 @@
     self.activityPicImageView.clipsToBounds = YES;
     [self.activityPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.activityPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-    self.activityPicImageView.layer.backgroundColor = [[UIColor colorWithRed:250/255.0 green:150/255.0 blue:20/255.0 alpha:1] CGColor];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.activityPicImageView.bounds];
-    self.activityPicImageView.layer.shadowPath = path.CGPath;
     
     
     //-------------------User Profile Image View------------------//
@@ -84,8 +81,7 @@
     [self.userPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.userPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.userPicImageView.layer.borderWidth = 1;
-    UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:self.userPicImageView.bounds];
-    self.userPicImageView.layer.shadowPath = path1.CGPath;
+
     
     NSURL *imageUrl=[NSURL URLWithString:element.user_pic];
     //deal with the profile image
@@ -127,16 +123,15 @@
 
     //-----------------------event picture display-----------------------//
     [self.eventPicImageView setFrame:CGRectMake(271, 7, 40, 40)];
-    self.eventPicImageView.layer.cornerRadius = 2;
+    self.eventPicImageView.layer.cornerRadius = 4;
     self.eventPicImageView.clipsToBounds = YES;
     [self.eventPicImageView setContentMode:UIViewContentModeScaleAspectFill];
     self.eventPicImageView.layer.borderColor = [[UIColor darkGrayColor] CGColor];
     self.eventPicImageView.layer.borderWidth = 1;
-    UIBezierPath *path2 = [UIBezierPath bezierPathWithRect:self.eventPicImageView.bounds];
-    self.eventPicImageView.layer.shadowPath = path2.CGPath;
-    if ([[NSString stringWithFormat:@"%@",element.event_pic] isEqualToString:@"<null>"]) {
-        element.event_pic=DEFAULT_IMAGE_PLACEHOLDER;
-    }
+
+//    if ([[NSString stringWithFormat:@"%@",element.event_pic] isEqualToString:@"<null>"]) {
+//        element.event_pic=DEFAULT_IMAGE_PLACEHOLDER;
+//    }
     NSLog(@"-->%@",element.event_pic);
     NSURL *eventUrl=[NSURL URLWithString:element.event_pic];
     //deal with the profile image
@@ -220,9 +215,8 @@
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined OrangeParc.",self.user_name]];
         self.activityDescriptionLabel.frame = CGRectMake(65, 8, 246, 37);
         self.activityPicImageView.hidden = YES;
-
 #warning need further other image
-        //[self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
+        [self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
     }
     
     // No activity found

@@ -1330,7 +1330,7 @@
         comment_user_name_label.numberOfLines = 0;
         
         CGSize maximumLabelSize1 = CGSizeMake(100,9999);
-        CGSize expectedLabelSize1 = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:12] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
+        CGSize expectedLabelSize1 = [[NSString stringWithFormat:@"%@:",comment.user_name] sizeWithFont:[UIFont boldSystemFontOfSize:12] constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
         CGSize expectedWidth = [comment_user_name sizeWithFont:[UIFont boldSystemFontOfSize:12] forWidth:100 lineBreakMode:UILineBreakModeWordWrap];
         
         CGRect newFrame1 = comment_user_name_label.frame;
