@@ -18,7 +18,6 @@
     
     if(internetStatus == NotReachable) {
         UIAlertView *errorView;
-# warning Change this to industry standard
         errorView = [[UIAlertView alloc]
                      initWithTitle: NSLocalizedString(@"Network error", @"Network error")
                      message: NSLocalizedString(@"No internet connection found. Please change your network settings.", @"Network error")

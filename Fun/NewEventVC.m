@@ -983,13 +983,13 @@
 
 #pragma mark - action sheet
 - (IBAction)InviteFriendButtonClicked:(id)sender {
-    if ([self.invitedFriend count]==0) {
+//    if ([self.invitedFriend count]==0) {
         [self performSegueWithIdentifier:@"StartInviteFriend" sender:self];
-    } else {
-        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Invite Friends" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Remove Friends",@"Add Friends",nil];
-        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-        [pop showFromTabBar:self.tabBarController.tabBar];
-    }
+//    } else {
+//        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Invite Friends" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Remove Friends",@"Add Friends",nil];
+//        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+//        [pop showFromTabBar:self.tabBarController.tabBar];
+//    }
 }
 
 

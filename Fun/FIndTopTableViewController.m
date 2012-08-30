@@ -72,7 +72,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+/*
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {
@@ -96,6 +96,7 @@
                                 nil];
         [funAppdelegate.facebook authorize:permissions];
     }
+ */
     
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/top_users",CONNECT_DOMIAN_NAME]];
 

@@ -73,18 +73,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT" userLabel="Scroll View- My event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="255"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
                                 </connections>
                             </scrollView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SQy-2V-Vvf" userLabel="Scroll View - joined event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="255"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="36q-I3-gQR"/>
@@ -1054,7 +1054,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2053,11 +2053,11 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Php-mD-Smt">
-                                <rect key="frame" x="0.0" y="120" width="320" height="251"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="344"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="ofe-Y1-2Da" id="IqW-7o-Nbk"/>
@@ -2207,7 +2207,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBM-Nv-4TO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="GBr-L9-MMr" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="l3R-0z-I3I">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2241,7 +2241,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-6h-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="9i7-54-eHW" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="fok-68-c8Y">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2383,11 +2383,25 @@ Find us @OrangeParc.com</string>
                                     <outlet property="delegate" destination="LNn-0V-MCE" id="VA0-u1-P0N"/>
                                 </connections>
                             </textField>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Qg6-Fl-05t">
+                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="253" style="plain" systemItem="fixedSpace" id="Lf2-cz-kfb"/>
+                                    <barButtonItem title="Done" id="PSr-0X-bWC">
+                                        <connections>
+                                            <action selector="leaveEditMode:" destination="LNn-0V-MCE" id="2JV-2P-wW9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="PSr-0X-bWC" id="FH2-og-e4c"/>
                         <outlet property="facebookLoginButton" destination="Vn4-cc-xG7" id="qQx-dW-grW"/>
+                        <outlet property="keyboardToolbar" destination="Qg6-Fl-05t" id="stY-wU-52W"/>
                         <outlet property="normalLoginButton" destination="s9n-ag-BUG" id="LqM-pt-gv5"/>
                         <outlet property="userName" destination="FAf-5x-Ucj" id="hsc-tX-e1a"/>
                         <outlet property="userPassword" destination="SEc-tB-M73" id="xpL-pr-3R3"/>
@@ -2512,13 +2526,27 @@ Find us @OrangeParc.com</string>
                                     <outlet property="delegate" destination="zcT-6n-80h" id="N4G-9J-uoe"/>
                                 </connections>
                             </textField>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GYc-14-4Pm">
+                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="257" style="plain" systemItem="fixedSpace" id="Kzu-Ah-Uf2"/>
+                                    <barButtonItem title="Done" id="pmt-oW-aTq">
+                                        <connections>
+                                            <action selector="leaveEditMode:" destination="zcT-6n-80h" id="xv5-rt-szF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="F5n-Xp-4QA"/>
                     <connections>
+                        <outlet property="doneButton" destination="pmt-oW-aTq" id="civ-Ka-FIh"/>
                         <outlet property="emailTextField" destination="fMU-Iq-4iA" id="CAg-Vk-zcx"/>
                         <outlet property="firstNameTextField" destination="DUY-JA-qGC" id="E8n-xV-CJf"/>
+                        <outlet property="keyboardToolbar" destination="GYc-14-4Pm" id="W1Q-fS-hCq"/>
                         <outlet property="passwordTextField" destination="qgB-Rh-9dd" id="C4R-kO-U2A"/>
                         <outlet property="rePasswordTextField" destination="3nc-51-k7C" id="XhX-oL-1Rr"/>
                     </connections>
@@ -2943,7 +2971,7 @@ Find us @OrangeParc.com</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -3360,7 +3388,6 @@ Find us @OrangeParc.com</string>
         <class className="DiscussionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="CommentEnterButtonClicked:"/>
                 <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
             </relationships>
@@ -3397,7 +3424,9 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
@@ -3506,6 +3535,8 @@ Find us @OrangeParc.com</string>
         <class className="TimeChooseViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
             <relationships>
+                <relationship kind="action" name="DecideToCancel:"/>
+                <relationship kind="action" name="ValueChanged:" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
             </relationships>
@@ -3526,8 +3557,14 @@ Find us @OrangeParc.com</string>
         <class className="registerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelRegisterNew:"/>
+                <relationship kind="action" name="leaveEditMode:"/>
+                <relationship kind="action" name="registerButtonBlicked:"/>
+                <relationship kind="action" name="stillWantToSignInWithFaceBook:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
             </relationships>
@@ -3539,13 +3576,13 @@ Find us @OrangeParc.com</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="e9f-Ec-HCG"/>
+        <segue reference="QLm-4G-UTH"/>
+        <segue reference="CCE-Bo-yKv"/>
         <segue reference="Idn-d1-X1d"/>
-        <segue reference="HUl-1w-jPL"/>
         <segue reference="eX7-7v-GIv"/>
         <segue reference="uWA-gI-Coc"/>
         <segue reference="EMN-UC-MwH"/>
-        <segue reference="CCE-Bo-yKv"/>
+        <segue reference="m3w-7p-4nh"/>
         <segue reference="dBi-XW-FfW"/>
     </inferredMetricsTieBreakers>
 </document>

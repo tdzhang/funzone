@@ -216,7 +216,7 @@
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined OrangeParc.",self.user_name]];
         self.activityDescriptionLabel.frame = CGRectMake(65, 8, 246, 37);
         self.activityPicImageView.hidden = YES;
-#warning need further other image
+#warning need further other default image
         [self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
     }
     

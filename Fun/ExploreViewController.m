@@ -102,6 +102,16 @@
     
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    //-------------------------------------------------->
+    //need further develop
+//    //NSLog(@"%@,%@,%@",[defaults objectForKey:@"login_auth_token" ],[defaults objectForKey:@"FBAccessTokenKey"],[defaults objectForKey:@"FBExpirationDateKey"]);
+//    [defaults setValue:@"priHpc8XGxktvURXgTBY" forKey:@"login_auth_token"];
+//    [defaults setValue:@"BAAGKdo9mb0gBALet8L3To9yYfoLavX61boA5BNZCajbIM9O1ZCDqP9KhNXZB3cr9hRZCgC0potk01vKljt6gkIQ2XigsgIEdSyNiocbZBYKXojOGweQWLUgZBgv6ZBE4PzHdsUVLShhHIDo2Cki2dIm" forKey:@"FBAccessTokenKey"];
+//    [defaults setValue:@"2012-10-25 15:42:20 +0000" forKey:@"FBExpirationDateKey"];
+//    [defaults synchronize];
+    //-------------------------------------------------->
+    
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];

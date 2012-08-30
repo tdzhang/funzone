@@ -418,6 +418,11 @@
     return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". I want to invite you to join me.\nYou can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
+//twitter share message
+-(NSString*)twitterShareMessage{
+    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". You can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
+}
+
 //(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner{
     self.event_id = event_id;
@@ -1513,7 +1518,7 @@
             if (twitterClass) {
                 if ([TWTweetComposeViewController canSendTweet]) {
                     TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-                    [tweetViewController setInitialText:@"test"];
+                    [tweetViewController setInitialText:[self twitterShareMessage]];
                     if (self.eventImageView.image != nil) {
                         [tweetViewController addImage:self.eventImageView.image];
                     }

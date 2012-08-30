@@ -464,7 +464,6 @@
             }
             else{
                 //connect error
-#warning handle connection error
             }
             
         });

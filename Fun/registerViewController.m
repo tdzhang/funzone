@@ -16,6 +16,13 @@
 
 @property (nonatomic,strong) NSMutableData *data;
 @property (nonatomic,strong) NSString *currentConnection;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *keyboardToolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+@property (nonatomic) BOOL isScreenUp;
+
+
 @end
 
 @implementation registerViewController
@@ -26,6 +33,10 @@
 
 @synthesize data=_data;
 @synthesize currentConnection=_currentConnection;
+@synthesize keyboardToolbar;
+@synthesize doneButton;
+
+@synthesize isScreenUp=_isScreenUp;
 
 #pragma mark - View life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,6 +51,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self.keyboardToolbar setHidden:YES];
+    
+    
+	//used to add the additional keyboard done toobar
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    
     //add notification receiver
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
@@ -47,6 +66,9 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
+    //reset the keyboard addititonal "done" tool bar
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     //delete notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PushNotificationHandler SendAPNStokenToServer];
@@ -66,6 +88,8 @@
     [self setPasswordTextField:nil];
     [self setRePasswordTextField:nil];
     [self setFirstNameTextField:nil];
+    [self setKeyboardToolbar:nil];
+    [self setDoneButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -335,6 +359,43 @@
     }
 }
 
+#pragma mark - keyboard toolbar related method
+- (void)keyboardWillShow:(NSNotification *)notification {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    //[self.labelEventTitleHolder setHidden:YES];
+    [self.keyboardToolbar setHidden:NO];
+    CGRect frame = self.keyboardToolbar.frame;
+    if (self.isScreenUp) {
+        frame.origin.y = self.view.frame.size.height - 140.0;
+    } else {
+        frame.origin.y = self.view.frame.size.height - 260.0;
+    }
+    
+    self.keyboardToolbar.frame = frame;
+    [self.keyboardToolbar setHidden:FALSE];
+    UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:0];
+    doneButtonKeyBoard.target = self;
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.25];
+	[self.keyboardToolbar setHidden:YES];
+	CGRect frame = self.keyboardToolbar.frame;
+	frame.origin.y = self.view.frame.size.height;
+	self.keyboardToolbar.frame = frame;
+	
+	[UIView commitAnimations];
+}
+
+- (IBAction)leaveEditMode:(id)sender {
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.rePasswordTextField resignFirstResponder];
+    [self.firstNameTextField resignFirstResponder];
+}
 
 #pragma mark - testfield delegate method
 ////////////////////////////////////////////////
@@ -347,11 +408,14 @@
 //the next 3 method deal with the keyboard covering with the text field
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    self.isScreenUp=NO;
     if ([textField isEqual:self.passwordTextField]) {
         [self animateTextField:textField up:YES];
+        self.isScreenUp=YES;
     }
     if ([textField isEqual:self.rePasswordTextField]) {
         [self animateTextField:textField up:YES];
+        self.isScreenUp=YES;
     }
     //if edit the add cost textfield, the whole view need to 
     //scroll up, get rid of the keyboard covering

@@ -18,6 +18,9 @@
 @property (nonatomic,strong) NSString *currentConnection;
 @property (nonatomic,weak) CLLocationManager *myLocationManager;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *keyboardToolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
 
 -(void)faceBookLoginFinished; //deal with the finish of facebook login
 @end
@@ -31,6 +34,8 @@
 @synthesize currentConnection;
 @synthesize parentVC=_parentVC;
 @synthesize myLocationManager=_myLocationManager;
+@synthesize keyboardToolbar;
+@synthesize doneButton;
 
 #pragma mark - view life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,6 +61,14 @@
     //set the password field property
     self.userPassword.secureTextEntry=YES;
     
+    [self.keyboardToolbar setHidden:YES];
+    
+	//used to add the additional keyboard done toobar
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    
+    
     //add notification receiver
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faceBookLoginFinished) name:@"faceBookLoginFinished" object:nil];
 }
@@ -65,6 +78,10 @@
     //delete notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [PushNotificationHandler SendAPNStokenToServer];
+    
+    //reset the keyboard addititonal "done" tool bar
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -80,6 +97,8 @@
     [self setUserPassword:nil];
     [self setNormalLoginButton:nil];
     [self setFacebookLoginButton:nil];
+    [self setKeyboardToolbar:nil];
+    [self setDoneButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -327,6 +346,39 @@
         NSLog(@"12312342");
     }
 }
+
+#pragma mark - keyboard toolbar related
+- (void)keyboardWillShow:(NSNotification *)notification {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    //[self.labelEventTitleHolder setHidden:YES];
+    [self.keyboardToolbar setHidden:NO];
+    CGRect frame = self.keyboardToolbar.frame;
+    frame.origin.y = self.view.frame.size.height - 140;
+    self.keyboardToolbar.frame = frame;
+    [self.keyboardToolbar setHidden:FALSE];
+    UIBarButtonItem *doneButtonKeyBoard = [self.keyboardToolbar.items objectAtIndex:0];
+    doneButtonKeyBoard.target = self;
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.25];
+	[self.keyboardToolbar setHidden:YES];
+	CGRect frame = self.keyboardToolbar.frame;
+	frame.origin.y = self.view.frame.size.height;
+	self.keyboardToolbar.frame = frame;
+	
+	[UIView commitAnimations];
+}
+
+- (IBAction)leaveEditMode:(id)sender {
+
+    [self.userName resignFirstResponder];
+    [self.userPassword resignFirstResponder];
+}
+
 
 #pragma mark - testfield delegate method
 ////////////////////////////////////////////////

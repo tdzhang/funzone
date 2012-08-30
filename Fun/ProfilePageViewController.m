@@ -225,7 +225,6 @@
             [request startSynchronous];
             
             int code=[request responseStatusCode];
-            NSLog(@"code:%d",code);
             
             dispatch_async( dispatch_get_main_queue(),^{
                 if (code==200) {
