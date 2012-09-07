@@ -712,21 +712,20 @@
                 [subview removeFromSuperview];
             }
             
-            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            loading.layer.cornerRadius =15;
+            loading.opaque = NO;
             loading.backgroundColor =[UIColor clearColor];
-            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
-            loadLabel.text =@"LOADING...";
-            loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
-            loadLabel.textAlignment = UITextAlignmentCenter;
-            loadLabel.textColor =[UIColor darkGrayColor];
+            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
+            [loadLabel setBackgroundColor:[UIColor clearColor]];
+            loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+            loadLabel.textAlignment =UITextAlignmentCenter;
+            loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
             loadLabel.backgroundColor =[UIColor clearColor];
-            [loadLabel setShadowColor:[UIColor whiteColor]];
-            [loadLabel setShadowOffset:CGSizeMake(0, 1)];
             [loading addSubview:loadLabel];
             UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            spinning.frame =CGRectMake(115,15,20,20);
-            [spinning startAnimating];
-            [loading addSubview:spinning];
+            spinning.frame =CGRectMake(120,20,80,80);
+            [spinning startAnimating];[loading addSubview:spinning];
             [self.refreshView addSubview:loading];
             
             [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -884,24 +883,25 @@
             for(UIView *subview in [self.refreshViewdown subviews]) {
                 [subview removeFromSuperview];
             }
-            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+            UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            [underloading setBackgroundColor:[UIColor clearColor]];
+            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            loading.layer.cornerRadius =15;
+            loading.opaque = NO;
             loading.backgroundColor =[UIColor clearColor];
-            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
-            loadLabel.text =@"LOADING...";
-            loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
-            loadLabel.textAlignment = UITextAlignmentCenter;
-            loadLabel.textColor =[UIColor darkGrayColor];
+            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
+            [loadLabel setBackgroundColor:[UIColor clearColor]];
+            loadLabel.text =@"Loading More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+            loadLabel.textAlignment =UITextAlignmentCenter;
+            loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
             loadLabel.backgroundColor =[UIColor clearColor];
-            [loadLabel setShadowColor:[UIColor whiteColor]];
-            [loadLabel setShadowOffset:CGSizeMake(0, 1)];
             [loading addSubview:loadLabel];
             UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            spinning.frame =CGRectMake(115,15,20,20);
-            [spinning startAnimating];
-            [loading addSubview:spinning];
-            [self.refreshView addSubview:loading];
+            spinning.frame = CGRectMake(120,20,80,80);
+            [spinning startAnimating];[loading addSubview:spinning];
             self.refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_ELEMENT_VIEW_HEIGHT*([self.blockViews count]/2+[self.blockViews count]%2),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
             [self.refreshViewdown removeFromSuperview];
+            [self.refreshViewdown addSubview:underloading];
             [self.refreshViewdown addSubview:loading];
             [self.mainScrollView addSubview:self.refreshViewdown];
             self.mainScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.blockViews count]/2+[self.blockViews count]%2+0.5)*PROFILE_ELEMENT_VIEW_HEIGHT+5);
@@ -1040,22 +1040,21 @@
                 [subview removeFromSuperview];
             }
             
-            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            loading.layer.cornerRadius =15;
+            loading.opaque = NO;
             loading.backgroundColor =[UIColor clearColor];
-            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
-            loadLabel.text =@"LOADING...";
-            loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
-            loadLabel.textAlignment = UITextAlignmentCenter;
-            loadLabel.textColor =[UIColor darkGrayColor];
+            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
+            [loadLabel setBackgroundColor:[UIColor clearColor]];
+            loadLabel.text =@"Loading";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+            loadLabel.textAlignment =UITextAlignmentCenter;
+            loadLabel.textColor =[UIColor colorWithWhite:0.2f alpha:0.5f];
             loadLabel.backgroundColor =[UIColor clearColor];
-            [loadLabel setShadowColor:[UIColor whiteColor]];
-            [loadLabel setShadowOffset:CGSizeMake(0, 1)];
             [loading addSubview:loadLabel];
             UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            spinning.frame =CGRectMake(115,15,20,20);
-            [spinning startAnimating];
-            [loading addSubview:spinning];
-            [self.refreshView addSubview:loading];
+            spinning.frame =CGRectMake(120,20,80,80);
+            [spinning startAnimating];[loading addSubview:spinning];
+            [self.joined_refreshView addSubview:loading];
             
             [self.joinedScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
             
@@ -1212,24 +1211,25 @@
             for(UIView *subview in [self.joined_refreshViewdown subviews]) {
                 [subview removeFromSuperview];
             }
-            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+            UIView* underloading=[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            [underloading setBackgroundColor:[UIColor clearColor]];
+            UIView*loading =[[UIView alloc] initWithFrame:CGRectMake(0,0,EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
+            loading.layer.cornerRadius =15;
+            loading.opaque = NO;
             loading.backgroundColor =[UIColor clearColor];
-            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(130,15,80,20)];
-            loadLabel.text =@"LOADING...";
-            loadLabel.font =[UIFont boldSystemFontOfSize:12.0f];
-            loadLabel.textAlignment = UITextAlignmentCenter;
-            loadLabel.textColor =[UIColor darkGrayColor];
+            UILabel*loadLabel =[[UILabel alloc] initWithFrame:CGRectMake(90,10,140,40)];
+            [loadLabel setBackgroundColor:[UIColor clearColor]];
+            loadLabel.text =@"Loading More";loadLabel.font =[UIFont boldSystemFontOfSize:18.0f];
+            loadLabel.textAlignment =UITextAlignmentCenter;
+            loadLabel.textColor =[UIColor colorWithWhite:0.4f alpha:1.0f];
             loadLabel.backgroundColor =[UIColor clearColor];
-            [loadLabel setShadowColor:[UIColor whiteColor]];
-            [loadLabel setShadowOffset:CGSizeMake(0, 1)];
             [loading addSubview:loadLabel];
             UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            spinning.frame =CGRectMake(115,15,20,20);
-            [spinning startAnimating];
-            [loading addSubview:spinning];
-            [self.refreshView addSubview:loading];
+            spinning.frame = CGRectMake(120,20,80,80);
+            [spinning startAnimating];[loading addSubview:spinning];
             self.joined_refreshViewdown= [[UIView alloc] initWithFrame:CGRectMake(0,PROFILE_ELEMENT_VIEW_HEIGHT*([self.joined_blockViews count]/2+[self.joined_blockViews count]%2),EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH,EVENT_ELEMENT_CONTENT_HEIGHT/2)];
             [self.joined_refreshViewdown removeFromSuperview];
+            [self.joined_refreshViewdown addSubview:underloading];
             [self.joined_refreshViewdown addSubview:loading];
             [self.joinedScrollView addSubview:self.joined_refreshViewdown];
             self.joinedScrollView.contentSize =CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, ([self.joined_blockViews count]/2+[self.joined_blockViews count]%2+0.5)*PROFILE_ELEMENT_VIEW_HEIGHT);
