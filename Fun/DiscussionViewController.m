@@ -494,7 +494,6 @@
 }
 
 -(void)tapInviteBlock:(UITapGestureRecognizer *)tapGR {
-    #warning need process the touch event of the discussion invited people
     /*
     if ([self.invitee count]==0) {
         return;
@@ -519,7 +518,6 @@
 
 - (IBAction)CommentEnterButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
-#warning strip white spaces
     if (self.addCommentTextView.text.length>0) {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/create",CONNECT_DOMIAN_NAME]];

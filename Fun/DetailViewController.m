@@ -85,7 +85,6 @@
 @property (nonatomic) int next_page_profile_via; //used to send via information to the next segue (used for show others user profile)
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 @property (nonatomic) BOOL isInvited;  //record if a user is invited to this event
-#warning need to hide/show specific button for isInvited
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 @property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
 @property (nonatomic,strong)NSMutableArray* alreadyInvitedAddressBookFriends;  //the json data of already invited addressbook friend
@@ -1770,7 +1769,6 @@
             self.isEnteredDiscussion=YES;
             [self performSegueWithIdentifier:@"startDiscussion" sender:self];
         }
-#warning fetch original creator info
         //handle the interest people part
 //        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
 //        [self handleTheInterestedPeoplePart];

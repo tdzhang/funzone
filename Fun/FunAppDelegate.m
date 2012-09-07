@@ -204,7 +204,6 @@
     [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-    #warning need a more precise url about the event, not just the image
     ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
     //    WXImageObject *ext = [WXImageObject object];
     //    ext.imageData = [Cache getCachedData:imgurl];
@@ -247,7 +246,6 @@
     [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-#warning need a more precise url about the event, not just the image
     ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
 //    WXImageObject *ext = [WXImageObject object];
 //    ext.imageData = [Cache getCachedData:imgurl];
