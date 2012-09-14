@@ -28,7 +28,7 @@
     }
     else{
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/available",CONNECT_DOMIAN_NAME]];
-        
+        NSLog(@"%@",url);
         ///////////////////////////////////////////////////////////////////////////
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
