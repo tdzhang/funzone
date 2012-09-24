@@ -134,7 +134,6 @@
 //        element.event_pic=DEFAULT_IMAGE_PLACEHOLDER;
 //    }
     NSLog(@"-->%@",element.event_pic);
-    NSLog(@"%@",element.event_pic);
     if (!element.event_pic||[[NSString stringWithFormat:@"%@",element.event_pic] isEqualToString:@"<null>"]) {
         element.event_pic = DEFAULT_IMAGE_PLACEHOLDER;
     }
