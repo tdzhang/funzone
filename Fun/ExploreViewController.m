@@ -164,6 +164,7 @@
     [super viewDidAppear:animated];
     
     [self startTheTutorialPage];
+    //clear the segue circle if has one
     NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
     if ([viewControllers count] > 1)
     {
@@ -178,7 +179,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
@@ -249,7 +250,7 @@
                 //success
                     NSError *error;
                     NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                    NSLog(@"%@",json);
+                    //NSLog(@"%@",json);
                     //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                     self.refresh_page_num=2;
                     
