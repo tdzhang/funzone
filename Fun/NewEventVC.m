@@ -1181,9 +1181,11 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
         NSLog(@"%@",result);
-        NSString *photo=[result objectForKey:@"picture"];
+        NSString *photo=[[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        
         //NSString *facebook_user_id=[result objectForKey:@"id"];
         //set the user photo
+        
         NSURL *url=[NSURL URLWithString:photo];
         if (![Cache isURLCached:url]) {
             //using high priority queue to fetch the image

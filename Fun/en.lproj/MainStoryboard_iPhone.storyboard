@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="pzt-DD-uvy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zoe-hB-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="UCH-1w-VJE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" id="JGj-2K-dkc"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -24,13 +23,13 @@
                         <segue destination="cDZ-cT-Wh3" kind="relationship" relationship="rootViewController" id="Vli-6v-jlz"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zoe-hB-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="1488"/>
         </scene>
         <!--Profile Pic View Controller-->
         <scene sceneID="bnU-rb-qUP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-wR-iYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9K5-6S-mAV" customClass="ProfilePicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WnS-bL-hv5">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -64,13 +63,13 @@
                         <outlet property="largeProfilePic" destination="Ww4-mJ-f0G" id="iTk-Wl-BPo"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5M-wR-iYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3180" y="678"/>
         </scene>
         <!--Profile Page View Controller - Collection-->
         <scene sceneID="8AS-Gi-EOt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -223,13 +222,13 @@
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="nyH-Sx-6aU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gKC-3i-vaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2768" y="1033"/>
         </scene>
         <!--More Table View Controller - More-->
         <scene sceneID="NbL-Ak-CXt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CSW-Vq-fkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="jag-1w-uml" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KUr-qn-diQ">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -409,16 +408,16 @@
                         <outlet property="signOutButton" destination="AkL-O1-5sf" id="L5i-aV-jeG"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSW-Vq-fkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4722" y="4512"/>
         </scene>
         <!--Find Friend Table View Controller - Facebook Friends-->
         <scene sceneID="ykS-s4-dcL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="dKU-YC-n8T">
@@ -454,16 +453,16 @@
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="m3w-7p-4nh"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2rl-4D-FDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6057" y="3940"/>
         </scene>
         <!--Ind Top Table View Controller - Popular Users-->
         <scene sceneID="9tX-NJ-k1z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="81h-zi-eyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="E0p-qY-vtY" customClass="FIndTopTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bbQ-YI-143">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -488,13 +487,13 @@
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="ViewProfile" id="HsQ-l0-8Fo"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="81h-zi-eyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6432" y="4464"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Lep-eO-1kU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="biv-AN-I61" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sIh-4k-1gG" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZQ8-cu-0rI">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -625,13 +624,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="vCV-sm-Tml"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biv-AN-I61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6432" y="5084"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="15">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="mainTabBarController" id="4" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -649,13 +648,13 @@
                         <segue destination="1vV-J8-L5m" kind="relationship" relationship="viewControllers" id="pFT-bk-muS"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-901" y="1012"/>
         </scene>
         <!--Navigation Controller - Popular-->
         <scene sceneID="a4u-tg-tVy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pgR-Sh-5uC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Q8M-ox-ewY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="Popular" id="7"/>
                     <toolbarItems/>
@@ -674,13 +673,13 @@
                         <segue destination="3gf-sz-pKR" kind="relationship" relationship="rootViewController" id="JJc-ow-YZ3"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgR-Sh-5uC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="-734"/>
         </scene>
         <!--Explore View Controller - Popular-->
         <scene sceneID="ZX0-g3-g0t">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5g-Go-z8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="3gf-sz-pKR" customClass="ExploreViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ka2-US-eI1">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -726,13 +725,13 @@
                         <segue destination="HBN-ju-E0g" kind="custom" identifier="StartIntroduceToTheApp" customClass="NONEANIMATIONSegue" id="Noy-c2-bhI"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5g-Go-z8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="-726"/>
         </scene>
         <!--Navigation Controller - Feeds-->
         <scene sceneID="lWy-O6-SIi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bZN-Lv-NBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="eqn-h2-xv5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feeds" id="6"/>
                     <toolbarItems/>
@@ -746,13 +745,13 @@
                         <segue destination="3i5-5a-vO5" kind="relationship" relationship="rootViewController" id="xeI-lM-XxO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bZN-Lv-NBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="298"/>
         </scene>
         <!--Navigation Controller - Collection-->
         <scene sceneID="93z-0B-UvQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I1s-w2-VsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="yO2-58-RfF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="4" title="Collection" id="NL6-fp-Lxs"/>
                     <toolbarItems/>
@@ -766,13 +765,13 @@
                         <segue destination="GYI-Cy-G3E" kind="relationship" relationship="rootViewController" id="5YL-VF-kXv"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I1s-w2-VsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="2795"/>
         </scene>
         <!--Navigation Controller - More-->
         <scene sceneID="yBW-ic-o4f">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LCo-ZO-kJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="More" id="1vV-J8-L5m" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="Activity" id="L5h-V5-sUv"/>
                     <toolbarItems/>
@@ -786,13 +785,13 @@
                         <segue destination="vbx-9i-lGG" kind="relationship" relationship="rootViewController" id="hIA-y1-0jl"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCo-ZO-kJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="3979"/>
         </scene>
         <!--Activity Tabele View Controller - Activity-->
         <scene sceneID="JpV-6f-yHG">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i0z-oZ-XOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="vbx-9i-lGG" customClass="ActivityTabeleViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="fMT-HW-MPh">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -855,13 +854,13 @@
                         <segue destination="BPi-pg-2E0" kind="push" identifier="seeOtherEvent" id="tkd-Fy-Fbx"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0z-oZ-XOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1164" y="3979"/>
         </scene>
         <!--Choose Image Table View Controller - Choose a Photo-->
         <scene sceneID="Cnv-qM-cUF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j2x-ng-Mof" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="0Oa-z7-ur9" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="SHD-BC-oU5">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -876,7 +875,7 @@
                             </connections>
                         </searchBar>
                         <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="PsF-q8-vPI">
-                            <rect key="frame" x="0.0" y="425" width="320" height="35"/>
+                            <rect key="frame" x="0.0" y="376" width="320" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <prototypes>
@@ -911,13 +910,13 @@
                         <outlet property="searchBarImage" destination="laD-1r-gbL" id="mmB-ck-xbC"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j2x-ng-Mof" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5686" y="1148"/>
         </scene>
         <!--Time Choose View Controller-->
         <scene sceneID="aAO-fk-NZ4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1GF-Td-Rku" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="UDl-pC-I2G" customClass="TimeChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Az8-qz-Gzi">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -998,13 +997,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="datePicker" destination="3h3-fN-dVa" id="kZZ-vM-jP5"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1GF-Td-Rku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5696" y="3132"/>
         </scene>
         <!--View Controller - About Us-->
         <scene sceneID="9Ly-7U-af3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-PY-q4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zn8-a6-0kg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Mz-5Q-Y9g">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -1045,13 +1044,13 @@ Find us @OrangeParc.com</string>
                     </view>
                     <navigationItem key="navigationItem" title="About Us" id="S3H-x3-7dO"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-PY-q4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6420" y="5686"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="Cmv-xU-vgk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -1079,13 +1078,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="SeeProfile" id="WcP-Ze-tWU"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pbs-bg-e7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3012" y="3984"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="P4w-kC-xZF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vU6-9S-CK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="i8q-Ty-eGM" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="UmV-2f-1iE">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
@@ -1138,6 +1137,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="dM0-jG-e7x" id="RpT-sA-sps"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU6-9S-CK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="dM0-jG-e7x">
                     <connections>
                         <outlet property="delegate" destination="i8q-Ty-eGM" id="KNv-XY-VfJ"/>
@@ -1153,7 +1153,6 @@ Find us @OrangeParc.com</string>
         <!--Feed View Controller - Feeds-->
         <scene sceneID="J7I-Bi-1WF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CEz-ia-77P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="3i5-5a-vO5" customClass="FeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w3w-yc-fXP">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -1282,13 +1281,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="ofe-Y1-2Da" kind="push" identifier="ViewOthersProfile" id="Hfw-Db-bjl"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CEz-ia-77P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="266"/>
         </scene>
         <!--Map View Controller - Places-->
         <scene sceneID="50d-tt-Sfs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6gk-rT-Uab" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="smM-VS-7bp" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e3g-De-Baa">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -1407,6 +1406,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="similarPlaceToLabel" destination="C2S-gh-0f1" id="nT1-IN-JuH"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6gk-rT-Uab" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="0jS-oW-KFi">
                     <connections>
                         <outlet property="delegate" destination="smM-VS-7bp" id="vT5-c7-UBz"/>
@@ -1422,7 +1422,6 @@ Find us @OrangeParc.com</string>
         <!--Movie Aoto CompletionVC-->
         <scene sceneID="6ji-Dg-55J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hEh-YK-PXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="km1-G9-q0y" customClass="MovieAotoCompletionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aDT-nr-6VF">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -1491,6 +1490,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="x6O-j8-iTN" id="5bC-FI-LTf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEh-YK-PXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="x6O-j8-iTN">
                     <connections>
                         <outlet property="delegate" destination="km1-G9-q0y" id="Iuo-TR-BCt"/>
@@ -1506,10 +1506,9 @@ Find us @OrangeParc.com</string>
         <!--Detail View Controller-->
         <scene sceneID="eaP-re-pOh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qo0-g8-Ohx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="BPi-pg-2E0" customClass="DetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zqL-OZ-rk9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" id="ODl-hu-66N">
@@ -1623,13 +1622,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="c7b-6L-79P" kind="push" identifier="webView" id="CA7-Bb-7qX"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qo0-g8-Ohx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2182" y="2101"/>
         </scene>
         <!--Add CommentVC - Comments-->
         <scene sceneID="FuY-v2-pwr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jPD-xn-ME8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="bGQ-ML-0nM" customClass="AddCommentVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5O9-Mi-kx7">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1687,13 +1686,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="myTableView" destination="AXj-7C-tjG" id="0T5-i9-uxH"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jPD-xn-ME8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4565" y="413"/>
         </scene>
         <!--New EventVC - Create new event-->
         <scene sceneID="ovw-Dd-Shb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YSf-i0-mFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="createeventpage" hidesBottomBarWhenPushed="YES" id="aP0-zW-Vs1" customClass="NewEventVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2i-ar-FFs">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -1994,16 +1993,16 @@ Find us @OrangeParc.com</string>
                         <segue destination="km1-G9-q0y" kind="modal" identifier="moviewAutoCompletion" id="oqq-Ef-0A7"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YSf-i0-mFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4565" y="1872"/>
         </scene>
         <!--Invite Table View Controller-->
         <scene sceneID="ppp-YU-I9v">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Egm-1C-jY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="ORt-hE-mSa" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="w3E-Es-mC2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="ot0-cV-Iom">
@@ -2035,6 +2034,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="1j2-LK-Tp2" id="beb-LY-2yu"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Egm-1C-jY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="1j2-LK-Tp2">
                     <connections>
                         <outlet property="delegate" destination="ORt-hE-mSa" id="1ZJ-C3-HYn"/>
@@ -2050,10 +2050,9 @@ Find us @OrangeParc.com</string>
         <!--Other Profile Page View Controller-->
         <scene sceneID="8WN-mI-a6y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Php-mD-Smt">
@@ -2198,16 +2197,16 @@ Find us @OrangeParc.com</string>
                         <segue destination="BPi-pg-2E0" kind="push" identifier="ViewEventDetail" id="hTB-gn-88u"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UbV-Cu-huP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2209" y="434"/>
         </scene>
         <!--My Follower Table View Controller-->
         <scene sceneID="ORx-qh-gxk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aBM-Nv-4TO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="GBr-L9-MMr" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="l3R-0z-I3I">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2232,13 +2231,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="SeeProfile" id="RAB-D5-3ai"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aBM-Nv-4TO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3900" y="385"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="ypc-jh-bEo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-6h-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="9i7-54-eHW" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="fok-68-c8Y">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -2266,13 +2265,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="SeeProfile" id="piq-3x-Qso"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rsI-6h-f2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4504" y="-486"/>
         </scene>
         <!--Login Page View Controller-->
         <scene sceneID="Wb9-lx-KwH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PhJ-qt-d9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="loginPage" id="LNn-0V-MCE" customClass="LoginPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zCU-Ye-mEm">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -2407,13 +2406,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="userPassword" destination="SEc-tB-M73" id="xpL-pr-3R3"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PhJ-qt-d9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5267" y="257"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="nfI-uB-mku">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sbj-ol-fsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zcT-6n-80h" customClass="registerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ef9-Le-G6I">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -2551,13 +2550,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="rePasswordTextField" destination="3nc-51-k7C" id="XhX-oL-1Rr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sbj-ol-fsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6007" y="257"/>
         </scene>
         <!--Share After New Event View Controller-->
         <scene sceneID="VLI-8l-ygH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nck-Gu-R8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" id="aqP-Jo-YAA" customClass="ShareAfterNewEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xIJ-Pp-cOw">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
@@ -2704,16 +2703,16 @@ Find us @OrangeParc.com</string>
                         <segue destination="i8q-Ty-eGM" kind="push" identifier="ChooseFriends" id="yT5-mz-bg3"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nck-Gu-R8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7252" y="1741"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="0ca-JE-tM4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mau-Mq-IRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ogA-6E-Slr" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="dgE-Mb-LzR">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="uaZ-2Q-7O0">
@@ -2763,6 +2762,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="mcL-2R-Zu9" id="mWf-wE-aQ5"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mau-Mq-IRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="mcL-2R-Zu9">
                     <connections>
                         <outlet property="delegate" destination="ogA-6E-Slr" id="Bpf-U6-8Dk"/>
@@ -2778,7 +2778,6 @@ Find us @OrangeParc.com</string>
         <!--Categroy Choose View Controller - Create new event-->
         <scene sceneID="K1j-9d-l9H">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ulp-jA-1aq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="cDZ-cT-Wh3" customClass="CategroyChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xrj-ts-oKf">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -2962,13 +2961,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="aP0-zW-Vs1" kind="push" identifier="NewEvent" customClass="NoAnimationSegue" id="lqc-Cx-NBX"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ulp-jA-1aq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="1488"/>
         </scene>
         <!--My Follower Table View Controller-->
         <scene sceneID="Udb-rb-o0v">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -2996,20 +2995,20 @@ Find us @OrangeParc.com</string>
                         <segue destination="GYI-Cy-G3E" kind="push" identifier="SeeProfile" id="uZt-a5-DvH"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XXm-Zk-egB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3525" y="4033"/>
         </scene>
         <!--Discussion View Controller-->
         <scene sceneID="jCP-Kh-Bl1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6r2-kJ-M0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="7ka-bV-aVx" customClass="DiscussionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LmK-Pk-Wst">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qKs-cR-P3L">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="366"/>
+                                <rect key="frame" x="0.0" y="-1" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="QW9-qw-uQ6">
@@ -3060,16 +3059,16 @@ Find us @OrangeParc.com</string>
                         <segue destination="ORt-hE-mSa" kind="push" identifier="StartInviteFriend" id="SuE-un-eNf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6r2-kJ-M0z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157" y="2788"/>
         </scene>
         <!--Detail Link View Controller-->
         <scene sceneID="byu-YH-LOV">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sz5-e9-1yr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="c7b-6L-79P" customClass="detailLinkViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XJd-2A-3Bf">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="uas-4M-Mtg">
@@ -3085,13 +3084,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="webView" destination="uas-4M-Mtg" id="SNn-xw-uka"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sz5-e9-1yr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2579" y="2502"/>
         </scene>
         <!--Detail Location Map View Controller - Map-->
         <scene sceneID="0AG-xg-00O">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zNl-18-fT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="kIy-qt-1wP" customClass="detailLocationMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIS-E4-aKa">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -3117,13 +3116,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="myMapView" destination="wyu-sn-djS" id="ke6-WM-2eR"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zNl-18-fT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3288" y="2101"/>
         </scene>
         <!--IntroductionVC Page2-->
         <scene sceneID="jCX-RI-EHI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gfe-Oh-Q53" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="startInstruction" hidesBottomBarWhenPushed="YES" id="HBN-ju-E0g" customClass="IntroductionVCPage2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FRf-5F-xPX">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -3216,13 +3215,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="gv3-6C-qtH" kind="modal" identifier="Magic" modalTransitionStyle="partialCurl" id="lLe-iJ-Xhg"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gfe-Oh-Q53" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2798" y="5762"/>
         </scene>
         <!--Magic View Controller-->
         <scene sceneID="Ird-nW-3um">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pto-jK-ZNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="gv3-6C-qtH" customClass="MagicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hIg-rf-m0e">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -3283,6 +3282,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="refreshButton" destination="1Dd-H7-7Ca" id="qb7-BP-eKt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pto-jK-ZNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3900" y="5747"/>
         </scene>
@@ -3336,19 +3336,247 @@ Find us @OrangeParc.com</string>
         <image name="texture@2x.png" width="640" height="862"/>
         <image name="welcome-2-bg.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="ActivityTabeleViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityTabeleViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="segmentationView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AddCommentVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddCommentVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="CategroyChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategroyChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="textFieldSelfDefine" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="ChooseImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChooseImageTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="moreButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="searchBarImage" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="ChoosePeopleToGoTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChoosePeopleToGoTableViewController.h"/>
+        </class>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="DIMButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="actionButtonHolder" candidateClass="UIView"/>
+                <relationship kind="outlet" name="doitmyselfButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="interestOrInviteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="joinButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="likeButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="likeButtonSection" candidateClass="UIView"/>
+                <relationship kind="outlet" name="myScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="pickOrEditButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="DiscussionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DiscussionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addCommentTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="ExploreViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExploreViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FIndTopTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FIndTopTableViewController.h"/>
+        </class>
+        <class className="FeedViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="CategoryFilterButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="instructionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="FindFriendTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FindFriendTableViewController.h"/>
+        </class>
+        <class className="IntroductionVCPage2" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroductionVCPage2.h"/>
+        </class>
+        <class className="InviteTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InviteTableViewController.h"/>
+        </class>
+        <class className="LoginPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MagicViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MagicViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="MySearchDisplayController" candidateClass="UISearchDisplayController"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="mySearchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="similarPlaceToLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MoreTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signOutButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MovieAotoCompletionVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieAotoCompletionVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MyFollowerTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowerTableViewController.h"/>
+        </class>
+        <class className="MyFollowingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyFollowingTableViewController.h"/>
+        </class>
+        <class className="NewEventVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewEventVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChooseEventLocation" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonChooseEventPhoto" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEditEventTitle" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonEventTime" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="inviteFriendsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inviteIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="labelEventTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="labelEventTitleHolder" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapViewFeedBackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="personProfileImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textFieldEventTitle" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="timeIcon" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="uIImageViewEvent" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="OtherProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OtherProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="profileHeaderView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="ProfilePageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bookmarkNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="creatorImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="creatorNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followerNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followingNumLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="joinedScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="mainScrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="mySegmentControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="profileHeaderView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="ProfilePicViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfilePicViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="largeProfilePic" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ShareAfterNewEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareAfterNewEventViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="EmailButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="WeixinButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="TimeChooseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeChooseViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="buttonChoose" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="detailLinkViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/detailLinkViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="detailLocationMapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/detailLocationMapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="GetDirectionButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="myMapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="registerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/registerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="firstNameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rePasswordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lqc-Cx-NBX"/>
-        <segue reference="uWA-gI-Coc"/>
-        <segue reference="sin-Qw-UXs"/>
-        <segue reference="jpf-qW-bdW"/>
-        <segue reference="tkd-Fy-Fbx"/>
-        <segue reference="yVF-rC-WUA"/>
+        <segue reference="hTB-gn-88u"/>
+        <segue reference="LTc-MZ-txG"/>
         <segue reference="uZt-a5-DvH"/>
-        <segue reference="nM9-CM-7r4"/>
+        <segue reference="dBi-XW-FfW"/>
+        <segue reference="SuE-un-eNf"/>
+        <segue reference="lqc-Cx-NBX"/>
+        <segue reference="CCE-Bo-yKv"/>
+        <segue reference="EMN-UC-MwH"/>
     </inferredMetricsTieBreakers>
 </document>
