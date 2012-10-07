@@ -10,8 +10,8 @@
 #import "CheckForInternetConnection.h"
 
 @interface LoginPageViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *userName;
-@property (weak, nonatomic) IBOutlet UITextField *userPassword;
+//@property (weak, nonatomic) IBOutlet UITextField *userName;
+//@property (weak, nonatomic) IBOutlet UITextField *userPassword;
 @property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIButton *normalLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
@@ -26,8 +26,8 @@
 @end
 
 @implementation LoginPageViewController
-@synthesize userName;
-@synthesize userPassword;
+//@synthesize userName;
+//@synthesize userPassword;
 @synthesize normalLoginButton;
 @synthesize facebookLoginButton;
 @synthesize data=_data;
@@ -59,7 +59,7 @@
     
     //[current_location_manager stopUpdatingLocation];
     //set the password field property
-    self.userPassword.secureTextEntry=YES;
+    //self.userPassword.secureTextEntry=YES;
     
     [self.keyboardToolbar setHidden:YES];
     
@@ -93,8 +93,8 @@
 
 - (void)viewDidUnload
 {
-    [self setUserName:nil];
-    [self setUserPassword:nil];
+   // [self setUserName:nil];
+    //[self setUserPassword:nil];
     [self setNormalLoginButton:nil];
     [self setFacebookLoginButton:nil];
     [self setKeyboardToolbar:nil];
@@ -137,7 +137,7 @@
 }
 
 
-
+/*
 //Start normal login
 - (IBAction)normalLoginButtonClickedNew:(id)sender {
     //resign the firstResponser
@@ -196,7 +196,7 @@
         
     });
 }
-
+*/
 
 
 
@@ -375,8 +375,8 @@
 
 - (IBAction)leaveEditMode:(id)sender {
 
-    [self.userName resignFirstResponder];
-    [self.userPassword resignFirstResponder];
+    //[self.userName resignFirstResponder];
+//    [self.userPassword resignFirstResponder];
 }
 
 

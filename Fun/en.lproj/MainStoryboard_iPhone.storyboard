@@ -2282,7 +2282,7 @@ Find us @OrangeParc.com</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vn4-cc-xG7">
-                                <rect key="frame" x="20" y="96" width="280" height="48"/>
+                                <rect key="frame" x="20" y="187" width="280" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="facebook_signin_button.png">
@@ -2297,7 +2297,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign in with Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="WMK-PR-ggj">
-                                <rect key="frame" x="96" y="109" width="172" height="21"/>
+                                <rect key="frame" x="96" y="200" width="172" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2316,7 +2316,7 @@ Find us @OrangeParc.com</string>
                                 <color key="shadowColor" white="0.4962363139" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bsu-K1-3JU">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bsu-K1-3JU">
                                 <rect key="frame" x="250" y="7" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -2348,40 +2348,6 @@ Find us @OrangeParc.com</string>
                                     <action selector="cancelLoginNew:" destination="LNn-0V-MCE" eventType="touchUpInside" id="ug5-EK-W7f"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s9n-ag-BUG">
-                                <rect key="frame" x="20" y="315" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <size key="titleShadowOffset" width="0.0" height="1"/>
-                                <state key="normal" title="Sign in" backgroundImage="create_account_button.png">
-                                    <color key="titleColor" red="0.90155220030000005" green="0.38804696830000002" blue="0.035024054999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="normalLoginButtonClickedNew:" destination="LNn-0V-MCE" eventType="touchUpInside" id="KTD-rJ-0bm"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" minimumFontSize="17" id="FAf-5x-Ucj">
-                                <rect key="frame" x="27" y="205" width="263" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="LNn-0V-MCE" id="Cza-yk-l5Q"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="SEc-tB-M73">
-                                <rect key="frame" x="27" y="249" width="263" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="LNn-0V-MCE" id="VA0-u1-P0N"/>
-                                </connections>
-                            </textField>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Qg6-Fl-05t">
                                 <rect key="frame" x="0.0" y="416" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -2401,9 +2367,6 @@ Find us @OrangeParc.com</string>
                         <outlet property="doneButton" destination="PSr-0X-bWC" id="FH2-og-e4c"/>
                         <outlet property="facebookLoginButton" destination="Vn4-cc-xG7" id="qQx-dW-grW"/>
                         <outlet property="keyboardToolbar" destination="Qg6-Fl-05t" id="stY-wU-52W"/>
-                        <outlet property="normalLoginButton" destination="s9n-ag-BUG" id="LqM-pt-gv5"/>
-                        <outlet property="userName" destination="FAf-5x-Ucj" id="hsc-tX-e1a"/>
-                        <outlet property="userPassword" destination="SEc-tB-M73" id="xpL-pr-3R3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PhJ-qt-d9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3424,12 +3387,13 @@ Find us @OrangeParc.com</string>
         <class className="LoginPageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginPageViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelLoginNew:"/>
+                <relationship kind="action" name="facebookLoginButtonClickedNew:"/>
+                <relationship kind="action" name="leaveEditMode:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="facebookLoginButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="keyboardToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="normalLoginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPassword" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="MagicViewController" superclassName="UIViewController">
