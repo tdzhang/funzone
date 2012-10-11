@@ -20,14 +20,19 @@
 @property (nonatomic,strong) NSString *preDefinedMode;
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
-@property (weak, nonatomic) IBOutlet UIButton *WeixinButton;
-@property (weak, nonatomic) IBOutlet UIButton *EmailButton;
+//@property (weak, nonatomic) IBOutlet UIButton *WeixinButton;
+//@property (weak, nonatomic) IBOutlet UIButton *EmailButton;
+@property (weak, nonatomic) IBOutlet UITextView *textview_shareinfo;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *myKeyboardToolbar;
+@property (weak, nonatomic) IBOutlet UILabel *statuse_text;
+@property (weak, nonatomic) IBOutlet UIButton *button_finish;
 
 @end
 
 @implementation ShareAfterNewEventViewController
-@synthesize WeixinButton = _WeixinButton;
-@synthesize EmailButton = _EmailButton;
+//@synthesize WeixinButton = _WeixinButton;
+//@synthesize EmailButton = _EmailButton;
 @synthesize delegate=_delegate;
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -76,15 +81,30 @@
     self.delegate=(id)appDelegate;
     
     //set the button to be a circle
-    self.WeixinButton.layer.cornerRadius = 20;
-    self.WeixinButton.clipsToBounds=YES;
-    self.EmailButton.layer.cornerRadius = 20;
-    self.EmailButton.clipsToBounds=YES;
+//    self.WeixinButton.layer.cornerRadius = 20;
+//    self.WeixinButton.clipsToBounds=YES;
+//    self.EmailButton.layer.cornerRadius = 20;
+//    self.EmailButton.clipsToBounds=YES;
+    
+    //add notification listener
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(EventCreateFinished) name:@"EventCreateFinished" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    //set the preset content of the sharing
+    [self.textview_shareinfo setText:[self inviteMessagetoSend]];
+    [self.button_finish setEnabled:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    //remove observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"EventCreateFinished" object:nil];
+    //reset the keyboard addititonal "done" tool bar
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 
@@ -94,6 +114,60 @@
 }
 
 #pragma mark - self defined method
+//deal when event is already created
+-(void)EventCreateFinished{
+    [self.statuse_text setText:@"Ready To Finish."];
+    [self.button_finish setTitle:@"Finish Creation and Invitation" forState:UIControlStateNormal];
+    [self.button_finish setEnabled:YES];
+}
+- (IBAction)FinishedThisPage:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString* event_id=[defaults objectForKey:@"temp_event_id"];
+    NSString* shared_event_id=[defaults objectForKey:@"temp_shared_event_id"];
+    
+    NSLog(@"%@",event_id);
+    NSLog(@"%@",shared_event_id);
+    ///////
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/send_invitation?",CONNECT_DOMIAN_NAME]];
+    NSLog(@"request:%@",url);
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:event_id forKey:@"event_id"];
+        [request setPostValue:shared_event_id forKey:@"shared_event_id"];
+        [request setPostValue:self.textview_shareinfo.text forKey:@"content"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+            }
+            
+        });
+        
+    });
+    
+    //make the my collection page refresh
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    appDelegate.myCollection_needrefresh=YES;
+    //return to the my collection page
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+}
 
 //return the share message
 -(NSString*)shareMessagetoSend{
@@ -117,6 +191,59 @@
     self.createEvent_imageUrlName=createEvent_imageUrlName;
 }
 
+#pragma mark - edit textview related thing
+
+
+- (IBAction)closeKeyboard:(id)sender {
+    [self.textview_shareinfo resignFirstResponder];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+    [self animateTextFieldup:true];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    //[self.labelEventTitleHolder setHidden:YES];
+    [self.myKeyboardToolbar setHidden:NO];
+    CGRect frame = self.myKeyboardToolbar.frame;
+    frame.origin.y = self.view.frame.size.height - 260.0+160;
+    self.myKeyboardToolbar.frame = frame;
+    [self.myKeyboardToolbar setHidden:FALSE];
+    UIBarButtonItem *doneButtonKeyBoard = [self.myKeyboardToolbar.items objectAtIndex:0];
+    doneButtonKeyBoard.target = self;
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
+    [self animateTextFieldup:FALSE];
+    
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.25];
+	[self.myKeyboardToolbar setHidden:YES];
+	CGRect frame = self.myKeyboardToolbar.frame;
+	frame.origin.y = self.view.frame.size.height;
+	self.myKeyboardToolbar.frame = frame;
+	
+	[UIView commitAnimations];
+    
+}
+
+- (void) animateTextFieldup: (BOOL) up
+{
+    const int movementDistance = 160; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
 #pragma mark - segue related stuff
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"ChooseFriends"] && [segue.destinationViewController isKindOfClass:[ChoosePeopleToGoTableViewController class]]){
@@ -134,28 +261,6 @@
 
 
 #pragma mark - Button Action
-- (IBAction)FinishedThisSharePage:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    [funAppdelegate.thisTabBarController setSelectedIndex:3];
-}
-
-- (IBAction)EmailShare:(id)sender {
-    self.preDefinedMode=@"email";
-    [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
-}
-
-- (IBAction)MesssgeShare:(id)sender {
-    self.preDefinedMode=@"message";
-    [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
-}
-
-- (IBAction)WechatShare:(id)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose A WeChat Way" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share On Moment",@"Send Friend Message", nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-    [pop showFromTabBar:self.tabBarController.tabBar];
-}
-
 //start to compose email(the FeedBackToCreateActivityChange)
 -(void)StartComposeEmail{
     //compose the email
@@ -210,7 +315,7 @@
             if([MFMessageComposeViewController canSendText]) {
                 //if the device allowed sending email
                 MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
-                messageSender.messageComposeDelegate = self;
+                //messageSender.messageComposeDelegate = self;
                 //phone list
                 [messageSender setRecipients:phoneList];
                 //phone body
@@ -278,40 +383,13 @@
 }
 
 #pragma mark - implement protocals
-////////////////////////////////////////////////
-//implement the MFMailComposeViewControllerDelegate Method
--(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
-    if (error) {
-        NSLog(@"Sending Email Error Happended!");
-    }
-    [self dismissModalViewControllerAnimated:YES];
-}
 
--(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-////////////////////////////////////////////////
-//implement the UIActionSheetDelegate Method
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //for the when to go action sheet
-    NSLog(@"%@",actionSheet.title);
-    if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
-        if(buttonIndex == 0){
-            //shared on moment
-            //[self.delegate SendMoment:[self shareMessagetoSend]];
-        }
-        else if(buttonIndex == 1){
-            //send message to friend
-            [self.delegate sendText:[self inviteMessagetoSend]];
-            
-        }
-    }
-}
 
 - (void)viewDidUnload {
-    [self setWeixinButton:nil];
-    [self setEmailButton:nil];
+    [self setTextview_shareinfo:nil];
+    [self setMyKeyboardToolbar:nil];
+    [self setStatuse_text:nil];
+    [self setButton_finish:nil];
     [super viewDidUnload];
 }
 @end

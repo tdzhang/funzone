@@ -17,6 +17,7 @@
 @synthesize facebook=_facebook;
 @synthesize thisTabBarController = _thisTabBarController;
 @synthesize myLocationManager=_myLocationManager;
+@synthesize myCollection_needrefresh=_myCollection_needrefresh;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

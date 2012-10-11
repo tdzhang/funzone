@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="xHi-GY-egn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="xHi-GY-egn">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="K8u-Rd-MUo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mnd-3i-v0y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="7Tv-eB-ShT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" id="zbb-4x-d5B"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
@@ -25,13 +24,13 @@
                         <segue destination="LGO-yn-Q2g" kind="relationship" relationship="rootViewController" id="6Wa-8a-lnR"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mnd-3i-v0y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="1488"/>
         </scene>
         <!--Profile Pic View Controller-->
         <scene sceneID="Gq7-OI-QIm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rS7-o1-UYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="u7i-7R-Uur" customClass="ProfilePicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pc7-eM-udx">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -66,13 +65,13 @@
                         <outlet property="largeProfilePic" destination="su2-Ne-gKj" id="221-Xs-NV4"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rS7-o1-UYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3180" y="678"/>
         </scene>
         <!--Profile Page View Controller - Collection-->
         <scene sceneID="iOK-JW-y5G">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="coh-IS-SCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="cW1-pC-skF" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UJO-jd-DPE">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -226,13 +225,13 @@
                         <segue destination="fW2-DV-SvG" kind="push" identifier="ViewEventDetail" id="GCP-yg-VOn"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="coh-IS-SCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2768" y="1033"/>
         </scene>
         <!--More Table View Controller - More-->
         <scene sceneID="uSz-0c-GE9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ABH-jL-wlq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Vg1-Il-zVx" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FI1-6z-Vha">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -413,13 +412,13 @@
                         <outlet property="signOutButton" destination="iVp-Pm-9IW" id="GzE-BY-aMy"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ABH-jL-wlq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4722" y="4512"/>
         </scene>
         <!--Find Friend Table View Controller - Facebook Friends-->
         <scene sceneID="cI1-Z0-QKE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mlH-1T-qnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="EKy-sF-Ejt" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="cTd-a6-FxY">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -459,13 +458,13 @@
                         <segue destination="zsO-p1-YlU" kind="push" identifier="ViewOthersProfile" id="PsA-AQ-bNc"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mlH-1T-qnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6057" y="3940"/>
         </scene>
         <!--Ind Top Table View Controller - Popular Users-->
         <scene sceneID="MUG-fz-570">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DrQ-dU-efC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="3q3-cf-Lf4" customClass="FIndTopTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="YbX-SM-1SZ">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -494,13 +493,13 @@
                         <segue destination="cW1-pC-skF" kind="push" identifier="ViewProfile" id="zPd-fF-cSq"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DrQ-dU-efC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6432" y="4464"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="GUO-t9-Kf4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wp2-V7-UnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="A4o-v4-FpY" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uOA-Ud-s5I">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -632,13 +631,13 @@
                     <navigationItem key="navigationItem" id="HWk-eD-G1t"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wp2-V7-UnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6432" y="5084"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="dRP-Ei-4eQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N6c-Yw-bAn" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="mainTabBarController" id="xHi-GY-egn" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -656,13 +655,13 @@
                         <segue destination="BJi-u8-JKt" kind="relationship" relationship="viewControllers" id="0n5-zd-xpC"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6c-Yw-bAn" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-901" y="1012"/>
         </scene>
         <!--Navigation Controller - Popular-->
         <scene sceneID="eda-on-TEw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mly-AJ-zHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="VbU-4A-Cor" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="Popular" id="H3q-Vu-Bsy"/>
                     <toolbarItems/>
@@ -682,13 +681,13 @@
                         <segue destination="FrI-XA-0ib" kind="relationship" relationship="rootViewController" id="kj0-rN-tXY"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mly-AJ-zHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="-734"/>
         </scene>
         <!--Explore View Controller - Popular-->
         <scene sceneID="izd-0H-puw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uaR-vc-shl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="FrI-XA-0ib" customClass="ExploreViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4hg-2T-Cgb">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -735,13 +734,13 @@
                         <segue destination="V6n-oN-Y9I" kind="custom" identifier="StartIntroduceToTheApp" customClass="NONEANIMATIONSegue" id="i7J-vC-O8Y"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uaR-vc-shl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="-726"/>
         </scene>
         <!--Navigation Controller - Feeds-->
         <scene sceneID="88Y-h6-ddm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CwL-Ry-Vqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="qQT-p8-t9b" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feeds" id="9uL-ce-yv3"/>
                     <toolbarItems/>
@@ -756,13 +755,13 @@
                         <segue destination="znA-pW-YzU" kind="relationship" relationship="rootViewController" id="tDg-eN-rg7"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CwL-Ry-Vqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="298"/>
         </scene>
         <!--Navigation Controller - Collection-->
         <scene sceneID="oTB-zr-CwK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9gL-bd-Gj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="UNW-jE-wuX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="4" title="Collection" id="Iwi-NC-Jpw"/>
                     <toolbarItems/>
@@ -777,13 +776,13 @@
                         <segue destination="cW1-pC-skF" kind="relationship" relationship="rootViewController" id="rrD-A5-nyc"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9gL-bd-Gj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="2795"/>
         </scene>
         <!--Navigation Controller - More-->
         <scene sceneID="ecb-98-X4J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9iL-0I-NQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="More" id="BJi-u8-JKt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="Activity" id="U2j-Xe-b8S"/>
                     <toolbarItems/>
@@ -798,13 +797,13 @@
                         <segue destination="a7V-fG-Rls" kind="relationship" relationship="rootViewController" id="TqW-VC-rjC"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iL-0I-NQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="3979"/>
         </scene>
         <!--Activity Tabele View Controller - Activity-->
         <scene sceneID="bd4-gd-2Zi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ymf-OA-6yg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="a7V-fG-Rls" customClass="ActivityTabeleViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="kbm-fi-b1C">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -868,13 +867,13 @@
                         <segue destination="fW2-DV-SvG" kind="push" identifier="seeOtherEvent" id="0YA-xR-2AU"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ymf-OA-6yg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1164" y="3979"/>
         </scene>
         <!--Choose Image Table View Controller - Choose a Photo-->
         <scene sceneID="Jdk-aC-T77">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WHu-zV-hVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Fhh-hl-knN" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vdp-y7-G3h">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -889,15 +888,15 @@
                             </connections>
                         </searchBar>
                         <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="GXf-gL-z2P">
-                            <rect key="frame" x="0.0" y="425" width="320" height="35"/>
+                            <rect key="frame" x="0.0" y="920" width="768" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="This is not in use" rowHeight="140" id="YP1-TP-8kN">
-                                <rect key="frame" x="0.0" y="66" width="320" height="140"/>
+                                <rect key="frame" x="0.0" y="66" width="768" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="139"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -925,13 +924,13 @@
                         <outlet property="searchBarImage" destination="dGe-Q3-n6g" id="bV2-0Z-jwa"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WHu-zV-hVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5686" y="1148"/>
         </scene>
         <!--Time Choose View Controller-->
         <scene sceneID="d2d-Wv-I9L">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UwR-Hw-S12" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="c3y-6t-EAf" customClass="TimeChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VM5-4n-BZA">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -945,7 +944,7 @@
                                 </date>
                                 <locale key="locale" localeIdentifier="en_US"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <mutableData key="data">
+                                    <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -963,7 +962,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                 </timeZone>
                                 <connections>
                                     <action selector="ValueChanged:" destination="c3y-6t-EAf" eventType="valueChanged" id="ySy-sU-q2m"/>
@@ -1013,13 +1012,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="datePicker" destination="6tF-vJ-xio" id="X0w-eT-MmJ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UwR-Hw-S12" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5696" y="3132"/>
         </scene>
         <!--View Controller - About Us-->
         <scene sceneID="ddx-Fi-AgC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="umc-MJ-q5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="nLa-3x-jSd" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fuB-VZ-3xf">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -1061,13 +1060,13 @@ Find us @OrangeParc.com</string>
                     <navigationItem key="navigationItem" title="About Us" id="4lu-Ee-iWv"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="umc-MJ-q5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6420" y="5686"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="oA6-mb-z0G">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pnF-1G-HRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="7uu-b7-OYs" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="qNv-Pw-5nL">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -1096,13 +1095,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="cW1-pC-skF" kind="push" identifier="SeeProfile" id="9BJ-mI-DZh"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnF-1G-HRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3012" y="3984"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="ckv-DG-GeU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="na4-dj-zOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RgS-aQ-mM6" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="c3J-gx-spQ">
                         <rect key="frame" x="0.0" y="20" width="768" height="955"/>
@@ -1156,6 +1155,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="dga-ZZ-iye" id="qjM-Ir-nlj"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="na4-dj-zOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="dga-ZZ-iye">
                     <connections>
                         <outlet property="delegate" destination="RgS-aQ-mM6" id="hYF-Iv-fVy"/>
@@ -1171,7 +1171,6 @@ Find us @OrangeParc.com</string>
         <!--Feed View Controller - Feeds-->
         <scene sceneID="YTZ-E3-HX0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fSc-1u-Cmt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="znA-pW-YzU" customClass="FeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JI7-8Y-twg">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -1301,13 +1300,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="zsO-p1-YlU" kind="push" identifier="ViewOthersProfile" id="Cbk-Sw-hA0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fSc-1u-Cmt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="266"/>
         </scene>
         <!--Map View Controller - Places-->
         <scene sceneID="nHH-Zw-wJc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t5B-nn-DYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="08U-LN-Az5" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJS-uU-ZaN">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -1352,16 +1351,16 @@ Find us @OrangeParc.com</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="ssf-KI-BAV">
-                                    <rect key="frame" x="0.0" y="69" width="320" height="35"/>
+                                    <rect key="frame" x="0.0" y="69" width="768" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ChooseLocationOutsideTableCell" textLabel="thR-rx-pe0" detailTextLabel="MOE-6x-I0a" rowHeight="47" style="IBUITableViewCellStyleSubtitle" id="H6z-9Q-ClL">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="47"/>
+                                        <rect key="frame" x="0.0" y="22" width="768" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="thR-rx-pe0">
@@ -1427,6 +1426,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="similarPlaceToLabel" destination="gsO-Bi-IUD" id="4zm-5d-rfS"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t5B-nn-DYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="chX-tZ-4wC">
                     <connections>
                         <outlet property="delegate" destination="08U-LN-Az5" id="JMY-g7-cfg"/>
@@ -1442,7 +1442,6 @@ Find us @OrangeParc.com</string>
         <!--Movie Aoto CompletionVC-->
         <scene sceneID="MpA-wS-ZXX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fqb-SD-Ouw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Fhe-so-EOS" customClass="MovieAotoCompletionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="365-db-fU2">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -1462,10 +1461,10 @@ Find us @OrangeParc.com</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="68" id="iCa-DI-1Sg">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="68"/>
+                                        <rect key="frame" x="0.0" y="22" width="768" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -1512,6 +1511,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="mXC-8h-Q1f" id="h2H-TM-jnh"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqb-SD-Ouw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="mXC-8h-Q1f">
                     <connections>
                         <outlet property="delegate" destination="Fhe-so-EOS" id="b0U-dP-7rm"/>
@@ -1527,7 +1527,6 @@ Find us @OrangeParc.com</string>
         <!--Detail View Controller-->
         <scene sceneID="qJE-Bv-98g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UwX-9V-Zdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController hidesBottomBarWhenPushed="YES" id="fW2-DV-SvG" customClass="DetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Mb-Wk-VBM">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -1645,13 +1644,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="b8b-8U-ffQ" kind="push" identifier="webView" id="bso-fk-nMr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UwX-9V-Zdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2182" y="2101"/>
         </scene>
         <!--Add CommentVC - Comments-->
         <scene sceneID="52E-3U-Gby">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sbq-46-AxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="z5A-2c-pVZ" customClass="AddCommentVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eun-eQ-jhb">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -1710,13 +1709,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="myTableView" destination="gUR-hN-tbA" id="nYn-uy-l9e"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sbq-46-AxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4565" y="413"/>
         </scene>
         <!--New EventVC - Create new event-->
         <scene sceneID="VhM-wD-jO3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YgM-vO-EEy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="createeventpage" hidesBottomBarWhenPushed="YES" id="Rci-gr-50j" customClass="NewEventVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dIK-1I-evz">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -2017,13 +2016,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="Fhe-so-EOS" kind="modal" identifier="moviewAutoCompletion" id="zAN-aN-O0N"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YgM-vO-EEy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4565" y="1872"/>
         </scene>
         <!--Invite Table View Controller-->
         <scene sceneID="t0O-2r-AzF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iTr-ER-x1W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Iy5-kI-79k" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="PWy-9S-bHg">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -2039,10 +2038,10 @@ Find us @OrangeParc.com</string>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="55" id="RX6-7U-pgf">
-                                <rect key="frame" x="0.0" y="66" width="320" height="55"/>
+                                <rect key="frame" x="0.0" y="66" width="768" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -2059,6 +2058,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="4rW-ry-e1g" id="8Qx-bc-wuE"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iTr-ER-x1W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="4rW-ry-e1g">
                     <connections>
                         <outlet property="delegate" destination="Iy5-kI-79k" id="Btz-c2-lcf"/>
@@ -2074,7 +2074,6 @@ Find us @OrangeParc.com</string>
         <!--Other Profile Page View Controller-->
         <scene sceneID="7q1-bx-SFv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zK5-pG-DRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="zsO-p1-YlU" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fwa-rJ-So9">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -2223,13 +2222,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="fW2-DV-SvG" kind="push" identifier="ViewEventDetail" id="d1l-kl-Whf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zK5-pG-DRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2209" y="434"/>
         </scene>
         <!--My Follower Table View Controller-->
         <scene sceneID="3Yw-Gv-90L">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AhO-OZ-Lno" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="cz6-KI-M1I" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="AUl-yF-Xs4">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -2258,13 +2257,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="cW1-pC-skF" kind="push" identifier="SeeProfile" id="O8t-qa-eU4"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AhO-OZ-Lno" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3900" y="385"/>
         </scene>
         <!--My Following Table View Controller-->
         <scene sceneID="ogr-Cq-oNj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I3F-Bd-tJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Bib-MT-mps" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="AfY-UM-TTy">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -2293,13 +2292,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="cW1-pC-skF" kind="push" identifier="SeeProfile" id="7AB-Ex-37M"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I3F-Bd-tJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4504" y="-486"/>
         </scene>
         <!--Login Page View Controller-->
         <scene sceneID="FJt-js-M9F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7HC-UK-Uz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="loginPage" id="zrI-ch-6gW" customClass="LoginPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cFM-ho-s5I">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -2435,13 +2434,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="userPassword" destination="aCt-dV-QRw" id="nmM-g8-DBY"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7HC-UK-Uz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5267" y="257"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="bZE-6l-Bcc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jr7-bU-VlT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="VG6-yZ-piq" customClass="registerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z7K-Jm-U4V">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -2580,13 +2579,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="rePasswordTextField" destination="NeF-eB-rRN" id="Cme-kl-LMr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jr7-bU-VlT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6007" y="257"/>
         </scene>
         <!--Share After New Event View Controller-->
         <scene sceneID="bBG-JW-Qsx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="io3-gt-VRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="" id="4nb-nM-JOi" customClass="ShareAfterNewEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rHE-9h-kfN">
                         <rect key="frame" x="0.0" y="20" width="768" height="955"/>
@@ -2734,13 +2733,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="RgS-aQ-mM6" kind="push" identifier="ChooseFriends" id="TCb-Nb-j6K"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="io3-gt-VRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7252" y="1741"/>
         </scene>
         <!--Choose People To Go Table View Controller - Choose Friends-->
         <scene sceneID="7aX-JQ-ZRn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dSP-w9-QYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="fjP-u9-El0" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="fpe-C3-7Pf">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -2794,6 +2793,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="searchDisplayController" destination="mpg-r1-Sjq" id="kan-yu-znz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSP-w9-QYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="mpg-r1-Sjq">
                     <connections>
                         <outlet property="delegate" destination="fjP-u9-El0" id="ngm-rL-xFT"/>
@@ -2809,7 +2809,6 @@ Find us @OrangeParc.com</string>
         <!--Categroy Choose View Controller - Create new event-->
         <scene sceneID="4h0-oX-zde">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0X5-tE-hBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="LGO-yn-Q2g" customClass="CategroyChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GuX-c1-4JT">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -2994,13 +2993,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="Rci-gr-50j" kind="push" identifier="NewEvent" customClass="NoAnimationSegue" id="MHj-2U-ACt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0X5-tE-hBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="1488"/>
         </scene>
         <!--My Follower Table View Controller-->
         <scene sceneID="NGh-Bp-gWL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lCM-6z-4vQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="LfN-v9-Bzc" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="v7D-fF-pSt">
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
@@ -3029,13 +3028,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="cW1-pC-skF" kind="push" identifier="SeeProfile" id="xPO-rC-ROb"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lCM-6z-4vQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3525" y="4033"/>
         </scene>
         <!--Discussion View Controller-->
         <scene sceneID="2R1-fQ-Ag7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CCZ-St-S3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RY5-7O-fRe" customClass="DiscussionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VjA-f5-7l9">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -3094,13 +3093,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="Iy5-kI-79k" kind="push" identifier="StartInviteFriend" id="Oye-xN-CLO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CCZ-St-S3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157" y="2788"/>
         </scene>
         <!--Detail Link View Controller-->
         <scene sceneID="W2j-GU-Vp6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XPl-UV-hS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="b8b-8U-ffQ" customClass="detailLinkViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bI6-IA-zuu">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -3120,13 +3119,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="webView" destination="Uph-tf-OIK" id="7sq-75-POF"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPl-UV-hS9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2579" y="2502"/>
         </scene>
         <!--Detail Location Map View Controller - Map-->
         <scene sceneID="6Tf-9w-vn4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b7w-rq-Kff" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="5hd-0H-bbm" customClass="detailLocationMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Acu-RR-hiH">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -3153,13 +3152,13 @@ Find us @OrangeParc.com</string>
                         <outlet property="myMapView" destination="QQM-lw-WyB" id="ry5-t7-33M"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b7w-rq-Kff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3288" y="2101"/>
         </scene>
         <!--IntroductionVC Page2-->
         <scene sceneID="nZf-b7-G9B">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hdy-Sz-WIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="startInstruction" hidesBottomBarWhenPushed="YES" id="V6n-oN-Y9I" customClass="IntroductionVCPage2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7jq-TA-7oN">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -3253,13 +3252,13 @@ Find us @OrangeParc.com</string>
                         <segue destination="Lfb-pO-O6N" kind="modal" identifier="Magic" modalTransitionStyle="partialCurl" id="QrM-cX-eC3"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hdy-Sz-WIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2798" y="5762"/>
         </scene>
         <!--Magic View Controller-->
         <scene sceneID="J38-zZ-60E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HcY-3Z-qcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Lfb-pO-O6N" customClass="MagicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tpa-3F-5Br">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -3321,6 +3320,7 @@ Find us @OrangeParc.com</string>
                         <outlet property="refreshButton" destination="g2P-Uf-fqL" id="Oua-89-dcv"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HcY-3Z-qcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3900" y="5747"/>
         </scene>

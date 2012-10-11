@@ -199,8 +199,15 @@
     //check for internet connection, if no connection, showing alert
     [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
+
+    
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    //[defaults setValue:@"yes" forKey:@"myCollection_needrefresh"];
+    
+    
     if (![defaults objectForKey:@"login_auth_token"]) {
         //if not login, do it
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
@@ -210,387 +217,387 @@
         [self presentViewController:loginVC animated:YES completion:^{}];
     }
     else{
-        
-        
-        
-    
-    //query the user profile information
-    //add login auth_token
-    defaults = [NSUserDefaults standardUserDefaults];
-    ///////////////////////////////////////////////////////////////////////////
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-            NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.via]];
-            ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
-            [request setRequestMethod:@"GET"];
-            [request startSynchronous];
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.myCollection_needrefresh) {
             
-            int code=[request responseStatusCode];
-            
-            dispatch_async( dispatch_get_main_queue(),^{
-                if (code==200) {
-                    //success
-                    NSError *error;
-                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
-                    if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
-                        self.lastReceivedJson_profile=json;
-                        //only update the content when there is a content different
-                        [self.creatorNameLabel setText:[json objectForKey:@"name"]];
-                        [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
-                        [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
-                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
-                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
-                        [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
-                        self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
-                        self.url_large=[NSURL URLWithString:[[json objectForKey:@"profile_url"]stringByAppendingString:@"?type=large"]];
-                        if (![Cache isURLCached:self.url]) {
-                            //using high priority queue to fetch the image
-                            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                                //get the image data
-                                NSData * imageData = nil;
-                                imageData = [[NSData alloc] initWithContentsOfURL: self.url];
-                                
-                                if ( imageData == nil ){
-                                    //if the image data is nil, the image url is not reachable. using a default image to replace that
-                                    //NSLog(@"downloaded %@ error, using a default image",url);
-                                    UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
-                                    imageData=UIImagePNGRepresentation(image);
+            //query the user profile information
+            //add login auth_token
+            defaults = [NSUserDefaults standardUserDefaults];
+            ///////////////////////////////////////////////////////////////////////////
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/profile?auth_token=%@&via=%d",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.via]];
+                ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                
+                dispatch_async( dispatch_get_main_queue(),^{
+                    if (code==200) {
+                        //success
+                        NSError *error;
+                        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                        if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_profile]]) {
+                            self.lastReceivedJson_profile=json;
+                            //only update the content when there is a content different
+                            [self.creatorNameLabel setText:[json objectForKey:@"name"]];
+                            [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
+                            [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
+                            [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
+                            [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
+                            [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
+                            self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
+                            self.url_large=[NSURL URLWithString:[[json objectForKey:@"profile_url"]stringByAppendingString:@"?type=large"]];
+                            if (![Cache isURLCached:self.url]) {
+                                //using high priority queue to fetch the image
+                                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                                    //get the image data
+                                    NSData * imageData = nil;
+                                    imageData = [[NSData alloc] initWithContentsOfURL: self.url];
                                     
-                                    if(imageData){
-                                        dispatch_async( dispatch_get_main_queue(),^{
-                                            [Cache addDataToCache:url withData:imageData];
-                                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
-                                        });
+                                    if ( imageData == nil ){
+                                        //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                        //NSLog(@"downloaded %@ error, using a default image",url);
+                                        UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                                        imageData=UIImagePNGRepresentation(image);
+                                        
+                                        if(imageData){
+                                            dispatch_async( dispatch_get_main_queue(),^{
+                                                [Cache addDataToCache:url withData:imageData];
+                                                [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                            });
+                                        }
                                     }
-                                }
-                                else {
-                                    //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                                    //NSLog(@"downloaded %@",url);
-                                    if(imageData){
-                                        dispatch_async( dispatch_get_main_queue(),^{
-                                            [Cache addDataToCache:self.url withData:imageData];
-                                            [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
-                                        });
+                                    else {
+                                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                        //NSLog(@"downloaded %@",url);
+                                        if(imageData){
+                                            dispatch_async( dispatch_get_main_queue(),^{
+                                                [Cache addDataToCache:self.url withData:imageData];
+                                                [self.creatorImageView setImage:[UIImage imageWithData:imageData]];
+                                            });
+                                        }
                                     }
-                                }
-                            });
-                        }
-                        else {
-                            dispatch_async( dispatch_get_main_queue(),^{
-                                [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.url]]];
-                            });
+                                });
+                            }
+                            else {
+                                dispatch_async( dispatch_get_main_queue(),^{
+                                    [self.creatorImageView setImage:[UIImage imageWithData:[Cache getCachedData:self.url]]];
+                                });
+                            }
                         }
                     }
-                }
+                    
+                });
                 
             });
             
-        });
-    
-        
-    //---------->mainScrollView
-    //quest the most recent 10 events
- //the next page that need to refresh is 2
-    self.freshConnectionType=@"New";
-    self.isViewAppearConnection=YES;
-    
-    //main scroll view refresh
-    self.freshConnectionType=@"New";
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
-        NSURL *url=[NSURL URLWithString:request_string];
-        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
-        
-        [request setRequestMethod:@"GET"];
-        [request startSynchronous];
-        
-        int code=[request responseStatusCode];
-        NSLog(@"code:%d",code);
-        ///////////////
-        dispatch_async( dispatch_get_main_queue(),^{
-            if (code==200) {
-                //set the freshConnectionType to "not"
-                NSError *error;
-                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
-                NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
-                //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]
-                if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark]) {
-                    //do nothing here, if there is no diff
-                    //self.refresh_page_num=2;
-                    self.freshConnectionType=@"not";
-                    if (!self.isViewAppearConnection) {
-                        for (UIView *view in [self.mainScrollView subviews]) {
-                            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                        }
-                    }
-                }
-                else{
-                    for (UIView *view in [self.mainScrollView subviews]) {
-                        [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                    }
-                    self.refresh_page_num=2;
-                    self.lastReceivedJson_bookmark=json;
-                    //clean the page
-                    for (UIView* subView in self.mainScrollView.subviews) {
-                        [subView removeFromSuperview];
-                    }
-                    [self.blockViews removeAllObjects];
-                    //set the freshConnectionType to "not"
-                    self.freshConnectionType=@"not";
-                    for (NSDictionary *event in json) {
-                        //after receive the new page, add the next request page number
-                        NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
-                        NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
-                        NSString *title=[event objectForKey:@"title"];
-                        NSString *event_photo_url=[event objectForKey:@"photo_url"];
-                        NSString *locationName=[event objectForKey:@"location"];
-                        //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-                        NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
-                        NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-                        NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-                        CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-                        CLLocation *current_location = self.current_location_manager.location;
-                        CLLocationDistance distance;
-                        if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
-                            distance = -1;
-                        } else {
-                            distance = [current_location distanceFromLocation:location]*0.000621371;
-                        }
-                        
-                        if (!title) {
-                            continue;
-                        }
-                        if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
-                            //for the image is null situation
-                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:nil tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
-                            ;
-                            [self refreshAllTheMainScrollViewSUbviews];
+            
+            //---------->mainScrollView
+            //quest the most recent 10 events
+            //the next page that need to refresh is 2
+            self.freshConnectionType=@"New";
+            self.isViewAppearConnection=YES;
+            
+            //main scroll view refresh
+            self.freshConnectionType=@"New";
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSString *request_string=[NSString stringWithFormat:@"%@/bookmarks?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+                NSLog(@"%@",request_string);
+                NSURL *url=[NSURL URLWithString:request_string];
+                ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+                
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+                ///////////////
+                dispatch_async( dispatch_get_main_queue(),^{
+                    if (code==200) {
+                        //set the freshConnectionType to "not"
+                        NSError *error;
+                        NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                        NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
+                        NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
+                        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+                        //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]
+                        if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark]) {
+                            //do nothing here, if there is no diff
+                            //self.refresh_page_num=2;
+                            self.freshConnectionType=@"not";
+                            if (!self.isViewAppearConnection) {
+                                for (UIView *view in [self.mainScrollView subviews]) {
+                                    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                                }
+                            }
                         }
                         else{
-                            NSURL *url=[NSURL URLWithString:event_photo_url];
-                            if (![Cache isURLCached:url]) {
-                                //using high priority queue to fetch the image
-                                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                                    //get the image data
-                                    NSData * imageData = nil;
-                                    imageData = [[NSData alloc] initWithContentsOfURL: url];
-                                    
-                                    if ( imageData == nil ){
-                                        //if the image data is nil, the image url is not reachable. using a default image to replace that
-                                        //NSLog(@"downloaded %@ error, using a default image",url);
-                                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                                        imageData=UIImagePNGRepresentation(image);
-                                        
-                                        if(imageData){
-                                            dispatch_async( dispatch_get_main_queue(),^{
-                                                [Cache addDataToCache:url withData:imageData];
-                                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
-                                                ;
-                                                //refresh the whole view
-                                                NSLog(@"profile0:%@",event_id);
-                                                [self refreshAllTheMainScrollViewSUbviews];
-                                            });
-                                        }
-                                    }
-                                    else {
-                                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                                        //NSLog(@"downloaded %@",url);
-                                        if(imageData){
-                                            dispatch_async( dispatch_get_main_queue(),^{
-                                                [Cache addDataToCache:url withData:imageData];
-                                                [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
-                                                //refresh the whole view
-                                                NSLog(@"profile0:%@",event_id);
-                                                [self refreshAllTheMainScrollViewSUbviews];
-                                            });
-                                        }
-                                    }
-                                });
+                            for (UIView *view in [self.mainScrollView subviews]) {
+                                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
                             }
-                            else {
-                                dispatch_async( dispatch_get_main_queue(),^{
-                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
-                                    //refresh the whole view
-                                    NSLog(@"profile1:%@",shared_event_id);
+                            self.refresh_page_num=2;
+                            self.lastReceivedJson_bookmark=json;
+                            //clean the page
+                            for (UIView* subView in self.mainScrollView.subviews) {
+                                [subView removeFromSuperview];
+                            }
+                            [self.blockViews removeAllObjects];
+                            //set the freshConnectionType to "not"
+                            self.freshConnectionType=@"not";
+                            for (NSDictionary *event in json) {
+                                //after receive the new page, add the next request page number
+                                NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                                NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                                NSString *title=[event objectForKey:@"title"];
+                                NSString *event_photo_url=[event objectForKey:@"photo_url"];
+                                NSString *locationName=[event objectForKey:@"location"];
+                                //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                                NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                                NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+                                NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+                                CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+                                CLLocation *current_location = self.current_location_manager.location;
+                                CLLocationDistance distance;
+                                if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
+                                    distance = -1;
+                                } else {
+                                    distance = [current_location distanceFromLocation:location]*0.000621371;
+                                }
+                                
+                                if (!title) {
+                                    continue;
+                                }
+                                if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
+                                    //for the image is null situation
+                                    [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:nil tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
+                                    ;
                                     [self refreshAllTheMainScrollViewSUbviews];
-                                });
-                            }
-                            [self.refreshViewdown removeFromSuperview];
-                        }
-                        
-                        
-                    }
-                    self.freshConnectionType=@"not";
-                }
-            }
-            else{
-                //connect error
-            }
-            
-        });
-    });
-    //refresh part
-    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
-        [self.mainScrollView addSubview:self.refreshView];
-    
-    //---------->joined ScrollView
-    //quest the most recent 10 events
-    //self.joined_refresh_page_num=2; //the next page that need to refresh is 2
-    self.joined_freshConnectionType=@"New";
-    self.joined_isViewAppearConnection=YES;
-    
-    //main scroll view refresh
-    self.joined_freshConnectionType=@"New";
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
-        NSLog(@"%@",request_string);
-        NSURL *url=[NSURL URLWithString:request_string];
-        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
-        
-        [request setRequestMethod:@"GET"];
-        [request startSynchronous];
-        
-        int code=[request responseStatusCode];
-        NSLog(@"code:%d",code);
-        ///////////////
-        dispatch_async( dispatch_get_main_queue(),^{
-            if (code==200) {
-                //set the freshConnectionType to "not"
-                NSError *error;
-                NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
-                if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
-                    //do nothing here, if there is no diff
-                    //self.joined_refresh_page_num=2;
-                    self.joined_freshConnectionType=@"not";
-                    if (!self.joined_isViewAppearConnection) {
-                        for (UIView *view in [self.joinedScrollView subviews]) {
-                            [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                        }
-                    }
-                }
-                else{
-                    for (UIView *view in [self.joinedScrollView subviews]) {
-                        [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
-                    }
-                    self.joined_refresh_page_num=2;
-                    self.lastReceivedJson_bookmark_joined=json;
-                    //clean the page
-                    for (UIView* subView in self.joinedScrollView.subviews) {
-                        [subView removeFromSuperview];
-                    }
-                    [self.joined_blockViews removeAllObjects];
-                    //set the freshConnectionType to "not"
-                    self.joined_freshConnectionType=@"not";
-                    for (NSDictionary *event in json) {
-                        //after receive the new page, add the next request page number
-                        NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
-                        NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
-                        NSString *title=[event objectForKey:@"title"];
-                        NSString *event_photo_url=[event objectForKey:@"photo_url"];
-                        NSString *locationName=[event objectForKey:@"location"];
-                        //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-                        NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
-                        NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
-                        NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
-                        CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
-                        CLLocation *current_location = self.current_location_manager.location;
-                        CLLocationDistance distance;
-                        if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
-                            distance = -1;
-                        } else {
-                            distance = [current_location distanceFromLocation:location]*0.000621371;
-                        }
-                        
-                        if (!title) {
-                            continue;
-                        }
-                        if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
-                            //for the image is null situation
-                            [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:nil tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.joined_blockViews count]];
-                            ;
-                            [self joined_refreshAllTheMainScrollViewSUbviews];
-                        }
-                        else{
-                            NSURL *url=[NSURL URLWithString:event_photo_url];
-                            if (![Cache isURLCached:url]) {
-                                //using high priority queue to fetch the image
-                                dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-                                    //get the image data
-                                    NSData * imageData = nil;
-                                    imageData = [[NSData alloc] initWithContentsOfURL: url];
-                                    
-                                    if ( imageData == nil ){
-                                        //if the image data is nil, the image url is not reachable. using a default image to replace that
-                                        //NSLog(@"downloaded %@ error, using a default image",url);
-                                        UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
-                                        imageData=UIImagePNGRepresentation(image);
-                                        
-                                        if(imageData){
-                                            dispatch_async( dispatch_get_main_queue(),^{
-                                                [Cache addDataToCache:url withData:imageData];
-                                                [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.joined_blockViews count]];
-                                                ;
-                                                //refresh the whole view
-                                                NSLog(@"profile0:%@",event_id);
-                                                [self joined_refreshAllTheMainScrollViewSUbviews];
-                                            });
-                                        }
+                                }
+                                else{
+                                    NSURL *url=[NSURL URLWithString:event_photo_url];
+                                    if (![Cache isURLCached:url]) {
+                                        //using high priority queue to fetch the image
+                                        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                                            //get the image data
+                                            NSData * imageData = nil;
+                                            imageData = [[NSData alloc] initWithContentsOfURL: url];
+                                            
+                                            if ( imageData == nil ){
+                                                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                                //NSLog(@"downloaded %@ error, using a default image",url);
+                                                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                                                imageData=UIImagePNGRepresentation(image);
+                                                
+                                                if(imageData){
+                                                    dispatch_async( dispatch_get_main_queue(),^{
+                                                        [Cache addDataToCache:url withData:imageData];
+                                                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.blockViews count]];
+                                                        ;
+                                                        //refresh the whole view
+                                                        NSLog(@"profile0:%@",event_id);
+                                                        [self refreshAllTheMainScrollViewSUbviews];
+                                                    });
+                                                }
+                                            }
+                                            else {
+                                                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                                //NSLog(@"downloaded %@",url);
+                                                if(imageData){
+                                                    dispatch_async( dispatch_get_main_queue(),^{
+                                                        [Cache addDataToCache:url withData:imageData];
+                                                        [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                                                        //refresh the whole view
+                                                        NSLog(@"profile0:%@",event_id);
+                                                        [self refreshAllTheMainScrollViewSUbviews];
+                                                    });
+                                                }
+                                            }
+                                        });
                                     }
                                     else {
-                                        //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
-                                        //NSLog(@"downloaded %@",url);
-                                        if(imageData){
-                                            dispatch_async( dispatch_get_main_queue(),^{
-                                                [Cache addDataToCache:url withData:imageData];
-                                                [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.joined_blockViews count]];
-                                                //refresh the whole view
-                                                NSLog(@"profile0:%@",event_id);
-                                                [self joined_refreshAllTheMainScrollViewSUbviews];
-                                            });
-                                        }
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [self.blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.blockViews count]];
+                                            //refresh the whole view
+                                            NSLog(@"profile1:%@",shared_event_id);
+                                            [self refreshAllTheMainScrollViewSUbviews];
+                                        });
                                     }
-                                });
+                                    [self.refreshViewdown removeFromSuperview];
+                                }
+                                
+                                
                             }
-                            else {
-                                dispatch_async( dispatch_get_main_queue(),^{
-                                    [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.joined_blockViews count]];
-                                    //refresh the whole view
-                                    NSLog(@"profile1:%@",shared_event_id);
-                                    [self joined_refreshAllTheMainScrollViewSUbviews];
-                                });
-                            }
-                            [self.joined_refreshViewdown removeFromSuperview];
+                            self.freshConnectionType=@"not";
                         }
-                        
-                        
                     }
-                    self.joined_freshConnectionType=@"not";
-                }
-            }
-            else{
-                //connect error
-            }
+                    else{
+                        //connect error
+                    }
+                    
+                });
+            });
+            //refresh part
+            self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
+            [self.mainScrollView addSubview:self.refreshView];
             
-        });
-        
-        ////////////////
-        
-        
-    });
-    
-        //refresh part
-        self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
-        [self.mainScrollView addSubview:self.refreshView];
-        
-        //refresh part
-        self.joined_refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
-        [self.joinedScrollView addSubview:self.joined_refreshView];
+            //---------->joined ScrollView
+            //quest the most recent 10 events
+            //self.joined_refresh_page_num=2; //the next page that need to refresh is 2
+            self.joined_freshConnectionType=@"New";
+            self.joined_isViewAppearConnection=YES;
+            
+            //main scroll view refresh
+            self.joined_freshConnectionType=@"New";
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSString *request_string=[NSString stringWithFormat:@"%@/invitations?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]];
+                NSLog(@"%@",request_string);
+                NSURL *url=[NSURL URLWithString:request_string];
+                ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+                
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+                ///////////////
+                dispatch_async( dispatch_get_main_queue(),^{
+                    if (code==200) {
+                        //set the freshConnectionType to "not"
+                        NSError *error;
+                        NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+                        //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
+                        if ([self isTwoJasonEventArrayTheSameOne:json withOther:self.lastReceivedJson_bookmark_joined]) {
+                            //do nothing here, if there is no diff
+                            //self.joined_refresh_page_num=2;
+                            self.joined_freshConnectionType=@"not";
+                            if (!self.joined_isViewAppearConnection) {
+                                for (UIView *view in [self.joinedScrollView subviews]) {
+                                    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                                }
+                            }
+                        }
+                        else{
+                            for (UIView *view in [self.joinedScrollView subviews]) {
+                                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-EVENT_ELEMENT_CONTENT_HEIGHT/2, view.frame.size.width, view.frame.size.height)];
+                            }
+                            self.joined_refresh_page_num=2;
+                            self.lastReceivedJson_bookmark_joined=json;
+                            //clean the page
+                            for (UIView* subView in self.joinedScrollView.subviews) {
+                                [subView removeFromSuperview];
+                            }
+                            [self.joined_blockViews removeAllObjects];
+                            //set the freshConnectionType to "not"
+                            self.joined_freshConnectionType=@"not";
+                            for (NSDictionary *event in json) {
+                                //after receive the new page, add the next request page number
+                                NSString *event_id= [NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                                NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                                NSString *title=[event objectForKey:@"title"];
+                                NSString *event_photo_url=[event objectForKey:@"photo_url"];
+                                NSString *locationName=[event objectForKey:@"location"];
+                                //NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                                NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                                NSString *longitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"longitude"]];
+                                NSString *latitude = [NSString stringWithFormat:@"%@",[event objectForKey:@"latitude"]];
+                                CLLocation *location = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+                                CLLocation *current_location = self.current_location_manager.location;
+                                CLLocationDistance distance;
+                                if ([latitude isEqualToString:@"<null>"] || [longitude isEqualToString:@"<null>"]) {
+                                    distance = -1;
+                                } else {
+                                    distance = [current_location distanceFromLocation:location]*0.000621371;
+                                }
+                                
+                                if (!title) {
+                                    continue;
+                                }
+                                if ([[NSString stringWithFormat:@"%@",event_photo_url] isEqualToString:@"<null>"]) {
+                                    //for the image is null situation
+                                    [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:nil tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.joined_blockViews count]];
+                                    ;
+                                    [self joined_refreshAllTheMainScrollViewSUbviews];
+                                }
+                                else{
+                                    NSURL *url=[NSURL URLWithString:event_photo_url];
+                                    if (![Cache isURLCached:url]) {
+                                        //using high priority queue to fetch the image
+                                        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                                            //get the image data
+                                            NSData * imageData = nil;
+                                            imageData = [[NSData alloc] initWithContentsOfURL: url];
+                                            
+                                            if ( imageData == nil ){
+                                                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                                                //NSLog(@"downloaded %@ error, using a default image",url);
+                                                UIImage *image=[UIImage imageNamed:@"monterey.jpg"];
+                                                imageData=UIImagePNGRepresentation(image);
+                                                
+                                                if(imageData){
+                                                    dispatch_async( dispatch_get_main_queue(),^{
+                                                        [Cache addDataToCache:url withData:imageData];
+                                                        [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:(float)distance withCategory:nil] atIndex:[self.joined_blockViews count]];
+                                                        ;
+                                                        //refresh the whole view
+                                                        NSLog(@"profile0:%@",event_id);
+                                                        [self joined_refreshAllTheMainScrollViewSUbviews];
+                                                    });
+                                                }
+                                            }
+                                            else {
+                                                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                                                //NSLog(@"downloaded %@",url);
+                                                if(imageData){
+                                                    dispatch_async( dispatch_get_main_queue(),^{
+                                                        [Cache addDataToCache:url withData:imageData];
+                                                        [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.joined_blockViews count]];
+                                                        //refresh the whole view
+                                                        NSLog(@"profile0:%@",event_id);
+                                                        [self joined_refreshAllTheMainScrollViewSUbviews];
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        dispatch_async( dispatch_get_main_queue(),^{
+                                            [self.joined_blockViews insertObject:[ProfileEventElement initialWithPositionY:[self.joined_blockViews count] eventImageURL:event_photo_url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withDistance:distance withCategory:nil] atIndex:[self.joined_blockViews count]];
+                                            //refresh the whole view
+                                            NSLog(@"profile1:%@",shared_event_id);
+                                            [self joined_refreshAllTheMainScrollViewSUbviews];
+                                        });
+                                    }
+                                    [self.joined_refreshViewdown removeFromSuperview];
+                                }
+                                
+                                
+                            }
+                            self.joined_freshConnectionType=@"not";
+                        }
+                    }
+                    else{
+                        //connect error
+                    }
+                    
+                });
+                
+                ////////////////
+                
+                
+            });
+            
+            //refresh part
+            self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
+            [self.mainScrollView addSubview:self.refreshView];
+            
+            //refresh part
+            self.joined_refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(0, -EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT, EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, EXPLORE_PART_SCROLLVIEW_REFRESH_HEIGHT)];
+            [self.joinedScrollView addSubview:self.joined_refreshView];
+        }
     }
 }
 
@@ -601,6 +608,16 @@
     [super viewDidAppear:animated];
     
     [self startTheTutorialPage];
+    
+    //if the page is from creating an event, do the refresh
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    if (appDelegate.myCollection_needrefresh) {
+        [self performSelector:@selector(RefreshAction) withObject:self afterDelay:0.2];
+    [self performSelector:@selector(RefreshAction) withObject:self afterDelay:1.5];
+        appDelegate.myCollection_needrefresh=NO;
+    }
+    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -1390,7 +1407,7 @@
             
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
-            
+            NSLog(@"%@",[request responseString]);
             dispatch_async( dispatch_get_main_queue(),^{
                 if (code==200) {
                     //success
@@ -1467,6 +1484,7 @@
             [request startSynchronous];
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
+            NSLog(@"%@",[request responseString]);
             ///////////////
             dispatch_async( dispatch_get_main_queue(),^{
                 //enable the button after the request is finshed
@@ -1526,6 +1544,7 @@
                                 NSURL *url=[NSURL URLWithString:event_photo_url];
                                 if (![Cache isURLCached:url]) {
                                     //using high priority queue to fetch the image
+                                   //dispatch_async( dispatch_get_main_queue(),^{
                                     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
                                         //get the image data
                                         NSData * imageData = nil;

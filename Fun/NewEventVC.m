@@ -584,6 +584,8 @@
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
         [request setPostValue:user_ids forKey:@"user_ids"];
         [request setPostValue:emails forKey:@"emails"];
+        //sent the invitation later
+        [request setPostValue:@"true" forKey:@"dont_send_invitation"];
         [request setRequestMethod:@"POST"];
         [request startSynchronous];
         
@@ -607,9 +609,9 @@
     });
     
     //go to my parc
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+//    [funAppdelegate.thisTabBarController setSelectedIndex:3];
 }
 
 - (IBAction)deleteEventButton:(id)sender {
@@ -706,12 +708,19 @@
                     //success
                     NSError *error;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    NSLog(@"%@",json);
                     if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error" message: [NSString stringWithFormat:@"%@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         notsuccess.delegate=self;
                         [notsuccess show];
                     }
                     else{
+                        //when success, send notification
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setValue:self.detail_event_id forKey:@"temp_event_id"];
+                        [defaults setValue:self.detail_shared_event_id forKey:@"temp_shared_event_id"];
+                        [defaults synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"EventCreateFinished" object:nil];
                         //when success, start invite people;
                         if ([self.invitedFriend count]>0||[self.invitedAddressBookFriend count]>0) {
                             [self startInviteFriendWithEventID:self.detail_event_id withSharedEventID:self.detail_shared_event_id];
@@ -724,14 +733,13 @@
         });
         
         
-        
-        
+         
         
         //go to the next page
-        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        [funAppdelegate.thisTabBarController setSelectedIndex:0];
+        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+        //FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        //[funAppdelegate.thisTabBarController setSelectedIndex:0];
     }
     //for user create/repin a event
     else {
@@ -886,6 +894,11 @@
                         [notsuccess show];
                     }
                     else{
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setValue:[json objectForKey:@"event_id"] forKey:@"temp_event_id"];
+                        [defaults setValue:[json objectForKey:@"shared_event_id"] forKey:@"temp_shared_event_id"];
+                        [defaults synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"EventCreateFinished" object:nil];
                         //when success, start invite people;
                         if ([self.invitedFriend count]>0||[self.invitedAddressBookFriend count]>0) {
                             [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
@@ -901,13 +914,12 @@
         
         
         
-        
-        
+                
         //go to the next page
-        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        [funAppdelegate.thisTabBarController setSelectedIndex:3];
+        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+        //FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        //[funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
 }
 
@@ -1660,5 +1672,6 @@
 -(void)startInviteFriendWithEventID{
     //
 }
+
 
 @end
