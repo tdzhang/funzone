@@ -2266,6 +2266,7 @@
 		4668A76C1593E56400713A4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yizhou Zhu (CQ5A277369)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fun/OrangeParc-Prefix.pch";
 				INFOPLIST_FILE = "Fun/OrangeParc-Info.plist";
@@ -2276,6 +2277,7 @@
 					"\"$(SRCROOT)/Fun\"",
 				);
 				PRODUCT_NAME = OrangeParc;
+				PROVISIONING_PROFILE = "E5040945-D5AF-40FF-B4F8-E745624A41EA";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
