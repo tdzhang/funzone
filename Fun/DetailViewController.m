@@ -343,7 +343,7 @@
     [super viewWillAppear:animated];
     
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     //set the should back to false
 //    self.shouldGoBack=NO;
     //judge whether the user is login? if not, do the login
