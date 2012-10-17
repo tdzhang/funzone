@@ -7,6 +7,7 @@
 //
 
 #import "ActivityTabeleViewController.h"
+#import "Flurry.h"
 
 
 @interface ActivityTabeleViewController ()
@@ -130,6 +131,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [Flurry logEvent:FLURRY_ENTER_ACTIVITY];
     
     //get the notification list from the server
     [self startFetchingActivityData];  

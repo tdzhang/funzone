@@ -9,6 +9,7 @@
 #import "NewEventVC.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Event.h"
+#import "Flurry.h"
 
 #pragma mark - NewEventVC Private Declarition
 @interface NewEventVC () <UIActionSheetDelegate>
@@ -311,6 +312,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_START_CREATE_EVENT];
+    
     //hide the keyboard toolbar
     [self.keyboardToolbar setHidden:YES];
     //change the navigationController title
@@ -597,8 +600,9 @@
                 //success
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSLog(@"%@",[request responseString]);
                 if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     notsuccess.delegate=self;
                     [notsuccess show];
                 }
@@ -736,10 +740,14 @@
          
         
         //go to the next page
-        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
-        //[self.navigationController popToRootViewControllerAnimated:YES];
-        //FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        //[funAppdelegate.thisTabBarController setSelectedIndex:0];
+        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        ///make the my collection page refresh
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        appDelegate.myCollection_needrefresh=YES;
+        //return to the my collection page
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        [funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
     //for user create/repin a event
     else {
@@ -796,6 +804,8 @@
                 [request setPostValue:self.detail_creator_id forKey:@"creator_id"];
                 [request setPostValue:self.detail_event_id forKey:@"event_id"];
                 [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
+                
+                NSLog(@"%@",self.detail_event_id);
                 
                 if ([self.detail_latitude floatValue]>0.02||[self.detail_latitude floatValue]<-0.02) {
                     [request setPostValue:self.detail_latitude forKey:@"latitude"];
@@ -878,6 +888,7 @@
             
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
+            NSLog(@"response--->%@",[request responseString]);
             
             dispatch_async( dispatch_get_main_queue(),^{
                 if (code==200) {

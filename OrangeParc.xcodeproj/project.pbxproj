@@ -12,6 +12,8 @@
 		0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */; };
 		0F00546015C90315000EBF67 /* activityElementObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545E15C90315000EBF67 /* activityElementObject.h */; };
 		0F00546115C90315000EBF67 /* activityElementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545F15C90315000EBF67 /* activityElementObject.m */; };
+		0F0085D9162E1E960097D376 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F0085D7162E1E960097D376 /* Flurry.h */; };
+		0F0085DA162E1E960097D376 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0085D8162E1E960097D376 /* libFlurry.a */; };
 		0F06147E15E896E100A04591 /* IntroductionVCPage1.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F06147815E896E100A04591 /* IntroductionVCPage1.h */; };
 		0F06147F15E896E100A04591 /* IntroductionVCPage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06147915E896E100A04591 /* IntroductionVCPage1.m */; };
 		0F06148015E896E100A04591 /* IntroductionVCPage2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F06147A15E896E100A04591 /* IntroductionVCPage2.h */; };
@@ -381,6 +383,8 @@
 		0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		0F00545E15C90315000EBF67 /* activityElementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityElementObject.h; sourceTree = "<group>"; };
 		0F00545F15C90315000EBF67 /* activityElementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activityElementObject.m; sourceTree = "<group>"; };
+		0F0085D7162E1E960097D376 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		0F0085D8162E1E960097D376 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		0F06147815E896E100A04591 /* IntroductionVCPage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage1.h; sourceTree = "<group>"; };
 		0F06147915E896E100A04591 /* IntroductionVCPage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVCPage1.m; sourceTree = "<group>"; };
 		0F06147A15E896E100A04591 /* IntroductionVCPage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage2.h; sourceTree = "<group>"; };
@@ -834,6 +838,7 @@
 				4668A7471593E56400713A4C /* CoreGraphics.framework in Frameworks */,
 				9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */,
 				0FC659A315C517AF00727ED4 /* libWeChatSDK.a in Frameworks */,
+				0F0085DA162E1E960097D376 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +855,15 @@
 				0F00545F15C90315000EBF67 /* activityElementObject.m */,
 			);
 			name = "custom cell";
+			sourceTree = "<group>";
+		};
+		0F0085D6162E1E960097D376 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				0F0085D7162E1E960097D376 /* Flurry.h */,
+				0F0085D8162E1E960097D376 /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		0F07F27915AE1BEF00BF41CF /* auto completion part */ = {
@@ -1320,6 +1334,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F0085D6162E1E960097D376 /* Flurry */,
 				0FD0BE3315E7E7700068F76D /* Introduce to the app */,
 				4668A7A01593F98600713A4C /* Images */,
 				0F27BB8B15E33B4200335D42 /* Function Class */,
@@ -1790,6 +1805,7 @@
 				0F8B1E8E15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h in Headers */,
 				0F8B1E9515E9DBE900CBD517 /* TutorialPageConstant.h in Headers */,
 				5C271FF915EA397500E2D76D /* detailLinkViewController.h in Headers */,
+				0F0085D9162E1E960097D376 /* Flurry.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2256,6 +2272,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2275,6 +2292,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
 				PROVISIONING_PROFILE = "E5040945-D5AF-40FF-B4F8-E745624A41EA";
@@ -2319,6 +2337,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
 				TARGETED_DEVICE_FAMILY = 1;

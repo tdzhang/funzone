@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *statuse_text;
 @property (weak, nonatomic) IBOutlet UIButton *button_finish;
 
+@property (strong, nonatomic) IBOutlet UIView *mainView;
+@property (strong,nonatomic)UIImageView *refreshView;
 @end
 
 @implementation ShareAfterNewEventViewController
@@ -46,6 +48,7 @@
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
+@synthesize refreshView=_refreshView;
 
 
 #pragma mark - self defined setter and getter
@@ -91,6 +94,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    //hide the waiting button
+    [self.button_finish setHidden:YES];
+    
+    //add the refresh view
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(275, 5, 40, 40)];
+    [self.refreshView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0]];
+    [self.mainView addSubview:self.refreshView];
+    
+    UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinning.frame =CGRectMake(0,0,40,40);
+    [spinning startAnimating];
+    [self.refreshView addSubview:spinning];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //change the button color to orange
+    self.button_finish.backgroundColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    
+    
     //set the preset content of the sharing
     [self.textview_shareinfo setText:[self inviteMessagetoSend]];
     [self.button_finish setEnabled:NO];
@@ -116,9 +140,14 @@
 #pragma mark - self defined method
 //deal when event is already created
 -(void)EventCreateFinished{
-    [self.statuse_text setText:@"Ready To Finish."];
-    [self.button_finish setTitle:@"Finish Creation and Invitation" forState:UIControlStateNormal];
+    //the status text no longer need to change
+    [self.button_finish setHidden:NO];
+    //[self.statuse_text setText:@"Ready To Finish."];
+    //[self.button_finish setTitle:@"Finish Creation and Invitation" forState:UIControlStateNormal];
     [self.button_finish setEnabled:YES];
+    
+    //clear the refresh indicator
+    [self.refreshView removeFromSuperview];
 }
 - (IBAction)FinishedThisPage:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -176,7 +205,9 @@
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"I just found an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName,self.createEvent_time];
+    
+    NSString *msg=@"Hey guys,\n\nI have found an event that you may be interested in. Let me know what you think.";
+    return msg;
 }
 
 
@@ -390,6 +421,7 @@
     [self setMyKeyboardToolbar:nil];
     [self setStatuse_text:nil];
     [self setButton_finish:nil];
+    [self setMainView:nil];
     [super viewDidUnload];
 }
 @end

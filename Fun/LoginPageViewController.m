@@ -8,6 +8,7 @@
 
 #import "LoginPageViewController.h"
 #import "CheckForInternetConnection.h"
+#import "Flurry.h"
 
 @interface LoginPageViewController ()
 //@property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -298,7 +299,9 @@
 
 
 //when the connection get the returned data (json form)
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection { 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [Flurry logEvent:FLURRY_USER_LOGIN];
+    
     if ([self.currentConnection isEqualToString:@"facebookLogin"]) {
         self.currentConnection=nil;
         NSError *error;

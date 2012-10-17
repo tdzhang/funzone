@@ -7,6 +7,7 @@
 //
 
 #import "FIndTopTableViewController.h"
+#import "Flurry.h"
 
 @interface FIndTopTableViewController ()
 @property(nonatomic,strong)NSArray* topfriends;
@@ -43,6 +44,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [Flurry logEvent:FLURRY_ENTER_FINDPOPUSERS];
+    
     self.navigationItem.backBarButtonItem.tintColor =  [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
 }
 

@@ -8,6 +8,7 @@
 #import "FeedViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FeedBlockElement.h"
+#import "Flurry.h"
 
 
 @interface FeedViewController ()
@@ -118,6 +119,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_ENTER_FEEDS];
     [self.instructionView setHidden:YES];
     
     //judge whether the user is login? if not, do the login

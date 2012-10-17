@@ -9,6 +9,7 @@
 #import "ExploreViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
+#import "Flurry.h"
 
 
 
@@ -102,8 +103,11 @@
 
 #pragma mark - View Life circle
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     
+    
+    
+    [super viewWillAppear:animated];
+    [Flurry logEvent:FLURRY_ENTER_EXPLORE];
     //check for internet connection, if no connection, showing alert
     [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
@@ -170,6 +174,14 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    if ([[defaults valueForKey:@"need_refresh_explore"] isEqualToString:@"yes"]) {
+        [self RefreshAction];
+        [defaults setValue:@"no" forKey:@"need_refresh_explore"];
+        [defaults synchronize];
+    }
     
     [self startTheTutorialPage];
     //clear the segue circle if has one
@@ -181,7 +193,7 @@
         [self.navigationController setViewControllers:viewControllers animated:NO];
     }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     if ([self.refresh_checksum isEqualToString:@""]||![defaults objectForKey:@"notTheFirstTimeIntoExplore"]) {
         if ([defaults objectForKey:@"notTheFirstTime"]) {
             [defaults setValue:@"yes" forKey:@"notTheFirstTimeIntoExplore"];

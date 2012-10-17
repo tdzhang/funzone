@@ -10,14 +10,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CheckForInternetConnection.h"
 #import "ProfilePicViewController.h"
-
+#import "Flurry.h"
 
 @interface ProfilePageViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *joinedScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *creatorImageView;
 @property (weak, nonatomic) IBOutlet UILabel *creatorNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *bookmarkNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followerNumLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mySegmentControl;
@@ -72,7 +72,7 @@
 @synthesize joined_refreshViewdown=_joined_refreshViewdown;
 @synthesize creatorImageView = _creatorImageView;
 @synthesize creatorNameLabel = _creatorNameLabel;
-@synthesize bookmarkNumLabel = _bookmarkNumLabel;
+//@synthesize bookmarkNumLabel = _bookmarkNumLabel;
 @synthesize followingNumLabel = _followingNumLabel;
 @synthesize followerNumLabel = _followerNumLabel;
 @synthesize mySegmentControl = _mySegmentControl;
@@ -196,6 +196,8 @@
 #pragma mark - View Life Circle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [Flurry logEvent:FLURRY_ENTER_MYCOLLECTION];
     //check for internet connection, if no connection, showing alert
     //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     
@@ -239,7 +241,7 @@
                             self.lastReceivedJson_profile=json;
                             //only update the content when there is a content different
                             [self.creatorNameLabel setText:[json objectForKey:@"name"]];
-                            [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
+                            //[self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
                             [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
                             [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
                             [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
@@ -610,9 +612,10 @@
     //if the page is from creating an event, do the refresh
     FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
     if (appDelegate.myCollection_needrefresh) {
-        [self performSelector:@selector(RefreshAction) withObject:self afterDelay:0.2];
-    [self performSelector:@selector(RefreshAction) withObject:self afterDelay:1.5];
+        [self performSelector:@selector(RefreshAction) withObject:self afterDelay:0.1];
+    [self performSelector:@selector(RefreshAction) withObject:self afterDelay:2.0];
         appDelegate.myCollection_needrefresh=NO;
+    [Flurry logEvent:FLURRY_FINISH_CREATE_EVENT];
     }
     
 
@@ -684,7 +687,7 @@
     [self setMainScrollView:nil];
     [self setCreatorImageView:nil];
     [self setCreatorNameLabel:nil];
-    [self setBookmarkNumLabel:nil];
+    //[self setBookmarkNumLabel:nil];
     [self setFollowingNumLabel:nil];
     [self setFollowerNumLabel:nil];
     [self setMySegmentControl:nil];
@@ -1415,7 +1418,9 @@
                         self.lastReceivedJson_profile=json;
                         //only update the content when there is a content different
                         [self.creatorNameLabel setText:[json objectForKey:@"name"]];
-                        [self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
+                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ COLLECTED",[json objectForKey:@"num_bookmarks"]] forSegmentAtIndex:0];
+                        [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%@ INVITED",[json objectForKey:@"num_invitations"]] forSegmentAtIndex:1];
+                        //[self.bookmarkNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_bookmarks"]]];
                         [self.followerNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followers"]]];
                         [self.followingNumLabel setText:[NSString stringWithFormat:@"%@",[json objectForKey:@"num_followings"]]];
                         self.url=[NSURL URLWithString:[[json objectForKey:@"profile_url"] stringByAppendingString:@"?type=normal"]];
@@ -1491,8 +1496,8 @@
                     //set the freshConnectionType to "not"
                     NSError *error;
                     NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                    [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d COLLECTED",[json count]] forSegmentAtIndex:0];
-                    NSLog(@"%@",[NSString stringWithFormat:@"%@",json]);
+                    
+                    
                     NSLog(@"%@",[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]);
                     //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                     //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark]]

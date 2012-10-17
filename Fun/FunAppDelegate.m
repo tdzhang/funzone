@@ -5,7 +5,7 @@
 //  Created by He Yang on 6/21/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+#import "Flurry.h"
 #import "FunAppDelegate.h"
 
 @interface FunAppDelegate() <FBSessionDelegate,WXApiDelegate>
@@ -18,6 +18,11 @@
 @synthesize thisTabBarController = _thisTabBarController;
 @synthesize myLocationManager=_myLocationManager;
 @synthesize myCollection_needrefresh=_myCollection_needrefresh;
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+    [Flurry startSession:@"FDHVGK7S4CDKWGCKD6HD"];
+    //your code
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -105,6 +110,10 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+    //set the flag the will refresh when go to the explore page
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:@"yes" forKey:@"need_refresh_explore"];
+    [defaults synchronize];
     //set the location manager, start getting user location
     CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
     [current_location_manager startUpdatingLocation];
@@ -116,6 +125,8 @@
     [MyPermenentCachePart EXITit];//save the permanentcache data
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     //stop updating user's locaiton
+
+    
     if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
 }
 /////////////

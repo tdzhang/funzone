@@ -44,9 +44,8 @@
                 }
                 else{
                     //connect error
-                    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Not Complete." message:@"The speed of internet connection is slow, please try the refresh button to reload the data."
-                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show]; 
+                    //UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Not Complete." message:@"The speed of internet connection is slow, please try the refresh button to reload the data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    //[alert show];
                 }
             });
             
