@@ -1208,8 +1208,13 @@
         
         //NSString *facebook_user_id=[result objectForKey:@"id"];
         //set the user photo
-        
+    
+    
+        //save the user_image url for later use
         NSURL *url=[NSURL URLWithString:photo];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSString stringWithFormat:@"%@",photo] forKey:@"user_profile_img_url"];
+        [defaults synchronize];
         if (![Cache isURLCached:url]) {
             //using high priority queue to fetch the image
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{

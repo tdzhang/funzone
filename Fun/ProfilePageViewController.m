@@ -1637,7 +1637,7 @@
                     //set the freshConnectionType to "not"
                     NSError *error;
                     NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                    [self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d INVITED",[json count]] forSegmentAtIndex:1];
+                    //[self.mySegmentControl setTitle:[NSString stringWithFormat:@"%d INVITED",[json count]] forSegmentAtIndex:1];
                     //after reget the newest 10 popular event, the next page that need to be retrait is page 2
                     //[[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_bookmark_joined]]
 
@@ -2076,7 +2076,6 @@
 
 -(void)startTheTutorialPage{
     
-    
     //adding the tutorial cover page
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults objectForKey:@"ProfilePageTutorial"]) {
@@ -2091,7 +2090,8 @@
         [tutorial setImage:[UIImage imageNamed:TUTORIAL_PROFILE_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
-        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        //UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 375)];
         self.cancelTutorailButton=cancelTutorialButton;
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];

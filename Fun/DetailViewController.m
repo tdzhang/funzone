@@ -2057,7 +2057,8 @@
         [tutorial setImage:[UIImage imageNamed:TUTORIAL_DETAIL_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
-        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+//        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 375)];
         self.cancelTutorailButton=cancelTutorialButton;
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];

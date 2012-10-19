@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *myKeyboardToolbar;
 @property (weak, nonatomic) IBOutlet UILabel *statuse_text;
 @property (weak, nonatomic) IBOutlet UIButton *button_finish;
+@property (weak, nonatomic) IBOutlet UIImageView *user_profile_imageview;
 
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (strong,nonatomic)UIImageView *refreshView;
@@ -95,7 +96,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     //hide the waiting button
-    [self.button_finish setHidden:YES];
+    [self.button_finish setHidden:NO];
     
     //add the refresh view
     self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(275, 5, 40, 40)];
@@ -110,9 +111,11 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    //get teh image of the user
+    [self UserProfileImageSet];
     
     //change the button color to orange
-    self.button_finish.backgroundColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    //self.button_finish.backgroundColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
     
     //set the preset content of the sharing
@@ -138,6 +141,57 @@
 }
 
 #pragma mark - self defined method
+//initialize the user profile image on this page
+-(void)UserProfileImageSet{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"user_profile_img_url"]) {
+        return;
+    }
+    NSURL *url=[NSURL URLWithString:[defaults objectForKey:@"user_profile_img_url"]];
+    if (![Cache isURLCached:url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: url];
+            
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.user_profile_imageview setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+        });
+    }
+    self.user_profile_imageview.layer.cornerRadius = 6;
+    self.user_profile_imageview.layer.masksToBounds = YES;
+    self.user_profile_imageview.layer.shadowOpacity = 0.85f;
+    self.user_profile_imageview.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.user_profile_imageview.layer.shadowRadius = 2.f;
+    [self.user_profile_imageview.layer setShadowOffset:CGSizeMake(1, 1)];
+}
 //deal when event is already created
 -(void)EventCreateFinished{
     //the status text no longer need to change
@@ -206,7 +260,7 @@
 //return the share message
 -(NSString*)inviteMessagetoSend{
     
-    NSString *msg=@"Hey guys,\n\nI have found an event that you may be interested in. Let me know what you think.";
+    NSString *msg=@"Here is something you might be interested. Let's make it happen!";
     return msg;
 }
 
@@ -422,6 +476,7 @@
     [self setStatuse_text:nil];
     [self setButton_finish:nil];
     [self setMainView:nil];
+    [self setUser_profile_imageview:nil];
     [super viewDidUnload];
 }
 @end
