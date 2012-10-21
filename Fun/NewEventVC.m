@@ -394,16 +394,21 @@
         }
         //this is for the repin of a featured event
         [self.textFieldEventTitle setText:self.detail_event_title];
+        if (![self.detail_event_time isEqualToString:@"Not Specified"]) {
+            [self.labelEventTime setText:self.detail_event_time];
+            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+        }
         
-        [self.labelEventTime setText:self.detail_event_time];
-        [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
         [self.timeIcon setAlpha:0.8];
         [self.labelEventTitleHolder setHidden:YES];
         
-        [self.locationLabel setText:self.detail_location_name];
-        [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+        if (![self.detail_location_name isEqualToString:@"Not Specified"]) {
+            [self.locationLabel setText:self.detail_location_name];
+             [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
+             [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+        }
+        
         [self.locationIcon setAlpha:0.8];
         
         [self.uIImageViewEvent setImage:self.detail_image];
@@ -660,7 +665,9 @@
             [request setPostValue:self.createEvent_locationName forKey:@"location"];
             [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
-            [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            if (![self.createEvent_time isEqualToString:@"Find a time"]) {
+                [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            }
             NSLog(@"%@",self.createEvent_time);
 
             //used for server log
@@ -779,7 +786,11 @@
                 [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             }
             
-            [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            if (![self.createEvent_time isEqualToString:@"Find a time"]) {
+                [request setPostValue:self.createEvent_time forKey:@"start_time"];
+                
+            }
+
             if (self.detail_creator_id) {
                 //if it is from repin
                 if (![self.createEvent_image isEqual:self.detail_image]) {

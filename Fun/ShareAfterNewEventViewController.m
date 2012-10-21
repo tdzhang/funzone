@@ -99,12 +99,12 @@
     [self.button_finish setHidden:NO];
     
     //add the refresh view
-    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(275, 5, 40, 40)];
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(277, 7, 30, 30)];
     [self.refreshView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0]];
     [self.mainView addSubview:self.refreshView];
     
-    UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinning.frame =CGRectMake(0,0,40,40);
+    UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    spinning.frame =CGRectMake(0,0,30,30);
     [spinning startAnimating];
     [self.refreshView addSubview:spinning];
 }

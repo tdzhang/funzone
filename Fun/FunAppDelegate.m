@@ -104,6 +104,14 @@
         }
     }
     
+    //send the new token to the sever;
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"push_notification_token"]) {
+        [PushNotificationHandler SendeAPNStokenToServer:[defaults objectForKey:@"push_notification_token"]];
+    }
+    
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -143,9 +151,7 @@
 	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
 	NSLog(@"My token is: %@", newToken);
-    //send the new token to the sever;
     [PushNotificationHandler SendeAPNStokenToServer:newToken];
-
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

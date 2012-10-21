@@ -17,6 +17,7 @@
 #import "CategroyChooseViewController.h"
 #import "GlobalConstant.h"
 #import "PushNotificationHandler.h"
+#import "CheckForInternetConnection.h"
 
 @class FunFirstViewController;
 

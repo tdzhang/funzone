@@ -901,9 +901,11 @@
     [self.timeSectionView addSubview:timeIcon];
     UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     self.event_time=[event objectForKey:@"start_time"];
-    if ([self.event_time isEqualToString:@""]) {
+    NSLog(@"%@",self.event_time);
+    if ([[NSString stringWithFormat:@"%@",self.event_time] isEqualToString:@"<null>"]) {
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
     }
+    
     [eventTime setText:self.event_time];
     [eventTime setBackgroundColor:[UIColor clearColor]];
     [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
@@ -935,6 +937,7 @@
     if ([self.location_name isEqualToString:@""]) {
         self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
+    
     [eventLocation setText:self.location_name];
     [eventLocation setBackgroundColor:[UIColor clearColor]];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];

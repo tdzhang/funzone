@@ -109,7 +109,7 @@
     [super viewWillAppear:animated];
     [Flurry logEvent:FLURRY_ENTER_EXPLORE];
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     
     //judge whether the user is login? if not, do the login
