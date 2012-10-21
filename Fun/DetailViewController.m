@@ -409,7 +409,7 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"Hey,\n\nI found an event that you may be interested in.\n\nEvent : %@  \nLocation : %@ \nTime : %@ \n\nLet me know whether you want to join! \n\n-Shared via OrangeParc (http://www.orangeparc.com)",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"Hey,\n\nHere is something you might be interested.\n\nEvent : %@  \nWhere : %@ \nWhen : %@ \n\nLet me know whether you want to join! \n\n-Shared via OrangeParc (http://www.orangeparc.com)",self.event_title,self.location_name,self.event_time];
 }
 
 //return the share message
@@ -417,10 +417,6 @@
     return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". I want to invite you to join me.\nYou can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
-//twitter share message
--(NSString*)twitterShareMessage{
-    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". You can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
-}
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner{
@@ -1520,7 +1516,7 @@
             if (twitterClass) {
                 if ([TWTweetComposeViewController canSendTweet]) {
                     TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-                    [tweetViewController setInitialText:[self twitterShareMessage]];
+                    [tweetViewController setInitialText:[self shareMessagetoSend]];
                     if (self.eventImageView.image != nil) {
                         [tweetViewController addImage:self.eventImageView.image];
                     }
@@ -1720,7 +1716,7 @@
         
         
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
-        self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+        self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"Not Specified";
         self.event_address=[event objectForKey:@"address"];
         
         NSLog(@"---->%@,%@,%@",self.creator_id,self.location_name,self.event_address);

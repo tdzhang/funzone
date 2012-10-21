@@ -63,6 +63,34 @@
     //set the default start page
     [self.thisTabBarController setSelectedIndex:1];
     
+    //start upload location info and device token
+    //upload user's locaiton
+    if(self.myLocationManager){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if([CLLocationManager regionMonitoringEnabled]&&[defaults objectForKey:@"login_auth_token"]){
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                
+                NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_current_location?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.myLocationManager.location.coordinate.longitude,self.myLocationManager.location.coordinate.latitude]];
+                NSLog(@"upload location:%@",url);
+                ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+            });
+        }
+    }
+    
+    //send the new token to the sever;
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"push_notification_token"]) {
+        [PushNotificationHandler SendeAPNStokenToServer:[defaults objectForKey:@"push_notification_token"]];
+    }
+    
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
     return YES;
 }
 							

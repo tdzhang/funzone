@@ -157,7 +157,7 @@
 //implement the Protocal UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {  
     
-    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
+    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
     
     self.navigationItem.rightBarButtonItem = done;      
     [self animateTextView:textView up:YES];

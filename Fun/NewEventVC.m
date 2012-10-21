@@ -661,8 +661,11 @@
             [request setPostValue:self.createEvent_title forKey:@"title"];
             //NSLog(@"%@",self.createEvent_address);
             [request setPostValue:self.createEvent_address forKey:@"address"];
-            //NSLog(@"%@",self.createEvent_locationName);
-            [request setPostValue:self.createEvent_locationName forKey:@"location"];
+            if (self.createEvent_locationName) {
+                if (![self.createEvent_locationName isEqualToString:@""]) {
+                    [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                }
+            }
             [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
             if (![self.createEvent_time isEqualToString:@"Find a time"]) {
@@ -705,7 +708,11 @@
                     [request setPostValue:self.detail_longitude forKey:@"longitude"];
                 }
                 [request setPostValue:self.detail_address forKey:@"address"];
-                [request setPostValue:self.detail_location_name forKey:@"location"];
+                if (self.createEvent_locationName) {
+                    if (![self.createEvent_locationName isEqualToString:@""]) {
+                        [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                    }
+                }
             }
             
             [request setRequestMethod:@"POST"];
@@ -776,7 +783,11 @@
             NSLog(@"%@",self.createEvent_address);
             [request setPostValue:self.createEvent_address forKey:@"address"];
             NSLog(@"%@",self.createEvent_locationName);
-            [request setPostValue:self.createEvent_locationName forKey:@"location"];
+            if (self.createEvent_locationName) {
+                if (![self.createEvent_locationName isEqualToString:@""]) {
+                    [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                }
+            }
             //used for server log
             [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
             if ([self.createEvent_latitude floatValue]>0.02||[self.createEvent_latitude floatValue]<-0.02) {
@@ -825,7 +836,11 @@
                     [request setPostValue:self.detail_longitude forKey:@"longitude"];
                 }
                 [request setPostValue:self.detail_address forKey:@"address"];
-                [request setPostValue:self.detail_location_name forKey:@"location"];
+                if (self.createEvent_locationName) {
+                    if (![self.createEvent_locationName isEqualToString:@""]) {
+                        [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                    }
+                }
             }
             else {
                 if (self.createEvent_imageUrlName) {
