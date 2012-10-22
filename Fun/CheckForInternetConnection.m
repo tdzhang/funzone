@@ -28,7 +28,7 @@
     }
     else{
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/available",CONNECT_DOMIAN_NAME]];
-        
+        NSLog(@"%@",url);
         ///////////////////////////////////////////////////////////////////////////
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
@@ -44,9 +44,8 @@
                 }
                 else{
                     //connect error
-                    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Error." message:@"Our server is currently under maintenance. Please try again later."
-                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show]; 
+                    //UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"Server Connection Not Complete." message:@"The speed of internet connection is slow, please try the refresh button to reload the data." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    //[alert show];
                 }
             });
             

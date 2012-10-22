@@ -134,7 +134,11 @@
 //        element.event_pic=DEFAULT_IMAGE_PLACEHOLDER;
 //    }
     NSLog(@"-->%@",element.event_pic);
+    if (!element.event_pic||[[NSString stringWithFormat:@"%@",element.event_pic] isEqualToString:@"<null>"]) {
+        element.event_pic = DEFAULT_IMAGE_PLACEHOLDER;
+    }
     NSURL *eventUrl=[NSURL URLWithString:element.event_pic];
+
     //deal with the profile image
     if (![Cache isURLCached:eventUrl]) {
         //using high priority queue to fetch the image
@@ -216,7 +220,6 @@
         [self.activityDescriptionLabel setText:[NSString stringWithFormat:@"%@ joined OrangeParc.",self.user_name]];
         self.activityDescriptionLabel.frame = CGRectMake(65, 8, 246, 37);
         self.activityPicImageView.hidden = YES;
-#warning need further other default image
         [self.activityPicImageView setImage:[UIImage imageNamed:@"invite.png"]];
     }
     

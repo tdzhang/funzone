@@ -9,6 +9,8 @@
 
 
 #import "CategroyChooseViewController.h"
+#import "Flurry.h"
+
 
 @interface CategroyChooseViewController ()
 @property (nonatomic,strong) UIView *flash;
@@ -38,6 +40,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_ENTER_CREATE_EVENT];
     
     //judge whether the user is login? if not, do the login
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

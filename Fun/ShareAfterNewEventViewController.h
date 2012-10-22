@@ -27,7 +27,7 @@
 @end
 
 
-@interface ShareAfterNewEventViewController : UIViewController<FBRequestDelegate,FeedBackToCreateActivityChange,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate>
+@interface ShareAfterNewEventViewController : UIViewController<FBRequestDelegate,FeedBackToCreateActivityChange,MFMailComposeViewControllerDelegate,UIActionSheetDelegate>
 @property(nonatomic,weak)id<WEICHATprotocal>delegate;
 
 -(void)presetEventImage:(UIImage*)createEvent_image WithTiTle:(NSString*)createEvent_title WithLatitude:(NSString*)createEvent_latitude WithLongitude:(NSString*)createEvent_longitude WithLocationName:(NSString*)createEvent_locationName WithTime:(NSString*)createEvent_time WithAddress:(NSString*)createEvent_address WithImageUrlName:(NSString*)createEvent_imageUrlName;

@@ -85,7 +85,6 @@
 @property (nonatomic) int next_page_profile_via; //used to send via information to the next segue (used for show others user profile)
 @property (nonatomic) BOOL isEventOwner; //used to indicate whether it is a editable event (based on who is the owner)
 @property (nonatomic) BOOL isInvited;  //record if a user is invited to this event
-#warning need to hide/show specific button for isInvited
 @property (nonatomic,strong)NSString* mysendMessageType; //differentiate share and invite
 @property (nonatomic,strong)NSArray* alreadyInvitedFriend; //the json data of already invited friends
 @property (nonatomic,strong)NSMutableArray* alreadyInvitedAddressBookFriends;  //the json data of already invited addressbook friend
@@ -344,7 +343,7 @@
     [super viewWillAppear:animated];
     
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     //set the should back to false
 //    self.shouldGoBack=NO;
     //judge whether the user is login? if not, do the login
@@ -410,7 +409,7 @@
 #pragma mark - self defined method 
 //return the share message
 -(NSString*)shareMessagetoSend{
-    return [NSString stringWithFormat:@"Hey,\n\nI found an event that you may be interested in.\n\nEvent : %@  \nLocation : %@ \nTime : %@ \n\nLet me know whether you want to join! \n\n-Shared via OrangeParc (http://www.orangeparc.com)",self.event_title,self.location_name,self.event_time];
+    return [NSString stringWithFormat:@"Hey,\n\nHere is something you might be interested.\n\nEvent : %@  \nWhere : %@ \nWhen : %@ \n\nLet me know whether you want to join! \n\n-Shared via OrangeParc (http://www.orangeparc.com)",self.event_title,self.location_name,self.event_time];
 }
 
 //return the share message
@@ -418,10 +417,6 @@
     return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". I want to invite you to join me.\nYou can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
 }
 
-//twitter share message
--(NSString*)twitterShareMessage{
-    return [NSString stringWithFormat:@"I just found an interesting event \"%@\" at %@. It will start \"%@\". You can check out more details at http://www.orangeparc.com",self.event_title,self.location_name,self.event_time];
-}
 
 //(this method is called by the explorer page before loading to set the event id and shared event id)
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner{
@@ -902,9 +897,11 @@
     [self.timeSectionView addSubview:timeIcon];
     UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     self.event_time=[event objectForKey:@"start_time"];
-    if ([self.event_time isEqualToString:@""]) {
+    NSLog(@"%@",self.event_time);
+    if ([[NSString stringWithFormat:@"%@",self.event_time] isEqualToString:@"<null>"]) {
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
     }
+    
     [eventTime setText:self.event_time];
     [eventTime setBackgroundColor:[UIColor clearColor]];
     [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
@@ -936,6 +933,7 @@
     if ([self.location_name isEqualToString:@""]) {
         self.location_name = [NSString stringWithFormat:@"Not Specified"];
     }
+    
     [eventLocation setText:self.location_name];
     [eventLocation setBackgroundColor:[UIColor clearColor]];
     [eventLocation setFont:[UIFont boldSystemFontOfSize:14]];
@@ -1518,7 +1516,7 @@
             if (twitterClass) {
                 if ([TWTweetComposeViewController canSendTweet]) {
                     TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-                    [tweetViewController setInitialText:[self twitterShareMessage]];
+                    [tweetViewController setInitialText:[self shareMessagetoSend]];
                     if (self.eventImageView.image != nil) {
                         [tweetViewController addImage:self.eventImageView.image];
                     }
@@ -1718,7 +1716,7 @@
         
         
         self.creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
-        self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"location name unavailable";
+        self.location_name=[event objectForKey:@"location"] !=[NSNull null]?[event objectForKey:@"location"]:@"Not Specified";
         self.event_address=[event objectForKey:@"address"];
         
         NSLog(@"---->%@,%@,%@",self.creator_id,self.location_name,self.event_address);
@@ -1770,7 +1768,6 @@
             self.isEnteredDiscussion=YES;
             [self performSegueWithIdentifier:@"startDiscussion" sender:self];
         }
-#warning fetch original creator info
         //handle the interest people part
 //        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
 //        [self handleTheInterestedPeoplePart];
@@ -2059,7 +2056,8 @@
         [tutorial setImage:[UIImage imageNamed:TUTORIAL_DETAIL_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
-        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+//        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 375)];
         self.cancelTutorailButton=cancelTutorialButton;
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];

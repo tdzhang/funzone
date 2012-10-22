@@ -7,6 +7,7 @@
 //
 
 #import "ActivityTabeleViewController.h"
+#import "Flurry.h"
 
 
 @interface ActivityTabeleViewController ()
@@ -131,6 +132,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_ENTER_ACTIVITY];
+    
     //get the notification list from the server
     [self startFetchingActivityData];  
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -145,7 +148,7 @@
     [super viewDidLoad];
     
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];

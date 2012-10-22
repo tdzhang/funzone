@@ -17,6 +17,7 @@
 #import "CategroyChooseViewController.h"
 #import "GlobalConstant.h"
 #import "PushNotificationHandler.h"
+#import "CheckForInternetConnection.h"
 
 @class FunFirstViewController;
 
@@ -26,5 +27,6 @@
 @property (strong, nonatomic) Facebook *facebook;
 @property (strong, nonatomic) UITabBarController *thisTabBarController;
 @property (nonatomic,strong) CLLocationManager *myLocationManager;
+@property (nonatomic)BOOL myCollection_needrefresh;
 
 @end

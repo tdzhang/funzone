@@ -5,7 +5,7 @@
 //  Created by He Yang on 6/21/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+#import "Flurry.h"
 #import "FunAppDelegate.h"
 
 @interface FunAppDelegate() <FBSessionDelegate,WXApiDelegate>
@@ -17,6 +17,12 @@
 @synthesize facebook=_facebook;
 @synthesize thisTabBarController = _thisTabBarController;
 @synthesize myLocationManager=_myLocationManager;
+@synthesize myCollection_needrefresh=_myCollection_needrefresh;
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+    [Flurry startSession:@"FDHVGK7S4CDKWGCKD6HD"];
+    //your code
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -56,6 +62,34 @@
     
     //set the default start page
     [self.thisTabBarController setSelectedIndex:1];
+    
+    //start upload location info and device token
+    //upload user's locaiton
+    if(self.myLocationManager){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if([CLLocationManager regionMonitoringEnabled]&&[defaults objectForKey:@"login_auth_token"]){
+            dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                
+                NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/upload_current_location?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.myLocationManager.location.coordinate.longitude,self.myLocationManager.location.coordinate.latitude]];
+                NSLog(@"upload location:%@",url);
+                ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+                [request setRequestMethod:@"GET"];
+                [request startSynchronous];
+                
+                int code=[request responseStatusCode];
+                NSLog(@"code:%d",code);
+            });
+        }
+    }
+    
+    //send the new token to the sever;
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"push_notification_token"]) {
+        [PushNotificationHandler SendeAPNStokenToServer:[defaults objectForKey:@"push_notification_token"]];
+    }
+    
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     return YES;
 }
@@ -98,12 +132,24 @@
         }
     }
     
+    //send the new token to the sever;
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"push_notification_token"]) {
+        [PushNotificationHandler SendeAPNStokenToServer:[defaults objectForKey:@"push_notification_token"]];
+    }
+    
+    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
+    //set the flag the will refresh when go to the explore page
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:@"yes" forKey:@"need_refresh_explore"];
+    [defaults synchronize];
     //set the location manager, start getting user location
     CLLocationManager *current_location_manager = [[CLLocationManager alloc] init];
     [current_location_manager startUpdatingLocation];
@@ -115,6 +161,8 @@
     [MyPermenentCachePart EXITit];//save the permanentcache data
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     //stop updating user's locaiton
+
+    
     if(self.myLocationManager)[self.myLocationManager stopUpdatingLocation];
 }
 /////////////
@@ -131,9 +179,7 @@
 	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
 	NSLog(@"My token is: %@", newToken);
-    //send the new token to the sever;
     [PushNotificationHandler SendeAPNStokenToServer:newToken];
-
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -204,7 +250,6 @@
     [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-    #warning need a more precise url about the event, not just the image
     ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
     //    WXImageObject *ext = [WXImageObject object];
     //    ext.imageData = [Cache getCachedData:imgurl];
@@ -247,7 +292,6 @@
     [message setThumbImage:[self imageByScalingAndCroppingithImage:[UIImage imageWithData:[Cache getCachedData:imgurl]]]];
     
     WXWebpageObject *ext = [WXWebpageObject object];
-#warning need a more precise url about the event, not just the image
     ext.webpageUrl = @"http://www.orangeparc.com";//[NSString stringWithFormat:@"%@",imgurl];//@"http://www.orangeparc.com";
 //    WXImageObject *ext = [WXImageObject object];
 //    ext.imageData = [Cache getCachedData:imgurl];

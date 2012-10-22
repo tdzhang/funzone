@@ -9,6 +9,7 @@
 #import "NewEventVC.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Event.h"
+#import "Flurry.h"
 
 #pragma mark - NewEventVC Private Declarition
 @interface NewEventVC () <UIActionSheetDelegate>
@@ -311,6 +312,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_START_CREATE_EVENT];
+    
     //hide the keyboard toolbar
     [self.keyboardToolbar setHidden:YES];
     //change the navigationController title
@@ -391,16 +394,21 @@
         }
         //this is for the repin of a featured event
         [self.textFieldEventTitle setText:self.detail_event_title];
+        if (![self.detail_event_time isEqualToString:@"Not Specified"]) {
+            [self.labelEventTime setText:self.detail_event_time];
+            [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
+        }
         
-        [self.labelEventTime setText:self.detail_event_time];
-        [self.labelEventTime setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.labelEventTime setTextColor:[UIColor darkGrayColor]];
         [self.timeIcon setAlpha:0.8];
         [self.labelEventTitleHolder setHidden:YES];
         
-        [self.locationLabel setText:self.detail_location_name];
-        [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+        if (![self.detail_location_name isEqualToString:@"Not Specified"]) {
+            [self.locationLabel setText:self.detail_location_name];
+             [self.locationLabel setFont:[UIFont boldSystemFontOfSize:14]];
+             [self.locationLabel setTextColor:[UIColor darkGrayColor]];
+        }
+        
         [self.locationIcon setAlpha:0.8];
         
         [self.uIImageViewEvent setImage:self.detail_image];
@@ -584,6 +592,8 @@
         ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
         [request setPostValue:user_ids forKey:@"user_ids"];
         [request setPostValue:emails forKey:@"emails"];
+        //sent the invitation later
+        [request setPostValue:@"true" forKey:@"dont_send_invitation"];
         [request setRequestMethod:@"POST"];
         [request startSynchronous];
         
@@ -595,8 +605,9 @@
                 //success
                 NSError *error;
                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                NSLog(@"%@",[request responseString]);
                 if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
-                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     notsuccess.delegate=self;
                     [notsuccess show];
                 }
@@ -607,9 +618,9 @@
     });
     
     //go to my parc
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+//    [funAppdelegate.thisTabBarController setSelectedIndex:3];
 }
 
 - (IBAction)deleteEventButton:(id)sender {
@@ -650,11 +661,16 @@
             [request setPostValue:self.createEvent_title forKey:@"title"];
             //NSLog(@"%@",self.createEvent_address);
             [request setPostValue:self.createEvent_address forKey:@"address"];
-            //NSLog(@"%@",self.createEvent_locationName);
-            [request setPostValue:self.createEvent_locationName forKey:@"location"];
+            if (self.createEvent_locationName) {
+                if (![self.createEvent_locationName isEqualToString:@""]) {
+                    [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                }
+            }
             [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             [request setPostValue:self.createEvent_latitude forKey:@"latitude"];
-            [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            if (![self.createEvent_time isEqualToString:@"Find a time"]) {
+                [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            }
             NSLog(@"%@",self.createEvent_time);
 
             //used for server log
@@ -692,7 +708,11 @@
                     [request setPostValue:self.detail_longitude forKey:@"longitude"];
                 }
                 [request setPostValue:self.detail_address forKey:@"address"];
-                [request setPostValue:self.detail_location_name forKey:@"location"];
+                if (self.createEvent_locationName) {
+                    if (![self.createEvent_locationName isEqualToString:@""]) {
+                        [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                    }
+                }
             }
             
             [request setRequestMethod:@"POST"];
@@ -706,12 +726,19 @@
                     //success
                     NSError *error;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    NSLog(@"%@",json);
                     if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
                         UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:@"Upload Error" message: [NSString stringWithFormat:@"%@",[json objectForKey:@"message"] ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
                         notsuccess.delegate=self;
                         [notsuccess show];
                     }
                     else{
+                        //when success, send notification
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setValue:self.detail_event_id forKey:@"temp_event_id"];
+                        [defaults setValue:self.detail_shared_event_id forKey:@"temp_shared_event_id"];
+                        [defaults synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"EventCreateFinished" object:nil];
                         //when success, start invite people;
                         if ([self.invitedFriend count]>0||[self.invitedAddressBookFriend count]>0) {
                             [self startInviteFriendWithEventID:self.detail_event_id withSharedEventID:self.detail_shared_event_id];
@@ -724,14 +751,17 @@
         });
         
         
-        
-        
+         
         
         //go to the next page
         //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        ///make the my collection page refresh
+        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        appDelegate.myCollection_needrefresh=YES;
+        //return to the my collection page
         [self.navigationController popToRootViewControllerAnimated:YES];
         FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        [funAppdelegate.thisTabBarController setSelectedIndex:0];
+        [funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
     //for user create/repin a event
     else {
@@ -753,7 +783,11 @@
             NSLog(@"%@",self.createEvent_address);
             [request setPostValue:self.createEvent_address forKey:@"address"];
             NSLog(@"%@",self.createEvent_locationName);
-            [request setPostValue:self.createEvent_locationName forKey:@"location"];
+            if (self.createEvent_locationName) {
+                if (![self.createEvent_locationName isEqualToString:@""]) {
+                    [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                }
+            }
             //used for server log
             [request setPostValue:[NSString stringWithFormat:@"%d",self.via] forKey:@"via"];
             if ([self.createEvent_latitude floatValue]>0.02||[self.createEvent_latitude floatValue]<-0.02) {
@@ -763,7 +797,11 @@
                 [request setPostValue:self.createEvent_longitude forKey:@"longitude"];
             }
             
-            [request setPostValue:self.createEvent_time forKey:@"start_time"];
+            if (![self.createEvent_time isEqualToString:@"Find a time"]) {
+                [request setPostValue:self.createEvent_time forKey:@"start_time"];
+                
+            }
+
             if (self.detail_creator_id) {
                 //if it is from repin
                 if (![self.createEvent_image isEqual:self.detail_image]) {
@@ -789,6 +827,8 @@
                 [request setPostValue:self.detail_event_id forKey:@"event_id"];
                 [request setPostValue:self.detail_shared_event_id forKey:@"shared_event_id"];
                 
+                NSLog(@"%@",self.detail_event_id);
+                
                 if ([self.detail_latitude floatValue]>0.02||[self.detail_latitude floatValue]<-0.02) {
                     [request setPostValue:self.detail_latitude forKey:@"latitude"];
                 }
@@ -796,7 +836,11 @@
                     [request setPostValue:self.detail_longitude forKey:@"longitude"];
                 }
                 [request setPostValue:self.detail_address forKey:@"address"];
-                [request setPostValue:self.detail_location_name forKey:@"location"];
+                if (self.createEvent_locationName) {
+                    if (![self.createEvent_locationName isEqualToString:@""]) {
+                        [request setPostValue:self.createEvent_locationName forKey:@"location"];
+                    }
+                }
             }
             else {
                 if (self.createEvent_imageUrlName) {
@@ -870,6 +914,7 @@
             
             int code=[request responseStatusCode];
             NSLog(@"code:%d",code);
+            NSLog(@"response--->%@",[request responseString]);
             
             dispatch_async( dispatch_get_main_queue(),^{
                 if (code==200) {
@@ -886,6 +931,11 @@
                         [notsuccess show];
                     }
                     else{
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setValue:[json objectForKey:@"event_id"] forKey:@"temp_event_id"];
+                        [defaults setValue:[json objectForKey:@"shared_event_id"] forKey:@"temp_shared_event_id"];
+                        [defaults synchronize];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"EventCreateFinished" object:nil];
                         //when success, start invite people;
                         if ([self.invitedFriend count]>0||[self.invitedAddressBookFriend count]>0) {
                             [self startInviteFriendWithEventID:[json objectForKey:@"event_id"] withSharedEventID:[json objectForKey:@"shared_event_id"]];
@@ -901,13 +951,12 @@
         
         
         
-        
-        
+                
         //go to the next page
-        //[self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-        [funAppdelegate.thisTabBarController setSelectedIndex:3];
+        [self performSegueWithIdentifier:@"FinshCreateGoToSharePart" sender:self];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+        //FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+        //[funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
 }
 
@@ -1181,10 +1230,17 @@
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
         NSLog(@"%@",result);
-        NSString *photo=[result objectForKey:@"picture"];
+        NSString *photo=[[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        
         //NSString *facebook_user_id=[result objectForKey:@"id"];
         //set the user photo
+    
+    
+        //save the user_image url for later use
         NSURL *url=[NSURL URLWithString:photo];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSString stringWithFormat:@"%@",photo] forKey:@"user_profile_img_url"];
+        [defaults synchronize];
         if (![Cache isURLCached:url]) {
             //using high priority queue to fetch the image
             dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
@@ -1658,5 +1714,6 @@
 -(void)startInviteFriendWithEventID{
     //
 }
+
 
 @end

@@ -20,14 +20,22 @@
 @property (nonatomic,strong) NSString *preDefinedMode;
 @property (nonatomic,strong) NSDictionary *peopleGoOutWith; //the infomation of the firend that user choose to go with
 @property (nonatomic,strong) NSDictionary *peopleGoOutWithMessage; //the infomation of the firend that user choose to go with
-@property (weak, nonatomic) IBOutlet UIButton *WeixinButton;
-@property (weak, nonatomic) IBOutlet UIButton *EmailButton;
+//@property (weak, nonatomic) IBOutlet UIButton *WeixinButton;
+//@property (weak, nonatomic) IBOutlet UIButton *EmailButton;
+@property (weak, nonatomic) IBOutlet UITextView *textview_shareinfo;
 
+@property (weak, nonatomic) IBOutlet UIToolbar *myKeyboardToolbar;
+@property (weak, nonatomic) IBOutlet UILabel *statuse_text;
+@property (weak, nonatomic) IBOutlet UIButton *button_finish;
+@property (weak, nonatomic) IBOutlet UIImageView *user_profile_imageview;
+
+@property (strong, nonatomic) IBOutlet UIView *mainView;
+@property (strong,nonatomic)UIImageView *refreshView;
 @end
 
 @implementation ShareAfterNewEventViewController
-@synthesize WeixinButton = _WeixinButton;
-@synthesize EmailButton = _EmailButton;
+//@synthesize WeixinButton = _WeixinButton;
+//@synthesize EmailButton = _EmailButton;
 @synthesize delegate=_delegate;
 @synthesize createEvent_image=_createEvent_image;
 @synthesize createEvent_title=_createEvent_title;
@@ -41,6 +49,7 @@
 
 @synthesize peopleGoOutWith=_peopleGoOutWith;
 @synthesize peopleGoOutWithMessage=_peopleGoOutWithMessage;
+@synthesize refreshView=_refreshView;
 
 
 #pragma mark - self defined setter and getter
@@ -76,15 +85,53 @@
     self.delegate=(id)appDelegate;
     
     //set the button to be a circle
-    self.WeixinButton.layer.cornerRadius = 20;
-    self.WeixinButton.clipsToBounds=YES;
-    self.EmailButton.layer.cornerRadius = 20;
-    self.EmailButton.clipsToBounds=YES;
+//    self.WeixinButton.layer.cornerRadius = 20;
+//    self.WeixinButton.clipsToBounds=YES;
+//    self.EmailButton.layer.cornerRadius = 20;
+//    self.EmailButton.clipsToBounds=YES;
+    
+    //add notification listener
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(EventCreateFinished) name:@"EventCreateFinished" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    //hide the waiting button
+    [self.button_finish setHidden:NO];
+    
+    //add the refresh view
+    self.refreshView=[[UIImageView alloc] initWithFrame:CGRectMake(277, 7, 30, 30)];
+    [self.refreshView setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.0]];
+    [self.mainView addSubview:self.refreshView];
+    
+    UIActivityIndicatorView*spinning =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    spinning.frame =CGRectMake(0,0,30,30);
+    [spinning startAnimating];
+    [self.refreshView addSubview:spinning];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //get teh image of the user
+    [self UserProfileImageSet];
+    
+    //change the button color to orange
+    //self.button_finish.backgroundColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
+    
+    
+    //set the preset content of the sharing
+    [self.textview_shareinfo setText:[self inviteMessagetoSend]];
+    [self.button_finish setEnabled:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    //remove observer
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"EventCreateFinished" object:nil];
+    //reset the keyboard addititonal "done" tool bar
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 
@@ -94,6 +141,116 @@
 }
 
 #pragma mark - self defined method
+//initialize the user profile image on this page
+-(void)UserProfileImageSet{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"user_profile_img_url"]) {
+        return;
+    }
+    NSURL *url=[NSURL URLWithString:[defaults objectForKey:@"user_profile_img_url"]];
+    if (![Cache isURLCached:url]) {
+        //using high priority queue to fetch the image
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            //get the image data
+            NSData * imageData = nil;
+            imageData = [[NSData alloc] initWithContentsOfURL: url];
+            
+            if ( imageData == nil ){
+                //if the image data is nil, the image url is not reachable. using a default image to replace that
+                //NSLog(@"downloaded %@ error, using a default image",url);
+                UIImage *image=[UIImage imageNamed:DEFAULT_PROFILE_IMAGE_REPLACEMENT];
+                imageData=UIImagePNGRepresentation(image);
+                
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.user_profile_imageview setImage:image];
+                    });
+                }
+            }
+            else {
+                //else, the image date getting finished, directlhy put it in the cache, and then reload the table view data.
+                //NSLog(@"downloaded %@",url);
+                if(imageData){
+                    dispatch_async( dispatch_get_main_queue(),^{
+                        [Cache addDataToCache:url withData:imageData];
+                        [self.user_profile_imageview setImage:[UIImage imageWithData:imageData]];
+                    });
+                }
+            }
+        });
+    }
+    else {
+        dispatch_async( dispatch_get_main_queue(),^{
+            [self.user_profile_imageview setImage:[UIImage imageWithData:[Cache getCachedData:url]]];
+        });
+    }
+    self.user_profile_imageview.layer.cornerRadius = 6;
+    self.user_profile_imageview.layer.masksToBounds = YES;
+    self.user_profile_imageview.layer.shadowOpacity = 0.85f;
+    self.user_profile_imageview.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.user_profile_imageview.layer.shadowRadius = 2.f;
+    [self.user_profile_imageview.layer setShadowOffset:CGSizeMake(1, 1)];
+}
+//deal when event is already created
+-(void)EventCreateFinished{
+    //the status text no longer need to change
+    [self.button_finish setHidden:NO];
+    //[self.statuse_text setText:@"Ready To Finish."];
+    //[self.button_finish setTitle:@"Finish Creation and Invitation" forState:UIControlStateNormal];
+    [self.button_finish setEnabled:YES];
+    
+    //clear the refresh indicator
+    [self.refreshView removeFromSuperview];
+}
+- (IBAction)FinishedThisPage:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString* event_id=[defaults objectForKey:@"temp_event_id"];
+    NSString* shared_event_id=[defaults objectForKey:@"temp_shared_event_id"];
+    
+    NSLog(@"%@",event_id);
+    NSLog(@"%@",shared_event_id);
+    ///////
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/messages/send_invitation?",CONNECT_DOMIAN_NAME]];
+    NSLog(@"request:%@",url);
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        [request setPostValue:[defaults objectForKey:@"login_auth_token"] forKey:@"auth_token"];
+        [request setPostValue:event_id forKey:@"event_id"];
+        [request setPostValue:shared_event_id forKey:@"shared_event_id"];
+        [request setPostValue:self.textview_shareinfo.text forKey:@"content"];
+        [request setRequestMethod:@"POST"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                if (![[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    UIAlertView *notsuccess = [[UIAlertView alloc] initWithTitle:nil message: [NSString stringWithFormat:@"Error: %@",error.description ] delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    notsuccess.delegate=self;
+                    [notsuccess show];
+                }
+            }
+            
+        });
+        
+    });
+    
+    //make the my collection page refresh
+    FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    appDelegate.myCollection_needrefresh=YES;
+    //return to the my collection page
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
+    [funAppdelegate.thisTabBarController setSelectedIndex:3];
+}
 
 //return the share message
 -(NSString*)shareMessagetoSend{
@@ -102,7 +259,9 @@
 
 //return the share message
 -(NSString*)inviteMessagetoSend{
-    return [NSString stringWithFormat:@"I just found an insteresting event \"%@\" at %@, it will start \"%@\", I want to invite you to join me.\nCheck out the detail at http://www.orangeparc.com",self.createEvent_title,self.createEvent_locationName,self.createEvent_time];
+    
+    NSString *msg=@"Here is something you might be interested. Let's make it happen!";
+    return msg;
 }
 
 
@@ -115,6 +274,59 @@
     self.createEvent_time=createEvent_time;
     self.createEvent_address=createEvent_address;
     self.createEvent_imageUrlName=createEvent_imageUrlName;
+}
+
+#pragma mark - edit textview related thing
+
+
+- (IBAction)closeKeyboard:(id)sender {
+    [self.textview_shareinfo resignFirstResponder];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+    [self animateTextFieldup:true];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    //[self.labelEventTitleHolder setHidden:YES];
+    [self.myKeyboardToolbar setHidden:NO];
+    CGRect frame = self.myKeyboardToolbar.frame;
+    frame.origin.y = self.view.frame.size.height - 260.0+160;
+    self.myKeyboardToolbar.frame = frame;
+    [self.myKeyboardToolbar setHidden:FALSE];
+    UIBarButtonItem *doneButtonKeyBoard = [self.myKeyboardToolbar.items objectAtIndex:0];
+    doneButtonKeyBoard.target = self;
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
+    [self animateTextFieldup:FALSE];
+    
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.25];
+	[self.myKeyboardToolbar setHidden:YES];
+	CGRect frame = self.myKeyboardToolbar.frame;
+	frame.origin.y = self.view.frame.size.height;
+	self.myKeyboardToolbar.frame = frame;
+	
+	[UIView commitAnimations];
+    
+}
+
+- (void) animateTextFieldup: (BOOL) up
+{
+    const int movementDistance = 160; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 #pragma mark - segue related stuff
@@ -134,28 +346,6 @@
 
 
 #pragma mark - Button Action
-- (IBAction)FinishedThisSharePage:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
-    [funAppdelegate.thisTabBarController setSelectedIndex:3];
-}
-
-- (IBAction)EmailShare:(id)sender {
-    self.preDefinedMode=@"email";
-    [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
-}
-
-- (IBAction)MesssgeShare:(id)sender {
-    self.preDefinedMode=@"message";
-    [self performSegueWithIdentifier:@"ChooseFriends" sender:self];
-}
-
-- (IBAction)WechatShare:(id)sender {
-    UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose A WeChat Way" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share On Moment",@"Send Friend Message", nil];
-    pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-    [pop showFromTabBar:self.tabBarController.tabBar];
-}
-
 //start to compose email(the FeedBackToCreateActivityChange)
 -(void)StartComposeEmail{
     //compose the email
@@ -210,7 +400,7 @@
             if([MFMessageComposeViewController canSendText]) {
                 //if the device allowed sending email
                 MFMessageComposeViewController *messageSender = [MFMessageComposeViewController new];
-                messageSender.messageComposeDelegate = self;
+                //messageSender.messageComposeDelegate = self;
                 //phone list
                 [messageSender setRecipients:phoneList];
                 //phone body
@@ -278,40 +468,15 @@
 }
 
 #pragma mark - implement protocals
-////////////////////////////////////////////////
-//implement the MFMailComposeViewControllerDelegate Method
--(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
-    if (error) {
-        NSLog(@"Sending Email Error Happended!");
-    }
-    [self dismissModalViewControllerAnimated:YES];
-}
 
--(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-////////////////////////////////////////////////
-//implement the UIActionSheetDelegate Method
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    //for the when to go action sheet
-    NSLog(@"%@",actionSheet.title);
-    if([actionSheet.title isEqualToString:@"Choose A WeChat Way"]){
-        if(buttonIndex == 0){
-            //shared on moment
-            //[self.delegate SendMoment:[self shareMessagetoSend]];
-        }
-        else if(buttonIndex == 1){
-            //send message to friend
-            [self.delegate sendText:[self inviteMessagetoSend]];
-            
-        }
-    }
-}
 
 - (void)viewDidUnload {
-    [self setWeixinButton:nil];
-    [self setEmailButton:nil];
+    [self setTextview_shareinfo:nil];
+    [self setMyKeyboardToolbar:nil];
+    [self setStatuse_text:nil];
+    [self setButton_finish:nil];
+    [self setMainView:nil];
+    [self setUser_profile_imageview:nil];
     [super viewDidUnload];
 }
 @end

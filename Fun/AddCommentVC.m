@@ -110,7 +110,6 @@
 #pragma mark - button action part
 - (IBAction)addCommentButtonClicked:(id)sender {
     [self.addCommentTextView resignFirstResponder];
-    #warning strip white space
     if (self.addCommentTextView.text.length>0) {
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/comment",CONNECT_DOMIAN_NAME]];
@@ -158,7 +157,7 @@
 //implement the Protocal UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {  
     
-    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];  
+    UIBarButtonItem *done =    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(leaveEditMode)];
     
     self.navigationItem.rightBarButtonItem = done;      
     [self animateTextView:textView up:YES];

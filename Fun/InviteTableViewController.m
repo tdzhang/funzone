@@ -87,62 +87,14 @@
     _alreadySelectedContacts=alreadySelectedContacts;
 }
 
+#pragma mark - permission
+-(BOOL)isABAddressBookCreateWithOptionsAvailable {
+    return &ABAddressBookCreateWithOptions != NULL;
+}
 
 #pragma mark - View Life circle
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!self.addressbook_contacts) {
-        //get the address book information (only the user with email infomation)
-        //Get in the data from the address book
-        NSMutableArray * constactsMutable = [NSMutableArray array];
-        ABAddressBookRef addressBook = ABAddressBookCreate( );
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
-        CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
-        for (int i=0; i<numberOfPeople; i++) {
-            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-            //get phone number list
-            ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
-            NSMutableArray *phoneNumbersList = [ [ NSMutableArray alloc ] init ];
-            CFIndex nPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
-            for(int i=0;i<nPhoneNumbers;i++) {
-                NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
-                [ phoneNumbersList addObject: phoneNumber ];
-            }
-            //get email list
-            ABMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
-            NSMutableArray *emailList = [ [ NSMutableArray alloc ] init ];
-            CFIndex nemail = ABMultiValueGetCount(emails);
-            for(int i=0;i<nemail;i++) {
-                NSString *email = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emails, i);
-                [ emailList addObject: email ];
-            }
-            //get name
-            NSString *firstName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonFirstNameProperty) ;
-            NSString *lastName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonLastNameProperty) ;
-            //NSLog(@"%@",firstName);
-            //NSLog(@"%@",lastName);
-            //NSLog(@"%@",[phoneNumbersList objectAtIndex:0]);
-            //NSLog(@"%@",[emailList objectAtIndex:0]);
-            
-            UserContactObject *contact = [UserContactObject new];
-            contact.firstName=firstName;
-            contact.lastName=lastName;
-            contact.phone=[phoneNumbersList copy];
-            contact.email=[emailList copy];
-            if ([contact.email count]>0) {
-                [constactsMutable addObject:contact];
-            }
-            
-            
-        }
-        //set the contacts property
-        self.addressbook_contacts = [constactsMutable copy];
-    }
+-(void) addressbookGranted{
     [self getTheDividedAddressBookContacts];
-    
-    
     //------------>get already registered users friend
     //use the last result first;
     self.contacts=[[InviteFriendObject generateProfileInfoElementArrayFromJson:self.lastReceivedJson] mutableCopy];
@@ -154,7 +106,7 @@
     NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/friends?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
     
     NSLog(@"request following:%@",url);
-
+    
     //set the contacts and divided contacts
     
     ///////////////////////////////////////////////////////////////////////////
@@ -187,6 +139,134 @@
         });
         
     });
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (!self.addressbook_contacts) {
+        
+        //    ABAddressBookRef addressBook;
+        if ([self isABAddressBookCreateWithOptionsAvailable]) {
+            //ios 6. Ask user for permission.
+            CFErrorRef error = nil;
+            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL,&error);
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                // callback can occur in background, address book must be accessed on thread it was created on
+                    if (error) {
+                        //                    [self.delegate addressBookHelperError:self];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, we were able to access your contacts info. You may change it in Settings->Privacy->Contacts." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [alertView show];
+                    } else if (!granted) {
+                        //                    [self.delegate addressBookHelperDeniedAcess:self];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Privacy Setting" message:@"You did not grant us permission to access contacts information. You may change it later under Settings->Privacy->Contacts." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [alertView show];
+                    } else {
+                        // access granted
+                        //                    AddressBookUpdated(addressBook, nil, self);
+                        //get the address book information (only the user with email infomation)
+                        //Get in the data from the address book
+                        NSMutableArray * constactsMutable = [NSMutableArray array];
+                        ABAddressBookRef addressBook = ABAddressBookCreate( );
+                        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+                        CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
+                        for (int i=0; i<numberOfPeople; i++) {
+                            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+                            //get phone number list
+                            ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+                            NSMutableArray *phoneNumbersList = [ [ NSMutableArray alloc ] init ];
+                            CFIndex nPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
+                            for(int i=0;i<nPhoneNumbers;i++) {
+                                NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+                                [ phoneNumbersList addObject: phoneNumber ];
+                            }
+                            //get email list
+                            ABMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
+                            NSMutableArray *emailList = [ [ NSMutableArray alloc ] init ];
+                            CFIndex nemail = ABMultiValueGetCount(emails);
+                            for(int i=0;i<nemail;i++) {
+                                NSString *email = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emails, i);
+                                [ emailList addObject: email ];
+                            }
+                            //get name
+                            NSString *firstName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonFirstNameProperty) ;
+                            NSString *lastName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonLastNameProperty) ;
+                            //NSLog(@"%@",firstName);
+                            //NSLog(@"%@",lastName);
+                            //NSLog(@"%@",[phoneNumbersList objectAtIndex:0]);
+                            //NSLog(@"%@",[emailList objectAtIndex:0]);
+                            
+                            UserContactObject *contact = [UserContactObject new];
+                            contact.firstName=firstName;
+                            contact.lastName=lastName;
+                            contact.phone=[phoneNumbersList copy];
+                            contact.email=[emailList copy];
+                            if ([contact.email count]>0) {
+                                [constactsMutable addObject:contact];
+                            }
+                            
+                    }
+                        //set the contacts property
+                        self.addressbook_contacts = [constactsMutable copy];
+                        [self addressbookGranted];
+                    }});
+        } else {
+            //< ios 6
+            //////////////////////////
+            //get the address book information (only the user with email infomation)
+            //Get in the data from the address book
+            NSMutableArray * constactsMutable = [NSMutableArray array];
+            ABAddressBookRef addressBook = ABAddressBookCreate( );
+            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+            CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
+            for (int i=0; i<numberOfPeople; i++) {
+                ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+                //get phone number list
+                ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+                NSMutableArray *phoneNumbersList = [ [ NSMutableArray alloc ] init ];
+                CFIndex nPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
+                for(int i=0;i<nPhoneNumbers;i++) {
+                    NSString *phoneNumber = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+                    [ phoneNumbersList addObject: phoneNumber ];
+                }
+                //get email list
+                ABMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
+                NSMutableArray *emailList = [ [ NSMutableArray alloc ] init ];
+                CFIndex nemail = ABMultiValueGetCount(emails);
+                for(int i=0;i<nemail;i++) {
+                    NSString *email = (__bridge NSString *)ABMultiValueCopyValueAtIndex(emails, i);
+                    [ emailList addObject: email ];
+                }
+                //get name
+                NSString *firstName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonFirstNameProperty) ;
+                NSString *lastName = (__bridge NSString *) ABRecordCopyValue(person, kABPersonLastNameProperty) ;
+                //NSLog(@"%@",firstName);
+                //NSLog(@"%@",lastName);
+                //NSLog(@"%@",[phoneNumbersList objectAtIndex:0]);
+                //NSLog(@"%@",[emailList objectAtIndex:0]);
+                
+                UserContactObject *contact = [UserContactObject new];
+                contact.firstName=firstName;
+                contact.lastName=lastName;
+                contact.phone=[phoneNumbersList copy];
+                contact.email=[emailList copy];
+                if ([contact.email count]>0) {
+                    [constactsMutable addObject:contact];
+                }
+                
+            }
+            //set the contacts property
+            self.addressbook_contacts = [constactsMutable copy];
+            [self addressbookGranted];
+        }
+        
+        
+        
+        
+    }
+    
     
     
 }

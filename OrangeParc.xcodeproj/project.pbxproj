@@ -12,6 +12,8 @@
 		0F00545D15C8FE8D000EBF67 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */; };
 		0F00546015C90315000EBF67 /* activityElementObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F00545E15C90315000EBF67 /* activityElementObject.h */; };
 		0F00546115C90315000EBF67 /* activityElementObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F00545F15C90315000EBF67 /* activityElementObject.m */; };
+		0F0085D9162E1E960097D376 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F0085D7162E1E960097D376 /* Flurry.h */; };
+		0F0085DA162E1E960097D376 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0085D8162E1E960097D376 /* libFlurry.a */; };
 		0F06147E15E896E100A04591 /* IntroductionVCPage1.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F06147815E896E100A04591 /* IntroductionVCPage1.h */; };
 		0F06147F15E896E100A04591 /* IntroductionVCPage1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F06147915E896E100A04591 /* IntroductionVCPage1.m */; };
 		0F06148015E896E100A04591 /* IntroductionVCPage2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F06147A15E896E100A04591 /* IntroductionVCPage2.h */; };
@@ -84,6 +86,7 @@
 		0F5A84D515BA06C9000BD0FF /* Marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F5A84D415BA06C9000BD0FF /* Marker.png */; };
 		0F5A84D715BA0B59000BD0FF /* 29-heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F5A84D615BA0B59000BD0FF /* 29-heart.png */; };
 		0F5A84D915BA0B6A000BD0FF /* bookmark_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F5A84D815BA0B6A000BD0FF /* bookmark_64.png */; };
+		0F608C5516311C450072F99E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F608C5416311C450072F99E /* logo.png */; };
 		0F60F3FE15BC6A0A00053D25 /* ProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */; };
 		0F60F40015BC6B1600053D25 /* seperator_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F60F3FF15BC6B1600053D25 /* seperator_vertical.png */; };
 		0F60F40315BC72F100053D25 /* ProfileEventElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F60F40215BC72F100053D25 /* ProfileEventElement.m */; };
@@ -381,6 +384,8 @@
 		0F00545B15C8FE8D000EBF67 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		0F00545E15C90315000EBF67 /* activityElementObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityElementObject.h; sourceTree = "<group>"; };
 		0F00545F15C90315000EBF67 /* activityElementObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activityElementObject.m; sourceTree = "<group>"; };
+		0F0085D7162E1E960097D376 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		0F0085D8162E1E960097D376 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		0F06147815E896E100A04591 /* IntroductionVCPage1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage1.h; sourceTree = "<group>"; };
 		0F06147915E896E100A04591 /* IntroductionVCPage1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionVCPage1.m; sourceTree = "<group>"; };
 		0F06147A15E896E100A04591 /* IntroductionVCPage2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionVCPage2.h; sourceTree = "<group>"; };
@@ -472,6 +477,7 @@
 		0F5A84D415BA06C9000BD0FF /* Marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Marker.png; sourceTree = "<group>"; };
 		0F5A84D615BA0B59000BD0FF /* 29-heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29-heart.png"; sourceTree = "<group>"; };
 		0F5A84D815BA0B6A000BD0FF /* bookmark_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark_64.png; sourceTree = "<group>"; };
+		0F608C5416311C450072F99E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		0F60F3FC15BC6A0A00053D25 /* ProfilePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePageViewController.h; sourceTree = "<group>"; };
 		0F60F3FD15BC6A0A00053D25 /* ProfilePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePageViewController.m; sourceTree = "<group>"; };
 		0F60F3FF15BC6B1600053D25 /* seperator_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seperator_vertical.png; sourceTree = "<group>"; };
@@ -834,6 +840,7 @@
 				4668A7471593E56400713A4C /* CoreGraphics.framework in Frameworks */,
 				9298266015A938D6003673CF /* libfacebook_ios_sdk.a in Frameworks */,
 				0FC659A315C517AF00727ED4 /* libWeChatSDK.a in Frameworks */,
+				0F0085DA162E1E960097D376 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +857,15 @@
 				0F00545F15C90315000EBF67 /* activityElementObject.m */,
 			);
 			name = "custom cell";
+			sourceTree = "<group>";
+		};
+		0F0085D6162E1E960097D376 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				0F0085D7162E1E960097D376 /* Flurry.h */,
+				0F0085D8162E1E960097D376 /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		0F07F27915AE1BEF00BF41CF /* auto completion part */ = {
@@ -1320,6 +1336,7 @@
 		4668A7481593E56400713A4C /* Fun */ = {
 			isa = PBXGroup;
 			children = (
+				0F0085D6162E1E960097D376 /* Flurry */,
 				0FD0BE3315E7E7700068F76D /* Introduce to the app */,
 				4668A7A01593F98600713A4C /* Images */,
 				0F27BB8B15E33B4200335D42 /* Function Class */,
@@ -1557,6 +1574,7 @@
 		466943AB15E80F9E007DE625 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				0F608C5416311C450072F99E /* logo.png */,
 				466943B115E8197F007DE625 /* welcome-2-bg.jpg */,
 				466943AF15E80FB9007DE625 /* welcome-1-bg.jpg */,
 				466943AD15E80FB2007DE625 /* welcome-1-fb.png */,
@@ -1790,6 +1808,7 @@
 				0F8B1E8E15E977A900CBD517 /* FollowingOrErLookProfileDelegate.h in Headers */,
 				0F8B1E9515E9DBE900CBD517 /* TutorialPageConstant.h in Headers */,
 				5C271FF915EA397500E2D76D /* detailLinkViewController.h in Headers */,
+				0F0085D9162E1E960097D376 /* Flurry.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1821,7 +1840,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = Fun;
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 4668A7381593E56400713A4C /* Build configuration list for PBXProject "OrangeParc" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2062,6 +2081,7 @@
 				0F2E46AE15EA7D8D00421601 /* tut-detail.png in Resources */,
 				0F2E46AF15EA7D8D00421601 /* tut-feeds.png in Resources */,
 				0F2E46B015EA7D8D00421601 /* tut-popular.png in Resources */,
+				0F608C5516311C450072F99E /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2197,8 +2217,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tongda Zhang (CGK59PQ788)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tongda Zhang (CGK59PQ788)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2214,8 +2234,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -2225,8 +2248,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ORANGE PARC, INC.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ORANGE PARC, INC.";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2235,10 +2258,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0803C13F-5C80-4BCE-BFC5-3CA5E4673C37";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0803C13F-5C80-4BCE-BFC5-3CA5E4673C37";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -2253,6 +2278,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2263,6 +2289,7 @@
 		4668A76C1593E56400713A4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ORANGE PARC, INC.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fun/OrangeParc-Prefix.pch";
 				INFOPLIST_FILE = "Fun/OrangeParc-Info.plist";
@@ -2271,8 +2298,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
+				PROVISIONING_PROFILE = "0803C13F-5C80-4BCE-BFC5-3CA5E4673C37";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2284,8 +2313,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ORANGE PARC, INC.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ORANGE PARC, INC.";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2294,10 +2323,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6408E267-CF4D-4DCF-9AC4-D84A34105DBF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6408E267-CF4D-4DCF-9AC4-D84A34105DBF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = AppStore;
 		};
@@ -2312,6 +2343,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Fun/facebook-ios-sdk\"",
 					"\"$(SRCROOT)/Fun\"",
+					"\"$(SRCROOT)/Fun/Flurry\"",
 				);
 				PRODUCT_NAME = OrangeParc;
 				TARGETED_DEVICE_FAMILY = 1;

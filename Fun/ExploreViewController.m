@@ -9,6 +9,7 @@
 #import "ExploreViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
+#import "Flurry.h"
 
 
 
@@ -37,6 +38,7 @@
 @property (nonatomic,strong) NSString *categoryFilter;
 @property (nonatomic,strong) NSString *categoryFilter_id;
 @property (nonatomic)BOOL isCategoryPickerSelected;
+@property (nonatomic,strong) NSString *refresh_checksum;
 
 //for the tutorial page
 @property (nonatomic,strong) UIImageView* tutorial;
@@ -69,6 +71,7 @@
 @synthesize categoryFilter=_categoryFilter;
 @synthesize categoryFilter_id=_categoryFilter_id;
 @synthesize isCategoryPickerSelected=_isCategoryPickerSelected;
+@synthesize refresh_checksum=_refresh_checksum;
 
 //for the tutorial page
 @synthesize tutorial=_tutorial;
@@ -91,13 +94,22 @@
     return _blockViews;
 }
 
+- (NSString*)refresh_checksum{
+    if (_refresh_checksum == nil) {
+        _refresh_checksum=@"";
+    }
+    return _refresh_checksum;
+}
 
 #pragma mark - View Life circle
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     
+    
+    
+    [super viewWillAppear:animated];
+    [Flurry logEvent:FLURRY_ENTER_EXPLORE];
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     
     //judge whether the user is login? if not, do the login
@@ -162,8 +174,17 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    if ([[defaults valueForKey:@"need_refresh_explore"] isEqualToString:@"yes"]) {
+        [self RefreshAction];
+        [defaults setValue:@"no" forKey:@"need_refresh_explore"];
+        [defaults synchronize];
+    }
     
     [self startTheTutorialPage];
+    //clear the segue circle if has one
     NSMutableArray * viewControllers = [[self.navigationController viewControllers] mutableCopy];
     if ([viewControllers count] > 1)
     {
@@ -173,12 +194,126 @@
     }
     
     
+    if ([self.refresh_checksum isEqualToString:@""]||![defaults objectForKey:@"notTheFirstTimeIntoExplore"]) {
+        if ([defaults objectForKey:@"notTheFirstTime"]) {
+            [defaults setValue:@"yes" forKey:@"notTheFirstTimeIntoExplore"];
+            [defaults synchronize];
+        }
+        ///////////////////////////////////////////////////////////////////////////
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
+            FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+            NSURL *url=nil;
+            if (self.categoryFilter_id) {
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
+                    }
+                }
+                else{
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
+                    }
+                }
+            } else {
+                if ([defaults objectForKey:@"login_auth_token"]) {
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
+                    }
+                }
+                else{
+                    if([CLLocationManager regionMonitoringEnabled]){
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                    }
+                    else{
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
+                    }
+                }
+            }
+            
+            
+            NSLog(@"%@",url);
+            ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
+            [request setRequestMethod:@"GET"];
+            [request startSynchronous];
+            
+            int code=[request responseStatusCode];
+            NSLog(@"code:%d",code);
+            
+            dispatch_async( dispatch_get_main_queue(),^{
+                if (code==200) {
+                    //success
+                    NSError *error;
+                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
+                    
+                    if (![[NSString stringWithFormat:@"%@",json] isEqualToString:self.refresh_checksum]) {
+                        self.refresh_checksum=[NSString stringWithFormat:@"%@",json];
+                        //NSLog(@"%@",json);
+                        //after reget the newest 10 popular event, the next page that need to be retrait is page 2
+                        self.refresh_page_num=2;
+                        
+                        //clean the page
+                        for (UIView* subView in self.mainScrollView.subviews) {
+                            [subView removeFromSuperview];
+                        }
+                        [self.blockViews removeAllObjects];
+                        for (NSDictionary* event in json) {
+                            NSString *title=[event objectForKey:@"title"];
+                            //NSString *description=[event objectForKey:@"description"];
+                            NSString *photo=[event objectForKey:@"photo_url"];
+                            NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
+                            //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
+                            //NSString *num_interests=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_interests"]];
+                            NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
+                            NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
+                            NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
+                            NSString *locationName=[event objectForKey:@"location"];
+                            NSString *creator_name=[event objectForKey:@"creator_name"];
+                            NSString *creator_pic=[event objectForKey:@"creator_pic"];
+                            NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
+                            NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
+                            
+                            
+                            if (!title) {continue;}
+                            if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
+                            NSURL *url=[NSURL URLWithString:photo];
+                            [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP)+CONTENT_OFFSET_Y backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
+                            //refresh the whole view
+                            [self refreshAllTheMainScrollViewSUbviews];
+                            
+                        }
+                        self.freshConnectionType=@"not";
+                    }
+                    
+                    
+                }
+                else{
+                    //connect error
+                    
+                }
+                
+            });
+            
+        });
+    }
+    
+
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //Navigation Bar Style
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBarHidden = NO;
@@ -193,107 +328,6 @@
     //change the color style of the refresh button
     self.refreshButton.tintColor = [UIColor colorWithRed:255/255.0 green:150/255.0 blue:0/255.0 alpha:1];
     
-    ///////////////////////////////////////////////////////////////////////////
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        FunAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-        NSURL *url=nil;
-        if (self.categoryFilter_id) {
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
-                }
-                else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&category_id=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],self.categoryFilter_id]];
-                }
-            }
-            else{
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f&category_id=%@",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude,self.categoryFilter_id]];
-                }
-                else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?category_id=%@",CONNECT_DOMIAN_NAME,self.categoryFilter_id]];
-                }
-            }
-        } else {
-            if ([defaults objectForKey:@"login_auth_token"]) {
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
-                }
-                else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?auth_token=%@",CONNECT_DOMIAN_NAME,[defaults objectForKey:@"login_auth_token"]]];
-                }
-            }
-            else{
-                if([CLLocationManager regionMonitoringEnabled]){
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
-                }
-                else{
-                    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore",CONNECT_DOMIAN_NAME]];
-                }
-            }
-        }
-        
-        
-        NSLog(@"%@",url);
-        ASIFormDataRequest* request=[ASIFormDataRequest requestWithURL:url];
-        [request setRequestMethod:@"GET"];
-        [request startSynchronous];
-        
-        int code=[request responseStatusCode];
-        NSLog(@"code:%d",code);
-        
-        dispatch_async( dispatch_get_main_queue(),^{
-            if (code==200) {
-                //success
-                    NSError *error;
-                    NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                    NSLog(@"%@",json);
-                    //after reget the newest 10 popular event, the next page that need to be retrait is page 2
-                    self.refresh_page_num=2;
-                    
-                    //clean the page
-                    for (UIView* subView in self.mainScrollView.subviews) {
-                        [subView removeFromSuperview];
-                    }
-                    [self.blockViews removeAllObjects];
-                    for (NSDictionary* event in json) {
-                        NSString *title=[event objectForKey:@"title"];
-                        //NSString *description=[event objectForKey:@"description"];
-                        NSString *photo=[event objectForKey:@"photo_url"];
-                        NSString *num_pins=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_pins"]];
-                        //NSString *num_views=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_views"]];
-                        //NSString *num_interests=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_interests"]];
-                        NSString *num_likes=[NSString stringWithFormat:@"%@",[event objectForKey:@"num_likes"]];
-                        NSString *event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"event_id"]];
-                        NSString *shared_event_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"shared_event_id"]];
-                        NSString *locationName=[event objectForKey:@"location"];
-                        NSString *creator_name=[event objectForKey:@"creator_name"];
-                        NSString *creator_pic=[event objectForKey:@"creator_pic"];
-                        NSString *creator_id=[NSString stringWithFormat:@"%@",[event objectForKey:@"creator_id"]];
-                        NSString *event_category=[NSString stringWithFormat:@"%@",[event objectForKey:@"category_id"]];
-                        
-                        
-                        if (!title) {continue;}
-                        if ([[NSString stringWithFormat:@"%@",photo] isEqualToString:@"<null>"]) {continue;}
-                        NSURL *url=[NSURL URLWithString:photo];
-                        [self.blockViews insertObject:[ExploreBlockElement initialWithPositionY:[self.blockViews count]*(EVENT_ELEMENT_CONTENT_HEIGHT+EVENT_ELEMENT_GAP)+CONTENT_OFFSET_Y backGroundImageUrl:url tabActionTarget:self withTitle:title withFavorLabelString:num_likes withJoinLabelString:num_pins withEventID:event_id withShared_Event_ID:shared_event_id withLocationName:locationName withCreatorName:creator_name withCreatorPhoto:creator_pic withCreatorId:creator_id  withEventCategory:event_category] atIndex:[self.blockViews count]];
-                        //refresh the whole view
-                        [self refreshAllTheMainScrollViewSUbviews];
-                        
-                    }
-                    self.freshConnectionType=@"not"; 
-                
-            }
-            else{
-                //connect error
-                
-            }
-            
-        });
-        
-    });
     
     //set view background
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
@@ -301,6 +335,9 @@
     //set mainScrollView layout styles
     self.mainScrollView.contentSize = CGSizeMake(EXPLORE_PART_SCROLLVIEW_CONTENT_WIDTH, 0);
     [self.mainScrollView setContentOffset:CGPointMake(EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_X, EXPLORE_PART_SCROLLVIEW_CONTENT_OFFSET_Y)];
+    
+
+    
 }
 
 
@@ -531,15 +568,15 @@
                         url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"],appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
                     }
                     else{
-                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore?auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&auth_token=%@",CONNECT_DOMIAN_NAME,self.refresh_page_num,[defaults objectForKey:@"login_auth_token"]]];
                     }
                 }
                 else{
                     if([CLLocationManager regionMonitoringEnabled]){
-                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore?current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d&current_longitude=%f&current_latitude=%f",CONNECT_DOMIAN_NAME,self.refresh_page_num,appDelegate.myLocationManager.location.coordinate.longitude,appDelegate.myLocationManager.location.coordinate.latitude]];
                     }
                     else{
-                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/page=%d&explore",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
+                        url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/explore?page=%d",CONNECT_DOMIAN_NAME,self.refresh_page_num]];
                     }
                 }
             }
@@ -1076,7 +1113,8 @@
         [tutorial setImage:[UIImage imageNamed:TUTORIAL_POPULAR_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
-        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+//        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 375)];
         self.cancelTutorailButton=cancelTutorialButton;
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];

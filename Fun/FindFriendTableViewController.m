@@ -8,6 +8,7 @@
 
 #import "FindFriendTableViewController.h"
 #import "QuartzCore/QuartzCore.h"
+#import "Flurry.h"
 
 
 
@@ -78,6 +79,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_ENTER_FINDFACEBOOKFRIEND];
     //initial the face book
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
     if (!funAppdelegate.facebook) {

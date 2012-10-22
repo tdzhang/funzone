@@ -8,10 +8,11 @@
 
 #import "LoginPageViewController.h"
 #import "CheckForInternetConnection.h"
+#import "Flurry.h"
 
 @interface LoginPageViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *userName;
-@property (weak, nonatomic) IBOutlet UITextField *userPassword;
+//@property (weak, nonatomic) IBOutlet UITextField *userName;
+//@property (weak, nonatomic) IBOutlet UITextField *userPassword;
 @property (nonatomic,strong) NSMutableData *data;
 @property (weak, nonatomic) IBOutlet UIButton *normalLoginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookLoginButton;
@@ -26,8 +27,8 @@
 @end
 
 @implementation LoginPageViewController
-@synthesize userName;
-@synthesize userPassword;
+//@synthesize userName;
+//@synthesize userPassword;
 @synthesize normalLoginButton;
 @synthesize facebookLoginButton;
 @synthesize data=_data;
@@ -51,7 +52,7 @@
     [super viewWillAppear:animated];
     
     //check for internet connection, if no connection, showing alert
-    [CheckForInternetConnection CheckForConnectionToBackEndServer];
+    //[CheckForInternetConnection CheckForConnectionToBackEndServer];
     
     //ask user to require location
     FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
@@ -59,7 +60,7 @@
     
     //[current_location_manager stopUpdatingLocation];
     //set the password field property
-    self.userPassword.secureTextEntry=YES;
+    //self.userPassword.secureTextEntry=YES;
     
     [self.keyboardToolbar setHidden:YES];
     
@@ -93,8 +94,8 @@
 
 - (void)viewDidUnload
 {
-    [self setUserName:nil];
-    [self setUserPassword:nil];
+   // [self setUserName:nil];
+    //[self setUserPassword:nil];
     [self setNormalLoginButton:nil];
     [self setFacebookLoginButton:nil];
     [self setKeyboardToolbar:nil];
@@ -137,7 +138,7 @@
 }
 
 
-
+/*
 //Start normal login
 - (IBAction)normalLoginButtonClickedNew:(id)sender {
     //resign the firstResponser
@@ -196,7 +197,7 @@
         
     });
 }
-
+*/
 
 
 
@@ -298,7 +299,9 @@
 
 
 //when the connection get the returned data (json form)
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection { 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [Flurry logEvent:FLURRY_USER_LOGIN];
+    
     if ([self.currentConnection isEqualToString:@"facebookLogin"]) {
         self.currentConnection=nil;
         NSError *error;
@@ -375,8 +378,8 @@
 
 - (IBAction)leaveEditMode:(id)sender {
 
-    [self.userName resignFirstResponder];
-    [self.userPassword resignFirstResponder];
+    //[self.userName resignFirstResponder];
+//    [self.userPassword resignFirstResponder];
 }
 
 

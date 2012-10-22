@@ -8,6 +8,7 @@
 #import "FeedViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FeedBlockElement.h"
+#import "Flurry.h"
 
 
 @interface FeedViewController ()
@@ -118,6 +119,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [Flurry logEvent:FLURRY_ENTER_FEEDS];
     [self.instructionView setHidden:YES];
     
     //judge whether the user is login? if not, do the login
@@ -831,7 +833,8 @@
         [tutorial setImage:[UIImage imageNamed:TUTORIAL_FEEDS_PAGE]];
         [tutorial setUserInteractionEnabled:YES];
         [self.view addSubview:tutorial];
-        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        //UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(280, 0, 40, 40)];
+        UIButton* cancelTutorialButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 320, 375)];
         self.cancelTutorailButton=cancelTutorialButton;
         [cancelTutorialButton addTarget:self action:@selector(cancelTheTutorailPage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelTutorialButton];
