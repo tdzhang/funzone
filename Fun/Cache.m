@@ -40,8 +40,8 @@ static NSString* recentViewListPath;
     cacheSize = CACHE_LIMIT;
     usedCacheSize = 0;
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSLog(@"%@",paths);
     documentDir = [paths objectAtIndex:0];    
     // set cache dictionary path as current document directory with appending cache naming component
     cacheDictPath = [documentDir stringByAppendingPathComponent:DEFAULT_CACHE_DICT_FILE];
