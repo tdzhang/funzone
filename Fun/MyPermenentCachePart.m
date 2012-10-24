@@ -43,7 +43,8 @@ static bool init_flag=false;
             NSLog(@"success feching document1");
             [self sizeControl];
             NSLog(@"success sizeControl document1");
-            
+            //control the size of the icloud
+            [self addSkipBackupAttributeToItemAtURL:url];
         }];
     }else if(self.document.documentState == UIDocumentStateClosed){
         //the document is exist and closed, so just open it
@@ -54,7 +55,8 @@ static bool init_flag=false;
             NSLog(@"success feching document2");
             [self sizeControl];
             NSLog(@"success sizeControl document2");
-            ;
+            //control the size of the icloud
+            [self addSkipBackupAttributeToItemAtURL:url];
         }];
     }else if(self.document.documentState == UIDocumentStateNormal){
         //already open, start to stuff
@@ -64,9 +66,9 @@ static bool init_flag=false;
         init_flag=true;
         [self sizeControl];
         NSLog(@"success sizeControl document3");
+        //control the size of the icloud
+        [self addSkipBackupAttributeToItemAtURL:url];
     }
-    
-    [self addSkipBackupAttributeToItemAtURL:url];
 }
 
 +(UIManagedDocument *)document{
@@ -194,10 +196,12 @@ static bool init_flag=false;
         u_int8_t attrValue = 1;
         
         int result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+        NSLog(@"%d",result);
         return result == 0;
     } else { // iOS >= 5.1
         NSError *error = nil;
         [URL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&error];
+        NSLog(@"%@",error);
         return error == nil;
     }
 }
