@@ -21,4 +21,6 @@
 +(NSMutableArray *)url2datas;
 +(NSMutableDictionary *)url2dataDictionary;
 +(void)EXITit;
+//prevernt icloud back up
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 @end
