@@ -282,7 +282,7 @@
         MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
         annotationPoint.coordinate = coordinate;
         if (!self.feedBackAnnotation.title||[self.feedBackAnnotation.title isEqualToString:@"Current Location"]) {
-            annotationPoint.title=@"You Pressed Here";
+            annotationPoint.title=@"Customized Location";
         }
         else{
             annotationPoint.title=self.feedBackAnnotation.title;
