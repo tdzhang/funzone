@@ -65,6 +65,7 @@
 
 //the property used to chaneg the UI between edit and create
 @property (nonatomic) BOOL isEditPage;
+@property (nonatomic) BOOL hasInformationChanged;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
@@ -142,6 +143,7 @@
 
 //the property used to chaneg the UI between edit and create
 @synthesize isEditPage=_isEditPage;
+@synthesize hasInformationChanged=_hasInformationChanged;
 
 //used to invite inner friend(following)
 @synthesize invitedFriend=_invitedFriend;
@@ -311,7 +313,7 @@
 #pragma mark - View lifecycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.hasInformationChanged=NO;
     [Flurry logEvent:FLURRY_START_CREATE_EVENT];
     
     //hide the keyboard toolbar
@@ -485,7 +487,12 @@
         [self.navigationController.navigationBar.topItem setTitle:@"Create new event"];
     }
     else{
-        [self.navigationController.navigationBar.topItem setTitle:@"Do it myself"];
+        if (self.isEditPage) {
+            [self.navigationController.navigationBar.topItem setTitle:@"Edit"];
+        }
+        else{
+            [self.navigationController.navigationBar.topItem setTitle:@"Do it myself"];
+        }
     }
     
     if (self.isNeedToUseOtherSource) {
@@ -958,6 +965,8 @@
         //FunAppDelegate *funAppdelegate=[[UIApplication sharedApplication] delegate];
         //[funAppdelegate.thisTabBarController setSelectedIndex:3];
     }
+    
+    
 }
 
 
@@ -975,6 +984,7 @@
     if ([segue.identifier isEqualToString:@"chooseTime"] &&[segue.destinationViewController isKindOfClass:[TimeChooseViewController class]]){
         TimeChooseViewController *TimeChooseVC=segue.destinationViewController;
         [TimeChooseVC setDelegate:self];
+        
     }
     else if ([segue.identifier isEqualToString:@"ChooseLocationInMAP"]){
         

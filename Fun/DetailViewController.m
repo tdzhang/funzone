@@ -912,7 +912,7 @@
             NSDate *date  = [dateFormatter dateFromString:self.event_time];
             
             // Convert to new Date Format
-            [dateFormatter setDateFormat:@"EEEE MMM dd HH:mm:ss"];
+            [dateFormatter setDateFormat:@"EEEE MMM dd yyyy HH:mm:ss"];
             event_show_time = [dateFormatter stringFromDate:date];
         }
         else{
@@ -922,7 +922,7 @@
             NSDate *date  = [dateFormatter dateFromString:self.event_time];
             
             // Convert to new Date Format
-            [dateFormatter setDateFormat:@"EEEE MMM dd"];
+            [dateFormatter setDateFormat:@"EEEE MMM dd yyyy"];
             event_show_time = [dateFormatter stringFromDate:date];
         }
     }
