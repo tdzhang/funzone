@@ -898,11 +898,36 @@
     UILabel *eventTime = [[UILabel alloc] initWithFrame:CGRectMake(DVC_LABEL_X,DVC_LABEL_Y,DVC_LABEL_WIDTH,DVC_LABEL_HEIGHT)];
     self.event_time=[event objectForKey:@"start_time"];
     NSLog(@"%@",self.event_time);
+    
     if ([[NSString stringWithFormat:@"%@",self.event_time] isEqualToString:@"<null>"]) {
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
     }
     
-    [eventTime setText:self.event_time];
+    NSString *event_show_time=[NSString stringWithString:self.event_time];
+    if (![event_show_time isEqualToString:@"Anytime"]&&![event_show_time isEqualToString:@"Not Specified"]) {
+        if ([event_show_time length]>12) {
+            //parse the date information
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *date  = [dateFormatter dateFromString:self.event_time];
+            
+            // Convert to new Date Format
+            [dateFormatter setDateFormat:@"EEEE MMM dd HH:mm:ss"];
+            event_show_time = [dateFormatter stringFromDate:date];
+        }
+        else{
+            //parse the date information
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *date  = [dateFormatter dateFromString:self.event_time];
+            
+            // Convert to new Date Format
+            [dateFormatter setDateFormat:@"EEEE MMM dd"];
+            event_show_time = [dateFormatter stringFromDate:date];
+        }
+    }
+    
+    [eventTime setText:event_show_time];
     [eventTime setBackgroundColor:[UIColor clearColor]];
     [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
     [eventTime setTextColor:[UIColor darkGrayColor]];
