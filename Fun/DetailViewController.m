@@ -903,6 +903,8 @@
         self.event_time = [NSString stringWithFormat:@"Not Specified"];
     }
     
+    [eventTime setText:self.event_time];
+    /*
     NSString *event_show_time=[NSString stringWithString:self.event_time];
     if (![event_show_time isEqualToString:@"Anytime"]&&![event_show_time isEqualToString:@"Not Specified"]) {
         if ([event_show_time length]>12) {
@@ -928,6 +930,7 @@
     }
     
     [eventTime setText:event_show_time];
+     */
     [eventTime setBackgroundColor:[UIColor clearColor]];
     [eventTime setFont:[UIFont boldSystemFontOfSize:14]];
     [eventTime setTextColor:[UIColor darkGrayColor]];
