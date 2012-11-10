@@ -230,7 +230,8 @@
     blockElement.categorySection.alpha = 1;
     [blockElement.blockView addSubview:blockElement.categorySection];
     
-    if (![locationName isEqualToString:@""]) {
+    NSLog(@"%@",locationName);
+    if (![[NSString stringWithFormat:@"%@",locationName] isEqualToString:@"<null>"]) {
     //marker image
     UIImageView* marker=[[UIImageView alloc] initWithFrame:CGRectMake(EXPLORE_BLOCK_ELEMENT_MARKER_X, EXPLORE_BLOCK_ELEMENT_MARKER_Y, EXPLORE_BLOCK_ELEMENT_MARKER_WIDTH, EXPLORE_BLOCK_ELEMENT_MARKER_HEIGHT)];
     [marker setAlpha:EXPLORE_BLOCK_ELEMENT_MARKER_ALPHA];
