@@ -366,6 +366,10 @@
     [self.event_name_label setTextColor:[UIColor lightGrayColor]];
     self.event_name_label.lineBreakMode = UILineBreakModeTailTruncation;
     self.event_name_label.numberOfLines = 1;
+    if (self.isViewed==1) {
+        self.contentView.backgroundColor=[UIColor colorWithRed:229.0/255.0f green:164.0/255.0f blue:37.0/255.0f alpha:0.7];
+    }
+    
 
 }
 

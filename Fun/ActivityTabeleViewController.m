@@ -347,7 +347,6 @@
         [request setRequestMethod:@"GET"];
         [request startSynchronous];
         int code=[request responseStatusCode];
-        NSLog(@"%d",code);
         dispatch_async( dispatch_get_main_queue(),^{
         if (code==200) {
             //success
@@ -380,8 +379,8 @@
         [request setRequestMethod:@"GET"];
         [request startSynchronous];
         int code=[request responseStatusCode];
-        NSLog(@"%d",code);
-        NSLog(@"%@",request.responseString);
+        //NSLog(@"%d",code);
+        //NSLog(@"%@",request.responseString);
         dispatch_async( dispatch_get_main_queue(),^{
             if (code==200) {
                 //success

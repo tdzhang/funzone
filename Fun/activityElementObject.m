@@ -39,6 +39,7 @@
         activity.event_id=event_id;
         activity.shared_event_id=shared_event_id;
         activity.event_pic=photo_url;
+        
         [temp_array addObject:activity];
     }
     return temp_array;
@@ -64,6 +65,7 @@
         activity.event_pic=photo_url;
         activity.shared_event_id=shared_event_id;
         activity.isViewed=[[element objectForKey:@"viewed"] integerValue];
+        
         [temp_array addObject:activity];
     }
     return temp_array;

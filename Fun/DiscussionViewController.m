@@ -347,7 +347,7 @@
                     int height = comment_y_start;
                     
                     //add every single comment entry
-                    for (int i = 0; i<[self.comments count]; i++) {
+                    for (int i = [self.comments count]-1; i>=0; i--) {
                         //if(i==5)break; //in this page, only present a few comments
                         DiscussionComment* comment=[self.comments objectAtIndex:i];
                         UIImageView *seperator = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
@@ -460,6 +460,8 @@
                     //set the scroll view content size
                     //self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
                     [self.mainScrollView setContentSize:CGSizeMake(320, height+5)];
+                    CGPoint bottomOffset = CGPointMake(0, self.mainScrollView.contentSize.height - self.mainScrollView.bounds.size.height);
+                    [self.mainScrollView setContentOffset:bottomOffset animated:YES];
                 }
             }
             else{
