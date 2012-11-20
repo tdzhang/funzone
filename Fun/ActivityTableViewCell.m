@@ -366,8 +366,20 @@
     [self.event_name_label setTextColor:[UIColor lightGrayColor]];
     self.event_name_label.lineBreakMode = UILineBreakModeTailTruncation;
     self.event_name_label.numberOfLines = 1;
-    if (self.isViewed==1) {
-        self.contentView.backgroundColor=[UIColor colorWithRed:229.0/255.0f green:164.0/255.0f blue:37.0/255.0f alpha:0.7];
+    if (self.isViewed==0) {
+        [self.badgeView setHidden:NO];
+        [self.badgeView setBackgroundColor:[UIColor colorWithRed:255.0/255.0f green:0.0/255.0f blue:0.0/255.0f alpha:0.98]];
+        self.badgeView.layer.cornerRadius=10;
+        [self.badgeNumberLabel setHidden:NO];
+        if ([element.unread_msg_num intValue]>9) {
+            [self.badgeNumberLabel setText:@"N"];
+        }
+        else{
+            [self.badgeNumberLabel setText:[element.unread_msg_num stringValue]];
+        }
+        
+//        self.contentView.backgroundColor=[UIColor colorWithRed:229.0/255.0f green:164.0/255.0f blue:37.0/255.0f alpha:0.7];
+        
     }
     
 

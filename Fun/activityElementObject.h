@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSString* event_name;
 @property (nonatomic,strong) NSString *event_pic;
 @property (nonatomic,strong) NSString* message;
+@property (nonatomic,strong) NSNumber* unread_msg_num;
 @property int isViewed;
 
 +(NSMutableArray*)getActivityElementsArrayByJson:(NSArray*)json;

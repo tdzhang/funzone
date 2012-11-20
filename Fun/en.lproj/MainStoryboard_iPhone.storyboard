@@ -31,11 +31,11 @@
             <objects>
                 <viewController id="9K5-6S-mAV" customClass="ProfilePicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WnS-bL-hv5">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Ww4-mJ-f0G">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kPi-0b-b2l">
@@ -71,18 +71,18 @@
             <objects>
                 <viewController id="GYI-Cy-G3E" customClass="ProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giz-28-roK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="PYT-Lg-klT" userLabel="Scroll View- My event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="304"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="Hfv-QD-8P2"/>
                                 </connections>
                             </scrollView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SQy-2V-Vvf" userLabel="Scroll View - joined event">
-                                <rect key="frame" x="0.0" y="115" width="320" height="304"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="GYI-Cy-G3E" id="36q-I3-gQR"/>
@@ -230,7 +230,7 @@
             <objects>
                 <tableViewController id="jag-1w-uml" customClass="MoreTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KUr-qn-diQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
@@ -387,7 +387,7 @@
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="1g0-Yu-0Mu" customClass="FindFriendTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="z16-pk-qcu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="dKU-YC-n8T">
@@ -432,7 +432,7 @@
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="E0p-qY-vtY" customClass="FIndTopTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="bbQ-YI-143">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -466,7 +466,7 @@
             <objects>
                 <tableViewController id="sIh-4k-1gG" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ZQ8-cu-0rI">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -652,15 +652,15 @@
             <objects>
                 <viewController id="3gf-sz-pKR" customClass="ExploreViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ka2-US-eI1">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" id="Wz8-2i-zgi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="Oj9-LI-9BZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
@@ -764,7 +764,7 @@
             <objects>
                 <tableViewController id="vbx-9i-lGG" customClass="ActivityTabeleViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="fMT-HW-MPh">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="ynd-LD-i72">
@@ -783,6 +783,14 @@
                                         <action selector="segmentControlValuechanged:" destination="vbx-9i-lGG" eventType="valueChanged" id="bJy-Xv-96d"/>
                                     </connections>
                                 </segmentedControl>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="Kjf-bW-P6G">
+                                    <rect key="frame" x="172" y="8" width="23" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="M6B-b6-M2u">
+                                    <rect key="frame" x="20" y="8" width="23" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -815,6 +823,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="badgeView1" destination="M6B-b6-M2u" id="79l-yR-vVs"/>
+                        <outlet property="badgeView2" destination="Kjf-bW-P6G" id="dWH-zd-Ntz"/>
                         <outlet property="moreButton" destination="2en-x1-ghy" id="0gv-b2-Z0f"/>
                         <outlet property="mySegmentControl" destination="Tcy-NX-o5r" id="gU0-UL-JyM"/>
                         <outlet property="refreshButton" destination="1Qx-og-H9P" id="Fb4-xH-XAj"/>
@@ -833,7 +843,7 @@
             <objects>
                 <tableViewController id="0Oa-z7-ur9" customClass="ChooseImageTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" id="SHD-BC-oU5">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="laD-1r-gbL">
@@ -889,7 +899,7 @@
             <objects>
                 <viewController id="UDl-pC-I2G" customClass="TimeChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Az8-qz-Gzi">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="3h3-fN-dVa">
@@ -976,7 +986,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="zn8-a6-0kg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Mz-5Q-Y9g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="V1s-0l-w0g">
@@ -1023,7 +1033,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <tableViewController id="lWe-CX-Qz7" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="a6d-Wn-gGy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1057,7 +1067,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="i8q-Ty-eGM" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="UmV-2f-1iE">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" id="xjV-JM-llG">
@@ -1125,15 +1135,15 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="3i5-5a-vO5" customClass="FeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w3w-yc-fXP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Zlp-hj-00h">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture@2x.png" id="a5D-mo-W1s">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -1260,7 +1270,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="smM-VS-7bp" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e3g-De-Baa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="Search location" id="qeT-AW-zzF">
@@ -1298,7 +1308,7 @@ Find us @OrangeParc.com</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="47" sectionHeaderHeight="22" sectionFooterHeight="22" id="K79-RN-pul">
-                                <rect key="frame" x="0.0" y="228" width="320" height="188"/>
+                                <rect key="frame" x="0.0" y="228" width="320" height="276"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="powered-by-google-on-white@2x.png" id="PHy-uH-i8K">
@@ -1394,7 +1404,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="km1-G9-q0y" customClass="MovieAotoCompletionVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aDT-nr-6VF">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" id="fJf-S2-ohv">
@@ -1406,7 +1416,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="68" sectionHeaderHeight="22" sectionFooterHeight="22" id="t1c-hK-fet">
-                                <rect key="frame" x="0.0" y="88" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1478,11 +1488,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="BPi-pg-2E0" customClass="DetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zqL-OZ-rk9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" id="ODl-hu-66N">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="tq2-iD-Cwq">
@@ -1601,11 +1611,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="bGQ-ML-0nM" customClass="AddCommentVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5O9-Mi-kx7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="AXj-7C-tjG">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -1665,11 +1675,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController storyboardIdentifier="createeventpage" hidesBottomBarWhenPushed="YES" id="aP0-zW-Vs1" customClass="NewEventVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2i-ar-FFs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" id="LpO-mT-VNT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="texture.png" id="3r8-m5-n6x">
@@ -1972,7 +1982,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <tableViewController id="ORt-hE-mSa" customClass="InviteTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="w3E-Es-mC2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="ot0-cV-Iom">
@@ -2022,11 +2032,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="ofe-Y1-2Da" customClass="OtherProfilePageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oog-zh-aju">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Php-mD-Smt">
-                                <rect key="frame" x="0.0" y="120" width="320" height="251"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="339"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="ofe-Y1-2Da" id="IqW-7o-Nbk"/>
@@ -2176,7 +2186,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <tableViewController id="GBr-L9-MMr" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="l3R-0z-I3I">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2210,7 +2220,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <tableViewController id="9i7-54-eHW" customClass="MyFollowingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="fok-68-c8Y">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2244,7 +2254,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController storyboardIdentifier="loginPage" id="LNn-0V-MCE" customClass="LoginPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zCU-Ye-mEm">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcome-2-bg.jpg" id="oXT-1V-vQT">
@@ -2312,7 +2322,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Qg6-Fl-05t">
-                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem width="253" style="plain" systemItem="fixedSpace" id="Lf2-cz-kfb"/>
@@ -2345,7 +2355,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="zcT-6n-80h" customClass="registerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ef9-Le-G6I">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcome-2-bg.jpg" id="Jta-ka-Dqr">
@@ -2456,7 +2466,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </textField>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GYc-14-4Pm">
-                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem width="257" style="plain" systemItem="fixedSpace" id="Kzu-Ah-Uf2"/>
@@ -2489,7 +2499,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController storyboardIdentifier="" id="aqP-Jo-YAA" customClass="ShareAfterNewEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xIJ-Pp-cOw">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="header.png" id="Je2-Oc-3hy">
@@ -2554,7 +2564,7 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="SWX-AE-0lI">
-                                <rect key="frame" x="-1" y="416" width="320" height="44"/>
+                                <rect key="frame" x="-1" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem width="253" style="plain" systemItem="fixedSpace" id="fcJ-2E-7dK"/>
@@ -2597,7 +2607,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="ogA-6E-Slr" customClass="ChoosePeopleToGoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="61" sectionHeaderHeight="22" sectionFooterHeight="22" id="dgE-Mb-LzR">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="uaZ-2Q-7O0">
@@ -2665,7 +2675,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="cDZ-cT-Wh3" customClass="CategroyChooseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xrj-ts-oKf">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Category.jpg" id="uBa-65-dsU">
@@ -2855,7 +2865,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <tableViewController id="IKj-TI-dFE" customClass="MyFollowerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" id="yAH-nG-cqy">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2889,11 +2899,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="7ka-bV-aVx" customClass="DiscussionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LmK-Pk-Wst">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qKs-cR-P3L">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="366"/>
+                                <rect key="frame" x="0.0" y="-1" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="QW9-qw-uQ6">
@@ -2953,11 +2963,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="c7b-6L-79P" customClass="detailLinkViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XJd-2A-3Bf">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="uas-4M-Mtg">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -2978,11 +2988,11 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="kIy-qt-1wP" customClass="detailLocationMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIS-E4-aKa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="wyu-sn-djS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
@@ -3010,15 +3020,15 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController storyboardIdentifier="startInstruction" hidesBottomBarWhenPushed="YES" id="HBN-ju-E0g" customClass="IntroductionVCPage2" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FRf-5F-xPX">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcome-2-bg.jpg" id="Dyk-Jd-j5d">
-                                <rect key="frame" x="0.0" y="-20" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="68" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="OrangeParc is more fun with friends! Now find some friends to follow." textAlignment="center" id="wqb-o6-JAj">
-                                <rect key="frame" x="20" y="105" width="264" height="60"/>
+                                <rect key="frame" x="20" y="193" width="264" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.72999999999999998" colorSpace="calibratedRGB"/>
@@ -3026,25 +3036,25 @@ Find us @OrangeParc.com</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Follow popular users" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bgi-TK-kyp">
-                                <rect key="frame" x="89" y="253" width="209" height="21"/>
+                                <rect key="frame" x="89" y="341" width="209" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Top contributors in OrangeParc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="wjd-9s-Vmh">
-                                <rect key="frame" x="89" y="271" width="224" height="21"/>
+                                <rect key="frame" x="89" y="359" width="224" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="more-popular-color@2x.png" id="e5l-V7-fDg">
-                                <rect key="frame" x="41" y="252" width="40" height="40"/>
+                                <rect key="frame" x="41" y="340" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sv3-3S-QqK" userLabel="Button-Find Top">
-                                <rect key="frame" x="29" y="248" width="255" height="48"/>
+                                <rect key="frame" x="29" y="336" width="255" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -3059,25 +3069,25 @@ Find us @OrangeParc.com</string>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="facebook_icon.png" id="2Vk-LP-K8G">
-                                <rect key="frame" x="42" y="190" width="38" height="38"/>
+                                <rect key="frame" x="42" y="278" width="38" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find Facebook friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dUc-TI-11N">
-                                <rect key="frame" x="89" y="209" width="224" height="21"/>
+                                <rect key="frame" x="89" y="297" width="224" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="See who's already here" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7OI-S3-Ddw">
-                                <rect key="frame" x="89" y="192" width="209" height="21"/>
+                                <rect key="frame" x="89" y="280" width="209" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hfo-6c-YrP" userLabel="Button-Find Facebook">
-                                <rect key="frame" x="29" y="185" width="255" height="47"/>
+                                <rect key="frame" x="29" y="273" width="255" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                 <state key="normal">
@@ -3109,7 +3119,7 @@ Find us @OrangeParc.com</string>
             <objects>
                 <viewController id="gv3-6C-qtH" customClass="MagicViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hIg-rf-m0e">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="header.png" id="Jos-fg-HlW">
@@ -3222,16 +3232,16 @@ Find us @OrangeParc.com</string>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="tkd-Fy-Fbx"/>
         <segue reference="sin-Qw-UXs"/>
         <segue reference="jpf-qW-bdW"/>
-        <segue reference="tkd-Fy-Fbx"/>
         <segue reference="1jG-3L-8vd"/>
-        <segue reference="oxR-j5-unP"/>
-        <segue reference="eX7-7v-GIv"/>
-        <segue reference="SuE-un-eNf"/>
         <segue reference="dBi-XW-FfW"/>
+        <segue reference="eX7-7v-GIv"/>
+        <segue reference="oxR-j5-unP"/>
+        <segue reference="SuE-un-eNf"/>
     </inferredMetricsTieBreakers>
 </document>

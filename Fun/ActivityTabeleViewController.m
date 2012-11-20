@@ -27,6 +27,10 @@
 @property(nonatomic,strong)activityElementObject* tapped_element;
 @property(nonatomic)int send_via;
 //start fetching activity data from the sever(and did the badge clean job)
+@property (weak, nonatomic) IBOutlet UIImageView *badgeView1;
+@property (weak, nonatomic) IBOutlet UIImageView *badgeView2;
+
+
 -(void)startFetchingActivityData;
 @end
 
@@ -213,6 +217,9 @@
     [self setMySegmentControl:nil];
     [self setSegmentationView:nil];
     [self setMoreButton:nil];
+    [self setBadgeView2:nil];
+    [self setBadgeView1:nil];
+    [self setBadgeView2:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -388,14 +395,23 @@
                 NSLog(@"%@",responseString);
                 NSError *error;
                 NSArray *json = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-                if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_conversation]]) {
+                //if (![[NSString stringWithFormat:@"%@",json] isEqualToString:[NSString stringWithFormat:@"%@",self.lastReceivedJson_conversation]]) {
                     //not equal, update the last reveived json
                     self.lastReceivedJson_conversation=json;
                     //deal with json
                     self.activities_conversation=[activityElementObject getConversationActivityElementsArrayByJson:json];
                     NSLog(@"Have fetched %d Activities",[self.activities_conversation count]);
                     [self reloadDataConsiderSegmentControl];
+                
+                int sum=0;
+                for (activityElementObject* ele in self.activities_conversation) {
+                    sum=sum+[ele.unread_msg_num intValue];
                 }
+                
+                if (sum>0) {
+                    [self.badgeView2 setHidden:NO];
+                }
+                //}
                 //reset the tabbat notification number
                 [PushNotificationHandler clearApplicationPushNotifNumber];
                 [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:nil];

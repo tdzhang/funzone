@@ -17,6 +17,7 @@
 @synthesize event_pic=_event_pic;
 @synthesize shared_event_id=_shared_event_id;
 @synthesize isViewed=_isViewed;
+@synthesize unread_msg_num=_unread_msg_num;
 
 @synthesize event_name=_event_name;
 @synthesize message=_message;
@@ -65,6 +66,8 @@
         activity.event_pic=photo_url;
         activity.shared_event_id=shared_event_id;
         activity.isViewed=[[element objectForKey:@"viewed"] integerValue];
+        activity.unread_msg_num=[element objectForKey:@"num_unread"];
+        NSLog(@"%@",activity.unread_msg_num);
         
         [temp_array addObject:activity];
     }

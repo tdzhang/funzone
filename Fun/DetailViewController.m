@@ -37,6 +37,7 @@
 @property (nonatomic,strong) UIView *descriptionSectionView;
 @property (nonatomic,strong) UIView *invitedPeopleSectionView;
 @property (nonatomic,strong) UIButton *editButton;
+@property (nonatomic,strong) UILabel *edit_label;
 @property (weak,nonatomic) IBOutlet UIView *likeButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *joinButtonSection;
 @property (weak,nonatomic) IBOutlet UIView *doitmyselfButtonSection;
@@ -54,6 +55,7 @@
 @property (nonatomic,strong) NSString *isLiked;
 @property (nonatomic,strong) NSString *isJoined;
 @property (nonatomic,strong) NSString *isAdded;
+@property (nonatomic,strong) NSString *rsvp;
 
 @property (nonatomic,strong) NSString *event_id;
 @property (nonatomic,strong) NSString *shared_event_id;
@@ -136,6 +138,8 @@
 @synthesize isLiked=_isLiked;
 @synthesize isJoined=_isJoined;
 @synthesize isAdded=_isAdded;
+@synthesize rsvp=_rsvp;
+@synthesize edit_label=_edit_label;
 
 @synthesize shareButton=_shareButton;
 @synthesize actionButtonHolder=_actionButtonHolder;
@@ -188,22 +192,6 @@
         [_privateMessageButton addTarget:self action:@selector(startPrivateConversationButtonClicked) forControlEvents:UIControlEventTouchDown];
     }
     return _privateMessageButton;
-}
-
--(BOOL)isInvited{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString* user_id = [defaults valueForKey:@"user_id"];
-    BOOL result=NO;
-    if (self.isEventOwner) {
-        result=YES;
-    }
-    for (ProfileInfoElement* element in self.invitee) {
-        if ([element.user_id isEqualToString:user_id]) {
-            result=YES;
-            break;
-        }
-    }
-    return result;
 }
 
 -(NSMutableArray *)comments{
@@ -384,15 +372,7 @@
         NSURLConnection *connection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
         [connection start];
         
-        //change the button title based on the BOOL isOwner
-        if (self.isEventOwner) {
-            [self.actionButtonHolder setHidden:YES];
-            self.editButton.frame = CGRectMake(240, 190, 70, 30);
-            [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        }
-        else{
-            
-        }
+
     }
 //    if (!self.isEnteredDiscussion) {
 //        self.isEnteredDiscussion=YES;
@@ -443,6 +423,30 @@
 
 - (void)editButtonClicked{
     [self performSegueWithIdentifier:@"repin to create new event" sender:self];
+}
+
+- (void)rsvpButtonClicked{
+    if ([self.rsvp isEqualToString:INVITED]) {
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"RSVP:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Accept",@"Maybe",@"Reject", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    else if ([self.rsvp isEqualToString:ACCEPTED]){
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"RSVP:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Maybe",@"Reject", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    else if ([self.rsvp isEqualToString:MAYBE]){
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"RSVP:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Accept",@"Reject", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    else if ([self.rsvp isEqualToString:REJECTED]){
+        UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"RSVP:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Accept",@"Maybe", nil];
+        pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+        [pop showFromTabBar:self.tabBarController.tabBar];
+    }
+    
 }
 
 - (IBAction)shareButtonClicked:(UIBarButtonItem *)sender {
@@ -562,6 +566,63 @@
         });
         
     });
+}
+
+//handle the rsvp action:
+- (void)startRsvp:(NSString *)rsvp_choice {
+    //send join information to server
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url;
+    url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/events/rsvp?event_id=%@&shared_event_id=%@&auth_token=%@&status=%@",CONNECT_DOMIAN_NAME,self.event_id,self.shared_event_id,[defaults objectForKey:@"login_auth_token"],rsvp_choice]];
+
+    
+    ///////////////////////////////////////////////////////////////////////////
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
+        
+        
+        ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:url];
+        
+        [request setRequestMethod:@"GET"];
+        [request startSynchronous];
+        
+        int code=[request responseStatusCode];
+        NSLog(@"code:%d",code);
+        
+        dispatch_async( dispatch_get_main_queue(),^{
+            if (code==200) {
+                //success
+                // Use when fetching text data
+                NSError *error;
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[request responseData] options:kNilOptions error:&error];
+                if ([[json objectForKey:@"response"] isEqualToString:@"ok"]) {
+                    NSLog(@"%@",[NSString stringWithFormat:@"Joined!"]);
+                    if ([rsvp_choice isEqualToString:ACCEPTED]){
+                        [self.edit_label setText:@"accepted"];
+                        self.rsvp=rsvp_choice;
+                    }
+                    else if ([rsvp_choice isEqualToString:MAYBE]){
+                        [self.edit_label setText:@"maybe"];
+                        self.rsvp=rsvp_choice;
+                    }
+                    else if ([rsvp_choice isEqualToString:REJECTED]){
+                        [self.edit_label setText:@"rejected"];
+                        self.rsvp=rsvp_choice;
+                    }
+                   
+                } else {
+                    NSLog(@"%@",[NSString stringWithFormat:@"Oops, something went wrong:%@",[json objectForKey:@"message"]]);
+                }
+            }
+            else{
+                //connect error
+                //                NSError *error = [request error];
+                //                NSLog(@"%@",[NSString stringWithFormat:@"Error: %@",error.description ]);
+            }
+            
+        });
+        
+    });
+    
 }
 
 
@@ -1082,6 +1143,12 @@
 }
 
 - (void)handleInvitedPeoplePart:(NSDictionary *)event{
+    
+    //handle rsvp part
+    self.rsvp=[NSString stringWithFormat:@"%@",[event objectForKey:@"rsvp_status"] ];
+    self.isInvited=[[NSString stringWithFormat:@"%@",[event objectForKey:@"invited"]] isEqualToString:@"1"];
+    NSLog(@"rsvp:%@, invited:%c",self.rsvp,self.isInvited);
+    
     for (UIView *subview in [self.invitedPeopleSectionView subviews]) {
         [subview removeFromSuperview];
     }
@@ -1190,6 +1257,8 @@
     [seperator setImage:[UIImage imageNamed:@"seperator_line.png"]];
     [self.myScrollView addSubview:seperator];
     self.view_height += 1;
+    
+
 }
 
 - (void)handleLikedPeoplePart:(NSDictionary *)event{
@@ -1474,12 +1543,55 @@
 
 //action sheet related stuff
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    /*
-     //give user several way to share
-     UIActionSheet *pop=[[UIActionSheet alloc] initWithTitle:@"Choose To Share:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email",@"Facebook Wall",@"Twitter",@"Wechat",@"Self enter", nil];
-     pop.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
-     [pop showFromTabBar:self.tabBarController.tabBar];
-     */
+
+        
+    if ([actionSheet.title isEqualToString:@"RSVP:"]) {
+        if ([self.rsvp isEqualToString:INVITED]) {
+            if (buttonIndex == 0) {
+                NSLog(@"join");
+                [self startRsvp:ACCEPTED];
+            }
+            else if (buttonIndex == 1) {
+                NSLog(@"maybe");
+                [self startRsvp:MAYBE];
+            }
+            else if(buttonIndex ==2){
+                NSLog(@"Can't Make It");
+                [self startRsvp:REJECTED];
+            }
+        }
+        else if ([self.rsvp isEqualToString:ACCEPTED]){
+            if (buttonIndex == 0) {
+                NSLog(@"maybe");
+                [self startRsvp:MAYBE];
+            }
+            else if (buttonIndex == 1) {
+                NSLog(@"reject");
+                [self startRsvp:REJECTED];
+            }
+        }
+        else if ([self.rsvp isEqualToString:MAYBE]){
+            if (buttonIndex == 0) {
+                NSLog(@"accept");
+                [self startRsvp:ACCEPTED];
+            }
+            else if (buttonIndex == 1) {
+                NSLog(@"reject");
+                [self startRsvp:REJECTED];
+            }
+        }
+        else if ([self.rsvp isEqualToString:REJECTED]){
+            if (buttonIndex == 0) {
+                NSLog(@"accept");
+                [self startRsvp:ACCEPTED];
+            }
+            else if (buttonIndex == 1) {
+                NSLog(@"maybe");
+                [self startRsvp:MAYBE];
+            }
+        }
+    }
+
     if([actionSheet.title isEqualToString:@"Share with:"]){
         NSString *channel=nil;
         
@@ -1800,18 +1912,46 @@
 //        self.interestedPeople=[[ProfileInfoElement generateProfileInfoElementArrayFromJson:[event objectForKey:@"interests"]] mutableCopy];
 //        [self handleTheInterestedPeoplePart];
         //handle the comment part
-        
-        if (self.isEventOwner) {
+        if (self.isEventOwner||self.isInvited) {
             UIImageView *edit_icon = [[UIImageView alloc] initWithFrame:CGRectMake(7, 5, 20, 20)];
             [edit_icon setImage:[UIImage imageNamed:@"detail-edit-color.png"]];
             [self.editButton addSubview:edit_icon];
-            UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(35, 5, 25, 20)];
+            UILabel *edit_label = [[UILabel alloc] initWithFrame:CGRectMake(30, 5, 65, 20)];
             [edit_label setText:@"Edit"];
+            self.edit_label=edit_label;
+            if (!self.isEventOwner&&self.isInvited) {
+                if ([self.rsvp isEqualToString:INVITED]) {
+                    [edit_label setText:@"rsvp"];
+                }
+                else if ([self.rsvp isEqualToString:ACCEPTED]){
+                    [edit_label setText:@"accepted"];
+                }
+                else if ([self.rsvp isEqualToString:MAYBE]){
+                    [edit_label setText:@"maybe"];
+                }
+                else if ([self.rsvp isEqualToString:REJECTED]){
+                    [edit_label setText:@"rejected"];
+                }
+            }
+
+            
             [edit_label setFont:[UIFont boldSystemFontOfSize:12]];
             [edit_label setBackgroundColor:[UIColor clearColor]];
             [edit_label setTextColor:[UIColor darkGrayColor]];
             [self.editButton addSubview:edit_label];
             [self.editButton setBackgroundImage:[UIImage imageNamed:@"button_comment.png"] forState:UIControlStateNormal];
+            
+            //change the button title based on the BOOL isOwner
+            if (self.isEventOwner) {
+                [self.actionButtonHolder setHidden:YES];
+                self.editButton.frame = CGRectMake(240, 190, 70, 30);
+                [self.editButton addTarget:self action:@selector(editButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if(self.isInvited){
+                [self.actionButtonHolder setHidden:YES];
+                self.editButton.frame = CGRectMake(200, 190, 90, 30);
+                [self.editButton addTarget:self action:@selector(rsvpButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+            }
         }
     }
     

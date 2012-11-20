@@ -35,4 +35,6 @@
 -(void)preSetTheEventID:(NSString *)event_id andSetTheSharedEventID:(NSString *)shared_event_id andSetIsOwner:(BOOL)isOwner;
 //server log need method
 -(void)preSetServerLogViaParameter:(int)via;
+//handle the rsvp action:
+- (void)startRsvp:(NSString *)rsvp_choice;
 @end

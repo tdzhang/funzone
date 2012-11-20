@@ -324,4 +324,9 @@
 #define FLURRY_FINISH_CREATE_EVENT @"FINISH CREATE EVENT"
 
 
-
+//resvp constant
+#define INVITED  @"1"
+#define REVOKED @"3"
+#define ACCEPTED  @"4"
+#define REJECTED  @"2"
+#define MAYBE  @"5"
