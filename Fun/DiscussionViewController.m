@@ -461,7 +461,11 @@
                     //self.commentSectionView.frame = CGRectMake(0, height+15, 320, 200);
                     [self.mainScrollView setContentSize:CGSizeMake(320, height+5)];
                     CGPoint bottomOffset = CGPointMake(0, self.mainScrollView.contentSize.height - self.mainScrollView.bounds.size.height);
-                    [self.mainScrollView setContentOffset:bottomOffset animated:YES];
+                    if (bottomOffset.y>0) {
+                        [self.mainScrollView setContentOffset:bottomOffset animated:YES];
+                    }
+                    //NSLog(@"offset %f %f",bottomOffset.x,bottomOffset.y);
+                    
                 }
             }
             else{
