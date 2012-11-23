@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (![Cache isURLCached:self.self.imgUrl]) {
+    if (![Cache isURLCached:self.imgUrl]) {
         //using high priority queue to fetch the image
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0),^{
             //get the image data
@@ -79,6 +79,5 @@
 
 - (void)preSetImgUrl:(NSURL *)imgUrl {
     self.imgUrl = imgUrl;
-    return;
 }
 @end
